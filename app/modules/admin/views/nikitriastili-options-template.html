@@ -1,0 +1,171 @@
+<div class="modal-header" ng-click="debugInfo()">
+	<h3>Δημιουργία Σέτ Ρυθμίσεων για την Υπηρεσία "{{appName}}"</h3>
+</div>
+<form name="form.optionsForm" ng-submit="submitForm()" novalidate>
+	<div class="modal-body">
+		<!-- NAME -->
+		<div class="form-group">
+			<label>Όνομα</label>
+			<input type="text" name="name" class="form-control" ng-model="optionsForm.name" required placeholder="Όνομα Ρυθμίσεων">
+			<p ng-show="form.optionsForm.name.$invalid && !form.optionsForm.name.$pristine" class="help-block">You name is required.</p>
+		</div>
+
+		<!-- DESCRIPTION -->
+		<div class="form-group">
+			<label>Περιγραφή</label>
+			<textarea name="desc" class="form-control" ng-model="optionsForm.descr" ng-maxlength="256" placeholder="περιγραφή του Σετ Ρυθμίσεων" required></textarea>
+			<p ng-show="form.optionsForm.desc.$error.maxlength" class="help-block">Πολύ μεγάλη περιγραφή.</p>
+		</div>
+
+		<hr class="myhr">
+
+		<div class="form-group">
+			<label>Ρυθμίσεις</label>
+			<div style="width:100%;height: 34px;">
+				<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+					<div class="input-group">
+						<span class="input-group-addon">Κεφαλίδα</span>
+						<input class="form-control" type="text" name="epwnymia" ng-model="optionsForm.options.livescoreHeader.epwnymia" ng-disabled="!optionsForm.options.ifHeader" placeholder="Επωνυμία Πρακτορείου ή Άλλο μήνυμα του Πράκτορα.">
+						<span class="input-group-btn">
+						<button type="button"  name="epwnymiaOnOff" class="btn btn-sm {{!optionsForm.options.ifHeader?'btn-danger':'btn-success'}}" style="width:60px;" ng-click="optionsForm.options.ifHeader?optionsForm.options.ifHeader=false:optionsForm.options.ifHeader=true"><span style="float:left;">{{optionsForm.options.ifHeader?' ON ':' OFF '}}</span><i class="glyphicon {{optionsForm.options.ifHeader?' glyphicon-ok':' glyphicon-remove'}} pull-right"></i></button>
+					</span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="padding-top: 2px;">
+					<button  name="footer" type="button" class="btn btn-sm {{!optionsForm.options.ifFooter?'btn-danger':'btn-success'}}" style="width:120px;" ng-click="optionsForm.options.ifFooter?optionsForm.options.ifFooter=false:optionsForm.options.ifFooter=true"><span style="float:left;">{{optionsForm.options.ifFooter?'Υποσέλιδο ON':'Υποσέλιδο OFF'}}</span>
+						<span class="glyphicon {{optionsForm.options.ifFooter?' glyphicon-ok':' glyphicon-remove'}} pull-right"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="btn-group" style="text-align: center;">
+
+			<div class="btn-group-vertical" style="margin-right: 10px;position: relative;display: inline-block;vertical-align: top;margin-top: 10px;">
+				<div style="margin-bottom: 8px;text-align:left;">Επιλογή Κουπονιού</div>
+				<div class="btn-group-vertical" >
+					<label id="matchset{{$index}}"  name="kouponi" style="min-width:170px;max-width:170px;text-align: left;display: block;height: 34px;" ng-repeat="matchSet in matchesSet" class="btn btn-primary" ng-model="optionsForm.options.matchesSetCoupon" uib-btn-radio="matchSet.label" ng-click="changeMatchesSet(matchSet.label,$index)" uib-uncheckable ="uncheckable"><span style="float:left;">{{matchSet.label}}</span>
+						<i class="glyphicon glyphicon-ok pull-right" ng-show="optionsForm.options.matchesSetCoupon===matchSet.label"></i>
+					</label>
+				</div>
+
+			</div>
+
+			<div class="btn-group-vertical" style="margin-right: 10px;position: relative;display: inline-block;vertical-align: top;margin-top: 10px;">
+				<div style="margin-bottom: 8px;text-align:left;">Επιλογή Αγώνων<span style="color: #ab1212;text-align:left;font-size: 10px;"> ({{matches2show}} Αγώνες)</span></div>
+				<div class="btn-group-vertical" >
+					<label style="min-width:170px;max-width:170px;text-align: left;display: block;height: 34px;" class="btn btn-warning" ng-model="optionsForm.options.filters.subAll"
+						   uib-btn-checkbox ng-click="setFilters();" ><span style="float:left;">Όλα τα παιχνίδια</span>
+						<i class="glyphicon glyphicon-ok pull-right" ng-show="optionsForm.options.filters.subAll"></i>
+					</label>
+					<label style="min-width:170px;max-width:170px;text-align: left;display: block;height: 34px;" class="btn btn-warning" ng-model="optionsForm.options.filters.liveFilter"
+						   uib-btn-checkbox ng-click="setFilters();" ><span style="float:left;">Παιχνίδια σε Εξέλιξη</span>
+						<i class="glyphicon glyphicon-ok pull-right" ng-show="optionsForm.options.filters.liveFilter"></i>
+					</label>
+					<label  style="min-width:170px;max-width:170px;text-align: left;display: block;height: 34px;" class="btn btn-warning" ng-model="optionsForm.options.filters.ftFilter"
+							uib-btn-checkbox ng-click="setFilters();" ><span style="float:left;">Τελ. Αποτελέσματα</span>
+						<i class="glyphicon glyphicon-ok pull-right" ng-show="optionsForm.options.filters.ftFilter"></i>
+					</label>
+					<label style="min-width:170px;max-width:170px;text-align: left;display: block;height: 34px;" class="btn btn-warning" ng-model="optionsForm.options.filters.apodoseisFilter"
+						   uib-btn-checkbox ng-click="setFilters();" ><span style="float:left;">Αλ/γές Αποδόσεων</span>
+						<i class="glyphicon glyphicon-ok pull-right" ng-show="optionsForm.options.filters.apodoseisFilter"></i>
+					</label>
+					<label style="min-width:170px;max-width:170px;text-align: left;display: block;height: 34px;" class="btn btn-warning" ng-model="optionsForm.options.filters.susBlocked"
+						   uib-btn-checkbox ng-click="setFilters();" ><span style="float:left;">Αναβ./Φραγμένα</span>
+						<i class="glyphicon glyphicon-ok pull-right" ng-show="optionsForm.options.filters.susBlocked"></i>
+					</label>
+					<label style="min-width:170px;max-width:170px;text-align: left;display: block;height: 34px;" class="btn btn-warning" ng-model="optionsForm.options.filters.mineFilter"
+						   uib-btn-checkbox ng-click="setFilters();" ><span style="float:left;">Τα Παιχνίδια μου</span>
+						<i class="glyphicon glyphicon-ok pull-right" ng-show="optionsForm.options.filters.mineFilter"></i>
+					</label>
+				</div>
+			</div>
+
+			<div class="btn-group-vertical" style="margin-right: 10px;position: relative;display: inline-block;vertical-align: top;margin-top: 10px;border-left: solid 1px #ffffff;padding-left: 10px;text-align:left;">
+				<div style="margin-bottom: 8px;text-align:left;">Στήλες</div>
+				<div class="btn-group-vertical" style="text-align:left;">
+					<button type="button" class="btn btn-sm {{!optionsForm.options.ifShowNew?'btn-danger':'btn-success'}}" style="width:170px;" ng-click="optionsForm.options.ifShowNew?optionsForm.options.ifShowNew=false:optionsForm.options.ifShowNew=true"><span style="float:left;">{{optionsForm.options.ifShowNew?'Σύμανση ΝΕΩΝ ON':'Σύμανση ΝΕΩΝ OFF'}}</span>
+						<span class="glyphicon {{optionsForm.options.ifShowNew?' glyphicon-ok':' glyphicon-remove'}} pull-right"></span>
+					</button>
+
+					<button type="button" class="btn btn-sm {{!optionsForm.options.ifDiorg?'btn-danger':'btn-success'}}" style="width:170px;" ng-click="optionsForm.options.ifDiorg?optionsForm.options.ifDiorg=false:optionsForm.options.ifDiorg=true"><span style="float:left;">{{optionsForm.options.ifDiorg?'Διοργάνωση ON':'Διοργάνωση OFF'}}</span>
+						<span class="glyphicon {{optionsForm.options.ifDiorg?' glyphicon-ok':' glyphicon-remove'}} pull-right"></span>
+					</button>
+
+					<button type="button" class="btn btn-sm {{!optionsForm.options.ifOdd?'btn-danger':'btn-success'}}" style="width:170px;" ng-click="optionsForm.options.ifOdd?optionsForm.options.ifOdd=false:optionsForm.options.ifOdd=true"><span style="float:left;">{{optionsForm.options.ifOdd?'Αποδόσεις ON':'Αποδόσεις OFF'}}</span>
+						<span class="glyphicon {{optionsForm.options.ifOdd?' glyphicon-ok':' glyphicon-remove'}} pull-right"></span>
+					</button>
+				</div>
+
+				<div style="margin-top:10px;margin-bottom: 8px;text-align:left;">Ειδοποιήσεις</div>
+				<div class="btn-group-vertical" style="text-align:left;">
+					<div style="">
+						<button type="button" class="btn btn-sm {{!optionsForm.options.ifSound?'btn-danger':'btn-success'}}" style="width:170px;" ng-click="optionsForm.options.ifSound?optionsForm.options.ifSound=false:optionsForm.options.ifSound=true"><span style="float:left;">{{optionsForm.options.ifSound?'Ήχος Συμβάντων ON':'Ήχος Συμβάντων OFF'}}</span>
+							<span class="glyphicon {{optionsForm.options.ifSound?' glyphicon-ok':' glyphicon-remove'}} pull-right"></span>
+						</button>
+					</div>
+					<div style="margin-top:10px;">
+						<button type="button" class="btn btn-sm {{optionsForm.options.alertOptions.none === true?'btn-danger':'btn-success'}}" style="width:170px;" ng-click="optionsForm.options.alertOptions.none === true?optionsForm.options.alertOptions.none=false:optionsForm.options.alertOptions.none=true"><span style="float:left;">{{optionsForm.options.alertOptions.none===false?'Παρ/θυρο Ειδοπ. ON':'Παρ/θυρο Ειδοπ. OFF'}}</span>
+							<span class="glyphicon {{optionsForm.options.alertOptions.none === false?' glyphicon-ok':' glyphicon-remove'}} pull-right"></span>
+						</button>
+					</div>
+					<div class="input-group " style="max-width: 170px;margin-top:10px;">
+						<span class="input-group-addon" style="width: 120px;" >Χρόνος Ειδ. <i class="glyphicon glyphicon-time"></i></span>
+						<input type="number" class="form-control" ng-model="optionsForm.options.notifDelay" style="padding-right:0px;" ng-disabled="optionsForm.options.alertOptions.none">
+					</div>
+
+				</div>
+			</div>
+
+
+
+			<div class="btn-group-vertical" style="height: 210px;margin-left: 10px;margin-right: 10px;border-left: solid 1px #ffffff;padding-left: 10px;margin-top: 10px;">
+				<div style="margin-bottom: 8px;text-align:left;">Άλλες Ρυθμίσεις </div>
+
+				<div class="input-group" style="max-width: 180px;margin-top:10px;">
+					<span class="input-group-addon" style="width: 130px;">Γραμ/σειρά <i class="glyphicon glyphicon-text-size"></i></span>
+					<input type="number" class="form-control" ng-model="optionsForm.options.restTextSize" style="padding-right:0px;">
+				</div>
+
+				<div class="input-group" style="max-width: 180px;">
+					<span class="input-group-addon" style="width: 130px;">Χρόνος Εναλ. <i class="glyphicon glyphicon-time"></i></span>
+					<input type="number" class="form-control" ng-model="optionsForm.options.delay" style="padding-right:0px;">
+				</div>
+				<div class="input-group" style="max-width: 180px;" ng-disabled="true">
+					<span class="input-group-addon" style="width: 130px;">Αριθ. Στηλών <i class="glyphicon glyphicon-align-justify" style="transform: rotate(90deg);"></i></span>
+					<input type="number" class="form-control" ng-model="optionsForm.options.holdersNo" style="padding-right:0px;" ng-disabled="true">
+				</div>
+				<div class="input-group " style="max-width: 180px;">
+					<span class="input-group-addon" style="width: 130px;">Μάτς / Σελίδα <i class="glyphicon glyphicon-list"></i></span>
+					<input type="number" class="form-control" ng-model="optionsForm.options.visRows" style="padding-right:0px;">
+				</div>
+				<div class="input-group " style="max-width: 180px;">
+					<span class="input-group-addon" style="width: 130px;">Χρόνος Τελ. <i class="glyphicon glyphicon-time"></i></span>
+					<input type="number" class="form-control" ng-model="optionsForm.options.ftLeaveTime" style="padding-right:0px;">
+				</div>
+				<div class="input-group " style="max-width: 180px;">
+					<span class="input-group-addon" style="width: 130px;">Έλεγχος Goal<i class="glyphicon glyphicon-time"></i></span>
+					<input type="number" class="form-control" ng-model="optionsForm.options.goalDelay" style="padding-right:0px;">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-primary" ng-disabled="form.optionsForm.$invalid">Εισαγωγή</button>
+		<button class="btn btn-warning" ng-click="cancel()">Ακύρωση</button>
+	</div>
+</form>
+<!--
+
+<div class="modal-header">
+	<h3 class="modal-title">Φόρμα Καταχώρησης Ρυθμίσεων</h3>
+</div>
+<div class="modal-body">
+	<span>Θέλετε να κάνετε Πλήρη Προβολή;{{appId}}</span>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="ok()">Εισαγωγή</button>
+	<button class="btn btn-danger" type="button" ng-click="cancel()">Ακύρωση</button>
+</div>-->
