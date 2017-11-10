@@ -1,163 +1,104 @@
-create table class
+CREATE TABLE class
 (
-	id int not null auto_increment
-		primary key,
-	name varchar(255) null,
-	address varchar(512) null,
-	building varchar(255) null,
-	floor int null,
-	status int default '0' not null,
-	active int null,
-	destroyed int null,
-	nonexist int null,
-	capasity int null,
-	exams_capasity int null,
-	width int null,
-	height int null,
-	capasity_categ int null,
-	tm_owner int null
-)
-;
-
-create table class_book
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255),
+  address VARCHAR(512),
+  building VARCHAR(255),
+  floor INT(11),
+  status INT(11) DEFAULT '0' NOT NULL,
+  active INT(11),
+  destroyed INT(11),
+  nonexist INT(11),
+  capasity INT(11),
+  exams_capasity INT(11),
+  width INT(11),
+  height INT(11),
+  capasity_categ INT(11),
+  tm_owner INT(11)
+);
+CREATE TABLE class_book
 (
-	id int not null auto_increment
-		primary key,
-	user_id int null,
-	class_id int null,
-	date int null,
-	fromt time null,
-	tot time null,
-	type int null,
-	dt timestamp null
-)
-;
-
-create index class_book_class_id_fk
-	on class_book (class_id)
-;
-
-create index class_book_users_id_fk
-	on class_book (user_id)
-;
-
-comment on column class_book.date is 'Ποια μέρα (1-7) είναι η δεσμευση'
-;
-
-comment on column class_book.type is '0 - syxnotita
-1 - memonomeni'
-;
-
-create table class_items
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  user_id INT(11),
+  class_id INT(11),
+  date INT(11),
+  from_t TIME,
+  to_t TIME,
+  type INT(11),
+  dt TIMESTAMP
+);
+CREATE TABLE class_items
 (
-	class_id int null,
-	ieam_id int null,
-	comments int null,
-	dt timestamp default CURRENT_TIMESTAMP null,
-	id int null,
-	stat int null,
-	`from` timestamp null,
-	`to` timestamp null
-)
-;
-
-comment on table class_items is 'τρεχον εξοπλισμός αίθουσας'
-;
-
-create table configs
+  class_id INT(11),
+  ieam_id INT(11),
+  comments INT(11),
+  dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  id INT(11),
+  stat INT(11),
+  from_dt TIMESTAMP,
+  to_dt TIMESTAMP
+);
+CREATE TABLE configs
 (
-	id int not null auto_increment
-		primary key,
-	year int null,
-	dt timestamp default CURRENT_TIMESTAMP null,
-	status int null
-)
-;
-
-create table items
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  year INT(11),
+  dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  status INT(11)
+);
+CREATE TABLE items
 (
-	id int not null auto_increment
-		primary key,
-	descr varchar(255) null,
-	comments varchar(215) null
-)
-;
-
-comment on table items is 'Εξοπλισμός'
-;
-
-create table kat
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  descr VARCHAR(255),
+  comments VARCHAR(215)
+);
+CREATE TABLE kat
 (
-	id int not null auto_increment
-		primary key,
-	tm_id int null,
-	decr varchar(32) null,
-	title varchar(255) null,
-	pm int null
-)
-;
-
-comment on table kat is 'katey8inseis tmimaton'
-;
-
-create table requests
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  tm_id INT(11),
+  decr VARCHAR(32),
+  title VARCHAR(255),
+  pm INT(11)
+);
+CREATE TABLE requests
 (
-	id int not null auto_increment
-		primary key,
-	req_dt datetime default CURRENT_TIMESTAMP null,
-	user_id int null,
-	descr longtext null,
-	period varchar(5) null,
-	ps_id int null,
-	teacher varchar(255) null,
-	from_book int null,
-	rea_stat int null,
-	class_use varchar(255) null,
-	links varchar(512) null,
-	fromdt timestamp null,
-	todt timestamp null
-)
-;
-
-comment on column requests.ps_id is 'ma8ima apo ps'
-;
-
-comment on column requests.from_book is 'an einai apo akyrosi edo fainetai se poia anaferete'
-;
-
-create table roles
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  req_dt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  user_id INT(11),
+  descr LONGTEXT,
+  period VARCHAR(5),
+  ps_id INT(11),
+  teacher VARCHAR(255),
+  from_book INT(11),
+  rea_stat INT(11),
+  class_use VARCHAR(255),
+  links VARCHAR(512),
+  fromdt TIMESTAMP,
+  todt TIMESTAMP
+);
+CREATE TABLE roles
 (
-	id int not null auto_increment
-		primary key,
-	role varchar(255) null,
-	descr varchar(255) null
-)
-;
-
-create table tm
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  role VARCHAR(255),
+  descr VARCHAR(255)
+);
+CREATE TABLE tm
 (
-	id int not null auto_increment
-		primary key,
-	tm_code varchar(32) null,
-	descr varchar(12) null,
-	title varchar(255) null,
-	sxoli varchar(64) null
-)
-;
-
-create table users
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  tm_code VARCHAR(32),
+  descr VARCHAR(12),
+  title VARCHAR(255),
+  sxoli VARCHAR(64)
+);
+CREATE TABLE users
 (
-	id int not null auto_increment
-		primary key,
-	tm_id int null,
-	fname varchar(255) null,
-	sname varchar(255) null,
-	phone varchar(255) null,
-	em_main varchar(128) null,
-	em_sec varchar(128) null,
-	em_pant varchar(128) null,
-	cat_id int null,
-	comments varchar(512) null
-)
-;
-
+  id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  tm_id INT(11),
+  fname VARCHAR(255),
+  sname VARCHAR(255),
+  phone VARCHAR(255),
+  em_main VARCHAR(128),
+  em_sec VARCHAR(128),
+  em_pant VARCHAR(128),
+  cat_id INT(11),
+  comments VARCHAR(512)
+);
