@@ -14,8 +14,8 @@ $dbpass   = 'b3t@N@Lys15_U53R';
 // connection to soccerbox_srvs
 
 $dbhost = 'localhost';
-$dbname = 'lpadmin';
-$dbuser = 'lpadmin';
-$dbpass = 'OKEcmRv1UAa0Fqrb';
+$dbname = 'classrooms';
+$dbuser = 'root';
+$dbpass = '';
 
 $dblink = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
