@@ -4,6 +4,8 @@ angular.module('Admin', ['DB'])
     .controller('AdminController',
         ['$scope', '$http', '$rootScope', 'DBService',
             function ($scope, $http, $rootScope, DBService) {
+
+                //var xoros = [{w:10,h5}, {w:10,h5}, {w:1,h10}, {w:10,h5}, {w:10,h5}, {w:10,h5}];
                 $scope.devices = [{name: "d1"}, {name: "d2"}];
                 //$scope.matchesSet = [{label: "Όλο το Κουπόνι"}, {label: "Νέα Παιχνίδια"}, {label: "Αρχικό Κουπόνι"}];
                 $scope.appid = 7;

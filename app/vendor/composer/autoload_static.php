@@ -44,6 +44,7 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Micheh\\Cache\\' => 13,
         ),
         'I' => 
         array (
@@ -129,6 +130,10 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Micheh\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/micheh/psr7-cache/src',
         ),
         'Interop\\Container\\' => 
         array (

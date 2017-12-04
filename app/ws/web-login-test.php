@@ -182,7 +182,6 @@ New Login    ON:'.$dateNow.'    FROM:'.$mac.'   USING USERNAME:'.$usr.'   PASSWO
 				
 				/*
 				ERRORS CATALOG
-				
 				ERROR#00 -> ERROR SOMEBODY USE LOLAKIAS
 				ERROR#10 -> WRONG USERNAME
 				ERROR#11 -> WRONG PASSWORD
@@ -190,7 +189,6 @@ New Login    ON:'.$dateNow.'    FROM:'.$mac.'   USING USERNAME:'.$usr.'   PASSWO
 				ERROR#13 -> ERROR FOR NO AGENT ROLE IN DRUPAL
 				ERROR#14 -> NO MORE PCS
 				ERROR#15 -> SOMEBODY USE PHPMYADMIN TO INSERT MACS
-				
 				*/
 				
 				if ($cnt<=$PCnum && $correctMAC){

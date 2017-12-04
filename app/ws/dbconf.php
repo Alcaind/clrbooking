@@ -14,7 +14,7 @@ $dbpass   = 'b3t@N@Lys15_U53R';
 // connection to soccerbox_srvs
 
 $dbhost = 'localhost';
-$dbname = 'classrooms';
+$dbname = 'clrbooking';
 $dbuser = 'root';
 $dbpass = '';
 

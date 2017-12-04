@@ -10,8 +10,8 @@ class db
 {
     // Properties
     private $dbhost = 'localhost';
-    private $dbuser = 'lpadmin';
-    private $dbpass = 'OKEcmRv1UAa0Fqrb';
+    private $dbuser = 'root';
+    private $dbpass = '';
     private $dbname = 'clrbooking';
 
     // Connect

@@ -6,16 +6,31 @@
 //return;
 
 include 'dbconf.php';
+$db = $dblink;
 
 if (!$_REQUEST["pswd"] || !$_REQUEST["usr"]){
     api('{"success":false with no credentials}');
     return;
 }
 
+$usr = $_REQUEST['usr'];
+$pswd = $_REQUEST['pswd'];
+
+$sql = "select * from users where user_n = $usr and pswd = $pswd";
+$result = mysqli_query($db, $sql);
+$myArray = array();
+while ($row = $result->fetch_object(MYSQLI_ASSOC)) {
+    $myArray[] = $row;
+}
+
+if ($row) {
+
+}
+
+echo json_encode($myArray);
+
 $params='ip='.$_SERVER['REMOTE_ADDR'].'&agent='.$_SERVER['HTTP_USER_AGENT'].'&cookie=0';
 $params.='&pswd='.$_REQUEST["pswd"].'&usr='.$_REQUEST["usr"].'&app='.$_REQUEST["app"];
-
-
 
 api(json_decode($result));
 

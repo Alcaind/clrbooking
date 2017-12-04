@@ -19,6 +19,7 @@ return array(
     'Neomerx\\Cors\\' => array($vendorDir . '/neomerx/cors-psr7/src'),
     'Negotiation\\' => array($vendorDir . '/willdurand/negotiation/src/Negotiation'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Micheh\\Cache\\' => array($vendorDir . '/micheh/psr7-cache/src'),
     'Interop\\Container\\' => array($vendorDir . '/container-interop/container-interop/src/Interop/Container'),
     'Gofabian\\Negotiation\\' => array($vendorDir . '/gofabian/negotiation-middleware/src'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
