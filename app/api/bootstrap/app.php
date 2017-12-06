@@ -15,7 +15,18 @@ require __DIR__ . '/../config/db.php';
 $app = new \Slim\App([
     'settings' => [
         'displayErrorDetails' => true,
-        "addContentLengthHeader" => false
+        "addContentLengthHeader" => false,
+        'determineRouteBeforeAppMiddleware' => false,
+        'db' => [
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'database' => 'clrbooking',
+            'username' => 'lpadmin',
+            'password' => 'OKEcmRv1UAa0Fqrb',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => ''
+        ]
     ]
 ]);
 
@@ -42,3 +53,4 @@ require __DIR__ . "/../auth/auth.php";
 require __DIR__ . "/../routes/devices.php";
 require __DIR__ . '/../routes/routes.php';
 require __DIR__ . '/../routes/options.php';
+require __DIR__ . '/../routes/users.php';

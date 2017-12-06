@@ -14,9 +14,11 @@ $app->get('/users', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $sql = "select * from users";
     try {
+
         $db = new db();
         $db = $db->connect();
         $stm = $db->query($sql);
+        $stm = $this->pdo->query($sql);
         $options = $stm->fetchAll(PDO::FETCH_OBJ);
         $db = null;
         echo json_encode($options);
@@ -38,7 +40,7 @@ $app->get('/users/{user}', function (Request $request, Response $response) {
 
     header("Content-Type: application/json");
     $user = $request->getAttribute('user');
-    $sql = "select * from users where user_n = '".$user."'";
+    $sql = "select * from users where user = '".$user."'";
     try {
         $db = new db();
         $db = $db->connect();
@@ -78,50 +80,3 @@ $app->post('/users', function (Request $request, Response $response) {
         echo '{"error": {"text":"' . $e->getMessage() . '"}}';
     }
 });
-
-$app->put('/options/{id}', function (Request $request, Response $response) {
-    header("Content-Type: application/json");
-    $data = $request->getParsedBody();
-    $id = $request->getAttribute('id');
-
-    $descr = $data['descr'];
-    $options = $data['options'];
-    $user = $data['user'];
-    $appid = $data['appid'];
-    //$id = $data['id'];
-
-    $sql = "update `appoptions` set `descr` = :descr, `options` = :options, `uid` = :usr, `appid` = :appid where `id` = :id";
-    try {
-        $db = new db();
-        $db = $db->connect();
-        $stm = $db->prepare($sql);
-        $stm->bindParam(':descr', $descr);
-        $stm->bindParam(':options', $options);
-        $stm->bindParam(':usr', $user);
-        $stm->bindParam(':appid', $appid);
-        $stm->bindParam(':id', $id);
-
-        $stm->execute();
-        echo '{"notice":{"text":"Option Updated"}}';
-    } catch (PDOException $e) {
-        echo '{"error": {"text":"' . $e->getMessage() . '"}}';
-    }
-});
-
-$app->delete('/options/{id}', function (Request $request, Response $response) {
-    header("Content-Type: application/json");
-    $id = $request->getAttribute('id');
-
-    $sql = "delete from appoptions where id = $id";
-    try {
-        $db = new db();
-        $db = $db->connect();
-        $stm = $db->query($sql);
-        $stm->execute();
-        $db = null;
-        echo '{"notice": {"text":"Option Deleted"}}';
-    } catch (PDOException $e) {
-        echo '{"error": {"text":' . $e->getMessage() . '}}';
-    }
-});
-

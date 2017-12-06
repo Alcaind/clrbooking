@@ -56,6 +56,7 @@ class ClrAuthenticator implements AuthenticatorInterface
 }
 
 $container = $app->getContainer();
+
 $container["HttpBasicAuthentication"] = function ($container) {
     return new HttpBasicAuthentication([
         "path" => ["/token", "/login"],
