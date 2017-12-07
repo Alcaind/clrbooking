@@ -114,18 +114,18 @@ create table room_book
 	id int not null auto_increment
 		primary key,
 	user_id int null,
-	class_id int null,
 	date_index int null,
 	fromt time null,
 	tot time null,
 	type int null,
 	dt timestamp null,
-	period int null
+	period int null,
+	room_id int null
 )
 ;
 
 create index class_book_class_id_fk
-	on room_book (class_id)
+	on room_book (room_id)
 ;
 
 create index class_book_users_id_fk

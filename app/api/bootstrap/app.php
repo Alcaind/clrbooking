@@ -8,7 +8,7 @@
 session_start();
 require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../config/db.php';
-
+//require __DIR__ . '../src/models/users.php';
 //$dotenv = new Dotenv\Dotenv(__DIR__);
 //$dotenv->load();
 

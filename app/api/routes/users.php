@@ -11,7 +11,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/users', function (Request $request, Response $response) {
     //if (in_array("get", $this->jwt->scope)) {
-    header("Content-Type: application/json");
+    /*header("Content-Type: application/json");
     $sql = "select * from users";
     try {
 
@@ -27,7 +27,9 @@ $app->get('/users', function (Request $request, Response $response) {
             ->withHeader("Content-Type", "application/json")
             ->write(json_encode($e, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         //echo '{"error": {"text":' . $e->getMessage() . '}}';
-    }
+    }*/
+
+    return $response->getBody()->write(Users::all()->toJson());
 });
 
 $app->get('/users/{user}', function (Request $request, Response $response) {
