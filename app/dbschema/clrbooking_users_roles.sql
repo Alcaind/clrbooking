@@ -1,0 +1,3 @@
+INSERT INTO clrbooking.users_roles (user_id, role_id, comment, exp_dt, dt, status) VALUES (1, 1, 'all', '2019-11-13 15:37:27', '2017-11-13 15:37:36', null);
+INSERT INTO clrbooking.users_roles (user_id, role_id, comment, exp_dt, dt, status) VALUES (1, 2, 'all', null, '2017-11-20 11:55:55', null);
+INSERT INTO clrbooking.users_roles (user_id, role_id, comment, exp_dt, dt, status) VALUES (1, 3, null, null, '2017-11-20 11:55:55', null);
