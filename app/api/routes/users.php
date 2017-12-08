@@ -11,25 +11,10 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/users', function (Request $request, Response $response) {
     //if (in_array("get", $this->jwt->scope)) {
-    /*header("Content-Type: application/json");
-    $sql = "select * from users";
-    try {
-
-        $db = new db();
-        $db = $db->connect();
-        $stm = $db->query($sql);
-        $stm = $this->pdo->query($sql);
-        $options = $stm->fetchAll(PDO::FETCH_OBJ);
-        $db = null;
-        echo json_encode($options);
-    } catch (PDOException $e) {
-        return $response->withStatus(401)
-            ->withHeader("Content-Type", "application/json")
-            ->write(json_encode($e, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-        //echo '{"error": {"text":' . $e->getMessage() . '}}';
-    }*/
-
-    return $response->getBody()->write(Users::all()->toJson());
+    header("Content-Type: application/json");
+    $tbl = $this->get('db')->table('users');
+    $users = \App\Models\Users::all();
+    return $response->getBody()->write($users->toJson());
 });
 
 $app->get('/users/{user}', function (Request $request, Response $response) {

@@ -11,7 +11,11 @@ namespace App\Models;
 
 use  \Illuminate\Database\Eloquent\Model as Model;
 
-class Users extends Model {
-    protected $table = 'users';
+class Roles extends Model {
+    protected $table = 'roles';
     public $timestamps = false;
+
+    public function getUsers () {
+        return $this->belongsToMany('App\Models\Users', 'users_roles', 'user_id', 'role_id');
+    }
 }

@@ -8,6 +8,10 @@
 session_start();
 require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../config/db.php';
+require __DIR__ . '/../src/models/users.php';
+require __DIR__ . '/../src/models/roles.php';
+//require __DIR__ . '../src/models/Users.php';
+//require __DIR__ . '../src/models/Roles.php';
 //require __DIR__ . '../src/models/users.php';
 //$dotenv = new Dotenv\Dotenv(__DIR__);
 //$dotenv->load();
@@ -54,3 +58,4 @@ require __DIR__ . "/../routes/devices.php";
 require __DIR__ . '/../routes/routes.php';
 require __DIR__ . '/../routes/options.php';
 require __DIR__ . '/../routes/users.php';
+require __DIR__ . '/../routes/roles.php';
