@@ -9,11 +9,23 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-$app->get('/role', function (Request $request, Response $response) {
+$app->get('/roles', function (Request $request, Response $response) {
     //if (in_array("get", $this->jwt->scope)) {
     header("Content-Type: application/json");
-    $tbl = $this->get('db')->table('roles');
     $roles = \App\Models\Roles::all();
+    return $response->getBody()->write($roles->toJson());
+});
+
+$app->get('/role/{id}', function (Request $request, Response $response, $args) {
+    //if (in_array("get", $this->jwt->scope)) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $roles = \App\Models\Roles::find($id);
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
     return $response->getBody()->write($roles->toJson());
 });
 
@@ -25,34 +37,55 @@ $app->post('/role', function (Request $request, Response $response) {
     }*/
     //$decoded = $request->getAttribute("dmt");
 
+
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
-    $role = new \App\Models\Roles();
-
-    $role->role = $data['role'];
-    $role->descr = $data['descr'];
-
-    $role->save();
-
+    try {
+        $role = new \App\Models\Roles();
+        $role->role = $data['role'];
+        $role->descr = $data['descr'];
+        $role->save();
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
     return $response->withStatus(201)->getBody()->write($role->toJson());
 });
 
-$app->delete('/role/{id}/', function($request, $response, $args) {
+$app->delete('/role/{id}', function ($request, $response, $args) {
     $id = $args['id'];
-    $role = \App\Models\Roles::find($id);
-    $role->delete();
+    try {
+        $role = \App\Models\Roles::find($id);
+        $role->delete();
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
 
-    return $response->withStatus(200);
+    return $response->withStatus(200)->getBody()->write($role->toJson());
 });
 
-$app->put('/role/{id}/', function($request, $response, $args) {
+$app->put('/role/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    $role = \App\Models\Roles::find($id);
-    $role->role = $data['role'] ?: $role->role;
-    $role->descr = $data['descr'] ?: $role->descr;
-
-    $dev->save();
-
-    return $response->getBody()->write($dev->toJson());
+    try {
+        $role = \App\Models\Roles::find($id);
+        $role->role = $data['role'] ?: $role->role;
+        $role->descr = $data['descr'] ?: $role->descr;
+        $role->save();
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($role->toJson());
 });
+
+$app->get('/usersRole/{id}', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $role = \App\Models\Roles::find($id);
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($role->users()->get()->toJson());
+});
+

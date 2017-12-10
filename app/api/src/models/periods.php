@@ -11,12 +11,13 @@ namespace App\Models;
 
 use  \Illuminate\Database\Eloquent\Model as Model;
 
-class Users extends Model {
+class Periods extends Model
+{
     public $timestamps = false;
-    protected $table = 'users';
+    protected $table = 'periods';
 
-    public function roles()
+    public function config()
     {
-        return $this->belongsToMany('\\App\\Models\\Roles', 'users_roles', 'role_id', 'user_id');
+        $this->belongsTo('\\App\\Models\\Config', 'conf_id');
     }
 }
