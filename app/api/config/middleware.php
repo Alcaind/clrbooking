@@ -14,7 +14,7 @@ use Micheh\Cache\CacheUtil; // Micheh\Cache\CacheUtil;
 use Slim\Middleware\HttpBasicAuthentication;
 use Slim\Middleware\JwtAuthentication;
 use Tuupola\Middleware\Cors;
-use  Response\UnauthorizedResponse; //Response\UnauthorizedResponse;
+use Response\UnauthorizedResponse; //Response\UnauthorizedResponse;
 use Slim\Middleware\HttpBasicAuthentication\PdoAuthenticator;
 use Slim\Middleware\HttpBasicAuthentication\AuthenticatorInterface;
 
@@ -84,12 +84,13 @@ $container["token"] = function ($container) {
     return new Token;
 };
 
+
 $container["JwtAuthentication"] = function ($container) {
     return new JwtAuthentication([
         "path" => "/",
         //"ignore" => ["/api/public/token"],
         //"secret" => getenv("JWT_SECRET"),
-        "secret" => "supersecretkeyyoushouldnotcommittogithub",
+        "secret" => "supersecretkeyyoushouldnotcommittogithub", //TODO : na mpei to super secret key sto ENV to leitourgikou
         "logger" => $container["logger"],
         "attribute" => false,
         "secure" => false,

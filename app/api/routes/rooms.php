@@ -9,11 +9,11 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-$app->get('/users', function (Request $request, Response $response) {
+$app->get('/rooms', function (Request $request, Response $response) {
     //if (in_array("get", $this->jwt->scope)) {
     header("Content-Type: application/json");
-    $tbl = $this->get('db')->table('users');
-    $users = \App\Models\Users::all();
+    $tbl = $this->get('db')->table('rooms');
+    $users = \App\Models\Rooms::all();
     return $response->getBody()->write($users->toJson());
 });
 
@@ -62,8 +62,11 @@ $app->put('/users', function (Request $request, Response $response) {
     }
 });
 
-$app->post('/user/{id}/roles', function ($request, $response, $args) {
+$app->post('/user_roles/{id}/', function ($request, $response, $args) {
     $id = $args['id'];
-    $user = \App\User::find($id);
-    return $response->getBody()->write($user->roles()->get()->toJson());
+    $user = App\User::find($id);
+
+    $roles = $user->roles();
+
+    return $response->getBody()->write($roles->toJson());
 });

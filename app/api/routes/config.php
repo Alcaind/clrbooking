@@ -12,6 +12,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->get('/configs', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $configs = \App\Models\Config::all();
+
     return $response->getBody()->write($configs->toJson());
 });
 
@@ -57,10 +58,11 @@ $app->delete('/config/{id}', function ($request, $response, $args) {
 $app->put('/config/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
+    print_r($data);
     try {
         $config = \App\Models\Config::find($id);
-        $config->role = $data['role'] ?: $config->role;
-        $config->descr = $data['descr'] ?: $config->descr;
+        $config->year = $data['year'] ?: $config->year;
+        $config->status = $data['status'] ?: $config->status;
         $config->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -68,8 +70,12 @@ $app->put('/config/{id}', function ($request, $response, $args) {
     return $response->getBody()->write($config->toJson());
 });
 
-$app->get('/configPeriods/{id}', function ($request, $response, $args) {
+$app->get('/config/{id}/periods', function ($request, $response, $args) {
     $id = $args['id'];
-    $conf = \App\Models\Config::find($id);
+    try {
+        $conf = \App\Models\Config::find($id);
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
     return $response->getBody()->write($conf->periods()->get()->toJson());
 });

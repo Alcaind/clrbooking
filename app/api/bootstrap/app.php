@@ -29,8 +29,8 @@ $app = new \Slim\App([
             'database' => 'clrbooking',
             'username' => 'lpadmin',
             'password' => 'OKEcmRv1UAa0Fqrb',
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            //'charset'   => 'utf8',
+            //'collation' => 'utf8_general_ci',
             'prefix'    => ''
         ]
     ]
