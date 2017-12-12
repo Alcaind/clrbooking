@@ -111,10 +111,14 @@ $app->put('/room/{id}', function ($request, $response, $args) {
     return $response->getBody()->write($room->toJson());
 });
 
+
+
 //$app->get("/room/{id}/item", function( Response $response, Request $request, $args){
-//    $id=$args['id'];
+//    $id = $args['id'];
 //    $room = \App\Models\Rooms::find($id);
-//    return $response->getBody()->write($room->items()-get()->toJson());
+//    $ret = $room->items()->get()->toJson();
+//    return $response->write(json_encode($ret, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 //}
+//
 //);
 
