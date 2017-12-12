@@ -14,5 +14,11 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 class Rooms extends Model
 {
     protected $table = 'rooms';
+    public $timestamps = false;
+
+    public function items()
+    {
+        return $this->belongsToMany("\\App\\Models\\Items", 'room_items', 'item_id', 'room_id');
+    }
 
 }

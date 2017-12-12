@@ -12,6 +12,16 @@ require __DIR__ . '/../src/models/users.php';
 require __DIR__ . '/../src/models/roles.php';
 require __DIR__ . '/../src/models/config.php';
 require __DIR__ . '/../src/models/periods.php';
+
+require __DIR__ . '/../src/models/tm.php';
+require __DIR__ . '/../src/models/kat.php';
+require __DIR__ . '/../src/models/item.php';
+require __DIR__ . '/../src/models/rooms.php';
+require __DIR__ . '/../src/models/ps.php';
+
+
+
+
 //require __DIR__ . '../src/models/Users.php';
 //require __DIR__ . '../src/models/Roles.php';
 //require __DIR__ . '../src/models/users.php';
@@ -62,3 +72,7 @@ require __DIR__ . '/../routes/options.php';
 require __DIR__ . '/../routes/users.php';
 require __DIR__ . '/../routes/roles.php';
 require __DIR__ . '/../routes/config.php';
+
+require __DIR__ . '/../routes/tm.php';
+require __DIR__ . '/../routes/item.php';
+require __DIR__ . '/../routes/rooms.php';

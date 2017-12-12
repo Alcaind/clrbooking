@@ -12,61 +12,109 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->get('/rooms', function (Request $request, Response $response) {
     //if (in_array("get", $this->jwt->scope)) {
     header("Content-Type: application/json");
-    $tbl = $this->get('db')->table('rooms');
-    $users = \App\Models\Rooms::all();
-    return $response->getBody()->write($users->toJson());
+    $rooms = \App\Models\Rooms::all();
+    return $response->getBody()->write($rooms->toJson());
 });
 
-$app->post('/users/{id}', function (Request $request, Response $response, $args) {
-    $id = $args['id'];
-    $user = \App\Models\Users::find($id);
-
+$app->get('/room/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
-    return $response->getBody()->write($user->toJson());
-
-});
-
-$app->post('/new_users', function (Request $request, Response $response, $args) {
     $id = $args['id'];
-    $bd = $request->getParsedBody();
-
-    $user = \App\Models\Users::find($id);
-
-    header("Content-Type: application/json");
-    return $response->getBody()->write($user->toJson());
-
+    try {
+        $room = \App\Models\Rooms::find($id);
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($room->toJson());
 });
 
-$app->put('/users', function (Request $request, Response $response) {
+$app->post('/room', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
 
-    $descr = $data['descr'];
-    $options = $data['options'];
-    $user = $data['user'];
-    $appid = $data['appid'];
-
-    $sql = "INSERT INTO `appoptions` (`id`, `descr`, `options`, `uid`, `appid`) VALUES (NULL, :descr, :options, :usr, :appid)";
     try {
-        $db = new db();
-        $db = $db->connect();
-        $stm = $db->prepare($sql);
-        $stm->bindParam(':descr', $descr);
-        $stm->bindParam(':options', $options);
-        $stm->bindParam(':usr', $user);
-        $stm->bindParam(':appid', $appid);
-        $stm->execute();
-        echo '{"notice":{"text":"Option Added"},"id":"' . $db->lastInsertId() . '"}';
-    } catch (PDOException $e) {
-        echo '{"error": {"text":"' . $e->getMessage() . '"}}';
+        $room = new \App\Models\Rooms();
+
+        $room->name = $data['name'];
+        $room->address = $data['address'];
+        $room->building = $data['building'];
+        $room->floor = $data['floor'];
+        $room->status = $data['status'];
+        $room->active = $data['active'];
+        $room->destroyed = $data['destroyed'];
+        $room->nonexist = $data['nonexist'];
+        $room->capasity = $data['capasity'];
+        $room->width = $data['width'];
+        $room->height = $data['height'];
+        $room->exams_capasity = $data['exams_capasity'];
+        $room->capasity_categ = $data['capasity_categ'];
+        $room->tm_owner = $data['name'];
+        $room->dt = $data['dt'];
+        $room->stat_comm = $data['stat_comm'];
+        $room->conf_id = $data['conf_id'];
+        $room->type = $data['type'];
+        $room->use_id = $data['use_id'];
+        $room->use_str = $data['use_str'];
+
+        $room->save();
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
+    return $response->withStatus(201)->getBody()->write($room->toJson());
 });
 
-$app->post('/user_roles/{id}/', function ($request, $response, $args) {
+$app->delete('/room/{id}', function ($request, $response, $args) {
     $id = $args['id'];
-    $user = App\User::find($id);
-
-    $roles = $user->roles();
-
-    return $response->getBody()->write($roles->toJson());
+    try {
+        $room = \App\Models\Rooms::find($id);
+        $room->delete();
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->withStatus(200)->getBody()->write($room->toJson());
 });
+
+$app->put('/room/{id}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    try {
+        $room = \App\Models\Rooms::find($id);
+
+        $room->name = $data['name'] ?: $room->name;;
+        $room->address = $data['address'] ?: $room->address;
+        $room->building = $data['building'] ?: $room->building;
+        $room->floor = $data['floor'] ?: $room->floor;
+        $room->status = $data['status'] ?: $room->status;
+        $room->active = $data['active'] ?: $room->active;
+        $room->destroyed = $data['destroyed'] ?: $room->destroyed;
+        $room->nonexist = $data['nonexist'] ?: $room->nonexist;
+        $room->capasity = $data['capasity'] ?: $room->capasity;
+        $room->width = $data['width'] ?: $room->width;
+        $room->height = $data['height'] ?: $room->height;
+        $room->exams_capasity = $data['exams_capasity'] ?: $room->exams_capasity;
+        $room->capasity_categ = $data['capasity_categ'] ?: $room->capasity_categ;
+        $room->tm_owner = $data['name'] ?: $room->tm_owner;
+        $room->dt = $data['dt'] ?: $room->dt;
+        $room->stat_comm = $data['stat_comm'] ?: $room->stat_comm;
+        $room->conf_id = $data['conf_id'] ?: $room->conf_id;
+        $room->type = $data['type'] ?: $room->type;
+        $room->use_id = $data['use_id'] ?: $room->use_id;
+        $room->use_str = $data['use_str'] ?: $room->use_str;
+
+        $room->save();
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($room->toJson());
+});
+
+//$app->get("/room/{id}/item", function( Response $response, Request $request, $args){
+//    $id=$args['id'];
+//    $room = \App\Models\Rooms::find($id);
+//    return $response->getBody()->write($room->items()-get()->toJson());
+//}
+//);
+
