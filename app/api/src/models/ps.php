@@ -20,4 +20,14 @@ class Ps extends Model
     {
         $this->belongsTo('\\App\\Models\\Config', 'conf_id');
     }
+
+    public function requests()
+    {
+        try {
+            $ret = $this->hasMany('\\App\\Models\\Requests', 'ps_id');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return $ret;
+    }
 }

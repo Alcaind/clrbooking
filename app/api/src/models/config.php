@@ -28,14 +28,14 @@ class Config extends Model
         return $ret;
     }
 
-    public function ps()
-    {
-        try {
-            $ret = $this->hasOne('\\App\\Models\\Ps', 'conf_id');
-            //print_r($ret);
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-        return $ret;
-    }
+//    public function ps()
+//    {
+//        try {
+//            $ret = $this->hasOne('\\App\\Models\\Ps', 'conf_id');
+//            //print_r($ret);
+//        } catch (\Exception $e) {
+//            return $e->getMessage();
+//        }
+//        return $ret;
+//    }
 }

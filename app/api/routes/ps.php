@@ -87,3 +87,13 @@ $app->put('/ps/{id}', function ($request, $response, $args) {
     }
     return $response->getBody()->write($ps->toJson());
 });
+
+$app->get('/user/{id}/requests', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $configuration = \App\Models\Ps::find($id);
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($configuration->requests()->get()->toJson());
+});

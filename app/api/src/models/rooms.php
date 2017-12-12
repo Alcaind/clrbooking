@@ -21,4 +21,14 @@ class Rooms extends Model
         return $this->belongsToMany("\\App\\Models\\Items", 'room_items', 'item_id', 'room_id');
     }
 
+    public function periods()
+    {
+        try {
+            $ret = $this->hasMany('\\App\\Models\\RoomBook', 'room_id');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return $ret;
+    }
+
 }

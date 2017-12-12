@@ -26,4 +26,14 @@ class Tm extends Model
         return $ret;
     }
 
+    public function users()
+    {
+        try {
+            $ret = $this->hasMany('\\App\\Models\\Users', 'tm_id');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return $ret;
+    }
+
 }

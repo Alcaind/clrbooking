@@ -87,3 +87,13 @@ $app->get('/tm/{id}/kat', function ($request, $response, $args) {
     }
     return $response->getBody()->write($tm->kat()->get()->toJson());
 });
+
+$app->get('/tm/{id}/users', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $configuration = \App\Models\Tm::find($id);
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($configuration->users()->get()->toJson());
+});

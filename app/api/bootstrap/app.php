@@ -17,9 +17,13 @@ require __DIR__ . '/../src/models/tm.php';
 require __DIR__ . '/../src/models/kat.php';
 require __DIR__ . '/../src/models/item.php';
 require __DIR__ . '/../src/models/rooms.php';
+
 require __DIR__ . '/../src/models/ps.php';
-require __DIR__ . '/../src/models/request.php';
+require __DIR__ . '/../src/models/requests.php';
 require __DIR__ . '/../src/models/roombook.php';
+require __DIR__ . '/../src/models/roomitem.php';
+require __DIR__ . '/../src/models/roomuse.php';
+require __DIR__ . '/../src/models/usersroles.php';
 
 
 
@@ -74,12 +78,16 @@ require __DIR__ . '/../routes/options.php';
 require __DIR__ . '/../routes/users.php';
 require __DIR__ . '/../routes/roles.php';
 require __DIR__ . '/../routes/config.php';
+require __DIR__ . '/../routes/periods.php';
 
 require __DIR__ . '/../routes/tm.php';
 require __DIR__ . '/../routes/item.php';
 require __DIR__ . '/../routes/rooms.php';
-require __DIR__ . '/../routes/periods.php';
+
 require __DIR__ . '/../routes/kat.php';
 require __DIR__ . '/../routes/ps.php';
-require __DIR__ . '/../routes/request.php';
+require __DIR__ . '/../routes/requests.php';
 require __DIR__ . '/../routes/roombook.php';
+require __DIR__ . '/../routes/roomitem.php';
+require __DIR__ . '/../routes/roomuse.php';
+require __DIR__ . '/../routes/usersroles.php';

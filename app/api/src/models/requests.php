@@ -15,4 +15,14 @@ class Requests extends Model
     public $timestamps = false;
     protected $table = 'requests';
 
+    public function users()
+    {
+        $this->belongsTo('\\App\\Models\\Users', 'user_id');
+    }
+
+    public function ps()
+    {
+        $this->belongsTo('\\App\\Models\\Ps', 'ps_id');
+    }
+
 }

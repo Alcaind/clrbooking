@@ -122,3 +122,14 @@ $app->put('/room/{id}', function ($request, $response, $args) {
 //
 //);
 
+
+$app->get('/room/{id}/roombook', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $configuration = \App\Models\Rooms::find($id);
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($configuration->roombook()->get()->toJson());
+});
+

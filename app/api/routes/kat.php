@@ -64,7 +64,7 @@ $app->put('/kat/{id}', function ($request, $response, $args) {
     print_r($data);
     try {
         $kat = \App\Models\Kat::find($id);
-//        $kat->tm_id = $data['tm_id'] ?: $kat->tm_id;    den 8a exei prosbash
+        $kat->tm_id = $data['tm_id'] ?: $kat->tm_id;
         $kat->decr = $data['decr'] ?: $kat->decr;
         $kat->title = $data['title'] ?: $kat->title;
         $kat->pm = $data['pm'] ?: $kat->pm;
