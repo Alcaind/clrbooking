@@ -10,7 +10,13 @@ angular.module('Authentication', ['angular-storage'])
                 service.Login = function (username, password, callback) {
                     var app = window.location.href.split('/');
                     var appStr = app[3];
-                    var req = {method: 'POST', url: './api/public/login', data:{usr:username,pswd:password,app:appStr}};
+
+
+                    var req = {
+                        method: 'POST',
+                        headers: {Authorization: service.SetCredentials(username, password)},
+                        url: './api/public/login', data: {user: username, password: password, app: appStr}
+                    };
                     $http(req).then(function (response) {
                         store.set('jwt', response.data);
                         store.set('rwt', jwtHelper.decodeToken(response.data.token)["refresh-token"]);
@@ -31,8 +37,9 @@ angular.module('Authentication', ['angular-storage'])
                         }
                     };
 
-                    $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-                    $cookieStore.put('globals', $rootScope.globals);
+                    //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+                    //$cookieStore.put('globals', $rootScope.globals);
+                    return 'Basic ' + authdata;
                 };
 
                 service.ClearCredentials = function () {

@@ -5,9 +5,10 @@ angular.module('Login', []);
 angular.module('Admin', []);
 angular.module('Authentication', []);
 angular.module('DB', []);
+angular.module('Roles', []);
 
 // Declare app level module which depends on views, and components
-angular.module('lp4000App', [
+angular.module('clrBooking', [
     'Authentication',
     'Admin',
     'Home',
@@ -16,7 +17,8 @@ angular.module('lp4000App', [
     'Login',
     'DB',
     'angular-jwt',
-    'angular-storage'
+    'angular-storage',
+    'Roles'
 ])
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
         function($locationProvider, $routeProvider,  $httpProvider, jwtOptionsProvider, jwtInterceptorProvider) {
@@ -37,6 +39,10 @@ angular.module('lp4000App', [
         .when('/home', {
             controller: 'HomeController',
             templateUrl: 'modules/home/views/home.html'
+        })
+        .when('/roles', {
+            controller: 'RolesController',
+            templateUrl: 'modules/roles/views/roles.html'
         })
         /*.when('/', {
             controller: 'HomeController',

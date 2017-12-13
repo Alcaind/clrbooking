@@ -31,7 +31,7 @@ angular.module('Login', ['Authentication'])
                             window.location('app.livepraktoreio.gr/' + $rootScope.app);
                             return;
                         }
-                        $location.path('/home');
+                        $location.path('/roles');
                     });
                 }
             }]);

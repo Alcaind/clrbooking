@@ -88,7 +88,7 @@ $app->put('/ps/{id}', function ($request, $response, $args) {
     return $response->getBody()->write($ps->toJson());
 });
 
-$app->get('/user/{id}/requests', function ($request, $response, $args) {
+$app->get('/users/{id}/requests', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $configuration = \App\Models\Ps::find($id);
