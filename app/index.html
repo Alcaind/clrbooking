@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="modules/login/logincss/login_style.css"/>
     <link rel="stylesheet" href="modules/login/logincss/mystyle.css"/>
+    <link rel="stylesheet" href="modules/roles/views/roles.css"/>
+
+    <link rel="stylesheet" href="modules/users/uviews/users.css"/>
+
     <link rel="stylesheet" href="modules/login/logincss/font-awesome.min.css"/>
     </head>
     <body>
@@ -28,18 +32,25 @@
         your browser</a> to improve your experience.</p>
     <![endif]-->
 
+
+    <div class="container">
+        <nav class="navbar-collapse collapse" role="navigation">
+            <ul class="navbar-nav nav">
+                <li><a href="#roles">Roles</a></li>
+                <li><a href="#users">Users</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <div ng-view></div>
+
 
     <!-- In productuse use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
     -->
 
     <!-- Javascript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="login_assets/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="login_assets/assets/js/jquery.backstretch.min.js"></script>
-    <script src="login_assets/assets/js/retina-1.1.0.min.js"></script>
-    <script src="login_assets/assets/js/scripts.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 
 
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -62,5 +73,8 @@
     <script src="modules/dbServices/controllers.js"></script>
     <script src="modules/dbServices/services.js"></script>
     <script src="modules/roles/controllers.js"></script>
+
+    <script src="modules/users/ucontrollers.js"></script>
+
     </body>
 </html>

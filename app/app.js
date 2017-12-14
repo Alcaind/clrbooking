@@ -6,6 +6,7 @@ angular.module('Admin', []);
 angular.module('Authentication', []);
 angular.module('DB', []);
 angular.module('Roles', []);
+angular.module('Users', []);
 
 // Declare app level module which depends on views, and components
 angular.module('clrBooking', [
@@ -18,8 +19,10 @@ angular.module('clrBooking', [
     'DB',
     'angular-jwt',
     'angular-storage',
-    'Roles'
+    'Roles',
+    'Users'
 ])
+
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
         function($locationProvider, $routeProvider,  $httpProvider, jwtOptionsProvider, jwtInterceptorProvider) {
 
@@ -41,8 +44,14 @@ angular.module('clrBooking', [
             templateUrl: 'modules/home/views/home.html'
         })
         .when('/roles', {
+            title: 'roles',
             controller: 'RolesController',
             templateUrl: 'modules/roles/views/roles.html'
+        })
+        .when('/users', {
+            title: 'users',
+            controller: 'UsersController',
+            templateUrl: 'modules/users/uviews/users.html'
         })
         /*.when('/', {
             controller: 'HomeController',
@@ -58,7 +67,8 @@ angular.module('clrBooking', [
             requireBase: false
         });*/
 
-        var getUrlParameter = function getUrlParameter(sParam) {
+
+            var getUrlParameter = function getUrlParameter(sParam) {
             var sPageURL = decodeURIComponent(window.location.search.substring(1)),
                 sURLVariables = sPageURL.split('&'),
                 sParameterName,
