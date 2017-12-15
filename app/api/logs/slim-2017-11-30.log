@@ -1,0 +1,348 @@
+[2017-11-30 17:19:42] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 17:19:42] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 17:19:42] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 18:42:56] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 18:42:56] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 18:42:56] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 18:42:57] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 18:42:57] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 18:42:57] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 18:42:58] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 18:42:58] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 18:42:58] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 18:50:46] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 18:50:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 18:50:46] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 18:50:47] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 18:50:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 18:50:47] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 18:50:48] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 18:50:48] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 18:50:48] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 18:50:48] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 18:50:48] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 18:50:48] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 18:50:49] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 18:50:49] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 18:50:49] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 18:50:51] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 18:50:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 18:50:51] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:35:06] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:35:06] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 19:35:06] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:35:06] [DEBUG]: Using token from environment 
+[2017-11-30 19:35:06] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTE1MjU4MTksImV4cCI6MTUxMTUyOTQxOSwianRpIjoiMWVIdGdXaUQ0Nm1FWFdZeVFWdDE5QiIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6IntcInVzZXJcIjp7XCJpZFwiOlwiMVwiLFwidG1faWRcIjpudWxsLFwiZm5hbWVcIjpcIlZhc3NpbGlzXCIsXCJzbmFtZVwiOlwiTWFub2xvZ2xvdVwiLFwicGhvbmVcIjpcIjY5NDQ0NjY2MDdcIixcImVtX21haW5cIjpcInZtYW5vbDA5QGdtYWlsLmNvbVwiLFwiZW1fc2VjXCI6bnVsbCxcImVtX3BhbnRcIjpudWxsLFwiY2F0X2lkXCI6bnVsbCxcImNvbW1lbnRzXCI6XCJhbGxcIixcInVzZXJfblwiOlwidm1hbm9sXCIsXCJwc3dkXCI6XCJraWxsZXJiZWVcIn0sXCJyb2xlc1wiOlt7XCJ1c2VyX2lkXCI6XCIxXCIsXCJyb2xlX2lkXCI6XCIxXCIsXCJjb21tZW50XCI6XCJ2bWFub2wgYWRtaW5cIixcImV4cF9kdFwiOm51bGwsXCJkdFwiOlwiMjAxNy0xMS0yMiAxNTo0NToxMVwiLFwic3RhdHVzXCI6XCIxXCIsXCJpZFwiOlwiMVwifV19IiwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVEUxTWpVNE1Ua3NJbVY0Y0NJNk1UVXhNVFUyTVRneE9Td2lhblJwSWpvaU1XVklkR2RYYVVRME5tMUZXRmRaZVZGV2RERTVRaUlzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPaUo3WENKMWMyVnlYQ0k2ZTF3aWFXUmNJanBjSWpGY0lpeGNJblJ0WDJsa1hDSTZiblZzYkN4Y0ltWnVZVzFsWENJNlhDSldZWE56YVd4cGMxd2lMRndpYzI1aGJXVmNJanBjSWsxaGJtOXNiMmRzYjNWY0lpeGNJbkJvYjI1bFhDSTZYQ0kyT1RRME5EWTJOakEzWENJc1hDSmxiVjl0WVdsdVhDSTZYQ0oyYldGdWIyd3dPVUJuYldGcGJDNWpiMjFjSWl4Y0ltVnRYM05sWTF3aU9tNTFiR3dzWENKbGJWOXdZVzUwWENJNmJuVnNiQ3hjSW1OaGRGOXBaRndpT201MWJHd3NYQ0pqYjIxdFpXNTBjMXdpT2x3aVlXeHNYQ0lzWENKMWMyVnlYMjVjSWpwY0luWnRZVzV2YkZ3aUxGd2ljSE4zWkZ3aU9sd2lhMmxzYkdWeVltVmxYQ0o5TEZ3aWNtOXNaWE5jSWpwYmUxd2lkWE5sY2w5cFpGd2lPbHdpTVZ3aUxGd2ljbTlzWlY5cFpGd2lPbHdpTVZ3aUxGd2lZMjl0YldWdWRGd2lPbHdpZG0xaGJtOXNJR0ZrYldsdVhDSXNYQ0psZUhCZlpIUmNJanB1ZFd4c0xGd2laSFJjSWpwY0lqSXdNVGN0TVRFdE1qSWdNVFU2TkRVNk1URmNJaXhjSW5OMFlYUjFjMXdpT2x3aU1Wd2lMRndpYVdSY0lqcGNJakZjSW4xZGZTSjkuemxtaDNqNVlxS2NjNzVlOGlMU1RIQzJhLXdNRzZIVzJ2OG1zWlVnSnFXVSIsImV4cGlyZXMiOjE1MTE1NjE4MTl9fQ._vlC6dstmqplPvcjXmo51-1nQ9FBTbxyC-ItMQNWWJY"]
+[2017-11-30 19:35:08] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:35:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 19:35:08] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:35:08] [DEBUG]: Using token from environment 
+[2017-11-30 19:35:08] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTE1MjU4MTksImV4cCI6MTUxMTUyOTQxOSwianRpIjoiMWVIdGdXaUQ0Nm1FWFdZeVFWdDE5QiIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6IntcInVzZXJcIjp7XCJpZFwiOlwiMVwiLFwidG1faWRcIjpudWxsLFwiZm5hbWVcIjpcIlZhc3NpbGlzXCIsXCJzbmFtZVwiOlwiTWFub2xvZ2xvdVwiLFwicGhvbmVcIjpcIjY5NDQ0NjY2MDdcIixcImVtX21haW5cIjpcInZtYW5vbDA5QGdtYWlsLmNvbVwiLFwiZW1fc2VjXCI6bnVsbCxcImVtX3BhbnRcIjpudWxsLFwiY2F0X2lkXCI6bnVsbCxcImNvbW1lbnRzXCI6XCJhbGxcIixcInVzZXJfblwiOlwidm1hbm9sXCIsXCJwc3dkXCI6XCJraWxsZXJiZWVcIn0sXCJyb2xlc1wiOlt7XCJ1c2VyX2lkXCI6XCIxXCIsXCJyb2xlX2lkXCI6XCIxXCIsXCJjb21tZW50XCI6XCJ2bWFub2wgYWRtaW5cIixcImV4cF9kdFwiOm51bGwsXCJkdFwiOlwiMjAxNy0xMS0yMiAxNTo0NToxMVwiLFwic3RhdHVzXCI6XCIxXCIsXCJpZFwiOlwiMVwifV19IiwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVEUxTWpVNE1Ua3NJbVY0Y0NJNk1UVXhNVFUyTVRneE9Td2lhblJwSWpvaU1XVklkR2RYYVVRME5tMUZXRmRaZVZGV2RERTVRaUlzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPaUo3WENKMWMyVnlYQ0k2ZTF3aWFXUmNJanBjSWpGY0lpeGNJblJ0WDJsa1hDSTZiblZzYkN4Y0ltWnVZVzFsWENJNlhDSldZWE56YVd4cGMxd2lMRndpYzI1aGJXVmNJanBjSWsxaGJtOXNiMmRzYjNWY0lpeGNJbkJvYjI1bFhDSTZYQ0kyT1RRME5EWTJOakEzWENJc1hDSmxiVjl0WVdsdVhDSTZYQ0oyYldGdWIyd3dPVUJuYldGcGJDNWpiMjFjSWl4Y0ltVnRYM05sWTF3aU9tNTFiR3dzWENKbGJWOXdZVzUwWENJNmJuVnNiQ3hjSW1OaGRGOXBaRndpT201MWJHd3NYQ0pqYjIxdFpXNTBjMXdpT2x3aVlXeHNYQ0lzWENKMWMyVnlYMjVjSWpwY0luWnRZVzV2YkZ3aUxGd2ljSE4zWkZ3aU9sd2lhMmxzYkdWeVltVmxYQ0o5TEZ3aWNtOXNaWE5jSWpwYmUxd2lkWE5sY2w5cFpGd2lPbHdpTVZ3aUxGd2ljbTlzWlY5cFpGd2lPbHdpTVZ3aUxGd2lZMjl0YldWdWRGd2lPbHdpZG0xaGJtOXNJR0ZrYldsdVhDSXNYQ0psZUhCZlpIUmNJanB1ZFd4c0xGd2laSFJjSWpwY0lqSXdNVGN0TVRFdE1qSWdNVFU2TkRVNk1URmNJaXhjSW5OMFlYUjFjMXdpT2x3aU1Wd2lMRndpYVdSY0lqcGNJakZjSW4xZGZTSjkuemxtaDNqNVlxS2NjNzVlOGlMU1RIQzJhLXdNRzZIVzJ2OG1zWlVnSnFXVSIsImV4cGlyZXMiOjE1MTE1NjE4MTl9fQ._vlC6dstmqplPvcjXmo51-1nQ9FBTbxyC-ItMQNWWJY"]
+[2017-11-30 19:35:09] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:35:09] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-11-30 19:35:09] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:35:09] [DEBUG]: Using token from environment 
+[2017-11-30 19:35:09] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTE1MjU4MTksImV4cCI6MTUxMTUyOTQxOSwianRpIjoiMWVIdGdXaUQ0Nm1FWFdZeVFWdDE5QiIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6IntcInVzZXJcIjp7XCJpZFwiOlwiMVwiLFwidG1faWRcIjpudWxsLFwiZm5hbWVcIjpcIlZhc3NpbGlzXCIsXCJzbmFtZVwiOlwiTWFub2xvZ2xvdVwiLFwicGhvbmVcIjpcIjY5NDQ0NjY2MDdcIixcImVtX21haW5cIjpcInZtYW5vbDA5QGdtYWlsLmNvbVwiLFwiZW1fc2VjXCI6bnVsbCxcImVtX3BhbnRcIjpudWxsLFwiY2F0X2lkXCI6bnVsbCxcImNvbW1lbnRzXCI6XCJhbGxcIixcInVzZXJfblwiOlwidm1hbm9sXCIsXCJwc3dkXCI6XCJraWxsZXJiZWVcIn0sXCJyb2xlc1wiOlt7XCJ1c2VyX2lkXCI6XCIxXCIsXCJyb2xlX2lkXCI6XCIxXCIsXCJjb21tZW50XCI6XCJ2bWFub2wgYWRtaW5cIixcImV4cF9kdFwiOm51bGwsXCJkdFwiOlwiMjAxNy0xMS0yMiAxNTo0NToxMVwiLFwic3RhdHVzXCI6XCIxXCIsXCJpZFwiOlwiMVwifV19IiwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVEUxTWpVNE1Ua3NJbVY0Y0NJNk1UVXhNVFUyTVRneE9Td2lhblJwSWpvaU1XVklkR2RYYVVRME5tMUZXRmRaZVZGV2RERTVRaUlzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPaUo3WENKMWMyVnlYQ0k2ZTF3aWFXUmNJanBjSWpGY0lpeGNJblJ0WDJsa1hDSTZiblZzYkN4Y0ltWnVZVzFsWENJNlhDSldZWE56YVd4cGMxd2lMRndpYzI1aGJXVmNJanBjSWsxaGJtOXNiMmRzYjNWY0lpeGNJbkJvYjI1bFhDSTZYQ0kyT1RRME5EWTJOakEzWENJc1hDSmxiVjl0WVdsdVhDSTZYQ0oyYldGdWIyd3dPVUJuYldGcGJDNWpiMjFjSWl4Y0ltVnRYM05sWTF3aU9tNTFiR3dzWENKbGJWOXdZVzUwWENJNmJuVnNiQ3hjSW1OaGRGOXBaRndpT201MWJHd3NYQ0pqYjIxdFpXNTBjMXdpT2x3aVlXeHNYQ0lzWENKMWMyVnlYMjVjSWpwY0luWnRZVzV2YkZ3aUxGd2ljSE4zWkZ3aU9sd2lhMmxzYkdWeVltVmxYQ0o5TEZ3aWNtOXNaWE5jSWpwYmUxd2lkWE5sY2w5cFpGd2lPbHdpTVZ3aUxGd2ljbTlzWlY5cFpGd2lPbHdpTVZ3aUxGd2lZMjl0YldWdWRGd2lPbHdpZG0xaGJtOXNJR0ZrYldsdVhDSXNYQ0psZUhCZlpIUmNJanB1ZFd4c0xGd2laSFJjSWpwY0lqSXdNVGN0TVRFdE1qSWdNVFU2TkRVNk1URmNJaXhjSW5OMFlYUjFjMXdpT2x3aU1Wd2lMRndpYVdSY0lqcGNJakZjSW4xZGZTSjkuemxtaDNqNVlxS2NjNzVlOGlMU1RIQzJhLXdNRzZIVzJ2OG1zWlVnSnFXVSIsImV4cGlyZXMiOjE1MTE1NjE4MTl9fQ._vlC6dstmqplPvcjXmo51-1nQ9FBTbxyC-ItMQNWWJY"]
+[2017-11-30 19:35:11] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:35:11] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:35:11] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:46:37] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:46:37] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:46:37] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:46:38] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:46:38] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:46:38] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:49:16] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:49:16] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:49:16] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:51:01] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:51:01] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:51:01] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:51:03] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:51:03] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:51:03] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:51:57] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:51:57] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:51:57] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:12] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:12] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:12] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:14] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:14] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:14] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:15] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:15] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:15] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:16] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:16] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:16] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:16] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:16] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:16] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:17] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:17] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:17] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:18] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:18] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:18] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:18] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:18] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:18] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:19] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:19] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:19] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:48] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:48] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:48] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:49] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:49] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:49] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:49] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:49] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:49] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:50] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:50] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:50] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:51] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:51] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:51] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:51] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:51] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:51] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:52] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:52] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:52] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:53] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:53] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:53] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:55:53] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:55:53] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:55:53] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:57:28] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:57:28] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:57:28] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:57:35] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:57:35] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:57:35] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:57:36] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:57:36] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:57:36] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:57:36] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:57:36] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:57:36] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 19:57:38] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 19:57:38] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 19:57:38] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:19:26] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:19:26] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:19:26] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:25:42] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:25:42] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:25:42] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:25:44] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:25:44] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:25:44] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:25:44] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:25:44] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:25:44] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:29:50] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:29:50] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:29:50] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:29:51] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:29:51] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:29:51] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:29:54] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:29:54] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:29:54] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:30:01] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:30:01] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:30:01] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:30:05] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:30:05] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:30:05] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:30:06] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:30:06] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:30:06] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:30:12] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:30:12] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:30:12] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:33:32] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:33:32] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:33:32] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:33:33] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:33:33] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:33:33] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:35:11] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:35:11] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:35:11] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:36:44] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:36:44] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:36:44] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:41:33] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:41:33] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:41:33] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:41:34] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:41:34] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:41:34] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:41:41] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:41:41] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:41:41] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:41:43] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:41:43] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:41:43] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:41:44] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:41:44] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:41:44] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:41:56] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:41:56] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:41:56] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:41:57] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:41:57] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:41:57] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:41:59] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:41:59] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:41:59] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:42:34] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:42:34] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:42:34] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:42:37] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:42:37] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:42:37] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:43:15] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:43:15] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:43:15] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:44:14] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:44:14] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:44:14] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 20:44:15] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 20:44:15] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 20:44:15] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:03:48] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:03:48] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:03:48] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:03:54] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:03:54] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:03:54] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:03:58] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:03:58] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:03:58] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:03] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:03] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:03] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:05] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:05] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:05] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:06] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:06] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:06] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:06] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:06] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:06] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:08] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:08] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:08] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:09] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:09] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:09] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:10] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:10] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:10] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:11] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:11] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:11] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:12] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:12] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:12] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:12] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:12] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:12] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:13] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:13] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:13] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:14] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:14] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:14] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:15] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:15] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:15] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:18] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:18] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:18] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:20] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:20] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:20] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:21] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:21] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:21] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:22] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:22] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:22] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:23] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:23] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:23] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:24] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:24] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:24] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:25] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:25] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:25] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:26] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:26] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:26] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:04:29] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:04:29] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:04:29] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:08:16] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:08:16] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:08:16] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:08:18] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:08:18] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:08:18] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:08:19] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:08:19] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:08:19] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:09:11] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:09:11] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:09:11] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:09:12] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:09:12] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:09:12] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:09:15] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:09:15] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:09:15] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:09:16] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:09:16] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:09:16] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:09:17] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:09:17] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:09:17] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:09:17] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:09:17] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:09:17] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:09:18] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:09:18] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:09:18] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:16:31] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:16:31] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:16:31] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:17:01] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:17:01] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:17:01] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:17:02] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:17:02] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:17:02] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:17:03] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:17:03] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:17:03] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:17:03] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:17:03] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:17:03] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:17:04] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:17:04] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:17:04] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:17:07] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:17:07] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:17:07] [DEBUG]: CORS analysis for request completed. 
+[2017-11-30 22:17:08] [DEBUG]: CORS analysis for request started. 
+[2017-11-30 22:17:08] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-11-30 22:17:08] [DEBUG]: CORS analysis for request completed. 

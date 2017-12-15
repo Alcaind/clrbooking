@@ -1,5 +1,5 @@
 'use strict';
-angular.module('Login', ['Authentication'])
+angular.module('Login', ['Authentication', 'MainComponents'])
     .controller('LoginController',
         ['$scope', '$http', '$rootScope', '$location', '$cookies', '$cookieStore', 'AuthenticationService', 'jwtHelper', 'store',
             function ($scope, $http, $rootScope, $location, $cookies, $cookieStore, AuthenticationService, jwtHelper, store) {

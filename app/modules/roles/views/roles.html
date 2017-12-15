@@ -1,0 +1,59 @@
+<navmenu></navmenu>
+<div id="roles_main">
+    <h1> Roles </h1>
+
+    <div id="options_div" style="padding: 5px">
+        <button type="button" class="btn btn-primary" ng-click="getRoles()">Get Roles</button>
+        <!--<button type="button" class="btn btn-primary" ng-click="getRole()">Get Role id</button>-->
+        <button type="button" class="btn btn-primary" ng-click="newRole()">New Roles</button>
+        <input type="text" ng-model="filter" class="form-control" placeholder="search" style="padding: 5px; width: 50%">
+        <span class="glyphicon glyphicon-search"></span>
+    </div>
+
+    <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>role</th>
+                <th>descr</th>
+                <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
+            </tr>
+            <tr ng-repeat="role in roles|filter:filter">
+                <td>{{ role.id }}</td>
+                <td>{{ role.role }}</td>
+                <td>{{ role.descr }}</td>
+                <td>
+                    <button ng-click="selectRole(role)" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button ng-click="deleteRole(role)" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-erase"></span>
+                    </button>
+                    <button ng-click="getUsers(role)" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="padding: 5px">
+        <input type="text" ng-model="currentRole.id" class="form-control" placeholder="id" ng-disabled="true"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRole.role" class="form-control" placeholder="role" style="padding: 5px">
+        <input type="text" ng-model="currentRole.descr" class="form-control" placeholder="description"
+               style="padding: 5px">
+        <button type="button" class="btn btn-primary" ng-click="updateRole()" style="padding: 5px"
+                ng-if="currentRole.id>0">Upd Roles
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="insertRole()" style="padding: 5px"
+                ng-if="currentRole.role && !currentRole.id">Save Roles
+        </button>
+    </div>
+</div>
+
+
+
+
+
+

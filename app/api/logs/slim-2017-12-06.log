@@ -1,0 +1,64 @@
+[2017-12-06 17:09:44] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:09:44] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:09:44] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:10:01] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:10:01] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:10:01] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:10:02] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:10:02] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:10:02] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:10:03] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:10:03] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:10:03] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:18:56] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:18:56] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:18:56] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:18:57] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:18:57] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:18:57] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:18:59] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:18:59] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:18:59] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:19:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:19:09] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-06 17:19:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:19:09] [DEBUG]: Using token from environment 
+[2017-12-06 17:19:09] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTIzODc1MDUsImV4cCI6MTUxMjM5MTEwNSwianRpIjoiMVdpNjhld1NJZ1pGR3pVaXNnYUZIUSIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6bnVsbCwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVEl6T0RjMU1EVXNJbVY0Y0NJNk1UVXhNalF5TXpVd05Td2lhblJwSWpvaU1WZHBOamhsZDFOSloxcEdSM3BWYVhObllVWklVU0lzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPbTUxYkd4OS5wUTM1eEU5UUpOWFJNckdsZ2RLSngwcmdfblNOb25rZTQ1SE9aOUE0di1vIiwiZXhwaXJlcyI6MTUxMjQyMzUwNX19.G4Yq6uqAE_I38m3YKeWClkHD_soCVxlqOjQDQ9a7b9s"]
+[2017-12-06 17:19:33] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:19:33] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-06 17:19:33] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:19:33] [DEBUG]: Using token from environment 
+[2017-12-06 17:20:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:20:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-06 17:20:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:20:13] [DEBUG]: Using token from environment 
+[2017-12-06 17:20:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:20:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-06 17:20:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:20:14] [DEBUG]: Using token from environment 
+[2017-12-06 17:20:19] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:20:19] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:20:19] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:20:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:20:20] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:20:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:20:21] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:20:21] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:20:21] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:20:23] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:20:23] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:20:23] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 17:20:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 17:20:27] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 17:20:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 18:22:24] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 18:22:24] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-06 18:22:24] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 18:22:24] [DEBUG]: Using token from environment 
+[2017-12-06 18:22:24] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTI1NzM1MzksImV4cCI6MTUxMjU3NzEzOSwianRpIjoiMVN6bTV6YVA2YU5SUFZSSHdPSDZoeSIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6bnVsbCwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVEkxTnpNMU16a3NJbVY0Y0NJNk1UVXhNall3T1RVek9Td2lhblJwSWpvaU1WTjZiVFY2WVZBMllVNVNVRlpTU0hkUFNEWm9lU0lzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPbTUxYkd4OS4xcnhmTlRjT2l1UllCZ3dIQ2hYdExqNGlOR1NQVGJaOU1qREM2OE9vZi1vIiwiZXhwaXJlcyI6MTUxMjYwOTUzOX19.33hNnB57_ad6e28_oHicLzyP0Unw1VnjBy11duMTgkU"]
+[2017-12-06 18:22:28] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 18:22:28] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 18:22:28] [DEBUG]: CORS analysis for request completed. 
+[2017-12-06 18:41:22] [DEBUG]: CORS analysis for request started. 
+[2017-12-06 18:41:22] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-06 18:41:22] [DEBUG]: CORS analysis for request completed. 

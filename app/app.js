@@ -7,6 +7,8 @@ angular.module('Authentication', []);
 angular.module('DB', []);
 angular.module('Roles', []);
 angular.module('Users', []);
+angular.module('Rooms', []);
+angular.module('MainComponents', []);
 
 // Declare app level module which depends on views, and components
 angular.module('clrBooking', [
@@ -20,7 +22,9 @@ angular.module('clrBooking', [
     'angular-jwt',
     'angular-storage',
     'Roles',
-    'Users'
+    'Users',
+    'Rooms',
+    'MainComponents'
 ])
 
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
@@ -52,6 +56,11 @@ angular.module('clrBooking', [
             title: 'users',
             controller: 'UsersController',
             templateUrl: 'modules/users/uviews/users.html'
+        })
+        .when('/rooms', {
+            title: 'rooms',
+            controller: 'RoomsController',
+            templateUrl: 'modules/rooms/rviews/rooms.html'
         })
         /*.when('/', {
             controller: 'HomeController',
@@ -197,4 +206,7 @@ angular.module('clrBooking', [
                 $rootScope.globals.currentUser = '';
                 $location.path('/login');
             });*/
-        }]);
+        }])
+
+
+;

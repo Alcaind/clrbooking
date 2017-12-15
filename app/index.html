@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="modules/roles/views/roles.css"/>
 
     <link rel="stylesheet" href="modules/users/uviews/users.css"/>
+    <link rel="stylesheet" href="modules/rooms/rviews/rooms.css"/>
 
     <link rel="stylesheet" href="modules/login/logincss/font-awesome.min.css"/>
     </head>
@@ -33,16 +34,12 @@
     <![endif]-->
 
 
-    <div class="container">
-        <nav class="navbar-collapse collapse" role="navigation">
-            <ul class="navbar-nav nav">
-                <li><a href="#roles">Roles</a></li>
-                <li><a href="#users">Users</a></li>
-            </ul>
-        </nav>
+    <div ng-view>
+
+
     </div>
 
-    <div ng-view></div>
+
 
 
     <!-- In productuse use:
@@ -75,6 +72,8 @@
     <script src="modules/roles/controllers.js"></script>
 
     <script src="modules/users/ucontrollers.js"></script>
+    <script src="modules/rooms/rcontrollers.js"></script>
+    <script src="modules/mainComponents/controllers.js"></script>
 
     </body>
 </html>
