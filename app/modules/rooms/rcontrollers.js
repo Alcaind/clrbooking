@@ -23,7 +23,7 @@ angular.module('Rooms', [
     $scope.getRoom = function () {
         $http({
             method: 'GET',
-            url: 'api/public/room/' + $scope.currentRooms.id
+            url: 'api/public/room/' + $scope.currentRoom.id
         }).then(function successCallback(response) {
             $scope.currentRoom = response.data;
 
@@ -35,9 +35,9 @@ angular.module('Rooms', [
     $scope.deleteRoom = function (room) {
         $http({
             method: 'DELETE',
-            url: 'api/public/room' + $scope.currentRoom.id
+            url: 'api/public/room/' + room.id
         }).then(function successCallBack(response) {
-            $scope.room.slice($scope.rooms.indexOf(room), 1)
+            $scope.rooms.splice($scope.rooms.indexOf(room), 1)
         }, function errorCallBack(response) {
             alert(response.message);
         });
@@ -58,7 +58,7 @@ angular.module('Rooms', [
     $scope.updateRoom = function () {
         $http({
             method: 'PUT',
-            url: 'apo/public/room' + $scope.currentRoom["id"],
+            url: 'api/public/room/' + $scope.currentRoom["id"],
             data: JSON.stringify($scope.currentRoom)
         }).then(function successCallBack(response) {
             //????
@@ -94,7 +94,7 @@ angular.module('Rooms', [
             type: "",
             use_id: "",
             use_str: ""
-        }
+        };
     };
 
 }]);

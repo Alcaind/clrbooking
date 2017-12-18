@@ -2,7 +2,6 @@
 
 angular.module('Roles', [
     'MainComponents',
-
     'ui.bootstrap'
 ]).controller('RolesController', ['$scope', '$http', function ($scope, $http) {
 

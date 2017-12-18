@@ -55,8 +55,7 @@ $app->post('/users', function (Request $request, Response $response) {
 $app->delete('/users/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
-        $users = \App\Models\Users::find($id);
-        $users->delete();
+        \App\Models\Users::destroy($id);
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());

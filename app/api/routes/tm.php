@@ -9,7 +9,7 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-$app->get('/tm', function (Request $request, Response $response) {
+$app->get('/tms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $tm = \App\Models\Tm::all();
 

@@ -32,13 +32,13 @@
                 <td>{{ user.tm_id }}</td>
                 <td>{{ user.fname }}</td>
                 <td>{{ user.sname}}</td>
-                <td>{{user.phone}}</td>
-                <td>{{user.em_main}}</td>
-                <td>{{user.em_sec}}</td>
-                <td>{{user.em_pant}}</td>
-                <td>{{user.cat_id}}</td>
-                <td>{{user.comments}}</td>
-                <td>{{user.user}}</td>
+                <td>{{ user.phone}}</td>
+                <td>{{ user.em_main}}</td>
+                <td>{{ user.em_sec}}</td>
+                <td>{{ user.em_pant}}</td>
+                <td>{{ user.cat_id}}</td>
+                <td>{{ user.comments}}</td>
+                <td>{{ user.user}}</td>
                 <!--<td>{{user.hash}}</td>-->
 
                 <td>
@@ -48,9 +48,9 @@
                     <button ng-click="deleteUser(user)" type="button" class="btn btn-primary">
                         <span class="glyphicon glyphicon-erase"></span>
                     </button>
-                    <!--<button ng-click="getRole(role)" type="button" class="btn btn-primary">-->
-                    <!--<span class="glyphicon glyphicon-user"></span>-->
-                    <!--</button>-->
+                    <button ng-click="getUser(user)" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
                 </td>
             </tr>
         </table>

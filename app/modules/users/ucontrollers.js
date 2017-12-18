@@ -22,7 +22,7 @@ angular.module('Users', [
     $scope.getUser = function () {
         $http({
             method: 'GET',
-            url: 'api/public/user/' + $scope.currentUsers.id
+            url: 'api/public/users/' + $scope.currentUser.id
         }).then(function successCallback(response) {
             $scope.currentUser = response.data;
 
@@ -34,9 +34,9 @@ angular.module('Users', [
     $scope.deleteUser = function (user) {
         $http({
             method: 'DELETE',
-            url: 'api/public/user' + $scope.currentUser.id
+            url: 'api/public/users/' + user.id
         }).then(function successCallUserBack(response) {
-            $scope.user.slice($scope.users.indexOf(user), 1)
+            $scope.users.splice($scope.users.indexOf(user), 1)
         }, function errorCallBack(response) {
             alert(response.message);
         });
@@ -45,9 +45,9 @@ angular.module('Users', [
     $scope.insertUser = function () {
         $http({
             method: 'POST',
-            url: 'api/public/user',
+            url: 'api/public/users',
             data: JSON.stringify($scope.currentUser)
-        }).then(function successCallUserBack(response) {
+        }).then(function successCallBack(response) {
             $scope.users.push(response.data);
         }, function errorCallBack(response) {
             alert(response.message);
@@ -57,9 +57,9 @@ angular.module('Users', [
     $scope.updateUser = function () {
         $http({
             method: 'PUT',
-            url: 'apo/public/user' + $scope.currentUser["id"],
+            url: 'api/public/users/' + $scope.currentUser["id"],
             data: JSON.stringify($scope.currentUser)
-        }).then(function successCallUserBack(response) {
+        }).then(function successCallBack(response) {
             //????
         }, function errorCallBack(response) {
             alert(response.message);

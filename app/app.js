@@ -8,6 +8,9 @@ angular.module('DB', []);
 angular.module('Roles', []);
 angular.module('Users', []);
 angular.module('Rooms', []);
+angular.module('Tm', []);
+angular.module('Kat', []);
+angular.module('Request', []);
 angular.module('MainComponents', []);
 
 // Declare app level module which depends on views, and components
@@ -24,6 +27,9 @@ angular.module('clrBooking', [
     'Roles',
     'Users',
     'Rooms',
+    'Tms',
+    'Kat',
+    'Request',
     'MainComponents'
 ])
 
@@ -61,6 +67,21 @@ angular.module('clrBooking', [
             title: 'rooms',
             controller: 'RoomsController',
             templateUrl: 'modules/rooms/rviews/rooms.html'
+        })
+        .when('/tms', {
+            title: 'tm',
+            controller: 'TmsController',
+            templateUrl: 'modules/tm/tmviews/tms.html'
+        })
+        .when('/kat', {
+            title: 'kat',
+            controller: 'KatController',
+            templateUrl: 'modules/kat/katsviews/kats.html'
+        })
+        .when('/requests', {
+            title: 'request',
+            controller: 'RequestsController',
+            templateUrl: 'modules/requests/reqviews/requests.html'
         })
         /*.when('/', {
             controller: 'HomeController',
