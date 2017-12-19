@@ -53,8 +53,8 @@ angular.module('MainComponents', [
         }
     })
     .controller('NavmenuController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
-
     }])
+
     .directive('footer', function () {
         return {
             restrict: "EA",
@@ -63,6 +63,80 @@ angular.module('MainComponents', [
         }
     })
     .controller('FooterController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
+    }])
+
+
+
+    // .directive('popupwindow',function (size,parentSelector){
+    //         var parentElem = parentSelector ?
+    //             angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+    //         var modalInstance = $uibModal.open({
+    //             animation: $ctrl.animationsEnabled,
+    //             ariaLabelledBy: 'modal-title',
+    //             ariaDescribedBy: 'modal-body',
+    //             templateUrl: 'myModalContent.html',
+    //             controller: 'ModalInstanceCtrl',
+    //             controllerAs: '$ctrl',
+    //             size: size,
+    //             appendTo: parentElem,
+    //             resolve: {
+    //                 items: function () {
+    //                     return $ctrl.items;
+    //                 }
+    //             }
+    //         });
+    //
+    //         modalInstance.result.then(function (selectedItem) {
+    //             $ctrl.selected = selectedItem;
+    //         }, function () {
+    //             $log.info('Modal dismissed at: ' + new Date());
+    //         });
+    //     }
+    // )
+
+
+    .controller("PopupHolderController", ['$scope', '$uibModal', '$rootScope', '$location', function ($scope, $uibModal, $rootScope, $location) {
+
+        $scope.mymodal = function () {
+            var $myModalInstance = $uibModal.open({
+                templateUrl: 'modules/mainComponents/views/popup.html',
+                controller: 'PopupController',
+                scope: $scope,
+                resolve: {
+                    /*optionsForm: function () {
+                        $scope.optionsForm = $scope.formOptions;
+                        return $scope.optionsForm;
+                    }*/
+                },
+                size: 'lg'
+            }).result.then(
+                function (result) {
+                }
+            );
+        };
 
     }])
+
+    .controller("PopupController", ['$scope', '$uibModalInstance', '$rootScope', '$location', function ($scope, $uibModalInstance, $rootScope, $location) {
+        $scope.ok = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+
+    }])
+
+    .directive("popup", function () {
+        return {
+            restrict: "E",
+            scope: true,
+            transclude: true,
+            templateUrl: 'modules/mainComponents/views/popupholder.html',
+            controller: 'PopupHolderController'
+        }
+    })
+
 ;
+
+

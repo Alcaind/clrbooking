@@ -8,12 +8,14 @@ angular.module('Users', [
     $scope.users = [];
     $scope.currentUser = {};
 
+
     $scope.getUsers = function () {
         $http({
             method: 'GET',
             url: 'api/public/users'
         }).then(function successCallback(response) {
             $scope.users = response.data;
+            MainComponents.PopupHolderController.mymodal();
         }, function errorCallBack(response) {
             alert(response.message);
         });

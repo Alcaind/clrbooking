@@ -10,7 +10,7 @@ angular.module('Users', []);
 angular.module('Rooms', []);
 angular.module('Tm', []);
 angular.module('Kat', []);
-angular.module('Request', []);
+angular.module('Requests', []);
 angular.module('MainComponents', []);
 
 // Declare app level module which depends on views, and components
@@ -29,7 +29,7 @@ angular.module('clrBooking', [
     'Rooms',
     'Tms',
     'Kat',
-    'Request',
+    'Requests',
     'MainComponents'
 ])
 
@@ -79,7 +79,7 @@ angular.module('clrBooking', [
             templateUrl: 'modules/kat/katsviews/kats.html'
         })
         .when('/requests', {
-            title: 'request',
+            title: 'requests',
             controller: 'RequestsController',
             templateUrl: 'modules/requests/reqviews/requests.html'
         })
