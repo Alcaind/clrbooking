@@ -65,61 +65,43 @@ angular.module('MainComponents', [
     .controller('FooterController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
     }])
 
+    .factory("MakeModal", ['$uibModal', function ($uibModal) {
 
+        var factory = {};
 
-    // .directive('popupwindow',function (size,parentSelector){
-    //         var parentElem = parentSelector ?
-    //             angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
-    //         var modalInstance = $uibModal.open({
-    //             animation: $ctrl.animationsEnabled,
-    //             ariaLabelledBy: 'modal-title',
-    //             ariaDescribedBy: 'modal-body',
-    //             templateUrl: 'myModalContent.html',
-    //             controller: 'ModalInstanceCtrl',
-    //             controllerAs: '$ctrl',
-    //             size: size,
-    //             appendTo: parentElem,
-    //             resolve: {
-    //                 items: function () {
-    //                     return $ctrl.items;
-    //                 }
-    //             }
-    //         });
-    //
-    //         modalInstance.result.then(function (selectedItem) {
-    //             $ctrl.selected = selectedItem;
-    //         }, function () {
-    //             $log.info('Modal dismissed at: ' + new Date());
-    //         });
-    //     }
-    // )
+        factory.defaultModal = function (size, okCallback, cancelCallback, scope) {
 
-
-    .controller("PopupHolderController", ['$scope', '$uibModal', '$rootScope', '$location', function ($scope, $uibModal, $rootScope, $location) {
-
-        $scope.mymodal = function () {
             var $myModalInstance = $uibModal.open({
                 templateUrl: 'modules/mainComponents/views/popup.html',
                 controller: 'PopupController',
-                scope: $scope,
-                resolve: {
-                    /*optionsForm: function () {
-                        $scope.optionsForm = $scope.formOptions;
-                        return $scope.optionsForm;
-                    }*/
-                },
-                size: 'lg'
-            }).result.then(
-                function (result) {
-                }
-            );
+                scope: scope,
+                size: size
+            });
+
+            function ok(result) {
+                alert(result);
+            }
+
+            function cancel(result) {
+                alert(result);
+            }
+
+            $myModalInstance.result.then(ok, cancel);
+
+
+            return $myModalInstance
         };
 
+        factory.okModal = function () {
+        };
+
+        return factory;
     }])
+
 
     .controller("PopupController", ['$scope', '$uibModalInstance', '$rootScope', '$location', function ($scope, $uibModalInstance, $rootScope, $location) {
         $scope.ok = function () {
-            $uibModalInstance.dismiss('cancel');
+            $uibModalInstance.close('ok');
         };
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
@@ -127,15 +109,20 @@ angular.module('MainComponents', [
 
     }])
 
-    .directive("popup", function () {
-        return {
-            restrict: "E",
-            scope: true,
-            transclude: true,
-            templateUrl: 'modules/mainComponents/views/popupholder.html',
-            controller: 'PopupHolderController'
-        }
-    })
+// .directive("popup", function () {
+//     return {
+//         restrict: "E",
+//         scope: true,
+//         transclude: true,
+//         templateUrl: 'modules/mainComponents/views/popupholder.html',
+//         controller: 'PopupHolderController'
+//     }
+// })
+
+
+
+
+
 
 ;
 

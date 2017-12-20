@@ -3,19 +3,28 @@
 angular.module('Users', [
     'MainComponents',
     'ui.bootstrap'
-]).controller('UsersController', ['$scope', '$http', function ($scope, $http) {
+]).controller('UsersController', ['$scope', 'MakeModal', '$http', function ($scope, MakeModal, $http) {
 
     $scope.users = [];
     $scope.currentUser = {};
 
 
     $scope.getUsers = function () {
+
+        function okFromModal(result) {
+            alert("ok from Users " + result);
+        }
+
+        function cancelFromModal(result) {
+            alert("cancel from Users " + result);
+        }
+
         $http({
             method: 'GET',
             url: 'api/public/users'
         }).then(function successCallback(response) {
             $scope.users = response.data;
-            MainComponents.PopupHolderController.mymodal();
+            var modalInstance = MakeModal.defaultModal('sm', okFromModal, cancelFromModal, $scope);
         }, function errorCallBack(response) {
             alert(response.message);
         });
