@@ -7,7 +7,7 @@ angular.module('Home',[
 ])
 
 .controller('HomeController', ['$scope','$interval', '$rootScope', '$location', function ($scope, $interval,$rootScope,$location) {
-    if ((!$rootScope.globals || !$rootScope.globals.currentUser || ($rootScope.globals.currentUser && !$rootScope.globals.currentUser.user)) && !$rootScope.inAuthentication ){
+    if ((!$rootScope.globals || !$rootScope.globals.item || ($rootScope.globals.item && !$rootScope.globals.item.user)) && !$rootScope.inAuthentication) {
         $location.path('/login');
     }
 }])
@@ -18,7 +18,7 @@ angular.module('Home',[
                 window.location('app.livepraktoreio.gr/'+$rootScope.app);
                 return;
             }
-            if ($rootScope.globals && $rootScope.globals.currentUser ){
+            if ($rootScope.globals && $rootScope.globals.item) {
                 return;
             }
 
@@ -27,21 +27,21 @@ angular.module('Home',[
             AuthenticationService.Login('', '', function(response) {
                 $rootScope.inAuthentication = false;
                 if (response === 'fail') {
-                    $rootScope.globals = {currentUser:null};
+                    $rootScope.globals = {item: null};
                     $location.path('/login');
                     return;
                 }
 
                 if (!response.data.success || typeof response.data.success !== 'object'){
                     $rootScope.errorString ='Δεν υπάρχει ενεργό login στην Υπηρεσία! Προσπαθήστε ΞΑΝΑ!';
-                    $rootScope.globals = {currentUser:null};
+                    $rootScope.globals = {item: null};
                     $location.path('/login');
                     return;
                 }
 
-                $rootScope.globals = {currentUser:{}};
-                $rootScope.globals.currentUser = response.data.success;
-                $rootScope.user = $rootScope.globals.currentUser.user;
+                $rootScope.globals = {item: {}};
+                $rootScope.globals.item = response.data.success;
+                $rootScope.user = $rootScope.globals.item.user;
             })
         }
     ]);

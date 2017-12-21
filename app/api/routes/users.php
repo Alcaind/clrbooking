@@ -9,14 +9,14 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-$app->get('/users', function (Request $request, Response $response) {
+$app->get('/dp', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $users = \App\Models\Users::all();
 
     return $response->getBody()->write($users->toJson());
 });
 
-$app->get('/users/{id}', function (Request $request, Response $response, $args) {
+$app->get('/dp/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
@@ -28,7 +28,7 @@ $app->get('/users/{id}', function (Request $request, Response $response, $args) 
     return $response->getBody()->write($users->toJson());
 });
 
-$app->post('/users', function (Request $request, Response $response) {
+$app->post('/dp', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     try {
@@ -52,10 +52,11 @@ $app->post('/users', function (Request $request, Response $response) {
     return $response->withStatus(201)->getBody()->write($users->toJson());
 });
 
-$app->delete('/users/{id}', function ($request, $response, $args) {
+$app->delete('/dp/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
-        \App\Models\Users::destroy($id);
+        $users = \App\Models\Users::find($id);
+        $users->delete();
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -63,7 +64,7 @@ $app->delete('/users/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)->getBody()->write($users->toJson());
 });
 
-$app->put('/users/{id}', function ($request, $response, $args) {
+$app->put('/dp/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
     print_r($data);
@@ -104,7 +105,7 @@ $app->get('/user/{id}/requests', function ($request, $response, $args) {
     return $response->getBody()->write($configuration->requests()->get()->toJson());
 });
 
-$app->get('/roombook/{id}/users', function ($request, $response, $args) {
+$app->get('/roombook/{id}/dp', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $configuration = \App\Models\Users::find($id);

@@ -34,7 +34,7 @@ class HttpBasicAuthenticationTest extends \PHPUnit_Framework_TestCase
             "path" => "/admin",
             "passthrough" => "/admin/ping",
             "realm" => "Mordor",
-            "users" => [
+            "dp" => [
                 "root" => "t00r",
                 "user" => "passw0rd"
             ]
@@ -594,7 +594,7 @@ class HttpBasicAuthenticationTest extends \PHPUnit_Framework_TestCase
 
         $auth = new HttpBasicAuthentication([
             "path" => "/api",
-            "users" => [
+            "dp" => [
                 "root" => "t00r",
                 "user" => "passw0rd"
             ]

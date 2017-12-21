@@ -11,7 +11,7 @@ angular.module('Admin', ['DB'])
                 $scope.appid = 7;
                 $scope.appAlias = '';
                 $scope.myDevices = false;
-                $scope.appLocked = $rootScope.globals.currentUser.role[DBService.findAppRole($scope.appAlias)];
+                $scope.appLocked = $rootScope.globals.item.role[DBService.findAppRole($scope.appAlias)];
 
                 $scope.getApps = function () {
                     DBService.apps({user: $scope.user}, function (response) {
@@ -25,7 +25,7 @@ angular.module('Admin', ['DB'])
                     $rootScope.appid = $scope.appid;
                     $scope.appAlias = item.app;
 
-                    $scope.appLocked = $rootScope.globals.currentUser.role[DBService.findAppRole($scope.appAlias)];
+                    $scope.appLocked = $rootScope.globals.item.role[DBService.findAppRole($scope.appAlias)];
 
                     $scope.appName = item.descr;
                     $scope.myDevices = false;

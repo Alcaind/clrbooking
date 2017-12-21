@@ -12,6 +12,7 @@ angular.module('Tm', []);
 angular.module('Kat', []);
 angular.module('Requests', []);
 angular.module('MainComponents', []);
+angular.module('ApiModules', []);
 
 // Declare app level module which depends on views, and components
 angular.module('clrBooking', [
@@ -30,7 +31,8 @@ angular.module('clrBooking', [
     'Tms',
     'Kat',
     'Requests',
-    'MainComponents'
+    'MainComponents',
+    'ApiModules'
 ])
 
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
@@ -58,8 +60,8 @@ angular.module('clrBooking', [
             controller: 'RolesController',
             templateUrl: 'modules/roles/views/roles.html'
         })
-        .when('/users', {
-            title: 'users',
+        .when('/dp', {
+            title: 'dp',
             controller: 'UsersController',
             templateUrl: 'modules/users/uviews/users.html'
         })
@@ -148,7 +150,7 @@ angular.module('clrBooking', [
                         if (rfToken) store.remove('rwt');
                         if (idToken) store.remove('jwt');
                         $rootScope.errorString ='Δεν υπάρχει ενεργό login στην Υπηρεσία! Προσπαθήστε ΞΑΝΑ!';
-                        $rootScope.globals = {currentUser:null};
+                        $rootScope.globals = {item: null};
                         $location.path('/login');
                         return null;
                     }
@@ -219,12 +221,12 @@ angular.module('clrBooking', [
                     return;
                 }
 
-                $rootScope.globals.currentUser = response.data;
+                $rootScope.globals.item = response.data;
                 $location.path('/home');
 
             }, function (response) {
                 console.log(response.status);
-                $rootScope.globals.currentUser = '';
+                $rootScope.globals.item = '';
                 $location.path('/login');
             });*/
         }])

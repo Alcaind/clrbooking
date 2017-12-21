@@ -16,7 +16,7 @@ $app->get('/testapi', function (Request $request, Response $response) {
     return $response->getBody()->write("{'msg':'all Done !!'}");
 });
 
-$app->post('/users/{id}', function (Request $request, Response $response, $args) {
+$app->post('/dp/{id}', function (Request $request, Response $response, $args) {
     $id = $args['id'];
     $user = \App\Models\Users::find($id);
 
@@ -36,7 +36,7 @@ $app->post('/new_users', function (Request $request, Response $response, $args) 
 
 });
 
-$app->put('/users', function (Request $request, Response $response) {
+$app->put('/dp', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
 

@@ -1,0 +1,100 @@
+<navmenu></navmenu>
+<div id="requests_main">
+    <h1> Requests </h1>
+
+    <div id="options_div" style="padding: 5px">
+        <button type="button" class="btn btn-primary" ng-click="getRequests()">Get Requests</button>
+        <button type="button" class="btn btn-primary" ng-click="newRequest()">New Requests</button>
+        <input type="text" ng-model="filter" class="form-control" placeholder="search" style="padding: 5px; width: 50%">
+        <span class="glyphicon glyphicon-search"></span>
+    </div>
+
+    <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>req_dt</th>
+                <th>user_id</th>
+                <th>descr</th>
+                <th>period</th>
+                <th>ps_id</th>
+                <th>teacher</th>
+                <th>from_book</th>
+                <th>class_use</th>
+                <th>links</th>
+                <th>fromdt</th>
+                <th>todt</th>
+                <th>protocol_id</th>
+                <th>req_stat</th>
+                <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
+            </tr>
+            <tr ng-repeat="request in requests|filter:filter">
+                <td>{{ request.id }}</td>
+                <td>{{ request.req_dt }}</td>
+                <td>{{ request.user_id }}</td>
+                <td>{{ request.descr }}</td>
+                <td>{{ request.period }}</td>
+                <td>{{ request.ps_id }}</td>
+                <td>{{ request.teacher }}</td>
+                <td>{{ request.from_book }}</td>
+                <td>{{ request.class_use }}</td>
+                <td>{{ request.links }}</td>
+                <td>{{ request.fromdt }}</td>
+                <td>{{ request.todt }}</td>
+                <td>{{ request.protocol_id }}</td>
+                <td>{{ request.req_stat }}</td>
+                <td>
+                    <button ng-click="selectRequest(request)" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button ng-click="deleteRequest(request)" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-erase"></span>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="padding: 5px">
+        <input type="text" ng-model="currentRequest.id" class="form-control" placeholder="id" ng-disabled="true"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.req_dt" class="form-control" placeholder="req_dt"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.user_id" class="form-control" placeholder="user_id"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.descr" class="form-control" placeholder="descr"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.period" class="form-control" placeholder="period"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.ps_id" class="form-control" placeholder="ps_id"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.teacher" class="form-control" placeholder="teacher"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.from_book" class="form-control" placeholder="from_book"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.class_use" class="form-control" placeholder="class_use"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.links" class="form-control" placeholder="links"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.fromdt" class="form-control" placeholder="fromdt"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.todt" class="form-control" placeholder="todt" style="padding: 5px">
+        <input type="text" ng-model="currentRequest.protocol_id" class="form-control" placeholder="protocol_id"
+               style="padding: 5px">
+        <input type="text" ng-model="currentRequest.req_stat" class="form-control" placeholder="req_stat"
+               style="padding: 5px">
+
+        <button type="button" class="btn btn-primary" ng-click="updateRequest()" style="padding: 5px"
+                ng-if="currentRequest.id>0">Upd Requests
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="insertRequest()" style="padding: 5px"
+                ng-if="currentRequest.req_dt && !currentRequest.id">Save Requests
+        </button>
+    </div>
+</div>
+
+
+
+
+
+

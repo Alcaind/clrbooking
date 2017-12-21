@@ -15,5 +15,5 @@ $user = "vmanol";
 $hash = password_hash("killerbee", PASSWORD_DEFAULT);
 
 $status = $pdo->exec(
-    "INSERT INTO `users` (`id`, `tm_id`, `fname`, `sname`, `phone`, `em_main`, `em_sec`, `em_pant`, `cat_id`, `comments`, `user_n`, `pswd`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '".$user."', '".$hash."')"
+    "INSERT INTO `dp` (`id`, `tm_id`, `fname`, `sname`, `phone`, `em_main`, `em_sec`, `em_pant`, `cat_id`, `comments`, `user_n`, `pswd`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '" . $user . "', '" . $hash . "')"
 );

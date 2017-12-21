@@ -29,7 +29,7 @@ class HttpBasicAuthentication
     private $options = [
         "secure" => true,
         "relaxed" => ["localhost", "127.0.0.1"],
-        "users" => null,
+        "dp" => null,
         "path" => null,
         "passthrough" => null,
         "realm" => "Protected",

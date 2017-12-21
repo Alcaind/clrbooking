@@ -31,7 +31,7 @@ angular.module('Authentication', ['angular-storage'])
                     var authdata = Base64.encode(username + ':' + password);
 
                     $rootScope.globals = {
-                        currentUser: {
+                        item: {
                             username: username,
                             authdata: authdata
                         }

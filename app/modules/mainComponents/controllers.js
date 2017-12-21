@@ -6,7 +6,7 @@ angular.module('MainComponents', [
 ])
 
     .controller('MainComponentsController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
-        if ((!$rootScope.globals || !$rootScope.globals.currentUser || ($rootScope.globals.currentUser && !$rootScope.globals.currentUser.user)) && !$rootScope.inAuthentication) {
+        if ((!$rootScope.globals || !$rootScope.globals.item || ($rootScope.globals.item && !$rootScope.globals.item.user)) && !$rootScope.inAuthentication) {
             $location.path('/login');
         }
     }])
@@ -18,7 +18,7 @@ angular.module('MainComponents', [
                 window.location('app.livepraktoreio.gr/' + $rootScope.app);
                 return;
             }
-            if ($rootScope.globals && $rootScope.globals.currentUser) {
+            if ($rootScope.globals && $rootScope.globals.item) {
                 return;
             }
 
@@ -27,21 +27,21 @@ angular.module('MainComponents', [
             AuthenticationService.Login('', '', function (response) {
                 $rootScope.inAuthentication = false;
                 if (response === 'fail') {
-                    $rootScope.globals = {currentUser: null};
+                    $rootScope.globals = {item: null};
                     $location.path('/login');
                     return;
                 }
 
                 if (!response.data.success || typeof response.data.success !== 'object') {
                     $rootScope.errorString = 'Δεν υπάρχει ενεργό login στην Υπηρεσία! Προσπαθήστε ΞΑΝΑ!';
-                    $rootScope.globals = {currentUser: null};
+                    $rootScope.globals = {item: null};
                     $location.path('/login');
                     return;
                 }
 
-                $rootScope.globals = {currentUser: {}};
-                $rootScope.globals.currentUser = response.data.success;
-                $rootScope.user = $rootScope.globals.currentUser.user;
+                $rootScope.globals = {item: {}};
+                $rootScope.globals.item = response.data.success;
+                $rootScope.user = $rootScope.globals.item.user;
             })
         }
     ])
@@ -66,11 +66,9 @@ angular.module('MainComponents', [
     }])
 
     .factory("MakeModal", ['$uibModal', function ($uibModal) {
-
         var factory = {};
 
-        factory.defaultModal = function (size, okCallback, cancelCallback, scope) {
-
+        factory.defaultModal = function (size, okCallback, cancelCallback, scope, resolve) {
             var $myModalInstance = $uibModal.open({
                 templateUrl: 'modules/mainComponents/views/popup.html',
                 controller: 'PopupController',
@@ -78,17 +76,7 @@ angular.module('MainComponents', [
                 size: size
             });
 
-            function ok(result) {
-                alert(result);
-            }
-
-            function cancel(result) {
-                alert(result);
-            }
-
-            $myModalInstance.result.then(ok, cancel);
-
-
+            $myModalInstance.result.then(okCallback, cancelCallback);
             return $myModalInstance
         };
 
@@ -108,22 +96,6 @@ angular.module('MainComponents', [
         };
 
     }])
-
-// .directive("popup", function () {
-//     return {
-//         restrict: "E",
-//         scope: true,
-//         transclude: true,
-//         templateUrl: 'modules/mainComponents/views/popupholder.html',
-//         controller: 'PopupHolderController'
-//     }
-// })
-
-
-
-
-
-
 ;
 
 

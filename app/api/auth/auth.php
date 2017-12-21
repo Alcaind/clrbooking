@@ -94,7 +94,7 @@ $app->post("/login", function (Request $request, Response $response) {
 
     //$pswd= $urlParams["pswd"];
     //$usr= $urlParams["usr"];
-    //$sql = "select * from users where users.user_n = '$usr'";
+    //$sql = "select * from dp where dp.user_n = '$usr'";
 
     //echo $sql;
     /*try {
