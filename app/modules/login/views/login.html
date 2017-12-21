@@ -1,143 +1,20 @@
-<nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
-    <div class="container"
-         style="width: 1170px !important; font-family: 'RobotoDraft', 'Roboto', sans-serif !important; font-weight: 300 !important;line-height: 30px !important;">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand"
-               href="http://www.livepraktoreio.gr/live-%CF%80%CF%81%CE%B1%CE%BA%CF%84%CE%BF%CF%81%CE%B5%CE%AF%CE%BF-4000"
-               target="_blank">LiVE Πρακτορειο 4000</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="top-navbar-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-							<span class="li-text">
-								Διαβάστε για το
-							</span>
-                    <a href="http://www.livepraktoreio.gr/live-%CF%80%CF%81%CE%B1%CE%BA%CF%84%CE%BF%CF%81%CE%B5%CE%AF%CE%BF-4000"
-                       target="_blank"><strong>LiVE Πρακτορειο 4000</strong></a>
-                    <span class="li-text">
-								ή ακολουθήστε μας:
-							</span>
-                    <span class="li-social">
-								<a href="https://www.facebook.com/livepraktoreiogr/"><i class="fa fa-facebook"></i></a>
-                        <!--<a href="#"><i class="fa fa-twitter"></i></a> -->
-								<a href="mailto:info@livepraktoreio.gr"><i class="fa fa-envelope"></i></a>
-								<a href="" tooltip-placement="bottom" tooltip-animation="false"
-                                   tooltip-class="tooltipClass" uib-tooltip="210 8940420 (εσωτ. 105)"><i
-                                        class="fa fa-phone"></i></a>
-								<a href=""><i class="fa fa-skype"></i></a>
-							</span>
-                </li>
-            </ul>
-        </div>
+<navmenu></navmenu>
+<div class="form-bottom">
+
+    <div style="margin:0px 0px 10px 0px;">
+        <uib-progressbar class="progress-striped active" max="200" value="200" type="normal"
+                         ng-show="!errorString"><i>γίνεται σύνδεση...</i></uib-progressbar>
+        <span style="width:100%;color:#ffffff;" ng-show="errorString">{{errorString}}</span>
     </div>
-</nav>
-
-<div class="top-content">
-    <div class="inner-bg">
-        <div class="container" style="width: 1170px !important;">
-            <div class="">
-                <div class="col-sm-8 col-sm-offset-2 text" style="text-align: center;">
-                    <h1 class="loginh1">Καλως ήρθατε στο <span style="font-weight:300;">"LiVE-ΠΡΑΚΤΟΡΕΙΟ 4000"</span>
-                    </h1>
-                    <div class="description">
-                        <p>Μπείτε στην ομάδα του LiVE Πρακτορειο 4000 ! </p>
-                        <p>Το καλύτερο και φθηνότερο εργαλείο για Πρακτορεία ΟΠΑΠ. </p>
-                    </div>
-                </div>
-            </div>
-            <div class=""
-                 style="font-size: 16px !important; font-weight: 300 !important; line-height: 30px !important; text-align: center;">
-                <div class="col-sm-7 col-xs-12">
-                    <div class="">
-                        <div class="alert alert-dismissible alert-danger"
-                             style="color: #a94442; background-color: #ffd3c5; border-color: #f1592a;font-weight: 600; border-width: 1px;"
-                             close=""><span class="glyphicon glyphicon-alert"></span> &nbsp;&nbsp;Από 16/02/2017 η
-                            Υπηρεσία είναι πλέον Συνδρομητική.
-                        </div>
-
-                        <uib-accordion>
-                            <div uib-accordion-group class="panel-warning" heading="Μεγάλη Προσφορά">
-                                <span class="glyphicon glyphicon-euro"></span> &nbsp;&nbsp;Μέχρι τις 20/02/2016 ΌΛΕΣ οι
-                                Υπηρεσίες του LiVE Πρακτορείου και του LiVE Πρακτορείου 4000 ΜΟΝΟ με 265€ (το χρόνο).
-                                <br>Σε ότι Οθόνη και αν έχετε, σε pc ή στικάκι ή smart TV, με εκτυπώσεις αν θέλετε,
-                                κάθετα ή Οριζόντια ΜΟΝΟ με 265€ (το χρόνο) ΤΑ ΠΑΝΤΑ ΟΛΑ.
-                            </div>
-                            <div uib-accordion-group class="panel-default">
-                                <uib-accordion-heading>
-                                    Έχω την Εφαρμογή "LiVE Πρακτορείο" για υπολογιστή. Πώς συνδέομαι εδώ;<i
-                                        class="pull-right glyphicon"
-                                        ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                                </uib-accordion-heading>
-                                Βάζω απλά το "Όνομα χρήστη" και τον "Κωδικό Σύνδεσης" που χρησιμοποιώ καθημερινά για να
-                                συνδέομαι στην εφαμογή LiVE Πρακτορείο που έχω στον Υπολογιστή μου. Μέχρι τις 01/03/2017
-                                η πρόσβαση στις Υπηρεσίες του "LiVE Πρακτορείου 4000" είναι εντελώς ΔΩΡΕΑΝ για όλους
-                                παλιούς συνδρομητές μας!
-                            </div>
-                            <div uib-accordion-group class="panel-default">
-                                <uib-accordion-heading>
-                                    Είμαι ήδη συνδρομητής στο "LiVE Πρακτορείο 4000". Πώς συνδέομαι;<i
-                                        class="pull-right glyphicon"
-                                        ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                                </uib-accordion-heading>
-                                Βάζω απλά το "Όνομα χρήστη" και τον "Κωδικό Σύνδεσης" που απέκτησα για να συνδέομαι στο
-                                website όταν εγγράφηκα.
-                            </div>
-                            <div uib-accordion-group class="panel-default">
-                                <uib-accordion-heading>
-                                    ΔΕΝ είμαι συνδρομητής του "LiVE Πρακτορείου". Τι κάνω;<i
-                                        class="pull-right glyphicon"
-                                        ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-                                </uib-accordion-heading>
-                                Το μόνο που πρέπει να κάνετε είναι:
-                                <br>1.απλά να μπείτε στο http://www.livepraktoreio.gr/user/register
-                                <br>2.Συμπληρώστε το Προφίλ με τα Στοιχεία του Πρακτορείου σας
-                                <br>3.Επικοινωνήστε μαζί μας να σας δώσουμε πρόσβαση για 10 μέρες να το δοκιμάσετε
-                                εντελώς Δωρεάν.
-                            </div>
-                        </uib-accordion>
-                        <div class="alert alert-dismissible alert-success" close=""
-                             style="font-size:12px;line-height:20px;">* Για οποιαδήποτε πληροφορία, απορία ή
-                            παρατήρηση/πρόταση επικοινωνείστε μαζί μας είτε τηλεφωνικά (210 8940420) ή μέσω email
-                            (info@livepraktoreio.gr) ή μέσω facebook (https://www.facebook.com/livepraktoreiogr/)
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-5 form-box">
-                    <div class="form-top">
-                        <div class="form-top-left">
-                            <h3>Σύνδεση</h3>
-
-                        </div>
-                        <div class="form-top-right">
-                            <i class="fa fa-pencil"></i>
-                            <p class="form-register">Ακόμα να δοκιμάσεις? <a class="form-link" target="_blank"
-                                                                             href="http://www.livepraktoreio.gr/user/register">Εγγραφή</a>
-                                ΤΩΡΑ!</p>
-                        </div>
-                    </div>
-                    <div class="form-bottom">
-                        <div style="margin:0px 0px 10px 0px;">
-                            <uib-progressbar class="progress-striped active" max="200" value="200" type="normal"
-                                             ng-show="!errorString"><i>γίνεται σύνδεση...</i></uib-progressbar>
-                            <span style="width:100%;color:#ffffff;" ng-show="errorString">{{errorString}}</span>
-                        </div>
-                        <form role="form" class="registration-form">
-                            <div class="form-group">
-                                <label class="sr-only" for="username">Username</label>
-                                <input id="username" name="usr" type="text" placeholder="Username..."
-                                       class="form-control" ng-model="usr">
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="password">Password</label>
-                                <span class="input-group">
+    <form role="form" class="registration-form">
+        <div class="form-group">
+            <label class="sr-only" for="username">Username</label>
+            <input id="username" name="usr" type="text" placeholder="Username..."
+                   class="form-control" ng-model="usr">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="password">Password</label>
+            <span class="input-group">
 									<input id="password" name="pswd" ng-init="passwordString='password'"
                                            type="{{passwordString}}" placeholder="Password..." class="form-control"
                                            ng-model="pswd">
@@ -148,33 +25,13 @@
 									</span>
 								</span>
 
-                            </div>
-                            <button id="loginButton" name="loginButton" class="btn btn-sm" ng-click="login()">Σύνδεση
-                            </button>
-                        </form>
-                        <div style="margin:0px 0px 10px 0px;text-align: right;">
+        </div>
+        <button id="loginButton" name="loginButton" class="btn btn-sm" ng-click="login()">Σύνδεση
+        </button>
+    </form>
+    <div style="margin:0px 0px 10px 0px;text-align: right;">
                             <span style="width:100%;color:#aad0e4 !important;font-size: 12px;"><a target="_blank"
                                                                                                   href="http://www.livepraktoreio.gr/user/password"
                                                                                                   class="form-link myLink">Ξέχασα τον Κωδικό μου</a></span>
-                        </div>
-                        <div style="margin:0px 0px 10px 0px;text-align: right;">
-                            <span style="width:100%;color:#aad0e4 !important;font-size: 12px;"><a target="_blank"
-                                                                                                  href="http://www.livepraktoreio.gr/webServices/web-login.php?usr={{usr}}&pswd={{pswd}}"
-                                                                                                  class="form-link myLink">Έλεγχος Προσβασιμότητας</a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="container"
-         style="line-height: 30px;width: 100%;background: rgba(241,89,42,0.20);position: fixed;bottom: 0px;margin-bottom: 0px !important;color: #000000 !important;border-top: 1px solid #848484;font-size: 11px;">
-        <div id="footer" style="clear:both;padding-bottom:20px;">
-            <span style="text-align:right;float:left;">All Right Reserved ... &reg; Copyright &copy; 2016-2018</span>
-            <span style="text-align:right;float:right;">Powered by <a class="myLink" href="http://www.digimagix.gr"
-                                                                      target="_blank" name="Digimagix" title="Digimagix"
-                                                                      style="font-weight:bold;color:#ff9a7b;">Digimagix</a></span>
-        </div>
     </div>
 </div>

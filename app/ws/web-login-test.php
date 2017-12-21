@@ -182,7 +182,6 @@ New Login    ON:'.$dateNow.'    FROM:'.$mac.'   USING USERNAME:'.$usr.'   PASSWO
 				
 				/*
 				ERRORS CATALOG
-				
 				ERROR#00 -> ERROR SOMEBODY USE LOLAKIAS
 				ERROR#10 -> WRONG USERNAME
 				ERROR#11 -> WRONG PASSWORD
@@ -190,7 +189,6 @@ New Login    ON:'.$dateNow.'    FROM:'.$mac.'   USING USERNAME:'.$usr.'   PASSWO
 				ERROR#13 -> ERROR FOR NO AGENT ROLE IN DRUPAL
 				ERROR#14 -> NO MORE PCS
 				ERROR#15 -> SOMEBODY USE PHPMYADMIN TO INSERT MACS
-				
 				*/
 				
 				if ($cnt<=$PCnum && $correctMAC){
@@ -278,10 +276,9 @@ New Login    ON:'.$dateNow.'    FROM:'.$mac.'   USING USERNAME:'.$usr.'   PASSWO
 				}
 			}
 		}
-		
-		
-		
-		$sql = 'Select uid, name, pass from users WHERE name="'.$_REQUEST["usr"].'"';
+
+
+        $sql = 'Select uid, name, pass from dp WHERE name="' . $_REQUEST["usr"] . '"';
 		//echo $sql."<br>";
 		$result = mysql_query($sql,$conn1)
 			or die('Query failed. ' . mysql_error());
@@ -387,9 +384,9 @@ New Login    ON:'.$dateNow.'    FROM:'.$mac.'   USING USERNAME:'.$usr.'   PASSWO
 		}
 			
 		//-- check also uc_roles_expirations -|>
-		//$sql = 'Select betanalysiSite.users.uid, betanalysiSite.users_roles.rid, betanalysiSite.uc_roles_expirations.expiration from betanalysiSite.users, betanalysiSite.users_roles, betanalysiSite.uc_roles_expirations WHERE betanalysiSite.users.uid="'.$_SESSION["id"].'" and betanalysiSite.users.uid=betanalysiSite.users_roles.uid and betanalysiSite.users.uid=betanalysiSite.uc_roles_expirations.uid';
-		
-		$sql = 'Select betanalysiSite.users.uid, betanalysiSite.users_roles.rid FROM betanalysiSite.users, betanalysiSite.users_roles WHERE betanalysiSite.users.uid="'.$_SESSION["id"].'" and betanalysiSite.users.uid=betanalysiSite.users_roles.uid';
+        //$sql = 'Select betanalysiSite.dp.uid, betanalysiSite.users_roles.rid, betanalysiSite.uc_roles_expirations.expiration from betanalysiSite.dp, betanalysiSite.users_roles, betanalysiSite.uc_roles_expirations WHERE betanalysiSite.dp.uid="'.$_SESSION["id"].'" and betanalysiSite.dp.uid=betanalysiSite.users_roles.uid and betanalysiSite.dp.uid=betanalysiSite.uc_roles_expirations.uid';
+
+        $sql = 'Select betanalysiSite.dp.uid, betanalysiSite.users_roles.rid FROM betanalysiSite.dp, betanalysiSite.users_roles WHERE betanalysiSite.dp.uid="' . $_SESSION["id"] . '" and betanalysiSite.dp.uid=betanalysiSite.users_roles.uid';
 		//echo $sql;
 		$result = mysql_query($sql,$conn1)
 			or die('Query failed1. '.$sql.' '. mysql_error());

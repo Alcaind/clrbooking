@@ -4,12 +4,14 @@ angular.module('Admin', ['DB'])
     .controller('AdminController',
         ['$scope', '$http', '$rootScope', 'DBService',
             function ($scope, $http, $rootScope, DBService) {
+
+                //var xoros = [{w:10,h5}, {w:10,h5}, {w:1,h10}, {w:10,h5}, {w:10,h5}, {w:10,h5}];
                 $scope.devices = [{name: "d1"}, {name: "d2"}];
                 //$scope.matchesSet = [{label: "Όλο το Κουπόνι"}, {label: "Νέα Παιχνίδια"}, {label: "Αρχικό Κουπόνι"}];
                 $scope.appid = 7;
                 $scope.appAlias = '';
                 $scope.myDevices = false;
-                $scope.appLocked = $rootScope.globals.currentUser.role[DBService.findAppRole($scope.appAlias)];
+                $scope.appLocked = $rootScope.globals.item.role[DBService.findAppRole($scope.appAlias)];
 
                 $scope.getApps = function () {
                     DBService.apps({user: $scope.user}, function (response) {
@@ -23,7 +25,7 @@ angular.module('Admin', ['DB'])
                     $rootScope.appid = $scope.appid;
                     $scope.appAlias = item.app;
 
-                    $scope.appLocked = $rootScope.globals.currentUser.role[DBService.findAppRole($scope.appAlias)];
+                    $scope.appLocked = $rootScope.globals.item.role[DBService.findAppRole($scope.appAlias)];
 
                     $scope.appName = item.descr;
                     $scope.myDevices = false;

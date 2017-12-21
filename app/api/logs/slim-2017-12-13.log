@@ -1,0 +1,1647 @@
+[2017-12-13 10:28:00] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:28:00] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:28:00] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 10:28:11] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:28:11] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:28:11] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 10:30:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:30:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:30:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 10:31:11] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:31:11] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:31:11] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 10:31:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:31:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:31:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 10:31:30] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:31:30] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:31:30] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 10:31:33] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:31:33] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:31:33] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 10:43:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:43:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:43:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 10:43:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:43:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:43:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 10:44:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 10:44:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 10:44:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:02:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:02:07] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:02:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:02:29] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:02:29] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:02:29] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:02:50] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:02:50] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:02:50] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:03:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:03:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:03:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:03:55] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:03:55] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:03:55] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:04:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:04:09] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:04:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:04:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:04:27] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:04:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:05:00] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:05:00] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:05:00] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:05:12] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:05:12] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:05:12] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:05:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:05:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:05:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:05:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:05:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:05:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:05:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:05:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:05:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:05:21] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:05:21] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:05:21] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:06:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:06:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:06:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:06:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:06:39] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:06:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:06:39] [DEBUG]: Using token from environment 
+[2017-12-13 11:08:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:13] [DEBUG]: Using token from environment 
+[2017-12-13 11:08:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:15] [DEBUG]: Using token from environment 
+[2017-12-13 11:08:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:19] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:19] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:19] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:21] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:21] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:21] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:22] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:22] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:22] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:23] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:23] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:23] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:24] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:24] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:24] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:41] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:41] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:41] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:41] [DEBUG]: Using token from environment 
+[2017-12-13 11:08:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:08:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:08:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:08:46] [DEBUG]: Using token from environment 
+[2017-12-13 11:09:24] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:09:24] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:09:24] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:09:24] [DEBUG]: Using token from environment 
+[2017-12-13 11:09:29] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:09:29] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:09:29] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:09:29] [DEBUG]: Using token from environment 
+[2017-12-13 11:09:38] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:09:38] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:09:38] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:09:38] [DEBUG]: Using token from environment 
+[2017-12-13 11:09:54] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:09:54] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:09:54] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:09:54] [DEBUG]: Using token from environment 
+[2017-12-13 11:10:04] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:10:04] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:10:04] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:10:04] [DEBUG]: Using token from environment 
+[2017-12-13 11:29:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:29:45] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:29:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:29:45] [DEBUG]: Using token from environment 
+[2017-12-13 11:29:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:29:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:29:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:29:50] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:29:50] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:29:50] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:29:50] [DEBUG]: Using token from environment 
+[2017-12-13 11:29:59] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:29:59] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:29:59] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:29:59] [DEBUG]: Using token from environment 
+[2017-12-13 11:30:03] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:30:03] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:30:03] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:30:03] [DEBUG]: Using token from environment 
+[2017-12-13 11:30:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:30:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:30:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:30:08] [DEBUG]: Using token from environment 
+[2017-12-13 11:30:32] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:30:32] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:30:32] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:30:32] [DEBUG]: Using token from environment 
+[2017-12-13 11:30:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 11:30:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 11:30:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 11:30:43] [DEBUG]: Using token from environment 
+[2017-12-13 12:31:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 12:31:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 12:31:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 12:31:47] [DEBUG]: Using token from environment 
+[2017-12-13 12:31:47] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTMxNTczODcsImV4cCI6MTUxMzE2MDk4NywianRpIjoiMWFVNWs1U1RZZFVVYmhXcnlvZGFHUyIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6bnVsbCwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVE14TlRjek9EY3NJbVY0Y0NJNk1UVXhNekU1TXpNNE55d2lhblJwSWpvaU1XRlZOV3MxVTFSWlpGVlZZbWhYY25sdlpHRkhVeUlzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPbTUxYkd4OS5ZSnVtTm5yTnQ2NFZVOUpfYjN2TE5HM21EUmRmWW54MC1QNmcxdzNYQ2FzIiwiZXhwaXJlcyI6MTUxMzE5MzM4N319.mUAS6YHAE-U2b3zV68ZtxQnov7e1rTIES8R7K252IJE"]
+[2017-12-13 12:31:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 12:31:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 12:31:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 12:31:58] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 12:31:58] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 12:31:58] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 12:31:58] [DEBUG]: Using token from environment 
+[2017-12-13 14:39:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 14:39:45] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 14:39:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 14:39:45] [DEBUG]: Using token from environment 
+[2017-12-13 14:39:45] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTMxNjExMTEsImV4cCI6MTUxMzE2NDcxMSwianRpIjoiMWNPU05YVkNTZk02Tm1HanVYUWhDVSIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6bnVsbCwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVE14TmpFeE1URXNJbVY0Y0NJNk1UVXhNekU1TnpFeE1Td2lhblJwSWpvaU1XTlBVMDVZVmtOVFprMDJUbTFIYW5WWVVXaERWU0lzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPbTUxYkd4OS4tV0g0OUcwM0s4WmlHS3F3YkpqYzNNZlBWUlByaE8tQmJDajJWZnB2cEZNIiwiZXhwaXJlcyI6MTUxMzE5NzExMX19._gn7P2QSY2HZbCnapphby2WcwiNHA8UzV2tzqQyVM1k"]
+[2017-12-13 14:56:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 14:56:39] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 14:56:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 14:58:12] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 14:58:12] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 14:58:12] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 14:58:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 14:58:17] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 14:58:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:02:48] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:02:48] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:02:48] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:04:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:04:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 15:04:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:06:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:06:45] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:06:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:10:23] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:10:23] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 15:10:23] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:16:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:16:43] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:16:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:16:54] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:16:54] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:16:54] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:18:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:18:18] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:18:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:18:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:18:20] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:18:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:18:30] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:18:30] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:18:30] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:21:26] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:21:26] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:21:26] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:24:42] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:24:42] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:24:42] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:24:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:24:43] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:24:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:25:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:25:17] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:25:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:25:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:25:45] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:25:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:26:06] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:26:06] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:26:06] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:26:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:26:07] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:26:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:26:24] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:26:24] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:26:24] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:27:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:27:07] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:27:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:27:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:27:39] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:27:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:27:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:27:39] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:27:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:30:28] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:30:28] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:30:28] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:32:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:32:17] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:32:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:32:33] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:32:33] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:32:33] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:33:06] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:33:06] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:33:06] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:35:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:35:51] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:35:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:36:55] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:36:55] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:36:55] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:37:03] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:37:03] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:37:03] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:37:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:37:07] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:37:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:37:24] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:37:24] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:37:24] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:39:33] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:39:33] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:39:33] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:39:52] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:39:52] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:39:52] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:41:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:41:20] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:41:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:41:32] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:41:32] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:41:32] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:41:41] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:41:41] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:41:41] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:42:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:42:08] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:42:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:42:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:42:18] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:42:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:52:58] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:52:58] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:52:58] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:53:06] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:53:06] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:53:06] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:55:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:55:13] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:55:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:55:21] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:55:21] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:55:21] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:55:38] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:55:38] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:55:38] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:55:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:55:45] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:55:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:59:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:59:09] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:59:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:59:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:59:16] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 15:59:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:59:23] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 15:59:23] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 15:59:23] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 15:59:23] [WARNING]: Token not found 
+[2017-12-13 16:04:02] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:04:02] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:04:02] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:04:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:04:15] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:04:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:04:37] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:04:37] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:04:37] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:04:37] [DEBUG]: Using token from environment 
+[2017-12-13 16:05:04] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:05:04] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:05:04] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:05:04] [DEBUG]: Using token from environment 
+[2017-12-13 16:05:04] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTMxNjExMTEsImV4cCI6MTUxMzE2NDcxMSwianRpIjoiMWNPU05YVkNTZk02Tm1HanVYUWhDVSIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6bnVsbCwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVE14TmpFeE1URXNJbVY0Y0NJNk1UVXhNekU1TnpFeE1Td2lhblJwSWpvaU1XTlBVMDVZVmtOVFprMDJUbTFIYW5WWVVXaERWU0lzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPbTUxYkd4OS4tV0g0OUcwM0s4WmlHS3F3YkpqYzNNZlBWUlByaE8tQmJDajJWZnB2cEZNIiwiZXhwaXJlcyI6MTUxMzE5NzExMX19._gn7P2QSY2HZbCnapphby2WcwiNHA8UzV2tzqQyVM1k"]
+[2017-12-13 16:05:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:05:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:05:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:05:18] [DEBUG]: Using token from environment 
+[2017-12-13 16:05:18] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTMxNjExMTEsImV4cCI6MTUxMzE2NDcxMSwianRpIjoiMWNPU05YVkNTZk02Tm1HanVYUWhDVSIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6bnVsbCwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVE14TmpFeE1URXNJbVY0Y0NJNk1UVXhNekU1TnpFeE1Td2lhblJwSWpvaU1XTlBVMDVZVmtOVFprMDJUbTFIYW5WWVVXaERWU0lzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPbTUxYkd4OS4tV0g0OUcwM0s4WmlHS3F3YkpqYzNNZlBWUlByaE8tQmJDajJWZnB2cEZNIiwiZXhwaXJlcyI6MTUxMzE5NzExMX19._gn7P2QSY2HZbCnapphby2WcwiNHA8UzV2tzqQyVM1k"]
+[2017-12-13 16:05:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:05:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:05:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:05:20] [DEBUG]: Using token from environment 
+[2017-12-13 16:05:20] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTMxNjExMTEsImV4cCI6MTUxMzE2NDcxMSwianRpIjoiMWNPU05YVkNTZk02Tm1HanVYUWhDVSIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6bnVsbCwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVE14TmpFeE1URXNJbVY0Y0NJNk1UVXhNekU1TnpFeE1Td2lhblJwSWpvaU1XTlBVMDVZVmtOVFprMDJUbTFIYW5WWVVXaERWU0lzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPbTUxYkd4OS4tV0g0OUcwM0s4WmlHS3F3YkpqYzNNZlBWUlByaE8tQmJDajJWZnB2cEZNIiwiZXhwaXJlcyI6MTUxMzE5NzExMX19._gn7P2QSY2HZbCnapphby2WcwiNHA8UzV2tzqQyVM1k"]
+[2017-12-13 16:06:01] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:06:01] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:06:01] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:06:01] [DEBUG]: Using token from environment 
+[2017-12-13 16:06:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:06:09] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:06:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:06:09] [DEBUG]: Using token from environment 
+[2017-12-13 16:06:42] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:06:42] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:06:42] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:06:59] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:06:59] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:06:59] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:07:05] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:07:05] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:07:05] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:07:05] [DEBUG]: Using token from environment 
+[2017-12-13 16:07:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:07:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:07:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:07:17] [DEBUG]: Using token from environment 
+[2017-12-13 16:08:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:08:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:08:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:08:20] [DEBUG]: Using token from environment 
+[2017-12-13 16:09:02] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:09:02] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:09:02] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:09:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:09:15] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:09:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:09:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:09:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:09:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:09:20] [DEBUG]: Using token from environment 
+[2017-12-13 16:10:48] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:10:48] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:10:48] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:10:56] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:10:56] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:10:56] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:10:57] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:10:57] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:10:57] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:10:57] [DEBUG]: Using token from environment 
+[2017-12-13 16:24:36] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:24:36] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:24:36] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:24:48] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:24:48] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:24:48] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:25:02] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:25:02] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:25:02] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:25:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:25:07] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:25:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:25:07] [DEBUG]: Using token from environment 
+[2017-12-13 16:27:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:27:17] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:27:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:27:30] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:27:30] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:27:30] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:27:37] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:27:37] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:27:37] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:27:37] [DEBUG]: Using token from environment 
+[2017-12-13 16:28:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:28:16] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:28:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:28:16] [DEBUG]: Using token from environment 
+[2017-12-13 16:28:32] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:28:32] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:28:32] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:28:32] [DEBUG]: Using token from environment 
+[2017-12-13 16:28:40] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:28:40] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:28:40] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:28:40] [DEBUG]: Using token from environment 
+[2017-12-13 16:31:00] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:31:00] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:31:00] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:31:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:31:18] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:31:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:31:24] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:31:24] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:31:24] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:31:24] [DEBUG]: Using token from environment 
+[2017-12-13 16:31:33] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:31:33] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:31:33] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:31:33] [DEBUG]: Using token from environment 
+[2017-12-13 16:36:12] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:36:12] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:36:12] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:36:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:36:47] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:36:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:36:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:36:51] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:36:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:37:04] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:37:04] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:37:04] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:37:06] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:37:06] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:37:06] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:37:06] [DEBUG]: Using token from environment 
+[2017-12-13 16:37:19] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:37:19] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:37:19] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:37:19] [DEBUG]: Using token from environment 
+[2017-12-13 16:37:29] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:37:29] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:37:29] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:37:29] [DEBUG]: Using token from environment 
+[2017-12-13 16:37:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:37:39] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:37:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:37:39] [DEBUG]: Using token from environment 
+[2017-12-13 16:39:22] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:39:22] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:39:22] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:39:22] [DEBUG]: Using token from environment 
+[2017-12-13 16:39:40] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:39:40] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:39:40] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:39:40] [DEBUG]: Using token from environment 
+[2017-12-13 16:41:28] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:41:28] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:41:28] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:41:36] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:41:36] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 16:41:36] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:41:44] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:41:44] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:41:44] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:41:44] [DEBUG]: Using token from environment 
+[2017-12-13 16:43:50] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 16:43:50] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 16:43:50] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 16:43:50] [DEBUG]: Using token from environment 
+[2017-12-13 17:01:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:01:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:01:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:01:13] [DEBUG]: Using token from environment 
+[2017-12-13 17:01:22] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:01:22] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:01:22] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:01:22] [DEBUG]: Using token from environment 
+[2017-12-13 17:03:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:03:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:03:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:03:16] [DEBUG]: Using token from environment 
+[2017-12-13 17:04:10] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:04:10] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:04:10] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:04:23] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:04:23] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:04:23] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:04:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:04:27] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:04:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:04:27] [DEBUG]: Using token from environment 
+[2017-12-13 17:04:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:04:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:04:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:04:46] [DEBUG]: Using token from environment 
+[2017-12-13 17:06:24] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:06:24] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:06:24] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:06:42] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:06:42] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:06:42] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:06:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:06:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:06:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:06:46] [DEBUG]: Using token from environment 
+[2017-12-13 17:06:58] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:06:58] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:06:58] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:06:58] [DEBUG]: Using token from environment 
+[2017-12-13 17:23:29] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:23:29] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:23:29] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:23:37] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:23:37] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:23:37] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:23:41] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:23:41] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:23:41] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:23:41] [DEBUG]: Using token from environment 
+[2017-12-13 17:23:48] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:23:48] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:23:48] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:23:48] [DEBUG]: Using token from environment 
+[2017-12-13 17:24:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:24:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:24:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:24:51] [DEBUG]: Using token from environment 
+[2017-12-13 17:25:01] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:25:01] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:25:01] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:25:01] [DEBUG]: Using token from environment 
+[2017-12-13 17:25:03] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:25:03] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:25:03] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:25:03] [DEBUG]: Using token from environment 
+[2017-12-13 17:25:06] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:25:06] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:25:06] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:25:06] [DEBUG]: Using token from environment 
+[2017-12-13 17:25:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:25:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:25:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:25:17] [DEBUG]: Using token from environment 
+[2017-12-13 17:26:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:26:45] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:26:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:26:45] [DEBUG]: Using token from environment 
+[2017-12-13 17:27:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:27:27] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:27:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:27:27] [DEBUG]: Using token from environment 
+[2017-12-13 17:27:49] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:27:49] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:27:49] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:27:49] [DEBUG]: Using token from environment 
+[2017-12-13 17:28:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:28:07] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:28:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:28:07] [DEBUG]: Using token from environment 
+[2017-12-13 17:30:44] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:30:44] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:30:44] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:30:53] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:30:53] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:30:53] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:30:58] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:30:58] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:30:58] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:30:58] [DEBUG]: Using token from environment 
+[2017-12-13 17:31:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:31:07] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:31:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:31:07] [DEBUG]: Using token from environment 
+[2017-12-13 17:31:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:31:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:31:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:31:15] [DEBUG]: Using token from environment 
+[2017-12-13 17:31:30] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:31:30] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:31:30] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:31:30] [DEBUG]: Using token from environment 
+[2017-12-13 17:32:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:32:09] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:32:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:32:09] [DEBUG]: Using token from environment 
+[2017-12-13 17:32:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:32:18] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:32:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:32:18] [DEBUG]: Using token from environment 
+[2017-12-13 17:32:28] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:32:28] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:32:28] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:32:28] [DEBUG]: Using token from environment 
+[2017-12-13 17:32:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:32:43] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:32:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:32:43] [DEBUG]: Using token from environment 
+[2017-12-13 17:33:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:33:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:33:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:33:20] [DEBUG]: Using token from environment 
+[2017-12-13 17:34:06] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:34:06] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:34:06] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:34:06] [DEBUG]: Using token from environment 
+[2017-12-13 17:34:06] [WARNING]: Expired token ["eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MTMxNzM4NTUsImV4cCI6MTUxMzE3NzQ1NSwianRpIjoiMWc4YnlyVndQalZ6Nm5KOWZLd201bSIsInN1YiI6bnVsbCwic2NvcGUiOlsicHV0IiwiZ2V0IiwicG9zdCJdLCJjdXJsUmVzdWx0cyI6bnVsbCwicmVmcmVzaC10b2tlbiI6eyJ0b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSklVekkxTmlKOS5leUpwWVhRaU9qRTFNVE14TnpNNE5UVXNJbVY0Y0NJNk1UVXhNekl3T1RnMU5Td2lhblJwSWpvaU1XYzRZbmx5Vm5kUWFsWjZObTVLT1daTGQyMDFiU0lzSW5OMVlpSTZiblZzYkN3aVkzVnliRkpsYzNWc2RITWlPbTUxYkd4OS5BemFoeThIZ0xnSTlzWjczWkFpZE1ZVE1QQlN3aHF5aUlUN3dUNjgtU3UwIiwiZXhwaXJlcyI6MTUxMzIwOTg1NX19.q7kNqE2dFyyfm3sKt-YvDr_SXuSkv_E7VpxowrTHJTk"]
+[2017-12-13 17:34:11] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:34:11] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:34:11] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:34:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:34:27] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:34:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:34:27] [DEBUG]: Using token from environment 
+[2017-12-13 17:35:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:35:27] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:35:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:35:35] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:35:35] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:35:35] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:35:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:35:39] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:35:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:35:39] [DEBUG]: Using token from environment 
+[2017-12-13 17:35:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:35:46] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:35:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:35:46] [DEBUG]: Using token from environment 
+[2017-12-13 17:35:48] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:35:48] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:35:48] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:35:48] [DEBUG]: Using token from environment 
+[2017-12-13 17:38:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:38:39] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:38:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:38:39] [DEBUG]: Using token from environment 
+[2017-12-13 17:38:54] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:38:54] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:38:54] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:38:54] [DEBUG]: Using token from environment 
+[2017-12-13 17:40:02] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:40:02] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:40:02] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:40:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:40:09] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:40:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:40:12] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:40:12] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:40:12] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:40:12] [DEBUG]: Using token from environment 
+[2017-12-13 17:40:30] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:40:30] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:40:30] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:40:30] [DEBUG]: Using token from environment 
+[2017-12-13 17:40:38] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:40:38] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:40:38] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:40:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:40:45] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:40:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:40:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:40:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:40:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:40:47] [DEBUG]: Using token from environment 
+[2017-12-13 17:40:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:40:51] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:40:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:40:51] [DEBUG]: Using token from environment 
+[2017-12-13 17:41:21] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:41:21] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:41:21] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:41:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:41:27] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:41:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:41:31] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:41:31] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:41:31] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:41:31] [DEBUG]: Using token from environment 
+[2017-12-13 17:42:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:42:08] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:42:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:42:08] [DEBUG]: Using token from environment 
+[2017-12-13 17:42:10] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:42:10] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:42:10] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:42:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:42:16] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:42:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:42:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:42:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 17:42:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:42:20] [DEBUG]: Using token from environment 
+[2017-12-13 17:42:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:42:47] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:42:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:42:47] [DEBUG]: Using token from environment 
+[2017-12-13 17:43:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 17:43:46] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 17:43:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 17:43:46] [DEBUG]: Using token from environment 
+[2017-12-13 18:14:59] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:14:59] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:14:59] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:15:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:15:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:15:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:15:19] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:15:19] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:15:19] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:15:19] [DEBUG]: Using token from environment 
+[2017-12-13 18:19:49] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:19:49] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:19:49] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:19:55] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:19:55] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:19:55] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:01] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:01] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:01] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:01] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:08] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:09] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:09] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:09] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:09] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:13] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:13] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:14] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:14] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:14] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:15] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:15] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:15] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:15] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:16] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:16] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:16] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:17] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:17] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:18] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:18] [DEBUG]: Using token from environment 
+[2017-12-13 18:20:50] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:50] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:50] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:20:59] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:20:59] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:20:59] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:00] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:00] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:00] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:00] [DEBUG]: Using token from environment 
+[2017-12-13 18:21:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:08] [DEBUG]: Using token from environment 
+[2017-12-13 18:21:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:15] [DEBUG]: Using token from environment 
+[2017-12-13 18:21:37] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:37] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:37] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:37] [DEBUG]: Using token from environment 
+[2017-12-13 18:21:38] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:38] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:38] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:38] [DEBUG]: Using token from environment 
+[2017-12-13 18:21:38] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:38] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:38] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:38] [DEBUG]: Using token from environment 
+[2017-12-13 18:21:38] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:38] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:38] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:38] [DEBUG]: Using token from environment 
+[2017-12-13 18:21:42] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:42] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:42] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:42] [DEBUG]: Using token from environment 
+[2017-12-13 18:21:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:47] [DEBUG]: Using token from environment 
+[2017-12-13 18:21:55] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:21:55] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:21:55] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:21:55] [DEBUG]: Using token from environment 
+[2017-12-13 18:22:10] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:22:10] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:22:10] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:22:10] [DEBUG]: Using token from environment 
+[2017-12-13 18:22:26] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:22:26] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:22:26] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:22:26] [DEBUG]: Using token from environment 
+[2017-12-13 18:53:36] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:53:36] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:53:36] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:53:58] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:53:58] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:53:58] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:54:00] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:54:00] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:54:00] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:54:00] [DEBUG]: Using token from environment 
+[2017-12-13 18:57:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:57:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:57:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:57:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:57:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:57:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:57:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:57:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:57:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:57:20] [DEBUG]: Using token from environment 
+[2017-12-13 18:57:37] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:57:37] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:57:37] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:57:37] [DEBUG]: Using token from environment 
+[2017-12-13 18:57:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:57:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:57:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:57:43] [DEBUG]: Using token from environment 
+[2017-12-13 18:57:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:57:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:57:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:57:51] [DEBUG]: Using token from environment 
+[2017-12-13 18:57:54] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:57:54] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:57:54] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:57:54] [DEBUG]: Using token from environment 
+[2017-12-13 18:57:56] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:57:56] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:57:56] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:57:56] [DEBUG]: Using token from environment 
+[2017-12-13 18:57:56] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:57:56] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:57:56] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:57:56] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:07] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:07] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:08] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:09] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:09] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:11] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:11] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:11] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:11] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:15] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:31] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:31] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:31] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:31] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:33] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:33] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:33] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:33] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:35] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:35] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:35] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:35] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:45] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:45] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:46] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:46] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:46] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:46] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:47] [DEBUG]: Using token from environment 
+[2017-12-13 18:58:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 18:58:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 18:58:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 18:58:47] [DEBUG]: Using token from environment 
+[2017-12-13 19:00:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:00:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:00:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:00:17] [DEBUG]: Using token from environment 
+[2017-12-13 19:00:19] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:00:19] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:00:19] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:00:19] [DEBUG]: Using token from environment 
+[2017-12-13 19:00:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:00:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:00:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:00:20] [DEBUG]: Using token from environment 
+[2017-12-13 19:00:23] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:00:23] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:00:23] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:00:23] [DEBUG]: Using token from environment 
+[2017-12-13 19:00:36] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:00:36] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:00:36] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:00:36] [DEBUG]: Using token from environment 
+[2017-12-13 19:00:38] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:00:38] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:00:38] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:00:38] [DEBUG]: Using token from environment 
+[2017-12-13 19:00:40] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:00:40] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:00:40] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:00:40] [DEBUG]: Using token from environment 
+[2017-12-13 19:00:42] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:00:42] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:00:42] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:00:42] [DEBUG]: Using token from environment 
+[2017-12-13 19:03:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:03:39] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:03:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:03:42] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:03:42] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:03:42] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:03:44] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:03:44] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:03:44] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:03:44] [DEBUG]: Using token from environment 
+[2017-12-13 19:06:40] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:06:40] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:06:40] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:06:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:06:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:06:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:06:44] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:06:44] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:06:44] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:06:44] [DEBUG]: Using token from environment 
+[2017-12-13 19:07:04] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:07:04] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:07:04] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:07:06] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:07:06] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:07:06] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:07:09] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:07:09] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:07:09] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:07:11] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:07:11] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:07:11] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:07:11] [DEBUG]: Using token from environment 
+[2017-12-13 19:07:38] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:07:38] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:07:38] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:07:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:07:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:07:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:07:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:07:45] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:07:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:07:45] [DEBUG]: Using token from environment 
+[2017-12-13 19:09:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:09:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:09:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:09:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:09:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:09:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:09:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:09:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:09:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:09:18] [DEBUG]: Using token from environment 
+[2017-12-13 19:09:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:09:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:09:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:09:50] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:09:50] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:09:50] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:09:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:09:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:09:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:09:51] [DEBUG]: Using token from environment 
+[2017-12-13 19:10:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:10:39] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:10:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:10:41] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:10:41] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:10:41] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:10:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:10:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:10:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:10:43] [DEBUG]: Using token from environment 
+[2017-12-13 19:11:40] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:11:40] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:11:40] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:11:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:11:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:11:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:11:44] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:11:44] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:11:44] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:11:44] [DEBUG]: Using token from environment 
+[2017-12-13 19:12:58] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:12:58] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:12:58] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:13:01] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:13:01] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:13:01] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:13:02] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:13:02] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:13:02] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:13:02] [DEBUG]: Using token from environment 
+[2017-12-13 19:15:56] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:15:56] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:15:56] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:15:59] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:15:59] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:15:59] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:16:00] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:16:00] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:16:00] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:16:00] [DEBUG]: Using token from environment 
+[2017-12-13 19:17:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:17:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:17:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:17:13] [DEBUG]: Using token from environment 
+[2017-12-13 19:17:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:17:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:17:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:17:15] [DEBUG]: Using token from environment 
+[2017-12-13 19:17:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:17:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:17:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:17:16] [DEBUG]: Using token from environment 
+[2017-12-13 19:17:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:17:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:17:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:17:18] [DEBUG]: Using token from environment 
+[2017-12-13 19:17:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:17:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:17:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:17:20] [DEBUG]: Using token from environment 
+[2017-12-13 19:17:21] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:17:21] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:17:21] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:17:21] [DEBUG]: Using token from environment 
+[2017-12-13 19:17:21] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:17:21] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:17:21] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:17:21] [DEBUG]: Using token from environment 
+[2017-12-13 19:17:22] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:17:22] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:17:22] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:17:22] [DEBUG]: Using token from environment 
+[2017-12-13 19:17:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:17:27] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:17:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:17:27] [DEBUG]: Using token from environment 
+[2017-12-13 19:19:11] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:19:11] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:19:11] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:19:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:19:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:19:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:19:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:19:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:19:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:19:14] [DEBUG]: Using token from environment 
+[2017-12-13 19:20:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:20:07] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:20:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:20:07] [DEBUG]: Using token from environment 
+[2017-12-13 19:21:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:21:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:21:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:21:19] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:21:19] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:21:19] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:21:21] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:21:21] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:21:21] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:21:21] [DEBUG]: Using token from environment 
+[2017-12-13 19:23:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:23:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:23:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:23:20] [DEBUG]: Using token from environment 
+[2017-12-13 19:23:22] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:23:22] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:23:22] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:23:22] [DEBUG]: Using token from environment 
+[2017-12-13 19:23:22] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:23:22] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:23:22] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:23:22] [DEBUG]: Using token from environment 
+[2017-12-13 19:23:34] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:23:34] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:23:34] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:23:34] [DEBUG]: Using token from environment 
+[2017-12-13 19:23:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:23:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:23:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:23:43] [DEBUG]: Using token from environment 
+[2017-12-13 19:23:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:23:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:23:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:23:51] [DEBUG]: Using token from environment 
+[2017-12-13 19:25:35] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:25:35] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:25:35] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:25:38] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:25:38] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:25:38] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:25:42] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:25:42] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:25:42] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:25:42] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:05] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:05] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:05] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:05] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:15] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:16] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:17] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:17] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:17] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:18] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:18] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:18] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:18] [DEBUG]: Using token from environment 
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:26:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:26:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:26:18] [DEBUG]: Using token from environment 
+[2017-12-13 19:28:28] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:28:28] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:28:28] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:28:31] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:28:31] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:28:31] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:28:33] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:28:33] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:28:33] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:28:33] [DEBUG]: Using token from environment 
+[2017-12-13 19:29:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:29:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:29:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:29:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:29:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:29:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:29:21] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:29:21] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:29:21] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:29:21] [DEBUG]: Using token from environment 
+[2017-12-13 19:29:48] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:29:48] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:29:48] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:29:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:29:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:29:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:29:52] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:29:52] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:29:52] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:29:52] [DEBUG]: Using token from environment 
+[2017-12-13 19:30:36] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:30:36] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:30:36] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:30:39] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:30:39] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:30:39] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:30:40] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:30:40] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:30:40] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:30:40] [DEBUG]: Using token from environment 
+[2017-12-13 19:32:48] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:32:48] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:32:48] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:32:50] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:32:50] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:32:50] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:32:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:32:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:32:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:32:51] [DEBUG]: Using token from environment 
+[2017-12-13 19:50:42] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:50:42] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:50:42] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:50:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:50:45] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:50:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:50:49] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:50:49] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:50:49] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:50:49] [DEBUG]: Using token from environment 
+[2017-12-13 19:53:55] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:53:55] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:53:55] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:53:59] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:53:59] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:53:59] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:54:00] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:54:00] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:54:00] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:54:00] [DEBUG]: Using token from environment 
+[2017-12-13 19:54:59] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:54:59] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 19:54:59] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:55:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:55:07] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 19:55:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:55:10] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:55:10] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:55:10] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:55:10] [DEBUG]: Using token from environment 
+[2017-12-13 19:55:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:55:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:55:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:55:51] [DEBUG]: Using token from environment 
+[2017-12-13 19:59:12] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:59:12] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:59:12] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:59:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:59:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:59:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:59:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:59:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:59:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:59:17] [DEBUG]: Using token from environment 
+[2017-12-13 19:59:26] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:59:26] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:59:26] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:59:26] [DEBUG]: Using token from environment 
+[2017-12-13 19:59:33] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 19:59:33] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 19:59:33] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 19:59:33] [DEBUG]: Using token from environment 
+[2017-12-13 20:01:04] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:01:04] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:01:04] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:01:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:01:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:01:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:01:11] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:01:11] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:01:11] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:01:11] [DEBUG]: Using token from environment 
+[2017-12-13 20:02:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:02:27] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:02:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:02:30] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:02:30] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:02:30] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:02:32] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:02:32] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:02:32] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:02:32] [DEBUG]: Using token from environment 
+[2017-12-13 20:02:59] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:02:59] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:02:59] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:03:02] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:03:02] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:03:02] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:03:03] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:03:03] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:03:03] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:03:03] [DEBUG]: Using token from environment 
+[2017-12-13 20:04:18] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:04:18] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:04:18] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:04:18] [DEBUG]: Using token from environment 
+[2017-12-13 20:04:53] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:04:53] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:04:53] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:04:53] [DEBUG]: Using token from environment 
+[2017-12-13 20:05:11] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:05:11] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:05:11] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:05:11] [DEBUG]: Using token from environment 
+[2017-12-13 20:05:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:05:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:05:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:05:13] [DEBUG]: Using token from environment 
+[2017-12-13 20:06:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:06:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:06:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:06:08] [DEBUG]: Using token from environment 
+[2017-12-13 20:06:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:06:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:06:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:06:14] [DEBUG]: Using token from environment 
+[2017-12-13 20:09:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:09:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:09:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:09:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:09:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:09:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:09:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:09:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:09:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:09:47] [DEBUG]: Using token from environment 
+[2017-12-13 20:10:01] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:10:01] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:10:01] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:10:01] [DEBUG]: Using token from environment 
+[2017-12-13 20:10:03] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:10:03] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:10:03] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:10:03] [DEBUG]: Using token from environment 
+[2017-12-13 20:10:05] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:10:05] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:10:05] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:10:05] [DEBUG]: Using token from environment 
+[2017-12-13 20:10:05] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:10:05] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:10:05] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:10:05] [DEBUG]: Using token from environment 
+[2017-12-13 20:10:05] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:10:05] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:10:05] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:10:05] [DEBUG]: Using token from environment 
+[2017-12-13 20:10:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:10:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:10:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:10:08] [DEBUG]: Using token from environment 
+[2017-12-13 20:13:27] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:13:27] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 20:13:27] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:13:28] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:13:28] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 20:13:28] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:13:30] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:13:30] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:13:30] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:13:30] [DEBUG]: Using token from environment 
+[2017-12-13 20:28:01] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:28:01] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:28:01] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:28:04] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:28:04] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:28:04] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:28:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:28:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:28:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:28:08] [DEBUG]: Using token from environment 
+[2017-12-13 20:54:40] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:54:40] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:54:40] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:54:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:54:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:54:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:54:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 20:54:45] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 20:54:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 20:54:45] [DEBUG]: Using token from environment 
+[2017-12-13 21:34:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:34:47] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 21:34:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:34:49] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:34:49] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 21:34:49] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:34:50] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:34:50] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:34:50] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:34:50] [DEBUG]: Using token from environment 
+[2017-12-13 21:35:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:35:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:35:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:35:51] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:35:51] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:35:51] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:35:53] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:35:53] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:35:53] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:35:53] [DEBUG]: Using token from environment 
+[2017-12-13 21:38:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:38:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:38:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:38:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:38:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:38:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:38:19] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:38:19] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:38:19] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:38:30] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:38:30] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:38:30] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:38:30] [DEBUG]: Using token from environment 
+[2017-12-13 21:38:37] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:38:37] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:38:37] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:38:37] [DEBUG]: Using token from environment 
+[2017-12-13 21:39:11] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:39:11] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:39:11] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:39:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:39:14] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:39:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:39:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:39:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:39:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:39:16] [DEBUG]: Using token from environment 
+[2017-12-13 21:41:29] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:41:29] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:41:29] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:41:29] [DEBUG]: Using token from environment 
+[2017-12-13 21:41:31] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:41:31] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:41:31] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:41:31] [DEBUG]: Using token from environment 
+[2017-12-13 21:41:31] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:41:31] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:41:31] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:41:31] [DEBUG]: Using token from environment 
+[2017-12-13 21:43:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:43:45] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:43:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:43:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:43:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:43:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:43:49] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:43:49] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:43:49] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:43:49] [DEBUG]: Using token from environment 
+[2017-12-13 21:44:16] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:44:16] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:44:16] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:44:19] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:44:19] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:44:19] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:44:20] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:44:20] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:44:20] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:44:20] [DEBUG]: Using token from environment 
+[2017-12-13 21:45:02] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:45:02] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:45:02] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:45:02] [DEBUG]: Using token from environment 
+[2017-12-13 21:45:49] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:45:49] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:45:49] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:45:49] [DEBUG]: Using token from environment 
+[2017-12-13 21:47:12] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:47:12] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:47:12] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:47:12] [DEBUG]: Using token from environment 
+[2017-12-13 21:51:54] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:51:54] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:51:54] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:51:54] [DEBUG]: Using token from environment 
+[2017-12-13 21:51:57] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:51:57] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:51:57] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:51:57] [DEBUG]: Using token from environment 
+[2017-12-13 21:55:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:55:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:55:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:55:10] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:55:10] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:55:10] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:55:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:55:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:55:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:55:13] [DEBUG]: Using token from environment 
+[2017-12-13 21:56:10] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:56:10] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:56:10] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:56:13] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:56:13] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:56:13] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:56:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:56:15] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:56:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:56:15] [DEBUG]: Using token from environment 
+[2017-12-13 21:57:19] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:57:19] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:57:19] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:57:22] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:57:22] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:57:22] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:57:40] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:57:40] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:57:40] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:57:40] [DEBUG]: Using token from environment 
+[2017-12-13 21:57:52] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:57:52] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:57:52] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:57:52] [DEBUG]: Using token from environment 
+[2017-12-13 21:59:45] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:59:45] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:59:45] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:59:45] [DEBUG]: Using token from environment 
+[2017-12-13 21:59:47] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 21:59:47] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 21:59:47] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 21:59:47] [DEBUG]: Using token from environment 
+[2017-12-13 22:29:43] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 22:29:43] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 22:29:43] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 22:29:46] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 22:29:46] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 22:29:46] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 22:29:48] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 22:29:48] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 22:29:48] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 22:29:48] [DEBUG]: Using token from environment 
+[2017-12-13 23:01:14] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 23:01:14] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 23:01:14] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 23:01:15] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 23:01:15] [DEBUG]: Request is identified as an actual CORS request. 
+[2017-12-13 23:01:15] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 23:01:17] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 23:01:17] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 23:01:17] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 23:01:17] [DEBUG]: Using token from environment 
+[2017-12-13 23:01:54] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 23:01:54] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 23:01:54] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 23:01:57] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 23:01:57] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 23:01:57] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 23:02:07] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 23:02:07] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 23:02:07] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 23:02:08] [DEBUG]: CORS analysis for request started. 
+[2017-12-13 23:02:08] [INFO]: Request is not CORS (request origin is empty). {"request":null,"server":"[object] (Neomerx\\Cors\\Http\\ParsedUrl: ://)"}
+[2017-12-13 23:02:08] [DEBUG]: CORS analysis for request completed. 
+[2017-12-13 23:02:08] [DEBUG]: Using token from environment 

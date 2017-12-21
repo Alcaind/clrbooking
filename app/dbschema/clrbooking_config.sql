@@ -1,0 +1,1 @@
+INSERT INTO clrbooking.config (year, dt, status) VALUES (2017, '2017-11-12 14:11:45', 1);

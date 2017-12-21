@@ -12,7 +12,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->get('/devices', function (Request $request, Response $response) {
     //if (in_array("get", $this->jwt->scope)) {
     header("Content-Type: application/json");
-    $sql = "select * from udevs";
+    $sql = "select * from users";
     try {
         $db = new db();
         $db = $db->connect();

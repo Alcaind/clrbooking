@@ -5,9 +5,17 @@ angular.module('Login', []);
 angular.module('Admin', []);
 angular.module('Authentication', []);
 angular.module('DB', []);
+angular.module('Roles', []);
+angular.module('Users', []);
+angular.module('Rooms', []);
+angular.module('Tm', []);
+angular.module('Kat', []);
+angular.module('Requests', []);
+angular.module('MainComponents', []);
+angular.module('ApiModules', []);
 
 // Declare app level module which depends on views, and components
-angular.module('lp4000App', [
+angular.module('clrBooking', [
     'Authentication',
     'Admin',
     'Home',
@@ -16,8 +24,17 @@ angular.module('lp4000App', [
     'Login',
     'DB',
     'angular-jwt',
-    'angular-storage'
+    'angular-storage',
+    'Roles',
+    'Users',
+    'Rooms',
+    'Tms',
+    'Kat',
+    'Requests',
+    'MainComponents',
+    'ApiModules'
 ])
+
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
         function($locationProvider, $routeProvider,  $httpProvider, jwtOptionsProvider, jwtInterceptorProvider) {
 
@@ -38,6 +55,36 @@ angular.module('lp4000App', [
             controller: 'HomeController',
             templateUrl: 'modules/home/views/home.html'
         })
+        .when('/roles', {
+            title: 'roles',
+            controller: 'RolesController',
+            templateUrl: 'modules/roles/views/roles.html'
+        })
+        .when('/dp', {
+            title: 'dp',
+            controller: 'UsersController',
+            templateUrl: 'modules/users/uviews/users.html'
+        })
+        .when('/rooms', {
+            title: 'rooms',
+            controller: 'RoomsController',
+            templateUrl: 'modules/rooms/rviews/rooms.html'
+        })
+        .when('/tms', {
+            title: 'tm',
+            controller: 'TmsController',
+            templateUrl: 'modules/tm/tmviews/tms.html'
+        })
+        .when('/kat', {
+            title: 'kat',
+            controller: 'KatController',
+            templateUrl: 'modules/kat/katsviews/kats.html'
+        })
+        .when('/requests', {
+            title: 'requests',
+            controller: 'RequestsController',
+            templateUrl: 'modules/requests/reqviews/requests.html'
+        })
         /*.when('/', {
             controller: 'HomeController',
             templateUrl: 'modules/home/views/home.html'
@@ -52,7 +99,8 @@ angular.module('lp4000App', [
             requireBase: false
         });*/
 
-        var getUrlParameter = function getUrlParameter(sParam) {
+
+            var getUrlParameter = function getUrlParameter(sParam) {
             var sPageURL = decodeURIComponent(window.location.search.substring(1)),
                 sURLVariables = sPageURL.split('&'),
                 sParameterName,
@@ -102,7 +150,7 @@ angular.module('lp4000App', [
                         if (rfToken) store.remove('rwt');
                         if (idToken) store.remove('jwt');
                         $rootScope.errorString ='Δεν υπάρχει ενεργό login στην Υπηρεσία! Προσπαθήστε ΞΑΝΑ!';
-                        $rootScope.globals = {currentUser:null};
+                        $rootScope.globals = {item: null};
                         $location.path('/login');
                         return null;
                     }
@@ -173,12 +221,15 @@ angular.module('lp4000App', [
                     return;
                 }
 
-                $rootScope.globals.currentUser = response.data;
+                $rootScope.globals.item = response.data;
                 $location.path('/home');
 
             }, function (response) {
                 console.log(response.status);
-                $rootScope.globals.currentUser = '';
+                $rootScope.globals.item = '';
                 $location.path('/login');
             });*/
-        }]);
+        }])
+
+
+;

@@ -1,0 +1,4 @@
+INSERT INTO clrbooking.periods (descr, synt, fromd, tod, comments, conf_id, `order`, status) VALUES ('Χημερινό εξάμ.', 'X', '2017-11-20', '2017-12-31', null, 1, 0, 1);
+INSERT INTO clrbooking.periods (descr, synt, fromd, tod, comments, conf_id, `order`, status) VALUES ('Εξεταστική Χημερινού', 'ΧΕ', '2018-01-01', '2018-02-15', null, 1, 1, 0);
+INSERT INTO clrbooking.periods (descr, synt, fromd, tod, comments, conf_id, `order`, status) VALUES ('Εαρινό εξάμ.', 'Ε', '2018-02-15', '2018-06-15', null, 1, 2, 0);
+INSERT INTO clrbooking.periods (descr, synt, fromd, tod, comments, conf_id, `order`, status) VALUES ('Εξεταστική Χημερινού', 'ΕΕ', '2018-06-15', '2018-07-31', null, 1, 3, 0);

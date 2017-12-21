@@ -14,23 +14,68 @@ use Micheh\Cache\CacheUtil; // Micheh\Cache\CacheUtil;
 use Slim\Middleware\HttpBasicAuthentication;
 use Slim\Middleware\JwtAuthentication;
 use Tuupola\Middleware\Cors;
-use  Response\UnauthorizedResponse; //Response\UnauthorizedResponse;
+use Response\UnauthorizedResponse; //Response\UnauthorizedResponse;
+use Slim\Middleware\HttpBasicAuthentication\PdoAuthenticator;
+use Slim\Middleware\HttpBasicAuthentication\AuthenticatorInterface;
+
+
+class ClrAuthenticator implements AuthenticatorInterface
+{
+    private $options;
+    private $pdo;
+
+    public function __construct(array $options = [])
+    {
+        /* Default options. */
+        $this->pdo = new db();
+        $this->pdo = $this->pdo->connect();
+        $this->options = [
+            "table" => "users",
+            "user" => "user",
+            "hash" => "hash"
+        ];
+        if ($options) {
+            $this->options = array_merge($this->options, $options);
+        }
+    }
+
+    public function __invoke(array $arguments)
+    {
+        $user = $arguments["user"];
+        $password = $arguments["password"];
+
+        $sql = "SELECT * FROM users WHERE user = '".$user."'";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+
+        if ($user = $statement->fetch(\PDO::FETCH_ASSOC)) {
+            return password_verify($password, $user[$this->options["hash"]]);
+        }
+        return false;
+    }
+}
 
 $container = $app->getContainer();
+
 $container["HttpBasicAuthentication"] = function ($container) {
     return new HttpBasicAuthentication([
-        "path" => "/",
-        "ignore" => ["/token", "/info", "/trackDev", "/login"],
+        "path" => ["/token", "/login"],
+        //"ignore" => ["/token", "/info", "/trackDev", "/login"],
         //"relaxed" => ["192.168.50.52", "127.0.0.1", "localhost"],
         //"passthrough" => ["/api/public/token", "/api/token"],
         "secure" => false,
         "error" => function ($request, $response, $arguments) {
             return new UnauthorizedResponse($arguments["message"], 401);
         },
-        "users" => [
-            "test" => "test",
-            "vmanol" => "lola"
-        ],
+        "callback" => function ($request, $response, $arguments) {
+            //print_r($arguments);
+        },
+        "realm" => "Protected",
+        "authenticator" => new ClrAuthenticator([
+            "table" => "users",
+            "user" => "user",
+            "hash" => "hash"
+        ]),
         "environment" => "REDIRECT_HTTP_AUTHORIZATION"
     ]);
 };
@@ -39,17 +84,18 @@ $container["token"] = function ($container) {
     return new Token;
 };
 
+
 $container["JwtAuthentication"] = function ($container) {
     return new JwtAuthentication([
         "path" => "/",
         //"ignore" => ["/api/public/token"],
         //"secret" => getenv("JWT_SECRET"),
-        "secret" => "supersecretkeyyoushouldnotcommittogithub",
+        "secret" => "supersecretkeyyoushouldnotcommittogithub", //TODO : na mpei to super secret key sto ENV to leitourgikou
         "logger" => $container["logger"],
         "attribute" => false,
         "secure" => false,
         //"relaxed" => ["192.168.50.52", "127.0.0.1", "localhost"],
-        //"passthrough" => ["/api/public/token"],
+        "passthrough" => ["/api/newuser"],
         "rules" => [
             new Slim\Middleware\JwtAuthentication\RequestPathRule([
                 "path" => "/",

@@ -12,7 +12,7 @@ class db
     private $dbhost = 'localhost';
     private $dbuser = 'lpadmin';
     private $dbpass = 'OKEcmRv1UAa0Fqrb';
-    private $dbname = 'lpadmin';
+    private $dbname = 'clrbooking';
 
     // Connect
     public function connect()

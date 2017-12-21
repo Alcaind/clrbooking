@@ -26,7 +26,7 @@ class PdoAuthenticatorTest extends \PHPUnit_Framework_TestCase
         //$this->pdo = new \PDO("sqlite:/tmp/test.db");
 
         $this->pdo->exec(
-            "CREATE TABLE users (
+            "CREATE TABLE dp (
                 user VARCHAR(32) NOT NULL,
                 hash VARCHAR(255) NOT NULL
             )"
@@ -36,7 +36,7 @@ class PdoAuthenticatorTest extends \PHPUnit_Framework_TestCase
         $hash = password_hash("t00r", PASSWORD_DEFAULT);
 
         $status = $this->pdo->exec(
-            "INSERT INTO users (user, hash) VALUES ('{$user}', '{$hash}')"
+            "INSERT INTO dp (user, hash) VALUES ('{$user}', '{$hash}')"
         );
     }
 
@@ -64,7 +64,7 @@ class PdoAuthenticatorTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals(
-            "SELECT * FROM users WHERE user = ? LIMIT 1",
+            "SELECT * FROM dp WHERE user = ? LIMIT 1",
             $authenticator->sql("root", "nosuch")
         );
     }
@@ -78,7 +78,7 @@ class PdoAuthenticatorTest extends \PHPUnit_Framework_TestCase
             "pdo" => $this->pdo
         ]);
         $this->assertEquals(
-            "SELECT TOP 1 * FROM users WHERE user = ?",
+            "SELECT TOP 1 * FROM dp WHERE user = ?",
             $authenticator->sql("root", "nosuch")
         );
     }

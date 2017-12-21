@@ -5,42 +5,43 @@
  * Date: 30/08/2017
  * Time: 1:26 μμ
  */
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Firebase\JWT\JWT;
 use Tuupola\Base62;
 
 $app->post("/token", function (Request $request, Response $response) {
-
     $now = new DateTime();
-
     $server = $request->getServerParams();
     $urlParams = $request->getParsedBody();
+    $ret = new stdClass();
 
-    $ch = curl_init();
-    $params = 'ip=' . $server['REMOTE_ADDR'] . '&agent=' . $server['HTTP_USER_AGENT'] . '&cookie=0';
-    $params .= '&pswd=' . $urlParams["pswd"] . '&usr=' . $urlParams["usr"] . '&app=' . $urlParams["app"];
+    //$params = 'ip=' . $server['REMOTE_ADDR'] . '&agent=' . $server['HTTP_USER_AGENT'] . '&cookie=0';
+    //$params .= '&pswd=' . $urlParams["pswd"] . '&usr=' . $urlParams["usr"] . '&app=' . $urlParams["app"];
 
-    curl_setopt($ch, CURLOPT_URL, 'http://www.livepraktoreio.gr/webServices/web-login-test.php');
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $pswd= $urlParams["pswd"];
+    $usr= $urlParams["usr"];
 
-    $result = curl_exec($ch);
-    curl_close($ch);
-    if (strpos($result, 'false') > -1) {
-        //api('{"success":false, "from curl":"-1"}');
+    $sql = "select * from users";
+    try {
+        $db = new db();
+        $db = $db->connect();
+        $stm = $db->query($sql);
+        $user = $stm->fetchAll(PDO::FETCH_OBJ);
+        //$db = null;
+        $ret->user = $user;
+        $sql = "select * from users_roles WHERE user_id = $user->id";
+        $stm = $db->query($sql);
+        $roles = $stm->fetchAll(PDO::FETCH_OBJ);
+        $ret->roles = $roles;
+    } catch (PDOException $e) {
         return $response->withStatus(401)
             ->withHeader("Content-Type", "application/json")
             ->write(json_encode($result, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
     }
 
-    $curlResults = json_decode($result);
-    //echo " ok /n";
-    //$b62 = new Base62();
-    //substr(strtr(base64_encode(hex2bin(bin2hex(random_bytes(32))), '+', '.'), 0, 44);
-    //$b62 = substr(strtr(base64_encode(hex2bin(bin2hex(random_bytes(32)))), '+', '.'), 0, 44);
-    //\Sodium\bin2hex(random_bytes(16)); //random_bytes(16);
+    $curlResults = json_decode($ret);
     $a = '';
     for ($i = 0; $i < 16; $i++) $a .= mt_rand(0, 9);
 
@@ -83,41 +84,45 @@ $app->post("/token", function (Request $request, Response $response) {
 });
 
 $app->post("/login", function (Request $request, Response $response) {
-
     $now = new DateTime();
+    //$server = $request->getServerParams();
+    //$urlParams = $request->getParsedBody();
+    $ret = new stdClass();
 
-    $server = $request->getServerParams();
-    $urlParams = $request->getParsedBody();
+    //$params = 'ip=' . $server['REMOTE_ADDR'] . '&agent=' . $server['HTTP_USER_AGENT'] . '&cookie=0';
+    //$params .= '&pswd=' . $urlParams["pswd"] . '&usr=' . $urlParams["usr"] . '&app=' . $urlParams["app"];
 
-    $ch = curl_init();
-    $params = 'ip=' . $server['REMOTE_ADDR'] . '&agent=' . $server['HTTP_USER_AGENT'] . '&cookie=0';
-    $params .= '&pswd=' . $urlParams["pswd"] . '&usr=' . $urlParams["usr"] . '&app=' . $urlParams["app"];
+    //$pswd= $urlParams["pswd"];
+    //$usr= $urlParams["usr"];
+    //$sql = "select * from dp where dp.user_n = '$usr'";
 
-    curl_setopt($ch, CURLOPT_URL, 'http://www.livepraktoreio.gr/webServices/web-login-test.php');
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $result = curl_exec($ch);
-    curl_close($ch);
-    if (strpos($result, 'false') > -1) {
-        //api('{"success":false, "from curl":"-1"}');
+    //echo $sql;
+    /*try {
+        $db = new db();
+        $db = $db->connect();
+        $stm = $db->query($sql);
+        $user = $stm->fetchAll(PDO::FETCH_OBJ);
+        //$db = null;
+        $ret->user = $user[0];
+        $sql = "select * from users_roles WHERE user_id = ".$user[0]->id;
+        //echo $sql;
+        $stm = $db->query($sql);
+        $roles = $stm->fetchAll(PDO::FETCH_OBJ);
+        $ret->roles = $roles;
+        //print_r($ret);
+    } catch (PDOException $e) {
+        //echo $result;
         return $response->withStatus(401)
             ->withHeader("Content-Type", "application/json")
             ->write(json_encode($result, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
     }
 
-    $curlResults = json_decode($result);
-    //echo " ok /n";
-    //$b62 = new Base62();
-    //substr(strtr(base64_encode(hex2bin(bin2hex(random_bytes(32))), '+', '.'), 0, 44);
-    //$b62 = substr(strtr(base64_encode(hex2bin(bin2hex(random_bytes(32)))), '+', '.'), 0, 44);
-    //\Sodium\bin2hex(random_bytes(16)); //random_bytes(16);
+    $curlResults = json_encode($ret); // json_decode($ret);*/
     $a = '';
     for ($i = 0; $i < 16; $i++) $a .= mt_rand(0, 9);
 
     $jti = (new Base62)->encode($a);
-    $secret = getenv("JWT_SECRET");
+    $secret = getenv("JWT_SECRET"); //TODO : na valoume to secret sto ENV kai na to pairnoume apo ekei ...
     $secret = "supersecretkeyyoushouldnotcommittogithub";
 
     $future = new DateTime("now +10 hours");
@@ -130,7 +135,7 @@ $app->post("/login", function (Request $request, Response $response) {
     ];
 
     $refreshToken = [];
-    $refreshToken["token"] = JWT::encode($payload, $secret, "HS256");
+    $refreshToken["token"] =  JWT::encode($payload, $secret, "HS256");
     $refreshToken["expires"] = $future->getTimeStamp();
 
     $future = new DateTime("now +1 hour");
@@ -153,7 +158,6 @@ $app->post("/login", function (Request $request, Response $response) {
         ->withHeader("Content-Type", "application/json")
         ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 });
-
 
 $app->post("/refresh-token", function (Request $request, Response $response) {
     $now = new DateTime();
@@ -187,4 +191,3 @@ $app->post("/refresh-token", function (Request $request, Response $response) {
         ->withHeader("Content-Type", "application/json")
         ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
 });
-

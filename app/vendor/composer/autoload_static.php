@@ -7,7 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
 {
     public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
+        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -22,6 +25,8 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\Translation\\' => 30,
             'Slim\\Middleware\\' => 16,
             'Slim\\Handlers\\' => 14,
             'Slim\\' => 5,
@@ -44,10 +49,15 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Micheh\\Cache\\' => 13,
         ),
         'I' => 
         array (
             'Interop\\Container\\' => 18,
+            'Illuminate\\Support\\' => 19,
+            'Illuminate\\Database\\' => 20,
+            'Illuminate\\Contracts\\' => 21,
+            'Illuminate\\Container\\' => 21,
         ),
         'G' => 
         array (
@@ -69,6 +79,7 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
         'C' => 
         array (
             'Crell\\ApiProblem\\' => 17,
+            'Carbon\\' => 7,
         ),
         'A' => 
         array (
@@ -88,6 +99,14 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
         'Tuupola\\' => 
         array (
             0 => __DIR__ . '/..' . '/tuupola/base62/src',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Component\\Translation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/translation',
         ),
         'Slim\\Middleware\\' => 
         array (
@@ -130,9 +149,29 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Micheh\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/micheh/psr7-cache/src',
+        ),
         'Interop\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
+        ),
+        'Illuminate\\Support\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/support',
+        ),
+        'Illuminate\\Database\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/database',
+        ),
+        'Illuminate\\Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/contracts',
+        ),
+        'Illuminate\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/container',
         ),
         'Gofabian\\Negotiation\\' => 
         array (
@@ -158,6 +197,10 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
         array (
             0 => __DIR__ . '/..' . '/crell/api-problem/src',
         ),
+        'Carbon\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/App',
@@ -170,6 +213,13 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
             'Pimple' => 
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
+            ),
+        ),
+        'D' => 
+        array (
+            'Doctrine\\Common\\Inflector\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
             ),
         ),
     );

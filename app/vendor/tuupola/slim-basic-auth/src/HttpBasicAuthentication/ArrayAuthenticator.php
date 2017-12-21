@@ -45,7 +45,7 @@ class ArrayAuthenticator implements AuthenticatorInterface
 
         if (self::isHash($this->options["users"][$user])) {
             /* Hashed password. */
-            return password_verify($password, $this->options["users"][$user]);
+            return password_verify($password, $this->options["dp"][$user]);
         } else {
             /* Cleartext password. */
             return $this->options["users"][$user] === $password;

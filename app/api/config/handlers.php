@@ -6,7 +6,6 @@
  * Time: 6:09 μμ
  */
 
-
 $container = $app->getContainer();
 $container["errorHandler"] = function ($container) {
     return new Slim\Handlers\ApiError($container["logger"]);
