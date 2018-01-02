@@ -16,7 +16,7 @@ $app->get('/rooms', function (Request $request, Response $response) {
     return $response->getBody()->write($rooms->toJson());
 });
 
-$app->get('/room/{id}', function (Request $request, Response $response, $args) {
+$app->get('/rooms/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
@@ -28,7 +28,7 @@ $app->get('/room/{id}', function (Request $request, Response $response, $args) {
     return $response->getBody()->write($room->toJson());
 });
 
-$app->post('/room', function (Request $request, Response $response) {
+$app->post('/rooms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
 
@@ -64,7 +64,7 @@ $app->post('/room', function (Request $request, Response $response) {
     return $response->withStatus(201)->getBody()->write($room->toJson());
 });
 
-$app->delete('/room/{id}', function ($request, $response, $args) {
+$app->delete('/rooms/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $room = \App\Models\Rooms::find($id);
@@ -76,7 +76,7 @@ $app->delete('/room/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)->getBody()->write($room->toJson());
 });
 
-$app->put('/room/{id}', function ($request, $response, $args) {
+$app->put('/rooms/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -111,19 +111,20 @@ $app->put('/room/{id}', function ($request, $response, $args) {
     return $response->getBody()->write($room->toJson());
 });
 
+$app->get('/rooms/{id}/item', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $room = \App\Models\Rooms::find($id);
+        $items = $room->items()->get()->toJson();
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($items);
+});
 
-
-//$app->get("/room/{id}/item", function( Response $response, Request $request, $args){
-//    $id = $args['id'];
-//    $room = \App\Models\Rooms::find($id);
-//    $ret = $room->items()->get()->toJson();
-//    return $response->write(json_encode($ret, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-//}
-//
-//);
-
-
-$app->get('/room/{id}/roombook', function ($request, $response, $args) {
+$app->get('/rooms/{id}/roombook', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $configuration = \App\Models\Rooms::find($id);

@@ -18,7 +18,7 @@ class Rooms extends Model
 
     public function items()
     {
-        return $this->belongsToMany("\\App\\Models\\Items", 'room_items', 'item_id', 'room_id');
+        return $this->belongsToMany("\\App\\Models\\Items", 'room_items', 'room_id', 'item_id');
     }
 
     public function periods()

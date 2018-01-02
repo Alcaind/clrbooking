@@ -38,7 +38,7 @@
 
                 <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
             </tr>
-            <tr ng-repeat="room in rooms|filter:filter">
+            <tr ng-repeat="room in dp|filter:filter">
                 <td>{{room.id }}</td>
                 <td>{{room.name}}</td>
                 <td>{{room.address }}</td>
@@ -65,56 +65,69 @@
                     <button ng-click="selectRoom(room)" type="button" class="btn btn-primary">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <button ng-click="deleteRoom(room)" type="button" class="btn btn-primary">
+                    <button ng-click="deleteRooms(room)" type="button" class="btn btn-primary">
                         <span class="glyphicon glyphicon-erase"></span>
+                    </button>
+                    <button ng-click="getItems(room)" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-briefcase"></span>
                     </button>
                 </td>
             </tr>
         </table>
     </div>
 
+    <div>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>descr</th>
+                <th>comments</th>
+                <th>code</th>
+                <th>status</th>
+            </tr>
+            <tr ng-repeat="item in roomItems">
+                <td>{{ item.id }}</td>
+                <td>{{ item.descr }}</td>
+                <td>{{ item.comments }}</td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.status }}</td>
+            </tr>
+        </table>
+    </div>
+
     <div style="padding: 5px">
-        <input type="text" ng-model="currentRoom.id" class="form-control" placeholder="id" ng-disabled="true"
+        <input type="text" ng-model="item.id" class="form-control" placeholder="id" ng-disabled="true"
                style="padding: 5px">
-        <input type="text" ng-model="currentRoom.name" class="form-control" placeholder="name" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.address" class="form-control" placeholder="address"
+        <input type="text" ng-model="item.name" class="form-control" placeholder="name" style="padding: 5px">
+        <input type="text" ng-model="item.address" class="form-control" placeholder="address" style="padding: 5px">
+        <input type="text" ng-model="item.building" class="form-control" placeholder="building" style="padding: 5px">
+        <input type="text" ng-model="item.floor" class="form-control" placeholder="floor" style="padding: 5px">
+        <input type="text" ng-model="item.status" class="form-control" placeholder="status" style="padding: 5px">
+        <input type="text" ng-model="item.active" class="form-control" placeholder="active" style="padding: 5px">
+        <input type="text" ng-model="item.destroyed" class="form-control" placeholder="destroyed" style="padding: 5px">
+        <input type="text" ng-model="item.nonexist" class="form-control" placeholder="nonexist" style="padding: 5px">
+        <input type="text" ng-model="item.capasity" class="form-control" placeholder="capasity" style="padding: 5px">
+        <input type="text" ng-model="item.width" class="form-control" placeholder="width" style="padding: 5px">
+        <input type="text" ng-model="item.height" class="form-control" placeholder="height" style="padding: 5px">
+        <input type="text" ng-model="item.xoros" class="form-control" placeholder="xoros" style="padding: 5px">
+        <input type="text" ng-model="item.exams_capasity" class="form-control" placeholder="exams_capasity"
                style="padding: 5px">
-        <input type="text" ng-model="currentRoom.building" class="form-control" placeholder="building"
+        <input type="text" ng-model="item.capasity_categ" class="form-control" placeholder="capasity_categ"
                style="padding: 5px">
-        <input type="text" ng-model="currentRoom.floor" class="form-control" placeholder="floor" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.status" class="form-control" placeholder="status" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.active" class="form-control" placeholder="active" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.destroyed" class="form-control" placeholder="destroyed"
-               style="padding: 5px">
-        <input type="text" ng-model="currentRoom.nonexist" class="form-control" placeholder="nonexist"
-               style="padding: 5px">
-        <input type="text" ng-model="currentRoom.capasity" class="form-control" placeholder="capasity"
-               style="padding: 5px">
-        <input type="text" ng-model="currentRoom.width" class="form-control" placeholder="width" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.height" class="form-control" placeholder="height" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.xoros" class="form-control" placeholder="xoros" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.exams_capasity" class="form-control" placeholder="exams_capasity"
-               style="padding: 5px">
-        <input type="text" ng-model="currentRoom.capasity_categ" class="form-control" placeholder="capasity_categ"
-               style="padding: 5px">
-        <input type="text" ng-model="currentRoom.tm_owner" class="form-control" placeholder="tm_owner"
-               style="padding: 5px">
-        <input type="text" ng-model="currentRoom.dt" class="form-control" placeholder="dt" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.stat_comm" class="form-control" placeholder="stat_comm"
-               style="padding: 5px">
-        <input type="text" ng-model="currentRoom.conf_id" class="form-control" placeholder="conf_id"
-               style="padding: 5px">
-        <input type="text" ng-model="currentRoom.type" class="form-control" placeholder="type" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.use_id" class="form-control" placeholder="use_id" style="padding: 5px">
-        <input type="text" ng-model="currentRoom.use_str" class="form-control" placeholder="use_str"
-               style="padding: 5px">
+        <input type="text" ng-model="item.tm_owner" class="form-control" placeholder="tm_owner" style="padding: 5px">
+        <input type="text" ng-model="item.dt" class="form-control" placeholder="dt" style="padding: 5px">
+        <input type="text" ng-model="item.stat_comm" class="form-control" placeholder="stat_comm" style="padding: 5px">
+        <input type="text" ng-model="item.conf_id" class="form-control" placeholder="conf_id" style="padding: 5px">
+        <input type="text" ng-model="item.type" class="form-control" placeholder="type" style="padding: 5px">
+        <input type="text" ng-model="item.use_id" class="form-control" placeholder="use_id" style="padding: 5px">
+        <input type="text" ng-model="item.use_str" class="form-control" placeholder="use_str" style="padding: 5px">
 
 
-        <button type="button" class="btn btn-primary" ng-click="updateRoom()" style="padding: 5px"
-                ng-if="currentRoom.id>0">Upd Rooms
+        <button type="button" class="btn btn-primary" ng-click="updateRooms(item)" style="padding: 5px"
+                ng-if="item.id>0">Upd Rooms
         </button>
-        <button type="button" class="btn btn-primary" ng-click="insertRoom()" style="padding: 5px"
-                ng-if="currentRoom.name && !currentRoom.id">Save Rooms
+        <button type="button" class="btn btn-primary" ng-click="saveRoom(item)" style="padding: 5px"
+                ng-if="item.name && !item.id">Save Rooms
         </button>
     </div>
 </div>
