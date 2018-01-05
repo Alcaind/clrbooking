@@ -2,7 +2,8 @@
 
 angular.module('Requests', [
     'MainComponents',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ApiModules'
 ]).controller('RequestsController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.requests = [];

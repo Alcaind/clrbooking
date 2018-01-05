@@ -2,60 +2,93 @@
 <div id="users_main">
     <h1> Users </h1>
     <div>total users : {{dp.length}}</div>
-    <div id="options_div" style="padding: 5px">
+    <div id="options_div" style="padding: 5px" class="col-sm-4">
         <button type="button" class="btn btn-primary" ng-click="getUsers()">Get Users</button>
         <button type="button" class="btn btn-primary" ng-click="newUser()">New User</button>
-        <input type="text" ng-model="filter" class="form-control" placeholder="search" style="padding: 5px; width: 50%">
-        <span class="glyphicon glyphicon-search"></span>
     </div>
 
-    <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto">
-        <table>
-            <tr>
-                <th>id</th>
-                <th>tm_id</th>
-                <th>fname</th>
-                <th>sname</th>
-                <th>phone</th>
-                <th>em_main</th>
-                <th>em_sec</th>
-                <th>em_pant</th>
-                <th>cat_id</th>
-                <th>comments</th>
-                <th>user</th>
-                <!--<th>hash</th>-->
-                <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
-            </tr>
-            <tr ng-repeat="user in dp|filter:filter" ng-click="selectUser(user);" style="cursor: pointer"
-                ng-class="{selected: user.id === item.id}">
-                <td>{{ user.id }}</td>
-                <td>{{ user.tm_id }}</td>
-                <td>{{ user.fname }}</td>
-                <td>{{ user.sname}}</td>
-                <td>{{ user.phone}}</td>
-                <td>{{ user.em_main}}</td>
-                <td>{{ user.em_sec}}</td>
-                <td>{{ user.em_pant}}</td>
-                <td>{{ user.cat_id}}</td>
-                <td>{{ user.comments}}</td>
-                <td>{{ user.user}}</td>
-                <!--<td>{{user.hash}}</td>-->
-                <td>
-                    <button ng-click="selectUser(user);" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button ng-click="deleteUser(user)" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-erase"></span>
-                    </button>
-                    <button ng-click="getRoles(user)" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-briefcase"></span>
-                    </button>
-                </td>
-            </tr>
-        </table>
+    <!--search bar and filtering !!!!!!!trial!!!!!!!-->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="input-group">
+                    <div class="input-group-btn search-panel">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="search_concept">Filter by</span> <span class="caret"></span>
+                        </button>
+                        <!-- den kanei tipota!!!! so far -->
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="">Id</a></li>
+                            <li><a href="">Name</a></li>
+                            <li><a href="">E-mail</a></li>
+                            <li><a href="">Book-Request</a></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" name="search_param" value="all" id="search_param">
+                    <input type="text" ng-model="filter" class="form-control" name="x" placeholder="Search term...">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span
+                            class="glyphicon glyphicon-search"></span></button>
+                </span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div>
+    <div ng-if="viewState['mainTable']" class="myTableHolder ">
+        <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto">
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>tm_id</th>
+                    <th>fname</th>
+                    <th>sname</th>
+                    <th>phone</th>
+                    <th>em_main</th>
+                    <th>em_sec</th>
+                    <th>em_pant</th>
+                    <th>cat_id</th>
+                    <th>comments</th>
+                    <th>user</th>
+                    <!--<th>hash</th>-->
+                    <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
+                </tr>
+                <tr ng-repeat="user in dp|filter:filter" style="cursor: pointer"
+                    ng-class="{selected: user.id === item.id}">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.tm_id }}</td>
+                    <td>{{ user.fname }}</td>
+                    <td>{{ user.sname}}</td>
+                    <td>{{ user.phone}}</td>
+                    <td>{{ user.em_main}}</td>
+                    <td>{{ user.em_sec}}</td>
+                    <td>{{ user.em_pant}}</td>
+                    <td>{{ user.cat_id}}</td>
+                    <td>{{ user.comments}}</td>
+                    <td>{{ user.user}}</td>
+                    <!--<td>{{user.hash}}</td>-->
+                    <td>
+                        <button ng-click="selectUser(user);" type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button ng-click="deleteUser(user)" type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-erase"></span>
+                        </button>
+                        <button ng-click="getRoles(user)" type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-briefcase"></span>
+                        </button>
+                        <button ng-click="getRequests(user)" type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-globe"></span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div ng-if="viewState['roles']">
+        <button ng-click="showState('mainTable',true)"> <-</button>
         <table>
             <tr>
                 <th>id</th>
@@ -70,20 +103,57 @@
         </table>
     </div>
 
-    <div style="padding: 5px">
+    <div ng-if="viewState['requests']">
+        <button ng-click="showState('mainTable',true)"> <-</button>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>req_dt</th>
+                <th>user_id</th>
+                <th>descr</th>
+                <th>period</th>
+                <th>ps_id</th>
+                <th>teacher</th>
+                <th>from_book</th>
+                <th>class_use</th>
+                <th>links</th>
+                <th>fromdt</th>
+                <th>todt</th>
+                <th>protocol_id</th>
+                <th>req_stat</th>
+            </tr>
+            <tr ng-repeat="request in uRequest|filter:filter">
+                <td>{{ request.id }}</td>
+                <td>{{ request.req_dt }}</td>
+                <td>{{ request.user_id }}</td>
+                <td>{{ request.descr }}</td>
+                <td>{{ request.period }}</td>
+                <td>{{ request.ps_id }}</td>
+                <td>{{ request.teacher }}</td>
+                <td>{{ request.from_book }}</td>
+                <td>{{ request.class_use }}</td>
+                <td>{{ request.links }}</td>
+                <td>{{ request.fromdt }}</td>
+                <td>{{ request.todt }}</td>
+                <td>{{ request.protocol_id }}</td>
+                <td>{{ request.req_stat }}</td>
+
+            </tr>
+        </table>
+    </div>
+
+    <div style="padding: 5px" ng-if="viewState['profile']">
+        <button ng-click="showState('mainTable',true)"> <-</button>
         <input type="text" ng-model="item.id" class="form-control" placeholder="id" ng-disabled="true"
                style="padding: 5px">
         <input type="text" ng-model="item.tm_id" class="form-control" placeholder="tm_id" style="padding: 5px">
         <input type="text" ng-model="item.fname" class="form-control" placeholder="fname" style="padding: 5px">
         <input type="text" ng-model="item.sname" class="form-control" placeholder="sname" style="padding: 5px">
-        <input type="text" ng-model="item.em_main" class="form-control" placeholder="em_main"
-               style="padding: 5px">
+        <input type="text" ng-model="item.em_main" class="form-control" placeholder="em_main" style="padding: 5px">
         <input type="text" ng-model="item.em_sec" class="form-control" placeholder="em_sec" style="padding: 5px">
-        <input type="text" ng-model="item.em_pant" class="form-control" placeholder="em_pant"
-               style="padding: 5px">
+        <input type="text" ng-model="item.em_pant" class="form-control" placeholder="em_pant" style="padding: 5px">
         <input type="text" ng-model="item.cat_id" class="form-control" placeholder="cat_id" style="padding: 5px">
-        <input type="text" ng-model="item.comments" class="form-control" placeholder="commetns"
-               style="padding: 5px">
+        <input type="text" ng-model="item.comments" class="form-control" placeholder="commetns" style="padding: 5px">
         <input type="text" ng-model="item.user" class="form-control" placeholder="user" style="padding: 5px">
         <input type="password" ng-model="item.hast" class="form-control" placeholder="hash" style="padding: 5px">
 

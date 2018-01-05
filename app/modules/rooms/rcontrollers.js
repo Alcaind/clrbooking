@@ -3,7 +3,7 @@
 angular.module('Rooms', [
     'MainComponents',
     'ui.bootstrap',
-    'ApiModules'
+    'ApiModules',
 ]).controller('RoomsController', ['$scope', 'MakeModal', '$http', 'api', function ($scope, MakeModal, $http, api) {
 
     $scope.apiResults = [];
@@ -11,7 +11,6 @@ angular.module('Rooms', [
     $scope.item = {};
     $scope.method = '';
     $scope.roomItems = [];
-
 
     $scope.roomsApi = function (url, method, data, successCallback, errorCallback) {
 
@@ -82,7 +81,7 @@ angular.module('Rooms', [
             type: "",
             use_id: "",
             use_str: ""
-        }
+        };
     };
 
     $scope.getRooms = function () {
