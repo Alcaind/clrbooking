@@ -4,7 +4,7 @@ angular.module('Users', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules'
-]).controller('UsersController', ['$scope', 'MakeModal', '$http', 'api', function ($scope, MakeModal, $http, api) {
+]).controller('UsersController', ['$scope', 'MakeModal', '$http', 'api', 'orderByFilter', function ($scope, MakeModal, $http, api, orderBy) {
 
     $scope.apiResults = [];
     $scope.dp = [];
@@ -149,14 +149,21 @@ angular.module('Users', [
 
     };
 }])
+// -------------------------------------------------------------------------------------------
+    .controller('OrderByController', ['$scope', 'orderByFilter', function ($scope, orderBy) {
 
-// $(document).ready(function(e){
-//     $('.search-panel .dropdown-menu').find('a').click(function(e) {
-//         e.preventDefault();
-//         var param = $(this).attr("href").replace("#","");
-//         var concept = $(this).text();
-//         $('.search-panel span#search_concept').text(concept);
-//         $('.input-group #search_param').val(param);
-//     });
-// })
+        $scope.propertyName = 'fname';
+        $scope.reverse = true;
+        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
+
+        $scope.sortBy = function (propertyName) {
+            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+                ? !$scope.reverse : false;
+            $scope.propertyName = propertyName;
+            $scope.dp = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
+        };
+
+    }])
+
+
 ;

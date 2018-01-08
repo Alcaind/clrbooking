@@ -24,3 +24,12 @@ table tr:nth-child(even) {
     background-color: #ffffff;
 }
 
+.sortorder:after {
+    content: '\25b2';
+    /*BLACK UP-POINTING TRIANGLE*/
+}
+
+.sortorder.reverse:after {
+    content: '\25bc';
+    /*BLACK DOWN-POINTING TRIANGLE*/
+}

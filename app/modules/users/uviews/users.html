@@ -6,50 +6,60 @@
         <button type="button" class="btn btn-primary" ng-click="getUsers()">Get Users</button>
         <button type="button" class="btn btn-primary" ng-click="newUser()">New User</button>
     </div>
-
-    <!--search bar and filtering !!!!!!!trial!!!!!!!-->
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-8 col-xs-offset-2">
-                <div class="input-group">
-                    <div class="input-group-btn search-panel">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <span id="search_concept">Filter by</span> <span class="caret"></span>
-                        </button>
-                        <!-- den kanei tipota!!!! so far -->
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="">Id</a></li>
-                            <li><a href="">Name</a></li>
-                            <li><a href="">E-mail</a></li>
-                            <li><a href="">Book-Request</a></li>
-                        </ul>
-                    </div>
-                    <input type="hidden" name="search_param" value="all" id="search_param">
-                    <input type="text" ng-model="filter" class="form-control" name="x" placeholder="Search term...">
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span
-                            class="glyphicon glyphicon-search"></span></button>
-                </span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div ng-if="viewState['mainTable']" class="myTableHolder ">
-        <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto">
-            <table>
+        <input type="text" ng-model="filter" class="form-control" placeholder="search" style="padding: 5px; width: 50%">
+        <span class="glyphicon glyphicon-search"></span>
+
+        <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto" ng-controller="OrderByController">
+
+            <table class="sorttable">
                 <tr>
-                    <th>id</th>
-                    <th>tm_id</th>
-                    <th>fname</th>
-                    <th>sname</th>
-                    <th>phone</th>
-                    <th>em_main</th>
-                    <th>em_sec</th>
-                    <th>em_pant</th>
-                    <th>cat_id</th>
-                    <th>comments</th>
-                    <th>user</th>
+                    <th>ID</th>
+                    <th>
+                        <button ng-click="sortBy('tm_id')">tm_id</button>
+                        <span class="sortorder" ng-show="propertyName === 'tm_id'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('fname')">fname</button>
+                        <span class="sortorder" ng-show="propertyName === 'fname'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('sname')">sname</button>
+                        <span class="sortorder" ng-show="propertyName === 'sname'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('phone')">phone</button>
+                        <span class="sortorder" ng-show="propertyName === 'phone'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('em_main')">em_main</button>
+                        <span class="sortorder" ng-show="propertyName === 'em_main'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('em_sec')">em_sec</button>
+                        <span class="sortorder" ng-show="propertyName === 'em_sec'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('em_pant')">em_pant</button>
+                        <span class="sortorder" ng-show="propertyName === 'em_pant'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('cat_id')">cat_id</button>
+                        <span class="sortorder" ng-show="propertyName === 'cat_id'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('comments')">comments</button>
+                        <span class="sortorder" ng-show="propertyName === 'comments'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('user')">user</button>
+                        <span class="sortorder" ng-show="propertyName === 'user'" ng-class="{reverse: reverse}"></span>
+                    </th>
                     <!--<th>hash</th>-->
                     <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
                 </tr>
@@ -88,7 +98,7 @@
 
 
     <div ng-if="viewState['roles']">
-        <button ng-click="showState('mainTable',true)"> <-</button>
+        <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
         <table>
             <tr>
                 <th>id</th>
@@ -104,7 +114,7 @@
     </div>
 
     <div ng-if="viewState['requests']">
-        <button ng-click="showState('mainTable',true)"> <-</button>
+        <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
         <table>
             <tr>
                 <th>id</th>
@@ -143,19 +153,105 @@
     </div>
 
     <div style="padding: 5px" ng-if="viewState['profile']">
-        <button ng-click="showState('mainTable',true)"> <-</button>
-        <input type="text" ng-model="item.id" class="form-control" placeholder="id" ng-disabled="true"
-               style="padding: 5px">
-        <input type="text" ng-model="item.tm_id" class="form-control" placeholder="tm_id" style="padding: 5px">
-        <input type="text" ng-model="item.fname" class="form-control" placeholder="fname" style="padding: 5px">
-        <input type="text" ng-model="item.sname" class="form-control" placeholder="sname" style="padding: 5px">
-        <input type="text" ng-model="item.em_main" class="form-control" placeholder="em_main" style="padding: 5px">
-        <input type="text" ng-model="item.em_sec" class="form-control" placeholder="em_sec" style="padding: 5px">
-        <input type="text" ng-model="item.em_pant" class="form-control" placeholder="em_pant" style="padding: 5px">
-        <input type="text" ng-model="item.cat_id" class="form-control" placeholder="cat_id" style="padding: 5px">
-        <input type="text" ng-model="item.comments" class="form-control" placeholder="commetns" style="padding: 5px">
-        <input type="text" ng-model="item.user" class="form-control" placeholder="user" style="padding: 5px">
-        <input type="password" ng-model="item.hast" class="form-control" placeholder="hash" style="padding: 5px">
+        <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
+        <!--<input type="text" ng-model="item.id" class="form-control" placeholder="id" ng-disabled="true" style="padding: 5px">-->
+        <!--<input type="text" ng-model="item.tm_id" class="form-control" placeholder="tm_id" style="padding: 5px">-->
+        <!--<input type="text" ng-model="item.fname" class="form-control" placeholder="fname" style="padding: 5px">-->
+        <!--<input type="text" ng-model="item.sname" class="form-control" placeholder="sname" style="padding: 5px">-->
+        <!--<input type="text" ng-model="item.em_main" class="form-control" placeholder="em_main" style="padding: 5px">-->
+        <!--<input type="text" ng-model="item.em_sec" class="form-control" placeholder="em_sec" style="padding: 5px">-->
+        <!--<input type="text" ng-model="item.em_pant" class="form-control" placeholder="em_pant" style="padding: 5px">-->
+        <!--<input type="text" ng-model="item.cat_id" class="form-control" placeholder="cat_id" style="padding: 5px">-->
+        <!--<input type="text" ng-model="item.comments" class="form-control" placeholder="commetns" style="padding: 5px">-->
+        <!--<input type="text" ng-model="item.user" class="form-control" placeholder="user" style="padding: 5px">-->
+        <!--<input type="password" ng-model="item.hash" class="form-control" placeholder="hash" style="padding: 5px">-->
+
+        <form class="form-horizontal" ng-submit="submitForm()" role="form">
+            <div class="form-group">
+                <label for="id" class="col-sm-3 control-label">ID</label>
+                <div class="col-sm-6">
+                    <input type="number" id="id" class="form-control" ng-disabled="true"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <!--TODO dropdown wanna be-->
+            <div class="form-group">
+                <label for="tm_id" class="col-sm-3 control-label">tm_id*</label>
+                <div class="col-sm-6">
+                    <input type="number" id="tm_id" class="form-control" ng-model="item.tm_id"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="fname" class="col-sm-3 control-label">First Name*</label>
+                <div class="col-sm-6">
+                    <input type="text" id="fname" class="form-control" ng-model="item.fname"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="form-group">
+                <label for="sname" class="col-sm-3 control-label">Last Name*</label>
+                <div class="col-sm-6">
+                    <input type="text" id="sname" class="form-control" ng-model="item.sname"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="form-group">
+                <label for="em_main" class="col-sm-3 control-label">E-Mail_Main*</label>
+                <div class="col-sm-6">
+                    <input type="email" id="em_main" class="form-control" ng-model="item.em_main"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="form-group">
+                <label for="em_sec" class="col-sm-3 control-label">E-Mail_Secondary</label>
+                <div class="col-sm-6">
+                    <input type="email" id="em_sec" class="form-control" ng-model="item.em_sec"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="form-group">
+                <label for="em_pant" class="col-sm-3 control-label">E-Mail_Panteiou</label>
+                <div class="col-sm-6">
+                    <input type="email" id="em_pant" class="form-control" ng-model="item.em_pant"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="form-group">
+                <label for="cat_id" class="col-sm-3 control-label">cat_id</label>
+                <div class="col-sm-6">
+                    <input type="text" id="cat_id" class="form-control" ng-model="item.cat_id"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="form-group">
+                <label for="comments" class="col-sm-3 control-label">Comments</label>
+                <div class="col-sm-6">
+                    <textarea name="message" style="width:200px; height:600px;" id="comments" class="form-control"
+                              ng-model="item.comments"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="form-group">
+                <label for="user" class="col-sm-3 control-label">UserName</label>
+                <div class="col-sm-6">
+                    <input type="text" id="user" class="form-control" ng-model="item.user"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="form-group">
+                <label for="hash" class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-6">
+                    <input type="password" id="hash" class="form-control" ng-model="item.hash"/>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+
+            <input type="submit" value="Save" class="btn btn-primary col-sm-offset-3"/>
+            <input type="reset" value="Reset" ng-click="resetForm()" class="btn"/> <br/>
+        </form>
+
 
         <button type="button" class="btn btn-primary" ng-click="updateUser(item)" style="padding: 5px"
                 ng-if="item.id>0">Upd User
