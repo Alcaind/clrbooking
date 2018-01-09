@@ -24,6 +24,7 @@ table tr:nth-child(even) {
     background-color: #ffffff;
 }
 
+/*# sourceMappingURL=components.css.map */
 .sortorder:after {
     content: '\25b2';
     /*BLACK UP-POINTING TRIANGLE*/

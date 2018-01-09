@@ -148,22 +148,18 @@ angular.module('Users', [
         $scope.usersApi(undefined, 'POST', item);
 
     };
+
+    $scope.propertyName = 'fname';
+    $scope.reverse = true;
+    $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
+
+    $scope.sortBy = function (propertyName) {
+        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+            ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
+        //$scope.dp = orderBy($scope.dp, $scope.propertyName, $scope.reverse); ginetai xrhsh eswterika sto html
+    };
+
 }])
-// -------------------------------------------------------------------------------------------
-    .controller('OrderByController', ['$scope', 'orderByFilter', function ($scope, orderBy) {
-
-        $scope.propertyName = 'fname';
-        $scope.reverse = true;
-        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
-
-        $scope.sortBy = function (propertyName) {
-            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-                ? !$scope.reverse : false;
-            $scope.propertyName = propertyName;
-            $scope.dp = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
-        };
-
-    }])
-
 
 ;
