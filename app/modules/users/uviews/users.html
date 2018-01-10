@@ -1,184 +1,186 @@
 <navmenu></navmenu>
 <div id="users_main">
-    <h1> Users </h1>
-    <div>total users : {{dp.length}}</div>
-    <div id="options_div" style="padding: 5px" class="col-sm-4">
-        <button type="button" class="btn btn-primary" ng-click="getUsers()">Get Users</button>
-        <button type="button" class="btn btn-primary" ng-click="newUser()">New User</button>
-    </div>
-    <div ng-if="viewState['mainTable']" class="myTableHolder ">
-        <input type="text" ng-model="filter" class="form-control" placeholder="search" style="padding: 5px; width: 50%">
-        <span class="glyphicon glyphicon-search"></span>
+    <div class="innertube">
+        <h1> Users </h1>
+        <div>total users : {{dp.length}}</div>
+        <div id="options_div" style="padding: 5px" class="col-sm-4">
+            <button type="button" class="btn btn-primary" ng-click="getUsers()">Get Users</button>
+            <button type="button" class="btn btn-primary" ng-click="newUser()">New User</button>
+        </div>
+        <div ng-if="viewState['mainTable']" class="myTableHolder ">
+            <input type="text" ng-model="filter" class="form-control" placeholder="search" style="padding: 5px; width: 50%">
+            <span class="glyphicon glyphicon-search"></span>
 
-        <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto">
+            <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto">
 
-            <table class="sorttable">
+                <table class="sorttable">
+                    <tr>
+                        <th>ID</th>
+                        <th>
+                            <button ng-click="sortBy('tm_id')">tm_id</button>
+                            <span class="sortorder" ng-show="propertyName === 'tm_id'" ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button ng-click="sortBy('fname')">fname</button>
+                            <span class="sortorder" ng-show="propertyName === 'fname'" ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button ng-click="sortBy('sname')">sname</button>
+                            <span class="sortorder" ng-show="propertyName === 'sname'" ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button ng-click="sortBy('phone')">phone</button>
+                            <span class="sortorder" ng-show="propertyName === 'phone'" ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button ng-click="sortBy('em_main')">em_main</button>
+                            <span class="sortorder" ng-show="propertyName === 'em_main'"
+                                  ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button ng-click="sortBy('em_sec')">em_sec</button>
+                            <span class="sortorder" ng-show="propertyName === 'em_sec'"
+                                  ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button ng-click="sortBy('em_pant')">em_pant</button>
+                            <span class="sortorder" ng-show="propertyName === 'em_pant'"
+                                  ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button ng-click="sortBy('cat_id')">cat_id</button>
+                            <span class="sortorder" ng-show="propertyName === 'cat_id'"
+                                  ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button ng-click="sortBy('comments')">comments</button>
+                            <span class="sortorder" ng-show="propertyName === 'comments'"
+                                  ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button ng-click="sortBy('user')">user</button>
+                            <span class="sortorder" ng-show="propertyName === 'user'" ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <!--<th>hash</th>-->
+                        <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
+                    </tr>
+                    <tr ng-repeat="user in dp|filter:filter|orderBy:propertyName:reverse" style="cursor: pointer"
+                        ng-class="{selected: user.id === item.id}">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.tm_id }}</td>
+                        <td>{{ user.fname }}</td>
+                        <td>{{ user.sname}}</td>
+                        <td>{{ user.phone}}</td>
+                        <td>{{ user.em_main}}</td>
+                        <td>{{ user.em_sec}}</td>
+                        <td>{{ user.em_pant}}</td>
+                        <td>{{ user.cat_id}}</td>
+                        <td>{{ user.comments}}</td>
+                        <td>{{ user.user}}</td>
+                        <!--<td>{{user.hash}}</td>-->
+                        <td>
+                            <button ng-click="selectUser(user);" type="button" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button ng-click="deleteUser(user)" type="button" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-erase"></span>
+                            </button>
+                            <button ng-click="getRoles(user)" type="button" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-briefcase"></span>
+                            </button>
+                            <button ng-click="getRequests(user)" type="button" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-globe"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <div ng-if="viewState['roles']">
+            <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
+            <table>
                 <tr>
-                    <th>ID</th>
-                    <th>
-                        <button ng-click="sortBy('tm_id')">tm_id</button>
-                        <span class="sortorder" ng-show="propertyName === 'tm_id'" ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button ng-click="sortBy('fname')">fname</button>
-                        <span class="sortorder" ng-show="propertyName === 'fname'" ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button ng-click="sortBy('sname')">sname</button>
-                        <span class="sortorder" ng-show="propertyName === 'sname'" ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button ng-click="sortBy('phone')">phone</button>
-                        <span class="sortorder" ng-show="propertyName === 'phone'" ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button ng-click="sortBy('em_main')">em_main</button>
-                        <span class="sortorder" ng-show="propertyName === 'em_main'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button ng-click="sortBy('em_sec')">em_sec</button>
-                        <span class="sortorder" ng-show="propertyName === 'em_sec'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button ng-click="sortBy('em_pant')">em_pant</button>
-                        <span class="sortorder" ng-show="propertyName === 'em_pant'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button ng-click="sortBy('cat_id')">cat_id</button>
-                        <span class="sortorder" ng-show="propertyName === 'cat_id'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button ng-click="sortBy('comments')">comments</button>
-                        <span class="sortorder" ng-show="propertyName === 'comments'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button ng-click="sortBy('user')">user</button>
-                        <span class="sortorder" ng-show="propertyName === 'user'" ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <!--<th>hash</th>-->
-                    <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
+                    <th>id</th>
+                    <th>role</th>
+                    <th>descr</th>
                 </tr>
-                <tr ng-repeat="user in dp|filter:filter|orderBy:propertyName:reverse" style="cursor: pointer"
-                    ng-class="{selected: user.id === item.id}">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.tm_id }}</td>
-                    <td>{{ user.fname }}</td>
-                    <td>{{ user.sname}}</td>
-                    <td>{{ user.phone}}</td>
-                    <td>{{ user.em_main}}</td>
-                    <td>{{ user.em_sec}}</td>
-                    <td>{{ user.em_pant}}</td>
-                    <td>{{ user.cat_id}}</td>
-                    <td>{{ user.comments}}</td>
-                    <td>{{ user.user}}</td>
-                    <!--<td>{{user.hash}}</td>-->
-                    <td>
-                        <button ng-click="selectUser(user);" type="button" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button ng-click="deleteUser(user)" type="button" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-erase"></span>
-                        </button>
-                        <button ng-click="getRoles(user)" type="button" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-briefcase"></span>
-                        </button>
-                        <button ng-click="getRequests(user)" type="button" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-globe"></span>
-                        </button>
-                    </td>
+                <tr ng-repeat="role in uRoles">
+                    <td>{{ role.id }}</td>
+                    <td>{{ role.role }}</td>
+                    <td>{{ role.descr }}</td>
                 </tr>
             </table>
         </div>
+
+        <div ng-if="viewState['requests']">
+            <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>req_dt</th>
+                    <th>user_id</th>
+                    <th>descr</th>
+                    <th>period</th>
+                    <th>ps_id</th>
+                    <th>teacher</th>
+                    <th>from_book</th>
+                    <th>class_use</th>
+                    <th>links</th>
+                    <th>fromdt</th>
+                    <th>todt</th>
+                    <th>protocol_id</th>
+                    <th>req_stat</th>
+                </tr>
+                <tr ng-repeat="request in uRequest|filter:filter">
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.req_dt }}</td>
+                    <td>{{ request.user_id }}</td>
+                    <td>{{ request.descr }}</td>
+                    <td>{{ request.period }}</td>
+                    <td>{{ request.ps_id }}</td>
+                    <td>{{ request.teacher }}</td>
+                    <td>{{ request.from_book }}</td>
+                    <td>{{ request.class_use }}</td>
+                    <td>{{ request.links }}</td>
+                    <td>{{ request.fromdt }}</td>
+                    <td>{{ request.todt }}</td>
+                    <td>{{ request.protocol_id }}</td>
+                    <td>{{ request.req_stat }}</td>
+
+                </tr>
+            </table>
+        </div>
+
+        <div ng-if="viewState['profile']">
+            <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
+            <form><br>
+                <label>ID:<input type="text" ng-model="item.id" class="form-control" placeholder="id"
+                                 ng-disabled="true"></label><br>
+                <label>TM_ID:<input type="text" ng-model="item.tm_id" class="form-control" placeholder="tm_id"></label><br>
+                <label>First Name:<input type="text" ng-model="item.fname" class="form-control" placeholder="fname"></label><br>
+                <label>Last Name:<input type="text" ng-model="item.sname" class="form-control"
+                                        placeholder="sname"></label><br>
+                <label>E-mail:<input type="text" ng-model="item.em_main" class="form-control" placeholder="em_main"></label><br>
+                <label>E-mail 2:<input type="text" ng-model="item.em_sec" class="form-control" placeholder="em_sec"></label><br>
+                <label>E-mail Panteiou:<input type="text" ng-model="item.em_pant" class="form-control"
+                                              placeholder="em_pant"></label><br>
+                <label>CAT_ID:<input type="text" ng-model="item.cat_id" class="form-control"
+                                     placeholder="cat_id"></label><br>
+                <label>Comments:<input type="text" ng-model="item.comments" class="form-control"
+                                       placeholder="commetns"></label><br>
+                <label>UserName:<input type="text" ng-model="item.user" class="form-control" placeholder="user"></label><br>
+                <label>Password:<input type="password" ng-model="item.hash" class="form-control" placeholder="hash"></label><br>
+
+                <button type="button" class="btn btn-primary" ng-click="updateUser(item)" style="padding: 5px"
+                        ng-if="item.id>0">Upd User
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="saveUser(item)" style="padding: 5px"
+                        ng-if="item.tm_id && !item.id">Save User
+                </button>
+            </form>
+        </div>
+
     </div>
-
-
-    <div ng-if="viewState['roles']">
-        <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
-        <table>
-            <tr>
-                <th>id</th>
-                <th>role</th>
-                <th>descr</th>
-            </tr>
-            <tr ng-repeat="role in uRoles">
-                <td>{{ role.id }}</td>
-                <td>{{ role.role }}</td>
-                <td>{{ role.descr }}</td>
-            </tr>
-        </table>
-    </div>
-
-    <div ng-if="viewState['requests']">
-        <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
-        <table>
-            <tr>
-                <th>id</th>
-                <th>req_dt</th>
-                <th>user_id</th>
-                <th>descr</th>
-                <th>period</th>
-                <th>ps_id</th>
-                <th>teacher</th>
-                <th>from_book</th>
-                <th>class_use</th>
-                <th>links</th>
-                <th>fromdt</th>
-                <th>todt</th>
-                <th>protocol_id</th>
-                <th>req_stat</th>
-            </tr>
-            <tr ng-repeat="request in uRequest|filter:filter">
-                <td>{{ request.id }}</td>
-                <td>{{ request.req_dt }}</td>
-                <td>{{ request.user_id }}</td>
-                <td>{{ request.descr }}</td>
-                <td>{{ request.period }}</td>
-                <td>{{ request.ps_id }}</td>
-                <td>{{ request.teacher }}</td>
-                <td>{{ request.from_book }}</td>
-                <td>{{ request.class_use }}</td>
-                <td>{{ request.links }}</td>
-                <td>{{ request.fromdt }}</td>
-                <td>{{ request.todt }}</td>
-                <td>{{ request.protocol_id }}</td>
-                <td>{{ request.req_stat }}</td>
-
-            </tr>
-        </table>
-    </div>
-
-    <div ng-if="viewState['profile']">
-        <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
-        <form><br>
-            <label>ID:<input type="text" ng-model="item.id" class="form-control" placeholder="id"
-                             ng-disabled="true"></label><br>
-            <label>TM_ID:<input type="text" ng-model="item.tm_id" class="form-control" placeholder="tm_id"></label><br>
-            <label>First Name:<input type="text" ng-model="item.fname" class="form-control" placeholder="fname"></label><br>
-            <label>Last Name:<input type="text" ng-model="item.sname" class="form-control"
-                                    placeholder="sname"></label><br>
-            <label>E-mail:<input type="text" ng-model="item.em_main" class="form-control" placeholder="em_main"></label><br>
-            <label>E-mail 2:<input type="text" ng-model="item.em_sec" class="form-control" placeholder="em_sec"></label><br>
-            <label>E-mail Panteiou:<input type="text" ng-model="item.em_pant" class="form-control"
-                                          placeholder="em_pant"></label><br>
-            <label>CAT_ID:<input type="text" ng-model="item.cat_id" class="form-control"
-                                 placeholder="cat_id"></label><br>
-            <label>Comments:<input type="text" ng-model="item.comments" class="form-control"
-                                   placeholder="commetns"></label><br>
-            <label>UserName:<input type="text" ng-model="item.user" class="form-control" placeholder="user"></label><br>
-            <label>Password:<input type="password" ng-model="item.hash" class="form-control" placeholder="hash"></label><br>
-
-            <button type="button" class="btn btn-primary" ng-click="updateUser(item)" style="padding: 5px"
-                    ng-if="item.id>0">Upd User
-            </button>
-            <button type="button" class="btn btn-primary" ng-click="saveUser(item)" style="padding: 5px"
-                    ng-if="item.tm_id && !item.id">Save User
-            </button>
-        </form>
-    </div>
-
 </div>

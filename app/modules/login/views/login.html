@@ -1,7 +1,6 @@
 <navmenu></navmenu>
-
 <div class="form-bottom">
-    <div style="margin:0px 0px 10px 0px;">
+    <div>
         <uib-progressbar class="progress-striped active" max="200" value="200" type="normal" ng-show="!errorString"><i>γίνεται
             σύνδεση...</i></uib-progressbar>
         <span style="width:100%;color:#ffffff;" ng-show="errorString">{{errorString}}</span>
@@ -17,7 +16,7 @@
                 <input id="password" name="pswd" ng-init="passwordString='password'" type="{{passwordString}}"
                        placeholder="Password..." class="form-control" ng-model="pswd">
                 <span class="input-group-btn">
-				<button type="button" class="btn btn-success" style="background:#337ab7;"
+				<button type="button" class="btn btn-success btn-eye" style="background:#800000;"
                         ng-click="passwordString==='text'?passwordString='password':passwordString='text';errorString='*'+pswd+'*';">
                     <i class="glyphicon glyphicon-eye-open"></i>
                 </button>
@@ -27,7 +26,7 @@
         <button id="loginButton" name="loginButton" class="btn btn-sm" ng-click="login()">Σύνδεση</button>
     </form>
     <div style="margin:0px 0px 10px 0px;text-align: right;">
-    <span style="width:100%;color:#aad0e4 !important;font-size: 12px;">
+    <span style="width:100%;color:rgba(145,0,0,0.55) !important;font-size: 12px;">
         <a target="_blank" href="http://www.livepraktoreio.gr/user/password" class="form-link myLink">Ξέχασα τον Κωδικό μου</a></span>
     </div>
 </div>
