@@ -24,7 +24,7 @@ angular.module('MainComponents', [
 
             $rootScope.inAuthentication = true;
 
-            AuthenticationService.Login('', '', function (response) {
+            /*AuthenticationService.Login('', '', function (response) {
                 $rootScope.inAuthentication = false;
                 if (response === 'fail') {
                     $rootScope.globals = {item: null};
@@ -42,7 +42,7 @@ angular.module('MainComponents', [
                 $rootScope.globals = {item: {}};
                 $rootScope.globals.item = response.data.success;
                 $rootScope.user = $rootScope.globals.item.user;
-            })
+            })*/
         }
     ])
     .directive('navmenu', function () {
@@ -52,7 +52,16 @@ angular.module('MainComponents', [
             templateUrl: 'modules/mainComponents/views/navmenu.html'
         }
     })
-    .controller('NavmenuController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
+    .controller('NavmenuController', ['$scope', '$interval', 'AuthenticationService', '$rootScope', '$location', function ($scope, $interval, AuthenticationService, $rootScope, $location) {
+        $scope.toggleDropdown = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.status.isopen = !$scope.status.isopen;
+        };
+
+        $scope.logout = function () {
+            AuthenticationService.ClearCredentials();
+        }
     }])
 
     .directive('footer', function () {
@@ -96,6 +105,8 @@ angular.module('MainComponents', [
         };
 
     }])
+
+
 ;
 
 

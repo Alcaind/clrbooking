@@ -55,3 +55,13 @@
     color: #fff;
     -moz-border-radius: 4px;
 }
+
+#remembercheck {
+    padding: 1.75em;
+    position: relative;
+    width: 100%;
+    clear: left;
+    width: 100%;
+    color: rgba(145, 0, 0, 0.55) !important;
+    font-size: 12px;
+}

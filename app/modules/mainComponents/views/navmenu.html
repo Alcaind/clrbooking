@@ -1,19 +1,5 @@
-<!--<nav class="topnav navbar navbar-default">-->
-<!--<div class=" navbar-header">-->
-<!--<ul class=" nav navbar-nav navbar-center">-->
-<!--<li><a href="#roles">Roles</a></li>-->
-<!--<li><a href="#users">Users</a></li>-->
-<!--<li><a href="#rooms">Rooms</a></li>-->
-<!--<li><a href="#tms">Tmhmata</a></li>-->
-<!--<li><a href="#kat">Katey8hnseis</a></li>-->
-<!--<li><a href="#requests">Aithmata</a></li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--</nav>-->
-
-
 <nav class="navbarpan navbar navbar-default" role="navigation">
-    <div class="navbar-header">
+    <div class="navbar-header navbarpan">
 
         <button type="button" class="navbar-toggle" ng-init="navCollapsed = true"
                 ng-click="navCollapsed = !navCollapsed">
@@ -22,28 +8,31 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand " href="http://www.panteion.gr/index.php/el/">Panteios</a>
+        <a class="navbar-brand " href="#home">Panteios</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbarpan" ng-class="!navCollapsed && 'in'">
+    <div class="collapse navbar-collapse navbarpan " ng-class="!navCollapsed && 'in'"
+         ng-if="globals.item.username && globals.item.username !== '' && globals.item.authdata">
         <ul class="nav navbar-nav">
-            <li><a href="#roles">Roles</a></li>
+            <li><a href="#roles">Ρόλοι</a></li>
             <li><a href="#users">Users</a></li>
-            <li><a href="#rooms">Rooms</a></li>
-            <li><a href="#tms">Tmhmata</a></li>
-            <li><a href="#kat">Katey8hnseis</a></li>
-            <li><a href="#requests">Aithmata</a></li>
+            <li><a href="#rooms">Αίθουσες</a></li>
+            <li><a href="#tms">Τμήματα</a></li>
+            <li><a href="#kat">Κατευθήνσεις</a></li>
+            <li><a href="#requests">Requests</a></li>
         </ul>
-        <!--<ul class="nav navbar-nav navbar-right">-->
-        <!--<li class="dropdown">-->
-        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
-        <!--<ul class="dropdown-menu">-->
-        <!--<li><a href="#">Profile</a></li>-->
-        <!--<li><a href="#">logOff</a></li>-->
-        <!--</ul>-->
-        <!--</li>-->
-        <!--</ul>-->
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">Settings<b class="caret"></b></a>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+                    <li role="menuitem"><a href="#roles">Profile</a></li>
+                    <li role="menuitem" ng-click="logout()"><a href="#login">LogOff</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </nav>
+
 

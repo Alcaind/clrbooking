@@ -3,14 +3,13 @@
 angular.module('Authentication', ['angular-storage'])
 
     .factory('AuthenticationService',
-        ['Base64', '$http', '$cookieStore', '$rootScope', 'store', 'jwtHelper',
-            function (Base64, $http, $cookieStore, $rootScope, store, jwtHelper) {
+        ['Base64', '$http', '$cookieStore', '$rootScope', 'store', 'jwtHelper', '$location',
+            function (Base64, $http, $cookieStore, $rootScope, store, jwtHelper, $location) {
                 var service = {};
 
                 service.Login = function (username, password, callback) {
                     var app = window.location.href.split('/');
                     var appStr = app[3];
-
 
                     var req = {
                         method: 'POST',
@@ -20,6 +19,12 @@ angular.module('Authentication', ['angular-storage'])
                     $http(req).then(function (response) {
                         store.set('jwt', response.data);
                         store.set('rwt', jwtHelper.decodeToken(response.data.token)["refresh-token"]);
+                        $rootScope.globals = {
+                            item: {
+                                username: username,
+                                authdata: jwtHelper.decodeToken(response.data.token)
+                            }
+                        };
                         callback(response);
                     }, function (response) {
                         callback(response);
@@ -30,13 +35,6 @@ angular.module('Authentication', ['angular-storage'])
                 service.SetCredentials = function (username, password) {
                     var authdata = Base64.encode(username + ':' + password);
 
-                    $rootScope.globals = {
-                        item: {
-                            username: username,
-                            authdata: authdata
-                        }
-                    };
-
                     //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
                     //$cookieStore.put('globals', $rootScope.globals);
                     return 'Basic ' + authdata;
@@ -45,7 +43,28 @@ angular.module('Authentication', ['angular-storage'])
                 service.ClearCredentials = function () {
                     $rootScope.globals = {};
                     $cookieStore.remove('globals');
+                    store.set('jwt', null);
+                    store.set('rwt', null);
                     $http.defaults.headers.common.Authorization = 'Basic ';
+                    $location.path('/login');
+                };
+
+                service.CheckCredentials = function () {
+                    var idToken = store.get('jwt') && store.get('jwt').token != 'undefined' ? store.get('jwt').token : null;
+                    var rfToken = store.get('rwt') && store.get('rwt').token != 'undefined' ? store.get('rwt').token : null;
+
+                    if (!idToken || jwtHelper.isTokenExpired(idToken)) {
+                        $location.path('/login');
+                        return false;
+                    } else {
+                        $rootScope.globals = {
+                            item: {
+                                username: jwtHelper.decodeToken(idToken).sub,
+                                authdata: jwtHelper.decodeToken(idToken)
+                            }
+                        };
+                        return jwtHelper.decodeToken(idToken).sub
+                    }
                 };
 
                 return service;

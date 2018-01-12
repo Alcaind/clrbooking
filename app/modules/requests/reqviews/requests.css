@@ -26,12 +26,10 @@ table tr:nth-child(even) {
 
 .myTableHolder {
     padding: 5px;
-    height: 600px;
     overflow-y: auto;
     text-align: center;
     text-align: -webkit-center;
     text-align: -moz-center;
-
 }
 
 .wrapper {

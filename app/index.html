@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/css/app_async.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="modules/roles/views/home.css"/>
     <link rel="stylesheet" href="modules/login/logincss/login_style.css"/>
     <link rel="stylesheet" href="modules/roles/views/roles.css"/>
     <link rel="stylesheet" href="modules/users/uviews/users.css"/>
@@ -34,8 +35,10 @@
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
         your browser</a> to improve your experience.</p>
     <![endif]-->
+    <navmenu></navmenu>
+    <div class="maincontainer" ng-view></div>
+    <footer></footer>
 
-        <div ng-view></div>
 
     <!-- In productuse use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>-->

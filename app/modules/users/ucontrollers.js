@@ -3,8 +3,12 @@
 angular.module('Users', [
     'MainComponents',
     'ui.bootstrap',
-    'ApiModules'
-]).controller('UsersController', ['$scope', 'MakeModal', '$http', 'api', 'orderByFilter', function ($scope, MakeModal, $http, api, orderBy) {
+    'ApiModules',
+    'Authentication'
+])
+    .controller('UsersController', ['$scope', 'MakeModal', '$http', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, $http, api, orderBy, AuthenticationService) {
+
+        AuthenticationService.CheckCredentials();
 
     $scope.apiResults = [];
     $scope.dp = [];
@@ -31,7 +35,7 @@ angular.module('Users', [
     };
     $scope.viewState = [];
 
-    function intiSates() {
+        function initStates() {
         $scope.viewState['mainTable'] = true;
         $scope.viewState['profile'] = false;
         $scope.viewState['roles'] = false;
@@ -47,7 +51,7 @@ angular.module('Users', [
         }
     }
 
-    intiSates();
+        initStates();
 
     $scope.usersApi = function (url, method, data, successCallback, errorCallback) {
         method = typeof method !== 'undefined' ? method : 'GET';
@@ -96,6 +100,7 @@ angular.module('Users', [
     $scope.getUsers = function () {
         $scope.usersApi(undefined, undefined, undefined, function (results) {
             $scope.dp = results.data;
+            $scope.totalItems = $scope.dp.length;
             $scope.showState('mainTable', true);
         });
     };
@@ -160,6 +165,22 @@ angular.module('Users', [
         //$scope.dp = orderBy($scope.dp, $scope.propertyName, $scope.reverse); ginetai xrhsh eswterika sto html
     };
 
-}])
+        $scope.viewby = 5;
+        $scope.totalItems = 40;
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = $scope.viewby;
+        $scope.maxSize = 5; //Number of pager buttons to show
+        //$scope.totalItems = 0;
 
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.setItemsPerPage = function (num) {
+            $scope.itemsPerPage = num;
+            $scope.currentPage = 1; //reset to first page
+        }
+
+        $scope.getUsers();
+    }])
 ;
