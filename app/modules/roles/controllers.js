@@ -2,7 +2,8 @@
 
 angular.module('Roles', [
     'MainComponents',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'usersProfile'
 ]).controller('RolesController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.roles = [];

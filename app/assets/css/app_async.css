@@ -49,19 +49,20 @@ nav.navbarpan {
 
 nav.navbarpan > div > a.navbar-brand {
     color: #fff;
+    border-style: none;
 }
 
-.navbar-default .navbar-brand:focus {
+.navbar-default .navbar-brand.panteiosbrand:focus {
     color: #800000;
     background-color: #e6e6e6;
 }
 
-.navbar-default .navbar-brand:hover {
+.navbar-default .navbar-brand.panteiosbrand:hover {
     color: #800000;
     background-color: #e6e6e6;
 }
 
-.navbar-default .navbar-brand:active {
+.navbar-default .navbar-brand.panteiosbrand:active {
     color: #800000;
     background-color: #e6e6e6;
 }
@@ -69,6 +70,7 @@ nav.navbarpan > div > a.navbar-brand {
 nav.navbarpan > div > ul.nav.navbar-nav > li > a:hover {
     background-color: #e6e6e6;
     color: #800000;
+
 }
 
 nav.navbarpan > div > ul.nav.navbar-nav > li > a:active {
@@ -82,10 +84,12 @@ nav.navbarpan > div > ul.nav.navbar-nav > li > a:focus {
 }
 
 nav.navbarpan > div > ul.nav.navbar-nav > li > a {
+    border-style: none;
     color: #fff;
 }
 
 nav.navbarpan > div > ul.nav.navbar-nav > li > a > ul > li {
+    border-style: none;
     color: #fff;
 }
 
@@ -130,34 +134,3 @@ footer {
     margin-top: 50px;
     text-align: center;
 }
-
-/*footer :hover{*/
-/*color: #fff !important;*/
-/*}*/
-
-
-/*Use in index_async.html no sure about what*/
-/*.menu {*/
-/*list-style: none;*/
-/*border-bottom: 0.1em solid black;*/
-/*margin-bottom: 2em;*/
-/*padding: 0 0 0.5em;*/
-/*}*/
-
-/*.menu:before {*/
-/*content: "[";*/
-/*}*/
-
-/*.menu:after {*/
-/*content: "]";*/
-/*}*/
-
-/*.menu > li {*/
-/*display: inline;*/
-/*}*/
-
-/*.menu > li + li:before {*/
-/*content: "|";*/
-/*padding-right: 0.3em;*/
-/*}*/
-

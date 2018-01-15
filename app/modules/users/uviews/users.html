@@ -92,6 +92,7 @@
                         <td>{{ user.user}}</td>
                         <!--<td>{{user.hash}}</td>-->
                         <td>
+                            <a href="#/users/{{user.id}}" class="thumb">info</a>
                             <button ng-click="selectUser(user);" type="button" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
@@ -165,35 +166,6 @@
 
                 </tr>
             </table>
-        </div>
-
-        <div ng-if="viewState['profile']">
-            <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
-            <form><br>
-                <label>ID:<input type="text" ng-model="item.id" class="form-control" placeholder="id"
-                                 ng-disabled="true"></label><br>
-                <label>TM_ID:<input type="text" ng-model="item.tm_id" class="form-control" placeholder="tm_id"></label><br>
-                <label>First Name:<input type="text" ng-model="item.fname" class="form-control" placeholder="fname"></label><br>
-                <label>Last Name:<input type="text" ng-model="item.sname" class="form-control"
-                                        placeholder="sname"></label><br>
-                <label>E-mail:<input type="text" ng-model="item.em_main" class="form-control" placeholder="em_main"></label><br>
-                <label>E-mail 2:<input type="text" ng-model="item.em_sec" class="form-control" placeholder="em_sec"></label><br>
-                <label>E-mail Panteiou:<input type="text" ng-model="item.em_pant" class="form-control"
-                                              placeholder="em_pant"></label><br>
-                <label>CAT_ID:<input type="text" ng-model="item.cat_id" class="form-control"
-                                     placeholder="cat_id"></label><br>
-                <label>Comments:<input type="text" ng-model="item.comments" class="form-control"
-                                       placeholder="commetns"></label><br>
-                <label>UserName:<input type="text" ng-model="item.user" class="form-control" placeholder="user"></label><br>
-                <label>Password:<input type="password" ng-model="item.hash" class="form-control" placeholder="hash"></label><br>
-
-                <button type="button" class="btn btn-primary" ng-click="updateUser(item)" style="padding: 5px"
-                        ng-if="item.id>0">Upd User
-                </button>
-                <button type="button" class="btn btn-primary" ng-click="saveUser(item)" style="padding: 5px"
-                        ng-if="item.tm_id && !item.id">Save User
-                </button>
-            </form>
         </div>
 
     </div>

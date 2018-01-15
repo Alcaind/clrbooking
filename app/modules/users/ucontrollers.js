@@ -182,5 +182,22 @@ angular.module('Users', [
         }
 
         $scope.getUsers();
+    }]);
+
+angular.module('usersProfile', [
+    'ngRoute',
+    'ApiModules'
+])
+    .controller('ProfileController', ['$scope', '$routeParams', 'api', function ($scope, $routeParams, api) {
+        if ($routeParams.userId) var itemId =
+            api.apiCall('GET', 'api/public/users/' + $routeParams.userId, function (results) {
+                $scope.item = results.data;
+            });
     }])
-;
+    .component('usersProfile', {
+        templateUrl: 'modules/users/uviews/profile.html',
+        scope: {
+            itemId: '=itemId'
+        },
+        controller: 'ProfileController'
+    });
