@@ -17,12 +17,17 @@ class Users extends Model {
 
     public function roles()
     {
-        return $this->belongsToMany('\\App\\Models\\Roles', 'users_roles', 'role_id', 'user_id');
+        return $this->belongsToMany('\\App\\Models\\Roles', 'users_roles', 'role_id', 'user_id')->withPivot('comment', 'exp_dt', 'dt', 'status');
     }
 
     public function tm()
     {
-        $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
+        return $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
+    }
+
+    public function ucategories()
+    {
+        return $this->belongsTo('\\App\\Models\\Ucategories', 'cat_id');
     }
 
     public function requests()

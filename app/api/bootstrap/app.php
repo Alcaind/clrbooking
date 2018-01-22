@@ -24,6 +24,7 @@ require __DIR__ . '/../src/models/roombook.php';
 require __DIR__ . '/../src/models/roomitem.php';
 require __DIR__ . '/../src/models/roomuse.php';
 require __DIR__ . '/../src/models/usersroles.php';
+require __DIR__ . '/../src/models/ucategories.php';
 
 
 
@@ -91,3 +92,4 @@ require __DIR__ . '/../routes/roombook.php';
 require __DIR__ . '/../routes/roomitem.php';
 require __DIR__ . '/../routes/roomuse.php';
 require __DIR__ . '/../routes/usersroles.php';
+require __DIR__ . '/../routes/ucategories.php';

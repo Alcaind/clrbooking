@@ -1,34 +1,41 @@
 <!--<navmenu></navmenu>-->
 <div class="form-bottom">
-    <div>
-        <uib-progressbar class="progress-striped active" max="200" value="200" type="normal" ng-show="!errorString"><i>γίνεται
-            σύνδεση...</i></uib-progressbar>
-        <span style="width:100%;color:#ffffff;" ng-show="errorString">{{errorString}}</span>
+    <div style="background-color: #9b9c91;padding: 1px 5px 10px 25px;color: #fff;">
+        <h3>Συνδεση στο Αιθουσιολόγιο</h3>
     </div>
-    <form role="form" class="registration-form">
-        <div class="form-group">
-            <label class="sr-only" for="username">Username</label>
-            <input id="username" name="usr" type="text" placeholder="Username..." class="form-control" ng-model="usr">
+    <div style="padding: 25px;background: #e6e6e6;">
+        <div style="text-align: right;padding-bottom: 15px;">
+            <uib-progressbar class="progress-striped active" max="200" value="200" type="normal" ng-show="!errorString">
+                <i>γίνεται
+                    σύνδεση...</i></uib-progressbar>
+            <span style="width:100%;color: #000;" ng-show="errorString">{{errorString}}</span>
         </div>
-        <div class="form-group">
-            <label class="sr-only" for="password">Password</label>
-            <span class="input-group">
-                <input id="password" name="pswd" ng-init="passwordString='password'" type="{{passwordString}}"
-                       placeholder="Password..." class="form-control" ng-model="pswd">
-                <span class="input-group-btn">
-				<button type="button" class="btn btn-success btn-eye" style="background:#800000;"
-                        ng-click="passwordString==='text'?passwordString='password':passwordString='text';errorString='*'+pswd+'*';">
-                    <i class="glyphicon glyphicon-eye-open"></i>
-                </button>
+        <form role="form" class="registration-form">
+            <div class="form-group">
+                <label class="sr-only" for="username">Username</label>
+                <input id="username" name="usr" type="text" placeholder="Username..." class="form-control"
+                       ng-model="usr">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="password">Password</label>
+                <span class="input-group">
+                    <input id="password" name="pswd" ng-init="passwordString='password'" type="{{passwordString}}"
+                           placeholder="Password..." class="form-control" ng-model="pswd">
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-success btn-eye" style="background:#800000;"
+                            ng-click="passwordString==='text'?passwordString='password':passwordString='text';errorString='*'+pswd+'*';">
+                        <i class="glyphicon glyphicon-eye-open"></i>
+                    </button>
+                    </span>
                 </span>
-            </span>
+            </div>
+            <label id="remembercheck" class="checkbox"><input type="checkbox" class="width-full" name="remember_me">
+                Remember me</label>
+            <button id="loginButton" name="loginButton" class="btn btn-sm" ng-click="login()">Σύνδεση</button>
+        </form>
+        <div style="margin:0px 0px 10px 0px;text-align: right;">
+        <span style="width:100%;color:rgba(145,0,0,0.55) !important;font-size: 12px;">
+            <a target="_blank" href="http://www.livepraktoreio.gr/user/password" class="form-link myLink">Ξέχασα τον Κωδικό μου</a></span>
         </div>
-        <label id="remembercheck" class="checkbox"><input type="checkbox" class="width-full" name="remember_me">
-            Remember me</label>
-        <button id="loginButton" name="loginButton" class="btn btn-sm" ng-click="login()">Σύνδεση</button>
-    </form>
-    <div style="margin:0px 0px 10px 0px;text-align: right;">
-    <span style="width:100%;color:rgba(145,0,0,0.55) !important;font-size: 12px;">
-        <a target="_blank" href="http://www.livepraktoreio.gr/user/password" class="form-link myLink">Ξέχασα τον Κωδικό μου</a></span>
     </div>
 </div>

@@ -8,7 +8,7 @@ angular.module('ApiModules', [
 
         factory.apiCall = function (method, url, successCallback, errorCallBack, data, dataProvider, scope) {
             if (method === 'DELETE' || method === 'PUT') {
-                url += '/' + data.id;
+                //url += '/' + data.id;
                 scope.modalMessage = "Are you sure?"
                 var modalInstance = MakeModal.defaultModal('sm', callApi, null, scope);
             } else {

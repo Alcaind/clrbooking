@@ -1,5 +1,5 @@
-#body {
-    background: #e6e6e6;
+body {
+    /*background: #e6e6e6;
     color: #666666;
     font-family: 'RobotoDraft', 'Roboto', sans-serif;
     font-size: 14px;
@@ -11,10 +11,11 @@
     max-height: 100%;
     line-height: 1.5em;
     min-height: 100%;
-    /*position: absolute;*/
+    !*position: absolute;*!
     width: 100%;
     margin-right: auto;
-    margin-left: auto;
+    margin-left: auto;*/
+    background-color: #f3f3f3 !important;
 }
 
 #main {
@@ -45,11 +46,13 @@
 /*ok*/
 nav.navbarpan {
     background-color: #800000;
+    /*background-color: #5d0303;*/
 }
 
 nav.navbarpan > div > a.navbar-brand {
     color: #fff;
     border-style: none;
+    padding: 0px 15px;
 }
 
 .navbar-default .navbar-brand.panteiosbrand:focus {
@@ -118,7 +121,7 @@ nav.navbarpan > div > ul.nav.navbar-nav > li > a:active {
     padding: 0px;
     background-color: #e6e6e6;
     width: 80%;
-    height: 100%;
+    height: calc(100vh - 102px);
     margin-right: auto;
     margin-left: auto;
 }

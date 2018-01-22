@@ -1,172 +1,134 @@
 <div id="users_main">
     <div class="innertube">
-        <h1 style="text-align: center;"> Users </h1>
+        <h2 style="text-align: center;"> Κατάλογος Χρηστών </h2>
 
-        <div ng-if="viewState['mainTable']" class="myTableHolder ">
-            <div id="options_div" style="padding: 5px">
-                <button type="button" class="btn btn-primary" ng-click="getUsers()"><span
-                        class="glyphicon glyphicon-refresh"></span></button>
-                <button type="button" class="btn btn-primary" ng-click="newUser()">+</button>
+        <div style="padding: 15px">
+
+            <div style="display: flex">
+                View <select ng-model="itemsPerPage" ng-change="setItemsPerPage(itemsPerPage)"
+                             ng-options="pg.th as pg.th for pg in pageThresholds"></select> records at a time.
+                <ul uib-pagination boundary-links="true" items-per-page="itemsPerPage" total-items="totalItems"
+                    ng-model="currentPage" num-pages="numPages" class="pagination-sm" previous-text="&lsaquo;"
+                    next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
             </div>
-            <ul uib-pagination boundary-links="true" items-per-page="itemsPerPage" total-items="totalItems"
-                ng-model="currentPage" num-pages="numPages" class="pagination-sm" previous-text="&lsaquo;"
-                next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
-            <!--<ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></ul>-->
-            <div>
-                View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
-                <option>3</option>
-                <option>5</option>
-                <option>10</option>
-                <option>20</option>
-                <option>30</option>
-                <option>40</option>
-                <option>50</option>
-            </select> records at a time.
+            <div style="display: flex">
+                <input type="text" ng-model="filter" class="form-control" placeholder="search"
+                       style="padding: 5px; width: 100%">
+                <button type="button" class="btn btn-primary" ng-click="getUsers()"
+                        style="min-width: 50px;border-radius: 0px;">
+                    <span class="glyphicon glyphicon-cloud-download"></span>
+                </button>
+                <!--<button type="button" class="btn btn-primary" ng-click="newUser()">+</button>-->
+                <a href="#/users/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+                    <span style="font-size: 14px;font-weight: bold;">+</span><span class="glyphicon glyphicon-user"
+                                                                                   style=""></span>
+                </a>
             </div>
-            <input type="text" ng-model="filter" class="form-control" placeholder="search" style="padding: 5px; width: 50%">
-            <div id="data_tbl" style="padding: 5px; max-height:400px;overflow-y: auto">
-                <table class="sorttable">
+
+            <div id="data_tbl" class="table-responsive boxContent">
+                <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+                    <thead>
                     <tr>
                         <th>ID</th>
                         <th>
-                            <button ng-click="sortBy('tm_id')">tm_id</button>
-                            <span class="sortorder" ng-show="propertyName === 'tm_id'" ng-class="{reverse: reverse}"></span>
+                            <button class="btn btn-link" ng-click="sortBy('user')">Όνομα Χρήστη</button>
+                            <span class="sortorder" ng-show="propertyName === 'user'"
+                                  ng-class="{reverse: reverse}"></span>
                         </th>
                         <th>
-                            <button ng-click="sortBy('fname')">fname</button>
-                            <span class="sortorder" ng-show="propertyName === 'fname'" ng-class="{reverse: reverse}"></span>
+                            <button class="btn btn-link" ng-click="sortBy('fname')">Επώνυμο</button>
+                            <span class="sortorder" ng-show="propertyName === 'fname'"
+                                  ng-class="{reverse: reverse}"></span>
                         </th>
                         <th>
-                            <button ng-click="sortBy('sname')">sname</button>
-                            <span class="sortorder" ng-show="propertyName === 'sname'" ng-class="{reverse: reverse}"></span>
+                            <button class="btn btn-link" ng-click="sortBy('sname')">Όνομα</button>
+                            <span class="sortorder" ng-show="propertyName === 'sname'"
+                                  ng-class="{reverse: reverse}"></span>
                         </th>
                         <th>
-                            <button ng-click="sortBy('phone')">phone</button>
-                            <span class="sortorder" ng-show="propertyName === 'phone'" ng-class="{reverse: reverse}"></span>
+                            <button class="btn btn-link" ng-click="sortBy('phone')">Τηλ.</button>
+                            <span class="sortorder" ng-show="propertyName === 'phone'"
+                                  ng-class="{reverse: reverse}"></span>
                         </th>
                         <th>
-                            <button ng-click="sortBy('em_main')">em_main</button>
+                            <button class="btn btn-link" ng-click="sortBy('em_main')">1st email</button>
                             <span class="sortorder" ng-show="propertyName === 'em_main'"
                                   ng-class="{reverse: reverse}"></span>
                         </th>
                         <th>
-                            <button ng-click="sortBy('em_sec')">em_sec</button>
+                            <button class="btn btn-link" ng-click="sortBy('em_sec')">2nd email</button>
                             <span class="sortorder" ng-show="propertyName === 'em_sec'"
                                   ng-class="{reverse: reverse}"></span>
                         </th>
                         <th>
-                            <button ng-click="sortBy('em_pant')">em_pant</button>
+                            <button class="btn btn-link" ng-click="sortBy('em_pant')">Uni email</button>
                             <span class="sortorder" ng-show="propertyName === 'em_pant'"
                                   ng-class="{reverse: reverse}"></span>
                         </th>
                         <th>
-                            <button ng-click="sortBy('cat_id')">cat_id</button>
-                            <span class="sortorder" ng-show="propertyName === 'cat_id'"
+                            <button class="btn btn-link" ng-click="sortBy('ucategories.descr')">Κατηγορία</button>
+                            <span class="sortorder" ng-show="propertyName === 'ucategories.descr'"
                                   ng-class="{reverse: reverse}"></span>
                         </th>
                         <th>
-                            <button ng-click="sortBy('comments')">comments</button>
+                            <button class="btn btn-link" ng-click="sortBy('tm.title')">Τμήμα</button>
+                            <span class="sortorder" ng-show="propertyName === 'tm.title'"
+                                  ng-class="{reverse: reverse}"></span>
+                        </th>
+                        <th>
+                            <button class="btn btn-link" ng-click="sortBy('comments')">Σχόλεια</button>
                             <span class="sortorder" ng-show="propertyName === 'comments'"
                                   ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button ng-click="sortBy('user')">user</button>
-                            <span class="sortorder" ng-show="propertyName === 'user'" ng-class="{reverse: reverse}"></span>
                         </th>
                         <!--<th>hash</th>-->
                         <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <tr ng-repeat="user in dp.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
                         style="cursor: pointer"
                         ng-class="{selected: user.id === item.id}">
                         <td>{{ user.id }}</td>
-                        <td>{{ user.tm_id }}</td>
+                        <td>{{ user.user}}</td>
                         <td>{{ user.fname }}</td>
                         <td>{{ user.sname}}</td>
                         <td>{{ user.phone}}</td>
                         <td>{{ user.em_main}}</td>
                         <td>{{ user.em_sec}}</td>
                         <td>{{ user.em_pant}}</td>
-                        <td>{{ user.cat_id}}</td>
+                        <td>{{ user.ucategories.descr}}</td>
+                        <td>{{ user.tm.title }}</td>
                         <td>{{ user.comments}}</td>
-                        <td>{{ user.user}}</td>
                         <!--<td>{{user.hash}}</td>-->
                         <td>
-                            <a href="#/users/{{user.id}}" class="thumb">info</a>
-                            <button ng-click="selectUser(user);" type="button" class="btn btn-primary">
+
+                            <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
+                                    class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="#/users/{{user.id}}/roles" type="button" class="btn btn-primary thumb"><span
+                                    class="glyphicon glyphicon-knight"></span></a>
+                            <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"><span
+                                    class="glyphicon glyphicon-transfer"></span></a>
+                            <button ng-click="deleteUser(user)" type="button" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-erase"></span>
+                            </button>
+                            <!--<button ng-click="selectUser(user);" type="button" class="btn btn-info">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
-                            <button ng-click="deleteUser(user)" type="button" class="btn btn-primary">
+                            <button ng-click="deleteUser(user)" type="button" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-erase"></span>
                             </button>
                             <button ng-click="getRoles(user)" type="button" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-briefcase"></span>
                             </button>
                             <button ng-click="getRequests(user)" type="button" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-globe"></span>
-                            </button>
+                                <span class="glyphicon glyphicon-transfer"></span>
+                            </button>-->
                         </td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
             <pre>total users : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
         </div>
-
-
-        <div ng-if="viewState['roles']">
-            <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
-            <table>
-                <tr>
-                    <th>id</th>
-                    <th>role</th>
-                    <th>descr</th>
-                </tr>
-                <tr ng-repeat="role in uRoles">
-                    <td>{{ role.id }}</td>
-                    <td>{{ role.role }}</td>
-                    <td>{{ role.descr }}</td>
-                </tr>
-            </table>
-        </div>
-
-        <div ng-if="viewState['requests']">
-            <button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <-</button>
-            <table>
-                <tr>
-                    <th>id</th>
-                    <th>req_dt</th>
-                    <th>user_id</th>
-                    <th>descr</th>
-                    <th>period</th>
-                    <th>ps_id</th>
-                    <th>teacher</th>
-                    <th>from_book</th>
-                    <th>class_use</th>
-                    <th>links</th>
-                    <th>fromdt</th>
-                    <th>todt</th>
-                    <th>protocol_id</th>
-                    <th>req_stat</th>
-                </tr>
-                <tr ng-repeat="request in uRequest|filter:filter">
-                    <td>{{ request.id }}</td>
-                    <td>{{ request.req_dt }}</td>
-                    <td>{{ request.user_id }}</td>
-                    <td>{{ request.descr }}</td>
-                    <td>{{ request.period }}</td>
-                    <td>{{ request.ps_id }}</td>
-                    <td>{{ request.teacher }}</td>
-                    <td>{{ request.from_book }}</td>
-                    <td>{{ request.class_use }}</td>
-                    <td>{{ request.links }}</td>
-                    <td>{{ request.fromdt }}</td>
-                    <td>{{ request.todt }}</td>
-                    <td>{{ request.protocol_id }}</td>
-                    <td>{{ request.req_stat }}</td>
-
-                </tr>
-            </table>
-        </div>
-
     </div>
 </div>

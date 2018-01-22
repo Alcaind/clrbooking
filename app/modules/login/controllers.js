@@ -3,6 +3,8 @@ angular.module('Login', ['Authentication', 'MainComponents'])
     .controller('LoginController',
         ['$scope', '$http', '$rootScope', '$location', '$cookies', '$cookieStore', 'AuthenticationService', 'jwtHelper', 'store',
             function ($scope, $http, $rootScope, $location, $cookies, $cookieStore, AuthenticationService, jwtHelper, store) {
+
+                $scope.errorString = 'Εισάγετε τα στοιχεία σας για να συνδεθείτε!';
                 $scope.login = function () {
                     $scope.errorString = null;
                     AuthenticationService.Login($scope.usr, $scope.pswd, function (response) {
