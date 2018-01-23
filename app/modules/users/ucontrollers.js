@@ -105,14 +105,8 @@ angular.module('Users', [
         }
 
         $scope.getUsers();
-    }]);
+    }])
 
-angular.module('usersProfile', [
-    'ngRoute',
-    'ApiModules',
-    'MainComponents',
-    'Authentication'
-])
     .controller('ProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
         AuthenticationService.CheckCredentials();
         $scope.tms = {};
@@ -148,7 +142,7 @@ angular.module('usersProfile', [
 
 
         $scope.updateUser = function (item) {
-            api.apiCall('PUT', 'api/public/users', function (results) {
+            api.apiCall('PUT', 'api/public/users/' + item.id, function (results) {
                 $scope.modalMessage = "User Updated";
                 var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
 
@@ -156,9 +150,9 @@ angular.module('usersProfile', [
         };
 
         $scope.saveUser = function (item) {
+
             api.apiCall('POST', 'api/public/users', function (results) {
-                $scope.modalMessage = "User Created";
-                var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
+                var modalInstance = MakeModal.infoModal('lg', "User Created");
 
             }, undefined, item, undefined, $scope)
         };
@@ -189,15 +183,7 @@ angular.module('usersProfile', [
                 });
             }
         }
-    }]);
-
-
-angular.module('usersRequests', [
-    'ngRoute',
-    'ApiModules',
-    'MainComponents',
-    'Authentication'
-])
+    }])
     .controller('URequestsController', ['$scope', '$routeParams', 'api', 'AuthenticationService', function ($scope, $routeParams, api, AuthenticationService) {
         AuthenticationService.CheckCredentials();
         api.apiCall('GET', 'api/public/users/' + $routeParams.userId + '/requests', function (results) {
@@ -209,13 +195,6 @@ angular.module('usersRequests', [
             itemId: '=itemId'
         }
     })
-
-angular.module('usersRoles', [
-    'ngRoute',
-    'ApiModules',
-    'MainComponents',
-    'Authentication'
-])
     .controller('URolesController', ['$scope', '$routeParams', 'api', 'AuthenticationService', function ($scope, $routeParams, api, AuthenticationService) {
         AuthenticationService.CheckCredentials();
         $scope.uRoles = $scope.evRoles = null;
@@ -280,6 +259,4 @@ angular.module('usersRoles', [
         scope: {
             itemId: '=itemId'
         }
-    })
-
-
+    });

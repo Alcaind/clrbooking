@@ -69,8 +69,18 @@ span.msg-error {
 /*border-radius: 4px;*/
 /*}*/
 
-div.form-group.label.required {
-    content: "*";
+.userForm .label .required::before {
+    content: "* ";
     color: red;
 }
 
+.userForm {
+    display: inline;
+    float: left;
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 40px;
+    max-width: 600px;
+
+}

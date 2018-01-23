@@ -92,11 +92,39 @@ angular.module('MainComponents', [
         factory.okModal = function () {
         };
 
+        factory.infoModal = function (size, infoMessage) {
+            var $myModalInstance = $uibModal.open({
+                templateUrl: 'modules/mainComponents/views/popup.html',
+                controller: 'infoPopupController',
+                size: size,
+                resolve: {
+                    modalMessage: function () {
+                        return infoMessage;
+                    }
+                }
+            });
+            return $myModalInstance
+
+        }
+
+        factory.generalInfoModal = function (config) {
+            var $myModalInstance = $uibModal.open({
+                templateUrl: 'modules/mainComponents/views/genpopup.html',
+                controller: 'gneralInfoPopupController',
+                size: config.size ? config.size : 'sm',
+                resolve: {
+                    config: function () {
+                        return config;
+                    }
+                }
+            });
+            return $myModalInstance
+        }
+
         return factory;
     }])
+    .controller("PopupController", ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
 
-
-    .controller("PopupController", ['$scope', '$uibModalInstance', '$rootScope', '$location', function ($scope, $uibModalInstance, $rootScope, $location) {
         $scope.ok = function () {
             $uibModalInstance.close('ok');
         };
@@ -104,9 +132,27 @@ angular.module('MainComponents', [
             $uibModalInstance.dismiss('cancel');
         };
 
-    }
-    ])
+    }])
+    .controller("infoPopupController", ['$scope', '$uibModalInstance', 'modalMessage', function ($scope, $uibModalInstance, modalMessage) {
+        $scope.modalMessage = modalMessage;
+        $scope.ok = function () {
+            $uibModalInstance.close('ok');
+        };
+    }])
+    .controller("gneralInfoPopupController", ['$scope', '$uibModalInstance', 'config', function ($scope, $uibModalInstance, config) {
+        $scope.title = config.title ? config.title : "Info";
+        $scope.modalMessage = config.message ? config.message : "message";
+        $scope.type = config.type ? config.type : 'info';
+        $scope.buttons = config.buttons ? config.buttons : 1;
 
+        $scope.ok = function () {
+            $uibModalInstance.close('ok');
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.close('cancel');
+        };
+    }])
 
     .directive('backButton', function () {
         return {

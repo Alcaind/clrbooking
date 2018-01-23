@@ -21,13 +21,23 @@ angular.module('ApiModules', [
                     url: url,
                     data: data
                 }).then(function (results) {
-
                     //TODO : To see about dataProviders (bidings, etc...) ?!?!
                     /*results.data.map(function (obj) {
                         dataProvider.push(obj);
                     });*/
+                    if (results.data.indexOf("SQLSTATE") === -1) {
 
-                    if (successCallback) successCallback(results);
+                        if (successCallback) successCallback(results);
+                    } else {
+                        //var modalInstance = MakeModal.infoModal('sm',"Double key entry!");
+                        var modalInstance = MakeModal.generalInfoModal({
+                            size: 'sm',
+                            message: "Double key entry!",
+                            title: "Error",
+                            type: 'info',
+                            buttons: 1
+                        });
+                    }
                     return results;
                 }, function (results) {
                     var modalInstance = MakeModal.defaultModal('lg', null, null, scope);
@@ -35,10 +45,7 @@ angular.module('ApiModules', [
                     return results;
                 });
             }
-
         }
-
         return factory;
     }])
-
 ;
