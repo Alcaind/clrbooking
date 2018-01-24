@@ -55,11 +55,11 @@ angular.module('Users', [
                     $scope.apiResults = results.data;
                     break
             }
-        }
+        };
 
         $scope.errorCallback = function (results) {
 
-        }
+        };
 
         $scope.getUsers = function () {
             $scope.usersApi(undefined, undefined, undefined, function (results) {
@@ -102,7 +102,7 @@ angular.module('Users', [
         $scope.setItemsPerPage = function (num) {
             $scope.itemsPerPage = num === 'all' ? $scope.totalItems : num;
             $scope.currentPage = 1; //reset to first page
-        }
+        };
 
         $scope.getUsers();
     }])
@@ -156,8 +156,6 @@ angular.module('Users', [
 
             }, undefined, item, undefined, $scope)
         };
-
-
     }])
 
     .component('usersProfile', {

@@ -1,0 +1,40 @@
+<div>
+    <!--<button ng-click="showState('mainTable',true)" type="button" class="btn btn-primary"> <- </button>-->
+    <a href back-button>back</a>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>req_dt</th>
+            <th>user_id</th>
+            <th>descr</th>
+            <th>period</th>
+            <th>ps_id</th>
+            <th>teacher</th>
+            <th>from_book</th>
+            <th>class_use</th>
+            <th>links</th>
+            <th>fromdt</th>
+            <th>todt</th>
+            <th>protocol_id</th>
+            <th>req_stat</th>
+        </tr>
+        <tr ng-repeat="request in uRequest|filter:filter">
+            <td>{{ request.id }}</td>
+            <td>{{ request.req_dt }}</td>
+            <td>{{ request.user_id }}</td>
+            <td>{{ request.descr }}</td>
+            <td>{{ request.period }}</td>
+            <td>{{ request.ps_id }}</td>
+            <td>{{ request.teacher }}</td>
+            <td>{{ request.from_book }}</td>
+            <td>{{ request.class_use }}</td>
+            <td>{{ request.links }}</td>
+            <td>{{ request.fromdt }}</td>
+            <td>{{ request.todt }}</td>
+            <td>{{ request.protocol_id }}</td>
+            <td>{{ request.req_stat }}</td>
+
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,113 @@
+<div class="boxContent">
+    <a href back-button>back</a>
+    <form class="userForm" name="userForm" ng-submit="submitForm()" novalidate>
+        <!-- USERNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.uname.$invalid && !userForm.uname.$pristine }">
+            <label for="uname" class="required">Username:</label>
+            <div>
+                <input type="text" id="uname" name="uname" class="form-control" ng-model="item.user" ng-minlength="3"
+                       ng-maxlength="8">
+                <p ng-show="userForm.uname.$error.minlength" class="help-block">Username is too short.</p>
+                <p ng-show="userForm.uname.$error.maxlength" class="help-block">Username is too long.</p>
+            </div>
+        </div>
+        <!--PASSWORD-->
+        <div class="form-group">
+            <div>
+                <label class="required" for="pw1">Set a password:</label>
+                <input type="{{passwordString1}}" id="pw1" name="pw1" ng-model="item.hash" class="form-control"
+                       ng-init="passwordString1='password'" ng-required=""/>
+                <span class="form-group input-group-btn">
+                    <button type="button" class="btn btn-success btn-eye" style="background:#800000;"
+                            ng-click="passwordString1==='text'?passwordString1='password':passwordString1='text';errorString='*'+pw1+'*';">
+                        <i class="glyphicon glyphicon-eye-open"></i>
+                    </button>
+                </span>
+            </div>
+            <div>
+                <label class="required" for="pw2">Confirm the password:</label>
+                <input type="{{passwordString2}}" id="pw2" name="pw2" ng-model="pw2" class="form-control"
+                       ng-init="passwordString2='password'" pw-check="pw1" ng-required=""/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-success btn-eye" style="background:#800000;"
+                            ng-click="passwordString2==='text'?passwordString2='password':passwordString2='text';errorString='*'+pw2+'*';">
+                        <i class="glyphicon glyphicon-eye-open"></i>
+                    </button>
+                </span>
+                <div class="msg-block" ng-show="userForm.$error">
+                    <span class="msg-error" ng-show="userForm.pw2.$error.pwmatch">Passwords don't match.</span>
+                </div>
+            </div>
+        </div>
+        <!-- EMAIL FIRST MANDATORY -->
+        <div class="form-group " ng-class="{ 'has-error' : userForm.email1.$invalid && !userForm.email1.$pristine }">
+            <label for="email1" class="required">Email:</label>
+            <input id="email1" type="email" name="email1" class="form-control" ng-model="item.em_main" required>
+            <p ng-show="userForm.email1.$invalid && !userForm.email1.$pristine" class="help-block">Enter a valid
+                email.</p>
+        </div>
+        <!-- EMAIL SECOND -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.email2.$invalid  }">
+            <label for="email2">Email 2:</label>
+            <input id="email2" type="email" name="email2" class="form-control" ng-model="item.em_sec">
+            <p ng-show="userForm.email2.$invalid" class="help-block">Enter a valid email.</p>
+        </div>
+        <!-- EMAIL PANTEIOY -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.emailp.$invalid}">
+            <label for="emailp">Email Panteioy:</label>
+            <input id="emailp" type="email" name="emailp" class="form-control" ng-model="item.em_pant">
+            <p ng-show="userForm.emailp.$invalid" class="help-block">Enter a valid email.</p>
+        </div>
+        <!-- FIRSTNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.fname.$invalid && !userForm.fname.$pristine }">
+            <label for="fname" class="required">Name:</label>
+            <input id="fname" type="text" name="fname" class="form-control " ng-model="item.fname">
+            <p ng-show="userForm.fname.$invalid && !userForm.fname.$pristine" class="help-block">You first name is
+                required.</p>
+        </div>
+        <!-- LASTNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.sname.$invalid && !userForm.sname.$pristine }">
+            <label for="sname" class="required">Last Name:</label>
+            <input id="sname" type="text" name="sname" class="form-control " ng-model="item.sname">
+            <p ng-show="userForm.sname.$invalid && !userForm.sname.$pristine" class="help-block">You last name is
+                required.</p>
+        </div>
+        <!--PHONE-->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
+            <label for="phone" class="required">Phone:</label>
+            <input id="phone" type="integer" name="phone" class="form-control " ng-model="item.phone">
+            <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">You phone is
+                required.</p>
+        </div>
+        <!-- ID -->
+        <div class="form-group">
+            <label for="idnum">ID:<input id="idnum" ng-model="item.id" class="form-control" placeholder="id"
+                                         ng-disabled="true"></label>
+        </div>
+        <!--ID_TM-->
+        <div class="form-group">
+            <label for="idtm">TM_ID:<select id="idtm" ng-model="item.tm_id"
+                                            ng-options="tm.id as tm.title for tm in tms"> </select>
+            </label>
+        </div>
+        <!--Cat_ID-->
+        <div class="form-group">
+            <label for="catid">CAT_ID:<select id="catid" ng-model="item.cat_id" class="form-control"
+                                              ng-options="ucategorie.id as ucategorie.descr for ucategorie in ucategories"> </select>
+            </label>
+        </div>
+        <!--COMMENTS-->
+        <div class="form-group">
+            <label for="comments">Comments:</label>
+            <textarea class="form-control" id="comments" name="comments" class="form-control"
+                      ng-model="item.comments"></textarea>
+        </div>
+
+        <button type="button" class="btn btn-primary" ng-click="updateUser(item)" style="padding: 5px"
+                ng-if="item.id>0">Upd User
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveUser(item)" style="padding: 5px"
+                ng-if="item.tm_id && !item.id">Save User
+        </button>
+    </form>
+</div>

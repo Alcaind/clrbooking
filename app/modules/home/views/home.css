@@ -1,0 +1,52 @@
+.row > div > .homebtn {
+    display: flow-root;
+    padding: 56px 300px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: #800000;
+    color: #e6e6e6;
+}
+
+.row > div > .homebtn:hover {
+    background-color: #e6e6e6;
+    color: #800000;
+}
+
+/*a.btn.btn-info.homebtn {*/
+/*display: flow-root;*/
+/*padding: 56px 300px;*/
+/*margin-bottom: 0;*/
+/*font-size: 14px;*/
+/*font-weight: 400;*/
+/*line-height: 1.42857143;*/
+/*text-align: center;*/
+/*white-space: nowrap;*/
+/*vertical-align: middle;*/
+/*-ms-touch-action: manipulation;*/
+/*touch-action: manipulation;*/
+/*cursor: pointer;*/
+/*-webkit-user-select: none;*/
+/*-moz-user-select: none;*/
+/*-ms-user-select: none;*/
+/*user-select: none;*/
+/*background-image: none;*/
+/*border: 1px solid transparent;*/
+/*border-radius: 4px;*/
+/*background: #800000;*/
+/*color: white;*/
+/*}*/

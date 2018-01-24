@@ -1,0 +1,85 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left"><span
+                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span></span>
+        </a>
+    </div>
+    <div id="content" style="display: flex">
+        <div id="leftColumn" class="table-responsive boxContent" style="width: 100%">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>role</th>
+                    <th>descr</th>
+                    <th>comments</th>
+                    <th>exp. Date</th>
+                    <th>status</th>
+                    <th>...</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="role in uRoles">
+                    <td>{{ role.id }}</td>
+                    <td>{{ role.role }}</td>
+                    <td>{{ role.descr }}</td>
+                    <th>{{ role.pivot.comment }}</th>
+                    <th>{{ role.pivot.exp_dt}}</th>
+                    <th>{{ role.pivot.status}}</th>
+                    <td>
+                        <button ng-click="editUrData(role)" type="button" class="btn btn-info">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button ng-click="deleteRole(role.id)" type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-erase"></span>
+                        </button>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="rightColumn" style="width: 100%">
+            <div class="table-responsive boxContent" ng-if="!currentRole">
+                <table class="table table-striped">
+                    <tr>
+                        <th>id</th>
+                        <th>role</th>
+                        <th>descr</th>
+                        <th>...</th>
+                    </tr>
+                    <tr ng-repeat="role in evRoles" class="{{role.disabled?'warning disabled':''}}">
+                        <td>{{ role.id }}</td>
+                        <td>{{ role.role }}</td>
+                        <td>{{ role.descr }}</td>
+                        <td>
+                            <button ng-click="role.disabled?null:showUrData(role)" type="button"
+                                    class="btn {{role.disabled?'btn-regular disabled':'btn-success '}}">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width: 100%">
+                <form ng-show="currentRole" class="boxContent"><br>
+                    <label>comment:<input type="text" ng-model="urData.comment" class="form-control"
+                                          placeholder="comment"></label><br>
+                    <label>exp. date:
+                        <pre> <em>{{urData.exp_dt | date:'fullDate' }}</em></pre>
+                    </label> <br>
+                    <div style="display:flex; min-height:290px;">
+                        <div uib-datepicker ng-model="urData.exp_dt" class="well well-sm"></div>
+                    </div>
+                    <label>status:<input type="text" ng-model="urData.status" class="form-control" placeholder="status"></label><br>
+                    <button type="button" class="btn btn-primary" ng-click="insertRole()" style="padding: 5px">ok
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="cancelUrData()" style="padding: 5px">
+                        cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

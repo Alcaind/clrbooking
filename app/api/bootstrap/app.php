@@ -6,6 +6,7 @@
  * Time: 4:00 μμ
  */
 session_start();
+require __DIR__ . '/../src/models/apierror.php';
 require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../config/db.php';
 require __DIR__ . '/../src/models/users.php';
@@ -25,8 +26,6 @@ require __DIR__ . '/../src/models/roomitem.php';
 require __DIR__ . '/../src/models/roomuse.php';
 require __DIR__ . '/../src/models/usersroles.php';
 require __DIR__ . '/../src/models/ucategories.php';
-
-
 
 
 //require __DIR__ . '../src/models/Users.php';
