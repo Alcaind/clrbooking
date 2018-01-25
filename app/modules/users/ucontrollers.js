@@ -16,9 +16,6 @@ angular.module('Users', [
         $scope.method = '';
         $scope.pageThresholds = [{th: 'all'}, {th: 3}, {th: 5}, {th: 10}, {th: 20}, {th: 50}];
 
-        // $scope.uRoles = [];
-        // $scope.uRequest = [];
-
         $scope.usersApi = function (url, method, data, successCallback, errorCallback) {
             method = typeof method !== 'undefined' ? method : 'GET';
             data = typeof data !== 'undefined' ? data : null;

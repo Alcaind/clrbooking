@@ -67,12 +67,10 @@ angular.module('MainComponents', [
     .directive('footer', function () {
         return {
             restrict: "EA",
-            controller: 'FooterController',
             templateUrl: 'modules/mainComponents/views/footer.html'
         }
     })
-    .controller('FooterController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
-    }])
+
 
     .factory("MakeModal", ['$uibModal', function ($uibModal) {
         var factory = {};
@@ -169,13 +167,31 @@ angular.module('MainComponents', [
         }
     })
 
-
-
-
-
-
-
-
+    .directive('pagination', function () {
+        return {
+            restrict: "EA",
+            // controller:"PaginationController",
+            templateUrl: 'modules/mainComponents/views/pagination.html'
+        }
+    })
+// .controller('PaginationController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
+//     $scope.pageThresholds = [{th: 'all'}, {th: 3}, {th: 5}, {th: 10}, {th: 20}, {th: 50}];
+//     $scope.totalItems = 40;
+//     $scope.currentPage = 1;
+//     $scope.itemsPerPage = 'all';
+//     $scope.maxSize = 5; //Number of pager buttons to show
+//     //$scope.totalItems = 0;
+//
+//     $scope.setPage = function (pageNo) {
+//         $scope.currentPage = pageNo;
+//     };
+//
+//     $scope.setItemsPerPage = function (num) {
+//         $scope.itemsPerPage = num === 'all' ? $scope.totalItems : num;
+//         $scope.currentPage = 1; //reset to first page
+//     };
+//
+// }])
 ;
 
 

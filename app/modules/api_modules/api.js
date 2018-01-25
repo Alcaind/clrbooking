@@ -21,13 +21,7 @@ angular.module('ApiModules', [
                     url: url,
                     data: data
                 }).then(function (results) {
-                    var modalInstance = MakeModal.generalInfoModal({
-                        size: 'sm',
-                        message: "Double key entry!",
-                        title: "Error",
-                        type: 'info',
-                        buttons: 1
-                    });
+                    if (successCallback) successCallback(results);
                     return results;
                 }, function (results) {
                     MakeModal.generalInfoModal({

@@ -1,16 +1,10 @@
 <div id="users_main">
-    <div class="innertube">
+    <div>
         <h2 style="text-align: center;"> Κατάλογος Χρηστών </h2>
 
-        <div style="padding: 15px">
+    </div>
 
-            <div style="display: flex">
-                View <select ng-model="itemsPerPage" ng-change="setItemsPerPage(itemsPerPage)"
-                             ng-options="pg.th as pg.th for pg in pageThresholds"></select> records at a time.
-                <ul uib-pagination boundary-links="true" items-per-page="itemsPerPage" total-items="totalItems"
-                    ng-model="currentPage" num-pages="numPages" class="pagination-sm" previous-text="&lsaquo;"
-                    next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
-            </div>
+    <div style="padding: 15px">
             <div style="display: flex">
                 <input type="text" ng-model="filter" class="form-control" placeholder="search"
                        style="padding: 5px; width: 100%">
@@ -18,12 +12,13 @@
                         style="min-width: 50px;border-radius: 0px;">
                     <span class="glyphicon glyphicon-cloud-download"></span>
                 </button>
-                <!--<button type="button" class="btn btn-primary" ng-click="newUser()">+</button>-->
                 <a href="#/users/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-                    <span style="font-size: 14px;font-weight: bold;">+</span><span class="glyphicon glyphicon-user"
-                                                                                   style=""></span>
+                    <span>+</span><span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
+        <div>
+            <pagination></pagination>
+        </div>
 
             <div id="data_tbl" class="table-responsive boxContent">
                 <table class="sorttable table table-hover table-striped table-responsive header-fixed">
@@ -130,5 +125,5 @@
             </div>
             <pre>total users : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
         </div>
-    </div>
+
 </div>

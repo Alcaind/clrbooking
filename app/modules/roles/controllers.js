@@ -9,14 +9,32 @@ angular.module('Roles', [
     $scope.roles = [];
     $scope.currentRole = {};
 
+    $scope.rolesApi = function (url, method, data, successCallback, errorCallback) {
+        method = typeof method !== 'undefined' ? method : 'GET';
+        data = typeof data !== 'undefined' ? data : null;
+        url = typeof url !== 'undefined' ? url : 'api/public/roles';
+        successCallback = typeof successCallback !== 'undefined' ? successCallback : $scope.successCallback;
+        errorCallback = typeof errorCallback !== 'undefined' ? errorCallback : $scope.errorCallback;
+        $scope.method = method;
+        $scope.item = data;
+
+        return api.apiCall(method, url, successCallback, errorCallback, data, $scope.dp, $scope)
+    }
+
     $scope.getRoles = function () {
-        $http({
+        /*$http({
             method: 'GET',
             url: 'api/public/roles'
         }).then(function successCallback(response) {
             $scope.roles = response.data;
         }, function errorCallback(response) {
             alert(response.message);
+        });*/
+
+        $scope.rolesApi(undefined, undefined, undefined, function (results) {
+            $scope.dp = results.data;
+            $scope.totalItems = $scope.dp.length;
+            $scope.setItemsPerPage($scope.itemsPerPage);
         });
     };
 

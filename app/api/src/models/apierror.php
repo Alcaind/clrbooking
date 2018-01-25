@@ -26,14 +26,14 @@ class ApiError
         return json_encode(['errorType' => '', 'errorCode' => $this->errorCode, 'errorText' => $returnMessage]);
     }
 
-    public function libraryErrorMsg()
+    protected function libraryErrorMsg()
     {
         $errormessage = explode(':', $this->errorMessage)[2];
         $errormessage = explode('(', $errormessage)[0];
         return $this->dictionary($errormessage);
     }
 
-    public function dictionary($errorstring)
+    protected function dictionary($errorstring)
     {
         $returnString = '';
         switch (explode(' ', $errorstring)[1]) {
