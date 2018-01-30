@@ -1,11 +1,12 @@
 <div>
     <div style="text-align: left;padding-left: 5px;">
         <a href back-button type="button" class="btn btn-warning">
-            <span class="glyphicon glyphicon-chevron-left"><span
-                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span></span>
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
         </a>
     </div>
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>id</th>
             <th>req_dt</th>
@@ -21,8 +22,10 @@
             <th>todt</th>
             <th>protocol_id</th>
             <th>req_stat</th>
+            <th>...</th>
+
         </tr>
-        <tr ng-repeat="request in uRequest|filter:filter">
+        <tr ng-repeat="request in uRequest">
             <td>{{ request.id }}</td>
             <td>{{ request.req_dt }}</td>
             <td>{{ request.user_id }}</td>
@@ -37,7 +40,13 @@
             <td>{{ request.todt }}</td>
             <td>{{ request.protocol_id }}</td>
             <td>{{ request.req_stat }}</td>
-
+            <td>
+                <button ng-click="editRequestData(request)" type="button" class="btn btn-info">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <!--//TODO: add request , directive and sent it to the request form add--(post)-request -->
+            </td>
         </tr>
     </table>
 </div>
+

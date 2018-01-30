@@ -15,7 +15,7 @@ $app->get('/roles', function (Request $request, Response $response) {
     return $response->getBody()->write($roles->toJson());
 });
 
-$app->get('/role/{id}', function (Request $request, Response $response, $args) {
+$app->get('/roles/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
@@ -26,21 +26,21 @@ $app->get('/role/{id}', function (Request $request, Response $response, $args) {
     return $response->getBody()->write($roles->toJson());
 });
 
-$app->post('/role', function (Request $request, Response $response) {
+$app->post('/roles', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     try {
-        $role = new \App\Models\Roles();
-        $role->role = $data['role'];
-        $role->descr = $data['descr'];
-        $role->save();
+        $roles = new \App\Models\Roles();
+        $roles->role = $data['role'];
+        $roles->descr = $data['descr'];
+        $roles->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
-    return $response->withStatus(201)->getBody()->write($role->toJson());
+    return $response->withStatus(201)->getBody()->write($roles->toJson());
 });
 
-$app->delete('/role/{id}', function ($request, $response, $args) {
+$app->delete('/roles/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $role = \App\Models\Roles::find($id);
@@ -51,7 +51,7 @@ $app->delete('/role/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)->getBody()->write($role->toJson());
 });
 
-$app->put('/role/{id}', function ($request, $response, $args) {
+$app->put('/roles/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
     try {

@@ -170,28 +170,32 @@ angular.module('MainComponents', [
     .directive('pagination', function () {
         return {
             restrict: "EA",
-            // controller:"PaginationController",
-            templateUrl: 'modules/mainComponents/views/pagination.html'
+            scope: {
+                currentPage: "=",
+                totalItems: "<",
+                itemsPerPage: "="
+            },
+            templateUrl: 'modules/mainComponents/views/pagination.html',
+            controller: "PaginationController"
         }
     })
-// .controller('PaginationController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
-//     $scope.pageThresholds = [{th: 'all'}, {th: 3}, {th: 5}, {th: 10}, {th: 20}, {th: 50}];
-//     $scope.totalItems = 40;
-//     $scope.currentPage = 1;
-//     $scope.itemsPerPage = 'all';
-//     $scope.maxSize = 5; //Number of pager buttons to show
-//     //$scope.totalItems = 0;
-//
-//     $scope.setPage = function (pageNo) {
-//         $scope.currentPage = pageNo;
-//     };
-//
-//     $scope.setItemsPerPage = function (num) {
-//         $scope.itemsPerPage = num === 'all' ? $scope.totalItems : num;
-//         $scope.currentPage = 1; //reset to first page
-//     };
-//
-// }])
+    .controller('PaginationController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
+        $scope.pageThresholds = [{th: 'all'}, {th: 3}, {th: 5}, {th: 10}, {th: 20}, {th: 50}];
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = 50;
+        $scope.maxSize = 5; //Number of pager buttons to show
+        $scope.totalItems = 5;
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.setItemsPerPage = function (num) {
+            $scope.itemsPerPage = num === 'all' ? $scope.totalItems : num;
+            $scope.currentPage = 1; //reset to first page
+        };
+
+    }])
 ;
 
 

@@ -1,57 +1,56 @@
-
 <div id="roles_main">
-    <h1> Roles </h1>
-    <!--<users-profile itemid="19"></users-profile>-->
-    <pagination></pagination>
-    <div id="options_div" style="padding: 5px">
-        <button type="button" class="btn btn-primary" ng-click="getRoles()">Get Roles</button>
-        <!--<button type="button" class="btn btn-primary" ng-click="getRole()">Get Role id</button>-->
-        <button type="button" class="btn btn-primary" ng-click="newRole()">New Roles</button>
-        <input type="text" ng-model="filter" class="form-control" placeholder="search" style="padding: 5px; width: 50%">
-        <span class="glyphicon glyphicon-search"></span>
-    </div>
+    <div><h2 style="text-align: center;"> Κατάλογος Ρόλων </h2></div>
 
-    <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto">
-        <table>
+    <div style="display: flex">
+        <input type="text" ng-model="filter" class="form-control" placeholder="search"
+               style="padding: 5px; width: 100%">
+        <button type="button" class="btn btn-primary" ng-click="getRoles()"
+                style="min-width: 50px; border-radius: 0px;">
+            <span class="glyphicon glyphicon-cloud-download"></span>
+        </button>
+        <a href="#/roles/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+            <span>+</span><span class="glyphicon glyphicon-user"></span>
+        </a>
+    </div>
+    <div>
+        <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"></pagination>
+    </div>
+    <div id="data_tbl" class="table-responsive boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+            <thead>
             <tr>
-                <th>id</th>
-                <th>role</th>
-                <th>descr</th>
-                <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
-            </tr>
-            <tr ng-repeat="role in roles|filter:filter">
+                <th>ID</th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('role')">Ρόλος</button>
+                    <span class="sortorder" ng-show="propertyName === 'role'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('descr')">Περιγραφή</button>
+                    <span class="sortorder" ng-show="propertyName === 'descr'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+            <tbody>
+            <tr ng-repeat="role in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+                style="cursor: pointer" ng-class="{selected: role.id === item.id}">
                 <td>{{ role.id }}</td>
-                <td>{{ role.role }}</td>
+                <td>{{ role.role}}</td>
                 <td>{{ role.descr }}</td>
                 <td>
-                    <button ng-click="selectRole(role)" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button ng-click="deleteRole(role)" type="button" class="btn btn-primary">
+                    <a href="#/roles/{{role.id}}" type="button" class="btn btn-info thumb"><span
+                            class="glyphicon glyphicon-pencil"></span></a>
+                    <button ng-click="deleteRole(role)" type="button" class="btn btn-danger">
                         <span class="glyphicon glyphicon-erase"></span>
-                    </button>
-                    <button ng-click="getUsers(role)" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-user"></span>
                     </button>
                 </td>
             </tr>
+            </tbody>
         </table>
     </div>
-
-    <div style="padding: 5px">
-        <input type="text" ng-model="currentRole.id" class="form-control" placeholder="id" ng-disabled="true"
-               style="padding: 5px">
-        <input type="text" ng-model="currentRole.role" class="form-control" placeholder="role" style="padding: 5px">
-        <input type="text" ng-model="currentRole.descr" class="form-control" placeholder="description"
-               style="padding: 5px">
-        <button type="button" class="btn btn-primary" ng-click="updateRole()" style="padding: 5px"
-                ng-if="currentRole.id>0">Upd Roles
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="insertRole()" style="padding: 5px"
-                ng-if="currentRole.role && !currentRole.id">Save Roles
-        </button>
-    </div>
+    <pre>total role list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
 </div>
+
+
 
 
 
