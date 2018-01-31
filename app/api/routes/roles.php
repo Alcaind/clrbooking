@@ -65,7 +65,7 @@ $app->put('/roles/{id}', function ($request, $response, $args) {
     return $response->getBody()->write($role->toJson());
 });
 
-$app->get('/usersRole/{id}', function ($request, $response, $args) {
+$app->get('/roles/{id}/users', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $role = \App\Models\Roles::find($id);

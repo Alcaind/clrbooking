@@ -1,0 +1,140 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <form class="roomForm" name="roomForm" novalidate>
+        <!-- NAME -->
+        <div class="form-group" ng-class="{ 'has-error' : roomForm.rname.$invalid && !roomForm.rname.$pristine }">
+            <label class="required" for="rname">Όνομα Αιθουσας<span class="form-required">*</span>:</label>
+            <div>
+                <input id="rname" name="rname" class="form-control" type="text" ng-model="item.user">
+                <p ng-show="roomForm.rname.$invalid && !roomForm.rname.$pristine" class="help-block">The name is
+                    required.</p>
+            </div>
+        </div>
+        <!-- ADDRESS -->
+        <div class="form-group" ng-class="{ 'has-error' : roomForm.address.$invalid && !roomForm.address.$pristine }">
+            <label for="address" class="required">Διευθυνση<span class="form-required">*</span>:</label>
+            <input id="address" name="address" class="form-control" type="text" ng-model="item.address">
+            <p ng-show="roomForm.address.$invalid && !roomForm.address.$pristine" class="help-block">The address is
+                required.</p>
+        </div>
+        <!-- building -->
+        <div class="form-group" ng-class="{ 'has-error' : roomForm.building.$invalid && !roomForm.building.$pristine }">
+            <label for="building" class="required">Building<span class="form-required">*</span>:</label>
+            <input id="building" name="building" class="form-control" type="text" ng-model="item.building">
+            <p ng-show="roomForm.building.$invalid && !roomForm.building.$pristine" class="help-block">Building is
+                required.</p>
+        </div>
+        <!--floor-->
+        <div class="form-group" ng-class="{ 'has-error' : roomForm.floor.$invalid && !roomForm.floor.$pristine }">
+            <label for="floor" class="required">floor<span class="form-required">*</span>:</label>
+            <input id="floor" name="floor" class="form-control" type="number" ng-model="item.floor">
+            <p ng-show="roomForm.floor.$invalid && !roomForm.floor.$pristine" class="help-block">floor is
+                required.</p>
+        </div>
+        <!--status-->
+        <div class="form-group" ng-class="{ 'has-error' : roomForm.status.$invalid && !roomForm.status.$pristine }">
+            <label for="status" class="required">status<span class="form-required">*</span>:</label>
+            <input id="status" name="status" class="form-control" type="number" ng-model="item.status">
+            <p ng-show="roomForm.status.$invalid && !roomForm.status.$pristine" class="help-block">status is
+                required.</p>
+        </div>
+        <!--active-->
+        <div class="form-group" ng-class="{ 'has-error' : roomForm.active.$invalid && !roomForm.active.$pristine }">
+            <label for="active" class="required">active<span class="form-required">*</span>:</label>
+            <input id="active" name="active" class="form-control" type="number" ng-model="item.active">
+            <p ng-show="roomForm.active.$invalid && !roomForm.active.$pristine" class="help-block">active is
+                required.</p>
+        </div>
+        <!--destroyed-->
+        <div class="form-group">
+            <label for="destroyed" class="required">destroyed:</label>
+            <input id="destroyed" name="destroyed" class="form-control" type="number" ng-model="item.destroy">
+        </div>
+        <!--nonexist-->
+        <div class="form-group" ng-class="{ 'has-error' : roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine }">
+            <label for="nonexist" class="required">nonexist<span class="form-required">*</span>:</label>
+            <input id="nonexist" name="nonexist" class="form-control" type="number" ng-model="item.nonexist">
+            <p ng-show="roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine" class="help-block">nonexist is
+                required.</p>
+        </div>
+        <!--capasity-->
+        <div class="form-group">
+            <label for="capasity" class="required">capasit:</label>
+            <input id="capasity" name="capasity" class="form-control" type="number" ng-model="item.capasity">
+        </div>
+        <!--width-->
+        <div class="form-group">
+            <label for="width" class="required">width:</label>
+            <input id="width" name="width" class="form-control" type="number" ng-model="item.width">
+        </div>
+        <!--height-->
+        <div class="form-group">
+            <label for="height" class="required">height:</label>
+            <input id="height" name="height" class="form-control" type="number" ng-model="item.height">
+        </div>
+        <!--xoros-->
+        <div class="form-group">
+            <label for="xoros" class="required">xoros:</label>
+            <input id="xoros" name="xoros" class="form-control" type="number" ng-model="item.xoros">
+        </div>
+        <!--exams_capasity-->
+        <div class="form-group">
+            <label for="exams_capasity" class="required">exams_capasity:</label>
+            <input id="exams_capasity" name="exams_capasity" class="form-control" type="number"
+                   ng-model="item.exams_capasity">
+        </div>
+        <!--capasity_categ-->
+        <div class="form-group">
+            <label for="exams_categ" class="required">exams_categ:</label>
+            <input id="exams_categ" name="exams_categ" class="form-control" type="number" ng-model="item.exams_categ">
+        </div>
+        <!--tm_owner-->
+        <div class="form-group">
+            <label for="tm_owner" class="required">tm_owner:</label>
+            <input id="tm_owner" name="tm_owner" class="form-control" type="number" ng-model="item.tm_owner">
+        </div>
+        <!--dt-->
+        <div class="form-group">
+            <label for="dt" class="required">dt:</label>
+            <input id="dt" name="dt" class="form-control" type="number" ng-model="item.dt">
+        </div>
+        <!--stat_comm-->
+        <div class="form-group">
+            <label for="stat_comm" class="required">stat_comm:</label>
+            <input id="stat_comm" name="stat_comm" class="form-control" type="number" ng-model="item.stat_comm">
+        </div>
+        <!--conf_id-->
+        <div class="form-group">
+            <label for="conf_id" class="required">conf_id:</label>
+            <input id="conf_id" name="conf_id" class="form-control" type="number" ng-model="item.conf_id">
+        </div>
+        <!--type-->
+        <div class="form-group">
+            <label for="type" class="required">type:</label>
+            <input id="type" name="type" class="form-control" type="number" ng-model="item.type">
+        </div>
+        <!--use_id-->
+        <div class="form-group">
+            <label for="use_id" class="required">use_id:</label>
+            <input id="use_id" name="use_id" class="form-control" type="number" ng-model="item.use_id">
+        </div>
+        <!--use_str-->
+        <div class="form-group">
+            <label for="use_str" class="required">use_str:</label>
+            <input id="use_str" name="use_str" class="form-control" type="number" ng-model="item.use_str">
+        </div>
+
+        <button type="button" class="btn btn-primary" ng-click="updateRooms(item)" style="padding: 5px"
+                ng-if="item.name>0">Upd Room
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveRoom(item)" style="padding: 5px"
+                ng-if="item.name && !item.address">Save Room
+        </button>
+    </form>
+</div>

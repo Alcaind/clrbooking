@@ -10,7 +10,6 @@ angular.module('MainComponents', [
             $location.path('/login');
         }
     }])
-
     .run(['$rootScope', '$location', '$cookies', '$http', 'AuthenticationService',
         function ($rootScope, $location, $cookies, $http, AuthenticationService) {
 
@@ -63,15 +62,12 @@ angular.module('MainComponents', [
             AuthenticationService.ClearCredentials();
         }
     }])
-
     .directive('footer', function () {
         return {
             restrict: "EA",
             templateUrl: 'modules/mainComponents/views/footer.html'
         }
     })
-
-
     .factory("MakeModal", ['$uibModal', function ($uibModal) {
         var factory = {};
 
@@ -87,37 +83,20 @@ angular.module('MainComponents', [
             return $myModalInstance
         };
 
-        factory.okModal = function () {
-        };
-
-        factory.infoModal = function (size, infoMessage) {
-            var $myModalInstance = $uibModal.open({
-                templateUrl: 'modules/mainComponents/views/popup.html',
-                controller: 'infoPopupController',
-                size: size,
-                resolve: {
-                    modalMessage: function () {
-                        return infoMessage;
-                    }
-                }
-            });
-            return $myModalInstance
-
-        }
-
-        factory.generalInfoModal = function (config) {
+        factory.generalInfoModal = function (size, type, title, message, buttons, okCallback, cancelCallback) {
             var $myModalInstance = $uibModal.open({
                 templateUrl: 'modules/mainComponents/views/genpopup.html',
                 controller: 'gneralInfoPopupController',
-                size: config.size ? config.size : 'sm',
+                size: size ? size : 'sm',
                 resolve: {
                     config: function () {
-                        return config;
+                        return {title: title, message: message, type: type, buttons: buttons, size: size}
                     }
                 }
             });
+            $myModalInstance.result.then(okCallback, cancelCallback);
             return $myModalInstance
-        }
+        };
 
         return factory;
     }])
@@ -131,12 +110,6 @@ angular.module('MainComponents', [
         };
 
     }])
-    .controller("infoPopupController", ['$scope', '$uibModalInstance', 'modalMessage', function ($scope, $uibModalInstance, modalMessage) {
-        $scope.modalMessage = modalMessage;
-        $scope.ok = function () {
-            $uibModalInstance.close('ok');
-        };
-    }])
     .controller("gneralInfoPopupController", ['$scope', '$uibModalInstance', 'config', function ($scope, $uibModalInstance, config) {
         $scope.title = config.title ? config.title : "Info";
         $scope.modalMessage = config.message ? config.message : "message";
@@ -148,10 +121,9 @@ angular.module('MainComponents', [
         };
 
         $scope.cancel = function () {
-            $uibModalInstance.close('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     }])
-
     .directive('backButton', function () {
         return {
             restrict: 'A',
@@ -166,7 +138,6 @@ angular.module('MainComponents', [
             }
         }
     })
-
     .directive('pagination', function () {
         return {
             restrict: "EA",
@@ -179,7 +150,7 @@ angular.module('MainComponents', [
             controller: "PaginationController"
         }
     })
-    .controller('PaginationController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
+    .controller('PaginationController', ['$scope', function ($scope) {
         $scope.pageThresholds = [{th: 'all'}, {th: 3}, {th: 5}, {th: 10}, {th: 20}, {th: 50}];
         $scope.currentPage = 1;
         $scope.itemsPerPage = 50;

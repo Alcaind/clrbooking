@@ -6,11 +6,9 @@ angular.module('ApiModules', [
     .factory('api', ['MakeModal', '$http', function (MakeModal, $http) {
         var factory = {};
 
-        factory.apiCall = function (method, url, successCallback, errorCallBack, data, dataProvider, scope) {
+        factory.apiCall = function (method, url, successCallback, errorCallBack, data) {
             if (method === 'DELETE' || method === 'PUT') {
-                //url += '/' + data.id;
-                scope.modalMessage = "Are you sure?"
-                var modalInstance = MakeModal.defaultModal('sm', callApi, null, scope);
+                MakeModal.generalInfoModal('sm', 'danger', 'Confirmation', 'Are you sure?', 2, callApi);
             } else {
                 return callApi();
             }
@@ -24,17 +22,12 @@ angular.module('ApiModules', [
                     if (successCallback) successCallback(results);
                     return results;
                 }, function (results) {
-                    MakeModal.generalInfoModal({
-                        size: 'sm',
-                        title: "Error : " + results.data.errorCode,
-                        message: results.data.errorText,
-                        buttons: 1
-                    });
+                    MakeModal.generalInfoModal('sm', 'info', 'Error :' + results.data.errorCode, 1);
                     if (errorCallBack) errorCallBack(results);
                     return results;
                 });
             }
-        }
+        };
         return factory;
     }])
 ;

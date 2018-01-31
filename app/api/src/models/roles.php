@@ -17,12 +17,6 @@ class Roles extends Model {
 
     public function users()
     {
-        //return "lola";
-        try {
-            $ret = $this->belongsToMany('\\App\\Models\\Users', 'users_roles', 'role_id', 'user_id')->withPivot('comment', 'exp_dt', 'dt', 'status');
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-        return $ret;
+        return $this->belongsToMany('\\App\\Models\\Users', 'users_roles', 'user_id', 'role_id')->withPivot('comment', 'exp_dt', 'dt', 'status');
     }
 }

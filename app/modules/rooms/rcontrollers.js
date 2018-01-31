@@ -4,12 +4,20 @@ angular.module('Rooms', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
+    'Authentication',
 ]).controller('RoomsController', ['$scope', 'MakeModal', '$http', 'api', function ($scope, MakeModal, $http, api) {
+
+    AuthenticationService.CheckCredentials();
 
     $scope.apiResults = [];
     $scope.dp = [];
     $scope.item = {};
     $scope.method = '';
+
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 10;
+    $scope.totalItems = 5;
+
     $scope.roomItems = [];
 
     $scope.roomsApi = function (url, method, data, successCallback, errorCallback) {
@@ -23,7 +31,7 @@ angular.module('Rooms', [
         errorCallback = typeof errorCallback !== 'undefined' ? errorCallback : $scope.errorCallback;
 
         return api.apiCall(method, url, successCallback, errorCallback, data, $scope.dp, $scope)
-    }
+    };
 
     $scope.successCallback = function (results) {
         switch ($scope.method) {
@@ -49,10 +57,10 @@ angular.module('Rooms', [
                 $scope.dp = results.data;
                 break
         }
-    }
+    };
     $scope.errorCallback = function (results) {
 
-    }
+    };
 
     $scope.selectRoom = function (room) {
         $scope.item = room;

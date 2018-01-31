@@ -18,64 +18,27 @@ angular.module('Users', [
         $scope.currentPage = 1;
         $scope.itemsPerPage = 10;
         $scope.totalItems = 5;
-
-        $scope.usersApi = function (url, method, data, successCallback, errorCallback) {
-            method = typeof method !== 'undefined' ? method : 'GET';
-            data = typeof data !== 'undefined' ? data : null;
-            url = typeof url !== 'undefined' ? url : 'api/public/users';
-            successCallback = typeof successCallback !== 'undefined' ? successCallback : $scope.successCallback;
-            errorCallback = typeof errorCallback !== 'undefined' ? errorCallback : $scope.errorCallback;
-            $scope.method = method;
-            $scope.item = data;
-
-            return api.apiCall(method, url, successCallback, errorCallback, data, $scope.dp, $scope)
-        }
-
-        $scope.successCallback = function (results) {
-            switch ($scope.method) {
-                case 'DELETE' :
-                    $scope.dp.splice($scope.dp.indexOf($scope.item), 1);
-                    $scope.item = {};
-                    $scope.modalMessage = "User Deleted";
-                    var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-                    break;
-                case 'PUT' :
-                    $scope.modalMessage = "User Updated";
-                    var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-                    break;
-                case 'POST' :
-                    $scope.dp.push(results.data);
-                    $scope.modalMessage = "User Inserted";
-                    var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-                    break;
-                case 'GET' :
-                    $scope.apiResults = results.data;
-                    break;
-                default :
-                    $scope.apiResults = results.data;
-                    break
-            }
-        };
-
-        $scope.errorCallback = function (results) {
-
-        };
+        $scope.baseURL = 'api/public/users';
 
         $scope.getUsers = function () {
-            $scope.usersApi(undefined, undefined, undefined, function (results) {
+            api.apiCall('GET', $scope.baseURL, function (results) {
                 $scope.dp = results.data;
                 $scope.totalItems = $scope.dp.length;
             });
         };
 
-        $scope.getRoles = function (user) {
-            $scope.usersApi('api/public/users/' + user.id + '/roles', 'GET', undefined, function (results) {
-                $scope.uRoles = results.data;
+        $scope.deleteUser = function (item) {
+            api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
+                $scope.dp.splice($scope.dp.indexOf(item), 1);
+                $scope.item = {};
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'User Deleted', 1)
             });
         };
 
-        $scope.deleteUser = function (item) {
-            $scope.usersApi('api/public/users/' + item.id, 'DELETE', item);
+        $scope.getRoles = function (user) {
+            api.apiCall('GET', $scope.baseURL + "/" + user.id + '/roles', function (results) {
+                $scope.uRoles = results.data;
+            })
         };
 
         $scope.propertyName = 'fname';
@@ -127,17 +90,17 @@ angular.module('Users', [
 
         $scope.updateUser = function (item) {
             api.apiCall('PUT', 'api/public/users/' + item.id, function (results) {
-                $scope.modalMessage = "User Updated";
-                var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-            }, undefined, item, undefined, $scope)
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'User Updated', 1);
+                history.back();
+            }, undefined, item)
+
         };
 
         $scope.saveUser = function (item) {
-
             api.apiCall('POST', 'api/public/users', function (results) {
-                var modalInstance = MakeModal.infoModal('lg', "User Created");
-
-            }, undefined, item, undefined, $scope)
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'User Created', 1);
+                history.back();
+            }, undefined, item)
         };
     }])
 
@@ -145,7 +108,7 @@ angular.module('Users', [
         restrict: 'EA',
         templateUrl: 'modules/users/uviews/profile.html',
         scope: {
-            itemId: '=itemId',
+            //itemId: '=itemId',
             method: '=method'
         },
         controller: 'ProfileController'

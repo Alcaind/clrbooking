@@ -17,7 +17,7 @@ angular.module('Roles', [
 
     $scope.currentPage = 1;
     $scope.itemsPerPage = 10;
-    $scope.totalItems = 10;
+    $scope.totalItems = 5;
 
     $scope.rolesApi = function (url, method, data, successCallback, errorCallback) {
         method = typeof method !== 'undefined' ? method : 'GET';
@@ -106,12 +106,10 @@ angular.module('Roles', [
             api.apiCall('PUT', 'api/public/roles/' + item.id, function (results) {
                 $scope.modalMessage = "Role Updated";
                 var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-
             }, undefined, item, undefined, $scope)
         };
 
         $scope.saveRole = function (item) {
-
             api.apiCall('POST', 'api/public/roles', function (results) {
                 var modalInstance = MakeModal.infoModal('lg', "Role Created");
 
@@ -124,11 +122,40 @@ angular.module('Roles', [
         restrict: 'EA',
         templateUrl: 'modules/roles/views/profile.html',
         scope: {
-            itemId: '=itemId',
             method: '=method'
         },
         controller: 'RoleProfileController'
     })
+    .component('rolesUsers', {
+        restrict: 'EA',
+        templateUrl: 'modules/roles/views/rolesusers.html',
+        scope: {
+            method: '=method'
+        },
+        controller: 'RolesUserController'
+    })
+    .controller('RolesUserController', ['$scope', 'api', '$routeParams', 'orderByFilter', function ($scope, api, $routeParams, orderBy) {
+
+        $scope.dp = [];
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = 10;
+        $scope.totalItems = 5;
+
+        api.apiCall('GET', 'api/public/roles/' + $routeParams.roleId + '/users', function (results) {
+            $scope.dp = results.data;
+            $scope.totalItems = results.data.length;
+        })
+
+        $scope.propertyName = 'user';
+        $scope.reverse = true;
+        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
+
+        $scope.sortBy = function (propertyName) {
+            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+                ? !$scope.reverse : false;
+            $scope.propertyName = propertyName;
+        };
+    }])
 
 
 ;

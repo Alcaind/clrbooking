@@ -17,7 +17,5 @@ angular.module('Users')
             itemId: '='
         }
     })
-
-
 ;
 

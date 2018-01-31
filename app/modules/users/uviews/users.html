@@ -2,113 +2,111 @@
     <div>
         <h2 style="text-align: center;"> Κατάλογος Χρηστών </h2>
     </div>
-
     <div style="padding: 15px">
-            <div style="display: flex">
-                <input type="text" ng-model="filter" class="form-control" placeholder="search"
-                       style="padding: 5px; width: 100%">
-                <button type="button" class="btn btn-primary" ng-click="getUsers()"
-                        style="min-width: 50px; border-radius: 0px;">
-                    <span class="glyphicon glyphicon-cloud-download"></span>
-                </button>
-                <a href="#/users/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-                    <span>+</span><span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
+        <div style="display: flex">
+            <input type="text" ng-model="filter" class="form-control" placeholder="search"
+                   style="padding: 5px; width: 100%">
+            <button type="button" class="btn btn-primary" ng-click="getUsers()"
+                    style="min-width: 50px; border-radius: 0px;">
+                <span class="glyphicon glyphicon-cloud-download"></span>
+            </button>
+            <a href="#/users/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+                <span>+</span><span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
         <div>
             <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"></pagination>
         </div>
-            <div id="data_tbl" class="table-responsive boxContent">
-                <table class="sorttable table table-hover table-striped table-responsive header-fixed">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('user')">Όνομα Χρήστη</button>
-                            <span class="sortorder" ng-show="propertyName === 'user'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('fname')">Όνομα</button>
-                            <span class="sortorder" ng-show="propertyName === 'fname'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('sname')">Επώνυμο</button>
-                            <span class="sortorder" ng-show="propertyName === 'sname'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('phone')">Τηλέφωνο</button>
-                            <span class="sortorder" ng-show="propertyName === 'phone'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('em_main')">Email</button>
-                            <span class="sortorder" ng-show="propertyName === 'em_main'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('em_sec')">Email 2nd</button>
-                            <span class="sortorder" ng-show="propertyName === 'em_sec'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('em_pant')">Uni email</button>
-                            <span class="sortorder" ng-show="propertyName === 'em_pant'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('ucategories.descr')">Κατηγορία</button>
-                            <span class="sortorder" ng-show="propertyName === 'ucategories.descr'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('tm.title')">Τμήμα</button>
-                            <span class="sortorder" ng-show="propertyName === 'tm.title'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <th>
-                            <button class="btn btn-link" ng-click="sortBy('comments')">Σχόλια</button>
-                            <span class="sortorder" ng-show="propertyName === 'comments'"
-                                  ng-class="{reverse: reverse}"></span>
-                        </th>
-                        <!--<th>hash</th>-->
-                        <!--<th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>-->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="user in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
-                        style="cursor: pointer" ng-class="{selected: user.id === item.id}">
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.user}}</td>
-                        <td>{{ user.fname }}</td>
-                        <td>{{ user.sname}}</td>
-                        <td>{{ user.phone}}</td>
-                        <td>{{ user.em_main}}</td>
-                        <td>{{ user.em_sec}}</td>
-                        <td>{{ user.em_pant}}</td>
-                        <td>{{ user.ucategories.descr}}</td>
-                        <td>{{ user.tm.title }}</td>
-                        <td>{{ user.comments}}</td>
-                        <!--<td>{{user.hash}}</td>-->
-                        <td>
-
-                            <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
-                                    class="glyphicon glyphicon-pencil"></span></a>
-                            <a href="#/users/{{user.id}}/roles" type="button" class="btn btn-primary thumb"><span
-                                    class="glyphicon glyphicon-knight"></span></a>
-                            <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"><span
-                                    class="glyphicon glyphicon-transfer"></span></a>
-                            <button ng-click="deleteUser(user)" type="button" class="btn btn-danger">
-                                <span class="glyphicon glyphicon-erase"></span>
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <pre>total users : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+        <div id="data_tbl" class="table-responsive boxContent">
+            <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('user')">Όνομα Χρήστη</button>
+                        <span class="sortorder" ng-show="propertyName === 'user'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('fname')">Όνομα</button>
+                        <span class="sortorder" ng-show="propertyName === 'fname'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('sname')">Επώνυμο</button>
+                        <span class="sortorder" ng-show="propertyName === 'sname'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('phone')">Τηλέφωνο</button>
+                        <span class="sortorder" ng-show="propertyName === 'phone'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('em_main')">Email</button>
+                        <span class="sortorder" ng-show="propertyName === 'em_main'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('em_sec')">Email 2nd</button>
+                        <span class="sortorder" ng-show="propertyName === 'em_sec'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('em_pant')">Uni email</button>
+                        <span class="sortorder" ng-show="propertyName === 'em_pant'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('ucategories.descr')">Κατηγορία</button>
+                        <span class="sortorder" ng-show="propertyName === 'ucategories.descr'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('tm.title')">Τμήμα</button>
+                        <span class="sortorder" ng-show="propertyName === 'tm.title'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('comments')">Σχόλια</button>
+                        <span class="sortorder" ng-show="propertyName === 'comments'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>...</th>
+                    <!--<th>hash</th>-->
+                    <!--<th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+                    style="cursor: pointer" ng-class="{selected: user.id === item.id}">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.user}}</td>
+                    <td>{{ user.fname }}</td>
+                    <td>{{ user.sname}}</td>
+                    <td>{{ user.phone}}</td>
+                    <td>{{ user.em_main}}</td>
+                    <td>{{ user.em_sec}}</td>
+                    <td>{{ user.em_pant}}</td>
+                    <td>{{ user.ucategories.descr}}</td>
+                    <td>{{ user.tm.title }}</td>
+                    <td>{{ user.comments}}</td>
+                    <!--<td>{{user.hash}}</td>-->
+                    <td>
+                        <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
+                                class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="#/users/{{user.id}}/roles" type="button" class="btn btn-primary thumb"><span
+                                class="glyphicon glyphicon-knight"></span></a>
+                        <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"><span
+                                class="glyphicon glyphicon-transfer"></span></a>
+                        <button ng-click="deleteUser(user)" type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-erase"></span>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-
+        <pre>total users : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+    </div>
 </div>
