@@ -1,4 +1,5 @@
 <div>
+    <div><h2 style="text-align: center;"> Αιτήματα ανηκουν στον.... </h2></div>
     <div style="text-align: left;padding-left: 5px;">
         <a href back-button type="button" class="btn btn-warning">
             <span class="glyphicon glyphicon-chevron-left">
@@ -6,47 +7,121 @@
             </span>
         </a>
     </div>
-    <table class="table table-striped">
-        <tr>
-            <th>id</th>
-            <th>req_dt</th>
-            <th>user_id</th>
-            <th>descr</th>
-            <th>period</th>
-            <th>ps_id</th>
-            <th>teacher</th>
-            <th>from_book</th>
-            <th>class_use</th>
-            <th>links</th>
-            <th>fromdt</th>
-            <th>todt</th>
-            <th>protocol_id</th>
-            <th>req_stat</th>
-            <th>...</th>
+    <div style="padding: 15px">
+        <div style="display: flex">
+            <input type="text" ng-model="filter" class="form-control" placeholder="search"
+                   style="padding: 5px; width: 100%">
+        </div>
+        <div>
+            <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+                        num-pages="numPages"></pagination>
+        </div>
+        <div id="data_tbl" class="table-responsive boxContent">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('id')">ID</button>
+                        <span class="sortorder" ng-show="propertyName === 'id'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('req_dt')">req_dt</button>
+                        <span class="sortorder" ng-show="propertyName === 'req_dt'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('user_id')">user_id</button>
+                        <span class="sortorder" ng-show="propertyName === 'user_id'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('descr')">descr</button>
+                        <span class="sortorder" ng-show="propertyName === 'descr'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('period')">period</button>
+                        <span class="sortorder" ng-show="propertyName === 'period'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('ps_id')">ps_id</button>
+                        <span class="sortorder" ng-show="propertyName === 'ps_id'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('teacher')">teacher</button>
+                        <span class="sortorder" ng-show="propertyName === 'teacher'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('from_book')">from_book</button>
+                        <span class="sortorder" ng-show="propertyName === 'from_book'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('class_use')">class_use</button>
+                        <span class="sortorder" ng-show="propertyName === 'class_use'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('links')">links</button>
+                        <span class="sortorder" ng-show="propertyName === 'links'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('fromdt')">fromdt</button>
+                        <span class="sortorder" ng-show="propertyName === 'fromdt'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('todt')">todt</button>
+                        <span class="sortorder" ng-show="propertyName === 'todt'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('protocol_id')">protocol_id</button>
+                        <span class="sortorder" ng-show="propertyName === 'protocol_id'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('req_stat')">req_stat</button>
+                        <span class="sortorder" ng-show="propertyName === 'req_stat'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>...</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="request in uRequest.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+                    style="cursor: pointer">
+                    <td>{{ request.id }}</td>
+                    <td>{{ request.req_dt }}</td>
+                    <td>{{ request.user_id }}</td>
+                    <td><textarea disabled>{{ request.descr }}</textarea></td>
+                    <td>{{ request.period }}</td>
+                    <td>{{ request.ps_id }}</td>
+                    <td>{{ request.teacher }}</td>
+                    <td>{{ request.from_book }}</td>
+                    <td>{{ request.class_use }}</td>
+                    <td>{{ request.links }}</td>
+                    <td>{{ request.fromdt }}</td>
+                    <td>{{ request.todt }}</td>
+                    <td>{{ request.protocol_id }}</td>
+                    <td>{{ request.req_stat }}</td>
+                    <td>
 
-        </tr>
-        <tr ng-repeat="request in uRequest">
-            <td>{{ request.id }}</td>
-            <td>{{ request.req_dt }}</td>
-            <td>{{ request.user_id }}</td>
-            <td>{{ request.descr }}</td>
-            <td>{{ request.period }}</td>
-            <td>{{ request.ps_id }}</td>
-            <td>{{ request.teacher }}</td>
-            <td>{{ request.from_book }}</td>
-            <td>{{ request.class_use }}</td>
-            <td>{{ request.links }}</td>
-            <td>{{ request.fromdt }}</td>
-            <td>{{ request.todt }}</td>
-            <td>{{ request.protocol_id }}</td>
-            <td>{{ request.req_stat }}</td>
-            <td>
-                <button ng-click="editRequestData(request)" type="button" class="btn btn-info">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                <!--//TODO: add request , directive and sent it to the request form add--(post)-request -->
-            </td>
-        </tr>
-    </table>
+
+                        <button ng-click="updateRequest(request)" type="button" class="btn btn-info">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <!--//TODO: add request , directive and sent it to the request form   ADD AND EDIT    --(post+put)-request  WHEN REQUESTS IS READY TO LAUNCH   -->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <pre>total users : {{uRequest.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+    </div>
 </div>
-

@@ -64,14 +64,14 @@
         <div class="form-group" ng-class="{ 'has-error' : userForm.fname.$invalid && !userForm.fname.$pristine }">
             <label for="fname" class="required">First Name<span class="form-required">*</span>:</label>
             <input id="fname" name="fname" class="form-control" type="text" ng-model="item.fname">
-            <p ng-show="userForm.fname.$invalid && !userForm.fname.$pristine" class="help-block">You first name is
+            <p ng-show="userForm.fname.$invalid && !userForm.fname.$pristine" class="help-block">Your first name is
                 required.</p>
         </div>
         <!-- LASTNAME -->
         <div class="form-group" ng-class="{ 'has-error' : userForm.sname.$invalid && !userForm.sname.$pristine }">
             <label for="sname" class="required">Last Name<span class="form-required">*</span>:</label>
             <input id="sname" name="sname" class="form-control" type="text" ng-model="item.sname">
-            <p ng-show="userForm.sname.$invalid && !userForm.sname.$pristine" class="help-block">You last name is
+            <p ng-show="userForm.sname.$invalid && !userForm.sname.$pristine" class="help-block">Your last name is
                 required.</p>
         </div>
         <!--PHONE-->
@@ -80,7 +80,7 @@
             <input id="phone" name="phone" class="form-control" type="number" ng-model="item.phone" ng-minlength="5"
                    ng-maxlength="10">
             <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Your phone is
-                required.</p>
+                required.Look out the lenght!</p>
         </div>
         <!-- ID -->
         <!--<div class="form-group">-->
@@ -109,7 +109,7 @@
                 ng-if="item.id>0">Upd User
         </button>
         <button type="button" class="btn btn-primary" ng-click="saveUser(item)" style="padding: 5px"
-                ng-if="item.tm_id && !item.id">Save User
+                ng-if="item.fname && item.sname && !item.id">Save User
         </button>
     </form>
 </div>

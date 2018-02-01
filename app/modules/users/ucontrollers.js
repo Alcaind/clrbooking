@@ -10,14 +10,9 @@ angular.module('Users', [
 
         AuthenticationService.CheckCredentials();
 
-        $scope.apiResults = [];
         $scope.dp = [];
         $scope.item = {};
         $scope.method = '';
-
-        $scope.currentPage = 1;
-        $scope.itemsPerPage = 10;
-        $scope.totalItems = 5;
         $scope.baseURL = 'api/public/users';
 
         $scope.getUsers = function () {
@@ -33,12 +28,6 @@ angular.module('Users', [
                 $scope.item = {};
                 MakeModal.generalInfoModal('sm', 'Info', 'info', 'User Deleted', 1)
             });
-        };
-
-        $scope.getRoles = function (user) {
-            api.apiCall('GET', $scope.baseURL + "/" + user.id + '/roles', function (results) {
-                $scope.uRoles = results.data;
-            })
         };
 
         $scope.propertyName = 'fname';
@@ -59,6 +48,7 @@ angular.module('Users', [
         AuthenticationService.CheckCredentials();
         $scope.tms = {};
         $scope.ucategories = {};
+        $scope.baseURL = 'api/public/users';
 
         api.apiCall('GET', 'api/public/tms', function (results) {
             $scope.tms = results.data;
@@ -83,13 +73,13 @@ angular.module('Users', [
                 hash: ""
             };
         } else {
-            api.apiCall('GET', 'api/public/users/' + $routeParams.userId, function (results) {
+            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId, function (results) {
                 $scope.item = results.data;
             });
         }
 
         $scope.updateUser = function (item) {
-            api.apiCall('PUT', 'api/public/users/' + item.id, function (results) {
+            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
                 MakeModal.generalInfoModal('sm', 'Info', 'Info', 'User Updated', 1);
                 history.back();
             }, undefined, item)
@@ -97,7 +87,7 @@ angular.module('Users', [
         };
 
         $scope.saveUser = function (item) {
-            api.apiCall('POST', 'api/public/users', function (results) {
+            api.apiCall('POST', $scope.baseURL + "/", function (results) {
                 MakeModal.generalInfoModal('sm', 'Info', 'Info', 'User Created', 1);
                 history.back();
             }, undefined, item)
@@ -121,7 +111,6 @@ angular.module('Users', [
                 var firstPassword = '#' + attrs.pwCheck;
                 elem.add(firstPassword).on('keyup', function () {
                     scope.$apply(function () {
-                        // console.info(elem.val() === $(firstPassword).val());
                         ctrl.$setValidity('pwmatch', elem.val() === $(firstPassword).val());
                     });
                 });

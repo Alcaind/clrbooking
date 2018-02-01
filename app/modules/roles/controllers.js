@@ -4,73 +4,28 @@ angular.module('Roles', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Users'
-]).controller('RolesController', ['$scope', 'MakeModal', '$http', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, $http, api, orderBy, AuthenticationService) {
+    'Authentication'
 
-
+]).controller('RolesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
     AuthenticationService.CheckCredentials();
-
-    $scope.apiResults = [];
     $scope.dp = [];
     $scope.item = {};
     $scope.method = '';
-
-    $scope.currentPage = 1;
-    $scope.itemsPerPage = 10;
-    $scope.totalItems = 5;
-
-    $scope.rolesApi = function (url, method, data, successCallback, errorCallback) {
-        method = typeof method !== 'undefined' ? method : 'GET';
-        data = typeof data !== 'undefined' ? data : null;
-        url = typeof url !== 'undefined' ? url : 'api/public/roles';
-        successCallback = typeof successCallback !== 'undefined' ? successCallback : $scope.successCallback;
-        errorCallback = typeof errorCallback !== 'undefined' ? errorCallback : $scope.errorCallback;
-        $scope.method = method;
-        $scope.item = data;
-
-        return api.apiCall(method, url, successCallback, errorCallback, data, $scope.dp, $scope)
-    }
-
-    $scope.successCallback = function (results) {
-        switch ($scope.method) {
-            case 'DELETE' :
-                $scope.dp.splice($scope.dp.indexOf($scope.item), 1);
-                $scope.item = {};
-                $scope.modalMessage = "Role Deleted";
-                var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-                break;
-            case 'PUT' :
-                $scope.modalMessage = "Role Updated";
-                var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-                break;
-            case 'POST' :
-                $scope.dp.push(results.data);
-                $scope.modalMessage = "Role Inserted";
-                var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-                break;
-            case 'GET' :
-                $scope.apiResults = results.data;
-                break;
-            default :
-                $scope.apiResults = results.data;
-                break
-        }
-    };
-
-    $scope.errorCallback = function (results) {
-
-    };
+    $scope.baseURL = 'api/public/roles';
 
     $scope.getRoles = function () {
-        $scope.rolesApi(undefined, undefined, undefined, function (results) {
+        api.apiCall('GET', $scope.baseURL, function (results) {
             $scope.dp = results.data;
-            $scope.totalItems = results.data.length;
+            $scope.totalItems = $scope.dp.length;
         });
     };
 
     $scope.deleteRole = function (item) {
-        $scope.rolesApi('api/public/roles/' + item.id, 'DELETE', item);
-
+        api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
+            $scope.dp.splice($scope.dp.indexOf(item), 1);
+            $scope.item = {};
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Role Deleted', 1)
+        });
     };
 
 
@@ -90,6 +45,7 @@ angular.module('Roles', [
 }])
     .controller('RoleProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
         AuthenticationService.CheckCredentials();
+        $scope.baseURL = 'api/public/roles';
 
         if (!$routeParams.roleId) {
             $scope.item = {
@@ -97,23 +53,24 @@ angular.module('Roles', [
                 descr: ""
             };
         } else {
-            api.apiCall('GET', 'api/public/roles/' + $routeParams.roleId, function (results) {
+            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId, function (results) {
                 $scope.item = results.data;
             });
         }
 
         $scope.updateRole = function (item) {
-            api.apiCall('PUT', 'api/public/roles/' + item.id, function (results) {
-                $scope.modalMessage = "Role Updated";
-                var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-            }, undefined, item, undefined, $scope)
+            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Role Updated', 1);
+                history.back();
+            }, undefined, item)
+
         };
 
         $scope.saveRole = function (item) {
-            api.apiCall('POST', 'api/public/roles', function (results) {
-                var modalInstance = MakeModal.infoModal('lg', "Role Created");
-
-            }, undefined, item, undefined, $scope)
+            api.apiCall('POST', $scope.baseURL, function (results) {
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Role Created', 1);
+                history.back();
+            }, undefined, item)
         };
     }])
 
@@ -122,7 +79,7 @@ angular.module('Roles', [
         restrict: 'EA',
         templateUrl: 'modules/roles/views/profile.html',
         scope: {
-            method: '=method'
+            method: '='
         },
         controller: 'RoleProfileController'
     })
@@ -130,21 +87,18 @@ angular.module('Roles', [
         restrict: 'EA',
         templateUrl: 'modules/roles/views/rolesusers.html',
         scope: {
-            method: '=method'
+            method: '='
         },
         controller: 'RolesUserController'
     })
     .controller('RolesUserController', ['$scope', 'api', '$routeParams', 'orderByFilter', function ($scope, api, $routeParams, orderBy) {
-
+        $scope.baseURL = 'api/public/roles';
         $scope.dp = [];
-        $scope.currentPage = 1;
-        $scope.itemsPerPage = 10;
-        $scope.totalItems = 5;
 
-        api.apiCall('GET', 'api/public/roles/' + $routeParams.roleId + '/users', function (results) {
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId + '/users', function (results) {
             $scope.dp = results.data;
             $scope.totalItems = results.data.length;
-        })
+        });
 
         $scope.propertyName = 'user';
         $scope.reverse = true;
@@ -156,6 +110,4 @@ angular.module('Roles', [
             $scope.propertyName = propertyName;
         };
     }])
-
-
 ;

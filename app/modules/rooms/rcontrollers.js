@@ -5,19 +5,11 @@ angular.module('Rooms', [
     'ui.bootstrap',
     'ApiModules',
     'Authentication',
-]).controller('RoomsController', ['$scope', 'MakeModal', '$http', 'api', function ($scope, MakeModal, $http, api) {
-
+]).controller('RoomsController', ['$scope', 'MakeModal', '$http', 'api', 'AuthenticationService', function ($scope, MakeModal, $http, api, AuthenticationService) {
     AuthenticationService.CheckCredentials();
-
-    $scope.apiResults = [];
     $scope.dp = [];
     $scope.item = {};
     $scope.method = '';
-
-    $scope.currentPage = 1;
-    $scope.itemsPerPage = 10;
-    $scope.totalItems = 5;
-
     $scope.roomItems = [];
 
     $scope.roomsApi = function (url, method, data, successCallback, errorCallback) {

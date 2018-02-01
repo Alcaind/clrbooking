@@ -1,0 +1,99 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <form class="requestForm" name="requestForm" novalidate>
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.req_dt.$invalid && !requestForm.req_dt.$pristine }">
+            <label class="required" for="req_dt">req_dt<span class="form-required">*</span>:</label>
+            <input id="req_dt" name="req_dt" class="form-control" type="text" ng-model="item.req_dt">
+            <p ng-show="requestForm.req_dt.$invalid && !requestForm.req_dt.$pristine" class="help-block">Enter
+                req_dt.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.user_id.$invalid && !requestForm.user_id.$pristine }">
+            <label class="required" for="user_id">user_id<span class="form-required">*</span>:</label>
+            <input id="user_id" name="user_id" class="form-control" type="text" ng-model="item.user_id">
+            <p ng-show="requestForm.user_id.$invalid && !requestForm.user_id.$pristine" class="help-block">Enter
+                user_id.</p>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.period.$invalid && !requestForm.period.$pristine }">
+            <label class="required" for="period">period<span class="form-required">*</span>:</label>
+            <input id="period" name="period" class="form-control" type="text" ng-model="item.period">
+            <p ng-show="requestForm.period.$invalid && !requestForm.period.$pristine" class="help-block">Enter
+                period.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : requestForm.ps_id.$invalid && !requestForm.ps_id.$pristine }">
+            <label class="required" for="ps_id">ps_id<span class="form-required">*</span>:</label>
+            <input id="ps_id" name="ps_id" class="form-control" type="text" ng-model="item.ps_id">
+            <p ng-show="requestForm.ps_id.$invalid && !requestForm.ps_id.$pristine" class="help-block">Enter ps_id.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.teacher.$invalid && !requestForm.teacher.$pristine }">
+            <label class="required" for="teacher">teacher<span class="form-required">*</span>:</label>
+            <input id="teacher" name="teacher" class="form-control" type="text" ng-model="item.teacher">
+            <p ng-show="requestForm.teacher.$invalid && !requestForm.teacher.$pristine" class="help-block">Enter
+                teacher.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.from_book.$invalid && !requestForm.from_book.$pristine }">
+            <label class="required" for="from_book">from_book<span class="form-required">*</span>:</label>
+            <input id="from_book" name="from_book" class="form-control" type="text" ng-model="item.from_book">
+            <p ng-show="requestForm.from_book.$invalid && !requestForm.from_book.$pristine" class="help-block">Enter
+                from_book.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.class_use.$invalid && !requestForm.class_use.$pristine }">
+            <label class="required" for="class_use">class_use<span class="form-required">*</span>:</label>
+            <input id="class_use" name="class_use" class="form-control" type="text" ng-model="item.class_use">
+            <p ng-show="requestForm.class_use.$invalid && !requestForm.class_use.$pristine" class="help-block">Enter
+                class_use.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : requestForm.links.$invalid && !requestForm.links.$pristine }">
+            <label class="required" for="links">links<span class="form-required">*</span>:</label>
+            <input id="links" name="links" class="form-control" type="text" ng-model="item.links">
+            <p ng-show="requestForm.links.$invalid && !requestForm.links.$pristine" class="help-block">Enter links.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.fromdt.$invalid && !requestForm.fromdt.$pristine }">
+            <label class="required" for="fromdt">fromdt<span class="form-required">*</span>:</label>
+            <input id="fromdt" name="fromdt" class="form-control" type="text" ng-model="item.fromdt">
+            <p ng-show="requestForm.fromdt.$invalid && !requestForm.fromdt.$pristine" class="help-block">Enter
+                fromdt.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : requestForm.todt.$invalid && !requestForm.todt.$pristine }">
+            <label class="required" for="todt">todt<span class="form-required">*</span>:</label>
+            <input id="todt" name="todt" class="form-control" type="text" ng-model="item.todt">
+            <p ng-show="requestForm.todt.$invalid && !requestForm.todt.$pristine" class="help-block">Enter todt.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.protocol_id.$invalid && !requestForm.protocol_id.$pristine }">
+            <label class="required" for="protocol_id">protocol_id<span class="form-required">*</span>:</label>
+            <input id="protocol_id" name="protocol_id" class="form-control" type="text" ng-model="item.protocol_id">
+            <p ng-show="requestForm.protocol_id.$invalid && !requestForm.protocol_id.$pristine" class="help-block">Enter
+                protocol_id.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.req_stat.$invalid && !requestForm.req_stat.$pristine }">
+            <label class="required" for="req_stat">req_stat<span class="form-required">*</span>:</label>
+            <input id="req_stat" name="req_stat" class="form-control" type="text" ng-model="item.req_stat">
+            <p ng-show="requestForm.req_stat.$invalid && !requestForm.req_stat.$pristine" class="help-block">Enter
+                req_stat.</p>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="updateRequest()" style="padding: 5px"
+                ng-if="item.id>0">Upd Requests
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveRequest()" style="padding: 5px"
+                ng-if="item.req_dt && !item.id">Save Requests
+        </button>
+    </form>
+</div>

@@ -144,7 +144,8 @@ angular.module('MainComponents', [
             scope: {
                 currentPage: "=",
                 totalItems: "<",
-                itemsPerPage: "="
+                itemsPerPage: "=",
+                numPages: "="
             },
             templateUrl: 'modules/mainComponents/views/pagination.html',
             controller: "PaginationController"
@@ -153,9 +154,10 @@ angular.module('MainComponents', [
     .controller('PaginationController', ['$scope', function ($scope) {
         $scope.pageThresholds = [{th: 'all'}, {th: 3}, {th: 5}, {th: 10}, {th: 20}, {th: 50}];
         $scope.currentPage = 1;
-        $scope.itemsPerPage = 50;
-        $scope.maxSize = 5; //Number of pager buttons to show
-        $scope.totalItems = 5;
+        $scope.maxSize = 5;
+        $scope.itemsPerPage = 10;
+        $scope.numPages = $scope.totalItems / $scope.itemsPerPage;
+
 
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
@@ -164,6 +166,7 @@ angular.module('MainComponents', [
         $scope.setItemsPerPage = function (num) {
             $scope.itemsPerPage = num === 'all' ? $scope.totalItems : num;
             $scope.currentPage = 1; //reset to first page
+            $scope.numPages = $scope.totalItems / $scope.itemsPerPage;
         };
 
     }])
