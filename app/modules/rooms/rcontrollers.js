@@ -4,109 +4,100 @@ angular.module('Rooms', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication',
-]).controller('RoomsController', ['$scope', 'MakeModal', '$http', 'api', 'AuthenticationService', function ($scope, MakeModal, $http, api, AuthenticationService) {
+    'Authentication'
+]).controller('RoomsController', ['$scope', '$routeParams', 'api', 'MakeModal', 'orderByFilter', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, orderBy, AuthenticationService) {
     AuthenticationService.CheckCredentials();
+
     $scope.dp = [];
     $scope.item = {};
     $scope.method = '';
-    $scope.roomItems = [];
-
-    $scope.roomsApi = function (url, method, data, successCallback, errorCallback) {
-
-        method = typeof method !== 'undefined' ? method : 'GET';
-        data = typeof data !== 'undefined' ? data : null;
-        url = typeof url !== 'undefined' ? url : 'api/public/rooms';
-        $scope.method = method;
-        $scope.item = data;
-        successCallback = typeof successCallback !== 'undefined' ? successCallback : $scope.successCallback;
-        errorCallback = typeof errorCallback !== 'undefined' ? errorCallback : $scope.errorCallback;
-
-        return api.apiCall(method, url, successCallback, errorCallback, data, $scope.dp, $scope)
-    };
-
-    $scope.successCallback = function (results) {
-        switch ($scope.method) {
-            case 'DELETE' :
-                $scope.dp.splice($scope.dp.indexOf($scope.item), 1);
-                $scope.item = {};
-                $scope.modalMessage = "Room Deleted";
-                var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-                break;
-            case 'PUT' :
-                $scope.modalMessage = "Room Updated";
-                var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-                break;
-            case 'POST' :
-                $scope.dp.push(results.data);
-                $scope.modalMessage = "Room Inserted";
-                var modalInstance = MakeModal.defaultModal('lg', null, null, $scope);
-                break;
-            case 'GET' :
-                $scope.dp = results.data;
-                break;
-            default :
-                $scope.dp = results.data;
-                break
-        }
-    };
-    $scope.errorCallback = function (results) {
-
-    };
-
-    $scope.selectRoom = function (room) {
-        $scope.item = room;
-    };
-
-    $scope.newRoom = function () {
-        $scope.item = {
-            name: "",
-            address: "",
-            building: "",
-            floor: "",
-            status: "",
-            active: "",
-            destroyed: "",
-            nonexist: "",
-            capasity: "",
-            width: "",
-            height: "",
-            xoros: "",
-            exams_capasity: "",
-            capasity_categ: "",
-            tm_owner: "",
-            dt: "",
-            stat_comm: "",
-            conf_id: "",
-            type: "",
-            use_id: "",
-            use_str: ""
-        };
-    };
+    $scope.baseURL = 'api/public/rooms';
 
     $scope.getRooms = function () {
-        $scope.roomsApi(undefined, undefined, undefined, function (results) {
+        api.apiCall('GET', $scope.baseURL, function (results) {
             $scope.dp = results.data;
+            $scope.totalItems = $scope.dp.length;
         });
     };
 
-
     $scope.deleteRooms = function (item) {
-        $scope.roomsApi(undefined, 'DELETE', item);
+        api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
+            $scope.dp.splice($scope.dp.indexOf(item), 1);
+            $scope.item = {};
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Αίθουσα διαγράφηκε', 1)
+        });
     };
 
-    $scope.updateRooms = function (item) {
-        $scope.roomsApi(undefined, 'PUT', item);
+    $scope.propertyName = 'name';
+    $scope.reverse = true;
+    $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
+
+    $scope.sortBy = function (propertyName) {
+        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+            ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
     };
 
-    $scope.saveRoom = function (item) {
-        $scope.roomsApi(undefined, 'POST', item);
-    };
+    $scope.getRooms();
 
-    $scope.getItems = function (room) {
-        $scope.roomsApi("api/public/rooms/" + room.id + "/item", 'GET', undefined, function (results) {
-            $scope.roomItems = results.data;
-        })
-    };
+}])
 
-}]);
+    .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
+        AuthenticationService.CheckCredentials();
+        $scope.baseURL = 'api/public/rooms';
+
+        if (!$routeParams.roomId) {
+            $scope.item = {
+                name: "",
+                address: "",
+                building: "",
+                floor: "",
+                status: "",
+                active: "",
+                destroyed: "",
+                nonexist: "",
+                capasity: "",
+                width: "",
+                height: "",
+                xoros: "",
+                exams_capasity: "",
+                capasity_categ: "",
+                tm_owner: "",
+                dt: "",
+                stat_comm: "",
+                conf_id: "",
+                type: "",
+                use_id: "",
+                use_str: ""
+            };
+        } else {
+            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId, function (results) {
+                $scope.item = results.data;
+            });
+        }
+        $scope.updateRoom = function (item) {
+            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η αίθουσα ανανεώθηκε', 1);
+                history.back();
+            }, undefined, item)
+
+        };
+
+        $scope.saveRoom = function (item) {
+            api.apiCall('POST', $scope.baseURL, function (results) {
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα αίθουσα', 1);
+                history.back();
+            }, undefined, item)
+        }
+
+    }])
+    .component('roomProfile', {
+        restrict: 'EA',
+        templateUrl: 'modules/rooms/rviews/rprofile.html',
+        scope: {
+            method: '='
+        },
+        controller: 'RoomProfileController'
+    })
+
+;

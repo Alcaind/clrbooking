@@ -8,11 +8,11 @@
     </div>
     <form class="roomForm" name="roomForm" novalidate>
         <!-- NAME -->
-        <div class="form-group" ng-class="{ 'has-error' : roomForm.rname.$invalid && !roomForm.rname.$pristine }">
-            <label class="required" for="rname">Όνομα Αιθουσας<span class="form-required">*</span>:</label>
+        <div class="form-group" ng-class="{ 'has-error' : roomForm.name.$invalid && !roomForm.name.$pristine }">
+            <label class="required" for="name">Όνομα Αιθουσας<span class="form-required">*</span>:</label>
             <div>
-                <input id="rname" name="rname" class="form-control" type="text" ng-model="item.user">
-                <p ng-show="roomForm.rname.$invalid && !roomForm.rname.$pristine" class="help-block">The name is
+                <input id="name" name="name" class="form-control" type="text" ng-model="item.name">
+                <p ng-show="roomForm.name.$invalid && !roomForm.name.$pristine" class="help-block">The name is
                     required.</p>
             </div>
         </div>
@@ -54,7 +54,7 @@
         <!--destroyed-->
         <div class="form-group">
             <label for="destroyed" class="required">destroyed:</label>
-            <input id="destroyed" name="destroyed" class="form-control" type="number" ng-model="item.destroy">
+            <input id="destroyed" name="destroyed" class="form-control" type="number" ng-model="item.destroyed">
         </div>
         <!--nonexist-->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine }">
@@ -65,7 +65,7 @@
         </div>
         <!--capasity-->
         <div class="form-group">
-            <label for="capasity" class="required">capasit:</label>
+            <label for="capasity" class="required">capasity:</label>
             <input id="capasity" name="capasity" class="form-control" type="number" ng-model="item.capasity">
         </div>
         <!--width-->
@@ -130,11 +130,11 @@
             <input id="use_str" name="use_str" class="form-control" type="number" ng-model="item.use_str">
         </div>
 
-        <button type="button" class="btn btn-primary" ng-click="updateRooms(item)" style="padding: 5px"
-                ng-if="item.name>0">Upd Room
+        <button type="button" class="btn btn-primary" ng-click="updateRoom(item)" style="padding: 5px"
+                ng-if="item.id>0">Upd Room
         </button>
         <button type="button" class="btn btn-primary" ng-click="saveRoom(item)" style="padding: 5px"
-                ng-if="item.name && !item.address">Save Room
+                ng-if="item.name && !item.id">Save Room
         </button>
     </form>
 </div>

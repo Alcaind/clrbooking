@@ -10,14 +10,14 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 
-$app->get('/kat', function (Request $request, Response $response) {
+$app->get('/kats', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $kat = \App\Models\Kat::all();
 
     return $response->getBody()->write($kat->toJson());
 });
 
-$app->get('/kat/{id}', function (Request $request, Response $response, $args) {
+$app->get('/kats/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
@@ -29,7 +29,7 @@ $app->get('/kat/{id}', function (Request $request, Response $response, $args) {
     return $response->getBody()->write($kat->toJson());
 });
 
-$app->post('/kat', function (Request $request, Response $response) {
+$app->post('/kats', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     try {
@@ -46,7 +46,7 @@ $app->post('/kat', function (Request $request, Response $response) {
     return $response->withStatus(201)->getBody()->write($kat->toJson());
 });
 
-$app->delete('/kat/{id}', function ($request, $response, $args) {
+$app->delete('/kats/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $kat = \App\Models\Kat::find($id);
@@ -58,7 +58,7 @@ $app->delete('/kat/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)->getBody()->write($kat->toJson());
 });
 
-$app->put('/kat/{id}', function ($request, $response, $args) {
+$app->put('/kats/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
     print_r($data);

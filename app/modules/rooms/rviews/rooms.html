@@ -2,7 +2,6 @@
     <div>
         <h2 style="text-align: center;"> Κατάλογος Αιθουσών </h2>
     </div>
-
     <div style="padding: 15px">
         <div style="display: flex">
             <input type="text" ng-model="filter" class="form-control" placeholder="search"
@@ -160,9 +159,14 @@
                     <td>
                         <a href="#/rooms/{{room.id}}" type="button" class="btn btn-info thumb"><span
                                 class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="#/rooms/{{room.id}}/requests" type="button" class="btn btn-success thumb"><span
-                                class="glyphicon glyphicon-transfer"></span></a>
-                        <button ng-click="getItems(room)" type="button" class="btn btn-danger">
+
+                        <!--<a href="#/rooms/{{room.id}}/booking" type="button" class="btn btn-success thumb"><span-->
+                        <!--class="glyphicon glyphicon-check"></span></a>   TODO:   BUTTON BOOKING THE ROOM        -->
+
+                        <!--<a href="#/rooms/{{room.id}}/item" type="button" class="btn btn-info thumb"><span-->
+                        <!--class="glyphicon glyphicon-blackboard"></span></a>  TODO: BUTTON CHECK THE ITEMS INSIDE THAT ROOM    -->
+
+                        <button ng-click="deleteRooms(room)" type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-erase"></span>
                         </button>
                     </td>
@@ -170,45 +174,7 @@
                 </tbody>
             </table>
         </div>
+        <pre>total requests list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
 </div>
-<!--<td>-->
-<!--<button ng-click="selectRoom(room)" type="button" class="btn btn-primary">-->
-<!--<span class="glyphicon glyphicon-pencil"></span>-->
-<!--</button>-->
-<!--<button ng-click="deleteRooms(room)" type="button" class="btn btn-primary">-->
-<!--<span class="glyphicon glyphicon-erase"></span>-->
-<!--</button>-->
-<!--<button ng-click="getItems(room)" type="button" class="btn btn-primary">-->
-<!--<span class="glyphicon glyphicon-briefcase"></span>-->
-<!--</button>-->
-<!--</td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--</div>-->
-
-<!--<div>-->
-<!--<table>-->
-<!--<tr>-->
-<!--<th>id</th>-->
-<!--<th>descr</th>-->
-<!--<th>comments</th>-->
-<!--<th>code</th>-->
-<!--<th>status</th>-->
-<!--</tr>-->
-<!--<tr ng-repeat="item in roomItems">-->
-<!--<td>{{ item.id }}</td>-->
-<!--<td>{{ item.descr }}</td>-->
-<!--<td>{{ item.comments }}</td>-->
-<!--<td>{{ item.code }}</td>-->
-<!--<td>{{ item.status }}</td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--</div>-->
-
-
-
-
-
-
 

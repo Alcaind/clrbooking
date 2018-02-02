@@ -111,11 +111,8 @@
                     <td>{{ request.protocol_id }}</td>
                     <td>{{ request.req_stat }}</td>
                     <td>
-
-
-                        <button ng-click="updateRequest(request)" type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
+                        <a href="#/requests/{{request.id}}" type="button" class="btn btn-info">
+                            <span class="glyphicon glyphicon-pencil"></span></a>
                         <!--//TODO: add request , directive and sent it to the request form   ADD AND EDIT    --(post+put)-request  WHEN REQUESTS IS READY TO LAUNCH   -->
                     </td>
                 </tr>

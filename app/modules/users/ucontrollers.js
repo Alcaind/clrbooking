@@ -70,7 +70,9 @@ angular.module('Users', [
                 cat_id: "",
                 comments: "",
                 user: "",
-                hash: ""
+                hash: "",
+                created_at: "",
+                inserted_at: ""
             };
         } else {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId, function (results) {

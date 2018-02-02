@@ -89,10 +89,10 @@
             <p ng-show="requestForm.req_stat.$invalid && !requestForm.req_stat.$pristine" class="help-block">Enter
                 req_stat.</p>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="updateRequest()" style="padding: 5px"
+        <button type="button" class="btn btn-primary" ng-click="updateRequest(item)" style="padding: 5px"
                 ng-if="item.id>0">Upd Requests
         </button>
-        <button type="button" class="btn btn-primary" ng-click="saveRequest()" style="padding: 5px"
+        <button type="button" class="btn btn-primary" ng-click="saveRequest(item)" style="padding: 5px"
                 ng-if="item.req_dt && !item.id">Save Requests
         </button>
     </form>

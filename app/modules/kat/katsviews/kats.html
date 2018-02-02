@@ -1,57 +1,71 @@
 <div id="kat_main">
-    <h1> Kate8hnseis </h1>
-
-    <div id="options_div" style="padding: 5px">
-        <button type="button" class="btn btn-primary" ng-click="getKats()">Get Kats</button>
-        <button type="button" class="btn btn-primary" ng-click="newKat()">New Kats</button>
-        <input type="text" ng-model="filter" class="form-control" placeholder="search" style="padding: 5px; width: 50%">
-        <span class="glyphicon glyphicon-search"></span>
+    <div>
+        <h2 style="text-align: center;"> Κατάλογος Κατευθύνσεων </h2>
     </div>
+    <div style="padding: 15px">
+        <div style="display: flex">
+            <input type="text" ng-model="filter" class="form-control" placeholder="search"
+                   style="padding: 5px; width: 100%">
+            <button type="button" class="btn btn-primary" ng-click="getKats()"
+                    style="min-width: 50px; border-radius: 0px;">
+                <span class="glyphicon glyphicon-cloud-download"></span>
+            </button>
+            <a href="#/kats/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+                <span>+</span><span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+        <div>
+            <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+                        num-pages="numPages"></pagination>
+        </div>
+        <div id="data_tbl" class="table-responsive boxContent">
+            <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('tm_id')">tm_id</button>
+                        <span class="sortorder" ng-show="propertyName === 'tm_id'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('decr')">decr</button>
+                        <span class="sortorder" ng-show="propertyName === 'decr'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('title')">title</button>
+                        <span class="sortorder" ng-show="propertyName === 'title'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button class="btn btn-link" ng-click="sortBy('pm')">pm</button>
+                        <span class="sortorder" ng-show="propertyName === 'pm'"
+                              ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>...</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="kat in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+                    style="cursor: pointer">
+                    <td>{{ kat.id }}</td>
+                    <td>{{ kat.tm_id }}</td>
+                    <td>{{ kat.decr }}</td>
+                    <td>{{ kat.title }}</td>
+                    <td>{{ kat.pm }}</td>
+                    <td>
+                        <a href="#/kats/{{kat.id}}" type="button" class="btn btn-info thumb"><span
+                                class="glyphicon glyphicon-pencil"></span></a>
 
-    <div id="data_tbl" style="padding: 5px; height: 600px; overflow-y: auto">
-        <table>
-            <tr>
-                <th>id</th>
-                <th>tm_id</th>
-                <th>decr</th>
-                <th>title</th>
-                <th>pm</th>
-                <th><span class="glyphicon glyphicon-option-horizontal"></span></button></th>
-            </tr>
-            <tr ng-repeat="kat in kats|filter:filter">
-                <td>{{ kat.id }}</td>
-                <td>{{ kat.tm_id }}</td>
-                <td>{{ kat.decr }}</td>
-                <td>{{ kat.title }}</td>
-                <td>{{ kat.pm }}</td>
-                <td>
-                    <button ng-click="selectKat(kat)" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button ng-click="deleteKat(kat)" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-erase"></span>
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div style="padding: 5px">
-        <input type="text" ng-model="currentKat.id" class="form-control" placeholder="id" ng-disabled="true"
-               style="padding: 5px">
-        <input type="text" ng-model="currentKat.tm_id" class="form-control" placeholder="tm_id" style="padding: 5px">
-        <input type="text" ng-model="currentKat.decr" class="form-control" placeholder="decr"
-               style="padding: 5px">
-        <input type="text" ng-model="currentKat.title" class="form-control" placeholder="title"
-               style="padding: 5px">
-        <input type="text" ng-model="currentKat.pm" class="form-control" placeholder="pm"
-               style="padding: 5px">
-        <button type="button" class="btn btn-primary" ng-click="updateKat()" style="padding: 5px"
-                ng-if="currentKat.id>0">Upd Kats
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="insertKat()" style="padding: 5px"
-                ng-if="currentKat.tm_id && !currentKat.id">Save Kat
-        </button>
+                        <button ng-click="deleteKat(kat)" type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-erase"></span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <pre>total requests list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
 </div>
 
