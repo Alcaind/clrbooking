@@ -12,7 +12,8 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->get('/rooms', function (Request $request, Response $response) {
     //if (in_array("get", $this->jwt->scope)) {
     header("Content-Type: application/json");
-    $rooms = \App\Models\Rooms::all();
+    $rooms = \App\Models\Rooms::with(['room_category:id,descr', 'room_use'])->get();
+    //$rooms = \App\Models\RoomCategory::all();
     return $response->getBody()->write($rooms->toJson());
 });
 
@@ -20,7 +21,7 @@ $app->get('/rooms/{id}', function (Request $request, Response $response, $args) 
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $room = \App\Models\Rooms::find($id);
+        $room = \App\Models\Rooms::with(['room_category:id,descr'])->find($id);
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -54,8 +55,6 @@ $app->post('/rooms', function (Request $request, Response $response) {
         $room->conf_id = $data['conf_id'];
         $room->type = $data['type'];
         $room->use_id = $data['use_id'];
-        $room->use_str = $data['use_str'];
-
         $room->save();
     } catch (\Exception $e) {
         // do task when error
@@ -102,8 +101,6 @@ $app->put('/rooms/{id}', function ($request, $response, $args) {
         $room->conf_id = $data['conf_id'] ?: $room->conf_id;
         $room->type = $data['type'] ?: $room->type;
         $room->use_id = $data['use_id'] ?: $room->use_id;
-        $room->use_str = $data['use_str'] ?: $room->use_str;
-
         $room->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

@@ -89,7 +89,7 @@ angular.module('Users', [
         };
 
         $scope.saveUser = function (item) {
-            api.apiCall('POST', $scope.baseURL + "/", function (results) {
+            api.apiCall('POST', $scope.baseURL, function (results) {
                 MakeModal.generalInfoModal('sm', 'Info', 'Info', 'User Created', 1);
                 history.back();
             }, undefined, item)

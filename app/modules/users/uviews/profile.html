@@ -82,14 +82,6 @@
             <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Your phone is
                 required.Look out the lenght!</p>
         </div>
-        <!-- ID -->
-        <!--<div class="form-group">-->
-        <!--<label for="idnum">ID:-->
-        <!--<input id="idnum" ng-model="item.id" class="form-control" placeholder="id"-->
-        <!--ng-disabled="true">-->
-        <!--</label>-->
-        <!--</div>-->
-        <!--ID_TM-->
         <div class="form-group">
             <label for="idtm">TM_ID:</label>
             <select id="idtm" ng-model="item.tm_id" ng-options="tm.id as tm.title for tm in tms"></select>

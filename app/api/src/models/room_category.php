@@ -11,13 +11,12 @@ namespace App\Models;
 use  \Illuminate\Database\Eloquent\Model as Model;
 
 
-class Kat extends Model
+class RoomCategory extends Model
 {
-    protected $table = 'kat';
+    protected $table = 'room_category';
 
-    public function tm()
+    public function rooms()
     {
-        $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
+        $this->hasMany('\\App\\Models\\Rooms', 'category');
     }
-
 }

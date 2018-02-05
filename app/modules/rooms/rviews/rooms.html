@@ -114,20 +114,16 @@
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('type')">Τυπος Αιθουσας?</button>
-                        <span class="sortorder" ng-show="propertyName === 'type'"
+                        <button class="btn btn-link" ng-click="sortBy('category')">Τυπος Αιθουσας</button>
+                        <span class="sortorder" ng-show="propertyName === 'category'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('use_id')">use_id</button>
+                        <button class="btn btn-link" ng-click="sortBy('use_id')">Χρήση αίθουσας</button>
                         <span class="sortorder" ng-show="propertyName === 'use_id'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('use_str')">use_str</button>
-                        <span class="sortorder" ng-show="propertyName === 'use_str'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
+
                     <th>...</th>
                 </tr>
                 </thead>
@@ -153,9 +149,10 @@
                     <td>{{room.dt}}</td>
                     <td>{{room.stat_comm}}</td>
                     <td>{{room.conf_id}}</td>
-                    <td>{{room.type}}</td>
-                    <td>{{room.use_id}}</td>
-                    <td>{{room.use_str}}</td>
+                    <td>{{room.room_category.descr}}</td>
+                    <td>
+                        <li ng-repeat="use in room.room_use">{{use.synt}}</li>
+                    </td>
                     <td>
                         <a href="#/rooms/{{room.id}}" type="button" class="btn btn-info thumb"><span
                                 class="glyphicon glyphicon-pencil"></span></a>

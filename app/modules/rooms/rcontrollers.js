@@ -42,9 +42,19 @@ angular.module('Rooms', [
 
 }])
 
-    .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
+    .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'multipleSelect', function ($scope, $routeParams, api, MakeModal, AuthenticationService, multipleSelect) {
         AuthenticationService.CheckCredentials();
         $scope.baseURL = 'api/public/rooms';
+        $scope.categories = [];
+        $scope.roomusages = [];
+
+        api.apiCall('GET', 'api/public/roomcategory', function (result) {
+            $scope.categories = result.data;
+        });
+        api.apiCall('GET', 'api/public/roomuse', function (result) {
+            $scope.roomusages = result.data;
+        });
+
 
         if (!$routeParams.roomId) {
             $scope.item = {
@@ -90,7 +100,8 @@ angular.module('Rooms', [
             }, undefined, item)
         }
 
-    }])
+    }
+    ])
     .component('roomProfile', {
         restrict: 'EA',
         templateUrl: 'modules/rooms/rviews/rprofile.html',

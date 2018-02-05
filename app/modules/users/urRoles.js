@@ -5,6 +5,14 @@ angular.module('Users')
         $scope.urLength = $scope.evLength = 0;
         $scope.currentRole = null;
         $scope.baseURL = 'api/public/users';
+        $scope.urData = null;
+
+        $scope.getUser = function () {
+            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId, function (results) {
+                $scope.urData = results.data;
+            });
+        };
+        $scope.getUser();
 
         api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId + '/roles', function (results) {
             $scope.uRoles = results.data;
@@ -25,9 +33,11 @@ angular.module('Users')
         $scope.editUrData = function (role) {
             $scope.urData = role.pivot;
             $scope.currentRole = role;
+            $scope.state = 1;
         };
 
         $scope.showUrData = function (role) {
+            $scope.state = 0;
             $scope.currentRole = role;
         };
 
@@ -74,19 +84,22 @@ angular.module('Users')
         }
     })
     .controller('EvRolesFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
-        $scope.urData = {comment: '', exp_dt: '', status: ''};
+        //$scope.urData = {comment: '', exp_dt: '', status: ''};
         $scope.baseURL = 'api/public/users';
+        $scope.state = 1;
+
+        $scope.cancelUrData = function () {
+            $scope.urData = null;
+            $scope.currentRole = null;
+        };
 
         $scope.insertRole = function () {
-            api.apiCall('POST', $scope.baseURL + "/" + $routeParams.userId + '/roles/' + $scope.currentRole.id, function (results) {
+            var method = "PUT";
+            if ($scope.state === 0) method = "POST";
+            api.apiCall(method, $scope.baseURL + "/" + $routeParams.userId + '/roles/' + $scope.currentRole.id, function (results) {
                 $scope.uRoles = results.data;
                 $scope.compare();
-                $scope.currentRole = null;
+                $scope.cancelUrData();
             }, undefined, $scope.urData, undefined, $scope);
-
-            $scope.cancelUrData = function () {
-                $scope.urData = null;
-                $scope.currentRole = null;
-            };
         };
-    }])
+    }]);

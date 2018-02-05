@@ -13,7 +13,7 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 
 class Periods extends Model
 {
-    public $timestamps = false;
+
     protected $table = 'periods';
 
     public function config()

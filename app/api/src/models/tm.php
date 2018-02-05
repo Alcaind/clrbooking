@@ -13,7 +13,7 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 
 class Tm extends Model
 {
-    public $timestamps = false;
+
     protected $table = 'tm';
 
     public function kat()

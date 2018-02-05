@@ -13,7 +13,7 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 
 class Ucategories extends Model
 {
-    public $timestamps = false;
+
     protected $table = 'ucategories';
 
     public function users()

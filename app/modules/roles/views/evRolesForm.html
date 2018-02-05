@@ -1,0 +1,19 @@
+<div>
+    <form><br>
+        <label>comment:<input type="text" ng-model="urData.comment" class="form-control"
+                              placeholder="comment"></label><br>
+        <label>exp. date:
+            <pre> <em>{{urData.exp_dt | date:'fullDate' }}</em></pre>
+        </label> <br>
+        <div style="display:flex; min-height:290px;">
+            <div uib-datepicker ng-model="urData.exp_dt" class="well well-sm"></div>
+        </div>
+        <label>status:<input type="text" ng-model="urData.status" class="form-control"
+                             placeholder="status"></label><br>
+        <button type="button" class="btn btn-primary" ng-click="insertRole()" style="padding: 5px">ok
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="cancelUrData()" style="padding: 5px">
+            cancel
+        </button>
+    </form>
+</div>

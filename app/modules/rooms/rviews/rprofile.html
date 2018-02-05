@@ -33,14 +33,14 @@
         <!--floor-->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.floor.$invalid && !roomForm.floor.$pristine }">
             <label for="floor" class="required">floor<span class="form-required">*</span>:</label>
-            <input id="floor" name="floor" class="form-control" type="number" ng-model="item.floor">
+            <input id="floor" name="floor" class="form-control" type="text" ng-model="item.floor">
             <p ng-show="roomForm.floor.$invalid && !roomForm.floor.$pristine" class="help-block">floor is
                 required.</p>
         </div>
         <!--status-->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.status.$invalid && !roomForm.status.$pristine }">
             <label for="status" class="required">status<span class="form-required">*</span>:</label>
-            <input id="status" name="status" class="form-control" type="number" ng-model="item.status">
+            <input id="status" name="status" class="form-control" type="text" ng-model="item.status">
             <p ng-show="roomForm.status.$invalid && !roomForm.status.$pristine" class="help-block">status is
                 required.</p>
         </div>
@@ -54,12 +54,12 @@
         <!--destroyed-->
         <div class="form-group">
             <label for="destroyed" class="required">destroyed:</label>
-            <input id="destroyed" name="destroyed" class="form-control" type="number" ng-model="item.destroyed">
+            <input id="destroyed" name="destroyed" class="form-control" type="text" ng-model="item.destroyed">
         </div>
         <!--nonexist-->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine }">
             <label for="nonexist" class="required">nonexist<span class="form-required">*</span>:</label>
-            <input id="nonexist" name="nonexist" class="form-control" type="number" ng-model="item.nonexist">
+            <input id="nonexist" name="nonexist" class="form-control" type="text" ng-model="item.nonexist">
             <p ng-show="roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine" class="help-block">nonexist is
                 required.</p>
         </div>
@@ -81,7 +81,7 @@
         <!--xoros-->
         <div class="form-group">
             <label for="xoros" class="required">xoros:</label>
-            <input id="xoros" name="xoros" class="form-control" type="number" ng-model="item.xoros">
+            <input id="xoros" name="xoros" class="form-control" type="text" ng-model="item.xoros">
         </div>
         <!--exams_capasity-->
         <div class="form-group">
@@ -92,22 +92,22 @@
         <!--capasity_categ-->
         <div class="form-group">
             <label for="exams_categ" class="required">exams_categ:</label>
-            <input id="exams_categ" name="exams_categ" class="form-control" type="number" ng-model="item.exams_categ">
+            <input id="exams_categ" name="exams_categ" class="form-control" type="text" ng-model="item.exams_categ">
         </div>
         <!--tm_owner-->
         <div class="form-group">
             <label for="tm_owner" class="required">tm_owner:</label>
-            <input id="tm_owner" name="tm_owner" class="form-control" type="number" ng-model="item.tm_owner">
+            <input id="tm_owner" name="tm_owner" class="form-control" type="text" ng-model="item.tm_owner">
         </div>
         <!--dt-->
         <div class="form-group">
             <label for="dt" class="required">dt:</label>
-            <input id="dt" name="dt" class="form-control" type="number" ng-model="item.dt">
+            <input id="dt" name="dt" class="form-control" type="time" ng-model="item.dt">
         </div>
         <!--stat_comm-->
         <div class="form-group">
             <label for="stat_comm" class="required">stat_comm:</label>
-            <input id="stat_comm" name="stat_comm" class="form-control" type="number" ng-model="item.stat_comm">
+            <input id="stat_comm" name="stat_comm" class="form-control" type="text" ng-model="item.stat_comm">
         </div>
         <!--conf_id-->
         <div class="form-group">
@@ -116,25 +116,23 @@
         </div>
         <!--type-->
         <div class="form-group">
-            <label for="type" class="required">type:</label>
-            <input id="type" name="type" class="form-control" type="number" ng-model="item.type">
+            <label for="type" class="required">Κατηγορια Αιθουσας:</label>
+            <select id="type" ng-model="item.room_category" class="form-control"
+                    ng-options="category.id as category.descr for category in categories"> </select>
         </div>
         <!--use_id-->
         <div class="form-group">
-            <label for="use_id" class="required">use_id:</label>
-            <input id="use_id" name="use_id" class="form-control" type="number" ng-model="item.use_id">
-        </div>
-        <!--use_str-->
-        <div class="form-group">
-            <label for="use_str" class="required">use_str:</label>
-            <input id="use_str" name="use_str" class="form-control" type="number" ng-model="item.use_str">
+            <label for="use_id" class="required">Χρήση Αιθουσας:</label>
+            <!--<input id="use_id" name="use_id" class="form-control" type="number" ng-model="item.use_id">-->
+            <select id="use_id" ng-model="item.use_id" class="form-control" multiple=""
+                    ng-options="roomuse.id as roomuse.synt for roomuse in roomusages"> </select>
         </div>
 
         <button type="button" class="btn btn-primary" ng-click="updateRoom(item)" style="padding: 5px"
-                ng-if="item.id>0">Upd Room
+                ng-if="item.id>0">Ανανέωση
         </button>
         <button type="button" class="btn btn-primary" ng-click="saveRoom(item)" style="padding: 5px"
-                ng-if="item.name && !item.id">Save Room
+                ng-if="item.name && !item.id">Αποθήκευση
         </button>
     </form>
 </div>
