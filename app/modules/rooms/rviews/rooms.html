@@ -151,7 +151,10 @@
                     <td>{{room.conf_id}}</td>
                     <td>{{room.room_category.descr}}</td>
                     <td>
-                        <li ng-repeat="use in room.room_use">{{use.synt}}</li>
+                        <li ng-repeat="use in room.room_use">
+                            <button ng-click="deleteUsage(room, use)">x</button>
+                            {{use.synt}}
+                        </li>
                     </td>
                     <td>
                         <a href="#/rooms/{{room.id}}" type="button" class="btn btn-info thumb"><span

@@ -122,11 +122,10 @@
         </div>
         <!--use_id-->
         <div class="form-group">
-            <label for="use_id" class="required">Χρήση Αιθουσας:</label>
-            <!--<input id="use_id" name="use_id" class="form-control" type="number" ng-model="item.use_id">-->
-            <select id="use_id" ng-model="item.use_id" class="form-control" multiple=""
-                    ng-options="roomuse.id as roomuse.synt for roomuse in roomusages"> </select>
-        </div>
+            <!--<label for="use_id" class="required">Χρήση Αιθουσας:</label>
+                <div id="use_id" ng-dropdown-multiselect options="roomusages" selected-model="selectedUsages" extra-settings="multiSelectOptions"></div>
+                <label ng-repeat="sUsages in selectedUsages">{{sUsages.id}}</label>
+            </div>-->
 
         <button type="button" class="btn btn-primary" ng-click="updateRoom(item)" style="padding: 5px"
                 ng-if="item.id>0">Ανανέωση

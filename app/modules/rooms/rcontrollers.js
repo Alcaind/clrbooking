@@ -4,7 +4,8 @@ angular.module('Rooms', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication'
+    'Authentication',
+    'angularjs-dropdown-multiselect'
 ]).controller('RoomsController', ['$scope', '$routeParams', 'api', 'MakeModal', 'orderByFilter', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, orderBy, AuthenticationService) {
     AuthenticationService.CheckCredentials();
 
@@ -38,23 +39,36 @@ angular.module('Rooms', [
         $scope.propertyName = propertyName;
     };
 
+    $scope.deleteUsage = function (room, usage) {
+        api.apiCall('DELETE', $scope.baseURL + "/" + room.id + '/usages/' + usage.id, function (results) {
+            $scope.dp[$scope.dp.indexOf(room)].room_use.splice($scope.dp[$scope.dp.indexOf(room)].room_use.indexOf(usage), 1);
+            MakeModal.generalInfoModal('sm', 'Info', 'Info', 'room-use diagrafh', 1);
+        })
+
+    };
+
+
     $scope.getRooms();
 
 }])
 
-    .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'multipleSelect', function ($scope, $routeParams, api, MakeModal, AuthenticationService, multipleSelect) {
+    .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
         AuthenticationService.CheckCredentials();
         $scope.baseURL = 'api/public/rooms';
         $scope.categories = [];
         $scope.roomusages = [];
+        $scope.selectedUsages = [];
+        $scope.multiSelectOptions = {displayProp: 'synt'};
 
         api.apiCall('GET', 'api/public/roomcategory', function (result) {
             $scope.categories = result.data;
         });
         api.apiCall('GET', 'api/public/roomuse', function (result) {
             $scope.roomusages = result.data;
+            $scope.roomusages.forEach(function (element) {
+                element.label = element.synt;
+            });
         });
-
 
         if (!$routeParams.roomId) {
             $scope.item = {
@@ -76,7 +90,7 @@ angular.module('Rooms', [
                 dt: "",
                 stat_comm: "",
                 conf_id: "",
-                type: "",
+                category: "",
                 use_id: "",
                 use_str: ""
             };
@@ -87,6 +101,11 @@ angular.module('Rooms', [
         }
         $scope.updateRoom = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
+                api.apiCall('POST', $scope.baseURL + '/' + results.data.id + '/usages', function (results) {
+                    console.log(results | JSON);
+                }, undefined, $scope.selectedUsages.map(function (value) {
+                    return value.id
+                }));
                 MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η αίθουσα ανανεώθηκε', 1);
                 history.back();
             }, undefined, item)
@@ -95,6 +114,11 @@ angular.module('Rooms', [
 
         $scope.saveRoom = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
+                api.apiCall('POST', $scope.baseURL + '/' + results.data.id + '/usages', function (results) {
+                    console.log(results | JSON);
+                }, undefined, $scope.selectedUsages.map(function (value) {
+                    return value.id
+                }));
                 MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα αίθουσα', 1);
                 history.back();
             }, undefined, item)

@@ -7,6 +7,7 @@
  */
 session_start();
 require __DIR__ . '/../src/models/apierror.php';
+require __DIR__ . '/../src/Slim/Handlers/ApiError.php';
 require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../config/db.php';
 require __DIR__ . '/../src/models/users.php';

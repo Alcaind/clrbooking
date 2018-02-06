@@ -8,6 +8,7 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \App\Models\ApiError as ApiError;
 
 $app->get('/rooms', function (Request $request, Response $response) {
     //if (in_array("get", $this->jwt->scope)) {
@@ -53,15 +54,47 @@ $app->post('/rooms', function (Request $request, Response $response) {
         $room->dt = $data['dt'];
         $room->stat_comm = $data['stat_comm'];
         $room->conf_id = $data['conf_id'];
-        $room->type = $data['type'];
+        $room->category = $data['category'];
         $room->use_id = $data['use_id'];
         $room->save();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(201)->getBody()->write($room->toJson());
+});
+
+$app->post('/rooms/{id}/usages', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    $id = $args['id'];
+    $room = \App\Models\Rooms::find($id);
+    try {
+        $room->room_use()->attach($data);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(201)->getBody()->write($room->toJson());
+});
+
+$app->delete('/rooms/{rid}/usages/{uid}', function ($request, $response, $args) {
+    $rid = $args['rid'];
+    $uid = $args['uid'];
+    try {
+        $room = \App\Models\Rooms::find($rid);
+        $room->room_use()->detach($uid);
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
-    return $response->withStatus(201)->getBody()->write($room->toJson());
+    return $response->withStatus(200)->getBody()->write($room->toJson());
 });
+
 
 $app->delete('/rooms/{id}', function ($request, $response, $args) {
     $id = $args['id'];
@@ -99,7 +132,7 @@ $app->put('/rooms/{id}', function ($request, $response, $args) {
         $room->dt = $data['dt'] ?: $room->dt;
         $room->stat_comm = $data['stat_comm'] ?: $room->stat_comm;
         $room->conf_id = $data['conf_id'] ?: $room->conf_id;
-        $room->type = $data['type'] ?: $room->type;
+        $room->category = $data['category'] ?: $room->category;
         $room->use_id = $data['use_id'] ?: $room->use_id;
         $room->save();
     } catch (\Exception $e) {
