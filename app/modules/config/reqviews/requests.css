@@ -1,0 +1,21 @@
+#roles_main {
+    padding: 8px;
+}
+
+.myTableHolder {
+    padding: 5px;
+    overflow-y: auto;
+    text-align: center;
+    text-align: -webkit-center;
+    text-align: -moz-center;
+}
+
+.wrapper {
+    display: flex;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+}

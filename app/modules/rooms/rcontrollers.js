@@ -6,7 +6,8 @@ angular.module('Rooms', [
     'ApiModules',
     'Authentication',
     'angularjs-dropdown-multiselect'
-]).controller('RoomsController', ['$scope', '$routeParams', 'api', 'MakeModal', 'orderByFilter', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, orderBy, AuthenticationService) {
+])
+    .controller('RoomsController', ['$scope', '$routeParams', 'api', 'MakeModal', 'orderByFilter', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, orderBy, AuthenticationService) {
     AuthenticationService.CheckCredentials();
 
     $scope.dp = [];
@@ -44,14 +45,10 @@ angular.module('Rooms', [
             $scope.dp[$scope.dp.indexOf(room)].room_use.splice($scope.dp[$scope.dp.indexOf(room)].room_use.indexOf(usage), 1);
             MakeModal.generalInfoModal('sm', 'Info', 'Info', 'room-use diagrafh', 1);
         })
-
     };
-
-
     $scope.getRooms();
 
 }])
-
     .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
         AuthenticationService.CheckCredentials();
         $scope.baseURL = 'api/public/rooms';
@@ -91,8 +88,7 @@ angular.module('Rooms', [
                 stat_comm: "",
                 conf_id: "",
                 category: "",
-                use_id: "",
-                use_str: ""
+                use_id: ""
             };
         } else {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId, function (results) {
@@ -109,7 +105,6 @@ angular.module('Rooms', [
                 MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η αίθουσα ανανεώθηκε', 1);
                 history.back();
             }, undefined, item)
-
         };
 
         $scope.saveRoom = function (item) {
@@ -123,7 +118,6 @@ angular.module('Rooms', [
                 history.back();
             }, undefined, item)
         }
-
     }
     ])
     .component('roomProfile', {
@@ -134,5 +128,4 @@ angular.module('Rooms', [
         },
         controller: 'RoomProfileController'
     })
-
 ;

@@ -68,8 +68,6 @@ $app->put('/tms/{id}', function ($request, $response, $args) {
         $tm->descr = $data['descr'] ?: $tm->descr;
         $tm->title = $data['title'] ?: $tm->title;
         $tm->sxoli = $data['sxoli'] ?: $tm->sxoli;
-
-
         $tm->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

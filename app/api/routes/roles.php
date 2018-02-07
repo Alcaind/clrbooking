@@ -34,8 +34,11 @@ $app->post('/roles', function (Request $request, Response $response) {
         $roles->role = $data['role'];
         $roles->descr = $data['descr'];
         $roles->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($roles->toJson());
 });

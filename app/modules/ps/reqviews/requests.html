@@ -1,0 +1,124 @@
+<div id="requests_main">
+    <div><h2 style="text-align: center;"> Κατάλογος Αιτημάτων </h2></div>
+    <div style="display: flex">
+        <input type="text" ng-model="filter" class="form-control" placeholder="search"
+               style="padding: 5px; width: 100%">
+        <button type="button" class="btn btn-primary" ng-click="getRequests()"
+                style="min-width: 50px; border-radius: 0px;">
+            <span class="glyphicon glyphicon-cloud-download"></span>
+        </button>
+        <a href="#/requests/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+            <span>+</span><span class="glyphicon glyphicon-user"></span>
+        </a>
+    </div>
+    <div>
+        <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+                    num-pages="numPages"></pagination>
+    </div>
+    <div id="data_tbl" class="table-responsive boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('req_dt')">req_dt</button>
+                    <span class="sortorder" ng-show="propertyName === 'req_dt'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('user_id')">user_id</button>
+                    <span class="sortorder" ng-show="propertyName === 'user_id'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('descr')">descr</button>
+                    <span class="sortorder" ng-show="propertyName === 'descr'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('period')">period</button>
+                    <span class="sortorder" ng-show="propertyName === 'period'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('ps_id')">ps_id</button>
+                    <span class="sortorder" ng-show="propertyName === 'ps_id'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('teacher')">teacher</button>
+                    <span class="sortorder" ng-show="propertyName === 'teacher'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('from_book')">from_book</button>
+                    <span class="sortorder" ng-show="propertyName === 'from_book'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('class_use')">class_use</button>
+                    <span class="sortorder" ng-show="propertyName === 'class_use'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('links')">links</button>
+                    <span class="sortorder" ng-show="propertyName === 'links'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('fromdt')">fromdt</button>
+                    <span class="sortorder" ng-show="propertyName === 'fromdt'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('todt')">todt</button>
+                    <span class="sortorder" ng-show="propertyName === 'todt'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('protocol_id')">protocol_id</button>
+                    <span class="sortorder" ng-show="propertyName === 'protocol_id'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('req_stat')">req_stat</button>
+                    <span class="sortorder" ng-show="propertyName === 'req_stat'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>...</th>
+            <tbody>
+            <tr ng-repeat="request in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+                style="cursor: pointer">
+                <td>{{ request.id }}</td>
+                <td>{{ request.req_dt }}</td>
+                <td>{{ request.user_id }}</td>
+                <td><textarea disabled>{{ request.descr }}</textarea></td>
+                <td>{{ request.period }}</td>
+                <td>{{ request.ps_id }}</td>
+                <td>{{ request.teacher }}</td>
+                <td>{{ request.from_book }}</td>
+                <td>{{ request.class_use }}</td>
+                <td>{{ request.links }}</td>
+                <td>{{ request.fromdt }}</td>
+                <td>{{ request.todt }}</td>
+                <td>{{ request.protocol_id }}</td>
+                <td>{{ request.req_stat }}</td>
+                <td>
+                    <a href="#/requests/{{request.id}}" type="button" class="btn btn-info thumb"><span
+                            class="glyphicon glyphicon-pencil"></span></a>
+                    <button ng-click="deleteRequest(request)" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-erase"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <pre>total requests list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+</div>
+
+
+
+
+
+

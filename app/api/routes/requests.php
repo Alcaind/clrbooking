@@ -45,7 +45,12 @@ $app->post('/requests', function (Request $request, Response $response) {
         $requests->fromdt = $data['fromdt'];
         $requests->todt = $data['todt'];
         $requests->protocol_id = $data['protocol_id'];
-        $requests->req_stat = $data['req_stat'];
+        $requests->req_status = $data['req_status'];
+        $requests->fromd = $data['fromd'];
+        $requests->tod = $data['tod'];
+        $requests->date_index = $data['date_index'];
+//        $requests->created_at = $data['created_at'];
+//        $requests->inserted_at = $data['inserted_at'];
         $requests->save();
     } catch (\Exception $e) {
         // do task when error
@@ -78,13 +83,18 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->period = $data['period'] ?: $requests->period;
         $requests->ps_id = $data['ps_id'] ?: $requests->ps_id;
         $requests->teacher = $data['teacher'] ?: $requests->teacher;
-        $requests->from_book = $data['from_book'] ?: $requests->from_book;
         $requests->class_use = $data['class_use'] ?: $requests->class_use;
         $requests->links = $data['links'] ?: $requests->links;
         $requests->fromdt = $data['fromdt'] ?: $requests->fromdt;
         $requests->todt = $data['todt'] ?: $requests->todt;
         $requests->protocol_id = $data['protocol_id'] ?: $requests->protocol_id;
-        $requests->req_stat = $data['req_stat'] ?: $requests->req_stat;
+        $requests->req_status = $data['req_status'] ?: $requests->req_status;
+        $requests->fromd = $data['fromd'] ?: $requests->fromd;
+        $requests->tod = $data['tod'] ?: $requests->tod;
+        $requests->date_index = $data['date_index'] ?: $requests->date_index;
+//        $requests->created_at = $data['created_at'] ?: $requests->created_at;
+//        $requests->inserted_at = $data['inserted_at'] ?: $requests->inserted_at;
+
         $requests->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

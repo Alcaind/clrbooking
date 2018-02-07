@@ -5,7 +5,6 @@ angular.module('Home',[
     'Admin',
     'ui.bootstrap'
 ])
-
 .controller('HomeController', ['$scope','$interval', '$rootScope', '$location', function ($scope, $interval,$rootScope,$location) {
     if ((!$rootScope.globals || !$rootScope.globals.item || ($rootScope.globals.item && !$rootScope.globals.item.user)) && !$rootScope.inAuthentication) {
         $location.path('/login');

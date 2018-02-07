@@ -48,6 +48,7 @@ $app->post('/rooms', function (Request $request, Response $response) {
         $room->capasity = $data['capasity'];
         $room->width = $data['width'];
         $room->height = $data['height'];
+        $room->xoros = $data['xoros'];
         $room->exams_capasity = $data['exams_capasity'];
         $room->capasity_categ = $data['capasity_categ'];
         $room->tm_owner = $data['name'];
@@ -56,6 +57,8 @@ $app->post('/rooms', function (Request $request, Response $response) {
         $room->conf_id = $data['conf_id'];
         $room->category = $data['category'];
         $room->use_id = $data['use_id'];
+
+
         $room->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -126,6 +129,7 @@ $app->put('/rooms/{id}', function ($request, $response, $args) {
         $room->capasity = $data['capasity'] ?: $room->capasity;
         $room->width = $data['width'] ?: $room->width;
         $room->height = $data['height'] ?: $room->height;
+        $room->xoros = $data['xoros'] ?: $room->xoros;
         $room->exams_capasity = $data['exams_capasity'] ?: $room->exams_capasity;
         $room->capasity_categ = $data['capasity_categ'] ?: $room->capasity_categ;
         $room->tm_owner = $data['name'] ?: $room->tm_owner;
@@ -134,6 +138,7 @@ $app->put('/rooms/{id}', function ($request, $response, $args) {
         $room->conf_id = $data['conf_id'] ?: $room->conf_id;
         $room->category = $data['category'] ?: $room->category;
         $room->use_id = $data['use_id'] ?: $room->use_id;
+
         $room->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
