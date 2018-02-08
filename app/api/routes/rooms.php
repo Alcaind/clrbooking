@@ -57,8 +57,6 @@ $app->post('/rooms', function (Request $request, Response $response) {
         $room->conf_id = $data['conf_id'];
         $room->category = $data['category'];
         $room->use_id = $data['use_id'];
-
-
         $room->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -138,7 +136,6 @@ $app->put('/rooms/{id}', function ($request, $response, $args) {
         $room->conf_id = $data['conf_id'] ?: $room->conf_id;
         $room->category = $data['category'] ?: $room->category;
         $room->use_id = $data['use_id'] ?: $room->use_id;
-
         $room->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

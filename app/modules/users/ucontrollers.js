@@ -54,7 +54,7 @@ angular.module('Users', [
             $scope.tms = results.data;
         });
 
-        api.apiCall('GET', 'api/public/ucategories', function (results) {
+        api.apiCall('GET', 'api/public/userscategories', function (results) {
             $scope.ucategories = results.data;
         });
 
@@ -70,9 +70,7 @@ angular.module('Users', [
                 cat_id: "",
                 comments: "",
                 user: "",
-                hash: "",
-                created_at: "",
-                inserted_at: ""
+                hash: ""
             };
         } else {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId, function (results) {

@@ -11,7 +11,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $requests = \App\Models\Requests::all();
+    $requests = \App\Models\Requests::with(['users:id,user'])->get();
 
     return $response->getBody()->write($requests->toJson());
 });
@@ -20,7 +20,7 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::find($id);
+        $requests = \App\Models\Requests::with(['users:id,user'])->find($id);
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -39,7 +39,6 @@ $app->post('/requests', function (Request $request, Response $response) {
         $requests->period = $data['period'];
         $requests->ps_id = $data['ps_id'];
         $requests->teacher = $data['teacher'];
-        $requests->from_book = $data['from_book'];
         $requests->class_use = $data['class_use'];
         $requests->links = $data['links'];
         $requests->fromdt = $data['fromdt'];
@@ -49,12 +48,20 @@ $app->post('/requests', function (Request $request, Response $response) {
         $requests->fromd = $data['fromd'];
         $requests->tod = $data['tod'];
         $requests->date_index = $data['date_index'];
-//        $requests->created_at = $data['created_at'];
-//        $requests->inserted_at = $data['inserted_at'];
         $requests->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+//        $users->errorText = $e->getMessage();
+//        $users->errorCode = $e->getCode();
+//        $errormessage = explode(':', $e->getMessage())[2];
+//        $errormessage = explode('(', $errormessage)[0];
+//        $value = explode('\'', $errormessage)[1];
+//        $key = explode('\'', $errormessage)[3];
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
+
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());
 });
@@ -92,9 +99,6 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->fromd = $data['fromd'] ?: $requests->fromd;
         $requests->tod = $data['tod'] ?: $requests->tod;
         $requests->date_index = $data['date_index'] ?: $requests->date_index;
-//        $requests->created_at = $data['created_at'] ?: $requests->created_at;
-//        $requests->inserted_at = $data['inserted_at'] ?: $requests->inserted_at;
-
         $requests->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

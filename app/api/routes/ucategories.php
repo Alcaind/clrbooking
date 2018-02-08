@@ -40,8 +40,6 @@ $app->post('/userscategories', function (Request $request, Response $response) {
 
         $ucategories->descr = $data['descr'];
         $ucategories->comment = $data['comment'];
-//        $ucategories->created_at = $data['created_at'];
-//        $ucategories->inserted_at = $data['inserted_at'];
         $ucategories->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -74,8 +72,6 @@ $app->put('/userscategories/{id}', function ($request, $response, $args) {
 
         $ucategories->descr = $data['descr'] ?: $ucategories->descr;
         $ucategories->comment = $data['comment'] ?: $ucategories->comment;
-//        $ucategories->created_at = $data['created_at']?:$ucategories->created_at;
-//        $ucategories->inserted_at = $data['inserted_at']?:$ucategories->inserted_at;
         $ucategories->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

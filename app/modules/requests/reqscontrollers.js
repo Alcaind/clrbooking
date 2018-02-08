@@ -43,6 +43,12 @@ angular.module('Requests', [
     .controller('RequestProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
         AuthenticationService.CheckCredentials();
         $scope.baseURL = 'api/public/requests';
+        $scope.users = {};
+
+        api.apiCall('GET', 'api/public/users', function (results) {
+            $scope.users = results.data;
+        });
+
 
         if (!$routeParams.requestId) {
             $scope.item = {
@@ -53,13 +59,15 @@ angular.module('Requests', [
                 period: "",
                 ps_id: "",
                 teacher: "",
-                from_book: "",
                 class_use: "",
                 links: "",
                 fromdt: "",
                 todt: "",
                 protocol_id: "",
-                req_stat: ""
+                req_status: "",
+                fromd: "",
+                tod: "",
+                daye_index: ""
             };
         } else {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.requestId, function (results) {
@@ -80,20 +88,6 @@ angular.module('Requests', [
                 history.back();
             }, undefined, item)
         }
-
-        //
-        // $scope.updateRequest = function () {
-        //     $http({
-        //         method: 'PUT',
-        //         url: 'api/public/requests/' + $scope.currentRequest["id"],
-        //         data: JSON.stringify($scope.currentRequest)
-        //     }).then(function successCallback(response) {
-        //         //TODO : reply confirmation to user;
-        //     }, function errorCallback(response) {
-        //         alert(response);
-        //     });
-        // };
-
     }])
     .component('requestsProfile', {
         restrict: 'EA',

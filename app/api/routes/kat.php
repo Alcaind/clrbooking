@@ -12,8 +12,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/kats', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $kat = \App\Models\Kat::all();
-
+    $kat = \App\Models\Kat::with(['tm:id,title'])->get();
     return $response->getBody()->write($kat->toJson());
 });
 
@@ -21,7 +20,7 @@ $app->get('/kats/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $kat = \App\Models\Kat::find($id);
+        $kat = \App\Models\Kat::with(['tm:id,title'])->find($id);
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -39,9 +38,19 @@ $app->post('/kats', function (Request $request, Response $response) {
         $kat->title = $data['title'];
         $kat->pm = $data['pm'];
         $kat->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+//        $users->errorText = $e->getMessage();
+//        $users->errorCode = $e->getCode();
+//        $errormessage = explode(':', $e->getMessage())[2];
+//        $errormessage = explode('(', $errormessage)[0];
+//        $value = explode('\'', $errormessage)[1];
+//        $key = explode('\'', $errormessage)[3];
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
+
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($kat->toJson());
 });

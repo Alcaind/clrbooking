@@ -1,0 +1,32 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <form class="configForm" name="configForm" novalidate>
+        <div class="form-group"
+             ng-class="{ 'has-error' : configForm.year.$invalid && !configForm.year.$pristine }">
+            <label class="required" for="year">Έτος<span class="form-required">*</span>:</label>
+            <input id="year" name="year" class="form-control" type="number" ng-model="item.year">
+            <p ng-show="configForm.year.$invalid && !configForm.year.$pristine" class="help-block">Enter
+                year.</p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{ 'has-error' : configForm.status.$invalid && !configForm.status.$pristine }">
+            <label class="required" for="status">Κατάστηαση<span class="form-required">*</span>:</label>
+            <input id="status" name="status" class="form-control" type="number" ng-model="item.status">
+            <p ng-show="configForm.status.$invalid && !configForm.status.$pristine" class="help-block">Enter
+                status.</p>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="updateConfig(item)" style="padding: 5px"
+                ng-if="item.id>0">Ανανέωση
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveConfig(item)" style="padding: 5px"
+                ng-if="item.year && !item.id">Αποθήκευση
+        </button>
+    </form>
+</div>

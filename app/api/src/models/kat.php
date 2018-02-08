@@ -17,7 +17,7 @@ class Kat extends Model
 
     public function tm()
     {
-        $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
+        return $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
     }
 
 }

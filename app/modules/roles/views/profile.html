@@ -8,10 +8,10 @@
     </div>
     <form class="roleForm" name="roleForm" novalidate>
         <!-- ROLE -->
-        <div class="form-group" ng-class="{ 'has-error' : roleForm.name.$invalid && !roleForm.name.$pristine }">
-            <label class="required" for="name">Ρόλος<span class="form-required">*</span>:</label>
-            <input id="name" name="name" class="form-control" type="text" ng-model="item.role">
-            <p ng-show="roleForm.name.$invalid && !roleForm.name.$pristine" class="help-block">Enter role.</p>
+        <div class="form-group" ng-class="{ 'has-error' : roleForm.role.$invalid && !roleForm.role.$pristine }">
+            <label class="required" for="role">Ρόλος<span class="form-required">*</span>:</label>
+            <input id="role" name="role" class="form-control" type="text" ng-model="item.role">
+            <p ng-show="roleForm.role.$invalid && !roleForm.role.$pristine" class="help-block">Enter role.</p>
         </div>
         <!--DESCRIPTION-->
         <div class="form-group">

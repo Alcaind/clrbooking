@@ -24,11 +24,11 @@ angular.module('Kat', [
         api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
             $scope.dp.splice($scope.dp.indexOf(item), 1);
             $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Αίθουσα διαγράφηκε', 1)
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η κατευθυνση διαγράφηκε', 1)
         });
     };
 
-    $scope.propertyName = 'tm_id';
+    $scope.propertyName = 'title';
     $scope.reverse = true;
     $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
 
@@ -41,20 +41,22 @@ angular.module('Kat', [
     $scope.getKats();
 
 }])
-
-
     .controller('KatProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
         AuthenticationService.CheckCredentials();
         $scope.baseURL = 'api/public/kats';
+        $scope.tms = {};
+
+        api.apiCall('GET', 'api/public/tms', function (results) {
+            $scope.tms = results.data;
+        });
 
         if (!$routeParams.katId) {
-            $scope.item =
-                {
-                    tm_id: "",
-                    decr: "",
-                    title: "",
-                    pm: ""
-                };
+            $scope.item = {
+                tm_id: "",
+                decr: "",
+                title: "",
+                pm: ""
+            };
         } else {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.katId, function (results) {
                 $scope.item = results.data;
@@ -84,44 +86,4 @@ angular.module('Kat', [
         },
         controller: 'KatProfileController'
     })
-
 ;
-
-//
-//
-//
-//
-//
-//
-//     $scope.insertKat = function () {
-//         $http({
-//             method: 'POST',
-//             url: 'api/public/kat',
-//             data: JSON.stringify($scope.currentKat)
-//         }).then(function successCallback(response) {
-//             $scope.kats.push(response.data);
-//         }, function errorCallback(response) {
-//             alert(response.message);
-//         });
-//     };
-//
-//     $scope.updateKat = function () {
-//         $http({
-//             method: 'PUT',
-//             url: 'api/public/kat/' + $scope.currentKat["id"],
-//             data: JSON.stringify($scope.currentKat)
-//         }).then(function successCallback(response) {
-//             //TODO : reply confirmation to user;
-//             //$scope.roles = response.data;
-//         }, function errorCallback(response) {
-//             alert(response);
-//         });
-//     };
-//
-//     $scope.selectKat = function (kat) {
-//         $scope.currentKat = kat;
-//     };
-//     $scope.newKat = function () {
-//         $scope.currentKat = {tm_id: "", decr: "", title: "", pm: ""};
-//     };
-// }]);

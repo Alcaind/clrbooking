@@ -9,33 +9,32 @@
     <form class="katForm" name="katForm" novalidate>
         <div class="form-group" ng-class="{ 'has-error' : katForm.tm_id.$invalid && !katForm.tm_id.$pristine }">
             <label class="required" for="tm_id">tm_id<span class="form-required">*</span>:</label>
-            <input id="tm_id" name="tm_id" class="form-control" type="text" ng-model="item.tm_id">
+            <!--<input id="tm_id" name="tm_id" class="form-control" type="text" ng-model="item.tm_id">-->
+            <select id="tm_id" name="tm_id" ng-model="item.tm_id" ng-options="tm.id as tm.title for tm in tms"></select>
             <p ng-show="katForm.tm_id.$invalid && !katForm.tm_id.$pristine" class="help-block">The tm_id is
                 required.</p>
         </div>
-        <div class="form-group" ng-class="{ 'has-error' : katForm.tm_id.$invalid && !katForm.tm_id.$pristine }">
-            <label class="required" for="decr">decr<span class="form-required">*</span>:</label>
+        <div class="form-group">
+            <label for="decr">decr:</label>
             <input id="decr" name="decr" class="form-control" type="text" ng-model="item.decr">
-            <p ng-show="katForm.decr.$invalid && !katForm.decr.$pristine" class="help-block">The decr is
-                required.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : katForm.title.$invalid && !katForm.title.$pristine }">
             <label class="required" for="title">title<span class="form-required">*</span>:</label>
-            <input id="title" name="tm_id" class="form-control" type="text" ng-model="item.title">
+            <input id="title" name="title" class="form-control" type="text" ng-model="item.title">
             <p ng-show="katForm.title.$invalid && !katForm.title.$pristine" class="help-block">The title is
                 required.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : katForm.pm.$invalid && !katForm.pm.$pristine }">
-            <label class="required" for="pm">pm<span class="form-required">*</span>:</label>
+            <label class="required" for="pm">pm<span class="form-required">*</span>: ??????</label>
             <input id="pm" name="pm" class="form-control" type="text" ng-model="item.pm">
             <p ng-show="katForm.pm.$invalid && !katForm.pm.$pristine" class="help-block">The pm is
                 required.</p>
         </div>
         <button type="button" class="btn btn-primary" ng-click="updateKat(item)" style="padding: 5px"
-                ng-if="item.id>0">kat update
+                ng-if="item.id>0">Ανανέωση
         </button>
         <button type="button" class="btn btn-primary" ng-click="saveKat(item)" style="padding: 5px"
-                ng-if="item.tm_id && !item.id">Save kat
+                ng-if="item.tm_id && !item.id">Αποθήκευση
         </button>
     </form>
 </div>
