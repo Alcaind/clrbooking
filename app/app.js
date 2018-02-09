@@ -21,6 +21,7 @@ angular.module('Items', []);
 angular.module('RoomCategory', []);
 angular.module('RoomUse', []);
 angular.module('RoomBook', []);
+angular.module('PsStats', []);
 
 
 // Declare app level module which depends on views, and components
@@ -49,7 +50,8 @@ angular.module('clrBooking', [
     'Items',
     'RoomCategory',
     'RoomUse',
-    'RoomBook'
+    'RoomBook',
+    'PsStats'
 ])
 
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
@@ -149,8 +151,6 @@ angular.module('clrBooking', [
                     controller: 'RoomRequestsController',
                     templateUrl: 'modules/rooms/rviews/request/urequest.html'
                 })
-
-
                 .when('/tms', {
                     title: 'tm',
                     controller: 'TmsController',
@@ -294,6 +294,19 @@ angular.module('clrBooking', [
                 .when('/booking/:roombookId', {
                     title: 'booking',
                     template: '<room-book-profile></room-book-profile>'
+                })
+                .when('/psstats', {
+                    title: 'statistics',
+                    controller: 'PsStatsController',
+                    templateUrl: 'modules/ps_stats/psstatsviews/psstats.html'
+                })
+                .when('/psstats/create', {
+                    title: 'statistics create',
+                    template: '<ps-stats-profile></ps-stats-profile>'
+                })
+                .when('/psstats/:psstatId', {
+                    title: 'statistics',
+                    template: '<ps-stats-profile></ps-stats-profile>'
                 })
 
 

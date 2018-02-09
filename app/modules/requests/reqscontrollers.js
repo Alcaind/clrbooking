@@ -67,7 +67,7 @@ angular.module('Requests', [
                 fromd: "",
                 tod: "",
                 date_index: "",
-                admin: "",
+                admin: ""
             };
         } else {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.requestId, function (results) {

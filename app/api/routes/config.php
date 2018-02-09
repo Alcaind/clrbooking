@@ -8,6 +8,7 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \App\Models\ApiError as ApiError;
 
 $app->get('/config', function (Request $request, Response $response) {
     header("Content-Type: application/json");
@@ -34,19 +35,13 @@ $app->post('/config', function (Request $request, Response $response) {
         $config = new \App\Models\Config();
         $config->year = $data['year'];
         $config->status = $data['status'];
+        $config->fromd = $data['fromd'];
+        $config->tod = $data['tod'];
         $config->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
-//        $users->errorText = $e->getMessage();
-//        $users->errorCode = $e->getCode();
-//        $errormessage = explode(':', $e->getMessage())[2];
-//        $errormessage = explode('(', $errormessage)[0];
-//        $value = explode('\'', $errormessage)[1];
-//        $key = explode('\'', $errormessage)[3];
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
-//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
-
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($config->toJson());
@@ -72,19 +67,11 @@ $app->put('/config/{id}', function ($request, $response, $args) {
         $config = \App\Models\Config::find($id);
         $config->year = $data['year'] ?: $config->year;
         $config->status = $data['status'] ?: $config->status;
+        $config->fromd = $data['fromd'] ?: $config->fromd;
+        $config->tod = $data['tod'] ?: $config->tod;
         $config->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($config->toJson());
 });
-
-//$app->get('/configuration/{id}/periods', function ($request, $response, $args) {
-//    $id = $args['id'];
-//    try {
-//        $conf = \App\Models\Config::find($id);
-//    } catch (\Exception $e) {
-//        return $response->withStatus(404)->getBody()->write($e->getMessage());
-//    }
-//    return $response->getBody()->write($conf->periods()->get()->toJson());
-//});
