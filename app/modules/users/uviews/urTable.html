@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="role in uRoles.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:filter"
+        <tr ng-repeat="role in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filter"
             style="cursor: pointer" ng-class="{selected: role.id === item.id}">
             <td>{{ role.id }}</td>
             <td>{{ role.role }}</td>
@@ -21,10 +21,10 @@
             <th>{{ role.pivot.exp_dt}}</th>
             <th>{{ role.pivot.status}}</th>
             <td>
-                <button ng-click="editUrData(role)" type="button" class="btn btn-info">
+                <button ng-click="ctrl.editPivotData(role)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button ng-click="deleteRole(role.id)" type="button" class="btn btn-danger">
+                <button ng-click="ctrl.deleteData(role.id)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

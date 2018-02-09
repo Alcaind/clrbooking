@@ -1,14 +1,14 @@
 <div>
     <form><br>
-        <label>Σχόλια:<input type="text" ng-model="urData.comment" class="form-control"
+        <label>Σχόλια:<input type="text" ng-model="ctrl.pivotData.comment" class="form-control"
                              placeholder="comment"></label><br>
         <label>Ημ/νια Λήξης:
-            <pre> <em>{{urData.exp_dt | date:'fullDate' }}</em></pre>
+            <pre> <em>{{ctrl.pivotData.exp_dt | date:'fullDate' }}</em></pre>
         </label> <br>
         <div style="display:flex; min-height:290px;">
-            <div uib-datepicker ng-model="urData.exp_dt" class="well well-sm"></div>
+            <div uib-datepicker ng-model="ctrl.pivotData.exp_dt" class="well well-sm"></div>
         </div>
-        <label>Κατάσταση:<input type="text" ng-model="urData.status" class="form-control"
+        <label>Κατάσταση:<input type="text" ng-model="ctrl.pivotData.status" class="form-control"
                                 placeholder="status"></label><br>
         <button type="button" class="btn btn-primary" ng-click="insertRole()" style="padding: 5px">ok
         </button>

@@ -51,7 +51,8 @@ angular.module('clrBooking', [
     'RoomCategory',
     'RoomUse',
     'RoomBook',
-    'PsStats'
+    'PsStats',
+    'GlobalVarsSrvs'
 ])
 
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
@@ -101,16 +102,16 @@ angular.module('clrBooking', [
                     title: 'user create',
                     template: '<users-profile></users-profile>'
                 })
-                .when('/users/:userId', {
+                .when('/users/:id', {
                     title: 'user',
                     template: '<users-profile></users-profile>'
                 })
-                .when('/users/:userId/requests', {
+                .when('/users/:id/requests', {
                     title: 'user request',
                     controller: 'URequestsController',
                     templateUrl: 'modules/users/uviews/urequest.html'
                 })
-                .when('/users/:userId/roles', {
+                .when('/users/:id/roles', {
                     title: 'user role',
                     controller: 'URolesController',
                     templateUrl: 'modules/users/uviews/urole.html'
@@ -413,47 +414,9 @@ angular.module('clrBooking', [
     .controller('Controller', ['jwtHelper', 'store', function Controller(jwtHelper, store) {
 
     }])
-    .run(['$rootScope', '$location', '$cookieStore', '$http',
-        function ($rootScope, $location, $cookieStore, $http) {
+    .run(['$rootScope', '$location', '$cookieStore', '$http', 'globalVarsSrv',
+        function ($rootScope, $location, $cookieStore, $http, globalVarsSrv) {
+            globalVarsSrv.initFromFile('config/appConfig.json');
 
-            /*
-                $rootScope.globals = {};
-                var QueryString = function () {
-                    var query_string = {};
-                    var query = window.location.search.substring(1);
-                    var vars = query.split("&");
-                    for (var i=0;i<vars.length;i++) {
-                        var pair = vars[i].split("=");
-                        // If first entry with this name
-                        if (typeof query_string[pair[0]] === "undefined") {
-                            query_string[pair[0]] = decodeURIComponent(pair[1]);
-                            // If second entry with this name
-                        } else if (typeof query_string[pair[0]] === "string") {
-                            var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
-                            query_string[pair[0]] = arr;
-                            // If third or later entry with this name
-                        } else {
-                            query_string[pair[0]].push(decodeURIComponent(pair[1]));
-                        }
-                    }
-                    return query_string;
-                }();
-
-                //$cookieStore.put('globals', $rootScope.globals)
-
-                $http({method: 'GET', url: './ws/login.php?usr='+QueryString.usr}).then(function (response) {
-                    if (response.data === 'error-') {
-                        $location.path('/login');
-                        return;
-                    }
-
-                    $rootScope.globals.item = response.data;
-                    $location.path('/home');
-
-                }, function (response) {
-                    console.log(response.status);
-                    $rootScope.globals.item = '';
-                    $location.path('/login');
-                });*/
         }])
 ;

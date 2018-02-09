@@ -1,3 +1,3 @@
-<button class="btn btn-link" ng-click="sortBy(th)">{{th.title}}</button>
+<button class="btn btn-link" ng-click="ctrl.sortBy(th)">{{th.title}}</button>
 <span class="sortorder" ng-show="th.sorted" ng-class="{reverse: th.reverse}"></span>
-<input type="text" ng-model="th.filter" class="form-control" ng-change="setFilter(th)">
+<input type="text" ng-model="th.filter" class="form-control" ng-change="ctrl.setFilter(th)">

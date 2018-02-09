@@ -6,7 +6,7 @@
         <div style="display: flex">
             <input type="text" ng-model="filter" class="form-control" placeholder="search"
                    style="padding: 5px; width: 100%">
-            <button type="button" class="btn btn-primary" ng-click="getUsers()"
+            <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()"
                     style="min-width: 50px; border-radius: 0px;">
                 <span class="glyphicon glyphicon-refresh"></span>
             </button>
@@ -18,31 +18,29 @@
             <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
         </div>
-        <show-hide-columns colums-visibility="tableColumns"></show-hide-columns>
+        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
         <div id="data_tbl" class="table-responsive boxContent">
             <table class="sorttable table table-hover table-striped table-responsive header-fixed">
                 <thead>
                 <tr>
-                    <th dm-th ng-repeat="th in tableColumns" ng-if="th.visible"></th>
+                    <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"></th>
                     <th>...</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!--<tr ng-repeat="user in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
-                    style="cursor: pointer" ng-class="{selected: user.id === item.id}">-->
-                <tr ng-repeat="user in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter"
+                <tr ng-repeat="user in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
                     style="cursor: pointer" ng-class="{selected: user.id === item.id}">
-                    <td ng-if="tableColumns[0].visible">{{ user.id }}</td>
-                    <td ng-if="tableColumns[1].visible">{{ user.user}}</td>
-                    <td ng-if="tableColumns[2].visible">{{ user.fname }}</td>
-                    <td ng-if="tableColumns[3].visible">{{ user.sname}}</td>
-                    <td ng-if="tableColumns[4].visible">{{ user.phone}}</td>
-                    <td ng-if="tableColumns[5].visible">{{ user.em_main}}</td>
-                    <td ng-if="tableColumns[6].visible">{{ user.em_sec}}</td>
-                    <td ng-if="tableColumns[7].visible">{{ user.em_pant}}</td>
-                    <td ng-if="tableColumns[8].visible">{{ user.ucategories.descr}}</td>
-                    <td ng-if="tableColumns[9].visible">{{ user.tm.title }}</td>
-                    <td ng-if="tableColumns[10].visible"><textarea disabled>{{ user.comments}}</textarea></td>
+                    <td ng-if="ctrl.tableColumns[0].visible">{{ user.id }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{ user.user}}</td>
+                    <td ng-if="ctrl.tableColumns[2].visible">{{ user.fname }}</td>
+                    <td ng-if="ctrl.tableColumns[3].visible">{{ user.sname}}</td>
+                    <td ng-if="ctrl.tableColumns[4].visible">{{ user.phone}}</td>
+                    <td ng-if="ctrl.tableColumns[5].visible">{{ user.em_main}}</td>
+                    <td ng-if="ctrl.tableColumns[6].visible">{{ user.em_sec}}</td>
+                    <td ng-if="ctrl.tableColumns[7].visible">{{ user.em_pant}}</td>
+                    <td ng-if="ctrl.tableColumns[8].visible">{{ user.ucategories.descr}}</td>
+                    <td ng-if="ctrl.tableColumns[9].visible">{{ user.tm.title }}</td>
+                    <td ng-if="ctrl.tableColumns[10].visible"><textarea disabled>{{ user.comments}}</textarea></td>
                     <td>
                         <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
                                 class="glyphicon glyphicon-pencil"></span></a>
@@ -50,7 +48,7 @@
                                 class="glyphicon glyphicon-import"></span></a>
                         <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"><span
                                 class="glyphicon glyphicon-transfer"></span></a>
-                        <button ng-click="deleteUser(user)" type="button" class="btn btn-danger">
+                        <button ng-click="ctrl.delete(user)" type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>
@@ -58,6 +56,6 @@
                 </tbody>
             </table>
         </div>
-        <pre>total users : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+        <pre>total users : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
 </div>

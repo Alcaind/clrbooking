@@ -1,0 +1,80 @@
+{
+  "appUrl": "api/public",
+  "usersTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "user",
+      "title": "Username",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "fname",
+      "title": "Επώνυμο",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "sname",
+      "title": "Όνομα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "phone",
+      "title": "Τηλ",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "em_main",
+      "title": "1ο Email",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "em_sec",
+      "title": "2ο Email",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "em_pant",
+      "title": "Email Uni",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "cat_id",
+      "title": "Κατ.",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tm_id",
+      "title": "Τμήμα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "comments",
+      "title": "Σχόλια",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ]
+}
