@@ -4,8 +4,7 @@ angular.module('Rooms', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication',
-    'angularjs-dropdown-multiselect'
+    'Authentication'
 ])
     .controller('RoomsController', ['$scope', '$routeParams', 'api', 'MakeModal', 'orderByFilter', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, orderBy, AuthenticationService) {
         AuthenticationService.CheckCredentials();

@@ -5,11 +5,11 @@ angular.module('Users')
         $scope.urLength = $scope.evLength = 0;
         $scope.currentRole = null;
         $scope.baseURL = 'api/public/users';
-        $scope.urData = null;
+        $scope.uData = null;
 
         $scope.getUser = function () {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId, function (results) {
-                $scope.urData = results.data;
+                $scope.uData = results.data;
             });
         };
         $scope.getUser();
@@ -84,7 +84,7 @@ angular.module('Users')
         }
     })
     .controller('EvRolesFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
-        //$scope.urData = {comment: '', exp_dt: '', status: ''};
+        $scope.urData = {comment: '', exp_dt: '', status: '1'};
         $scope.baseURL = 'api/public/users';
         $scope.state = 1;
 
@@ -97,6 +97,7 @@ angular.module('Users')
             var method = "PUT";
             if ($scope.state === 0) method = "POST";
             api.apiCall(method, $scope.baseURL + "/" + $routeParams.userId + '/roles/' + $scope.currentRole.id, function (results) {
+                $scope.urData = {comment: '', exp_dt: '', status: '1'};
                 $scope.uRoles = results.data;
                 $scope.compare();
                 $scope.cancelUrData();

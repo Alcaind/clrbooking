@@ -6,7 +6,7 @@ angular.module('Roles', [
     'ApiModules',
     'Authentication'
 ])
-    .controller('RolesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
+    .controller('RolesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
         AuthenticationService.CheckCredentials();
         $scope.dp = [];
         $scope.item = {};
@@ -98,6 +98,11 @@ angular.module('Roles', [
         $scope.userTable = {};
         $scope.totalItemsL = $scope.totalItemsR = 0;
         $scope.currentUser = null;
+        $scope.rData = {};
+
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId, function (results) {
+            $scope.rData = results.data;
+        });
 
         $scope.getUsersRole = function () {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId + '/users', function (results) {
@@ -183,7 +188,7 @@ angular.module('Roles', [
         }
     })
     .controller('EvUserRolesFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
-        $scope.urData = {comment: '', exp_dt: '', status: ''};
+        $scope.urData = {comment: '', exp_dt: '', status: 1};
         $scope.state = 1;
 
         $scope.insertRole = function () {
@@ -191,7 +196,7 @@ angular.module('Roles', [
             if ($scope.state === 0) method = "POST";
             api.apiCall(method, 'api/public/users/' + $scope.currentUser.id + '/roles/' + $routeParams.roleId, function (results) {
                 $scope.uRoles = results.data;
-                $scope.compare();
+                $scope.urData = {comment: '', exp_dt: '', status: 1};
                 $scope.currentUser = null;
                 $scope.getUsersRole();
             }, undefined, $scope.urData, undefined, $scope);

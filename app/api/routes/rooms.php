@@ -30,6 +30,7 @@ $app->get('/rooms/{id}', function (Request $request, Response $response, $args) 
     return $response->getBody()->write($room->toJson());
 });
 
+
 $app->post('/rooms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
@@ -66,36 +67,6 @@ $app->post('/rooms', function (Request $request, Response $response) {
     }
     return $response->withStatus(201)->getBody()->write($room->toJson());
 });
-
-$app->post('/rooms/{id}/usages', function (Request $request, Response $response, $args) {
-    header("Content-Type: application/json");
-    $data = $request->getParsedBody();
-    $id = $args['id'];
-    $room = \App\Models\Rooms::find($id);
-    try {
-        $room->room_use()->attach($data);
-    } catch (PDOException $e) {
-        $nr = $response->withStatus(404);
-        $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
-        return $nr->write($error->toJson());
-    }
-    return $response->withStatus(201)->getBody()->write($room->toJson());
-});
-
-$app->delete('/rooms/{rid}/usages/{uid}', function ($request, $response, $args) {
-    $rid = $args['rid'];
-    $uid = $args['uid'];
-    try {
-        $room = \App\Models\Rooms::find($rid);
-        $room->room_use()->detach($uid);
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
-    }
-    return $response->withStatus(200)->getBody()->write($room->toJson());
-});
-
 
 $app->delete('/rooms/{id}', function ($request, $response, $args) {
     $id = $args['id'];
@@ -142,6 +113,67 @@ $app->put('/rooms/{id}', function ($request, $response, $args) {
     }
     return $response->getBody()->write($room->toJson());
 });
+
+
+$app->get('/rooms/{id}/usages', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $room = \App\Models\Rooms::with(['room_use'])->find($id);
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($room->toJson());
+});
+
+$app->post('/rooms/{id}/usages', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    $id = $args['id'];
+    $room = \App\Models\Rooms::find($id);
+    try {
+        $room->room_use()->attach($data);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(201)->getBody()->write($room->toJson());
+});
+
+$app->delete('/rooms/{rid}/usages/{uid}', function ($request, $response, $args) {
+    $rid = $args['rid'];
+    $uid = $args['uid'];
+    try {
+        $room = \App\Models\Rooms::find($rid);
+        $room->room_use()->detach($uid);
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->withStatus(200)->getBody()->write($room->toJson());
+});
+$app->post('/rooms/{rid}/usages/{uid}', function ($request, $response, $args) {
+    $uid = $args['uid'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $room = \App\Models\Rooms::find($rid);
+    $room->room_use()->attach($uid, $data);
+    return $response->getBody()->write($room->room_use()->get()->toJson());
+});
+
+$app->put('/rooms/{rid}/usages/{uid}', function ($request, $response, $args) {
+    $uid = $args['uid'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $room = \App\Models\Rooms::find($rid);
+    $room->room_use()->updateExistingPivot($uid, $data);
+    return $response->getBody()->write($room->room_use()->get()->toJson());
+});
+
+
 
 $app->get('/rooms/{id}/item', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");

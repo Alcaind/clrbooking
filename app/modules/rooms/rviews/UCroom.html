@@ -9,7 +9,7 @@
     <div id="content" style="display: flex">
         <div id="leftColumn" class="table-responsive boxContent tableView" style="width: 100%">
             <div>
-                <h2 style="text-align: center;"> Κατοχυρωμένοι ρόλοι στο {{urData.fname}} </h2>
+                <h2 style="text-align: center;"> Κατοχυρωμένες χρήσεις στην {{roomData.name}} </h2>
             </div>
             <div style="padding: 15px">
                 <div style="display: flex">
@@ -17,17 +17,17 @@
                            style="padding: 5px; width: 100%">
                 </div>
                 <div>
-                    <pagination current-page="currentPageL" total-items="urLength" items-per-page="itemsPerPageL"
+                    <pagination current-page="currentPageL" total-items="rLength" items-per-page="itemsPerPageL"
                                 num-pages="numPagesL"></pagination>
-                    <ur-table></ur-table>
-                    <pre>total rooms : {{urLength}}  Page: {{currentPageL}} / {{numPagesL}}</pre>
+                    <r-room-table></r-room-table>
+                    <pre>total rooms usages : {{lLength}}  Page: {{currentPageL}} / {{numPagesL}}</pre>
                 </div>
             </div>
         </div>
         <div id="rightColumn" style="width: 100%">
-            <div class="table-responsive boxContent" ng-if="!currentRole">
+            <div class="table-responsive boxContent" ng-if="!currentUsage">
                 <div>
-                    <h2 style="text-align: center;"> Επιλαχόντες ρόλοι </h2>
+                    <h2 style="text-align: center;"> Διαθέσιμες χρήσεις </h2>
                 </div>
                 <div style="padding: 15px">
                     <div style="display: flex">
@@ -36,18 +36,18 @@
                                style="padding: 5px; width: 100%">
                     </div>
                     <div>
-                        <pagination current-page="currentPageR" total-items="evLength"
+                        <pagination current-page="currentPageR" total-items="lLength"
                                     items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
-                        <evr-table></evr-table>
+                        <l-room-table></l-room-table>
                     </div>
-                    <pre>total users : {{evLength}}  Page: {{currentPageR}} / {{numPagesR}}</pre>
+                    <pre>total usages : {{rLength}}  Page: {{currentPageR}} / {{numPagesR}}</pre>
                 </div>
             </div>
-            <div ng-show="currentRole" style="width: 100%">
+            <div ng-show="currentUsage" style="width: 100%">
                 <div class="table-responsive boxContent">
                     <div style="padding: 15px">
                         <div>
-                            <ev-roles-form></ev-roles-form>
+                            <ev-rooms-form></ev-rooms-form>
                         </div>
                     </div>
                 </div>

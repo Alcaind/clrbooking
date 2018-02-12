@@ -47,7 +47,6 @@ angular.module('Config', [
         if (!$routeParams.configId) {
             $scope.item = {
                 year: "",
-                dt: "",
                 status: ""
             };
         } else {

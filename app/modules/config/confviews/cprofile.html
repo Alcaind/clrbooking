@@ -15,13 +15,6 @@
                 year.</p>
         </div>
         <div class="form-group"
-             ng-class="{ 'has-error' : configForm.dt.$invalid && !configForm.dt.$pristine }">
-            <label class="required" for="dt">dt<span class="form-required">*</span>:</label>
-            <input id="dt" name="dt" class="form-control" type="number" ng-model="item.dt">
-            <p ng-show="configForm.dt.$invalid && !configForm.dt.$pristine" class="help-block">Enter
-                dt.</p>
-        </div>
-        <div class="form-group"
              ng-class="{ 'has-error' : configForm.status.$invalid && !configForm.status.$pristine }">
             <label class="required" for="status">Κατάστηαση<span class="form-required">*</span>:</label>
             <input id="status" name="status" class="form-control" type="number" ng-model="item.status">

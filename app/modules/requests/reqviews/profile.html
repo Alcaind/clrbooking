@@ -17,7 +17,6 @@
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.user_id.$invalid && !requestForm.user_id.$pristine }">
             <label class="required" for="user_id">Username<span class="form-required">*</span>:</label>
-            <!--<input id="user_id" name="user_id" class="form-control" type="text" ng-model="item.user_id">-->
             <select id="user_id" name="user_id" ng-model="item.user_id"
                     ng-options="users.id as users.user for users in users"></select>
             <p ng-show="requestForm.user_id.$invalid && !requestForm.user_id.$pristine" class="help-block">Enter

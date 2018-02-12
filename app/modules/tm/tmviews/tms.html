@@ -11,7 +11,7 @@
                 <span class="glyphicon glyphicon-cloud-download"></span>
             </button>
             <a href="#/tms/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-                <span>+</span><span class="glyphicon glyphicon-user"></span>
+                <span class="glyphicon glyphicon-plus"></span>
             </a>
         </div>
         <div>
@@ -30,7 +30,7 @@
                     </th>
                     <th>
                         <button class="btn btn-link" ng-click="sortBy('descr')">descr</button>
-                        <span class="sortorder" ng-show="propertyName === 'tm_code'"
+                        <span class="sortorder" ng-show="propertyName === 'descr'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
@@ -63,7 +63,8 @@
                     <a href="#/tms/{{tm.id}}" type="button" class="btn btn-info thumb"><span
                             class="glyphicon glyphicon-pencil"></span></a>
                     <button ng-click="deleteTm(tm)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-erase"></span>
+                        <span class="glyphicon glyphicon-remove
+"></span>
                     </button>
                 </td>
                 </tr>

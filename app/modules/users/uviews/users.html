@@ -11,7 +11,7 @@
                 <span class="glyphicon glyphicon-cloud-download"></span>
             </button>
             <a href="#/users/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-                <span>+</span><span class="glyphicon glyphicon-user"></span>
+                <span class="glyphicon glyphicon-plus"></span>
             </a>
         </div>
         <div>
@@ -49,12 +49,12 @@
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('em_sec')">Email 2nd</button>
+                        <button class="btn btn-link" ng-click="sortBy('em_sec')">2ο Email</button>
                         <span class="sortorder" ng-show="propertyName === 'em_sec'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('em_pant')">Uni email</button>
+                        <button class="btn btn-link" ng-click="sortBy('em_pant')">Email Παντείου</button>
                         <span class="sortorder" ng-show="propertyName === 'em_pant'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
@@ -95,11 +95,12 @@
                         <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
                                 class="glyphicon glyphicon-pencil"></span></a>
                         <a href="#/users/{{user.id}}/roles" type="button" class="btn btn-primary thumb"><span
-                                class="glyphicon glyphicon-knight"></span></a>
+                                class="glyphicon glyphicon-import"></span></a>
                         <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"><span
                                 class="glyphicon glyphicon-transfer"></span></a>
                         <button ng-click="deleteUser(user)" type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-erase"></span>
+                            <span class="glyphicon glyphicon-remove
+"></span>
                         </button>
                     </td>
                 </tr>
