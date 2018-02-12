@@ -1,0 +1,66 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <form class="periodForm" name="periodForm" novalidate>
+        <div class="form-group"
+             ng-class="{ 'has-error' : periodForm.descr.$invalid && !periodForm.descr.$pristine }">
+            <label class="required" for="descr">descr<span class="form-required">*</span>:</label>
+            <input id="descr" name="descr" class="form-control" type="text" ng-model="item.descr">
+            <p ng-show="periodForm.descr.$invalid && !periodForm.descr.$pristine" class="help-block">Enter
+                description.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : periodForm.synt.$invalid && !periodForm.synt.$pristine }">
+            <label class="required" for="synt">synt<span class="form-required">*</span>:</label>
+            <input id="synt" name="synt" class="form-control" type="text" ng-model="item.synt">
+            <p ng-show="periodForm.synt.$invalid && !periodForm.synt.$pristine" class="help-block">Enter
+                synt.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : periodForm.fromd.$invalid && !periodForm.fromd.$pristine }">
+            <label class="required" for="fromd">fromd<span class="form-required">*</span>:</label>
+            <input id="fromd" name="fromd" class="form-control" type="date" ng-model="item.fromd">
+            <p ng-show="periodForm.fromd.$invalid && !periodForm.fromd.$pristine" class="help-block">Enter
+                fromd.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : periodForm.tod.$invalid && !periodForm.tod.$pristine }">
+            <label class="required" for="tod">tod<span class="form-required">*</span>:</label>
+            <input id="tod" name="tod" class="form-control" type="date" ng-model="item.tod">
+            <p ng-show="periodForm.tod.$invalid && !periodForm.tod.$pristine" class="help-block">Enter tod.</p>
+        </div>
+        <div class="form-group">
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" class="form-control" ng-model="item.comments"></textarea>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : periodForm.conf_id.$invalid && !periodForm.conf_id.$pristine }">
+            <label class="required" for="conf_id">conf_id<span class="form-required">*</span>:</label>
+            <input id="conf_id" name="conf_id" class="form-control" type="number" ng-model="item.conf_id">
+            <p ng-show="periodForm.conf_id.$invalid && !periodForm.conf_id.$pristine" class="help-block">Enter
+                conf_id.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : periodForm.porder.$invalid && !periodForm.porder.$pristine }">
+            <label class="required" for="porder">porder<span class="form-required">*</span>:</label>
+            <input id="porder" name="porder" class="form-control" type="number" ng-model="item.porder">
+            <p ng-show="periodForm.porder.$invalid && !periodForm.porder.$pristine" class="help-block">Enter porder.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : periodForm.status.$invalid && !periodForm.status.$pristine }">
+            <label class="required" for="status">status<span class="form-required">*</span>:</label>
+            <input id="status" name="status" class="form-control" type="number" ng-model="item.status">
+            <p ng-show="periodForm.status.$invalid && !periodForm.status.$pristine" class="help-block">Enter
+                status.</p>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="updatePeriod(item)" style="padding: 5px"
+                ng-if="item.id>0">Ανανέωση
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="savePeriod(item)" style="padding: 5px"
+                ng-if="item.synt && !item.id">Αποθήκευση
+        </button>
+    </form>
+</div>

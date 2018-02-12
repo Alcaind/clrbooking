@@ -12,7 +12,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->get('/roomuse', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $roomuse = \App\Models\RoomUse::all();
-
     return $response->getBody()->write($roomuse->toJson());
 });
 
@@ -36,9 +35,19 @@ $app->post('/roomuse', function (Request $request, Response $response) {
         $roomuse->synt = $data['synt'];
         $roomuse->descr = $data['descr'];
         $roomuse->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+//        $users->errorText = $e->getMessage();
+//        $users->errorCode = $e->getCode();
+//        $errormessage = explode(':', $e->getMessage())[2];
+//        $errormessage = explode('(', $errormessage)[0];
+//        $value = explode('\'', $errormessage)[1];
+//        $key = explode('\'', $errormessage)[3];
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
+
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($roomuse->toJson());
 });

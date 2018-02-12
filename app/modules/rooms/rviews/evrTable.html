@@ -1,0 +1,22 @@
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>id</th>
+            <th>role</th>
+            <th>descr</th>
+            <th>...</th>
+        </tr>
+        <tr ng-repeat="role in evRoles.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:filterR"
+            style="cursor: pointer" ng-class="{selected: role.id === item.id}">
+            <td>{{ role.id }}</td>
+            <td>{{ role.role }}</td>
+            <td>{{ role.descr }}</td>
+            <td>
+                <button ng-click="role.disabled?null:showUrData(role)" type="button"
+                        class="btn {{role.disabled?'btn-regular disabled':'btn-success '}}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>

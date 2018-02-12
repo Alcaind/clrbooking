@@ -12,17 +12,17 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 
 class Requests extends Model
 {
-    public $timestamps = false;
+
     protected $table = 'requests';
 
     public function users()
     {
-        $this->belongsTo('\\App\\Models\\Users', 'user_id');
+        return $this->belongsTo('\\App\\Models\\Users', 'user_id');
     }
 
     public function ps()
     {
-        $this->belongsTo('\\App\\Models\\Ps', 'ps_id');
+        return $this->belongsTo('\\App\\Models\\Ps', 'ps_id');
     }
 
 }

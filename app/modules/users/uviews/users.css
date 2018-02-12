@@ -2,24 +2,41 @@
     padding: 8px;
 }
 
-th {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 5px;
-    background-color: #ffffff;
-    font-size: 16px;
+/*# sourceMappingURL=components.css.map */
+.sortorder:after {
+    content: '\25b2';
+    /*BLACK UP-POINTING TRIANGLE*/
 }
 
-table, td {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 5px;
+.sortorder.reverse:after {
+    content: '\25bc';
+    /*BLACK DOWN-POINTING TRIANGLE*/
 }
 
-table tr:nth-child(odd) {
-    background-color: #f1f1f1;
+#rightColumn {
+    height: calc(100vh - 122px);
+    overflow-y: auto;
 }
 
-table tr:nth-child(even) {
-    background-color: #ffffff;
+span.msg-error {
+    color: #F00;
 }
+
+span.form-required {
+    margin-left: 5px;
+    color: red;
+}
+
+.userForm {
+    display: inline;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px;
+    max-width: 600px;
+
+}
+
+boxContent {
+}
+

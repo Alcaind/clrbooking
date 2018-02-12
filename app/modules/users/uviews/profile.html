@@ -1,0 +1,107 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <form class="userForm" name="userForm" novalidate>
+        <!-- USERNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.uname.$invalid && !userForm.uname.$pristine }">
+            <label class="required" for="uname">Username<span class="form-required">*</span>:</label>
+            <div>
+                <input id="uname" name="uname" class="form-control" type="text" ng-model="item.user" ng-minlength="5"
+                       ng-maxlength="30">
+                <p ng-show="userForm.uname.$error.minlength" class="help-block">Username is too short.</p>
+                <p ng-show="userForm.uname.$error.maxlength" class="help-block">Username is too long.</p>
+            </div>
+        </div>
+        <!--PASSWORD-->
+        <div class="form-group">
+            <div>
+                <label class="required" for="pw1">Set a password<span class="form-required">*</span>:</label>
+                <input id="pw1" name="pw1" class="form-control" type="{{passwordString1}}" ng-model="item.hash"
+                       ng-init="passwordString1='password'" ng-required=""/>
+                <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
+                   ng-click="passwordString1==='text'?passwordString1='password':passwordString1='text';errorString='*'+pw1+'*';">
+                    <i class="glyphicon glyphicon-eye-open"></i>
+                </a>
+            </div>
+            <div>
+                <label class="required" for="pw2">Confirm the password<span class="form-required">*</span>:</label>
+                <input id="pw2" name="pw2" class="form-control" type="{{passwordString2}}"
+                       ng-model="pw2" ng-init="passwordString2='password'" pw-check="pw1" ng-required=""/>
+                <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
+                   ng-click="passwordString2==='text'?passwordString2='password':passwordString2='text';errorString='*'+pw2+'*';">
+                    <i class="glyphicon glyphicon-eye-open"></i>
+                </a>
+                <div class="msg-block" ng-show="userForm.$error">
+                    <span class="msg-error" ng-show="userForm.pw2.$error.pwmatch">Passwords don't match.</span>
+                </div>
+            </div>
+        </div>
+        <!-- EMAIL FIRST MANDATORY -->
+        <div class="form-group " ng-class="{ 'has-error' : userForm.email1.$invalid && !userForm.email1.$pristine }">
+            <label class="required" for="email1">Email<span class="form-required">*</span>:</label>
+            <input id="email1" name="email1" class="form-control" type="email" ng-model="item.em_main" required>
+            <p ng-show="userForm.email1.$invalid && !userForm.email1.$pristine" class="help-block">Enter a valid
+                email.</p>
+        </div>
+        <!-- EMAIL SECOND -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.email2.$invalid  }">
+            <label for="email2">Email 2:</label>
+            <input id="email2" name="email2" class="form-control" type="email" ng-model="item.em_sec">
+            <p ng-show="userForm.email2.$invalid" class="help-block">Enter a valid email.</p>
+        </div>
+        <!-- EMAIL PANTEIOY -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.emailp.$invalid}">
+            <label for="emailp">Email Panteioy:</label>
+            <input id="emailp" name="emailp" class="form-control" type="email" ng-model="item.em_pant">
+            <p ng-show="userForm.emailp.$invalid" class="help-block">Enter a valid email.</p>
+        </div>
+        <!-- FIRSTNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.fname.$invalid && !userForm.fname.$pristine }">
+            <label for="fname" class="required">First Name<span class="form-required">*</span>:</label>
+            <input id="fname" name="fname" class="form-control" type="text" ng-model="item.fname">
+            <p ng-show="userForm.fname.$invalid && !userForm.fname.$pristine" class="help-block">Your first name is
+                required.</p>
+        </div>
+        <!-- LASTNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.sname.$invalid && !userForm.sname.$pristine }">
+            <label for="sname" class="required">Last Name<span class="form-required">*</span>:</label>
+            <input id="sname" name="sname" class="form-control" type="text" ng-model="item.sname">
+            <p ng-show="userForm.sname.$invalid && !userForm.sname.$pristine" class="help-block">Your last name is
+                required.</p>
+        </div>
+        <!--PHONE-->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
+            <label for="phone" class="required">Phone<span class="form-required">*</span>:</label>
+            <input id="phone" name="phone" class="form-control" type="number" ng-model="item.phone" ng-minlength="5"
+                   ng-maxlength="10">
+            <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Your phone is
+                required.Look out the lenght!</p>
+        </div>
+        <div class="form-group">
+            <label for="idtm">TM_ID:</label>
+            <select id="idtm" ng-model="item.tm_id" ng-options="tm.id as tm.title for tm in tms"></select>
+        </div>
+        <!--Cat_ID-->
+        <div class="form-group">
+            <label for="catid">CAT_ID:</label>
+            <select id="catid" ng-model="item.cat_id" class="form-control"
+                    ng-options="ucategorie.id as ucategorie.descr for ucategorie in ucategories"> </select>
+        </div>
+        <!--COMMENTS-->
+        <div class="form-group">
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" class="form-control" ng-model="item.comments"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="updateUser(item)" style="padding: 5px"
+                ng-if="item.id>0">Ανανέωση
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveUser(item)" style="padding: 5px"
+                ng-if="item.fname && item.sname && !item.id">Αποθήκευση
+        </button>
+    </form>
+</div>

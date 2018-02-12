@@ -39,12 +39,22 @@ $app->post('/periods', function (Request $request, Response $response) {
         $periods->tod = $data['tod'];
         $periods->comments = $data['comments'];
         $periods->conf_id = $data['conf_id'];
-        $periods->order = $data['order'];
+        $periods->porder = $data['porder'];
         $periods->status = $data['status'];
         $periods->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+//        $users->errorText = $e->getMessage();
+//        $users->errorCode = $e->getCode();
+//        $errormessage = explode(':', $e->getMessage())[2];
+//        $errormessage = explode('(', $errormessage)[0];
+//        $value = explode('\'', $errormessage)[1];
+//        $key = explode('\'', $errormessage)[3];
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
+
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($periods->toJson());
 });
@@ -73,7 +83,7 @@ $app->put('/periods/{id}', function ($request, $response, $args) {
         $periods->tod = $data['tod'] ?: $periods->tod;
         $periods->comments = $data['comments'] ?: $periods->comments;
         $periods->conf_id = $data['conf_id'] ?: $periods->status;
-        $periods->order = $data['order'] ?: $periods->order;
+        $periods->porder = $data['porder'] ?: $periods->order;
         $periods->status = $data['status'] ?: $periods->status;
         $periods->save();
     } catch (\Exception $e) {

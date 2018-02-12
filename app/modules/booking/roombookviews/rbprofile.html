@@ -1,0 +1,103 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <form class="roomBookForm" name="roomBookForm" novalidate>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomBookForm.user_id.$invalid && !roomBookForm.user_id.$pristine }">
+            <label class="required" for="user_id">Username<span class="form-required">*</span>:</label>
+            <select id="user_id" name="user_id" ng-model="item.user_id"
+                    ng-options="users.id as users.user for users in users"></select>
+            <p ng-show="roomBookForm.user_id.$invalid && !roomBookForm.user_id.$pristine" class="help-block">Enter
+                user_id.</p>
+        </div>
+        <div class="form-group">
+            <label for="description">Περιγραφή:</label>
+            <input id="description" name="comments" class="form-control" ng-model="item.descr">
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomBookForm.period.$invalid && !roomBookForm.period.$pristine }">
+            <label class="required" for="period">Ακαδημαϊκή Περίοδος<span class="form-required">*</span>:</label>
+            <input id="period" name="period" class="form-control" type="text" ng-model="item.period">
+            <p ng-show="roomBookForm.period.$invalid && !roomBookForm.period.$pristine" class="help-block">Enter
+                period.</p>
+        </div>
+        <div class="form-group">
+            <label class="required" for="ps_id">Πρόγραμμα Σπουδών:</label>
+            <input id="ps_id" name="ps_id" class="form-control" type="text" ng-model="item.ps_id">
+        </div>
+        <div class="form-group">
+            <label class="required" for="teacher">Καθηγητής:</label>
+            <input id="teacher" name="teacher" class="form-control" type="text" ng-model="item.teacher">
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomBookForm.class_use.$invalid && !roomBookForm.class_use.$pristine }">
+            <label class="required" for="class_use">Αίθουσα<span class="form-required">*</span>:</label>
+            <input id="class_use" name="class_use" class="form-control" type="text" ng-model="item.class_use">
+            <p ng-show="roomBookForm.class_use.$invalid && !roomBookForm.class_use.$pristine" class="help-block">Enter
+                class_use.</p>
+        </div>
+        <div class="form-group">
+            <label class="required" for="links">Παραποµπές:</label>
+            <input id="links" name="links" class="form-control" type="text" ng-model="item.links">
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomBookForm.fromdt.$invalid && !roomBookForm.fromdt.$pristine }">
+            <label class="required" for="fromdt">Από ώρα<span class="form-required">*</span>:</label>
+            <input id="fromdt" name="fromdt" class="form-control" type="time" ng-model="item.fromdt">
+            <p ng-show="roomBookForm.fromdt.$invalid && !roomBookForm.fromdt.$pristine" class="help-block">Enter
+                fromdt.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : roomBookForm.todt.$invalid && !roomBookForm.todt.$pristine }">
+            <label class="required" for="todt">Μέχρι ώρα<span class="form-required">*</span>:</label>
+            <input id="todt" name="todt" class="form-control" type="time" ng-model="item.todt">
+            <p ng-show="roomBookForm.todt.$invalid && !roomBookForm.todt.$pristine" class="help-block">Enter todt.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomBookForm.protocol_id.$invalid && !roomBookForm.protocol_id.$pristine }">
+            <label class="required" for="protocol_id">Αρ.πρωτοκόλλου<span class="form-required">*</span>:</label>
+            <input id="protocol_id" name="protocol_id" class="form-control" type="number" ng-model="item.protocol_id">
+            <p ng-show="roomBookForm.protocol_id.$invalid && !roomBookForm.protocol_id.$pristine" class="help-block">
+                Enter
+                protocol_id.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomBookForm.req_status.$invalid && !roomBookForm.req_status.$pristine }">
+            <label class="required" for="req_status">Κατάσταση Αιτήματος<span class="form-required">*</span>:</label>
+            <input id="req_status" name="req_status" class="form-control" type="text" ng-model="item.req_status">
+            <p ng-show="roomBookForm.req_status.$invalid && !roomBookForm.req_status.$pristine" class="help-block">Enter
+                req_status.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomBookForm.fromd.$invalid && !roomBookForm.fromd.$pristine }">
+            <label class="required" for="fromd">Από ημέρα<span class="form-required">*</span>:</label>
+            <input id="fromd" name="fromd" class="form-control" type="date" ng-model="item.fromd">
+            <p ng-show="roomBookForm.fromd.$invalid && !roomBookForm.fromd.$pristine" class="help-block">Enter
+                fromd.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomBookForm.tod.$invalid && !roomBookForm.tod.$pristine }">
+            <label class="required" for="tod">Μέχρι ημέρα<span class="form-required">*</span>:</label>
+            <input id="tod" name="tod" class="form-control" type="date" ng-model="item.tod">
+            <p ng-show="roomBookForm.tod.$invalid && !roomBookForm.tod.$pristine" class="help-block">Enter
+                tod.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomBookForm.date_index.$invalid && !roomBookForm.date_index.$pristine }">
+            <label class="required" for="date_index">date_index<span class="form-required">*</span>:</label>
+            <input id="date_index" name="date_index" class="form-control" type="text" ng-model="item.date_index">
+            <p ng-show="roomBookForm.date_index.$invalid && !roomBookForm.date_index.$pristine" class="help-block">Enter
+                date_index.</p>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="updateRequest(item)" style="padding: 5px"
+                ng-if="item.id>0">Ανανέωση
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveRequest(item)" style="padding: 5px"
+                ng-if="item.req_dt && !item.id">Αποθήκευση
+        </button>
+    </form>
+</div>

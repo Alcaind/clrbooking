@@ -2,80 +2,86 @@
 
 angular.module('Tms', [
     'MainComponents',
-    'ui.bootstrap'
-]).controller('TmsController', ['$scope', '$http', function ($scope, $http) {
+    'ui.bootstrap',
+    'ApiModules',
+    'Authentication'
+]).controller('TmsController', ['$scope', '$routeParams', 'api', 'MakeModal', 'orderByFilter', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, orderBy, AuthenticationService) {
+    AuthenticationService.CheckCredentials();
 
-    $scope.tms = [];
-    $scope.currentTm = {};
+    $scope.dp = [];
+    $scope.item = {};
+    $scope.method = '';
+    $scope.baseURL = 'api/public/tms';
 
     $scope.getTms = function () {
-        $http({
-            method: 'GET',
-            url: 'api/public/tms'
-        }).then(function successCallback(response) {
-            $scope.tms = response.data;
-        }, function errorCallBack(response) {
-            alert(response.message);
+        api.apiCall('GET', $scope.baseURL, function (results) {
+            $scope.dp = results.data;
+            $scope.totalItems = $scope.dp.length;
         });
     };
 
-    $scope.getTm = function () {
-        $http({
-            method: 'GET',
-            url: 'api/public/tm/' + $scope.currentTm.id
-        }).then(function successCallback(response) {
-            $scope.currentTm = response.data;
-
-        }, function errorCallBack(response) {
-            alert(response.message);
+    $scope.deleteTm = function (item) {
+        api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
+            $scope.dp.splice($scope.dp.indexOf(item), 1);
+            $scope.item = {};
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Το τμήμα διαγράφηκε', 1)
         });
     };
 
-    $scope.deleteTm = function (tm) {
-        $http({
-            method: 'DELETE',
-            url: 'api/public/tm/' + tm.id
-        }).then(function successCallBack(response) {
-            $scope.tms.splice($scope.tms.indexOf(tm), 1)
-        }, function errorCallBack(response) {
-            alert(response.message);
-        });
+    $scope.propertyName = 'tm_code';
+    $scope.reverse = true;
+    $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
+
+    $scope.sortBy = function (propertyName) {
+        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+            ? !$scope.reverse : false;
+        $scope.propertyName = propertyName;
     };
 
-    $scope.insertTm = function () {
-        $http({
-            method: 'POST',
-            url: 'api/public/tm',
-            data: JSON.stringify($scope.currentTm)
-        }).then(function successCallBack(response) {
-            $scope.tms.push(response.data);
-        }, function errorCallBack(response) {
-            alert(response.message);
-        })
-    };
+    $scope.getTms();
 
-    $scope.updateTm = function () {
-        $http({
-            method: 'PUT',
-            url: 'api/public/tm/' + $scope.currentTm.id,
-            data: JSON.stringify($scope.currentTm)
-        }).then(function successCallBack(response) {
-            //????
-        }, function errorCallBack(response) {
-            alert(response.message);
-        });
-    };
 
-    $scope.selectTm = function (tm) {
-        $scope.currentTm = tm;
-    };
+}])
 
-    $scope.newTm = function () {
-        $scope.currentTm = {
-            tm_code: "",
-            descr: "",
-            title: "",
-            sxoli: ""
+    .controller('TmProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
+        AuthenticationService.CheckCredentials();
+        $scope.baseURL = 'api/public/tms';
+
+        if (!$routeParams.tmId) {
+            $scope.item = {
+                tm_code: "",
+                descr: "",
+                title: "",
+                sxoli: ""
+            };
+        } else {
+            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.tmId, function (results) {
+                $scope.item = results.data;
+            });
         }
-    };
-}]);
+        $scope.updateTm = function (item) {
+            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Το τμήμα ανανεώθηκε', 1);
+                history.back();
+            }, undefined, item)
+
+        };
+
+        $scope.saveTm = function (item) {
+            api.apiCall('POST', $scope.baseURL, function (results) {
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νέο Τμήμα', 1);
+                history.back();
+            }, undefined, item)
+        }
+
+    }])
+
+    .component('tmProfile', {
+        restrict: 'EA',
+        templateUrl: 'modules/tm/tmviews/profile.html',
+        scope: {
+            method: '='
+        },
+        controller: 'TmProfileController'
+    })
+;

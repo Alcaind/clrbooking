@@ -11,7 +11,7 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 
 class RoomItem extends Model
 {
-    public $timestamps = false;
+
     protected $table = 'room_items';
 
 }

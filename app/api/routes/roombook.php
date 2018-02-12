@@ -38,17 +38,28 @@ $app->post('/roombook', function (Request $request, Response $response) {
         $roombook->fromt = $data['fromt'];
         $roombook->tot = $data['tot'];
         $roombook->type = $data['type'];
-        $roombook->dt = $data['dt'];
         $roombook->period = $data['period'];
-//        $roombook->room_id = $data['room_id']; den yparxei sthn bash
+        $roombook->room_id = $data['room_id'];
+        $roombook->fromd = $data['fromd'];
+        $roombook->tod = $data['tod'];
+        $roombook->request_id = $data['request_id'];
         $roombook->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+//        $users->errorText = $e->getMessage();
+//        $users->errorCode = $e->getCode();
+//        $errormessage = explode(':', $e->getMessage())[2];
+//        $errormessage = explode('(', $errormessage)[0];
+//        $value = explode('\'', $errormessage)[1];
+//        $key = explode('\'', $errormessage)[3];
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
+
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($roombook->toJson());
 });
-
 $app->delete('/roombook/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
@@ -72,9 +83,11 @@ $app->put('/roombook/{id}', function ($request, $response, $args) {
         $roombook->fromt = $data['fromt'] ?: $roombook->fromt;
         $roombook->tot = $data['tot'] ?: $roombook->tot;
         $roombook->type = $data['type'] ?: $roombook->type;
-        $roombook->dt = $data['dt'] ?: $roombook->dt;
         $roombook->period = $data['period'] ?: $roombook->period;
-//        $roombook->room_id = $data['room_id'] ?: $roombook->room_id;   den yparxei sthn bash
+        $roombook->room_id = $data['room_id'] ?: $roombook->room_id;
+        $roombook->fromd = $data['fromd'] ?: $roombook->fromd;
+        $roombook->tod = $data['tod'] ?: $roombook->tod;
+        $roombook->request = $data['request_id'] ?: $roombook->request_id;
         $roombook->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

@@ -5,7 +5,6 @@ angular.module('Home',[
     'Admin',
     'ui.bootstrap'
 ])
-
 .controller('HomeController', ['$scope','$interval', '$rootScope', '$location', function ($scope, $interval,$rootScope,$location) {
     if ((!$rootScope.globals || !$rootScope.globals.item || ($rootScope.globals.item && !$rootScope.globals.item.user)) && !$rootScope.inAuthentication) {
         $location.path('/login');
@@ -14,7 +13,7 @@ angular.module('Home',[
     .run(['$rootScope', '$location', '$cookies', '$http','AuthenticationService',
         function ($rootScope, $location, $cookies, $http, AuthenticationService) {
 
-            if ($rootScope.app) {
+            /*if ($rootScope.app) {
                 window.location('app.livepraktoreio.gr/'+$rootScope.app);
                 return;
             }
@@ -42,6 +41,6 @@ angular.module('Home',[
                 $rootScope.globals = {item: {}};
                 $rootScope.globals.item = response.data.success;
                 $rootScope.user = $rootScope.globals.item.user;
-            })
+            })*/
         }
     ]);

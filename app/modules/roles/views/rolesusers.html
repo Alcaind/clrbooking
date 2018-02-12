@@ -1,0 +1,59 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <div id="content" style="display: flex">
+        <div id="leftColumn" class="table-responsive boxContent tableView" style="width: 100%">
+            <div>
+                <h2 style="text-align: center;"> Κατοχυρωμένοι ρόλοι στον {{urData.fname}} </h2>
+            </div>
+            <div style="padding: 15px">
+                <div style="display: flex">
+                    <input name="searchownroles" type="text" ng-model="filter" class="form-control" placeholder="search"
+                           style="padding: 5px; width: 100%">
+                </div>
+                <div>
+                    <pagination current-page="currentPage" total-items="totalItemsL"
+                                items-per-page="itemsPerPage" num-pages="numPages"></pagination>
+                    <ur-user-table></ur-user-table>
+                    <pre>total users : {{totalItemsL}}  Page: {{currentPage}} / {{numPages}}</pre>
+                </div>
+            </div>
+        </div>
+        <div id="rightColumn" style="width: 100%">
+            <div class="table-responsive boxContent" ng-if="!currentUser">
+                <div>
+                    <h2 style="text-align: center;"> Επιλαχόντες ρόλοι </h2>
+                </div>
+                <div style="padding: 15px">
+                    <div style="display: flex">
+                        <input name="searchexistroles" type="text" ng-model="filterR" class="form-control"
+                               placeholder="search"
+                               style="padding: 5px; width: 100%">
+                    </div>
+                    <div>
+                        <pagination current-page="currentPageR" total-items="totalItemsR"
+                                    items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
+                        <evr-user-table></evr-user-table>
+                    </div>
+                    <pre>total users : {{totalItemsR}}  Page: {{currentPageR}} / {{numPagesR}}</pre>
+                </div>
+            </div>
+            <div ng-show="currentUser" style="width: 100%">
+                <div class="table-responsive boxContent">
+                    <div style="padding: 15px">
+                        <div>
+                            <ev-users-roles-form></ev-users-roles-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

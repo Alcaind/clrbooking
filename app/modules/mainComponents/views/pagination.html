@@ -1,0 +1,8 @@
+<div>
+    View <select ng-model="itemsPerPage" ng-change="setItemsPerPage(itemsPerPage)"
+                 ng-options="pg.th as pg.th for pg in pageThresholds"></select> records at a time.
+    <ul uib-pagination boundary-links="true" items-per-page="itemsPerPage" total-items="totalItems"
+        ng-model="currentPage" num-pages="numPages"
+        class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+        last-text="&raquo;"></ul>
+</div>

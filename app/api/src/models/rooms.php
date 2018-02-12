@@ -14,11 +14,21 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 class Rooms extends Model
 {
     protected $table = 'rooms';
-    public $timestamps = false;
+
 
     public function items()
     {
-        return $this->belongsToMany("\\App\\Models\\Items", 'room_items', 'item_id', 'room_id');
+        return $this->belongsToMany("\\App\\Models\\Items", 'room_items', 'room_id', 'item_id');
+    }
+
+    public function room_use()
+    {
+        return $this->belongsToMany("\\App\\Models\\RoomUse", 'rooms_room_use', 'rooms_id', 'room_use_id')->withPivot('comment');
+    }
+
+    public function room_category()
+    {
+        return $this->belongsTo("\\App\\Models\\RoomCategory", 'category');
     }
 
     public function periods()
@@ -30,5 +40,11 @@ class Rooms extends Model
         }
         return $ret;
     }
+
+    public function config()
+    {
+        return $this->belongsTo('\\App\\Models\\Config', 'conf_id');
+    }
+
 
 }

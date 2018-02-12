@@ -6,7 +6,9 @@
  * Time: 4:00 μμ
  */
 session_start();
+require __DIR__ . '/../src/models/apierror.php';
 require __DIR__ . '/../../vendor/autoload.php';
+//require __DIR__ . '/../src/Slim/Handlers/ApiError.php';
 require __DIR__ . '/../config/db.php';
 require __DIR__ . '/../src/models/users.php';
 require __DIR__ . '/../src/models/roles.php';
@@ -24,8 +26,8 @@ require __DIR__ . '/../src/models/roombook.php';
 require __DIR__ . '/../src/models/roomitem.php';
 require __DIR__ . '/../src/models/roomuse.php';
 require __DIR__ . '/../src/models/usersroles.php';
-
-
+require __DIR__ . '/../src/models/ucategories.php';
+require __DIR__ . '/../src/models/room_category.php';
 
 
 //require __DIR__ . '../src/models/Users.php';
@@ -43,10 +45,12 @@ $app = new \Slim\App([
             'driver' => 'mysql',
             'host' => 'localhost',
             'database' => 'clrbooking',
-            'username' => 'lpadmin',
-            'password' => 'OKEcmRv1UAa0Fqrb',
-            //'charset'   => 'utf8',
-            //'collation' => 'utf8_general_ci',
+            //'username' => 'lpadmin',
+            //'password' => 'OKEcmRv1UAa0Fqrb',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+            'collation' => 'utf8_general_ci',
             'prefix'    => ''
         ]
     ]
@@ -91,3 +95,5 @@ require __DIR__ . '/../routes/roombook.php';
 require __DIR__ . '/../routes/roomitem.php';
 require __DIR__ . '/../routes/roomuse.php';
 require __DIR__ . '/../routes/usersroles.php';
+require __DIR__ . '/../routes/ucategories.php';
+require __DIR__ . '/../routes/roomcategory.php';

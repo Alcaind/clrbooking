@@ -1,10 +1,51 @@
-<nav class="navbar-collapse collapse" role="navigation">
-    <ul class="navbar-nav nav">
-        <li><a href="#roles">Roles</a></li>
-        <li><a href="#users">Users</a></li>
-        <li><a href="#rooms">Rooms</a></li>
-        <li><a href="#tms">Tmhmata</a></li>
-        <li><a href="#kat">Katey8hnseis</a></li>
-        <li><a href="#requests">Aithmata</a></li>
-    </ul>
+<nav class="navbarpan navbar navbar-default" role="navigation">
+    <div class="navbar-header navbarpan" style="padding-left: 45px;background: #5d0303;;">
+
+        <button type="button" class="navbar-toggle" ng-init="navCollapsed = true"
+                ng-click="navCollapsed = !navCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand panteiosbrand " href="#home">
+            <div style="background: url('http://www.panteion.gr/images/Venda-img/logo.png') no-repeat 50% 0% #fff;background-size: auto auto;background-size: contain;height: 50px;position: absolute;left: 0px;z-index: 10;width: 50px;top: 0px;"></div>
+            <div style="border-bottom: 1px solid;height: 22px;margin-bottom: 5px;">Αιθουσιολόγιο</div>
+            <div style="font-size:10px;line-height: 10px;">ΠΑΝΤΕΙΟΝ ΠΑΝΕΠΙΣΤΗΜΙΟ <br> Κοινωνικών και Πολιτικών Επιστημών
+            </div>
+        </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbarpan " ng-class="!navCollapsed && 'in'"
+         ng-if="globals.item.username && globals.item.username !== '' && globals.item.authdata">
+        <ul class="nav navbar-nav">
+            <li><a href="#roles">Ρόλοι</a></li>
+            <li><a href="#users">Χρήστες</a></li>
+            <li><a href="#rooms">Αίθουσες</a></li>
+            <li><a href="#tms">Τμήματα</a></li>
+            <li><a href="#kats">Κατευθύνσεις</a></li>
+            <li><a href="#requests">Αιτήματα</a></li>
+            <li><a href="#config">Configuration</a></li>
+            <li><a href="#items">Εξοπλισμός</a></li>
+            <li><a href="#periods">Ακαδημαικοι Περίοδοι</a></li>
+            <li><a href="#ps">Προγραμμα σπουδών</a></li>
+            <li><a href="#booking">Κλείσιμο Αιθουσας</a></li>
+            <li><a href="#userscategories">Κατηγορίες Χρηστών</a></li>
+            <li><a href="#roomcategory">Κατηγορίες Αιθουσών</a></li>
+            <li><a href="#roomuse">Χρήση Αιθουσών</a></li>
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" style="background: #5d0303;">
+                <a class="dropdown-toggle" data-toggle="dropdown">Settings<b class="caret"></b></a>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+                    <li role="menuitem"><a href="#roles">Profile</a></li>
+                    <li role="menuitem" ng-click="logout()"><a href="#login">LogOff</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </nav>
+
+

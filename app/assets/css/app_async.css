@@ -1,0 +1,141 @@
+body {
+    /*background: #e6e6e6;
+    color: #666666;
+    font-family: 'RobotoDraft', 'Roboto', sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    overflow: scroll;
+    max-height: 100%;
+    line-height: 1.5em;
+    min-height: 100%;
+    !*position: absolute;*!
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;*/
+    background-color: #f3f3f3 !important;
+}
+
+#main {
+    position: fixed;
+    top: 50px; /* Set this to the height of the header */
+    bottom: 50px; /* Set this to the height of the footer */
+    left: 230px;
+    right: 0;
+    overflow: auto;
+    background: #fff;
+}
+
+.header {
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*width: 100%;*/
+    /*height: 50px;*/
+    /*overflow: hidden; !* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" *!*/
+    /*background: #800000;*/
+    /*margin-right: auto;*/
+    /*margin-left: auto;*/
+    background-color: #F1F1F1;
+    text-align: center;
+    padding: 20px;
+}
+
+/*ok*/
+nav.navbarpan {
+    background-color: #800000;
+    /*background-color: #5d0303;*/
+}
+
+nav.navbarpan > div > a.navbar-brand {
+    color: #fff;
+    border-style: none;
+    padding: 0px 15px;
+}
+
+.navbar-default .navbar-brand.panteiosbrand:focus {
+    color: #800000;
+    background-color: #e6e6e6;
+}
+
+.navbar-default .navbar-brand.panteiosbrand:hover {
+    color: #800000;
+    background-color: #e6e6e6;
+}
+
+.navbar-default .navbar-brand.panteiosbrand:active {
+    color: #800000;
+    background-color: #e6e6e6;
+}
+
+nav.navbarpan > div > ul.nav.navbar-nav > li > a:hover {
+    background-color: #e6e6e6;
+    color: #800000;
+
+}
+
+nav.navbarpan > div > ul.nav.navbar-nav > li > a:active {
+    background-color: #e6e6e6;
+    color: #800000;
+}
+
+nav.navbarpan > div > ul.nav.navbar-nav > li > a:focus {
+    background-color: #e6e6e6;
+    color: #800000;
+}
+
+nav.navbarpan > div > ul.nav.navbar-nav > li > a {
+    border-style: none;
+    color: #fff;
+}
+
+nav.navbarpan > div > ul.nav.navbar-nav > li > a > ul > li {
+    border-style: none;
+    color: #fff;
+}
+
+nav.navbarpan > div > ul.nav.navbar-nav > li > a:active {
+    background-color: #e6e6e6;
+    color: #800000;
+}
+
+.div.navbar-collapse.collapse {
+
+    display: block;
+    overflow: hidden;
+    max-height: 0px;
+    -webkit-transition: max-height .3s ease;
+    -moz-transition: max-height .3s ease;
+    -o-transition: max-height .3s ease;
+    transition: max-height .3s ease;
+}
+
+.div.navbar-collapse.collapse.in {
+    max-height: 2000px;
+}
+
+.maincontainer {
+
+    padding: 0px;
+    margin-left: auto;
+    background-color: #e6e6e6;
+    width: 80%;
+    height: calc(100vh - 102px);
+    margin-right: auto;
+    overflow-y: auto;
+
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background: #87887f;
+    color: #b2b3a8 !important;
+    margin-top: 50px;
+    text-align: center;
+}

@@ -1,0 +1,37 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <form class="itemForm" name="itemForm" novalidate>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="comments">comments:</label>
+            <textarea id="comments" name="comments" class="form-control" ng-model="item.comments"></textarea>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : itemForm.code.$invalid && !itemForm.code.$pristine }">
+            <label class="required" for="code">code<span class="form-required">*</span>:</label>
+            <input id="code" name="code" class="form-control" type="text" ng-model="item.code">
+            <p ng-show="itemForm.code.$invalid && !itemForm.code.$pristine" class="help-block">Enter code.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : itemForm.status.$invalid && !itemForm.status.$pristine }">
+            <label class="required" for="status">status<span class="form-required">*</span>:</label>
+            <input id="status" name="status" class="form-control" type="text" ng-model="item.status">
+            <p ng-show="itemForm.status.$invalid && !itemForm.status.$pristine" class="help-block">Enter
+                status.</p>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="updateItem(item)" style="padding: 5px"
+                ng-if="item.id>0">Ανανέωση
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveItem(item)" style="padding: 5px"
+                ng-if="item.code && !item.id">Αποθήκευση
+        </button>
+    </form>
+</div>

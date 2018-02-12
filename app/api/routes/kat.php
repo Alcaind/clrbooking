@@ -10,18 +10,17 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 
-$app->get('/kat', function (Request $request, Response $response) {
+$app->get('/kats', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $kat = \App\Models\Kat::all();
-
+    $kat = \App\Models\Kat::with(['tm:id,title'])->get();
     return $response->getBody()->write($kat->toJson());
 });
 
-$app->get('/kat/{id}', function (Request $request, Response $response, $args) {
+$app->get('/kats/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $kat = \App\Models\Kat::find($id);
+        $kat = \App\Models\Kat::with(['tm:id,title'])->find($id);
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -29,7 +28,7 @@ $app->get('/kat/{id}', function (Request $request, Response $response, $args) {
     return $response->getBody()->write($kat->toJson());
 });
 
-$app->post('/kat', function (Request $request, Response $response) {
+$app->post('/kats', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     try {
@@ -39,14 +38,24 @@ $app->post('/kat', function (Request $request, Response $response) {
         $kat->title = $data['title'];
         $kat->pm = $data['pm'];
         $kat->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+//        $users->errorText = $e->getMessage();
+//        $users->errorCode = $e->getCode();
+//        $errormessage = explode(':', $e->getMessage())[2];
+//        $errormessage = explode('(', $errormessage)[0];
+//        $value = explode('\'', $errormessage)[1];
+//        $key = explode('\'', $errormessage)[3];
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
+
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($kat->toJson());
 });
 
-$app->delete('/kat/{id}', function ($request, $response, $args) {
+$app->delete('/kats/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $kat = \App\Models\Kat::find($id);
@@ -58,7 +67,7 @@ $app->delete('/kat/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)->getBody()->write($kat->toJson());
 });
 
-$app->put('/kat/{id}', function ($request, $response, $args) {
+$app->put('/kats/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
     print_r($data);

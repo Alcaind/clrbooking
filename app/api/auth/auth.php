@@ -36,9 +36,10 @@ $app->post("/token", function (Request $request, Response $response) {
         $roles = $stm->fetchAll(PDO::FETCH_OBJ);
         $ret->roles = $roles;
     } catch (PDOException $e) {
-        return $response->withStatus(401)
+        return $response->withStatus(444)
             ->withHeader("Content-Type", "application/json")
-            ->write(json_encode($result, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+            //->write(json_encode($result, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+            ->write("lola");
     }
 
     $curlResults = json_decode($ret);
@@ -85,39 +86,7 @@ $app->post("/token", function (Request $request, Response $response) {
 
 $app->post("/login", function (Request $request, Response $response) {
     $now = new DateTime();
-    //$server = $request->getServerParams();
-    //$urlParams = $request->getParsedBody();
-    $ret = new stdClass();
-
-    //$params = 'ip=' . $server['REMOTE_ADDR'] . '&agent=' . $server['HTTP_USER_AGENT'] . '&cookie=0';
-    //$params .= '&pswd=' . $urlParams["pswd"] . '&usr=' . $urlParams["usr"] . '&app=' . $urlParams["app"];
-
-    //$pswd= $urlParams["pswd"];
-    //$usr= $urlParams["usr"];
-    //$sql = "select * from dp where dp.user_n = '$usr'";
-
-    //echo $sql;
-    /*try {
-        $db = new db();
-        $db = $db->connect();
-        $stm = $db->query($sql);
-        $user = $stm->fetchAll(PDO::FETCH_OBJ);
-        //$db = null;
-        $ret->user = $user[0];
-        $sql = "select * from users_roles WHERE user_id = ".$user[0]->id;
-        //echo $sql;
-        $stm = $db->query($sql);
-        $roles = $stm->fetchAll(PDO::FETCH_OBJ);
-        $ret->roles = $roles;
-        //print_r($ret);
-    } catch (PDOException $e) {
-        //echo $result;
-        return $response->withStatus(401)
-            ->withHeader("Content-Type", "application/json")
-            ->write(json_encode($result, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
-    }
-
-    $curlResults = json_encode($ret); // json_decode($ret);*/
+    $server = $request->getServerParams();
     $a = '';
     for ($i = 0; $i < 16; $i++) $a .= mt_rand(0, 9);
 
@@ -129,9 +98,7 @@ $app->post("/login", function (Request $request, Response $response) {
     $payload = [
         "iat" => $now->getTimeStamp(),
         "exp" => $future->getTimeStamp(),
-        "jti" => $jti,
-        "sub" => $server["PHP_AUTH_USER"],
-        "curlResults" => $curlResults
+        "jti" => $jti
     ];
 
     $refreshToken = [];
@@ -146,7 +113,6 @@ $app->post("/login", function (Request $request, Response $response) {
         "jti" => $jti,
         "sub" => $server["PHP_AUTH_USER"],
         "scope" => ["put", "get", "post"],
-        "curlResults" => $curlResults,
         "refresh-token" => $refreshToken
     ];
 
@@ -175,18 +141,14 @@ $app->post("/refresh-token", function (Request $request, Response $response) {
         "exp" => $future->getTimeStamp(),
         "jti" => $jti,
         "sub" => $server["PHP_AUTH_USER"],
-        "scope" => ["put", "get", "post"],
-        "curlResults" => $token->curlResults
+        "scope" => ["put", "get", "post"]
     ];
 
     $secret = getenv("JWT_SECRET");
     $secret = "supersecretkeyyoushouldnotcommittogithub";
-    //echo $secret;
-    //die();
     $token = JWT::encode($payload, $secret, "HS256");
     $data["token"] = $token;
     $data["expires"] = $future->getTimeStamp();
-    //$data["user"] = $future->getTimeStamp();
     return $response->withStatus(201)
         ->withHeader("Content-Type", "application/json")
         ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));

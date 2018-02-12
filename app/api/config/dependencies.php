@@ -43,5 +43,5 @@ $capsule->getContainer()->singleton(
 );
 
 $container['db'] = function ($container) {
-    return $capsule;
+    //return $capsule;
 };

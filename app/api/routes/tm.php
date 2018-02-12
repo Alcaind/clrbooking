@@ -16,7 +16,7 @@ $app->get('/tms', function (Request $request, Response $response) {
     return $response->getBody()->write($tm->toJson());
 });
 
-$app->get('/tm/{id}', function (Request $request, Response $response, $args) {
+$app->get('/tms/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
@@ -28,7 +28,7 @@ $app->get('/tm/{id}', function (Request $request, Response $response, $args) {
     return $response->getBody()->write($tm->toJson());
 });
 
-$app->post('/tm', function (Request $request, Response $response) {
+$app->post('/tms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     try {
@@ -45,7 +45,7 @@ $app->post('/tm', function (Request $request, Response $response) {
     return $response->withStatus(201)->getBody()->write($tm->toJson());
 });
 
-$app->delete('/tm/{id}', function ($request, $response, $args) {
+$app->delete('/tms/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $tm = \App\Models\Tm::find($id);
@@ -57,7 +57,7 @@ $app->delete('/tm/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)->getBody()->write($tm->toJson());
 });
 
-$app->put('/tm/{id}', function ($request, $response, $args) {
+$app->put('/tms/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
     print_r($data);
@@ -68,8 +68,6 @@ $app->put('/tm/{id}', function ($request, $response, $args) {
         $tm->descr = $data['descr'] ?: $tm->descr;
         $tm->title = $data['title'] ?: $tm->title;
         $tm->sxoli = $data['sxoli'] ?: $tm->sxoli;
-
-
         $tm->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -77,7 +75,7 @@ $app->put('/tm/{id}', function ($request, $response, $args) {
     return $response->getBody()->write($tm->toJson());
 });
 
-$app->get('/tm/{id}/kat', function ($request, $response, $args) {
+$app->get('/tms/{id}/kat', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $tm = \App\Models\Tm::find($id);
@@ -88,7 +86,7 @@ $app->get('/tm/{id}/kat', function ($request, $response, $args) {
     return $response->getBody()->write($tm->kat()->get()->toJson());
 });
 
-$app->get('/tm/{id}/dp', function ($request, $response, $args) {
+$app->get('/tms/{id}/dp', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $configuration = \App\Models\Tm::find($id);

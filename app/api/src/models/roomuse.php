@@ -13,6 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomUse extends Model
 {
-    public $timestamps = false;
+
     protected $table = 'room_use';
 }

@@ -1,0 +1,40 @@
+<div id="data_tbl" class="table-responsive boxContent">
+    <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+        <thead>
+        <tr>
+            <th>
+                <button class="btn btn-link" ng-click="sortBy('user')">Όνομα Χρήστη</button>
+                <span class="sortorder" ng-show="propertyName === 'user'"
+                      ng-class="{reverse: reverse}"></span>
+            </th>
+            <th>
+                <button class="btn btn-link" ng-click="sortBy('fname')">Όνομα</button>
+                <span class="sortorder" ng-show="propertyName === 'fname'"
+                      ng-class="{reverse: reverse}"></span>
+            </th>
+            <th>
+                <button class="btn btn-link" ng-click="sortBy('sname')">Επώνυμο</button>
+                <span class="sortorder" ng-show="propertyName === 'sname'"
+                      ng-class="{reverse: reverse}"></span>
+            </th>
+            <th>...</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in userTable.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:filterR"
+            style="cursor: pointer">
+            <td>{{ user.user}}</td>
+            <td>{{ user.fname }}</td>
+            <td>{{ user.sname }}</td>
+            <td>
+                <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
+                        class="glyphicon glyphicon-pencil"></span></a>
+                <button ng-click="user.disabled?null:showUrData(user)" type="button"
+                        class="btn {{user.disabled?'btn-regular disabled':'btn-success '}}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

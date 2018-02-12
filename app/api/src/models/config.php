@@ -13,20 +13,18 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 
 class Config extends Model
 {
-    public $timestamps = false;
+
     protected $table = 'config';
 
-    public function periods()
-    {
-        //return "lola";
-        try {
-            $ret = $this->hasMany('\\App\\Models\\Periods', 'conf_id');
-            //print_r($ret);
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-        return $ret;
-    }
+//    public function periods()
+//    {
+//        try {
+//            $ret = $this->hasMany('\\App\\Models\\Periods', 'conf_id');
+//        } catch (\Exception $e) {
+//            return $e->getMessage();
+//        }
+//        return $ret;
+//    }
 
 //    public function ps()
 //    {
@@ -38,4 +36,11 @@ class Config extends Model
 //        }
 //        return $ret;
 //    }
+
+    public function rooms()
+    {
+        return $this->hasMany('\\App\\Models\\Rooms', 'conf_id');
+    }
+
+
 }

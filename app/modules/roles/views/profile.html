@@ -1,0 +1,28 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <form class="roleForm" name="roleForm" novalidate>
+        <!-- ROLE -->
+        <div class="form-group" ng-class="{ 'has-error' : roleForm.role.$invalid && !roleForm.role.$pristine }">
+            <label class="required" for="role">Ρόλος<span class="form-required">*</span>:</label>
+            <input id="role" name="role" class="form-control" type="text" ng-model="item.role">
+            <p ng-show="roleForm.role.$invalid && !roleForm.role.$pristine" class="help-block">Enter role.</p>
+        </div>
+        <!--DESCRIPTION-->
+        <div class="form-group">
+            <label for="description">Περιγραφή ρόλου:</label>
+            <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="updateRole(item)" style="padding: 5px"
+                ng-if="item.id > 0">Ανανέωση
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveRole(item)" style="padding: 5px"
+                ng-if="item.role && !item.id ">Αποθήκευση
+        </button>
+    </form>
+</div>

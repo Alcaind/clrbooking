@@ -1,0 +1,106 @@
+<div id="ps_main">
+    <div><h2 style="text-align: center;"> Πρόγραμμα Σπουδων </h2></div>
+    <div style="display: flex">
+        <input type="text" ng-model="filter" class="form-control" placeholder="search"
+               style="padding: 5px; width: 100%">
+        <button type="button" class="btn btn-primary" ng-click="getPs()"
+                style="min-width: 50px; border-radius: 0px;">
+            <span class="glyphicon glyphicon-cloud-download"></span>
+        </button>
+        <a href="#/ps/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+            <span>+</span><span class="glyphicon glyphicon-user"></span>
+        </a>
+    </div>
+    <div>
+        <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+                    num-pages="numPages"></pagination>
+    </div>
+    <div id="data_tbl" class="table-responsive boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('tm_code')">tm_code</button>
+                    <span class="sortorder" ng-show="propertyName === 'tm_code'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('tm_per')">tm_per</button>
+                    <span class="sortorder" ng-show="propertyName === 'tm_per'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('pm')">pm</button>
+                    <span class="sortorder" ng-show="propertyName === 'pm'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('tma_code')">tma_code</button>
+                    <span class="sortorder" ng-show="propertyName === 'tma_code'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('tma_per')">tma_per</button>
+                    <span class="sortorder" ng-show="propertyName === 'tma_per'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('ps_ex')">ps_ex</button>
+                    <span class="sortorder" ng-show="propertyName === 'ps_ex'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('ps_dm')">ps_dm</button>
+                    <span class="sortorder" ng-show="propertyName === 'ps_dm'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('ps_km')">ps_km</button>
+                    <span class="sortorder" ng-show="propertyName === 'ps_km'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('teacher')">teacher</button>
+                    <span class="sortorder" ng-show="propertyName === 'teacher'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('conf_id')">conf_id</button>
+                    <span class="sortorder" ng-show="propertyName === 'conf_id'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>...</th>
+            <tbody>
+            <tr ng-repeat="ps in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+                style="cursor: pointer">
+                <td>{{ ps.id }}</td>
+                <td>{{ ps.tm_code }}</td>
+                <td>{{ ps.tm_per }}</td>
+                <td>{{ ps.pm }}</td>
+                <td>{{ ps.tma_code }}</td>
+                <td>{{ ps.tma_per }}</td>
+                <td>{{ ps.ps_ex }}</td>
+                <td>{{ ps.ps_dm }}</td>
+                <td>{{ ps.ps_km }}</td>
+                <td>{{ ps.teacher }}</td>
+                <td>{{ ps.conf_id }}</td>
+                <td>
+                    <a href="#/ps/{{ps.id}}" type="button" class="btn btn-info thumb"><span
+                            class="glyphicon glyphicon-pencil"></span></a>
+                    <button ng-click="deletePs(ps)" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-erase"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <pre>total ps list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+</div>
+
+
+
+
+
+

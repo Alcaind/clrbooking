@@ -8,19 +8,21 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \Illuminate\Database\QueryException as QException;
+use \App\Models\ApiError as ApiError;
 
-$app->get('/dp', function (Request $request, Response $response) {
+$app->get('/users', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $users = \App\Models\Users::all();
-
+    $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr'])->get();
     return $response->getBody()->write($users->toJson());
 });
 
-$app->get('/dp/{id}', function (Request $request, Response $response, $args) {
+
+$app->get('/users/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $users = \App\Models\Users::find($id);
+        $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr'])->find($id);
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -28,7 +30,7 @@ $app->get('/dp/{id}', function (Request $request, Response $response, $args) {
     return $response->getBody()->write($users->toJson());
 });
 
-$app->post('/dp', function (Request $request, Response $response) {
+$app->post('/users', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     try {
@@ -43,16 +45,26 @@ $app->post('/dp', function (Request $request, Response $response) {
         $users->cat_id = $data['cat_id'];
         $users->comments = $data['comments'];
         $users->user = $data['user'];
-        $users->hash = $data['hash'];
+        $users->hash = password_hash($data['hash'], PASSWORD_DEFAULT);
         $users->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+//        $users->errorText = $e->getMessage();
+//        $users->errorCode = $e->getCode();
+//        $errormessage = explode(':', $e->getMessage())[2];
+//        $errormessage = explode('(', $errormessage)[0];
+//        $value = explode('\'', $errormessage)[1];
+//        $key = explode('\'', $errormessage)[3];
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
+
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($users->toJson());
 });
 
-$app->delete('/dp/{id}', function ($request, $response, $args) {
+$app->delete('/users/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $users = \App\Models\Users::find($id);
@@ -61,10 +73,10 @@ $app->delete('/dp/{id}', function ($request, $response, $args) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
-    return $response->withStatus(200)->getBody()->write($users->toJson());
+    return $response->withStatus(201)->getBody()->write($users->toJson());
 });
 
-$app->put('/dp/{id}', function ($request, $response, $args) {
+$app->put('/users/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
     print_r($data);
@@ -88,14 +100,44 @@ $app->put('/dp/{id}', function ($request, $response, $args) {
     return $response->getBody()->write($users->toJson());
 });
 
-$app->post('/user/{id}/roles', function ($request, $response, $args) {
+$app->post('/users/{id}/roles/{rid}', function ($request, $response, $args) {
     $id = $args['id'];
-    $user = \App\User::find($id);
-    //$user->roles()->add('{"role":"kitsos"}');
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $user = \App\Models\Users::find($id);
+    $user->roles()->attach($rid, $data);
     return $response->getBody()->write($user->roles()->get()->toJson());
 });
 
-$app->get('/user/{id}/requests', function ($request, $response, $args) {
+$app->put('/users/{id}/roles/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $user = \App\Models\Users::find($id);
+    $user->roles()->updateExistingPivot($rid, $data);
+    return $response->getBody()->write($user->roles()->get()->toJson());
+});
+
+$app->delete('/users/{id}/roles/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $user = \App\Models\Users::find($id);
+    $user->roles()->detach($rid);
+    return $response->getBody()->write($user->roles()->get()->toJson());
+});
+
+$app->get('/users/{id}/roles', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $user = \App\Models\Users::find($id);
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($user->roles()->get()->toJson());
+});
+
+
+$app->get('/users/{id}/requests', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $configuration = \App\Models\Users::find($id);
@@ -105,7 +147,7 @@ $app->get('/user/{id}/requests', function ($request, $response, $args) {
     return $response->getBody()->write($configuration->requests()->get()->toJson());
 });
 
-$app->get('/roombook/{id}/dp', function ($request, $response, $args) {
+$app->get('/roombook/{id}/users', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $configuration = \App\Models\Users::find($id);

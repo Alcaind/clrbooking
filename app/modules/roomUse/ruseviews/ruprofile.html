@@ -1,0 +1,28 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <form class="roomUseForm" name="roomUseForm" novalidate>
+        <div class="form-group"
+             ng-class="{ 'has-error' : roomUseForm.synt.$invalid && !roomUseForm.synt.$pristine }">
+            <label class="required" for="synt">synt<span class="form-required">*</span>:</label>
+            <input id="synt" name="synt" class="form-control" type="text" ng-model="item.synt">
+            <p ng-show="roomUseForm.synt.$invalid && !roomUseForm.synt.$pristine" class="help-block">Enter
+                synt.</p>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="updateRoomUse(item)" style="padding: 5px"
+                ng-if="item.id>0">Ανανέωση
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="saveRoomUse(item)" style="padding: 5px"
+                ng-if="item.synt && !item.id">Αποθήκευση
+        </button>
+    </form>
+</div>

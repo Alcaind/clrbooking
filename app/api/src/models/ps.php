@@ -13,12 +13,12 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 
 class Ps extends Model
 {
-    public $timestamps = false;
+
     protected $table = 'ps';
 
     public function config()
     {
-        $this->belongsTo('\\App\\Models\\Config', 'conf_id');
+        return $this->belongsTo('\\App\\Models\\Config', 'conf_id');
     }
 
     public function requests()

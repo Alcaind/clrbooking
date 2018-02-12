@@ -1,0 +1,64 @@
+<div id="config_main">
+    <div><h2 style="text-align: center;"> Configuration </h2></div>
+    <div style="display: flex">
+        <input type="text" ng-model="filter" class="form-control" placeholder="search"
+               style="padding: 5px; width: 100%">
+        <button type="button" class="btn btn-primary" ng-click="getConfigs()"
+                style="min-width: 50px; border-radius: 0px;">
+            <span class="glyphicon glyphicon-cloud-download"></span>
+        </button>
+        <a href="#/config/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+            <span>+</span><span class="glyphicon glyphicon-user"></span>
+        </a>
+    </div>
+    <div>
+        <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+                    num-pages="numPages"></pagination>
+    </div>
+    <div id="data_tbl" class="table-responsive boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('year')">Έτος</button>
+                    <span class="sortorder" ng-show="propertyName === 'year'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('dt')">Ημερομηνία</button>
+                    <span class="sortorder" ng-show="propertyName === 'dt'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('status')">Κατάσταση</button>
+                    <span class="sortorder" ng-show="propertyName === 'status'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>...</th>
+            <tbody>
+            <tr ng-repeat="config in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+                style="cursor: pointer" ng-class="{selected: config.id === item.id}">
+                <td>{{ config.id }}</td>
+                <td>{{ config.year }}</td>
+                <td>{{ config.dt }}</td>
+                <td>{{ config.status }}</td>
+                <td>
+                    <a href="#/config/{{config.id}}" type="button" class="btn btn-info thumb"><span
+                            class="glyphicon glyphicon-pencil"></span></a>
+                    <button ng-click="deleteConfig(config)" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-erase"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <pre>total configs list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+</div>
+
+
+
+
+
+
