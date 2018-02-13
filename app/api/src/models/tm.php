@@ -26,4 +26,9 @@ class Tm extends Model
         $this->hasMany('\\App\\Models\\Users', 'tm_id');
     }
 
+    public function rooms()
+    {
+        $this->hasMany('\\App\\Models\\Rooms', 'tm_owner');
+    }
+
 }

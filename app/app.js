@@ -131,9 +131,14 @@ angular.module('clrBooking', [
             templateUrl: 'modules/rooms/rviews/UCroom.html'
         })
         .when('/rooms/:roomId/items', {
-            title: 'user items',
+            title: 'room items',
             controller: 'RoomsItemsController',
             templateUrl: 'modules/rooms/rviews/items/ItemRoom.html'
+        })
+        .when('/rooms/:roomId/tms', {
+            title: 'room tms',
+            controller: 'RoomsTmsController',
+            templateUrl: 'modules/rooms/rviews/tms/tmsTable.html'
         })
         .when('/tms', {
             title: 'tm',

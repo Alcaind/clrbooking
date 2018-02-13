@@ -239,3 +239,13 @@ $app->put('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
     $room->items()->updateExistingPivot($iid, $data);
     return $response->getBody()->write($room->items()->get()->toJson());
 });
+
+$app->get('/rooms/{id}/tms', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $configuration = \App\Models\Rooms::find($id);
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($configuration->tms()->get()->toJson());
+});
