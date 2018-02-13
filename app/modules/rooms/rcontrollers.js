@@ -13,6 +13,7 @@ angular.module('Rooms', [
         $scope.item = {};
         $scope.method = '';
         $scope.baseURL = 'api/public/rooms';
+        $scope.columsVisibility = [{column: 'address', value: true}, {column: 'building', value: true}];
 
         $scope.getRooms = function () {
             api.apiCall('GET', $scope.baseURL, function (results) {
@@ -25,7 +26,7 @@ angular.module('Rooms', [
             api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
                 $scope.dp.splice($scope.dp.indexOf(item), 1);
                 $scope.item = {};
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Αίθουσα διαγράφηκε', 1)
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η αίθουσα διαγράφηκε', 1)
             });
         };
 
@@ -42,7 +43,7 @@ angular.module('Rooms', [
         $scope.deleteUsage = function (room, usage) {
             api.apiCall('DELETE', $scope.baseURL + "/" + room.id + '/usages/' + usage.id, function (results) {
                 $scope.dp[$scope.dp.indexOf(room)].room_use.splice($scope.dp[$scope.dp.indexOf(room)].room_use.indexOf(usage), 1);
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'room-use diagrafh', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η κατηγορία χρήσης διαγράφηκε από την αίθουσα.', 1);
             })
         };
         $scope.getRooms();
@@ -105,7 +106,7 @@ angular.module('Rooms', [
                 }, undefined, $scope.selectedUsages.map(function (value) {
                     return value.id
                 }));
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η αίθουσα ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η εγγραφή της αίθουσας ανανεώθηκε', 1);
                 history.back();
             }, undefined, item)
         };
@@ -117,7 +118,7 @@ angular.module('Rooms', [
                 }, undefined, $scope.selectedUsages.map(function (value) {
                     return value.id
                 }));
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα αίθουσα', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα γγραφή αίθουσας', 1);
                 history.back();
             }, undefined, item)
         }

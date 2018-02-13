@@ -33,7 +33,6 @@ $app->post('/config', function (Request $request, Response $response) {
     try {
         $config = new \App\Models\Config();
         $config->year = $data['year'];
-        $config->dt = $data['dt'];
         $config->status = $data['status'];
         $config->save();
     } catch (PDOException $e) {
@@ -72,7 +71,6 @@ $app->put('/config/{id}', function ($request, $response, $args) {
     try {
         $config = \App\Models\Config::find($id);
         $config->year = $data['year'] ?: $config->year;
-        $config->dt = $data['dt'] ?: $config->dt;
         $config->status = $data['status'] ?: $config->status;
         $config->save();
     } catch (\Exception $e) {

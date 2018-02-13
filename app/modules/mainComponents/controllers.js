@@ -170,6 +170,28 @@ angular.module('MainComponents', [
         };
 
     }])
+
+
+    .directive('showHideColumns', function () {
+        return {
+            restrict: "EA",
+            scope: {
+                columsVisibility: "="
+            },
+            templateUrl: 'modules/mainComponents/views/showHideColumns.html',
+            controller: "showHideOptionsController"
+        }
+    })
+    .controller('showHideOptionsController', ['$scope', function ($scope) {
+        $scope.optionsVisible = true;
+
+        $scope.hideShowOptions = function () {
+            $scope.optionsVisible = !$scope.optionsVisible;
+        }
+        $scope.changeColumnVisibility = function (column, state) {
+            $scope.columsVisibility[column] = state ? state : !$scope.columsVisibility[column];
+        }
+    }])
 ;
 
 

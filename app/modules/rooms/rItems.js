@@ -1,10 +1,10 @@
 angular.module('Rooms')
-    .controller('RoomsUsagesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
+    .controller('RoomsItemsController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
         AuthenticationService.CheckCredentials();
 
         $scope.rData = $scope.lData = [];
         $scope.rLength = $scope.lLength = 0;
-        $scope.currentUsage = null;
+        $scope.currentItem = null;
         $scope.baseURL = 'api/public/rooms';
         $scope.roomData = null;
 
@@ -15,15 +15,15 @@ angular.module('Rooms')
         };
         $scope.getRoom();
 
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId + '/usages', function (results) {
-            $scope.lData = results.data.room_use;  //??????? mhpws xvris .room_use
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId + '/items', function (results) {
+            $scope.lData = results.data.items;
             $scope.lLength = $scope.lData.length;
             if ($scope.rData && $scope.rData.length > 0) {
                 $scope.compare();
             }
         });
 
-        api.apiCall('GET', 'api/public/roomuse', function (results) {
+        api.apiCall('GET', 'api/public/items', function (results) {
             $scope.rData = results.data;
             $scope.rLength = $scope.rData.length;
             if ($scope.lData && $scope.lData.length > 0) {
@@ -31,22 +31,22 @@ angular.module('Rooms')
             }
         });
 
-        $scope.editUrData = function (usage) {
-            $scope.urData = usage.pivot;
-            $scope.currentUsage = usage;
+        $scope.editPivotData = function (items) {
+            $scope.pivotData = items.pivot;
+            $scope.currentItem = items;
             $scope.state = 1;
         };
 
-        $scope.showUrData = function (usage) {
+        $scope.showPivotData = function (items) {
             $scope.state = 0;
-            $scope.currentUsage = usage;
+            $scope.currentItem = items;
         };
 
-        $scope.deleteUsageRoom = function (uid) {
-            api.apiCall('DELETE', $scope.baseURL + "/" + $routeParams.roomId + '/usages/' + uid, function (results) {
+        $scope.deleteItemRoom = function (iid) {
+            api.apiCall('DELETE', $scope.baseURL + "/" + $routeParams.roomId + '/items/' + iid, function (results) {
                 $scope.lData = results.data;
                 $scope.compare();
-            }, undefined, uid, undefined, $scope);
+            }, undefined, iid);
         };
 
         $scope.compare = function () {
@@ -61,40 +61,40 @@ angular.module('Rooms')
 
     }])
 
-    .directive('rRoomTable', function () {
+    .directive('rItemTable', function () {
         return {
             restrict: 'EA',
-            templateUrl: 'modules/rooms/rviews/urTable.html'
+            templateUrl: 'modules/rooms/rviews/items/urTable.html'
         }
     })
-    .directive('lRoomTable', function () {
+    .directive('lItemTable', function () {
         return {
             restrict: 'EA',
-            templateUrl: 'modules/rooms/rviews/evrTable.html'
+            templateUrl: 'modules/rooms/rviews/items/evrTable.html'
         }
     })
-    .directive('evRoomsForm', function () {
+    .directive('evItemsForm', function () {
         return {
             restrict: 'EA',
-            templateUrl: 'modules/rooms/rviews/evRoomsForm.html',
-            controller: "EvRoomsFormController"
+            templateUrl: 'modules/rooms/rviews/items/evItemsForm.html',
+            controller: "EvItemsFormController"
         }
     })
-    .controller('EvRoomsFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
-        $scope.pivotData = {comment: ''};
+    .controller('EvItemsFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
+        $scope.pivotData = {comments: '', stat: '', from: '', to: ""};
         $scope.baseURL = 'api/public/rooms';
         $scope.state = 1;
 
         $scope.cancel = function () {
-            $scope.pivotData = {comment: ''};
-            $scope.currentUsage = null;
+            $scope.pivotData = {comments: '', stat: '', from: '', to: ""};
+            $scope.currentItem = null;
         };
 
         $scope.insert = function () {
             var method = "PUT";
             if ($scope.state === 0) method = "POST";
-            api.apiCall(method, $scope.baseURL + "/" + $routeParams.roomId + '/usages/' + $scope.currentUsage.id, function (results) {
-                $scope.pivotData = {comment: ''};
+            api.apiCall(method, $scope.baseURL + "/" + $routeParams.roomId + '/items/' + $scope.currentItem.id, function (results) {
+                $scope.pivotData = {comments: '', stat: '', from: '', to: ""};
                 $scope.lData = results.data;
                 $scope.compare();
                 $scope.cancel();

@@ -1,0 +1,9 @@
+<div>
+    <button ng-click="hideShowOptions()">Press to show columns</button>
+    <div ng-if="optionsVisible">
+        <li ng-repeat="option in columsVisibility">
+            <button ng-click="changeColumnVisibility(option.column)">s/h</button>
+            {{option.column}}
+        </li>
+    </div>
+</div>

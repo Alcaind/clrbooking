@@ -130,6 +130,11 @@ angular.module('clrBooking', [
             controller: 'RoomsUsagesController',
             templateUrl: 'modules/rooms/rviews/UCroom.html'
         })
+        .when('/rooms/:roomId/items', {
+            title: 'user items',
+            controller: 'RoomsItemsController',
+            templateUrl: 'modules/rooms/rviews/items/ItemRoom.html'
+        })
         .when('/tms', {
             title: 'tm',
             controller: 'TmsController',

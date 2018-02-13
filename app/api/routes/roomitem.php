@@ -35,7 +35,6 @@ $app->post('/roomitem', function (Request $request, Response $response) {
         $roomitem = new \App\Models\RoomItem();
         $roomitem->item_id = $data['item_id'];
         $roomitem->comments = $data['comments'];
-        $roomitem->dt = $data['dt'];
         $roomitem->stat = $data['stat'];
         $roomitem->from = $data['from'];
         $roomitem->to = $data['to'];
@@ -68,7 +67,6 @@ $app->put('/roomitem/{id}', function ($request, $response, $args) {
         $roomitem = \App\Models\RoomItem::find($id);
         $roomitem->item_id = $data['item_id'] ?: $roomitem->item_id;
         $roomitem->comments = $data['comments'] ?: $roomitem->comments;
-        $roomitem->dt = $data['dt'] ?: $roomitem->dt;
         $roomitem->stat = $data['stat'] ?: $roomitem->stat;
         $roomitem->from = $data['from'] ?: $roomitem->from;
         $roomitem->to = $data['to'] ?: $roomitem->to;

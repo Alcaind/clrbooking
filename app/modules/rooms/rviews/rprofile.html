@@ -12,70 +12,68 @@
             <label class="required" for="name">Όνομα Αιθουσας<span class="form-required">*</span>:</label>
             <div>
                 <input id="name" name="name" class="form-control" type="text" ng-model="item.name">
-                <p ng-show="roomForm.name.$invalid && !roomForm.name.$pristine" class="help-block">The name is
-                    required.</p>
+                <p ng-show="roomForm.name.$invalid && !roomForm.name.$pristine" class="help-block">Απαιτείται όνομα
+                    αίθουσας.</p>
             </div>
         </div>
         <!-- ADDRESS -->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.address.$invalid && !roomForm.address.$pristine }">
             <label for="address" class="required">Διευθυνση<span class="form-required">*</span>:</label>
             <input id="address" name="address" class="form-control" type="text" ng-model="item.address">
-            <p ng-show="roomForm.address.$invalid && !roomForm.address.$pristine" class="help-block">The address is
-                required.</p>
+            <p ng-show="roomForm.address.$invalid && !roomForm.address.$pristine" class="help-block">Απαιτείται
+                διεύθυνση.</p>
         </div>
         <!-- building -->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.building.$invalid && !roomForm.building.$pristine }">
-            <label for="building" class="required">Building<span class="form-required">*</span>:</label>
+            <label for="building" class="required">Κτίριο<span class="form-required">*</span>:</label>
             <input id="building" name="building" class="form-control" type="text" ng-model="item.building">
-            <p ng-show="roomForm.building.$invalid && !roomForm.building.$pristine" class="help-block">Building is
-                required.</p>
+            <p ng-show="roomForm.building.$invalid && !roomForm.building.$pristine" class="help-block">Απαιτείται
+                κτίριο.</p>
         </div>
         <!--floor-->
-        <div class="form-group" ng-class="{ 'has-error' : roomForm.floor.$invalid && !roomForm.floor.$pristine }">
-            <label for="floor" class="required">floor<span class="form-required">*</span>:</label>
+        <div class="form-group">
+            <label for="floor" class="required">Όροφος:</label>
             <input id="floor" name="floor" class="form-control" type="text" ng-model="item.floor">
-            <p ng-show="roomForm.floor.$invalid && !roomForm.floor.$pristine" class="help-block">floor is
-                required.</p>
         </div>
         <!--status-->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.status.$invalid && !roomForm.status.$pristine }">
-            <label for="status" class="required">status<span class="form-required">*</span>:</label>
+            <label for="status" class="required">Κατάσταση<span class="form-required">*</span>:</label>
             <input id="status" name="status" class="form-control" type="text" ng-model="item.status">
-            <p ng-show="roomForm.status.$invalid && !roomForm.status.$pristine" class="help-block">status is
-                required.</p>
+            <p ng-show="roomForm.status.$invalid && !roomForm.status.$pristine" class="help-block">Απαιτείται
+                κατάσταση.</p>
         </div>
         <!--active-->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.active.$invalid && !roomForm.active.$pristine }">
-            <label for="active" class="required">active<span class="form-required">*</span>:</label>
+            <label for="active" class="required">Ενεργά<span class="form-required">*</span>:</label>
             <input id="active" name="active" class="form-control" type="number" ng-model="item.active">
-            <p ng-show="roomForm.active.$invalid && !roomForm.active.$pristine" class="help-block">active is
-                required.</p>
+            <p ng-show="roomForm.active.$invalid && !roomForm.active.$pristine" class="help-block">Απαιτείται ενεργά
+                καθίσματα.</p>
         </div>
         <!--destroyed-->
         <div class="form-group">
-            <label for="destroyed" class="required">destroyed:</label>
+            <label for="destroyed" class="required">Καταστροφές:</label>
             <input id="destroyed" name="destroyed" class="form-control" type="text" ng-model="item.destroyed">
         </div>
         <!--nonexist-->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine }">
-            <label for="nonexist" class="required">nonexist<span class="form-required">*</span>:</label>
+            <label for="nonexist" class="required">Ανενεργά<span class="form-required">*</span>:</label>
             <input id="nonexist" name="nonexist" class="form-control" type="text" ng-model="item.nonexist">
-            <p ng-show="roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine" class="help-block">nonexist is
-                required.</p>
+            <p ng-show="roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine" class="help-block">Απαιτείται
+                ανενεργά καθίσματα.</p>
         </div>
         <!--capasity-->
         <div class="form-group">
-            <label for="capasity" class="required">capasity:</label>
+            <label for="capasity" class="required">Χωρητικότητα:</label>
             <input id="capasity" name="capasity" class="form-control" type="number" ng-model="item.capasity">
         </div>
         <!--width-->
         <div class="form-group">
-            <label for="width" class="required">width:</label>
+            <label for="width" class="required">Πλάτος:</label>
             <input id="width" name="width" class="form-control" type="number" ng-model="item.width">
         </div>
         <!--height-->
         <div class="form-group">
-            <label for="height" class="required">height:</label>
+            <label for="height" class="required">Υψος/Βαθος:</label>
             <input id="height" name="height" class="form-control" type="number" ng-model="item.height">
         </div>
         <!--xoros-->
@@ -85,28 +83,24 @@
         </div>
         <!--exams_capasity-->
         <div class="form-group">
-            <label for="exams_capasity" class="required">exams_capasity:</label>
+            <label for="exams_capasity" class="required">Χωρητικότητα Εξετασεων:</label>
             <input id="exams_capasity" name="exams_capasity" class="form-control" type="number"
                    ng-model="item.exams_capasity">
         </div>
         <!--capasity_categ-->
         <div class="form-group">
-            <label for="exams_categ" class="required">exams_categ:</label>
-            <input id="exams_categ" name="exams_categ" class="form-control" type="text" ng-model="item.exams_categ">
+            <label for="capasity_categ" class="required">Χωρητικότητα/Κατηγορια:</label>
+            <input id="capasity_categ" name="capasity_categ" class="form-control" type="text"
+                   ng-model="item.capasity_categ">
         </div>
         <!--tm_owner-->
         <div class="form-group">
-            <label for="tm_owner" class="required">tm_owner:</label>
+            <label for="tm_owner" class="required">Τμήμα:</label>
             <input id="tm_owner" name="tm_owner" class="form-control" type="text" ng-model="item.tm_owner">
-        </div>
-        <!--dt-->
-        <div class="form-group">
-            <label for="dt" class="required">dt:</label>
-            <input id="dt" name="dt" class="form-control" type="time" ng-model="item.dt">
         </div>
         <!--stat_comm-->
         <div class="form-group">
-            <label for="stat_comm" class="required">stat_comm:</label>
+            <label for="stat_comm" class="required">Σχόλια κατάστασης:</label>
             <input id="stat_comm" name="stat_comm" class="form-control" type="text" ng-model="item.stat_comm">
         </div>
         <div class="form-group">
@@ -120,13 +114,13 @@
             <select id="type" ng-model="item.room_category" class="form-control"
                     ng-options="category.id as category.descr for category in categories"> </select>
         </div>
-        <!--use_id-->
-        <div class="form-group">
-            <label for="use_id" class="required">Χρήση Αιθουσας:</label>
-            <div id="use_id" ng-dropdown-multiselect options="roomusages" selected-model="selectedUsages"
-                 extra-settings="multiSelectOptions"></div>
-            <label ng-repeat="sUsages in selectedUsages">{{sUsages.id}}</label>
-        </div>
+        <!--&lt;!&ndash;use_id&ndash;&gt;-->
+        <!--<div class="form-group">-->
+        <!--<label for="use_id" class="required">Χρήση Αιθουσας:</label>-->
+        <!--<div id="use_id" ng-dropdown-multiselect options="roomusages" selected-model="selectedUsages"-->
+        <!--extra-settings="multiSelectOptions"></div>-->
+        <!--<label ng-repeat="sUsages in selectedUsages">{{sUsages.id}}</label>-->
+        <!--</div>-->
 
         <button type="button" class="btn btn-primary" ng-click="updateRoom(item)" style="padding: 5px"
                 ng-if="item.id>0">Ανανέωση

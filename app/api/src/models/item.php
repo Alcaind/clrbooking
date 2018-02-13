@@ -16,4 +16,10 @@ class Items extends Model
 
     protected $table = 'items';
 
+
+    public function rooms()
+    {
+        return $this->belongsToMany("\\App\\Models\\Rooms", 'room_items', 'item_id', 'room_id');
+    }
+
 }

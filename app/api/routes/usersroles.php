@@ -37,7 +37,6 @@ $app->post('/usersroles', function (Request $request, Response $response) {
         $usersroles->role_id = $data['role_id'];
         $usersroles->comment = $data['comment'];
         $usersroles->exp_dt = $data['exp_dt'];
-        $usersroles->dt = $data['dt'];
         $usersroles->status = $data['status'];
         $usersroles->save();
     } catch (\Exception $e) {
@@ -69,7 +68,6 @@ $app->put('/usersroles/{id}', function ($request, $response, $args) {
         $usersroles->role_id = $data['role_id'] ?: $usersroles->role_id;
         $usersroles->comment = $data['comment'] ?: $usersroles->comment;
         $usersroles->exp_dt = $data['exp_dt'] ?: $usersroles->exp_dt;
-        $usersroles->dt = $data['dt'] ?: $usersroles->dt;
         $usersroles->status = $data['status'] ?: $usersroles->status;
         $usersroles->save();
     } catch (\Exception $e) {
