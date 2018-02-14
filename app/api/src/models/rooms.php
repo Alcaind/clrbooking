@@ -46,10 +46,9 @@ class Rooms extends Model
         return $this->belongsTo('\\App\\Models\\Config', 'conf_id');
     }
 
-    public function tm()
+    public function tms()
     {
-        return $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
+        return $this->belongsToMany("\\App\\Models\\Tm", 'rooms_tms', 'room_id', 'tm_id')->withPivot('comments');
     }
-
 
 }

@@ -28,7 +28,7 @@ class Tm extends Model
 
     public function rooms()
     {
-        $this->hasMany('\\App\\Models\\Rooms', 'tm_owner');
+        return $this->belongsToMany("\\App\\Models\\Rooms", 'rooms_tms', 'tm_id', 'room_id')->withPivot('comments');
     }
 
 }

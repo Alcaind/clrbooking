@@ -57,8 +57,6 @@ angular.module('Rooms')
                         $scope.rData[i].disabled = true;
             }
         }
-
-
     }])
 
     .directive('rRoomTable', function () {

@@ -191,7 +191,6 @@ $app->get('/rooms/{id}/items', function (Request $request, Response $response, $
     }
     return $response->getBody()->write($item->toJson());
 });
-
 $app->post('/rooms/{id}/items', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
@@ -207,7 +206,6 @@ $app->post('/rooms/{id}/items', function (Request $request, Response $response, 
     }
     return $response->withStatus(201)->getBody()->write($room->toJson());
 });
-
 $app->delete('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
     $rid = $args['rid'];
     $iid = $args['iid'];
@@ -230,7 +228,6 @@ $app->post('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
     $room->items()->attach($iid, $data);
     return $response->getBody()->write($room->items()->get()->toJson());
 });
-
 $app->put('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
     $iid = $args['iid'];
     $rid = $args['rid'];
@@ -240,12 +237,60 @@ $app->put('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
     return $response->getBody()->write($room->items()->get()->toJson());
 });
 
-$app->get('/rooms/{id}/tms', function ($request, $response, $args) {
+
+$app->get('/rooms/{id}/tms', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $configuration = \App\Models\Rooms::find($id);
+        $tms = \App\Models\Rooms::with('tms')->find($id);
     } catch (\Exception $e) {
+        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
-    return $response->getBody()->write($configuration->tms()->get()->toJson());
+    return $response->getBody()->write($tms->toJson());
+});
+$app->post('/rooms/{id}/tms', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    $id = $args['id'];
+    $room = \App\Models\Rooms::find($id);
+    try {
+        $room->tms()->attach($data);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(201)->getBody()->write($room->toJson());
+});
+$app->delete('/rooms/{rid}/tms/{tid}', function ($request, $response, $args) {
+    $rid = $args['rid'];
+    $tid = $args['tid'];
+    try {
+        $room = \App\Models\Rooms::find($rid);
+        $room->tms()->detach($tid);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from delete'));
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(200)->getBody()->write($room->tms()->get()->toJson());
+});
+$app->post('/rooms/{rid}/tms/{tid}', function ($request, $response, $args) {
+    $tid = $args['tid'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $room = \App\Models\Rooms::find($rid);
+    $room->tms()->attach($tid, $data);
+    return $response->getBody()->write($room->tms()->get()->toJson());
+});
+$app->put('/rooms/{rid}/tms/{tid}', function ($request, $response, $args) {
+    $tid = $args['tid'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $room = \App\Models\Rooms::find($rid);
+    $room->tms()->updateExistingPivot($tid, $data);
+    return $response->getBody()->write($room->tms()->get()->toJson());
 });

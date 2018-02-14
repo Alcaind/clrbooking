@@ -88,7 +88,7 @@ $container["token"] = function ($container) {
 
 $container["JwtAuthentication"] = function ($container) {
     return new JwtAuthentication([
-        "path" => "/",
+        "path" => "localhost/",
         //"ignore" => ["/api/public/token"],
         //"secret" => getenv("JWT_SECRET"),
         "secret" => "supersecretkeyyoushouldnotcommittogithub", //TODO : na mpei to super secret key sto ENV to leitourgikou

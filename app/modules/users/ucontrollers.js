@@ -7,13 +7,25 @@ angular.module('Users', [
     'Authentication'
 ])
     .controller('UsersController', ['$scope', 'MakeModal', '$http', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, $http, api, orderBy, AuthenticationService) {
-
         AuthenticationService.CheckCredentials();
 
         $scope.dp = [];
         $scope.item = {};
         $scope.method = '';
         $scope.baseURL = 'api/public/users';
+        $scope.tableColumns = [
+            {column: "id", title: "ID", visible: true},
+            {column: "user", title: "Username", visible: true, sorted: false, filter: ""},
+            {column: "fname", title: "Επώνυμο", visible: true, sorted: false, filter: ""},
+            {column: "sname", title: "Όνομα", visible: true, sorted: false, filter: ""},
+            {column: "phone", title: "Τηλέφωνο", visible: true, sorted: false, filter: ""},
+            {column: "em_main", title: "1ο Email", visible: true, sorted: false, filter: ""},
+            {column: "em_sec", title: "2ο Email", visible: true, sorted: false, filter: ""},
+            {column: "em_pant", title: "Email Uni", visible: true, sorted: false, filter: ""},
+            {column: "cat_id", title: "Κατηγορία.", visible: true, sorted: false, filter: ""},
+            {column: "tm_id", title: "Τμήμα", visible: true, sorted: false, filter: ""},
+            {column: "comments", title: "Σχόλια", visible: true, sorted: false, filter: ""}
+        ];
 
         $scope.getUsers = function () {
             api.apiCall('GET', $scope.baseURL, function (results) {
@@ -30,16 +42,22 @@ angular.module('Users', [
             });
         };
 
-        $scope.propertyName = 'fname';
-        $scope.reverse = true;
-        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
+        $scope.cth = $scope.tableColumns[1];
 
-        $scope.sortBy = function (propertyName) {
-            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-                ? !$scope.reverse : false;
-            $scope.propertyName = propertyName;
+        $scope.sortBy = function (th) {
+            if ($scope.cth === th) {
+                $scope.cth.reverse = !$scope.cth.reverse;
+            } else {
+                $scope.cth.sorted = false;
+                th.sorted = true;
+                $scope.cth = th;
+            }
+            $scope.dp = orderBy($scope.dp, $scope.cth.column, $scope.cth.reverse);
         };
-
+        $scope.filter = [];
+        $scope.setFilter = function (th) {
+            $scope.filter[th.column] = th.filter;
+        };
 
         $scope.getUsers();
     }])

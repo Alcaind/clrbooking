@@ -158,7 +158,6 @@ angular.module('MainComponents', [
         $scope.itemsPerPage = 10;
         $scope.numPages = $scope.totalItems / $scope.itemsPerPage;
 
-
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
         };
@@ -168,10 +167,7 @@ angular.module('MainComponents', [
             $scope.currentPage = 1; //reset to first page
             $scope.numPages = $scope.totalItems / $scope.itemsPerPage;
         };
-
     }])
-
-
     .directive('showHideColumns', function () {
         return {
             restrict: "EA",
@@ -187,11 +183,17 @@ angular.module('MainComponents', [
 
         $scope.hideShowOptions = function () {
             $scope.optionsVisible = !$scope.optionsVisible;
-        }
+        };
         $scope.changeColumnVisibility = function (column, state) {
-            $scope.columsVisibility[column] = state ? state : !$scope.columsVisibility[column];
+            column.visible = state ? state : !column.visible;
         }
     }])
+    .directive('dmTh', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/dmth.html'
+        }
+    })
 ;
 
 
