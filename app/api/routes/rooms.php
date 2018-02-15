@@ -12,7 +12,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/rooms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $rooms = \App\Models\Rooms::with(['room_category:id,descr', 'config', 'room_use'])->get();
+    $rooms = \App\Models\Rooms::with(['room_category:id,descr', 'config', 'room_use', 'tms'])->get();
     return $response->getBody()->write($rooms->toJson());
 });
 
@@ -20,7 +20,7 @@ $app->get('/rooms/{id}', function (Request $request, Response $response, $args) 
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $room = \App\Models\Rooms::with(['room_category:id,descr', 'config', 'room_use'])->find($id);
+        $room = \App\Models\Rooms::with(['room_category:id,descr', 'config', 'room_use', 'tms'])->find($id);
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
