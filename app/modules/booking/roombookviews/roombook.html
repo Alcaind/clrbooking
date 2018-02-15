@@ -7,7 +7,7 @@
                 style="min-width: 50px; border-radius: 0px;">
             <span class="glyphicon glyphicon-refresh"></span>
         </button>
-        <a href="#/roombook/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+        <a href="#/booking/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
             <span class="glyphicon glyphicon-plus"></span>
         </a>
     </div>
@@ -21,73 +21,19 @@
             <tr>
                 <th>ID</th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('req_dt')">Ημερομηνία Αιτήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'req_dt'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
                     <button class="btn btn-link" ng-click="sortBy('users.user')">Username</button>
                     <span class="sortorder" ng-show="propertyName === 'user.user'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('descr')">Περιγραφή</button>
-                    <span class="sortorder" ng-show="propertyName === 'descr'"
+                    <button class="btn btn-link" ng-click="sortBy('room_id')">Αίθουσα</button>
+                    <span class="sortorder" ng-show="propertyName === 'room_id'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
+
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('period')">Ακαδημαϊκή Περίοδος</button>
-                    <span class="sortorder" ng-show="propertyName === 'period'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('ps_id')">Πρόγραμμα Σπουδών</button>
-                    <span class="sortorder" ng-show="propertyName === 'ps_id'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('teacher')">Καθηγητής</button>
-                    <span class="sortorder" ng-show="propertyName === 'teacher'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('class_use')">Αίθουσα</button>
-                    <span class="sortorder" ng-show="propertyName === 'class_use'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('links')">Παραποµπές</button>
-                    <span class="sortorder" ng-show="propertyName === 'links'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('fromdt')">Από ώρα</button>
-                    <span class="sortorder" ng-show="propertyName === 'fromdt'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('todt')">Μέχρι ώρα</button>
-                    <span class="sortorder" ng-show="propertyName === 'todt'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('protocol_id')">Αρ.πρωτοκόλλου</button>
-                    <span class="sortorder" ng-show="propertyName === 'protocol_id'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('req_status')">Κατάσταση Αιτήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'req_status'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('fromd')">Από ημέρα</button>
-                    <span class="sortorder" ng-show="propertyName === 'fromd'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('tod')">Μέχρι ημέρα</button>
-                    <span class="sortorder" ng-show="propertyName === 'tod'"
+                    <button class="btn btn-link" ng-click="sortBy('request_id')">Αιτήματα</button>
+                    <span class="sortorder" ng-show="propertyName === 'request_id'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
@@ -95,39 +41,63 @@
                     <span class="sortorder" ng-show="propertyName === 'date_index'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('fromd')">Από ημέρα</button>
+                    <span class="sortorder" ng-show="propertyName === 'fromt'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('tod')">Μέχρι ημέρα</button>
+                    <span class="sortorder" ng-show="propertyName === 'tot'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('fromt')">Από ώρα</button>
+                    <span class="sortorder" ng-show="propertyName === 'fromt'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('tot')">Μέχρι ώρα</button>
+                    <span class="sortorder" ng-show="propertyName === 'tot'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('type')">type</button>
+                    <span class="sortorder" ng-show="propertyName === 'type'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('period')">Ακαδημαϊκή Περίοδος</button>
+                    <span class="sortorder" ng-show="propertyName === 'period'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
                 <th>...</th>
             <tbody>
-            <tr ng-repeat="request in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+            <tr ng-repeat="roombook in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
                 style="cursor: pointer">
-                <td>{{ request.id }}</td>
-                <td>{{ request.req_dt }}</td>
-                <td>{{ request.users.user }}</td>
-                <td><textarea disabled>{{ request.descr }}</textarea></td>
-                <td>{{ request.period }}</td>
-                <td>{{ request.ps_id }}</td>
-                <td>{{ request.teacher }}</td>
-                <td>{{ request.class_use }}</td>
-                <td>{{ request.links }}</td>
-                <td>{{ request.fromdt }}</td>
-                <td>{{ request.todt }}</td>
-                <td>{{ request.protocol_id }}</td>
-                <td>{{ request.req_status }}</td>
-                <td>{{ request.fromd }}</td>
-                <td>{{ request.tod }}</td>
-                <td>{{ request.date_index }}</td>
+                <td>{{ roombook.id }}</td>
+                <td>{{ roombook.users.user }}</td>
+                <td>{{ roombook.room_id }}</td>
+                <td>{{ roombook.request_id }}</td>
+                <td>{{ roombook.date_index }}</td>
+                <td>{{ roombook.fromd }}</td>
+                <td>{{ roombook.tod }}</td>
+                <td>{{ roombook.fromt }}</td>
+                <td>{{ roombook.tot }}</td>
+                <td>{{ roombook.type }}</td>
+                <td>{{ roombook.period }}</td>
                 <td>
-                    <a href="#/roombook/{{request.id}}" type="button" class="btn btn-info thumb"><span
+                    <a href="#/booking/{{roombook.id}}" type="button" class="btn btn-info thumb"><span
                             class="glyphicon glyphicon-pencil"></span></a>
-                    <button ng-click="deleteRoomBook(request)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove
-"></span>
+                    <button ng-click="deleteRoomBook(roombook)" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <pre>total requests list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+    <pre>total booking list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
 </div>
 
 

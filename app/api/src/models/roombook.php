@@ -15,14 +15,21 @@ class RoomBook extends Model
 
     protected $table = 'room_book';
 
-//    public function users()             Einai users_id 'h user_id (einai ta idia kai exei ginei apla la8os??????????)
-//    {
-//        $this->belongsTo('\\App\\Models\\Users', 'users_id');
-//    }
-
     public function rooms()
     {
         $this->belongsTo('\\App\\Models\\Rooms', 'room_id');
     }
+
+    public function users()
+    {
+        return $this->belongsTo('\\App\\Models\\Users', 'user_id');
+    }
+
+    public function requests()
+    {
+        return $this->belongsTo('\\App\\Models\\Requests', 'request_id');
+    }
+
+
 
 }

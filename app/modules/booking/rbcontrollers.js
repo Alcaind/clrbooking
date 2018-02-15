@@ -1,29 +1,29 @@
 'use strict';
 
-angular.module('roomBook', [
+angular.module('RoomBook', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
     'Authentication'
-]).controller('RequestsController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
+]).controller('roomBookController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
     AuthenticationService.CheckCredentials();
     $scope.dp = [];
     $scope.item = {};
     $scope.method = '';
-    $scope.baseURL = 'api/public/roombook';
+    $scope.baseURL = 'api/public/booking';
 
-    $scope.getRequests = function () {
+    $scope.getRoomBook = function () {
         api.apiCall('GET', $scope.baseURL, function (results) {
             $scope.dp = results.data;
             $scope.totalItems = $scope.dp.length;
         });
     };
 
-    $scope.deleteRequest = function (item) {
+    $scope.deleteRoomBook = function (item) {
         api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
             $scope.dp.splice($scope.dp.indexOf(item), 1);
             $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Αίτημα διαγράφηκε', 1)
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'H δέσμεση αίθουσας διαγράφηκε', 1)
         });
     };
 
@@ -37,12 +37,12 @@ angular.module('roomBook', [
         $scope.propertyName = propertyName;
     };
 
-    $scope.getRequests();
+    $scope.getRoomBook();
 
 }])
-    .controller('RequestProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
+    .controller('RoomBookProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
         AuthenticationService.CheckCredentials();
-        $scope.baseURL = 'api/public/roombook';
+        $scope.baseURL = 'api/public/booking';
         $scope.users = {};
 
         api.apiCall('GET', 'api/public/users', function (results) {
@@ -50,52 +50,47 @@ angular.module('roomBook', [
         });
 
 
-        if (!$routeParams.requestId) {
+        if (!$routeParams.roombookId) {
             $scope.item = {
                 id: "",
-                req_dt: "",
                 user_id: "",
-                descr: "",
-                period: "",
-                ps_id: "",
-                teacher: "",
-                class_use: "",
-                links: "",
-                fromdt: "",
-                todt: "",
-                protocol_id: "",
-                req_status: "",
+                room_id: "",
+                request_id: "",
+                date_index: "",
                 fromd: "",
                 tod: "",
-                daye_index: ""
+                fromt: "",
+                tot: "",
+                type: "",
+                period: ""
             };
         } else {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.requestId, function (results) {
+            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roombookId, function (results) {
                 $scope.item = results.data;
             });
         }
-        $scope.updateRequest = function (item) {
+        $scope.updateRoomBook = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Το αίτημα ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η δέσμεση αίθουσας ανανεώθηκε', 1);
                 history.back();
             }, undefined, item)
 
         };
 
-        $scope.saveRequest = function (item) {
+        $scope.saveRoomBook = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο αίτημα', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα δέσμεση αίθουσας', 1);
                 history.back();
             }, undefined, item)
         }
     }])
-    .component('requestsProfile', {
+    .component('roomBookProfile', {
         restrict: 'EA',
-        templateUrl: 'modules/requests/reqviews/profile.html',
+        templateUrl: 'modules/booking/roombookviews/rbprofile.html',
         scope: {
             method: '='
         },
-        controller: 'RequestProfileController'
+        controller: 'roomBookProfileController'
     })
 
 ;

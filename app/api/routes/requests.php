@@ -8,6 +8,8 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \App\Models\ApiError as ApiError;
+
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");

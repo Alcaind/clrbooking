@@ -8,19 +8,20 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \App\Models\ApiError as ApiError;
 
-$app->get('/roombook', function (Request $request, Response $response) {
+
+$app->get('/booking', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $roombook = \App\Models\RoomBook::all();
-
+    $roombook = \App\Models\RoomBook::with(['users:id,user'])->get();
     return $response->getBody()->write($roombook->toJson());
 });
 
-$app->get('/roombook/{id}', function (Request $request, Response $response, $args) {
+$app->get('/booking/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $roombook = \App\Models\RoomBook::find($id);
+        $roombook = \App\Models\RoomBook::with(['users:id,user'])->find($id);
     } catch (\Exception $e) {
         // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -28,11 +29,14 @@ $app->get('/roombook/{id}', function (Request $request, Response $response, $arg
     return $response->getBody()->write($roombook->toJson());
 });
 
-$app->post('/roombook', function (Request $request, Response $response) {
+
+$app->post('/booking', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
+
     try {
         $roombook = new \App\Models\RoomBook();
+
         $roombook->user_id = $data['user_id'];
         $roombook->date_index = $data['date_index'];
         $roombook->fromt = $data['fromt'];
@@ -44,23 +48,17 @@ $app->post('/roombook', function (Request $request, Response $response) {
         $roombook->tod = $data['tod'];
         $roombook->request_id = $data['request_id'];
         $roombook->save();
+
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
-//        $users->errorText = $e->getMessage();
-//        $users->errorCode = $e->getCode();
-//        $errormessage = explode(':', $e->getMessage())[2];
-//        $errormessage = explode('(', $errormessage)[0];
-//        $value = explode('\'', $errormessage)[1];
-//        $key = explode('\'', $errormessage)[3];
         $error = new ApiError();
         $error->setData($e->getCode(), $e->getMessage('Error from POST'));
-//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
-
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($roombook->toJson());
 });
-$app->delete('/roombook/{id}', function ($request, $response, $args) {
+
+$app->delete('/booking/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $roombook = \App\Models\RoomBook::find($id);
@@ -72,12 +70,13 @@ $app->delete('/roombook/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)->getBody()->write($roombook->toJson());
 });
 
-$app->put('/roombook/{id}', function ($request, $response, $args) {
+$app->put('/booking/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+
     try {
         $roombook = \App\Models\RoomBook::find($id);
+
         $roombook->user_id = $data['user_id'] ?: $roombook->user_id;
         $roombook->date_index = $data['date_index'] ?: $roombook->date_index;
         $roombook->fromt = $data['fromt'] ?: $roombook->fromt;
@@ -88,6 +87,7 @@ $app->put('/roombook/{id}', function ($request, $response, $args) {
         $roombook->fromd = $data['fromd'] ?: $roombook->fromd;
         $roombook->tod = $data['tod'] ?: $roombook->tod;
         $roombook->request = $data['request_id'] ?: $roombook->request_id;
+
         $roombook->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

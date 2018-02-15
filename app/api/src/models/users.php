@@ -40,14 +40,14 @@ class Users extends Model {
         return $ret;
     }
 
-//    public function roombook()            Einai users_id 'h user_id (einai ta idia kai exei ginei apla la8os??????????)
-//    {
-//        try {
-//            $ret = $this->hasMany('\\App\\Models\\RoomBook', 'users_id');
-//        } catch (\Exception $e) {
-//            return $e->getMessage();
-//        }
-//        return $ret;
-//    }
+    public function roombook()
+    {
+        try {
+            $ret = $this->hasMany('\\App\\Models\\RoomBook', 'users_id');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return $ret;
+    }
 
 }

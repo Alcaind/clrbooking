@@ -9,8 +9,6 @@ angular.module('Home',[
     if ((!$rootScope.globals || !$rootScope.globals.item || ($rootScope.globals.item && !$rootScope.globals.item.user)) && !$rootScope.inAuthentication) {
         $location.path('/login');
     }
-        AuthenticationService.CheckCredentials();
-
 }])
     .run(['$rootScope', '$location', '$cookies', '$http','AuthenticationService',
         function ($rootScope, $location, $cookies, $http, AuthenticationService) {
