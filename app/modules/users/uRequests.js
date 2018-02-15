@@ -27,9 +27,9 @@ angular.module('Users')
                 $scope.totalItems = $scope.uRequest.length;
             });
     }])
-    .component('usersRequests', {
-        scope: {
-            itemId: '='
-        }
-    })
+// .component('usersRequests', {
+//     scope: {
+//         itemId: '='
+//     }
+// })
 ;

@@ -27,9 +27,4 @@ angular.module('Rooms')
                 $scope.totalItems = $scope.rRequest.length;
             });
     }])
-    .component('roomsRequests', {
-        scope: {
-            itemId: '='
-        }
-    })
 ;

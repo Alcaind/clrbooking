@@ -294,3 +294,16 @@ $app->put('/rooms/{rid}/tms/{tid}', function ($request, $response, $args) {
     $room->tms()->updateExistingPivot($tid, $data);
     return $response->getBody()->write($room->tms()->get()->toJson());
 });
+
+$app->get('/rooms/{id}/requests', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $requests = \App\Models\Rooms::with('requests')->find($id);
+    } catch (\Exception $e) {
+        // do task when error
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($requests->toJson());
+});
+

@@ -5,11 +5,18 @@
                style="padding: 5px; width: 100%">
         <button type="button" class="btn btn-primary" ng-click="getPeriod()"
                 style="min-width: 50px; border-radius: 0px;">
+            <<<<<<< HEAD
             <span class="glyphicon glyphicon-refresh"></span>
         </button>
         <a href="#/periods/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
             <span class="glyphicon glyphicon-plus"></span>
-        </a>
+            =======
+            <span class="glyphicon glyphicon-cloud-download"></span>
+            </button>
+            <a href="#/periods/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+                <span>+</span><span class="glyphicon glyphicon-user"></span>
+                >>>>>>> fc7528c... commit
+            </a>
     </div>
     <div>
         <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
@@ -77,8 +84,12 @@
                     <a href="#/periods/{{period.id}}" type="button" class="btn btn-info thumb"><span
                             class="glyphicon glyphicon-pencil"></span></a>
                     <button ng-click="deletePeriod(period)" type="button" class="btn btn-danger">
+                        <<<<<<< HEAD
                         <span class="glyphicon glyphicon-remove
 "></span>
+                        =======
+                        <span class="glyphicon glyphicon-erase"></span>
+                        >>>>>>> fc7528c... commit
                     </button>
                 </td>
             </tr>
