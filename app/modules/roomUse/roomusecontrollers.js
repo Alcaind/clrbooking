@@ -23,7 +23,7 @@ angular.module('RoomUse', [
         api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
             $scope.dp.splice($scope.dp.indexOf(item), 1);
             $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Χρήση αίθουσας διαγράφηκε', 1)
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η χρήση αίθουσας διαγράφηκε.', 1)
         });
     };
 
@@ -56,7 +56,7 @@ angular.module('RoomUse', [
         }
         $scope.updateRoomUse = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Χρήση αίθουσας ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η χρήση αίθουσας ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -64,7 +64,7 @@ angular.module('RoomUse', [
 
         $scope.saveRoomUse = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο χρήση αίθουσας', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα χρήση αίθουσας δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

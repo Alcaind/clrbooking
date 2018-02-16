@@ -24,7 +24,7 @@ angular.module('UsersCategories', [
             api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
                 $scope.dp.splice($scope.dp.indexOf(item), 1);
                 $scope.item = {};
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Κατηγορια χρήστη διαγράφηκε', 1)
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η κατηγορία χρήστη διαγράφηκε.', 1)
             });
         };
 
@@ -57,7 +57,7 @@ angular.module('UsersCategories', [
         }
         $scope.updateUsersCategories = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η κατηγορία χρήστη ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η κατηγορία χρήστη ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -65,7 +65,7 @@ angular.module('UsersCategories', [
 
         $scope.saveUsersCategories = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα κατηγορία χρήστη', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα κατηγορία χρήστη δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

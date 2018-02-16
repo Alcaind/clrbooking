@@ -12,7 +12,7 @@
             <label class="required" for="name">Όνομα Αιθουσας<span class="form-required">*</span>:</label>
             <div>
                 <input id="name" name="name" class="form-control" type="text" ng-model="item.name">
-                <p ng-show="roomForm.name.$invalid && !roomForm.name.$pristine" class="help-block">Απαιτείται όνομα
+                <p ng-show="roomForm.name.$invalid && !roomForm.name.$pristine" class="help-block">Εισάγετε όνομα
                     αίθουσας.</p>
             </div>
         </div>
@@ -20,14 +20,14 @@
         <div class="form-group" ng-class="{ 'has-error' : roomForm.address.$invalid && !roomForm.address.$pristine }">
             <label for="address" class="required">Διευθυνση<span class="form-required">*</span>:</label>
             <input id="address" name="address" class="form-control" type="text" ng-model="item.address">
-            <p ng-show="roomForm.address.$invalid && !roomForm.address.$pristine" class="help-block">Απαιτείται
+            <p ng-show="roomForm.address.$invalid && !roomForm.address.$pristine" class="help-block">Εισάγετε
                 διεύθυνση.</p>
         </div>
         <!-- building -->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.building.$invalid && !roomForm.building.$pristine }">
             <label for="building" class="required">Κτίριο<span class="form-required">*</span>:</label>
             <input id="building" name="building" class="form-control" type="text" ng-model="item.building">
-            <p ng-show="roomForm.building.$invalid && !roomForm.building.$pristine" class="help-block">Απαιτείται
+            <p ng-show="roomForm.building.$invalid && !roomForm.building.$pristine" class="help-block">Εισάγετε
                 κτίριο.</p>
         </div>
         <!--floor-->
@@ -39,14 +39,14 @@
         <div class="form-group" ng-class="{ 'has-error' : roomForm.status.$invalid && !roomForm.status.$pristine }">
             <label for="status" class="required">Κατάσταση<span class="form-required">*</span>:</label>
             <input id="status" name="status" class="form-control" type="text" ng-model="item.status">
-            <p ng-show="roomForm.status.$invalid && !roomForm.status.$pristine" class="help-block">Απαιτείται
+            <p ng-show="roomForm.status.$invalid && !roomForm.status.$pristine" class="help-block">Εισάγετε
                 κατάσταση.</p>
         </div>
         <!--active-->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.active.$invalid && !roomForm.active.$pristine }">
             <label for="active" class="required">Ενεργά<span class="form-required">*</span>:</label>
             <input id="active" name="active" class="form-control" type="number" ng-model="item.active">
-            <p ng-show="roomForm.active.$invalid && !roomForm.active.$pristine" class="help-block">Απαιτείται ενεργά
+            <p ng-show="roomForm.active.$invalid && !roomForm.active.$pristine" class="help-block">Εισάγετε ενεργά
                 καθίσματα.</p>
         </div>
         <!--destroyed-->
@@ -58,7 +58,7 @@
         <div class="form-group" ng-class="{ 'has-error' : roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine }">
             <label for="nonexist" class="required">Ανενεργά<span class="form-required">*</span>:</label>
             <input id="nonexist" name="nonexist" class="form-control" type="text" ng-model="item.nonexist">
-            <p ng-show="roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine" class="help-block">Απαιτείται
+            <p ng-show="roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine" class="help-block">Εισάγετε
                 ανενεργά καθίσματα.</p>
         </div>
         <!--capasity-->

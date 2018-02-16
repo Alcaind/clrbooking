@@ -23,7 +23,7 @@ angular.module('Periods', [
         api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
             $scope.dp.splice($scope.dp.indexOf(item), 1);
             $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Περίοδος διαγράφηκε', 1)
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η ακαδημαϊκή περίοδος διαγράφηκε.', 1)
         });
     };
 
@@ -63,7 +63,7 @@ angular.module('Periods', [
         }
         $scope.updatePeriod = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η ακαδημαική περίοδος ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η ακαδημαϊκή περίοδος ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -71,7 +71,7 @@ angular.module('Periods', [
 
         $scope.savePeriod = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα ακαδημαική περίοδος', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα ακαδημαϊκή περίοδος δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

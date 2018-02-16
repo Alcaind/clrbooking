@@ -38,7 +38,7 @@ angular.module('Users', [
             api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
                 $scope.dp.splice($scope.dp.indexOf(item), 1);
                 $scope.item = {};
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Ο χρήστης διαγράφηκε', 1)
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η εγγραφή του χρήστη διαγράφηκε.', 1)
             });
         };
 
@@ -98,7 +98,7 @@ angular.module('Users', [
 
         $scope.updateUser = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η εγγραφή του χρήστη αναεώθηκε.', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η εγγραφή του χρήστη ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -106,7 +106,7 @@ angular.module('Users', [
 
         $scope.saveUser = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Δημιουργία νέας εγγραφής χρήστη.', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νέα εγγραφή χρήστη δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         };

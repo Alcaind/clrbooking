@@ -8,34 +8,33 @@
     </div>
     <form class="tmForm" name="tmForm" novalidate>
         <div class="form-group" ng-class="{ 'has-error' : tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine }">
-            <label class="required" for="tm_code">tm_code <span class="form-required">*</span>:</label>
+            <label class="required" for="tm_code">Κωδικός τμήματος <span class="form-required">*</span>:</label>
             <input id="tm_code" name="tm_code" class="form-control" type="text" ng-model="item.tm_code">
-            <p ng-show="tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine" class="help-block">The tm_code is
-                required.</p>
+            <p ng-show="tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine" class="help-block">Εισάγετε κωδικό
+                τμήματος.</p>
         </div>
-        <div class="form-group" ng-class="{ 'has-error' : tmForm.descr.$invalid && !tmForm.descr.$pristine }">
-            <label for="descr" class="required">descr <span class="form-required">*</span>:</label>
+        <div class="form-group">
+            <label for="descr" class="required">Περιγραφή <span class="form-required">*</span>:</label>
             <input id="descr" name="descr" class="form-control" type="text" ng-model="item.descr">
-            <p ng-show="tmForm.descr.$invalid && !tmForm.descr.$pristine" class="help-block">The descr is
-                required.</p>
+            <p ng-show="tmForm.descr.$invalid && !tmForm.descr.$pristine" class="help-block">Εισάγετε περιγραφή.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : tmForm.title.$invalid && !tmForm.title.$pristine }">
-            <label for="title" class="required">title<span class="form-required">*</span>:</label>
+            <label for="title" class="required">Τίτλος<span class="form-required">*</span>:</label>
             <input id="title" name="title" class="form-control" type="text" ng-model="item.title">
-            <p ng-show="tmForm.title.$invalid && !tmForm.title.$pristine" class="help-block">title is
-                required.</p>
+            <p ng-show="tmForm.title.$invalid && !tmForm.title.$pristine" class="help-block">Εισάγετε τίτλο
+                τμήματος.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine }">
-            <label for="sxoli" class="required">sxoli<span class="form-required">*</span>:</label>
+            <label for="sxoli" class="required">Σχολή<span class="form-required">*</span>:</label>
             <input id="sxoli" name="sxoli" class="form-control" type="text" ng-model="item.sxoli">
-            <p ng-show="tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine" class="help-block">sxoli is
-                required.</p>
+            <p ng-show="tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine" class="help-block">Εισάγετε το όνομα της
+                σχολής.</p>
         </div>
         <button type="button" class="btn btn-primary" ng-click="updateTm(item)" style="padding: 5px"
-                ng-if="item.id>0">Upd Tm
+                ng-if="item.id>0">Ανανέωση
         </button>
         <button type="button" class="btn btn-primary" ng-click="saveTm(item)" style="padding: 5px"
-                ng-if="item.tm_code && !item.id">Save Tm
+                ng-if="item.tm_code && !item.id">Αποθήκευση
         </button>
     </form>
 </div>

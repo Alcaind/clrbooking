@@ -9,13 +9,13 @@
     <form class="roomCategoryForm" name="roomCategoryForm" novalidate>
         <div class="form-group"
              ng-class="{ 'has-error' : roomCategoryForm.synt.$invalid && !roomCategoryForm.synt.$pristine }">
-            <label class="required" for="synt">synt<span class="form-required">*</span>:</label>
+            <label class="required" for="synt">Συντομογραφία<span class="form-required">*</span>:</label>
             <input id="synt" name="synt" class="form-control" type="text" ng-model="item.synt">
-            <p ng-show="roomCategoryForm.synt.$invalid && !roomCategoryForm.synt.$pristine" class="help-block">Enter
-                synt.</p>
+            <p ng-show="roomCategoryForm.synt.$invalid && !roomCategoryForm.synt.$pristine" class="help-block">Εισάγετε
+                συντομογραφία.</p>
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
+            <label for="description">Περιγραφή:</label>
             <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
         </div>
         <button type="button" class="btn btn-primary" ng-click="updateRoomCategory(item)" style="padding: 5px"

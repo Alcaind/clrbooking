@@ -23,7 +23,7 @@ angular.module('RoomCategory', [
         api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
             $scope.dp.splice($scope.dp.indexOf(item), 1);
             $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η κατηγορία αίθουσας διαγράφηκε', 1)
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η κατηγορία αίθουσας διαγράφηκε.', 1)
         });
     };
 
@@ -57,7 +57,7 @@ angular.module('RoomCategory', [
         }
         $scope.updateRoomCategory = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η κατηγορία αίθουσας ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η κατηγορία αίθουσας ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -65,7 +65,7 @@ angular.module('RoomCategory', [
 
         $scope.saveRoomCategory = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα κατηγορία αίθουσας', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα κατηγορία αίθουσας δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

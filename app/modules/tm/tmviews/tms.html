@@ -56,10 +56,6 @@
                 <td>{{ tm.sxoli}}</td>
 
                 <td>
-                    <!--<button ng-click="selectTm(tm)" type="button" class="btn btn-primary">-->
-                    <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                    <!--</button>-->
-
                     <a href="#/tms/{{tm.id}}" type="button" class="btn btn-info thumb"><span
                             class="glyphicon glyphicon-pencil"></span></a>
                     <button ng-click="deleteTm(tm)" type="button" class="btn btn-danger">
@@ -70,7 +66,7 @@
                 </tbody>
             </table>
         </div>
-        <pre>total requests list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+        <pre>total tms list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
 </div>
 

@@ -16,7 +16,7 @@ angular.module('Rooms')
         $scope.getRoom();
 
         api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId + '/usages', function (results) {
-            $scope.lData = results.data.room_use;  //??????? mhpws xvris .room_use
+            $scope.lData = results.data.room_use;
             $scope.lLength = $scope.lData.length;
             if ($scope.rData && $scope.rData.length > 0) {
                 $scope.compare();

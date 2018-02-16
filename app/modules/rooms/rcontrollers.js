@@ -26,7 +26,7 @@ angular.module('Rooms', [
             api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
                 $scope.dp.splice($scope.dp.indexOf(item), 1);
                 $scope.item = {};
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η αίθουσα διαγράφηκε', 1)
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η αίθουσα διαγράφηκε.', 1)
             });
         };
 
@@ -106,7 +106,7 @@ angular.module('Rooms', [
                 }, undefined, $scope.selectedUsages.map(function (value) {
                     return value.id
                 }));
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η εγγραφή της αίθουσας ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η εγγραφή της αίθουσας ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
         };
@@ -118,7 +118,7 @@ angular.module('Rooms', [
                 }, undefined, $scope.selectedUsages.map(function (value) {
                     return value.id
                 }));
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα γγραφή αίθουσας', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα εγγραφή αίθουσας δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

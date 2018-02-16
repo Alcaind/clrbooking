@@ -1,5 +1,5 @@
 <div id="periods_main">
-    <div><h2 style="text-align: center;"> Περίοδοι ???? </h2></div>
+    <div><h2 style="text-align: center;"> Κατάλογος Περιόδων Ακαδημαϊκού Έτους </h2></div>
     <div style="display: flex">
         <input type="text" ng-model="filter" class="form-control" placeholder="search"
                style="padding: 5px; width: 100%">
@@ -21,42 +21,42 @@
             <tr>
                 <th>ID</th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('descr')">descr</button>
+                    <button class="btn btn-link" ng-click="sortBy('descr')">Περιγραφή</button>
                     <span class="sortorder" ng-show="propertyName === 'descr'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('synt')">synt</button>
+                    <button class="btn btn-link" ng-click="sortBy('synt')">Συντομογραφία</button>
                     <span class="sortorder" ng-show="propertyName === 'synt'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('fromd')">fromd</button>
+                    <button class="btn btn-link" ng-click="sortBy('fromd')">Από ημ/νία</button>
                     <span class="sortorder" ng-show="propertyName === 'fromd'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('tod')">tod</button>
+                    <button class="btn btn-link" ng-click="sortBy('tod')">Έως ημ/νία</button>
                     <span class="sortorder" ng-show="propertyName === 'tod'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('comments')">comments</button>
+                    <button class="btn btn-link" ng-click="sortBy('comments')">Σχόλια</button>
                     <span class="sortorder" ng-show="propertyName === 'comments'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('conf_id')">conf_id</button>
-                    <span class="sortorder" ng-show="propertyName === 'conf_id'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('porder')">porder</button>
+                    <button class="btn btn-link" ng-click="sortBy('porder')">Σειρά περιόδου</button>
                     <span class="sortorder" ng-show="propertyName === 'porder'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('status')">status</button>
+                    <button class="btn btn-link" ng-click="sortBy('conf_id')">Configuration</button>
+                    <span class="sortorder" ng-show="propertyName === 'conf_id'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('status')">Κατάσταση</button>
                     <span class="sortorder" ng-show="propertyName === 'status'"
                           ng-class="{reverse: reverse}"></span>
                 </th>

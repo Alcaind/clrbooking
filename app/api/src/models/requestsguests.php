@@ -2,16 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: Ifigeneia
- * Date: 12/12/2017
- * Time: 14:09
+ * Date: 16/02/2018
+ * Time: 11:33
  */
 
 namespace App\Models;
 use  \Illuminate\Database\Eloquent\Model as Model;
 
-class RoomItem extends Model
+class Guests extends Model
 {
-
-    protected $table = 'room_items';
-
+    protected $table = 'request_guests';
 }

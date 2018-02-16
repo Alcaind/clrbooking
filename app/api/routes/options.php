@@ -8,6 +8,7 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \App\Models\ApiError as ApiError;
 
 $app->get('/options', function (Request $request, Response $response) {
     //if (in_array("get", $this->jwt->scope)) {

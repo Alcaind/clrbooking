@@ -68,7 +68,7 @@ angular.module('Roles', [
 
         $scope.saveRole = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Δημιουργία νέου ρόλου.', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νέος ρόλος δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         };
@@ -120,7 +120,7 @@ angular.module('Roles', [
                 $scope.dp.splice($scope.dp.indexOf(item), 1);
                 $scope.item = {};
                 $scope.compare();
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Ο ρόλος από τον χρήστη διαγράφηκε', 1)
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Ο ρόλος από τον χρήστη διαγράφηκε.', 1)
             });
         };
 

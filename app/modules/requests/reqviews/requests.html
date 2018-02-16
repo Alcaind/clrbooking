@@ -21,7 +21,7 @@
             <tr>
                 <th>ID</th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('req_dt')">Ημερομηνία Αιτήματος</button>
+                    <button class="btn btn-link" ng-click="sortBy('req_dt')">Ημ/νία Αιτήματος</button>
                     <span class="sortorder" ng-show="propertyName === 'req_dt'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
@@ -46,12 +46,7 @@
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('teacher')">Καθηγητής</button>
-                    <span class="sortorder" ng-show="propertyName === 'teacher'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('class_use')">Αίθουσα</button>
+                    <button class="btn btn-link" ng-click="sortBy('class_use')">Χρήση Αίθουσας</button>
                     <span class="sortorder" ng-show="propertyName === 'class_use'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
@@ -91,21 +86,25 @@
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('date_index')">date_index</button>
+                    <button class="btn btn-link" ng-click="sortBy('date_index')">Kαταχώρηση αιτήματος</button>
                     <span class="sortorder" ng-show="propertyName === 'date_index'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('admin')">Επιβλέπων Αιτήματος</button>
+                    <span class="sortorder" ng-show="propertyName === 'admin'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>...</th>
             <tbody>
             <tr ng-repeat="request in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
-                style="cursor: pointer">
+                style="cursor: pointer" ng-class="{selected: request.id === item.id}">
                 <td>{{ request.id }}</td>
                 <td>{{ request.req_dt }}</td>
                 <td>{{ request.users.user }}</td>
                 <td><textarea disabled>{{ request.descr }}</textarea></td>
                 <td>{{ request.period }}</td>
                 <td>{{ request.ps_id }}</td>
-                <td>{{ request.teacher }}</td>
                 <td>{{ request.class_use }}</td>
                 <td>{{ request.links }}</td>
                 <td>{{ request.fromdt }}</td>
@@ -115,6 +114,7 @@
                 <td>{{ request.fromd }}</td>
                 <td>{{ request.tod }}</td>
                 <td>{{ request.date_index }}</td>
+                <td>{{ request.admin }}</td>
                 <td>
                     <a href="#/requests/{{request.id}}" type="button" class="btn btn-info thumb"><span
                             class="glyphicon glyphicon-pencil"></span></a>

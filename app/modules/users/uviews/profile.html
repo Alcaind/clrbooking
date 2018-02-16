@@ -8,13 +8,13 @@
     </div>
     <form class="userForm" name="userForm" novalidate>
         <!-- USERNAME -->
-        <div class="form-group" ng-class="{ 'has-error' : userForm.uname.$invalid && !userForm.uname.$pristine }">
-            <label class="required" for="uname">Username<span class="form-required">*</span>:</label>
+        <div class="form-group" ng-class="{ 'has-error' : userForm.user.$invalid && !userForm.user.$pristine }">
+            <label class="required" for="user">Username<span class="form-required">*</span>:</label>
             <div>
-                <input id="uname" name="uname" class="form-control" type="text" ng-model="item.user" ng-minlength="5"
+                <input id="user" name="user" class="form-control" type="text" ng-model="item.user" ng-minlength="5"
                        ng-maxlength="30">
-                <p ng-show="userForm.uname.$error.minlength" class="help-block">Username είναι πολύ μικρό.</p>
-                <p ng-show="userForm.uname.$error.maxlength" class="help-block">Username είναι πολύ μεγάλο.</p>
+                <p ng-show="userForm.user.$error.minlength" class="help-block">Το Username είναι πολύ μικρό.</p>
+                <p ng-show="userForm.user.$error.maxlength" class="help-block">Το Username είναι πολύ μεγάλο.</p>
             </div>
         </div>
         <!--PASSWORD-->
@@ -64,21 +64,22 @@
         <div class="form-group" ng-class="{ 'has-error' : userForm.fname.$invalid && !userForm.fname.$pristine }">
             <label for="fname" class="required">Όνομα<span class="form-required">*</span>:</label>
             <input id="fname" name="fname" class="form-control" type="text" ng-model="item.fname">
-            <p ng-show="userForm.fname.$invalid && !userForm.fname.$pristine" class="help-block">Απαιτείται όνομα.</p>
+            <p ng-show="userForm.fname.$invalid && !userForm.fname.$pristine" class="help-block">Εισάγετε όνομα
+                χρήστη.</p>
         </div>
         <!-- LASTNAME -->
         <div class="form-group" ng-class="{ 'has-error' : userForm.sname.$invalid && !userForm.sname.$pristine }">
             <label for="sname" class="required">Επώνυμο<span class="form-required">*</span>:</label>
             <input id="sname" name="sname" class="form-control" type="text" ng-model="item.sname">
-            <p ng-show="userForm.sname.$invalid && !userForm.sname.$pristine" class="help-block">Απαιτείται επώνυμο.</p>
+            <p ng-show="userForm.sname.$invalid && !userForm.sname.$pristine" class="help-block">Εισάγετε επώνυμο
+                χρήστη.</p>
         </div>
         <!--PHONE-->
         <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
             <label for="phone" class="required">Τηλέφωνο<span class="form-required">*</span>:</label>
             <input id="phone" name="phone" class="form-control" type="number" ng-model="item.phone" ng-minlength="5"
                    ng-maxlength="10">
-            <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Απαιτείται το
-                τηλέφωνο.</p>
+            <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Εισάγετε τηλέφωνο.</p>
         </div>
         <div class="form-group">
             <label for="idtm">Τμήμα:</label>

@@ -39,7 +39,7 @@
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('pm')">pm</button>
+                        <button class="btn btn-link" ng-click="sortBy('pm')">Είδος</button>
                         <span class="sortorder" ng-show="propertyName === 'pm'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
@@ -57,10 +57,8 @@
                     <td>
                         <a href="#/kats/{{kat.id}}" type="button" class="btn btn-info thumb"><span
                                 class="glyphicon glyphicon-pencil"></span></a>
-
                         <button ng-click="deleteKat(kat)" type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove
-"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>
                 </tr>

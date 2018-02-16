@@ -8,6 +8,7 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \App\Models\ApiError as ApiError;
 
 $app->get('/tms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
@@ -22,7 +23,6 @@ $app->get('/tms/{id}', function (Request $request, Response $response, $args) {
     try {
         $tm = \App\Models\Tm::find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($tm->toJson());
@@ -38,9 +38,11 @@ $app->post('/tms', function (Request $request, Response $response) {
         $tm->title = $data['title'];
         $tm->sxoli = $data['sxoli'];
         $tm->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($tm->toJson());
 });
@@ -51,7 +53,6 @@ $app->delete('/tms/{id}', function ($request, $response, $args) {
         $tm = \App\Models\Tm::find($id);
         $tm->delete();
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->withStatus(200)->getBody()->write($tm->toJson());

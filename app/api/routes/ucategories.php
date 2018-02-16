@@ -57,7 +57,6 @@ $app->delete('/userscategories/{id}', function ($request, $response, $args) {
         $ucategories = \App\Models\Ucategories::find($id);
         $ucategories->delete();
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->withStatus(200)->getBody()->write($ucategories->toJson());

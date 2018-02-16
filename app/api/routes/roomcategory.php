@@ -22,7 +22,6 @@ $app->get('/roomcategory/{id}', function (Request $request, Response $response, 
     try {
         $roomcategory = \App\Models\RoomCategory::find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($roomcategory->toJson());
@@ -38,16 +37,8 @@ $app->post('/roomcategory', function (Request $request, Response $response) {
         $roomcategory->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
-//        $users->errorText = $e->getMessage();
-//        $users->errorCode = $e->getCode();
-//        $errormessage = explode(':', $e->getMessage())[2];
-//        $errormessage = explode('(', $errormessage)[0];
-//        $value = explode('\'', $errormessage)[1];
-//        $key = explode('\'', $errormessage)[3];
         $error = new ApiError();
         $error->setData($e->getCode(), $e->getMessage('Error from POST'));
-//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
-
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($roomcategory->toJson());
@@ -59,7 +50,6 @@ $app->delete('/roomcategory/{id}', function ($request, $response, $args) {
         $roomcategory = \App\Models\RoomCategory::find($id);
         $roomcategory->delete();
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->withStatus(200)->getBody()->write($roomcategory->toJson());

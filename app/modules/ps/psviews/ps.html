@@ -21,37 +21,37 @@
             <tr>
                 <th>ID</th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('tm_code')">tm_code</button>
+                    <button class="btn btn-link" ng-click="sortBy('tm_code')">Κωδικός τμήματος</button>
                     <span class="sortorder" ng-show="propertyName === 'tm_code'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('tm_per')">tm_per</button>
+                    <button class="btn btn-link" ng-click="sortBy('tm_per')">Περιγραφή τμήματος</button>
                     <span class="sortorder" ng-show="propertyName === 'tm_per'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('pm')">pm</button>
+                    <button class="btn btn-link" ng-click="sortBy('pm')">Είδος</button>
                     <span class="sortorder" ng-show="propertyName === 'pm'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('tma_code')">tma_code</button>
+                    <button class="btn btn-link" ng-click="sortBy('tma_code')">Κωδικός μαθήματος</button>
                     <span class="sortorder" ng-show="propertyName === 'tma_code'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('tma_per')">tma_per</button>
+                    <button class="btn btn-link" ng-click="sortBy('tma_per')">Περιγραφή μαθήματος</button>
                     <span class="sortorder" ng-show="propertyName === 'tma_per'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('ps_ex')">ps_ex</button>
+                    <button class="btn btn-link" ng-click="sortBy('ps_ex')">Εξάμημο</button>
                     <span class="sortorder" ng-show="propertyName === 'ps_ex'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('ps_dm')">ps_dm</button>
+                    <button class="btn btn-link" ng-click="sortBy('ps_dm')">Έτος</button>
                     <span class="sortorder" ng-show="propertyName === 'ps_dm'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
@@ -61,19 +61,19 @@
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('teacher')">teacher</button>
+                    <button class="btn btn-link" ng-click="sortBy('teacher')">Διδάσκων</button>
                     <span class="sortorder" ng-show="propertyName === 'teacher'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>
-                    <button class="btn btn-link" ng-click="sortBy('conf_id')">conf_id</button>
+                    <button class="btn btn-link" ng-click="sortBy('conf_id')">Configuration</button>
                     <span class="sortorder" ng-show="propertyName === 'conf_id'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>...</th>
             <tbody>
             <tr ng-repeat="ps in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
-                style="cursor: pointer">
+                style="cursor: pointer" ng-class="{selected: ps.id === item.id}">>
                 <td>{{ ps.id }}</td>
                 <td>{{ ps.tm_code }}</td>
                 <td>{{ ps.tm_per }}</td>
@@ -96,7 +96,7 @@
             </tbody>
         </table>
     </div>
-    <pre>total ps list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+    <pre>total curriculum list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
 </div>
 
 

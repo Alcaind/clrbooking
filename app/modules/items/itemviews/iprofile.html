@@ -8,24 +8,25 @@
     </div>
     <form class="itemForm" name="itemForm" novalidate>
         <div class="form-group">
-            <label for="description">Description:</label>
+            <label for="description">Περιγραφή:</label>
             <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
         </div>
         <div class="form-group">
-            <label for="comments">comments:</label>
+            <label for="comments">Σχόλια:</label>
             <textarea id="comments" name="comments" class="form-control" ng-model="item.comments"></textarea>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : itemForm.code.$invalid && !itemForm.code.$pristine }">
-            <label class="required" for="code">code<span class="form-required">*</span>:</label>
+            <label class="required" for="code">Κωδικός εξοπλισμού:<span class="form-required">*</span>:</label>
             <input id="code" name="code" class="form-control" type="text" ng-model="item.code">
-            <p ng-show="itemForm.code.$invalid && !itemForm.code.$pristine" class="help-block">Enter code.</p>
+            <p ng-show="itemForm.code.$invalid && !itemForm.code.$pristine" class="help-block">Εισάγετε ημερομηνία
+                κωδικό.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : itemForm.status.$invalid && !itemForm.status.$pristine }">
-            <label class="required" for="status">status<span class="form-required">*</span>:</label>
+            <label class="required" for="status">Κατάσταση:<span class="form-required">*</span>:</label>
             <input id="status" name="status" class="form-control" type="text" ng-model="item.status">
-            <p ng-show="itemForm.status.$invalid && !itemForm.status.$pristine" class="help-block">Enter
-                status.</p>
+            <p ng-show="itemForm.status.$invalid && !itemForm.status.$pristine" class="help-block">Εισάγετε
+                κατάσταση.</p>
         </div>
         <button type="button" class="btn btn-primary" ng-click="updateItem(item)" style="padding: 5px"
                 ng-if="item.id>0">Ανανέωση

@@ -23,7 +23,7 @@ angular.module('Items', [
         api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
             $scope.dp.splice($scope.dp.indexOf(item), 1);
             $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Αντικείμενο/εξοπλισμός διαγράφηκε', 1)
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Αντικείμενο/εξοπλισμός διαγράφηκε.', 1)
         });
     };
 
@@ -58,7 +58,7 @@ angular.module('Items', [
         }
         $scope.updateItem = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Ο εξοπλισμός ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Ο εξοπλισμός ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -66,7 +66,7 @@ angular.module('Items', [
 
         $scope.saveItem = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο αντικείμενο εξοπλισμού', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο αντικείμενο εξοπλισμού δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

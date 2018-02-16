@@ -9,48 +9,47 @@
     <form class="psForm" name="psForm" novalidate>
         <div class="form-group"
              ng-class="{ 'has-error' : psForm.tm_code.$invalid && !psForm.tm_code.$pristine }">
-            <label class="required" for="tm_code">tm_code<span class="form-required">*</span>:</label>
+            <label class="required" for="tm_code">Κωδικός τμήματος<span class="form-required">*</span>:</label>
             <input id="tm_code" name="tm_code" class="form-control" type="number" ng-model="item.tm_code">
-            <p ng-show="psForm.tm_code.$invalid && !psForm.tm_code.$pristine" class="help-block">Enter
-                tm_code.</p>
+            <p ng-show="psForm.tm_code.$invalid && !psForm.tm_code.$pristine" class="help-block">Εισάγετε κωδικό
+                τμήματος.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : psForm.tm_per.$invalid && !psForm.tm_per.$pristine }">
-            <label class="required" for="tm_per">tm_per<span class="form-required">*</span>:</label>
+            <label class="required" for="tm_per">Περιγραφή τμήματος<span class="form-required">*</span>:</label>
             <input id="tm_per" name="tm_per" class="form-control" type="text" ng-model="item.tm_per">
-            <p ng-show="psForm.tm_per.$invalid && !psForm.tm_per.$pristine" class="help-block">Enter
-                tm_per.</p>
+            <p ng-show="psForm.tm_per.$invalid && !psForm.tm_per.$pristine" class="help-block">Εισάγετε περιγραφή
+                τμήματος.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : psForm.pm.$invalid && !psForm.pm.$pristine }">
-            <label class="required" for="pm">pm<span class="form-required">*</span>:</label>
+            <label class="required" for="pm">Είδος<span class="form-required">*</span>:</label>
             <input id="pm" name="pm" class="form-control" type="text" ng-model="item.pm">
-            <p ng-show="psForm.pm.$invalid && !psForm.pm.$pristine" class="help-block">Enter
-                pm.</p>
+            <p ng-show="psForm.pm.$invalid && !psForm.pm.$pristine" class="help-block">Εισάγετ είδος.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : psForm.tma_code.$invalid && !psForm.tma_code.$pristine }">
-            <label class="required" for="tma_code">tma_code<span class="form-required">*</span>:</label>
+            <label class="required" for="tma_code">Κωδικός μαθήματος<span class="form-required">*</span>:</label>
             <input id="tma_code" name="tma_code" class="form-control" type="number" ng-model="item.tma_code">
-            <p ng-show="psForm.tma_code.$invalid && !psForm.tma_code.$pristine" class="help-block">Enter tma_code.</p>
+            <p ng-show="psForm.tma_code.$invalid && !psForm.tma_code.$pristine" class="help-block">Εισάγετε κωδικός
+                μαθήματος.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : psForm.tma_per.$invalid && !psForm.tma_per.$pristine }">
-            <label class="required" for="tma_per">tma_per<span class="form-required">*</span>:</label>
+            <label class="required" for="tma_per">Περιγραφή μαθήματος<span class="form-required">*</span>:</label>
             <input id="tma_per" name="tma_per" class="form-control" type="text" ng-model="item.tma_per">
-            <p ng-show="psForm.tma_per.$invalid && !psForm.tma_per.$pristine" class="help-block">Enter
-                tma_per.</p>
+            <p ng-show="psForm.tma_per.$invalid && !psForm.tma_per.$pristine" class="help-block">Εισάγετε περιγραφή
+                μαθήματος.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : psForm.ps_ex.$invalid && !psForm.ps_ex.$pristine }">
-            <label class="required" for="ps_ex">ps_ex<span class="form-required">*</span>:</label>
+            <label class="required" for="ps_ex">Εξάμημο<span class="form-required">*</span>:</label>
             <input id="ps_ex" name="ps_ex" class="form-control" type="number" ng-model="item.ps_ex">
-            <p ng-show="psForm.ps_ex.$invalid && !psForm.ps_ex.$pristine" class="help-block">Enter
-                ps_ex.</p>
+            <p ng-show="psForm.ps_ex.$invalid && !psForm.ps_ex.$pristine" class="help-block">Εισάγετε εξάμημο.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : psForm.ps_dm.$invalid && !psForm.ps_dm.$pristine }">
-            <label class="required" for="ps_dm">ps_dm<span class="form-required">*</span>:</label>
+            <label class="required" for="ps_dm">Έτος<span class="form-required">*</span>:</label>
             <input id="ps_dm" name="ps_dm" class="form-control" type="number" ng-model="item.ps_dm">
-            <p ng-show="psForm.ps_dm.$invalid && !psForm.ps_dm.$pristine" class="help-block">Enter ps_dm.</p>
+            <p ng-show="psForm.ps_dm.$invalid && !psForm.ps_dm.$pristine" class="help-block">Εισάγετε έτος.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : psForm.ps_km.$invalid && !psForm.ps_km.$pristine }">
@@ -59,17 +58,13 @@
             <p ng-show="psForm.ps_km.$invalid && !psForm.ps_km.$pristine" class="help-block">Enter
                 ps_km.</p>
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : psForm.teacher.$invalid && !psForm.teacher.$pristine }">
-            <label class="required" for="teacher">teacher<span class="form-required">*</span>:</label>
+        <div class="form-group">
+            <label class="required" for="teacher">Διδάσκων:</label>
             <input id="teacher" name="teacher" class="form-control" type="text" ng-model="item.teacher">
-            <p ng-show="psForm.teacher.$invalid && !psForm.teacher.$pristine" class="help-block">Enter
-                teacher.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : psForm.conf_id.$invalid && !psForm.conf_id.$pristine }">
-            <label class="required" for="conf_id">conf_id<span class="form-required">*</span>:</label>
+            <label class="required" for="conf_id">Configuration<span class="form-required">*</span>:</label>
             <input id="conf_id" name="conf_id" class="form-control" type="number" ng-model="item.conf_id">
-            <p ng-show="psForm.conf_id.$invalid && !psForm.conf_id.$pristine" class="help-block">Enter conf_id.</p>
         </div>
         <button type="button" class="btn btn-primary" ng-click="updatePs(item)" style="padding: 5px"
                 ng-if="item.id>0">Ανανέωση

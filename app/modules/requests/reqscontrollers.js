@@ -23,7 +23,7 @@ angular.module('Requests', [
         api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
             $scope.dp.splice($scope.dp.indexOf(item), 1);
             $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Αίτημα διαγράφηκε', 1)
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Το αίτημα διαγράφηκε.', 1)
         });
     };
 
@@ -58,7 +58,6 @@ angular.module('Requests', [
                 descr: "",
                 period: "",
                 ps_id: "",
-                teacher: "",
                 class_use: "",
                 links: "",
                 fromdt: "",
@@ -67,7 +66,8 @@ angular.module('Requests', [
                 req_status: "",
                 fromd: "",
                 tod: "",
-                daye_index: ""
+                date_index: "",
+                admin: "",
             };
         } else {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.requestId, function (results) {
@@ -76,7 +76,7 @@ angular.module('Requests', [
         }
         $scope.updateRequest = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Το αίτημα ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Το αίτημα ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -84,7 +84,7 @@ angular.module('Requests', [
 
         $scope.saveRequest = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο αίτημα', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο αίτημα δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

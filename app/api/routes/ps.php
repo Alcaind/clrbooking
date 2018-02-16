@@ -8,7 +8,7 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-
+use \App\Models\ApiError as ApiError;
 
 $app->get('/ps', function (Request $request, Response $response) {
     header("Content-Type: application/json");
@@ -43,11 +43,12 @@ $app->post('/ps', function (Request $request, Response $response) {
         $ps->ps_km = $data['ps_km'];
         $ps->teacher = $data['teacher'];
         $ps->conf_id = $data['conf_id'];
+        $ps->ps_id = $data['ps_id'];
         $ps->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
-//        $users->errorText = $e->getMessage();
-//        $users->errorCode = $e->getCode();
+//        $ps->errorText = $e->getMessage();
+//        $ps->errorCode = $e->getCode();
 //        $errormessage = explode(':', $e->getMessage())[2];
 //        $errormessage = explode('(', $errormessage)[0];
 //        $value = explode('\'', $errormessage)[1];
@@ -90,6 +91,7 @@ $app->put('/ps/{id}', function ($request, $response, $args) {
         $ps->ps_km = $data['ps_km'] ?: $ps->ps_km;
         $ps->teacher = $data['teacher'] ?: $ps->teacher;
         $ps->conf_id = $data['conf_id '] ?: $ps->conf_id;
+        $ps->ps_id = $data['ps_id '] ?: $ps->ps_id;
         $ps->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

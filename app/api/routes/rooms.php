@@ -22,12 +22,10 @@ $app->get('/rooms/{id}', function (Request $request, Response $response, $args) 
     try {
         $room = \App\Models\Rooms::with(['room_category:id,descr', 'config', 'room_use', 'tms'])->find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($room->toJson());
 });
-
 
 $app->post('/rooms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
@@ -71,7 +69,6 @@ $app->delete('/rooms/{id}', function ($request, $response, $args) {
         $room = \App\Models\Rooms::find($id);
         $room->delete();
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->withStatus(200)->getBody()->write($room->toJson());
@@ -117,7 +114,6 @@ $app->get('/rooms/{id}/usages', function (Request $request, Response $response, 
     try {
         $room = \App\Models\Rooms::with(['room_use'])->find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($room->toJson());
@@ -186,7 +182,6 @@ $app->get('/rooms/{id}/items', function (Request $request, Response $response, $
     try {
         $item = \App\Models\Rooms::with('items')->find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($item->toJson());
@@ -244,7 +239,6 @@ $app->get('/rooms/{id}/tms', function (Request $request, Response $response, $ar
     try {
         $tms = \App\Models\Rooms::with('tms')->find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($tms->toJson());
@@ -301,7 +295,6 @@ $app->get('/rooms/{id}/requests', function (Request $request, Response $response
     try {
         $requests = \App\Models\Rooms::with('requests')->find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($requests->toJson());

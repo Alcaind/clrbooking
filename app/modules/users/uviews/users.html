@@ -43,7 +43,6 @@
                     <td ng-if="tableColumns[8].visible">{{ user.ucategories.descr}}</td>
                     <td ng-if="tableColumns[9].visible">{{ user.tm.title }}</td>
                     <td ng-if="tableColumns[10].visible"><textarea disabled>{{ user.comments}}</textarea></td>
-                    <!--<td>{{user.hash}}</td>-->
                     <td>
                         <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
                                 class="glyphicon glyphicon-pencil"></span></a>
@@ -52,8 +51,7 @@
                         <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"><span
                                 class="glyphicon glyphicon-transfer"></span></a>
                         <button ng-click="deleteUser(user)" type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove
-"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>
                 </tr>
