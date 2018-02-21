@@ -8,6 +8,7 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \App\Models\ApiError as ApiError;
 
 $app->get('/periods', function (Request $request, Response $response) {
     header("Content-Type: application/json");
@@ -22,7 +23,6 @@ $app->get('/periods/{id}', function (Request $request, Response $response, $args
     try {
         $periods = \App\Models\Periods::find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($periods->toJson());
@@ -39,12 +39,14 @@ $app->post('/periods', function (Request $request, Response $response) {
         $periods->tod = $data['tod'];
         $periods->comments = $data['comments'];
         $periods->conf_id = $data['conf_id'];
-        $periods->order = $data['order'];
+        $periods->porder = $data['porder'];
         $periods->status = $data['status'];
         $periods->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($periods->toJson());
 });
@@ -55,7 +57,6 @@ $app->delete('/periods/{id}', function ($request, $response, $args) {
         $periods = \App\Models\Periods::find($id);
         $periods->delete();
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->withStatus(200)->getBody()->write($periods->toJson());
@@ -73,7 +74,7 @@ $app->put('/periods/{id}', function ($request, $response, $args) {
         $periods->tod = $data['tod'] ?: $periods->tod;
         $periods->comments = $data['comments'] ?: $periods->comments;
         $periods->conf_id = $data['conf_id'] ?: $periods->status;
-        $periods->order = $data['order'] ?: $periods->order;
+        $periods->porder = $data['porder'] ?: $periods->order;
         $periods->status = $data['status'] ?: $periods->status;
         $periods->save();
     } catch (\Exception $e) {

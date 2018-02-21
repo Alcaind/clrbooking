@@ -1,0 +1,34 @@
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Κωδικός τμήματος</th>
+            <th>Περιγραφη</th>
+            <th>Τίτλος</th>
+            <th>Σχολή</th>
+            <th>Σχολια</th>
+            <th>...</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="tms in lData.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:filter"
+            style="cursor: pointer" ng-class="{selected: tms.id === item.id}">
+            <td>{{ tms.id }}</td>
+            <td>{{ tms.tm_code }}</td>
+            <td>{{ tms.descr}}</td>
+            <td>{{ tms.title}}</td>
+            <td>{{ tms.sxoli}}</td>
+            <td>{{tms.pivot.comments }}</td>
+            <td>
+                <button ng-click="editPivotData(tms)" type="button" class="btn btn-info">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button ng-click="deleteTmsRoom(tms.id)" type="button" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

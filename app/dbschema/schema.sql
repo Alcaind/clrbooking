@@ -1,497 +1,659 @@
-create table config
-(
-	id int not null auto_increment
-		primary key,
-	year int null,
-	dt timestamp default CURRENT_TIMESTAMP null,
-	status int null
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Feb 15, 2018 at 10:28 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS = @@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION = @@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `clrbooking`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `config`
+--
+
+CREATE TABLE `config` (
+  `id`         INT(11)   NOT NULL,
+  `year`       INT(11)        DEFAULT NULL,
+  `status`     INT(11)        DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-comment on column config.year is 'Έτος ισχύος'
-;
+-- --------------------------------------------------------
 
-create table items
-(
-	id int not null auto_increment
-		primary key,
-	descr varchar(255) null,
-	comments varchar(215) null,
-	code varchar(255) null,
-	status int null
+--
+-- Table structure for table `items`
+--
+
+CREATE TABLE `items` (
+  `id`         INT(11)   NOT NULL,
+  `descr`      VARCHAR(255)   DEFAULT NULL,
+  `comments`   VARCHAR(215)   DEFAULT NULL,
+  `code`       VARCHAR(255)   DEFAULT NULL,
+  `status`     INT(11)        DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-comment on table items is 'Εξοπλισμός'
-;
+-- --------------------------------------------------------
 
-create table kat
-(
-	id int not null auto_increment
-		primary key,
-	tm_id int null,
-	decr varchar(32) null,
-	title varchar(255) null,
-	pm int null
+--
+-- Table structure for table `kat`
+--
+
+CREATE TABLE `kat` (
+  `id`         INT(11)   NOT NULL,
+  `tm_id`      INT(11)        DEFAULT NULL,
+  `decr`       VARCHAR(32)    DEFAULT NULL,
+  `title`      VARCHAR(255)   DEFAULT NULL,
+  `pm`         INT(11)        DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-comment on table kat is 'katey8inseis tmimaton'
-;
+-- --------------------------------------------------------
 
-create table periods
-(
-	id int not null auto_increment
-		primary key,
-	descr varchar(64) null,
-	synt varchar(12) null,
-	fromd date null,
-	tod date null,
-	comments varchar(255) null,
-	conf_id int null,
-	`order` int null,
-	status int null
+--
+-- Table structure for table `periods`
+--
+
+CREATE TABLE `periods` (
+  `id`         INT(11)   NOT NULL,
+  `descr`      VARCHAR(64)    DEFAULT NULL,
+  `synt`       VARCHAR(12)    DEFAULT NULL,
+  `fromd`      DATE           DEFAULT NULL,
+  `tod`        DATE           DEFAULT NULL,
+  `comments`   VARCHAR(255)   DEFAULT NULL,
+  `conf_id`    INT(11)        DEFAULT NULL,
+  `porder`     INT(11)        DEFAULT NULL,
+  `status`     INT(11)        DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-comment on table periods is 'Ορισμός περιόδων έτους'
-;
+-- --------------------------------------------------------
 
-create table ps
-(
-	id int not null auto_increment
-		primary key,
-	tm_code int null,
-	tm_per varchar(255) null,
-	pm char(3) default 'ΠΡΟ' null,
-	tma_code int null,
-	tma_per varchar(255) null,
-	ps_ex int null,
-	ps_dm int null,
-	ps_km varchar(4) null,
-	teacher varchar(255) null,
-	conf_id int null
+--
+-- Table structure for table `ps`
+--
+
+CREATE TABLE `ps` (
+  `id`         INT(11)   NOT NULL,
+  `tm_code`    INT(11)        DEFAULT NULL,
+  `tm_per`     VARCHAR(255)   DEFAULT NULL,
+  `pm`         CHAR(3)        DEFAULT 'ΠΡΟ',
+  `tma_code`   INT(11)        DEFAULT NULL,
+  `tma_per`    VARCHAR(255)   DEFAULT NULL,
+  `ps_ex`      INT(11)        DEFAULT NULL,
+  `ps_dm`      INT(11)        DEFAULT NULL,
+  `ps_km`      VARCHAR(4)     DEFAULT NULL,
+  `teacher`    VARCHAR(255)   DEFAULT NULL,
+  `conf_id`    INT(11)        DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-create table requests
-(
-	id int not null auto_increment
-		primary key,
-	req_dt datetime default CURRENT_TIMESTAMP null,
-	user_id int null,
-	descr longtext null,
-	period varchar(5) null,
-	ps_id int null,
-	teacher varchar(255) null,
-	from_book int null,
-	class_use varchar(255) null,
-	links varchar(512) null,
-	fromdt timestamp null,
-	todt timestamp null,
-	protocol_id varchar(255) null,
-	req_stat int null
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requests`
+--
+
+CREATE TABLE `requests` (
+  `id`          INT(11)   NOT NULL,
+  `req_dt`      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id`     INT(11)            DEFAULT NULL,
+  `descr`       LONGTEXT,
+  `period`      VARCHAR(5)         DEFAULT NULL,
+  `ps_id`       INT(11)            DEFAULT NULL,
+  `teacher`     VARCHAR(255)       DEFAULT NULL,
+  `class_use`   VARCHAR(255)       DEFAULT NULL,
+  `links`       VARCHAR(512)       DEFAULT NULL,
+  `fromdt`      TIME               DEFAULT NULL,
+  `todt`        TIME               DEFAULT NULL,
+  `protocol_id` VARCHAR(255)       DEFAULT NULL,
+  `req_status`  INT(11)            DEFAULT NULL,
+  `fromd`       DATE               DEFAULT NULL,
+  `tod`         DATE               DEFAULT NULL,
+  `date_index`  INT(11)            DEFAULT NULL,
+  `created_at`  TIMESTAMP NULL     DEFAULT NULL,
+  `updated_at`  TIMESTAMP NULL     DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-comment on column requests.ps_id is 'ma8ima apo ps'
-;
+-- --------------------------------------------------------
 
-comment on column requests.from_book is 'an einai apo akyrosi edo fainetai se poia anaferete'
-;
+--
+-- Table structure for table `roles`
+--
 
-create table roles
-(
-	id int not null auto_increment
-		primary key,
-	role varchar(255) null,
-	descr varchar(255) null
+CREATE TABLE `roles` (
+  `id`         INT(11)   NOT NULL,
+  `role`       VARCHAR(255)   DEFAULT NULL,
+  `descr`      VARCHAR(255)   DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-create table room_book
-(
-	id int not null auto_increment
-		primary key,
-	user_id int null,
-	date_index int null,
-	fromt time null,
-	tot time null,
-	type int null,
-	dt timestamp null,
-	period int null,
-	room_id int null
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rooms`
+--
+
+CREATE TABLE `rooms` (
+  `id`             INT(11)     NOT NULL,
+  `name`           VARCHAR(255)         DEFAULT NULL,
+  `address`        VARCHAR(512)         DEFAULT NULL,
+  `building`       VARCHAR(255)         DEFAULT NULL,
+  `floor`          VARCHAR(128)         DEFAULT NULL,
+  `status`         VARCHAR(64) NOT NULL DEFAULT '0',
+  `active`         INT(11)              DEFAULT NULL,
+  `destroyed`      VARCHAR(4)           DEFAULT NULL,
+  `nonexist`       VARCHAR(4)           DEFAULT NULL,
+  `capasity`       INT(11)              DEFAULT NULL,
+  `width`          INT(11)              DEFAULT NULL,
+  `height`         INT(11)              DEFAULT NULL,
+  `xoros`          VARCHAR(512)         DEFAULT '{(10,15),(10,15)}',
+  `exams_capasity` INT(11)              DEFAULT NULL,
+  `capasity_categ` VARCHAR(10)          DEFAULT NULL,
+  `tm_owner`       VARCHAR(255)         DEFAULT NULL,
+  `stat_comm`      VARCHAR(255)         DEFAULT NULL,
+  `conf_id`        INT(11)              DEFAULT NULL,
+  `category`       INT(64)              DEFAULT NULL,
+  `use_id`         INT(11)              DEFAULT NULL,
+  `created_at`     TIMESTAMP   NULL     DEFAULT NULL,
+  `updated_at`     TIMESTAMP   NULL     DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-create index class_book_class_id_fk
-	on room_book (room_id)
-;
+-- --------------------------------------------------------
 
-create index class_book_users_id_fk
-	on room_book (user_id)
-;
+--
+-- Table structure for table `rooms_room_use`
+--
 
-comment on column room_book.date_index is 'Ποια μέρα (1-7) είναι η δεσμευση'
-;
-
-comment on column room_book.type is '0 - syxnotita
-1 - memonomeni'
-;
-
-create table room_items
-(
-	id int null,
-	item_id int null,
-	comments int null,
-	dt timestamp default CURRENT_TIMESTAMP null,
-	stat int null,
-	`from` timestamp null,
-	`to` timestamp null,
-	room_id int null
+CREATE TABLE `rooms_room_use` (
+  `id`          INT(11)   NOT NULL,
+  `rooms_id`    INT(11)   NOT NULL,
+  `room_use_id` INT(11)   NOT NULL,
+  `comment`     VARCHAR(255)       DEFAULT NULL,
+  `created_at`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at`  TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00'
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  COMMENT ='N-N για χρήση αιθουσών';
 
-comment on table room_items is 'τρεχον εξοπλισμός αίθουσας'
-;
+-- --------------------------------------------------------
 
-create table room_use
-(
-	id int not null auto_increment
-		primary key,
-	synt varchar(4) null,
-	descr varchar(255) null,
-	column_4 int null
+--
+-- Table structure for table `rooms_tms`
+--
+
+CREATE TABLE `rooms_tms` (
+  `id`         INT(11)   NOT NULL,
+  `tm_id`      INT(11)   NOT NULL,
+  `room_id`    INT(11)   NOT NULL,
+  `comments`   VARCHAR(225)       DEFAULT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00'
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  COMMENT ='N-N table rooms tmhmata';
 
-comment on table room_use is 'χρήσεις αιθουσων'
-;
+-- --------------------------------------------------------
 
-create table rooms
-(
-	id int not null auto_increment
-		primary key,
-	name varchar(255) null,
-	address varchar(512) null,
-	building varchar(255) null,
-	floor varchar(128) null,
-	status varchar(64) default '0' not null,
-	active int null,
-	destroyed varchar(4) null,
-	nonexist varchar(4) null,
-	capasity int null,
-	width int null,
-	height int null,
-	xoros varchar(512) default '{(10,15),(10,15)}' null,
-	exams_capasity int null,
-	capasity_categ varchar(10) null,
-	tm_owner varchar(255) null,
-	dt timestamp default CURRENT_TIMESTAMP null,
-	stat_comm varchar(255) null,
-	conf_id int null,
-	type varchar(64) null,
-	use_id int null,
-	use_str varchar(40) null
+--
+-- Table structure for table `room_book`
+--
+
+CREATE TABLE `room_book` (
+  `id`         INT(11)   NOT NULL,
+  `user_id`    INT(11)        DEFAULT NULL,
+  `date_index` INT(11)        DEFAULT NULL,
+  `fromt`      TIME           DEFAULT NULL,
+  `tot`        TIME           DEFAULT NULL,
+  `type`       INT(11)        DEFAULT NULL,
+  `period`     INT(11)        DEFAULT NULL,
+  `room_id`    INT(11)        DEFAULT NULL,
+  `fromd`      DATE           DEFAULT NULL,
+  `tod`        DATE           DEFAULT NULL,
+  `request_id` INT(11)        DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-comment on column rooms.destroyed is 'Χαλασμένα καθίσματα'
-;
+-- --------------------------------------------------------
 
-comment on column rooms.nonexist is 'Χαλασμένα έδρανα (για γραπτές εξετασεις)'
-;
+--
+-- Table structure for table `room_category`
+--
 
-comment on column rooms.xoros is 'π.χ. '{(10,15),(1,5),(10,15)}''
-;
-
-create table rooms_tranf3
-(
-	c1 varchar(255) null,
-	c2 varchar(255) null,
-	c3 varchar(255) null,
-	c4 varchar(255) null,
-	c5 varchar(255) null,
-	c6 varchar(255) null,
-	c7 varchar(255) null,
-	c8 varchar(255) null,
-	c10 varchar(255) null,
-	c11 varchar(255) null,
-	c12 varchar(255) null,
-	c13 varchar(255) null,
-	c14 varchar(255) null,
-	c15 varchar(255) null,
-	c16 varchar(255) null,
-	c17 varchar(255) null,
-	c18 varchar(255) null,
-	c19 varchar(255) null,
-	c20 varchar(255) null,
-	c21 varchar(255) null,
-	c22 varchar(255) null,
-	c23 varchar(255) null,
-	c24 varchar(255) null,
-	c25 varchar(255) null,
-	c26 varchar(255) null,
-	c27 varchar(255) null,
-	c28 varchar(255) null,
-	c29 varchar(255) null,
-	c30 varchar(255) null,
-	c31 varchar(255) null,
-	c32 varchar(255) null,
-	c33 varchar(255) null,
-	c34 varchar(255) null,
-	c35 varchar(255) null,
-	c36 varchar(255) null,
-	c37 varchar(255) null,
-	c38 varchar(255) null,
-	c39 varchar(255) null,
-	c40 varchar(255) null,
-	c41 varchar(255) null,
-	c42 varchar(255) null,
-	c43 varchar(255) null,
-	c44 varchar(255) null,
-	c45 varchar(255) null,
-	c46 varchar(255) null,
-	c47 varchar(255) null,
-	c48 varchar(255) null,
-	c49 varchar(255) null,
-	c50 varchar(255) null,
-	c51 varchar(255) null,
-	c52 varchar(255) null,
-	c53 varchar(255) null,
-	c54 varchar(255) null,
-	c55 varchar(255) null,
-	c56 varchar(255) null,
-	c57 varchar(255) null,
-	c58 varchar(255) null,
-	c59 varchar(255) null,
-	c60 varchar(255) null,
-	c61 varchar(255) null,
-	c62 varchar(255) null,
-	c63 varchar(255) null,
-	c64 varchar(255) null,
-	c65 varchar(255) null,
-	c66 varchar(255) null,
-	c67 varchar(255) null,
-	c68 varchar(255) null,
-	c69 varchar(255) null,
-	c70 varchar(255) null
+CREATE TABLE `room_category` (
+  `id`         INT(11)      NOT NULL,
+  `synt`       VARCHAR(255) NOT NULL,
+  `descr`      VARCHAR(255)          DEFAULT NULL,
+  `created_at` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP    NOT NULL DEFAULT '0000-00-00 00:00:00'
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  COMMENT ='Κατηγορίες αιθουσών';
 
-create table rooms_transf
-(
-	c1 varchar(255) not null,
-	c2 varchar(255) not null,
-	c3 varchar(255) not null,
-	c4 varchar(255) not null,
-	c5 varchar(255) not null,
-	c6 varchar(255) not null,
-	c7 varchar(255) not null,
-	c8 varchar(255) not null,
-	c10 varchar(255) not null,
-	c11 varchar(255) not null,
-	c12 varchar(255) not null,
-	c13 varchar(255) not null,
-	column_13 int null,
-	column_14 int null,
-	column_15 int null,
-	column_16 int null,
-	column_17 int null,
-	column_18 int null,
-	column_19 int null,
-	column_20 int null,
-	column_21 int null,
-	column_22 int null,
-	column_23 int null,
-	column_24 int null,
-	column_25 int null,
-	column_26 int null,
-	column_27 int null,
-	column_28 int null,
-	column_29 int null,
-	column_30 int null,
-	column_31 int null,
-	column_32 int null,
-	column_33 int null,
-	column_34 int null,
-	column_35 int null,
-	column_36 int null,
-	column_37 int null,
-	column_38 int null,
-	column_39 int null,
-	column_40 int null,
-	column_41 int null,
-	column_42 int null,
-	column_43 int null,
-	column_44 int null,
-	column_45 int null,
-	column_46 int null,
-	column_47 int null,
-	column_48 int null,
-	column_49 int null,
-	column_50 int null,
-	column_51 int null,
-	column_52 int null,
-	column_53 int null,
-	column_54 int null,
-	column_55 int null,
-	column_56 int null,
-	column_57 int null,
-	column_58 int null,
-	column_59 int null,
-	column_60 int null,
-	column_61 int null,
-	column_62 int null,
-	column_63 int null,
-	column_64 int null,
-	column_65 int null,
-	column_66 int null,
-	column_67 int null,
-	column_68 int null,
-	column_69 int null,
-	column_70 int null
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `room_items`
+--
+
+CREATE TABLE `room_items` (
+  `id`         INT(11)   NOT NULL,
+  `item_id`    INT(11)        DEFAULT NULL,
+  `comments`   VARCHAR(255)   DEFAULT NULL,
+  `stat`       INT(11)        DEFAULT NULL,
+  `from`       TIMESTAMP NULL DEFAULT NULL,
+  `to`         TIMESTAMP NULL DEFAULT NULL,
+  `room_id`    INT(11)        DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-create table rooms_transf2
-(
-	c1 varchar(255) null,
-	c2 varchar(255) null,
-	c3 varchar(255) null,
-	c4 varchar(255) null,
-	c5 varchar(255) null,
-	c6 varchar(255) null,
-	c7 varchar(255) null,
-	c8 varchar(255) null,
-	c10 varchar(255) null,
-	c11 varchar(255) null,
-	c12 varchar(255) null,
-	c13 varchar(255) null,
-	c14 varchar(255) null,
-	c15 varchar(255) null,
-	c16 varchar(255) null,
-	c17 varchar(255) null,
-	c18 varchar(255) null,
-	c19 varchar(255) null,
-	c20 varchar(255) null,
-	c21 varchar(255) null,
-	c22 varchar(255) null,
-	c23 varchar(255) null,
-	c24 varchar(255) null,
-	c25 varchar(255) null,
-	c26 varchar(255) null,
-	c27 varchar(255) null,
-	c28 varchar(255) null,
-	c29 varchar(255) null,
-	c30 varchar(255) null,
-	c31 varchar(255) null,
-	c32 varchar(255) null,
-	c33 varchar(255) null,
-	c34 varchar(255) null,
-	c35 varchar(255) null,
-	c36 varchar(255) null,
-	c37 varchar(255) null,
-	c38 varchar(255) null,
-	c39 varchar(255) null,
-	c40 varchar(255) null,
-	c41 varchar(255) null,
-	c42 varchar(255) null,
-	c43 varchar(255) null,
-	c44 varchar(255) null,
-	c45 varchar(255) null,
-	c46 varchar(255) null,
-	c47 varchar(255) null,
-	c48 varchar(255) null,
-	c49 varchar(255) null,
-	c50 varchar(255) null,
-	c51 varchar(255) null,
-	c52 varchar(255) null,
-	c53 varchar(255) null,
-	c54 varchar(255) null,
-	c55 varchar(255) null,
-	c56 varchar(255) null,
-	c57 varchar(255) null,
-	c58 varchar(255) null,
-	c59 varchar(255) null,
-	c60 varchar(255) null,
-	c61 varchar(255) null,
-	c62 varchar(255) null,
-	c63 varchar(255) null,
-	c64 varchar(255) null,
-	c65 varchar(255) null,
-	c66 varchar(255) null,
-	c67 varchar(255) null,
-	c68 varchar(255) null,
-	c69 varchar(255) null,
-	c70 varchar(255) null
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `room_use`
+--
+
+CREATE TABLE `room_use` (
+  `id`         INT(11)   NOT NULL,
+  `synt`       VARCHAR(4)     DEFAULT NULL,
+  `descr`      VARCHAR(255)   DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-create table tm
-(
-	id int not null auto_increment
-		primary key,
-	tm_code varchar(32) null,
-	descr varchar(12) null,
-	title varchar(255) null,
-	sxoli varchar(64) null
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tm`
+--
+
+CREATE TABLE `tm` (
+  `id`         INT(11)   NOT NULL,
+  `tm_code`    VARCHAR(32)    DEFAULT NULL,
+  `descr`      VARCHAR(12)    DEFAULT NULL,
+  `title`      VARCHAR(255)   DEFAULT NULL,
+  `sxoli`      VARCHAR(64)    DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-create table transf_ps
-(
-	c1 varchar(255) null,
-	c2 varchar(255) null,
-	c3 varchar(255) null,
-	c4 varchar(255) null,
-	c5 varchar(255) null,
-	c6 varchar(255) null,
-	c7 varchar(255) null,
-	c8 varchar(255) null,
-	c9 varchar(255) null
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ucategories`
+--
+
+CREATE TABLE `ucategories` (
+  `id`         INT(11)   NOT NULL,
+  `descr`      VARCHAR(255)   DEFAULT NULL,
+  `comment`    VARCHAR(255)   DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  COMMENT ='user categories';
 
-comment on table transf_ps is 'tmp'
-;
+-- --------------------------------------------------------
 
-create table users
-(
-	id int not null auto_increment
-		primary key,
-	tm_id int null,
-	fname varchar(255) null,
-	sname varchar(255) null,
-	phone varchar(255) null,
-	em_main varchar(128) null,
-	em_sec varchar(128) null,
-	em_pant varchar(128) null,
-	cat_id int null,
-	comments varchar(512) null,
-	user varchar(64) null,
-	hash varchar(255) null
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id`         INT(11)   NOT NULL,
+  `tm_id`      INT(11)        DEFAULT NULL,
+  `fname`      VARCHAR(255)   DEFAULT NULL,
+  `sname`      VARCHAR(255)   DEFAULT NULL,
+  `phone`      INT(255)       DEFAULT NULL,
+  `em_main`    VARCHAR(128)   DEFAULT NULL,
+  `em_sec`     VARCHAR(128)   DEFAULT NULL,
+  `em_pant`    VARCHAR(128)   DEFAULT NULL,
+  `cat_id`     INT(11)        DEFAULT NULL,
+  `comments`   VARCHAR(512)   DEFAULT NULL,
+  `user`       VARCHAR(64)    DEFAULT NULL,
+  `hash`       VARCHAR(255)   DEFAULT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-create table users_roles
-(
-	user_id int null,
-	role_id int null,
-	comment varchar(255) null,
-	exp_dt timestamp null,
-	dt timestamp default CURRENT_TIMESTAMP null,
-	status int null,
-	id int not null auto_increment
-		primary key
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_roles`
+--
+
+CREATE TABLE `users_roles` (
+  `user_id`    INT(11)        DEFAULT NULL,
+  `role_id`    INT(11)        DEFAULT NULL,
+  `comment`    VARCHAR(255)   DEFAULT NULL,
+  `exp_dt`     TIMESTAMP NULL DEFAULT NULL,
+  `status`     INT(11)        DEFAULT NULL,
+  `id`         INT(11)   NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL
 )
-;
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
-create index users_roles_roles_id_fk
-	on users_roles (role_id)
-;
+--
+-- Indexes for dumped tables
+--
 
-create index users_roles_users_id_fk
-	on users_roles (user_id)
-;
+--
+-- Indexes for table `config`
+--
+ALTER TABLE `config`
+  ADD PRIMARY KEY (`id`);
 
+--
+-- Indexes for table `items`
+--
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `kat`
+--
+ALTER TABLE `kat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `periods`
+--
+ALTER TABLE `periods`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ps`
+--
+ALTER TABLE `ps`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rooms`
+--
+ALTER TABLE `rooms`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rooms_room_use`
+--
+ALTER TABLE `rooms_room_use`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `room_use__index` (`rooms_id`, `room_use_id`),
+  ADD KEY `rooms_room_use_room_use_id_fk` (`room_use_id`);
+
+--
+-- Indexes for table `rooms_tms`
+--
+ALTER TABLE `rooms_tms`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `room_book`
+--
+ALTER TABLE `room_book`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `room_category`
+--
+ALTER TABLE `room_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `room_items`
+--
+ALTER TABLE `room_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `room_items_items_id_fk` (`item_id`),
+  ADD KEY `room_rooms___fk` (`room_id`);
+
+--
+-- Indexes for table `room_use`
+--
+ALTER TABLE `room_use`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tm`
+--
+ALTER TABLE `tm`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ucategories`
+--
+ALTER TABLE `ucategories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users_roles`
+--
+ALTER TABLE `users_roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `config`
+--
+ALTER TABLE `config`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 4;
+
+--
+-- AUTO_INCREMENT for table `items`
+--
+ALTER TABLE `items`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 3;
+
+--
+-- AUTO_INCREMENT for table `kat`
+--
+ALTER TABLE `kat`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 6;
+
+--
+-- AUTO_INCREMENT for table `periods`
+--
+ALTER TABLE `periods`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 6;
+
+--
+-- AUTO_INCREMENT for table `ps`
+--
+ALTER TABLE `ps`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 917;
+
+--
+-- AUTO_INCREMENT for table `requests`
+--
+ALTER TABLE `requests`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 3;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 12;
+
+--
+-- AUTO_INCREMENT for table `rooms`
+--
+ALTER TABLE `rooms`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 86;
+
+--
+-- AUTO_INCREMENT for table `rooms_room_use`
+--
+ALTER TABLE `rooms_room_use`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 39;
+
+--
+-- AUTO_INCREMENT for table `rooms_tms`
+--
+ALTER TABLE `rooms_tms`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 4;
+
+--
+-- AUTO_INCREMENT for table `room_book`
+--
+ALTER TABLE `room_book`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `room_category`
+--
+ALTER TABLE `room_category`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 3;
+
+--
+-- AUTO_INCREMENT for table `room_items`
+--
+ALTER TABLE `room_items`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 5;
+
+--
+-- AUTO_INCREMENT for table `room_use`
+--
+ALTER TABLE `room_use`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 4;
+
+--
+-- AUTO_INCREMENT for table `tm`
+--
+ALTER TABLE `tm`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 10;
+
+--
+-- AUTO_INCREMENT for table `ucategories`
+--
+ALTER TABLE `ucategories`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 7;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 5;
+
+--
+-- AUTO_INCREMENT for table `users_roles`
+--
+ALTER TABLE `users_roles`
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 51;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `rooms_room_use`
+--
+ALTER TABLE `rooms_room_use`
+  ADD CONSTRAINT `rooms_room_use_room_use_id_fk` FOREIGN KEY (`room_use_id`) REFERENCES `room_use` (`id`),
+  ADD CONSTRAINT `rooms_room_use_rooms_id_fk` FOREIGN KEY (`rooms_id`) REFERENCES `rooms` (`id`);
+
+--
+-- Constraints for table `room_items`
+--
+ALTER TABLE `room_items`
+  ADD CONSTRAINT `room_items_items_id_fk` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`),
+  ADD CONSTRAINT `room_rooms___fk` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;

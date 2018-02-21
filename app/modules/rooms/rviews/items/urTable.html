@@ -1,0 +1,34 @@
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Περιγραφή</th>
+            <th>Σχολια</th>
+            <th>Κατάσταση</th>
+            <th>Από ημ/νια</th>
+            <th>Μέχρι ημ/νια</th>
+            <th>...</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="items in lData.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:filter"
+            style="cursor: pointer" ng-class="{selected: items.id === item.id}">
+            <td>{{items.id }}</td>
+            <td>{{items.descr}}</td>
+            <td>{{items.pivot.comments }}</td>
+            <td>{{items.pivot.stat }}</td>
+            <td>{{items.pivot.from }}</td>
+            <td>{{items.pivot.to }}</td>
+            <td>
+                <button ng-click="editPivotData(items)" type="button" class="btn btn-info">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button ng-click="deleteItemRoom(items.id)" type="button" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

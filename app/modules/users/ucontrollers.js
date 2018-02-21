@@ -4,44 +4,15 @@ angular.module('Users', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication'
+    'Authentication',
+    'GlobalVarsSrvs'
 ])
-    .controller('UsersController', ['$scope', 'MakeModal', '$http', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, $http, api, orderBy, AuthenticationService) {
-
+    .controller('UsersController', ['$scope', 'MakeModal', '$http', 'api', 'orderByFilter', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, MakeModal, $http, api, orderBy, AuthenticationService, makeController, globalVarsSrv) {
         AuthenticationService.CheckCredentials();
 
-        $scope.dp = [];
-        $scope.item = {};
-        $scope.method = '';
-        $scope.baseURL = 'api/public/users';
+        $scope.ctrl = makeController.mainController('/users', 'usersTableConf');
+        $scope.ctrl.init();
 
-        $scope.getUsers = function () {
-            api.apiCall('GET', $scope.baseURL, function (results) {
-                $scope.dp = results.data;
-                $scope.totalItems = $scope.dp.length;
-            });
-        };
-
-        $scope.deleteUser = function (item) {
-            api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
-                $scope.dp.splice($scope.dp.indexOf(item), 1);
-                $scope.item = {};
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'User Deleted', 1)
-            });
-        };
-
-        $scope.propertyName = 'fname';
-        $scope.reverse = true;
-        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
-
-        $scope.sortBy = function (propertyName) {
-            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-                ? !$scope.reverse : false;
-            $scope.propertyName = propertyName;
-        };
-
-
-        $scope.getUsers();
     }])
 
     .controller('ProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
@@ -80,7 +51,7 @@ angular.module('Users', [
 
         $scope.updateUser = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'User Updated', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η εγγραφή του χρήστη ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -88,7 +59,7 @@ angular.module('Users', [
 
         $scope.saveUser = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'User Created', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νέα εγγραφή χρήστη δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         };

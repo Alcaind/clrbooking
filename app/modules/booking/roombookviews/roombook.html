@@ -1,0 +1,107 @@
+<div id="requests_main">
+    <div><h2 style="text-align: center;"> Κατάλογος </h2></div>
+    <div style="display: flex">
+        <input type="text" ng-model="filter" class="form-control" placeholder="search"
+               style="padding: 5px; width: 100%">
+        <button type="button" class="btn btn-primary" ng-click="getRoomBook()"
+                style="min-width: 50px; border-radius: 0px;">
+            <span class="glyphicon glyphicon-refresh"></span>
+        </button>
+        <a href="#/booking/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </div>
+    <div>
+        <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+                    num-pages="numPages"></pagination>
+    </div>
+    <div id="data_tbl" class="table-responsive boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('users.user')">Username</button>
+                    <span class="sortorder" ng-show="propertyName === 'user.user'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('room_id')">Αίθουσα</button>
+                    <span class="sortorder" ng-show="propertyName === 'room_id'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('request_id')">Αιτήματα</button>
+                    <span class="sortorder" ng-show="propertyName === 'request_id'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('date_index')">date_index</button>
+                    <span class="sortorder" ng-show="propertyName === 'date_index'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('fromd')">Από ημέρα</button>
+                    <span class="sortorder" ng-show="propertyName === 'fromt'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('tod')">Μέχρι ημέρα</button>
+                    <span class="sortorder" ng-show="propertyName === 'tot'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('fromt')">Από ώρα</button>
+                    <span class="sortorder" ng-show="propertyName === 'fromt'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('tot')">Μέχρι ώρα</button>
+                    <span class="sortorder" ng-show="propertyName === 'tot'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('type')">type</button>
+                    <span class="sortorder" ng-show="propertyName === 'type'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('period')">Ακαδημαϊκή Περίοδος</button>
+                    <span class="sortorder" ng-show="propertyName === 'period'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>...</th>
+            <tbody>
+            <tr ng-repeat="roombook in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+                style="cursor: pointer">
+                <td>{{ roombook.id }}</td>
+                <td>{{ roombook.users.user }}</td>
+                <td>{{ roombook.room_id }}</td>
+                <td>{{ roombook.request_id }}</td>
+                <td>{{ roombook.date_index }}</td>
+                <td>{{ roombook.fromd }}</td>
+                <td>{{ roombook.tod }}</td>
+                <td>{{ roombook.fromt }}</td>
+                <td>{{ roombook.tot }}</td>
+                <td>{{ roombook.type }}</td>
+                <td>{{ roombook.period }}</td>
+                <td>
+                    <a href="#/booking/{{roombook.id}}" type="button" class="btn btn-info thumb"><span
+                            class="glyphicon glyphicon-pencil"></span></a>
+                    <button ng-click="deleteRoomBook(roombook)" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <pre>total booking list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+</div>
+
+
+
+
+
+

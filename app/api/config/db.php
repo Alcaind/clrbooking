@@ -9,9 +9,16 @@
 class db
 {
     // Properties
+    //TODO : Ayto einai to config gia ton server epano.
+//    private $dbhost = 'localhost';
+//    private $dbuser = 'lpadmin';
+//    private $dbpass = 'OKEcmRv1UAa0Fqrb';
+//    private $dbname = 'clrbooking';
+
+    //TODO : Ayto einai to config gia ton local server.
     private $dbhost = 'localhost';
-    private $dbuser = 'lpadmin';
-    private $dbpass = 'OKEcmRv1UAa0Fqrb';
+    private $dbuser = 'root';
+    private $dbpass = '';
     private $dbname = 'clrbooking';
 
     // Connect

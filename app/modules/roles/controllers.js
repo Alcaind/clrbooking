@@ -5,14 +5,13 @@ angular.module('Roles', [
     'ui.bootstrap',
     'ApiModules',
     'Authentication'
-
 ])
-    .controller('RolesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
-    AuthenticationService.CheckCredentials();
-    $scope.dp = [];
-    $scope.item = {};
-    $scope.method = '';
-    $scope.baseURL = 'api/public/roles';
+    .controller('RolesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
+        AuthenticationService.CheckCredentials();
+        $scope.dp = [];
+        $scope.item = {};
+        $scope.method = '';
+        $scope.baseURL = 'api/public/roles';
 
     $scope.getRoles = function () {
         api.apiCall('GET', $scope.baseURL, function (results) {
@@ -21,29 +20,29 @@ angular.module('Roles', [
         });
     };
 
-    $scope.deleteRole = function (item) {
-        api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
-            $scope.dp.splice($scope.dp.indexOf(item), 1);
-            $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Role Deleted', 1)
-        });
-    };
+        $scope.deleteRole = function (item) {
+            api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
+                $scope.dp.splice($scope.dp.indexOf(item), 1);
+                $scope.item = {};
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Ο ρόλος διαγράφηκε.', 1)
+            });
+        };
 
 
-    $scope.propertyName = 'role';
-    $scope.reverse = true;
-    $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
+        $scope.propertyName = 'role';
+        $scope.reverse = true;
+        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
 
-    $scope.sortBy = function (propertyName) {
-        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-            ? !$scope.reverse : false;
-        $scope.propertyName = propertyName;
-    };
+        $scope.sortBy = function (propertyName) {
+            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+                ? !$scope.reverse : false;
+            $scope.propertyName = propertyName;
+        };
 
-    $scope.getRoles();
+        $scope.getRoles();
 
 
-}])
+    }])
     .controller('RoleProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
         AuthenticationService.CheckCredentials();
         $scope.baseURL = 'api/public/roles';
@@ -61,7 +60,7 @@ angular.module('Roles', [
 
         $scope.updateRole = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Role Updated', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Ο ρόλος ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -69,7 +68,7 @@ angular.module('Roles', [
 
         $scope.saveRole = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Role Created', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νέος ρόλος δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         };
@@ -99,6 +98,11 @@ angular.module('Roles', [
         $scope.userTable = {};
         $scope.totalItemsL = $scope.totalItemsR = 0;
         $scope.currentUser = null;
+        $scope.rData = {};
+
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId, function (results) {
+            $scope.rData = results.data;
+        });
 
         $scope.getUsersRole = function () {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId + '/users', function (results) {
@@ -116,7 +120,7 @@ angular.module('Roles', [
                 $scope.dp.splice($scope.dp.indexOf(item), 1);
                 $scope.item = {};
                 $scope.compare();
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Role Deleted', 1)
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Ο ρόλος από τον χρήστη διαγράφηκε.', 1)
             });
         };
 
@@ -184,7 +188,7 @@ angular.module('Roles', [
         }
     })
     .controller('EvUserRolesFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
-        $scope.urData = {comment: '', exp_dt: '', status: ''};
+        $scope.urData = {comment: '', exp_dt: '', status: 1};
         $scope.state = 1;
 
         $scope.insertRole = function () {
@@ -192,7 +196,7 @@ angular.module('Roles', [
             if ($scope.state === 0) method = "POST";
             api.apiCall(method, 'api/public/users/' + $scope.currentUser.id + '/roles/' + $routeParams.roleId, function (results) {
                 $scope.uRoles = results.data;
-                $scope.compare();
+                $scope.urData = {comment: '', exp_dt: '', status: 1};
                 $scope.currentUser = null;
                 $scope.getUsersRole();
             }, undefined, $scope.urData, undefined, $scope);
@@ -203,8 +207,4 @@ angular.module('Roles', [
             };
         };
     }])
-
-
-
-
 ;

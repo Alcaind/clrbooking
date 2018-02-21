@@ -18,7 +18,7 @@ class Ps extends Model
 
     public function config()
     {
-        $this->belongsTo('\\App\\Models\\Config', 'conf_id');
+        return $this->belongsTo('\\App\\Models\\Config', 'conf_id');
     }
 
     public function requests()

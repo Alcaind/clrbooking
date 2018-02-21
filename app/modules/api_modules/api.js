@@ -8,7 +8,7 @@ angular.module('ApiModules', [
 
         factory.apiCall = function (method, url, successCallback, errorCallBack, data) {
             if (method === 'DELETE' || method === 'PUT') {
-                MakeModal.generalInfoModal('sm', 'danger', 'Confirmation', 'Are you sure?', 2, callApi);
+                MakeModal.generalInfoModal('sm', 'danger', 'Επιβεβαίωση', 'Είστε σίγουρος για την αλλαγή που πρόκειται να πραγματοποιηθει;', 2, callApi);
             } else {
                 return callApi();
             }
@@ -22,7 +22,7 @@ angular.module('ApiModules', [
                     if (successCallback) successCallback(results);
                     return results;
                 }, function (results) {
-                    MakeModal.generalInfoModal('sm', 'info', 'Error :' + results.data.errorCode, 1);
+                    MakeModal.generalInfoModal('sm', 'info', '  Error :' + results.data.errorCode, 1);
                     if (errorCallBack) errorCallBack(results);
                     return results;
                 });

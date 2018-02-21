@@ -18,7 +18,7 @@ class Rooms extends Model
 
     public function items()
     {
-        return $this->belongsToMany("\\App\\Models\\Items", 'room_items', 'room_id', 'item_id');
+        return $this->belongsToMany("\\App\\Models\\Items", 'room_items', 'room_id', 'item_id')->withPivot('comments', 'stat', 'from', 'to');
     }
 
     public function room_use()
@@ -40,5 +40,25 @@ class Rooms extends Model
         }
         return $ret;
     }
+
+    public function config()
+    {
+        return $this->belongsTo('\\App\\Models\\Config', 'conf_id');
+    }
+
+    public function tms()
+    {
+        return $this->belongsToMany("\\App\\Models\\Tm", 'rooms_tms', 'room_id', 'tm_id')->withPivot('comments');
+    }
+
+//    public function requests()
+//    {
+//        try {
+//            $ret = $this->hasMany('\\App\\Models\\Requests', 'user_id');
+//        } catch (\Exception $e) {
+//            return $e->getMessage();
+//        }
+//        return $ret;
+//    }
 
 }

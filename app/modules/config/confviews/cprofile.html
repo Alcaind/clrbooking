@@ -11,16 +11,28 @@
              ng-class="{ 'has-error' : configForm.year.$invalid && !configForm.year.$pristine }">
             <label class="required" for="year">Έτος<span class="form-required">*</span>:</label>
             <input id="year" name="year" class="form-control" type="number" ng-model="item.year">
-            <p ng-show="configForm.year.$invalid && !configForm.year.$pristine" class="help-block">Enter
-                year.</p>
+            <p ng-show="configForm.year.$invalid && !configForm.year.$pristine" class="help-block">Εισάγετε έτος.</p>
         </div>
-
         <div class="form-group"
              ng-class="{ 'has-error' : configForm.status.$invalid && !configForm.status.$pristine }">
-            <label class="required" for="status">Κατάστηαση<span class="form-required">*</span>:</label>
+            <label class="required" for="status">Κατάσταση<span class="form-required">*</span>:</label>
             <input id="status" name="status" class="form-control" type="number" ng-model="item.status">
-            <p ng-show="configForm.status.$invalid && !configForm.status.$pristine" class="help-block">Enter
-                status.</p>
+            <p ng-show="configForm.status.$invalid && !configForm.status.$pristine" class="help-block">Εισάγετε
+                κατάσταση.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : configForm.fromd.$invalid && !configForm.fromd.$pristine }">
+            <label class="required" for="fromd">Από ημ/νια<span class="form-required">*</span>:</label>
+            <input id="fromd" name="fromd" class="form-control" type="number" ng-model="item.fromd">
+            <p ng-show="configForm.fromd.$invalid && !configForm.fromd.$pristine" class="help-block">Εισάγετε ημερομηνία
+                έναρξης.</p>
+        </div>
+        <div class="form-group"
+             ng-class="{ 'has-error' : configForm.tod.$invalid && !configForm.tod.$pristine }">
+            <label class="required" for="tod">Έως ημ/νια<span class="form-required">*</span>:</label>
+            <input id="tod" name="tod" class="form-control" type="number" ng-model="item.tod">
+            <p ng-show="configForm.tod.$invalid && !configForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνία
+                λήξης.</p>
         </div>
         <button type="button" class="btn btn-primary" ng-click="updateConfig(item)" style="padding: 5px"
                 ng-if="item.id>0">Ανανέωση

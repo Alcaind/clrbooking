@@ -8,6 +8,8 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \App\Models\ApiError as ApiError;
+
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
@@ -22,7 +24,6 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     try {
         $requests = \App\Models\Requests::with(['users:id,user'])->find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($requests->toJson());
@@ -38,7 +39,6 @@ $app->post('/requests', function (Request $request, Response $response) {
         $requests->descr = $data['descr'];
         $requests->period = $data['period'];
         $requests->ps_id = $data['ps_id'];
-        $requests->teacher = $data['teacher'];
         $requests->class_use = $data['class_use'];
         $requests->links = $data['links'];
         $requests->fromdt = $data['fromdt'];
@@ -48,19 +48,12 @@ $app->post('/requests', function (Request $request, Response $response) {
         $requests->fromd = $data['fromd'];
         $requests->tod = $data['tod'];
         $requests->date_index = $data['date_index'];
+        $requests->admin = $data['admin'];
         $requests->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
-//        $users->errorText = $e->getMessage();
-//        $users->errorCode = $e->getCode();
-//        $errormessage = explode(':', $e->getMessage())[2];
-//        $errormessage = explode('(', $errormessage)[0];
-//        $value = explode('\'', $errormessage)[1];
-//        $key = explode('\'', $errormessage)[3];
         $error = new ApiError();
         $error->setData($e->getCode(), $e->getMessage('Error from POST'));
-//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
-
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());
@@ -72,7 +65,6 @@ $app->delete('/requests/{id}', function ($request, $response, $args) {
         $requests = \App\Models\Requests::find($id);
         $requests->delete();
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->withStatus(200)->getBody()->write($requests->toJson());
@@ -89,7 +81,6 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->descr = $data['descr'] ?: $requests->descr;
         $requests->period = $data['period'] ?: $requests->period;
         $requests->ps_id = $data['ps_id'] ?: $requests->ps_id;
-        $requests->teacher = $data['teacher'] ?: $requests->teacher;
         $requests->class_use = $data['class_use'] ?: $requests->class_use;
         $requests->links = $data['links'] ?: $requests->links;
         $requests->fromdt = $data['fromdt'] ?: $requests->fromdt;
@@ -99,6 +90,8 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->fromd = $data['fromd'] ?: $requests->fromd;
         $requests->tod = $data['tod'] ?: $requests->tod;
         $requests->date_index = $data['date_index'] ?: $requests->date_index;
+        $requests->admin = $data['admin'] ?: $requests->admin;
+
         $requests->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

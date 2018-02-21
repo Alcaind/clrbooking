@@ -17,6 +17,7 @@
     height: calc(100vh - 122px);
     overflow-y: auto;
 }
+
 span.msg-error {
     color: #F00;
 }
@@ -25,7 +26,6 @@ span.form-required {
     margin-left: 5px;
     color: red;
 }
-
 
 .userForm {
     display: inline;

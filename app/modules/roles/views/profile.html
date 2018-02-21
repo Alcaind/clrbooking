@@ -11,18 +11,18 @@
         <div class="form-group" ng-class="{ 'has-error' : roleForm.role.$invalid && !roleForm.role.$pristine }">
             <label class="required" for="role">Ρόλος<span class="form-required">*</span>:</label>
             <input id="role" name="role" class="form-control" type="text" ng-model="item.role">
-            <p ng-show="roleForm.role.$invalid && !roleForm.role.$pristine" class="help-block">Enter role.</p>
+            <p ng-show="roleForm.role.$invalid && !roleForm.role.$pristine" class="help-block">Εισάγετε ρόλο.</p>
         </div>
         <!--DESCRIPTION-->
         <div class="form-group">
-            <label for="description">Description:</label>
+            <label for="description">Περιγραφή ρόλου:</label>
             <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
         </div>
         <button type="button" class="btn btn-primary" ng-click="updateRole(item)" style="padding: 5px"
-                ng-if="item.id > 0">Role Update
+                ng-if="item.id > 0">Ανανέωση
         </button>
         <button type="button" class="btn btn-primary" ng-click="saveRole(item)" style="padding: 5px"
-                ng-if="item.role && !item.id ">Save Role
+                ng-if="item.role && !item.id ">Αποθήκευση
         </button>
     </form>
 </div>

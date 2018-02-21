@@ -9,7 +9,7 @@
     <div id="content" style="display: flex">
         <div id="leftColumn" class="table-responsive boxContent tableView" style="width: 100%">
             <div>
-                <h2 style="text-align: center;"> Κατοχυρωμένοι ρόλοι στον {{urData.fname}} </h2>
+                <h2 style="text-align: center;"> Κατοχυρωμένοι ρόλοι στον {{ctrl.mainData.fname}} </h2>
             </div>
             <div style="padding: 15px">
                 <div style="display: flex">
@@ -17,33 +17,33 @@
                            style="padding: 5px; width: 100%">
                 </div>
                 <div>
-                    <pagination current-page="currentPageL" total-items="urLength"
+                    <pagination current-page="currentPageL" total-items="ctrl.ldp.length"
                                 items-per-page="itemsPerPageL" num-pages="numPagesL"></pagination>
                     <ur-table></ur-table>
-                    <pre>total users : {{urLength}}  Page: {{currentPageL}} / {{numPagesL}}</pre>
+                    <pre>total roles per user : {{ctrl.ldp.length}}  Page: {{currentPageL}} / {{numPagesL}}</pre>
                 </div>
             </div>
         </div>
         <div id="rightColumn" style="width: 100%">
-            <div class="table-responsive boxContent" ng-if="!currentRole">
+            <div class="table-responsive boxContent" ng-if="!ctrl.pivotData">
                 <div>
-                    <h2 style="text-align: center;"> Επιλαχόντες ρόλοι </h2>
+                    <h2 style="text-align: center;"> Διαθέσιμοι ρόλοι </h2>
                 </div>
                 <div style="padding: 15px">
                     <div style="display: flex">
-                        <input name="searchexistroles" type="text" ng-model="filterR" class="form-control"
+                        <input name="searchexistroles" type="text" ng-model="ctrl.filterR" class="form-control"
                                placeholder="search"
                                style="padding: 5px; width: 100%">
                     </div>
                     <div>
-                        <pagination current-page="currentPageR" total-items="evLength"
+                        <pagination current-page="currentPageR" total-items="ctrl.rpd.length"
                                     items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
                         <evr-table></evr-table>
                     </div>
-                    <pre>total users : {{evLength}}  Page: {{currentPageR}} / {{numPagesR}}</pre>
+                    <pre>total roles : {{ctrl.rdp.lenght}}  Page: {{currentPageR}} / {{numPagesR}}</pre>
                 </div>
             </div>
-            <div ng-show="currentRole" style="width: 100%">
+            <div ng-show="ctrl.pivotData" style="width: 100%">
                 <div class="table-responsive boxContent">
                     <div style="padding: 15px">
                         <div>

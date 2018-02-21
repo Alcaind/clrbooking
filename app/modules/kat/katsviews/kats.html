@@ -8,10 +8,10 @@
                    style="padding: 5px; width: 100%">
             <button type="button" class="btn btn-primary" ng-click="getKats()"
                     style="min-width: 50px; border-radius: 0px;">
-                <span class="glyphicon glyphicon-cloud-download"></span>
+                <span class="glyphicon glyphicon-refresh"></span>
             </button>
             <a href="#/kats/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-                <span>+</span><span class="glyphicon glyphicon-user"></span>
+                <span class="glyphicon glyphicon-plus"></span>
             </a>
         </div>
         <div>
@@ -39,7 +39,7 @@
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('pm')">pm</button>
+                        <button class="btn btn-link" ng-click="sortBy('pm')">Είδος</button>
                         <span class="sortorder" ng-show="propertyName === 'pm'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
@@ -57,9 +57,8 @@
                     <td>
                         <a href="#/kats/{{kat.id}}" type="button" class="btn btn-info thumb"><span
                                 class="glyphicon glyphicon-pencil"></span></a>
-
                         <button ng-click="deleteKat(kat)" type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-erase"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>
                 </tr>

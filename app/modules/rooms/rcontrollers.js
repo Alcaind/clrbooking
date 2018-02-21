@@ -4,61 +4,65 @@ angular.module('Rooms', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication',
-    'angularjs-dropdown-multiselect'
+    'Authentication'
 ])
     .controller('RoomsController', ['$scope', '$routeParams', 'api', 'MakeModal', 'orderByFilter', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, orderBy, AuthenticationService) {
-    AuthenticationService.CheckCredentials();
+        AuthenticationService.CheckCredentials();
 
-    $scope.dp = [];
-    $scope.item = {};
-    $scope.method = '';
-    $scope.baseURL = 'api/public/rooms';
+        $scope.dp = [];
+        $scope.item = {};
+        $scope.method = '';
+        $scope.baseURL = 'api/public/rooms';
+        $scope.columsVisibility = [{column: 'address', value: true}, {column: 'building', value: true}];
 
-    $scope.getRooms = function () {
-        api.apiCall('GET', $scope.baseURL, function (results) {
-            $scope.dp = results.data;
-            $scope.totalItems = $scope.dp.length;
-        });
-    };
+        $scope.getRooms = function () {
+            api.apiCall('GET', $scope.baseURL, function (results) {
+                $scope.dp = results.data;
+                $scope.totalItems = $scope.dp.length;
+            });
+        };
 
-    $scope.deleteRooms = function (item) {
-        api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
-            $scope.dp.splice($scope.dp.indexOf(item), 1);
-            $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Αίθουσα διαγράφηκε', 1)
-        });
-    };
+        $scope.deleteRooms = function (item) {
+            api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
+                $scope.dp.splice($scope.dp.indexOf(item), 1);
+                $scope.item = {};
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η αίθουσα διαγράφηκε.', 1)
+            });
+        };
 
-    $scope.propertyName = 'name';
-    $scope.reverse = true;
-    $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
+        $scope.propertyName = 'name';
+        $scope.reverse = true;
+        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
 
-    $scope.sortBy = function (propertyName) {
-        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-            ? !$scope.reverse : false;
-        $scope.propertyName = propertyName;
-    };
+        $scope.sortBy = function (propertyName) {
+            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
+                ? !$scope.reverse : false;
+            $scope.propertyName = propertyName;
+        };
 
-    $scope.deleteUsage = function (room, usage) {
-        api.apiCall('DELETE', $scope.baseURL + "/" + room.id + '/usages/' + usage.id, function (results) {
-            $scope.dp[$scope.dp.indexOf(room)].room_use.splice($scope.dp[$scope.dp.indexOf(room)].room_use.indexOf(usage), 1);
-            MakeModal.generalInfoModal('sm', 'Info', 'Info', 'room-use diagrafh', 1);
-        })
-    };
-    $scope.getRooms();
+        $scope.deleteUsage = function (room, usage) {
+            api.apiCall('DELETE', $scope.baseURL + "/" + room.id + '/usages/' + usage.id, function (results) {
+                $scope.dp[$scope.dp.indexOf(room)].room_use.splice($scope.dp[$scope.dp.indexOf(room)].room_use.indexOf(usage), 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η κατηγορία χρήσης διαγράφηκε από την αίθουσα.', 1);
+            })
+        };
+        $scope.getRooms();
 
-}])
+    }])
     .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
         AuthenticationService.CheckCredentials();
         $scope.baseURL = 'api/public/rooms';
         $scope.categories = [];
         $scope.roomusages = [];
+        $scope.configs = [];
         $scope.selectedUsages = [];
         $scope.multiSelectOptions = {displayProp: 'synt'};
 
         api.apiCall('GET', 'api/public/roomcategory', function (result) {
             $scope.categories = result.data;
+        });
+        api.apiCall('GET', 'api/public/config', function (result) {
+            $scope.configs = result.data;
         });
         api.apiCall('GET', 'api/public/roomuse', function (result) {
             $scope.roomusages = result.data;
@@ -102,7 +106,7 @@ angular.module('Rooms', [
                 }, undefined, $scope.selectedUsages.map(function (value) {
                     return value.id
                 }));
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η αίθουσα ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η εγγραφή της αίθουσας ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
         };
@@ -114,7 +118,7 @@ angular.module('Rooms', [
                 }, undefined, $scope.selectedUsages.map(function (value) {
                     return value.id
                 }));
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα αίθουσα', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα εγγραφή αίθουσας δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

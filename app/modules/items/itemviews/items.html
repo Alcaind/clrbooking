@@ -1,0 +1,66 @@
+<div id="requests_main">
+    <div><h2 style="text-align: center;"> Κατάλογος Εξοπλισμού Αιθουσών </h2></div>
+    <div style="display: flex">
+        <input type="text" ng-model="filter" class="form-control" placeholder="search"
+               style="padding: 5px; width: 100%">
+        <button type="button" class="btn btn-primary" ng-click="getItem()"
+                style="min-width: 50px; border-radius: 0px;">
+            <span class="glyphicon glyphicon-refresh"></span>
+        </button>
+        <a href="#/items/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+            <span class="glyphicon glyphicon-plus"></span>
+        </a>
+    </div>
+    <div>
+        <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+                    num-pages="numPages"></pagination>
+    </div>
+    <div id="data_tbl" class="table-responsive boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('descr')">Περιγραφή</button>
+                    <span class="sortorder" ng-show="propertyName === 'descr'" ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('comments')">Σχόλια</button>
+                    <span class="sortorder" ng-show="propertyName === 'comments'" ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('code')">Κωδικός εξοπλισμού</button>
+                    <span class="sortorder" ng-show="propertyName === 'code'" ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('status')">Κατάσταση</button>
+                    <span class="sortorder" ng-show="propertyName === 'status'" ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>...</th>
+            <tbody>
+            <tr ng-repeat="citem in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
+                style="cursor: pointer" ng-class="{selected: citem.id === item.id}">
+                <td>{{ citem.id }}</td>
+                <td><textarea disabled>{{ citem.descr }}</textarea></td>
+                <td><textarea disabled>{{ citem.comments }}</textarea></td>
+                <td>{{ citem.code }}</td>
+                <td>{{ citem.status }}</td>
+                <td>
+                    <a href="#/items/{{citem.id}}" type="button" class="btn btn-info thumb"><span
+                            class="glyphicon glyphicon-pencil"></span></a>
+                    <button ng-click="deleteItem(citem)" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <pre>total items list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+</div>
+
+
+
+
+
+

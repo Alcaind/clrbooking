@@ -23,7 +23,7 @@ angular.module('Config', [
         api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
             $scope.dp.splice($scope.dp.indexOf(item), 1);
             $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Config διαγράφηκε', 1)
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Configuration διαγράφηκε.', 1)
         });
     };
 
@@ -47,6 +47,7 @@ angular.module('Config', [
         if (!$routeParams.configId) {
             $scope.item = {
                 year: "",
+                dt: "",
                 status: ""
             };
         } else {
@@ -56,7 +57,7 @@ angular.module('Config', [
         }
         $scope.updateConfig = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Config ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Configuration ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -64,7 +65,7 @@ angular.module('Config', [
 
         $scope.saveConfig = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο config', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο Configuration δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

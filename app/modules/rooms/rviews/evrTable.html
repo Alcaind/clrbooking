@@ -1,0 +1,24 @@
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>id</th>
+            <th>Συντομογραφία</th>
+            <th>Περιγραφή</th>
+            <th>Σχόλια</th>
+            <th>...</th>
+        </tr>
+        <tr ng-repeat="room in rData.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:filterR"
+            style="cursor: pointer" ng-class="{selected: room.id === item.id}">
+            <td>{{room.id }}</td>
+            <td>{{room.synt}}</td>
+            <td>{{room.descr }}</td>
+            <td>{{room.comment}}</td>
+            <td>
+                <button ng-click="room.disabled?null:showUrData(room)" type="button"
+                        class="btn {{room.disabled?'btn-regular disabled':'btn-success '}}">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>

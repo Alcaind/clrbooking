@@ -1,0 +1,12 @@
+<div>
+    <button ng-click="hideShowOptions()">Press to show columns</button>
+    <div ng-if="optionsVisible" style="display: flex">
+        <div ng-repeat="option in columsVisibility" style="padding: 2px">
+            <label style="padding: 2px">
+                <input type="checkbox" ng-model="option.visible">
+                {{option.title}}
+            </label>
+        </div>
+        <!--<button ng-click="changeColumnVisibility(option)">{{option.visible ? 'hide' : 'show' }}</button>-->
+    </div>
+</div>

@@ -22,7 +22,6 @@ $app->get('/roomcategory/{id}', function (Request $request, Response $response, 
     try {
         $roomcategory = \App\Models\RoomCategory::find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($roomcategory->toJson());
@@ -36,9 +35,11 @@ $app->post('/roomcategory', function (Request $request, Response $response) {
         $roomcategory->synt = $data['synt'];
         $roomcategory->descr = $data['descr'];
         $roomcategory->save();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($roomcategory->toJson());
 });
@@ -49,7 +50,6 @@ $app->delete('/roomcategory/{id}', function ($request, $response, $args) {
         $roomcategory = \App\Models\RoomCategory::find($id);
         $roomcategory->delete();
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->withStatus(200)->getBody()->write($roomcategory->toJson());

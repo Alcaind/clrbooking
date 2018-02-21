@@ -36,4 +36,11 @@ class Config extends Model
 //        }
 //        return $ret;
 //    }
+
+    public function rooms()
+    {
+        return $this->hasMany('\\App\\Models\\Rooms', 'conf_id');
+    }
+
+
 }

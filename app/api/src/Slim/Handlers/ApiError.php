@@ -24,8 +24,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 use Crell\ApiProblem\ApiProblem;
+use Slim\Handlers\Error as SHError;
 
-final class ApiError extends \Slim\Handlers\Error
+final class ApiError extends SHError
 {
     protected $logger;
 

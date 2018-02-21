@@ -8,27 +8,26 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use \App\Models\ApiError as ApiError;
 
-$app->get('/item', function (Request $request, Response $response) {
+$app->get('/items', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $item = \App\Models\Items::all();
-
     return $response->getBody()->write($item->toJson());
 });
 
-$app->get('/item/{id}', function (Request $request, Response $response, $args) {
+$app->get('/items/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
         $item = \App\Models\Items::find($id);
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($item->toJson());
 });
 
-$app->post('/item', function (Request $request, Response $response) {
+$app->post('/items', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
 
@@ -39,38 +38,36 @@ $app->post('/item', function (Request $request, Response $response) {
         $item->code = $data['code'];
         $item->status = $data['status'];
         $item->save();
-    } catch (\Exception $e) {
-        // TODO task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($item->toJson());
 });
 
-$app->delete('/item/{id}', function ($request, $response, $args) {
+$app->delete('/items/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $item = \App\Models\Items::find($id);
         $item->delete();
     } catch (\Exception $e) {
-        // do task when error
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->withStatus(200)->getBody()->write($item->toJson());
 });
 
-$app->put('/item/{id}', function ($request, $response, $args) {
+$app->put('/items/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
 
     try {
         $item = \App\Models\Items::find($id);
-
         $item->descr = $data['descr'] ?: $item->descr;
-        $item->comments = $data['title'] ?: $item->comments;
-        $item->code = $data['sxoli'] ?: $item->code;
-        $item->status = $data['tm_code'] ?: $item->status;
-
-
+        $item->comments = $data['comments'] ?: $item->comments;
+        $item->code = $data['code'] ?: $item->code;
+        $item->status = $data['status'] ?: $item->status;
         $item->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

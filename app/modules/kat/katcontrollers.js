@@ -24,7 +24,7 @@ angular.module('Kat', [
         api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
             $scope.dp.splice($scope.dp.indexOf(item), 1);
             $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η κατευθυνση διαγράφηκε', 1)
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η κατεύθυνση διαγράφηκε.', 1)
         });
     };
 
@@ -64,7 +64,7 @@ angular.module('Kat', [
         }
         $scope.updateKat = function (item) {
             api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η κατευθυνση ανανεώθηκε', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η κατεύθυνση ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
 
@@ -72,7 +72,7 @@ angular.module('Kat', [
 
         $scope.saveKat = function (item) {
             api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα κατευθυνση', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νέα κατεύθυνση δημιουργήθηκε.', 1);
                 history.back();
             }, undefined, item)
         }

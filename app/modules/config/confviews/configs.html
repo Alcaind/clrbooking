@@ -5,10 +5,10 @@
                style="padding: 5px; width: 100%">
         <button type="button" class="btn btn-primary" ng-click="getConfigs()"
                 style="min-width: 50px; border-radius: 0px;">
-            <span class="glyphicon glyphicon-cloud-download"></span>
+            <span class="glyphicon glyphicon-refresh"></span>
         </button>
         <a href="#/config/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-            <span>+</span><span class="glyphicon glyphicon-user"></span>
+            <span class="glyphicon glyphicon-plus"></span>
         </a>
     </div>
     <div>
@@ -25,14 +25,19 @@
                     <span class="sortorder" ng-show="propertyName === 'year'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
-                <!--<th>-->
-                <!--<button class="btn btn-link" ng-click="sortBy('dt')">Ημερομηνία</button>-->
-                <!--<span class="sortorder" ng-show="propertyName === 'dt'"-->
-                <!--ng-class="{reverse: reverse}"></span>-->
-                <!--</th>-->
                 <th>
                     <button class="btn btn-link" ng-click="sortBy('status')">Κατάσταση</button>
                     <span class="sortorder" ng-show="propertyName === 'status'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('fromd')">Από ημ/νια</button>
+                    <span class="sortorder" ng-show="propertyName === 'fromd'"
+                          ng-class="{reverse: reverse}"></span>
+                </th>
+                <th>
+                    <button class="btn btn-link" ng-click="sortBy('tod')">Έως ημ/νια</button>
+                    <span class="sortorder" ng-show="propertyName === 'tod'"
                           ng-class="{reverse: reverse}"></span>
                 </th>
                 <th>...</th>
@@ -41,13 +46,14 @@
                 style="cursor: pointer" ng-class="{selected: config.id === item.id}">
                 <td>{{ config.id }}</td>
                 <td>{{ config.year }}</td>
-                <!--<td>{{ config.dt }}</td>-->
                 <td>{{ config.status }}</td>
+                <td>{{ config.fromd }}</td>
+                <td>{{ config.tod }}</td>
                 <td>
                     <a href="#/config/{{config.id}}" type="button" class="btn btn-info thumb"><span
                             class="glyphicon glyphicon-pencil"></span></a>
                     <button ng-click="deleteConfig(config)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-erase"></span>
+                        <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </td>
             </tr>

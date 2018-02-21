@@ -9,6 +9,12 @@ angular.module('Users')
         $scope.reverse = true;
         $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
 
+        $scope.urData = null;
+
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId, function (results) {
+            $scope.urData = results.data;
+        });
+
         $scope.sortBy = function (propertyName) {
             $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
                 ? !$scope.reverse : false;
@@ -17,13 +23,8 @@ angular.module('Users')
 
         api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId + '/requests',
             function (results) {
-            $scope.uRequest = results.data;
+                $scope.uRequest = results.data;
                 $scope.totalItems = $scope.uRequest.length;
-        });
+            });
     }])
-    .component('usersRequests', {
-        scope: {
-            itemId: '='
-        }
-    })
 ;

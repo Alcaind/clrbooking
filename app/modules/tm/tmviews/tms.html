@@ -8,10 +8,10 @@
                    style="padding: 5px; width: 100%">
             <button type="button" class="btn btn-primary" ng-click="getTms()"
                     style="min-width: 50px; border-radius: 0px;">
-                <span class="glyphicon glyphicon-cloud-download"></span>
+                <span class="glyphicon glyphicon-refresh"></span>
             </button>
             <a href="#/tms/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-                <span>+</span><span class="glyphicon glyphicon-user"></span>
+                <span class="glyphicon glyphicon-plus"></span>
             </a>
         </div>
         <div>
@@ -24,22 +24,22 @@
                 <tr>
                     <th>ID</th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('tm_code')">tm_code</button>
+                        <button class="btn btn-link" ng-click="sortBy('tm_code')">Κωδικός τμήματος</button>
                         <span class="sortorder" ng-show="propertyName === 'tm_code'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('descr')">descr</button>
-                        <span class="sortorder" ng-show="propertyName === 'tm_code'"
+                        <button class="btn btn-link" ng-click="sortBy('descr')">Περιγραφη</button>
+                        <span class="sortorder" ng-show="propertyName === 'descr'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('title')">title</button>
+                        <button class="btn btn-link" ng-click="sortBy('title')">Τίτλος</button>
                         <span class="sortorder" ng-show="propertyName === 'title'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
                     <th>
-                        <button class="btn btn-link" ng-click="sortBy('sxoli')">sxoli</button>
+                        <button class="btn btn-link" ng-click="sortBy('sxoli')">Σχολή</button>
                         <span class="sortorder" ng-show="propertyName === 'sxoli'"
                               ng-class="{reverse: reverse}"></span>
                     </th>
@@ -56,21 +56,17 @@
                 <td>{{ tm.sxoli}}</td>
 
                 <td>
-                    <!--<button ng-click="selectTm(tm)" type="button" class="btn btn-primary">-->
-                    <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                    <!--</button>-->
-
                     <a href="#/tms/{{tm.id}}" type="button" class="btn btn-info thumb"><span
                             class="glyphicon glyphicon-pencil"></span></a>
                     <button ng-click="deleteTm(tm)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-erase"></span>
+                        <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <pre>total requests list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+        <pre>total tms list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
 </div>
 
