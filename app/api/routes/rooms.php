@@ -48,16 +48,15 @@ $app->post('/rooms', function (Request $request, Response $response) {
         $room->xoros = $data['xoros'];
         $room->exams_capasity = $data['exams_capasity'];
         $room->capasity_categ = $data['capasity_categ'];
-        $room->tm_owner = $data['name'];
+        $room->tm_owner = $data['tm_owner'];
         $room->stat_comm = $data['stat_comm'];
         $room->conf_id = $data['conf_id'];
         $room->category = $data['category'];
-        $room->use_id = $data['use_id'];
         $room->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($room->toJson());
@@ -129,7 +128,7 @@ $app->post('/rooms/{id}/usages', function (Request $request, Response $response,
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($room->toJson());
@@ -196,7 +195,7 @@ $app->post('/rooms/{id}/items', function (Request $request, Response $response, 
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($room->toJson());
@@ -253,7 +252,7 @@ $app->post('/rooms/{id}/tms', function (Request $request, Response $response, $a
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($room->toJson());

@@ -51,14 +51,9 @@ class Rooms extends Model
         return $this->belongsToMany("\\App\\Models\\Tm", 'rooms_tms', 'room_id', 'tm_id')->withPivot('comments');
     }
 
-//    public function requests()
-//    {
-//        try {
-//            $ret = $this->hasMany('\\App\\Models\\Requests', 'user_id');
-//        } catch (\Exception $e) {
-//            return $e->getMessage();
-//        }
-//        return $ret;
-//    }
+    public function requests()
+    {
 
+        return $this->belongsToMany('\\App\\Models\\Requests', 'request_rooms', 'room_id', 'req_id')->withPivot(['comment', 'teacher']);
+    }
 }

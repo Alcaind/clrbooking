@@ -98,3 +98,39 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
     }
     return $response->getBody()->write($requests->toJson());
 });
+
+$app->post('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $requests = \App\Models\Requests::find($id);
+    $requests->rooms()->attach($rid, $data);
+    return $response->getBody()->write($requests->rooms()->get()->toJson());
+});
+
+$app->put('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $requests = \App\Models\Requests::find($id);
+    $requests->rooms()->updateExistingPivot($rid, $data);
+    return $response->getBody()->write($requests->rooms()->get()->toJson());
+});
+
+$app->delete('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $requests = \App\Models\Requests::find($id);
+    $requests->rooms()->detach($rid);
+    return $response->getBody()->write($requests->rooms()->get()->toJson());
+});
+
+$app->get('/requests/{id}/rooms', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $requests = \App\Models\Requests::find($id);
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($requests->rooms()->get()->toJson());
+});

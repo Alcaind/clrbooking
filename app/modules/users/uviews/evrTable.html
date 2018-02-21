@@ -7,7 +7,7 @@
             <th>...</th>
         </tr>
         <tr ng-repeat="role in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
-            style="cursor: pointer" ng-class="{selected: role.id === item.id}">
+            style="cursor: pointer">
             <td>{{ role.id }}</td>
             <td>{{ role.role }}</td>
             <td>{{ role.descr }}</td>

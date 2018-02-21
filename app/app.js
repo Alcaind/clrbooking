@@ -141,7 +141,6 @@ angular.module('clrBooking', [
                     templateUrl: 'modules/rooms/rviews/items/ItemRoom.html'
                 })
 
-
                 .when('/rooms/:roomId/tms', {
                     title: 'room tms',
                     controller: 'RoomsTmsController',
@@ -190,6 +189,11 @@ angular.module('clrBooking', [
                 .when('/requests/:requestId', {
                     title: 'requests',
                     template: '<requests-profile></requests-profile>'
+                })
+                .when('/requests/:id/rooms', {
+                    title: 'requests rooms',
+                    controller: 'RequestsRoomsController',
+                    templateUrl: 'modules/requests/reqviews/rooms/mainn2n.html'
                 })
                 .when('/userscategories', {
                     title: 'users categories',

@@ -25,4 +25,9 @@ class Requests extends Model
         return $this->belongsTo('\\App\\Models\\Ps', 'ps_id');
     }
 
+    public function rooms()
+    {
+        return $this->belongsToMany('\\App\\Models\\Rooms', 'request_rooms', 'req_id', 'room_id')->withPivot('comment', 'teacher');
+    }
+
 }

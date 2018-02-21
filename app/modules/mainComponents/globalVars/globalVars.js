@@ -95,14 +95,15 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         return ctrl;
     };
 
-    function n2nController(url, table) {
+    function n2nController(url, table, pivotTable) {
         var ctrl = {
             ldp: [],
             rdp: [],
             lLength: 0,
             rLength: 0,
-            pivotData: {},
-            //currentRight : {},
+            pivotData: null,
+            pivotTable: pivotTable,
+            currentRight: {},
             baseURL: globalVarsSrv.getGlobalVar('appUrl') + url,
             mainData: {}
         };
@@ -146,6 +147,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         };
 
         ctrl.showPivotData = function (role) {
+            ctrl.pivotData = Object.assign({}, ctrl.pivotTable); //ctrl.pivotTable;
             ctrl.state = 0;
             ctrl.currentRight = role;
         };
@@ -153,16 +155,16 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         ctrl.deleteData = function (id) {
             api.apiCall('DELETE', ctrl.baseURL + "/" + $routeParams.id + '/' + table + '/' + id, function (results) {
                 ctrl.ldp = results.data;
-                ctrl.compare(ldp, rdp);
+                ctrl.compare(ctrl.ldp, ctrl.rdp);
             }, undefined, id);
         };
 
         ctrl.compare = function (sdp, cdp) {
-            for (var i = 0; i < sdp.length; i++) {
-                sdp[i].disabled = false;
-                for (var j = 0; j < cdp.length; j++)
-                    if (angular.equals(cdp[j].id, sdp[i].id))
-                        sdp[i].disabled = true;
+            for (var i = 0; i < cdp.length; i++) {
+                cdp[i].disabled = false;
+                for (var j = 0; j < sdp.length; j++)
+                    if (angular.equals(cdp[i].id, sdp[j].id))
+                        cdp[i].disabled = true;
             }
         };
 

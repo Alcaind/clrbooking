@@ -1,0 +1,18 @@
+<div>
+    <form><br>
+        <label>Σχόλια:<input type="text" ng-model="ctrl.pivotData.comment" class="form-control"
+                             placeholder="comment"></label><br>
+        <label>teacher:
+            <pre> <em>{{ctrl.pivotData.teacher}}</em></pre>
+        </label> <br>
+        <div style="display:flex; min-height:290px;">
+            <div uib-datepicker ng-model="ctrl.pivotData.teacher" class="well well-sm"></div>
+        </div>
+
+        <button type="button" class="btn btn-primary" ng-click="insertRoom()" style="padding: 5px">ok
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="cancelData()" style="padding: 5px">
+            cancel
+        </button>
+    </form>
+</div>

@@ -1,0 +1,21 @@
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>...</th>
+        </tr>
+        <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
+            style="cursor: pointer">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+
+            <td>
+                <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
+                        class="btn {{item.disabled?'btn-regular disabled':'btn-success '}}">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>

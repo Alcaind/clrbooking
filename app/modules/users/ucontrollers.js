@@ -29,7 +29,7 @@ angular.module('Users', [
             $scope.ucategories = results.data;
         });
 
-        if (!$routeParams.userId) {
+        if (!$routeParams.id) {
             $scope.item = {
                 tm_id: "",
                 fname: "",
@@ -44,7 +44,7 @@ angular.module('Users', [
                 hash: ""
             };
         } else {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId, function (results) {
+            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id, function (results) {
                 $scope.item = results.data;
             });
         }

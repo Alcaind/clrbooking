@@ -1,9 +1,9 @@
-angular.module('Users')
+angular.module('Rooms')
     .controller('URequestsController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
         AuthenticationService.CheckCredentials();
-        $scope.uRequest = [];
+        $scope.rRequest = [];
         $scope.method = '';
-        $scope.baseURL = 'api/public/users';
+        $scope.baseURL = 'api/public/rooms';
 
         $scope.propertyName = 'id';
         $scope.reverse = true;
@@ -11,7 +11,7 @@ angular.module('Users')
 
         $scope.urData = null;
 
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id, function (results) {
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId, function (results) {
             $scope.urData = results.data;
         });
 
@@ -21,10 +21,15 @@ angular.module('Users')
             $scope.propertyName = propertyName;
         };
 
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id + '/requests',
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId + '/requests',
             function (results) {
-                $scope.uRequest = results.data;
-                $scope.totalItems = $scope.uRequest.length;
+                $scope.rRequest = results.data;
+                $scope.totalItems = $scope.rRequest.length;
             });
     }])
+    .component('roomsRequests', {
+        scope: {
+            itemId: '='
+        }
+    })
 ;

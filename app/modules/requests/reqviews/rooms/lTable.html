@@ -1,0 +1,30 @@
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>name</th>
+            <th>comment</th>
+            <th>teacher</th>
+            <th>...</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filter"
+            style="cursor: pointer" ng-class="{selected: item.id === item.id}">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <th>{{ item.pivot.comment }}</th>
+            <th>{{ item.pivot.teacher}}</th>
+            <td>
+                <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button ng-click="ctrl.deleteData(item.id)" type="button" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
