@@ -111,16 +111,9 @@
         <!--type-->
         <div class="form-group">
             <label for="type" class="required">Κατηγορια Αιθουσας:</label>
-            <select id="type" ng-model="item.room_category" class="form-control"
+            <select id="type" ng-model="item.category" class="form-control"
                     ng-options="category.id as category.descr for category in categories"> </select>
         </div>
-        <!--&lt;!&ndash;use_id&ndash;&gt;-->
-        <!--<div class="form-group">-->
-        <!--<label for="use_id" class="required">Χρήση Αιθουσας:</label>-->
-        <!--<div id="use_id" ng-dropdown-multiselect options="roomusages" selected-model="selectedUsages"-->
-        <!--extra-settings="multiSelectOptions"></div>-->
-        <!--<label ng-repeat="sUsages in selectedUsages">{{sUsages.id}}</label>-->
-        <!--</div>-->
 
         <button type="button" class="btn btn-primary" ng-click="updateRoom(item)" style="padding: 5px"
                 ng-if="item.id>0">Ανανέωση

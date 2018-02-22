@@ -28,9 +28,10 @@ class ApiError
 
     protected function libraryErrorMsg()
     {
-        $errormessage = explode(':', $this->errorMessage)[2];
-        $errormessage = explode('(', $errormessage)[0];
-        return $this->dictionary($errormessage);
+        //$errormessage = explode(':', $this->errorMessage)[2];
+        //$errormessage = explode('(', $errormessage)[0];
+        //return $this->dictionary($errormessage);
+        return $this->errorMessage;
     }
 
     protected function dictionary($errorstring)

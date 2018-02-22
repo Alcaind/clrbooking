@@ -29,7 +29,7 @@
     },
     {
       "column": "phone",
-      "title": "Τηλ",
+      "title": "Τηλέφωνο",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -57,7 +57,7 @@
     },
     {
       "column": "cat_id",
-      "title": "Κατ.",
+      "title": "Κατευθυνση.",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -76,5 +76,244 @@
       "sorted": false,
       "filter": ""
     }
+  ],
+  "requestsTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "req_dt",
+      "title": "Ημ/νία Αιτήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "user",
+      "title": "Username",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "descr",
+      "title": "Περιγραφή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "period",
+      "title": "Ακαδημαϊκή Περίοδος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "ps_id",
+      "title": "Πρόγραμμα Σπουδών",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "class_use",
+      "title": "Χρήση Αίθουσας",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "links",
+      "title": "Παραποµπές",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "fromdt",
+      "title": "Από ώρα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "todt",
+      "title": "Μέχρι ώρα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "protocol_id",
+      "title": "Αρ.πρωτοκόλλου",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "req_status",
+      "title": "Κατάσταση Αιτήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "fromd",
+      "title": "Από ημέρα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tod",
+      "title": "Μέχρι ημέρα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "date_index",
+      "title": "Kαταχώρηση αιτήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "admin",
+      "title": "Επιβλέπων Αιτήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "roomsTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "name",
+      "title": "Όνομα Αιθουσας",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "address",
+      "title": "Διευθυνση",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "building",
+      "title": "Κτίριο",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "floor",
+      "title": "Όροφος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "status",
+      "title": "Κατασταση(status)",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "active",
+      "title": "Ενεργά",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "destroyed",
+      "title": "Καταστροφές",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "nonexist",
+      "title": "Ανενεργά",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "capasity",
+      "title": "Χωρητικότητα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "width",
+      "title": "Πλάτος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "height",
+      "title": "Υψος/Βαθος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "xoros",
+      "title": "xoros",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "exams_capasity",
+      "title": "Χωρητικότητα/Κατηγορια",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tm_owner",
+      "title": "Τμήμα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "stat_comm",
+      "title": "Σχόλια",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "config.year",
+      "title": "Έτος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "category",
+      "title": "Κατηγορια Αιθουσας",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+
   ]
 }

@@ -7,7 +7,7 @@ angular.module('Users', [
     'Authentication',
     'GlobalVarsSrvs'
 ])
-    .controller('UsersController', ['$scope', 'MakeModal', '$http', 'api', 'orderByFilter', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, MakeModal, $http, api, orderBy, AuthenticationService, makeController, globalVarsSrv) {
+    .controller('UsersController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
         AuthenticationService.CheckCredentials();
 
         $scope.ctrl = makeController.mainController('/users', 'usersTableConf');

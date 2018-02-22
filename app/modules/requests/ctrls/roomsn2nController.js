@@ -29,6 +29,14 @@ angular.module('Requests')
     .controller('FormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
         $scope.baseURL = 'api/public/requests';
 
+        $scope.teachers = [];
+
+        api.apiCall('GET', 'api/public/users', function (results) {
+            for (var i = 0; i < results.data.length; i++) {
+                if (results.data[i].cat_id === 7) $scope.teachers.push(results.data[i]);
+            }
+        });
+
         $scope.cancelData = function () {
             $scope.ctrl.pivotData = null;
             $scope.ctrl.currentRight = null;

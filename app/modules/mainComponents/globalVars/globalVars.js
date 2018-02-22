@@ -1,8 +1,8 @@
 'use strict';
 
-var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules']);
+var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies']);
 
-globalVars.factory('globalVarsSrv', ['$http', function ($http) {
+globalVars.factory('globalVarsSrv', ['$http', '$cookies', function ($http, $cookies) {
     var globalVariables = {};
 
     function getGlobalVar(gVar) {
@@ -32,6 +32,14 @@ globalVars.factory('globalVarsSrv', ['$http', function ($http) {
             }, function (res) {
                 console.log(res | JSON);
             });
+    }
+
+    function cookieSave() {
+        $cookies.put('globalData', globalVariables)
+    }
+
+    function cookieGet() {
+        globalVariables = $cookies.get('globalData');
     }
 
     var glbSrv = {

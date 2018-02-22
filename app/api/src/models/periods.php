@@ -20,4 +20,9 @@ class Periods extends Model
     {
         $this->belongsTo('\\App\\Models\\Config', 'conf_id');
     }
+
+    public function requests()
+    {
+        $this->hasMany('\\App\\Models\\Requests', 'period');
+    }
 }

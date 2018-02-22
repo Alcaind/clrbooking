@@ -30,10 +30,8 @@ $app->get('/rooms/{id}', function (Request $request, Response $response, $args) 
 $app->post('/rooms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
-
     try {
         $room = new \App\Models\Rooms();
-
         $room->name = $data['name'];
         $room->address = $data['address'];
         $room->building = $data['building'];

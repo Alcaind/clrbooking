@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $requests = \App\Models\Requests::with(['users:id,user'])->get();
+    $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr'])->get();
 
     return $response->getBody()->write($requests->toJson());
 });
@@ -22,7 +22,7 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user'])->find($id);
+        $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr'])->find($id);
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
@@ -53,7 +53,7 @@ $app->post('/requests', function (Request $request, Response $response) {
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());

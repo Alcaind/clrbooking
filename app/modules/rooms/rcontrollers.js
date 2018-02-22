@@ -91,8 +91,7 @@ angular.module('Rooms', [
                 dt: "",
                 stat_comm: "",
                 conf_id: "",
-                category: "",
-                use_id: ""
+                category: ""
             };
         } else {
             api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId, function (results) {

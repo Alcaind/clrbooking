@@ -186,7 +186,7 @@ angular.module('clrBooking', [
                     title: 'request create',
                     template: '<requests-profile></requests-profile>'
                 })
-                .when('/requests/:requestId', {
+                .when('/requests/:id', {
                     title: 'requests',
                     template: '<requests-profile></requests-profile>'
                 })

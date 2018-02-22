@@ -30,4 +30,9 @@ class Requests extends Model
         return $this->belongsToMany('\\App\\Models\\Rooms', 'request_rooms', 'req_id', 'room_id')->withPivot('comment', 'teacher');
     }
 
+    public function periods()
+    {
+        return $this->belongsTo('\\App\\Models\\Periods', 'period');
+    }
+
 }
