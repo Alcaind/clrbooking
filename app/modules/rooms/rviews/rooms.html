@@ -6,7 +6,7 @@
         <div style="display: flex">
             <input type="text" ng-model="filter" class="form-control" placeholder="search"
                    style="padding: 5px; width: 100%">
-            <button type="button" class="btn btn-primary" ng-click="getRooms()"
+            <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()"
                     style="min-width: 50px; border-radius: 0px;">
                 <span class="glyphicon glyphicon-refresh"></span>
             </button>
@@ -18,128 +18,39 @@
             <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
         </div>
-        <show-hide-columns colums-visibility="columsVisibility"></show-hide-columns>
+        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
         <div id="data_tbl" class="table-responsive boxContent">
             <table class="sorttable table table-hover table-striped table-responsive header-fixed">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('name')">Όνομα Αιθουσας</button>
-                        <span class="sortorder" ng-show="propertyName === 'name'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th ng-if="columsVisibility['address']">
-                        <button class="btn btn-link" ng-click="sortBy('address')">Διευθυνση</button>
-                        <span class="sortorder" ng-show="propertyName === 'address'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th ng-if="columsVisibility['building']">
-                        <button class="btn btn-link" ng-click="sortBy('building')">Κτίριο</button>
-                        <span class="sortorder" ng-show="propertyName === 'building'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('floor')">Όροφος</button>
-                        <span class="sortorder" ng-show="propertyName === 'floor'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('status')">Κατασταση(status)</button>
-                        <span class="sortorder" ng-show="propertyName === 'status'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('active')">Ενεργά</button>
-                        <span class="sortorder" ng-show="propertyName === 'active'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('destroyed')">Καταστροφές</button>
-                        <span class="sortorder" ng-show="propertyName === 'destroyed'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('nonexist')">Ανενεργά</button>
-                        <span class="sortorder" ng-show="propertyName === 'nonexist'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('capasity')">Χωρητικότητα</button>
-                        <span class="sortorder" ng-show="propertyName === 'capasity'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('width')">Πλάτος</button>
-                        <span class="sortorder" ng-show="propertyName === 'width'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('height')">Υψος/Βαθος</button>
-                        <span class="sortorder" ng-show="propertyName === 'height'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('xoros')">xoros</button>
-                        <span class="sortorder" ng-show="propertyName === 'xoros'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('exams_capasity')">Χωρητικότητα Εξετασεων</button>
-                        <span class="sortorder" ng-show="propertyName === 'exams_capasity'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('capasity_categ')">Χωρητικότητα/Κατηγορια</button>
-                        <span class="sortorder" ng-show="propertyName === 'capasity_categ'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('tm_owner')">Τμήμα</button>
-                        <span class="sortorder" ng-show="propertyName === 'tm_owner'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('stat_comm')">Σχόλια</button>
-                        <span class="sortorder" ng-show="propertyName === 'stat_comm'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('config.year')">Έτος</button>
-                        <span class="sortorder" ng-show="propertyName === 'config.year'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
-                    <th>
-                        <button class="btn btn-link" ng-click="sortBy('category')">Κατηγορια Αιθουσας</button>
-                        <span class="sortorder" ng-show="propertyName === 'category'"
-                              ng-class="{reverse: reverse}"></span>
-                    </th>
+                    <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"></th>
                     <th>...</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="room in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
-                    style="cursor: pointer">
-                    <td>{{room.id }}</td>
-                    <td>{{room.name}}</td>
-                    <td ng-if="columsVisibility['address']">{{room.address }}</td>
-                    <td ng-if="columsVisibility['building']">{{room.building}}</td>
-                    <td>{{room.floor}}</td>
-                    <td>{{room.status}}</td>
-                    <td>{{room.active}}</td>
-                    <td>{{room.destroyed}}</td>
-                    <td>{{room.nonexist}}</td>
-                    <td>{{room.capasity}}</td>
-                    <td>{{room.width}}</td>
-                    <td>{{room.height }}</td>
-                    <td>{{room.xoros}}</td>
-                    <td>{{room.exams_capasity }}</td>
-                    <td>{{room.capasity_categ}}</td>
-                    <td>{{room.tm_owner}}</td>
-                    <td>{{room.stat_comm}}</td>
-                    <td>{{room.config.year}}</td>
-                    <td>{{room.room_category.descr}}</td>
-                    <td>
+                <tr ng-repeat="room in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
+                    style="cursor: pointer" ng-class="{selected: room.id === item.id}">
+
+                    <td ng-if="ctrl.tableColumns[0].visible">{{room.id }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{room.name}}</td>
+                    <td ng-if="ctrl.tableColumns[2].visible">{{room.address }}</td>
+                    <td ng-if="ctrl.tableColumns[3].visible">{{room.building}}</td>
+                    <td ng-if="ctrl.tableColumns[4].visible">{{room.floor}}</td>
+                    <td ng-if="ctrl.tableColumns[5].visible">{{room.status}}</td>
+                    <td ng-if="ctrl.tableColumns[6].visible">{{room.active}}</td>
+                    <td ng-if="ctrl.tableColumns[7].visible">{{room.destroyed}}</td>
+                    <td ng-if="ctrl.tableColumns[8].visible">{{room.nonexist}}</td>
+                    <td ng-if="ctrl.tableColumns[9].visible">{{room.capasity}}</td>
+                    <td ng-if="ctrl.tableColumns[10].visible">{{room.width}}</td>
+                    <td ng-if="ctrl.tableColumns[11].visible">{{room.height }}</td>
+                    <td ng-if="ctrl.tableColumns[12].visible">{{room.xoros}}</td>
+                    <td ng-if="ctrl.tableColumns[13].visible">{{room.exams_capasity }}</td>
+                    <td ng-if="ctrl.tableColumns[14].visible">{{room.capasity_categ}}</td>
+                    <td ng-if="ctrl.tableColumns[15].visible">{{room.tm_owner}}</td>
+                    <td ng-if="ctrl.tableColumns[16].visible">{{room.stat_comm}}</td>
+                    <td ng-if="ctrl.tableColumns[17].visible">{{room.config.year}}</td>
+                    <td ng-if="ctrl.tableColumns[18].visible">{{room.room_category.descr}}</td>
+                    <td ng-if="ctrl.tableColumns[19].visible">
                         <li ng-repeat="use in room.room_use">
                             <button ng-click="deleteUsage(room, use)">x</button>
                             {{use.synt}}
@@ -159,7 +70,7 @@
                         <a href="#/rooms/{{room.id}}/tms" type="button" class="btn btn-primary thumb"><span
                                 class="glyphicon glyphicon-map-marker"></span></a>
 
-                        <button ng-click="deleteRooms(room)" type="button" class="btn btn-danger">
+                        <button ng-click="ctrl.delete(room)" type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>
@@ -167,7 +78,7 @@
                 </tbody>
             </table>
         </div>
-        <pre>total requests list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+        <pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
 </div>
 

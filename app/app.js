@@ -52,7 +52,8 @@ angular.module('clrBooking', [
     'RoomUse',
     'RoomBook',
     'PsStats',
-    'GlobalVarsSrvs'
+    'GlobalVarsSrvs',
+    'Authentication'
 ])
 
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
@@ -125,28 +126,28 @@ angular.module('clrBooking', [
                     title: 'room create',
                     template: '<room-profile></room-profile>'
                 })
-                .when('/rooms/:roomId', {
+                .when('/rooms/:id', {
                     title: 'rooms',
                     template: '<room-profile></room-profile>'
                 })
 
-                .when('/rooms/:roomId/usages', {
+                .when('/rooms/:id/usages', {
                     title: 'user request',
                     controller: 'RoomsUsagesController',
                     templateUrl: 'modules/rooms/rviews/UCroom.html'
                 })
-                .when('/rooms/:roomId/items', {
+                .when('/rooms/:id/items', {
                     title: 'room items',
                     controller: 'RoomsItemsController',
                     templateUrl: 'modules/rooms/rviews/items/ItemRoom.html'
                 })
 
-                .when('/rooms/:roomId/tms', {
+                .when('/rooms/:id/tms', {
                     title: 'room tms',
                     controller: 'RoomsTmsController',
                     templateUrl: 'modules/rooms/rviews/tms/TmsRoom.html'
                 })
-                .when('/rooms/:roomId/requests', {
+                .when('/rooms/:id/requests', {
                     title: 'room requests',
                     controller: 'RoomRequestsController',
                     templateUrl: 'modules/rooms/rviews/request/urequest.html'
@@ -415,12 +416,16 @@ angular.module('clrBooking', [
             $httpProvider.interceptors.push('jwtInterceptor');
             //$rootScope.app =  getUrlParameter('app');
         }])
-    .controller('Controller', ['jwtHelper', 'store', function Controller(jwtHelper, store) {
+    .controller('Controller', ['$scope', 'jwtHelper', 'store', 'globalVarsSrv', '$window', 'AuthenticationService', function Controller($scope, jwtHelper, store, globalVarsSrv, $window, AuthenticationService) {
+        $scope.close = function () {
+            globalVarsSrv.cookieSave();
+        };
 
+        //$window.onclose =  $scope.close();
     }])
-    .run(['$rootScope', '$location', '$cookieStore', '$http', 'globalVarsSrv',
-        function ($rootScope, $location, $cookieStore, $http, globalVarsSrv) {
-            globalVarsSrv.initFromFile('config/appConfig.json');
-
+    .run(['$rootScope', '$location', '$http', 'globalVarsSrv', 'AuthenticationService',
+        function ($rootScope, $location, $http, globalVarsSrv, AuthenticationService) {
+            var usr = null;
+            if (usr = AuthenticationService.CheckCredentials()) globalVarsSrv.appInit('config/appConfig.json', usr);
         }])
 ;

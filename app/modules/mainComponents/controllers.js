@@ -2,7 +2,8 @@
 
 angular.module('MainComponents', [
     'Authentication',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'GlobalVarsSrvs'
 ])
 
     .controller('MainComponentsController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
@@ -51,7 +52,7 @@ angular.module('MainComponents', [
             templateUrl: 'modules/mainComponents/views/navmenu.html'
         }
     })
-    .controller('NavmenuController', ['$scope', '$interval', 'AuthenticationService', '$rootScope', '$location', function ($scope, $interval, AuthenticationService, $rootScope, $location) {
+    .controller('NavmenuController', ['$scope', '$interval', 'AuthenticationService', 'globalVarsSrv', function ($scope, $interval, AuthenticationService, globalVarsSrv) {
         $scope.toggleDropdown = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -60,6 +61,10 @@ angular.module('MainComponents', [
 
         $scope.logout = function () {
             AuthenticationService.ClearCredentials();
+        }
+
+        $scope.close = function () {
+            globalVarsSrv.cookieSave();
         }
     }])
     .directive('footer', function () {
@@ -158,6 +163,7 @@ angular.module('MainComponents', [
         $scope.itemsPerPage = 10;
         $scope.numPages = $scope.totalItems / $scope.itemsPerPage;
 
+
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
         };
@@ -167,6 +173,7 @@ angular.module('MainComponents', [
             $scope.currentPage = 1; //reset to first page
             $scope.numPages = $scope.totalItems / $scope.itemsPerPage;
         };
+
     }])
     .directive('showHideColumns', function () {
         return {

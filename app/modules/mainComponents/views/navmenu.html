@@ -16,8 +16,8 @@
         </a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbarpan " ng-class="!navCollapsed && 'in'"
-         ng-if="globals.item.username && globals.item.username !== '' && globals.item.authdata">
+    <div class="collapse navbar-collapse navbarpan " ng-class="!navCollapsed && 'in'">
+        <!--ng-if="globals.item.username && globals.item.username !== '' && globals.item.authdata"-->
         <ul class="nav navbar-nav">
             <li><a href="#roles">Ρόλοι</a></li>
             <li><a href="#users">Χρήστες</a></li>
@@ -43,6 +43,9 @@
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
                     <li role="menuitem"><a href="#roles">Προφίλ</a></li>
                     <li role="menuitem" ng-click="logout()"><a href="#login">Έξοδος</a></li>
+                    <li role="menuitem">
+                        <button ng-click="close()">Έξοδος rt ert</button>
+                    </li>
                 </ul>
             </li>
         </ul>

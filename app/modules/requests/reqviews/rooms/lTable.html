@@ -15,7 +15,7 @@
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
             <th>{{ item.pivot.comment }}</th>
-            <th>{{ item.pivot.teachers.users.fname}}</th>
+            <th>{{ getTeacher(item.pivot.teacher) }}</th>
             <td>
                 <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>

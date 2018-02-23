@@ -25,10 +25,10 @@ angular.module('Login', ['Authentication', 'MainComponents'])
                         var tokenPayload = jwtHelper.decodeToken(expToken);
 
                         //$rootScope.globals = {item: tokenPayload.curlResults};
-                        $rootScope.user = $scope.usr;
+                        //$rootScope.user = $scope.usr;
 
-                        $cookies.put('user', $rootScope.globals.item);
-                        $cookieStore.put('user', $rootScope.globals.item);
+                        //$cookies.put('user', $rootScope.globals.item);
+                        //$cookieStore.put('user', $rootScope.globals.item);
 
                         if ($rootScope.app) {
                             window.location('app.livepraktoreio.gr/' + $rootScope.app);

@@ -2,7 +2,7 @@
 
 var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies']);
 
-globalVars.factory('globalVarsSrv', ['$http', '$cookies', function ($http, $cookies) {
+globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($http, $cookies, $window) {
     var globalVariables = {};
 
     function getGlobalVar(gVar) {
@@ -35,11 +35,17 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', function ($http, $cook
     }
 
     function cookieSave() {
-        $cookies.put('globalData', globalVariables)
+        $window.localStorage['appConf' + getGlobalVar('auth')['username']] = JSON.stringify(globalVariables);
     }
 
-    function cookieGet() {
-        globalVariables = $cookies.get('globalData');
+    function cookieGet(usr) {
+        var appConf = $window.localStorage['appConf' + usr];
+        globalVariables = appConf ? JSON.parse(appConf) : null;
+        return globalVariables;
+    }
+
+    function appInit(fName, usr) {
+        if (!cookieGet(usr)) initFromFile(fName);
     }
 
     var glbSrv = {
@@ -47,7 +53,10 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', function ($http, $cook
         'setGlobalVar': setGlobalVar,
         'removeGlobalVar': removeGlobalVar,
         'setGlobal': setGlobal,
-        'initFromFile': initFromFile
+        'initFromFile': initFromFile,
+        'appInit': appInit,
+        'cookieGet': cookieGet,
+        'cookieSave': cookieSave
     };
     return glbSrv;
 }]);

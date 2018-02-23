@@ -14,14 +14,14 @@
       "filter": ""
     },
     {
-      "column": "fname",
+      "column": "sname",
       "title": "Επώνυμο",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
-      "column": "sname",
+      "column": "fname",
       "title": "Όνομα",
       "visible": true,
       "sorted": false,
@@ -281,6 +281,13 @@
     },
     {
       "column": "exams_capasity",
+      "title": "Χωρητικότητα Εξετάσεων",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "capasity_categ",
       "title": "Χωρητικότητα/Κατηγορια",
       "visible": true,
       "sorted": false,
