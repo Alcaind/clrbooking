@@ -1,6 +1,6 @@
 angular.module('Rooms')
     .controller('RoomsItemsController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
-        AuthenticationService.CheckCredentials();
+
 
         $scope.rData = $scope.lData = [];
         $scope.rLength = $scope.lLength = 0;

@@ -29,6 +29,12 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     return $response->getBody()->write($requests->toJson());
 });
 
+$checkPostRequestRules = function ($request, $response, $next) {
+    $data = $request->getParsedBody();
+
+
+};
+
 $app->post('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
@@ -57,7 +63,7 @@ $app->post('/requests', function (Request $request, Response $response) {
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());
-});
+})->add($checkPostRequestRules);
 
 $app->delete('/requests/{id}', function ($request, $response, $args) {
     $id = $args['id'];

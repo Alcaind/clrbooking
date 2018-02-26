@@ -8,7 +8,6 @@ angular.module('Users', [
     'GlobalVarsSrvs'
 ])
     .controller('UsersController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
-        AuthenticationService.CheckCredentials();
 
         $scope.ctrl = makeController.mainController('/users', 'usersTableConf');
         $scope.ctrl.init();
@@ -16,7 +15,7 @@ angular.module('Users', [
     }])
 
     .controller('ProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
+
         $scope.tms = {};
         $scope.ucategories = {};
         $scope.baseURL = 'api/public/users';

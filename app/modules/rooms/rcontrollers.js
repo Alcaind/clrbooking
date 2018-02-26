@@ -7,7 +7,6 @@ angular.module('Rooms', [
     'Authentication'
 ])
     .controller('RoomsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
-        AuthenticationService.CheckCredentials();
 
 
         $scope.ctrl = makeController.mainController('/rooms', 'roomsTableConf');
@@ -16,7 +15,7 @@ angular.module('Rooms', [
     }])
 
     .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
+
         $scope.baseURL = 'api/public/rooms';
         $scope.categories = [];
         $scope.roomusages = [];

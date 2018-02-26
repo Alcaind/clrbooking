@@ -6,7 +6,7 @@ angular.module('RoomBook', [
     'ApiModules',
     'Authentication'
 ]).controller('roomBookController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
-    AuthenticationService.CheckCredentials();
+
     $scope.dp = [];
     $scope.item = {};
     $scope.method = '';
@@ -41,7 +41,7 @@ angular.module('RoomBook', [
 
 }])
     .controller('RoomBookProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
+
         $scope.baseURL = 'api/public/booking';
         $scope.users = {};
 

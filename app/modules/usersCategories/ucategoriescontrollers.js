@@ -7,7 +7,7 @@ angular.module('UsersCategories', [
     'Authentication'
 ])
     .controller('UsersCategoriesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
+
         $scope.dp = [];
         $scope.item = {};
         $scope.method = '';
@@ -42,7 +42,7 @@ angular.module('UsersCategories', [
 
     }])
     .controller('UsersCategoriesProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
+
         $scope.baseURL = 'api/public/userscategories';
 
         if (!$routeParams.userscategoryId) {

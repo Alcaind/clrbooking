@@ -1,6 +1,6 @@
 angular.module('Rooms')
     .controller('URequestsController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
-        AuthenticationService.CheckCredentials();
+
         $scope.rRequest = [];
         $scope.method = '';
         $scope.baseURL = 'api/public/rooms';

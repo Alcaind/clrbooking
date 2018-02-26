@@ -6,11 +6,13 @@
         <div style="display: flex">
             <input type="text" ng-model="filter" class="form-control" placeholder="search"
                    style="padding: 5px; width: 100%">
-            <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()"
+            <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()" data-toggle="popover"
+                    data-content="get" data-trigger="hover"
                     style="min-width: 50px; border-radius: 0px;">
-                <span class="glyphicon glyphicon-refresh"></span>
+                <span class="glyphicon glyphicon-cloud-download"></span>
             </button>
-            <a href="#/users/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+            <a href="#/users/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;"
+               data-toggle="popover" data-content="Δημιουργία" data-trigger="hover">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
         </div>
@@ -42,13 +44,17 @@
                     <td ng-if="ctrl.tableColumns[9].visible">{{ user.tm.title }}</td>
                     <td ng-if="ctrl.tableColumns[10].visible"><textarea disabled>{{ user.comments}}</textarea></td>
                     <td>
-                        <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
+                        <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb" data-toggle="popover"
+                           data-content="Επεξεργασία" data-trigger="hover"><span
                                 class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="#/users/{{user.id}}/roles" type="button" class="btn btn-primary thumb"><span
+                        <a href="#/users/{{user.id}}/roles" type="button" class="btn btn-primary thumb"
+                           data-toggle="popover" data-content="Ρόλοι χρήστη" data-trigger="hover"><span
                                 class="glyphicon glyphicon-import"></span></a>
-                        <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"><span
+                        <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"
+                           data-toggle="popover" data-content="Αιτήματα" data-trigger="hover"><span
                                 class="glyphicon glyphicon-transfer"></span></a>
-                        <button ng-click="ctrl.delete(user)" type="button" class="btn btn-danger">
+                        <button ng-click="ctrl.delete(user)" type="button" class="btn btn-danger" data-toggle="popover"
+                                data-content="Διαγραφή" data-trigger="hover">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>

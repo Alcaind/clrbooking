@@ -1,6 +1,6 @@
 angular.module('Requests')
     .controller('RequestsRoomsController', ['$scope', 'AuthenticationService', 'makeController', function ($scope, AuthenticationService, makeController) {
-        AuthenticationService.CheckCredentials();
+
 
         $scope.ctrl = makeController.n2nController('/requests', 'rooms', {comment: '', teacher: ''});
         $scope.ctrl.init();

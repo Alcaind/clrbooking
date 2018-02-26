@@ -1,6 +1,6 @@
 'use strict';
 
-var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies']);
+var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies', 'MainComponents']);
 
 globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($http, $cookies, $window) {
     var globalVariables = {};
@@ -61,15 +61,16 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($
     return glbSrv;
 }]);
 
-globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '$routeParams', function (globalVarsSrv, api, orderBy, $routeParams) {
+globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '$routeParams', 'MakeModal', function (globalVarsSrv, api, orderBy, $routeParams, MakeModal) {
     var makeController = {};
 
-    function mainController(url, table) {
+    function mainController(url, table, title) {
         var ctrl = {
             dp: [],
             baseURL: globalVarsSrv.getGlobalVar('appUrl') + url,
             totalRows: 0,
-            tableColumns: globalVarsSrv.getGlobalVar(table)
+            tableColumns: globalVarsSrv.getGlobalVar(table),
+            title: title
         };
 
         ctrl.getAll = function () {
@@ -110,7 +111,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         };
 
         return ctrl;
-    };
+    }
 
     function n2nController(url, table, pivotTable) {
         var ctrl = {
@@ -188,10 +189,48 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         return ctrl;
     }
 
+    function profileController(url, table) {
+        var ctrl = {
+            item: {},
+            baseURL: globalVarsSrv.getGlobalVar('appUrl') + url,
+            tableColumns: globalVarsSrv.getGlobalVar(table)
+        };
+
+        ctrl.init = function () {
+            if (!$routeParams.id) {
+                ctrl.tableColumns.map(function (tableColumn) {
+                    ctrl.item[tableColumn.column] = '';
+                });
+            } else {
+                api.apiCall('GET', ctrl.baseURL + "/" + $routeParams.id, function (results) {
+                    ctrl.item = results.data;
+                });
+            }
+        };
+
+        ctrl.save = function (item) {
+            api.apiCall('POST', ctrl.baseURL, function (results) {
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Δημιουργήθηκε νέα εγγραφή.', 1);
+                history.back();
+            }, undefined, item)
+        };
+
+        ctrl.update = function (item) {
+            api.apiCall('PUT', ctrl.baseURL + "/" + item.id, function (results) {
+                MakeModal.generalInfoModal('sm', 'Info', 'Η εγγραφή ανανεώθηκε.', 1);
+                history.back();
+            }, undefined, item)
+        };
+
+        return ctrl;
+    }
+
     makeController = {
         mainController: mainController,
-        n2nController: n2nController
+        n2nController: n2nController,
+        profileController: profileController
     };
 
     return makeController;
+
 }]);

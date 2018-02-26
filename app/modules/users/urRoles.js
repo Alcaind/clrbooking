@@ -1,6 +1,5 @@
 angular.module('Users')
     .controller('URolesController', ['$scope', 'AuthenticationService', 'makeController', function ($scope, AuthenticationService, makeController) {
-        AuthenticationService.CheckCredentials();
 
         $scope.ctrl = makeController.n2nController('/users', 'roles', {comment: '', exp_dt: '', status: '1'});
         $scope.ctrl.init();

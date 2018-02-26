@@ -110,7 +110,7 @@ angular.module('clrBooking', [
                 .when('/users/:id/requests', {
                     title: 'user request',
                     controller: 'URequestsController',
-                    templateUrl: 'modules/users/uviews/urequest.html'
+                    templateUrl: 'modules/requests/reqviews/requests.html'
                 })
                 .when('/users/:id/roles', {
                     title: 'user role',
@@ -130,7 +130,6 @@ angular.module('clrBooking', [
                     title: 'rooms',
                     template: '<room-profile></room-profile>'
                 })
-
                 .when('/rooms/:id/usages', {
                     title: 'user request',
                     controller: 'RoomsUsagesController',
@@ -141,7 +140,6 @@ angular.module('clrBooking', [
                     controller: 'RoomsItemsController',
                     templateUrl: 'modules/rooms/rviews/items/ItemRoom.html'
                 })
-
                 .when('/rooms/:id/tms', {
                     title: 'room tms',
                     controller: 'RoomsTmsController',
@@ -314,9 +312,6 @@ angular.module('clrBooking', [
                     title: 'statistics',
                     template: '<ps-stats-profile></ps-stats-profile>'
                 })
-
-
-
                 /*.when('/', {
                     controller: 'HomeController',
                     templateUrl: 'modules/home/views/home.html'

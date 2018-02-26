@@ -7,7 +7,7 @@ angular.module('Roles', [
     'Authentication'
 ])
     .controller('RolesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
-        AuthenticationService.CheckCredentials();
+
         $scope.dp = [];
         $scope.item = {};
         $scope.method = '';
@@ -44,7 +44,7 @@ angular.module('Roles', [
 
     }])
     .controller('RoleProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
+
         $scope.baseURL = 'api/public/roles';
 
         if (!$routeParams.roleId) {

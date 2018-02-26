@@ -6,7 +6,7 @@ angular.module('Kat', [
     'ApiModules',
     'Authentication'
 ]).controller('KatController', ['$scope', '$routeParams', 'api', 'MakeModal', 'orderByFilter', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, orderBy, AuthenticationService) {
-    AuthenticationService.CheckCredentials();
+
 
     $scope.dp = [];
     $scope.item = {};
@@ -42,7 +42,7 @@ angular.module('Kat', [
 
 }])
     .controller('KatProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
+
         $scope.baseURL = 'api/public/kats';
         $scope.tms = {};
 
