@@ -392,6 +392,220 @@
       "filter": ""
     }
   ],
+  "itemTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "descr",
+      "title": "Περιγραφή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "comments",
+      "title": "Σχόλια",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "code",
+      "title": "Κωδικός εξοπλισμού",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "status",
+      "title": "Κατάσταση",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "katTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "tm_id",
+      "title": "Τμήμα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "decr",
+      "title": "Περιγραφή κατηγορίας",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "title",
+      "title": "Τίτλος κατηγορίας",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "pm",
+      "title": "Είδος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "periodTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "descr",
+      "title": "Περιγραφή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "synt",
+      "title": "Συντομογραφία",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "fromd",
+      "title": "Από ημ/νία",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tod",
+      "title": "Έως ημ/νία",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "comments",
+      "title": "Σχόλια",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "porder",
+      "title": "Σειρά περιόδου",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "conf_id",
+      "title": "Configuration",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "status",
+      "title": "status",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "psTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "tm_code",
+      "title": "Κωδικός τμήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tm_per",
+      "title": "Περιγραφή τμήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "pm",
+      "title": "Είδος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tma_code",
+      "title": "Κωδικός μαθήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tma_per",
+      "title": "Περιγραφή μαθήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "ps_ex",
+      "title": "Εξάμημο",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "ps_dm",
+      "title": "Έτος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "ps_km",
+      "title": "ps_km",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "teacher",
+      "title": "Διδάσκων",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "conf_id",
+      "title": "Configuration",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+
+
+
+
   "roomsTableConfOps": [
     {
       "hr": "#/rooms/id",
@@ -451,6 +665,34 @@
   "configTableConfOps": [
     {
       "hr": "#/config/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
+  ],
+  "itemTableConfOps": [
+    {
+      "hr": "#/items/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
+  ],
+  "katTableConfOps": [
+    {
+      "hr": "#/kats/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
+  ],
+  "periodTableConfOps": [
+    {
+      "hr": "#/periods/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
+  ],
+  "psTableConfOps": [
+    {
+      "hr": "#/ps/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil"
     }

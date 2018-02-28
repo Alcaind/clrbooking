@@ -65,8 +65,11 @@ $app->delete('/rooms/{id}', function ($request, $response, $args) {
     try {
         $room = \App\Models\Rooms::find($id);
         $room->delete();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($room->toJson());
 });
@@ -97,8 +100,11 @@ $app->put('/rooms/{id}', function ($request, $response, $args) {
         $room->conf_id = $data['conf_id'] ?: $room->conf_id;
         $room->category = $data['category'] ?: $room->category;
         $room->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($room->toJson());
 });
@@ -140,9 +146,11 @@ $app->delete('/rooms/{rid}/usages/{uid}', function ($request, $response, $args) 
     try {
         $room = \App\Models\Rooms::find($rid);
         $room->room_use()->detach($uid);
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($room->toJson());
 });
@@ -168,8 +176,11 @@ $app->get('/rooms/{id}/roombook', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $configuration = \App\Models\Rooms::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($configuration->roombook()->get()->toJson());
 });
@@ -180,8 +191,11 @@ $app->get('/rooms/{id}/items', function (Request $request, Response $response, $
     $id = $args['id'];
     try {
         $item = \App\Models\Rooms::with('items')->find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($item->toJson());
 });
@@ -237,8 +251,11 @@ $app->get('/rooms/{id}/tms', function (Request $request, Response $response, $ar
     $id = $args['id'];
     try {
         $tms = \App\Models\Rooms::with('tms')->find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($tms->toJson());
 });

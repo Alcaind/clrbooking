@@ -14,7 +14,6 @@ use \App\Models\ApiError as ApiError;
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr'])->get();
-
     return $response->getBody()->write($requests->toJson());
 });
 
@@ -43,11 +42,22 @@ $app->get('/requests/users/{id}', function (Request $request, Response $response
     return $response->getBody()->write($requests->toJson());
 });
 
+$checkRequestRules = function ($request, $response, $next) {
+    //$response->getBody()->write('BEFORE');
+    $res = null;
+    $data = $request->getParsedBody();
+    $res = \App\Models\Requests::where('fromd', '=', $data['fromd'])->get();
+    if (sizeof($res) > 0) {
+        $nr = $response->withStatus(417);
+        $error = new ApiError();
+        $error->setData(815, 'Already Booked for ' . $data['fromd'] . ' day.');
+        return $nr->write($error->toJson());
+    }
 
-//$checkPostRequestRules = function ($request, $response, $next) {
-//    $data = $request->getParsedBody();
-//    return $response;
-//};
+    $response = $next($request, $response);
+    //$response->getBody()->write('AFTER');
+    return $response;
+};
 
 $app->post('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
@@ -77,15 +87,18 @@ $app->post('/requests', function (Request $request, Response $response) {
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());
-});
+})->add($checkRequestRules);
 
 $app->delete('/requests/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $requests = \App\Models\Requests::find($id);
         $requests->delete();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($requests->toJson());
 });
@@ -113,11 +126,31 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->admin = $data['admin'] ?: $requests->admin;
 
         $requests->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($requests->toJson());
-});
+})->add($checkRequestRules);
+
+$checkReqRooms = function ($request, $response, $next) {
+    $res = null;
+    $args = $request->getAttributes()['routeInfo'][2];
+    $data = $request->getParsedBody();
+    $req = \App\Models\Requests::with(['rooms'])->find($args['id']);
+    foreach ($req->rooms as $room) {
+        if ($room->pivot->teacher == $data['teacher']) {
+            $nr = $response->withStatus(417);
+            $error = new ApiError();
+            $error->setData(815, 'Teacher ' . \App\Models\Users::find($data['teacher'])->user . ' is already assigned to another room.');
+            return $nr->write($error->toJson());
+        }
+    }
+    $response = $next($request, $response);
+    return $response;
+};
 
 $app->post('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];
@@ -126,7 +159,7 @@ $app->post('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $requests = \App\Models\Requests::find($id);
     $requests->rooms()->attach($rid, $data);
     return $response->getBody()->write($requests->rooms()->get()->toJson());
-});
+})->add($checkReqRooms);
 
 $app->put('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];
@@ -135,7 +168,7 @@ $app->put('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $requests = \App\Models\Requests::find($id);
     $requests->rooms()->updateExistingPivot($rid, $data);
     return $response->getBody()->write($requests->rooms()->get()->toJson());
-});
+})->add($checkReqRooms);
 
 $app->delete('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];

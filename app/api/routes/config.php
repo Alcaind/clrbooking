@@ -21,9 +21,11 @@ $app->get('/config/{id}', function (Request $request, Response $response, $args)
     $id = $args['id'];
     try {
         $config = \App\Models\Config::find($id);
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($config->toJson());
 });
@@ -37,6 +39,7 @@ $app->post('/config', function (Request $request, Response $response) {
         $config->status = $data['status'];
         $config->fromd = $data['fromd'];
         $config->tod = $data['tod'];
+        $config->synt = $data['synt'];
         $config->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -52,9 +55,11 @@ $app->delete('/config/{id}', function ($request, $response, $args) {
     try {
         $config = \App\Models\Config::find($id);
         $config->delete();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($config->toJson());
 });
@@ -69,9 +74,13 @@ $app->put('/config/{id}', function ($request, $response, $args) {
         $config->status = $data['status'] ?: $config->status;
         $config->fromd = $data['fromd'] ?: $config->fromd;
         $config->tod = $data['tod'] ?: $config->tod;
+        $config->synt = $data['synt'] ?: $config->synt;
         $config->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($config->toJson());
 });

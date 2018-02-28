@@ -20,6 +20,7 @@ angular.module('Rooms', [
         $scope.categories = [];
         $scope.roomusages = [];
         $scope.configs = [];
+        $scope.tms = [];
         $scope.selectedUsages = [];
         $scope.multiSelectOptions = {displayProp: 'synt'};
 
@@ -34,6 +35,10 @@ angular.module('Rooms', [
             $scope.roomusages.forEach(function (element) {
                 element.label = element.synt;
             });
+        });
+
+        api.apiCall('GET', 'api/public/tms', function (result) {
+            $scope.tms = result.data;
         });
 
         if (!$routeParams.id) {

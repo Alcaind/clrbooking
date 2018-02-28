@@ -77,6 +77,89 @@ angular.module('clrBooking', [
                     controller: 'HomeController',
                     templateUrl: 'modules/home/views/home.html'
                 })
+                .when('/config', {
+                    title: 'configuration',
+                    controller: 'ConfigController',
+                    templateUrl: 'modules/config/confviews/configs.html'
+                })
+                .when('/config/create', {
+                    title: 'configuration create',
+                    template: '<config-profile></config-profile>'
+                })
+                .when('/config/:id', {
+                    title: 'configuration',
+                    template: '<config-profile></config-profile>'
+                })
+                .when('/items', {
+                    title: 'items',
+                    controller: 'ItemsController',
+                    templateUrl: 'modules/items/itemviews/items.html'
+                })
+                .when('/items/create', {
+                    title: 'items create',
+                    template: '<items-profile></items-profile>'
+                })
+                .when('/items/:id', {
+                    title: 'items',
+                    template: '<items-profile></items-profile>'
+                })
+                .when('/kats', {
+                    title: 'kat',
+                    controller: 'KatController',
+                    templateUrl: 'modules/kat/katsviews/kats.html'
+                })
+                .when('/kats/create', {
+                    title: 'kat create',
+                    template: '<kat-profile></kat-profile>'
+                })
+                .when('/kats/:id', {
+                    title: 'kat',
+                    template: '<kat-profile></kat-profile>'
+                })
+                .when('/periods', {
+                    title: 'academic periods',
+                    controller: 'PeriodsController',
+                    templateUrl: 'modules/periods/periodviews/periods.html'
+                })
+                .when('/periods/create', {
+                    title: 'academic period create',
+                    template: '<period-profile></period-profile>'
+                })
+                .when('/periods/:id', {
+                    title: 'academic period',
+                    template: '<period-profile></period-profile>'
+                })
+                .when('/ps', {
+                    title: 'curriculum',
+                    controller: 'PsController',
+                    templateUrl: 'modules/ps/psviews/ps.html'
+                })
+                .when('/ps/create', {
+                    title: 'curriculum create',
+                    template: '<ps-profile></ps-profile>'
+                })
+                .when('/ps/:id', {
+                    title: 'curroculum',
+                    template: '<ps-profile></ps-profile>'
+                })
+                .when('/requests', {
+                    title: 'requests',
+                    controller: 'RequestsController',
+                    templateUrl: 'modules/requests/reqviews/requests.html'
+                })
+                .when('/requests/create', {
+                    title: 'request create',
+                    template: '<requests-profile></requests-profile>'
+                })
+                .when('/requests/:id', {
+                    title: 'requests',
+                    template: '<requests-profile></requests-profile>'
+                })
+                .when('/requests/:id/rooms', {
+                    title: 'requests rooms',
+                    controller: 'RequestsRoomsController',
+                    templateUrl: 'modules/requests/reqviews/rooms/mainn2n.html'
+                })
                 .when('/roles', {
                     title: 'roles',
                     controller: 'RolesController',
@@ -94,28 +177,31 @@ angular.module('clrBooking', [
                     title: 'role',
                     template: '<roles-users></roles-users>'
                 })
-                .when('/users', {
-                    title: 'users',
-                    controller: 'UsersController',
-                    templateUrl: 'modules/users/uviews/users.html'
+                .when('/roomcategory', {
+                    title: 'room category',
+                    controller: 'RoomCategoryController',
+                    templateUrl: 'modules/roomCategory/rcviews/rcategories.html'
                 })
-                .when('/users/create', {
-                    title: 'user create',
-                    template: '<users-profile></users-profile>'
+                .when('/roomcategory/create', {
+                    title: 'room category create',
+                    template: '<room-category-profile></room-category-profile>'
                 })
-                .when('/users/:id', {
-                    title: 'user',
-                    template: '<users-profile></users-profile>'
+                .when('/roomcategory/:roomcategoryId', {
+                    title: 'room category',
+                    template: '<room-category-profile></room-category-profile>'
                 })
-                .when('/users/:id/requests', {
-                    title: 'user request',
-                    controller: 'URequestsController',
-                    templateUrl: 'modules/requests/reqviews/requests.html'
+                .when('/roomuse', {
+                    title: 'room use',
+                    controller: 'RoomUseController',
+                    templateUrl: 'modules/roomUse/ruseviews/roomuse.html'
                 })
-                .when('/users/:id/roles', {
-                    title: 'user role',
-                    controller: 'URolesController',
-                    templateUrl: 'modules/users/uviews/urole.html'
+                .when('/roomuse/create', {
+                    title: 'room use create',
+                    template: '<room-use-profile></room-use-profile>'
+                })
+                .when('/roomuse/:roomuseId', {
+                    title: 'room use',
+                    template: '<room-use-profile></room-use-profile>'
                 })
                 .when('/rooms', {
                     title: 'rooms',
@@ -163,37 +249,6 @@ angular.module('clrBooking', [
                     title: 'tm',
                     template: '<tm-profile></tm-profile>'
                 })
-                .when('/kats', {
-                    title: 'kat',
-                    controller: 'KatController',
-                    templateUrl: 'modules/kat/katsviews/kats.html'
-                })
-                .when('/kats/create', {
-                    title: 'kat create',
-                    template: '<kat-profile></kat-profile>'
-                })
-                .when('/kats/:katId', {
-                    title: 'kat',
-                    template: '<kat-profile></kat-profile>'
-                })
-                .when('/requests', {
-                    title: 'requests',
-                    controller: 'RequestsController',
-                    templateUrl: 'modules/requests/reqviews/requests.html'
-                })
-                .when('/requests/create', {
-                    title: 'request create',
-                    template: '<requests-profile></requests-profile>'
-                })
-                .when('/requests/:id', {
-                    title: 'requests',
-                    template: '<requests-profile></requests-profile>'
-                })
-                .when('/requests/:id/rooms', {
-                    title: 'requests rooms',
-                    controller: 'RequestsRoomsController',
-                    templateUrl: 'modules/requests/reqviews/rooms/mainn2n.html'
-                })
                 .when('/userscategories', {
                     title: 'users categories',
                     controller: 'UsersCategoriesController',
@@ -207,97 +262,28 @@ angular.module('clrBooking', [
                     title: 'users categories',
                     template: '<users-categories-profile></users-categories-profile>'
                 })
-                .when('/config', {
-                    title: 'configuration',
-                    controller: 'ConfigController',
-                    templateUrl: 'modules/config/confviews/configs.html'
+                .when('/users', {
+                    title: 'users',
+                    controller: 'UsersController',
+                    templateUrl: 'modules/users/uviews/users.html'
                 })
-                .when('/config/create', {
-                    title: 'configuration create',
-                    template: '<config-profile></config-profile>'
+                .when('/users/create', {
+                    title: 'user create',
+                    template: '<users-profile></users-profile>'
                 })
-                .when('/config/:id', {
-                    title: 'configuration',
-                    template: '<config-profile></config-profile>'
+                .when('/users/:id', {
+                    title: 'user',
+                    template: '<users-profile></users-profile>'
                 })
-                .when('/ps', {
-                    title: 'curriculum',
-                    controller: 'PsController',
-                    templateUrl: 'modules/ps/psviews/ps.html'
+                .when('/users/:id/requests', {
+                    title: 'user request',
+                    controller: 'URequestsController',
+                    templateUrl: 'modules/requests/reqviews/requests.html'
                 })
-                .when('/ps/create', {
-                    title: 'curriculum create',
-                    template: '<ps-profile></ps-profile>'
-                })
-                .when('/ps/:psId', {
-                    title: 'curroculum',
-                    template: '<ps-profile></ps-profile>'
-                })
-                .when('/periods', {
-                    title: 'academic periods',
-                    controller: 'PeriodsController',
-                    templateUrl: 'modules/periods/periodviews/periods.html'
-                })
-                .when('/periods/create', {
-                    title: 'academic period create',
-                    template: '<period-profile></period-profile>'
-                })
-                .when('/periods/:periodId', {
-                    title: 'academic period',
-                    template: '<period-profile></period-profile>'
-                })
-                .when('/items', {
-                    title: 'items',
-                    controller: 'ItemsController',
-                    templateUrl: 'modules/items/itemviews/items.html'
-                })
-                .when('/items/create', {
-                    title: 'items create',
-                    template: '<items-profile></items-profile>'
-                })
-                .when('/items/:itemId', {
-                    title: 'items',
-                    template: '<items-profile></items-profile>'
-                })
-                .when('/roomcategory', {
-                    title: 'room category',
-                    controller: 'RoomCategoryController',
-                    templateUrl: 'modules/roomCategory/rcviews/rcategories.html'
-                })
-                .when('/roomcategory/create', {
-                    title: 'room category create',
-                    template: '<room-category-profile></room-category-profile>'
-                })
-                .when('/roomcategory/:roomcategoryId', {
-                    title: 'room category',
-                    template: '<room-category-profile></room-category-profile>'
-                })
-                .when('/roomuse', {
-                    title: 'room use',
-                    controller: 'RoomUseController',
-                    templateUrl: 'modules/roomUse/ruseviews/roomuse.html'
-                })
-                .when('/roomuse/create', {
-                    title: 'room use create',
-                    template: '<room-use-profile></room-use-profile>'
-                })
-                .when('/roomuse/:roomuseId', {
-                    title: 'room use',
-                    template: '<room-use-profile></room-use-profile>'
-                })
-
-                .when('/booking', {
-                    title: 'booking',
-                    controller: 'roomBookController',
-                    templateUrl: 'modules/booking/roombookviews/roombook.html'
-                })
-                .when('/booking/create', {
-                    title: 'booking create',
-                    template: '<room-book-profile></room-book-profile>'
-                })
-                .when('/booking/:roombookId', {
-                    title: 'booking',
-                    template: '<room-book-profile></room-book-profile>'
+                .when('/users/:id/roles', {
+                    title: 'user role',
+                    controller: 'URolesController',
+                    templateUrl: 'modules/users/uviews/urole.html'
                 })
                 .when('/psstats', {
                     title: 'statistics',
@@ -312,6 +298,20 @@ angular.module('clrBooking', [
                     title: 'statistics',
                     template: '<ps-stats-profile></ps-stats-profile>'
                 })
+                .when('/booking', {
+                    title: 'booking',
+                    controller: 'roomBookController',
+                    templateUrl: 'modules/booking/roombookviews/roombook.html'
+                })
+                .when('/booking/create', {
+                    title: 'booking create',
+                    template: '<room-book-profile></room-book-profile>'
+                })
+                .when('/booking/:roombookId', {
+                    title: 'booking',
+                    template: '<room-book-profile></room-book-profile>'
+                })
+
                 /*.when('/', {
                     controller: 'HomeController',
                     templateUrl: 'modules/home/views/home.html'

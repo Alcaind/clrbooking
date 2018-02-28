@@ -46,7 +46,11 @@
                     <td ng-if="ctrl.tableColumns[12].visible">{{room.xoros}}</td>
                     <td ng-if="ctrl.tableColumns[13].visible">{{room.exams_capasity }}</td>
                     <td ng-if="ctrl.tableColumns[14].visible">{{room.capasity_categ}}</td>
-                    <td ng-if="ctrl.tableColumns[15].visible">{{room.tm_owner}}</td>
+
+                    <td ng-if="ctrl.tableColumns[15].visible">
+                        <li ng-repeat="tm in room.tms">{{tm.descr}}</li>
+                    </td>
+
                     <td ng-if="ctrl.tableColumns[16].visible">{{room.stat_comm}}</td>
                     <td ng-if="ctrl.tableColumns[17].visible">{{room.config.year}}</td>
                     <td ng-if="ctrl.tableColumns[18].visible">{{room.room_category.descr}}</td>
@@ -57,30 +61,9 @@
                         </li>
                     </td>
                     <td>
-                        <!--<a href="#/rooms/{{room.id}}" type="button" class="btn btn-info thumb" data-toggle="popover"-->
-                        <!--data-content="Επεξεργασία" data-trigger="hover"><span-->
-                        <!--class="glyphicon glyphicon-pencil"></span></a>-->
-
-
                         <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id',room.id)}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>
-
-
-                        <!--<a href="#/rooms/{{room.id}}/usages" type="button" class="btn btn-primary thumb" data-toggle="popover"-->
-                        <!--data-content="Χρήσεις αίθουσας" data-trigger="hover"><span-->
-                        <!--class="glyphicon glyphicon-import"></span></a>-->
-                        <!--<a href="#/rooms/{{room.id}}/requests" type="button" class="btn btn-primary thumb" data-toggle="popover"-->
-                        <!--data-content="Αιτήματα" data-trigger="hover"><span-->
-                        <!--class="glyphicon glyphicon-folder-open"></span></a>-->
-                        <!--&lt;!&ndash;<a href="#/rooms/{{room.id}}/booking" type="button" class="btn btn-success thumb"><span&ndash;&gt;-->
-                        <!--&lt;!&ndash;class="glyphicon glyphicon-check"></span></a>   TODO:   BUTTON BOOKING THE ROOM        &ndash;&gt;-->
-                        <!--<a href="#/rooms/{{room.id}}/items" type="button" class="btn btn-primary thumb" data-toggle="popover"-->
-                        <!--data-content="Εξοπλισμός" data-trigger="hover"><span-->
-                        <!--class="glyphicon glyphicon-blackboard"></span></a>-->
-                        <!--<a href="#/rooms/{{room.id}}/tms" type="button" class="btn btn-primary thumb" data-toggle="popover"-->
-                        <!--data-content="Τμήματα" data-trigger="hover"><span-->
-                        <!--class="glyphicon glyphicon-map-marker"></span></a>-->
-
+                        <!--TODO:   BUTTON BOOKING THE ROOM   -->
                         <button ng-click="ctrl.delete(room)" type="button" class="btn btn-danger" data-toggle="popover"
                                 data-content="Διαγραφή" data-trigger="hover">
                             <span class="glyphicon glyphicon-remove"></span>

@@ -9,57 +9,57 @@
     <form class="periodForm" name="periodForm" novalidate>
         <div class="form-group">
             <label class="required" for="descr">Περιγραφή:</label>
-            <input id="descr" name="descr" class="form-control" type="text" ng-model="item.descr">
+            <input id="descr" name="descr" class="form-control" type="text" ng-model="ctrl.item.descr">
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : periodForm.synt.$invalid && !periodForm.synt.$pristine }">
             <label class="required" for="synt">Συντομογραφία<span class="form-required">*</span>:</label>
-            <input id="synt" name="synt" class="form-control" type="text" ng-model="item.synt">
+            <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt">
             <p ng-show="periodForm.synt.$invalid && !periodForm.synt.$pristine" class="help-block">Εισάγετε
                 συντομογραφία.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : periodForm.fromd.$invalid && !periodForm.fromd.$pristine }">
             <label class="required" for="fromd">Από ημ/νία<span class="form-required">*</span>:</label>
-            <input id="fromd" name="fromd" class="form-control" type="date" ng-model="item.fromd">
+            <input id="fromd" name="fromd" class="form-control" type="text" ng-model="ctrl.item.fromd">
             <p ng-show="periodForm.fromd.$invalid && !periodForm.fromd.$pristine" class="help-block">Εισάγετε ημερομηνία
                 έναρξης.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : periodForm.tod.$invalid && !periodForm.tod.$pristine }">
             <label class="required" for="tod">Έως ημ/νία<span class="form-required">*</span>:</label>
-            <input id="tod" name="tod" class="form-control" type="date" ng-model="item.tod">
+            <input id="tod" name="tod" class="form-control" type="text" ng-model="ctrl.item.tod">
             <p ng-show="periodForm.tod.$invalid && !periodForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνία
                 λήξης.</p>
         </div>
         <div class="form-group">
             <label for="comments">Σχόλια:</label>
-            <textarea id="comments" name="comments" class="form-control" ng-model="item.comments"></textarea>
+            <textarea id="comments" name="comments" class="form-control" ng-model="ctrl.item.comments"></textarea>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : periodForm.conf_id.$invalid && !periodForm.conf_id.$pristine }">
             <label class="required" for="conf_id">Configuration<span class="form-required">*</span>:</label>
-            <input id="conf_id" name="conf_id" class="form-control" type="number" ng-model="item.conf_id">
+            <input id="conf_id" name="conf_id" class="form-control" type="number" ng-model="ctrl.item.conf_id">
             <p ng-show="periodForm.conf_id.$invalid && !periodForm.conf_id.$pristine" class="help-block">Εισάγετε
                 configuration.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : periodForm.porder.$invalid && !periodForm.porder.$pristine }">
             <label class="required" for="porder">Περίοδος<span class="form-required">*</span>:</label>
-            <input id="porder" name="porder" class="form-control" type="number" ng-model="item.porder">
+            <input id="porder" name="porder" class="form-control" type="number" ng-model="ctrl.item.porder">
             <p ng-show="periodForm.porder.$invalid && !periodForm.porder.$pristine" class="help-block">Εισάγετε την
                 σειρά της περιόδου.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : periodForm.status.$invalid && !periodForm.status.$pristine }">
             <label class="required" for="status">Κατάσταση<span class="form-required">*</span>:</label>
-            <input id="status" name="status" class="form-control" type="number" ng-model="item.status">
+            <input id="status" name="status" class="form-control" type="number" ng-model="ctrl.item.status">
             <p ng-show="periodForm.status.$invalid && !periodForm.status.$pristine" class="help-block">Εισάγετε
                 κατάσταση.</p>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="updatePeriod(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.id>0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="savePeriod(item)" style="padding: 5px"
-                ng-if="item.synt && !item.id">Αποθήκευση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.synt && !ctrl.item.id">Αποθήκευση
         </button>
     </form>
 </div>
