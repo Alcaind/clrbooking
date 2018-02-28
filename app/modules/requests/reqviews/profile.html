@@ -97,11 +97,11 @@
             <label class="required" for="admin">Επιβλέπων Αιτήματος:</label>
             <input id="admin" name="admin" class="form-control" type="text" ng-model="ctrl.item.admin">
         </div>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.update(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.id>0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.save(item)" style="padding: 5px"
-                ng-if="item.req_dt && !item.id">Αποθήκευση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.req_dt && !ctrl.item.id">Αποθήκευση
         </button>
     </form>
 </div>

@@ -30,4 +30,9 @@ class Ps extends Model
         }
         return $ret;
     }
+
+    public function stats()
+    {
+        return $this->belongsTo('\\App\\Models\\Ps', 'ps_id');
+    }
 }

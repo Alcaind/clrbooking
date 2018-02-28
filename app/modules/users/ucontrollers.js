@@ -9,7 +9,7 @@ angular.module('Users', [
 ])
     .controller('UsersController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
 
-        $scope.ctrl = makeController.mainController('/users', 'usersTableConf');
+        $scope.ctrl = makeController.mainController('/users', 'usersTableConf', 'Καταλογος Χρηστών');
         $scope.ctrl.init();
 
     }])
@@ -68,7 +68,6 @@ angular.module('Users', [
         restrict: 'EA',
         templateUrl: 'modules/users/uviews/profile.html',
         scope: {
-            //itemId: '=itemId',
             method: '=method'
         },
         controller: 'ProfileController'

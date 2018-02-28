@@ -12,7 +12,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/psstats', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $psstat = \App\Models\Stats::all();
+    $psstat = \App\Models\Stats::with(['ps:id,ps_id'])->get();
     return $response->getBody()->write($psstat->toJson());
 });
 
@@ -20,7 +20,7 @@ $app->get('/psstats/{id}', function (Request $request, Response $response, $args
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $psstat = \App\Models\Stats::find($id);
+        $psstat = \App\Models\Stats::with(['ps:id,ps_id'])->find($id);
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }

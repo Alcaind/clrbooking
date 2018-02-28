@@ -140,11 +140,11 @@ $app->get('/users/{id}/roles', function ($request, $response, $args) {
 $app->get('/users/{id}/requests', function ($request, $response, $args) {
     $id = $args['id'];
     try {
-        $configuration = \App\Models\Users::find($id);
+        $user = \App\Models\Users::find($id);
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
-    return $response->getBody()->write($configuration->requests()->get()->toJson());
+    return $response->getBody()->write($user->requests()->get()->toJson());
 });
 
 $app->get('/roombook/{id}/users', function ($request, $response, $args) {

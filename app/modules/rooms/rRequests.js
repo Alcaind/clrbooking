@@ -11,7 +11,7 @@ angular.module('Rooms')
 
         $scope.urData = null;
 
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId, function (results) {
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id, function (results) {
             $scope.urData = results.data;
         });
 
@@ -21,7 +21,7 @@ angular.module('Rooms')
             $scope.propertyName = propertyName;
         };
 
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId + '/requests',
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id + '/requests',
             function (results) {
                 $scope.rRequest = results.data;
                 $scope.totalItems = $scope.rRequest.length;

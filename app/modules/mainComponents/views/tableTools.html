@@ -1,0 +1,11 @@
+<div style="display: flex">
+    <input type="text" ng-model="filter" class="form-control" placeholder="search"
+           style="padding: 5px; width: 100%">
+    <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()"
+            style="min-width: 50px; border-radius: 0px;">
+        <span class="glyphicon glyphicon-download"></span>
+    </button>
+    <a href="#{{ctrl.url}}/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
+</div>

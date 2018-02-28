@@ -9,13 +9,13 @@ angular.module('Rooms')
         $scope.roomData = null;
 
         $scope.getRoom = function () {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId, function (results) {
+            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id, function (results) {
                 $scope.roomData = results.data;
             });
         };
         $scope.getRoom();
 
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roomId + '/tms', function (results) {
+        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id + '/tms', function (results) {
             $scope.lData = results.data.tms;
             $scope.lLength = $scope.lData.length;
             if ($scope.rData && $scope.rData.length > 0) {
@@ -43,7 +43,7 @@ angular.module('Rooms')
         };
 
         $scope.deleteTmsRoom = function (tid) {
-            api.apiCall('DELETE', $scope.baseURL + "/" + $routeParams.roomId + '/tms/' + tid, function (results) {
+            api.apiCall('DELETE', $scope.baseURL + "/" + $routeParams.id + '/tms/' + tid, function (results) {
                 $scope.lData = results.data;
                 $scope.compare();
             }, undefined, tid);
@@ -93,7 +93,7 @@ angular.module('Rooms')
         $scope.insert = function () {
             var method = "PUT";
             if ($scope.state === 0) method = "POST";
-            api.apiCall(method, $scope.baseURL + "/" + $routeParams.roomId + '/tms/' + $scope.currentTms.id, function (results) {
+            api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/tms/' + $scope.currentTms.id, function (results) {
                 $scope.pivotData = {comments: ''};
                 $scope.lData = results.data;
                 $scope.compare();

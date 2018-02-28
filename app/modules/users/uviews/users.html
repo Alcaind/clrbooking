@@ -1,21 +1,9 @@
 <div id="users_main">
     <div>
-        <h2 style="text-align: center;"> Κατάλογος Χρηστών </h2>
+        <dm-title></dm-title>
     </div>
     <div style="padding: 15px">
-        <div style="display: flex">
-            <input type="text" ng-model="filter" class="form-control" placeholder="search"
-                   style="padding: 5px; width: 100%">
-            <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()" data-toggle="popover"
-                    data-content="get" data-trigger="hover"
-                    style="min-width: 50px; border-radius: 0px;">
-                <span class="glyphicon glyphicon-cloud-download"></span>
-            </button>
-            <a href="#/users/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;"
-               data-toggle="popover" data-content="Δημιουργία" data-trigger="hover">
-                <span class="glyphicon glyphicon-plus"></span>
-            </a>
-        </div>
+        <table-tools></table-tools>
         <div>
             <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
@@ -30,33 +18,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="user in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                    style="cursor: pointer" ng-class="{selected: user.id === item.id}">
-                    <td ng-if="ctrl.tableColumns[0].visible">{{ user.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ user.user}}</td>
-                    <td ng-if="ctrl.tableColumns[2].visible">{{ user.fname }}</td>
-                    <td ng-if="ctrl.tableColumns[3].visible">{{ user.sname}}</td>
-                    <td ng-if="ctrl.tableColumns[4].visible">{{ user.phone}}</td>
-                    <td ng-if="ctrl.tableColumns[5].visible">{{ user.em_main}}</td>
-                    <td ng-if="ctrl.tableColumns[6].visible">{{ user.em_sec}}</td>
-                    <td ng-if="ctrl.tableColumns[7].visible">{{ user.em_pant}}</td>
-                    <td ng-if="ctrl.tableColumns[8].visible">{{ user.ucategories.descr}}</td>
-                    <td ng-if="ctrl.tableColumns[9].visible">{{ user.tm.title }}</td>
-                    <td ng-if="ctrl.tableColumns[10].visible"><textarea disabled>{{ user.comments}}</textarea></td>
+                <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
+                    style="cursor: pointer" ng-class="{selected: item.id === item.id}">
+                    <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.user}}</td>
+                    <td ng-if="ctrl.tableColumns[2].visible">{{ item.fname }}</td>
+                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.sname}}</td>
+                    <td ng-if="ctrl.tableColumns[4].visible">{{ item.phone}}</td>
+                    <td ng-if="ctrl.tableColumns[5].visible">{{ item.em_main}}</td>
+                    <td ng-if="ctrl.tableColumns[6].visible">{{ item.em_sec}}</td>
+                    <td ng-if="ctrl.tableColumns[7].visible">{{ item.em_pant}}</td>
+                    <td ng-if="ctrl.tableColumns[8].visible">{{ item.ucategories.descr}}</td>
+                    <td ng-if="ctrl.tableColumns[9].visible">{{ item.tm.title }}</td>
+                    <td ng-if="ctrl.tableColumns[10].visible"><textarea disabled>{{ item.comments}}</textarea></td>
                     <td>
-                        <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb" data-toggle="popover"
-                           data-content="Επεξεργασία" data-trigger="hover"><span
-                                class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="#/users/{{user.id}}/roles" type="button" class="btn btn-primary thumb"
-                           data-toggle="popover" data-content="Ρόλοι χρήστη" data-trigger="hover"><span
-                                class="glyphicon glyphicon-import"></span></a>
-                        <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"
-                           data-toggle="popover" data-content="Αιτήματα" data-trigger="hover"><span
-                                class="glyphicon glyphicon-transfer"></span></a>
-                        <button ng-click="ctrl.delete(user)" type="button" class="btn btn-danger" data-toggle="popover"
-                                data-content="Διαγραφή" data-trigger="hover">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
+                        <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
+                                    content="{{op.content}}" gicon="{{op.gicon}}"></operations>
+                        <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
                     </td>
                 </tr>
                 </tbody>

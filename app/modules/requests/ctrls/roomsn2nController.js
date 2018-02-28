@@ -41,7 +41,7 @@ angular.module('Requests')
             for (var i = 0; i < $scope.teachers.length; i++) {
                 if ($scope.teachers[i].id === teacherId) return $scope.teachers[i].user;
             }
-        }
+        };
 
         $scope.cancelData = function () {
             $scope.ctrl.pivotData = null;

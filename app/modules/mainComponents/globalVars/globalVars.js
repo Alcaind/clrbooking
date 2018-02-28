@@ -70,7 +70,9 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             baseURL: globalVarsSrv.getGlobalVar('appUrl') + url,
             totalRows: 0,
             tableColumns: globalVarsSrv.getGlobalVar(table),
-            title: title
+            title: title,
+            operations: globalVarsSrv.getGlobalVar(table + "Ops"),
+            url: url
         };
 
         ctrl.getAll = function () {
@@ -217,7 +219,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
 
         ctrl.update = function (item) {
             api.apiCall('PUT', ctrl.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Η εγγραφή ανανεώθηκε.', 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η εγγραφή ανανεώθηκε.', 1);
                 history.back();
             }, undefined, item)
         };

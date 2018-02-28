@@ -4,7 +4,7 @@ angular.module('Users')
 
         api.apiCall('GET', globalVarsSrv.getGlobalVar('appUrl') + "/users/" + $routeParams.id, function (results) {
             user = results.data;
-            $scope.ctrl = makeController.mainController('/users/' + $routeParams.id + "/requests", 'requestsTableConf', "Κατοχυρωμένα αιτήματα στον " + user.user);
+            $scope.ctrl = makeController.mainController('/requests/users/' + $routeParams.id, 'requestsTableConf', "Κατοχυρωμένα αιτήματα στον " + user.user);
             $scope.ctrl.init();
 
             });

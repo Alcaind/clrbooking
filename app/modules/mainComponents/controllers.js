@@ -217,6 +217,38 @@ angular.module('MainComponents', [
             }
         };
     })
+
+    .directive('operations', function () {
+        return {
+            restrict: "EA",
+            scope: {
+                hr: "@",
+                content: "@",
+                gicon: "@"
+            },
+            templateUrl: 'modules/mainComponents/views/buttonPopUp.html'
+        }
+    })
+
+    .directive('deleteRowButton', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/deleteRowButton.html'
+        }
+    })
+    .directive('dmTitle', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/dmTitle.html'
+        }
+    })
+
+    .directive('tableTools', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/tableTools.html'
+        }
+    })
 ;
 
 

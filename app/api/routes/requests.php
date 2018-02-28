@@ -29,11 +29,25 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     return $response->getBody()->write($requests->toJson());
 });
 
-$checkPostRequestRules = function ($request, $response, $next) {
-    $data = $request->getParsedBody();
+$app->get('/requests/users/{id}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr'])->where('user_id', '=', $id)->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($requests->toJson());
+});
 
 
-};
+//$checkPostRequestRules = function ($request, $response, $next) {
+//    $data = $request->getParsedBody();
+//    return $response;
+//};
 
 $app->post('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
@@ -63,7 +77,7 @@ $app->post('/requests', function (Request $request, Response $response) {
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());
-})->add($checkPostRequestRules);
+});
 
 $app->delete('/requests/{id}', function ($request, $response, $args) {
     $id = $args['id'];

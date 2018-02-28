@@ -92,11 +92,10 @@ $app->put('/rooms/{id}', function ($request, $response, $args) {
         $room->xoros = $data['xoros'] ?: $room->xoros;
         $room->exams_capasity = $data['exams_capasity'] ?: $room->exams_capasity;
         $room->capasity_categ = $data['capasity_categ'] ?: $room->capasity_categ;
-        $room->tm_owner = $data['name'] ?: $room->tm_owner;
+        $room->tm_owner = $data['tm_owner'] ?: $room->tm_owner;
         $room->stat_comm = $data['stat_comm'] ?: $room->stat_comm;
         $room->conf_id = $data['conf_id'] ?: $room->conf_id;
         $room->category = $data['category'] ?: $room->category;
-        $room->use_id = $data['use_id'] ?: $room->use_id;
         $room->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
@@ -110,8 +109,11 @@ $app->get('/rooms/{id}/usages', function (Request $request, Response $response, 
     $id = $args['id'];
     try {
         $room = \App\Models\Rooms::with(['room_use'])->find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($room->toJson());
 });

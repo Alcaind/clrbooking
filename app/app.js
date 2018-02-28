@@ -216,7 +216,7 @@ angular.module('clrBooking', [
                     title: 'configuration create',
                     template: '<config-profile></config-profile>'
                 })
-                .when('/config/:configId', {
+                .when('/config/:id', {
                     title: 'configuration',
                     template: '<config-profile></config-profile>'
                 })

@@ -21,6 +21,7 @@ require __DIR__ . '/../src/models/item.php';
 require __DIR__ . '/../src/models/rooms.php';
 
 require __DIR__ . '/../src/models/ps.php';
+require __DIR__ . '/../src/models/stats.php';
 require __DIR__ . '/../src/models/requests.php';
 require __DIR__ . '/../src/models/roomuse.php';
 require __DIR__ . '/../src/models/ucategories.php';
@@ -85,6 +86,7 @@ require __DIR__ . '/../routes/item.php';
 require __DIR__ . '/../routes/rooms.php';
 require __DIR__ . '/../routes/kat.php';
 require __DIR__ . '/../routes/ps.php';
+require __DIR__ . '/../routes/psstats.php';
 require __DIR__ . '/../routes/requests.php';
 require __DIR__ . '/../routes/roomuse.php';
 require __DIR__ . '/../routes/ucategories.php';

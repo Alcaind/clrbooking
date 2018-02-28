@@ -1,16 +1,6 @@
 <div id="requests_main">
-    <div><h2 style="text-align: center;"> {{ctrl.title}} </h2></div>
-    <div style="display: flex">
-        <input type="text" ng-model="filter" class="form-control" placeholder="search"
-               style="padding: 5px; width: 100%">
-        <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()"
-                style="min-width: 50px; border-radius: 0px;">
-            <span class="glyphicon glyphicon-download"></span>
-        </button>
-        <a href="#/requests/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-            <span class="glyphicon glyphicon-plus"></span>
-        </a>
-    </div>
+    <dm-title></dm-title>
+    <table-tools></table-tools>
     <div>
         <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
                     num-pages="numPages"></pagination>
@@ -25,32 +15,28 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="request in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                style="cursor: pointer" ng-class="{selected: request.id === item.id}">
-                <td ng-if="ctrl.tableColumns[0].visible">{{ request.id }}</td>
-                <td ng-if="ctrl.tableColumns[1].visible">{{ request.req_dt }}</td>
-                <td ng-if="ctrl.tableColumns[2].visible">{{ request.users.user }}</td>
-                <td ng-if="ctrl.tableColumns[3].visible"><textarea disabled>{{ request.descr }}</textarea></td>
-                <td ng-if="ctrl.tableColumns[4].visible">{{ request.periods.descr }}</td>
-                <td ng-if="ctrl.tableColumns[5].visible">{{ request.ps_id }}</td>
-                <td ng-if="ctrl.tableColumns[6].visible">{{ request.class_use }}</td>
-                <td ng-if="ctrl.tableColumns[7].visible">{{ request.links }}</td>
-                <td ng-if="ctrl.tableColumns[8].visible">{{ request.fromdt }}</td>
-                <td ng-if="ctrl.tableColumns[9].visible">{{ request.todt }}</td>
-                <td ng-if="ctrl.tableColumns[10].visible">{{ request.protocol_id }}</td>
-                <td ng-if="ctrl.tableColumns[11].visible">{{ request.req_status }}</td>
-                <td ng-if="ctrl.tableColumns[12].visible">{{ request.fromd }}</td>
-                <td ng-if="ctrl.tableColumns[13].visible">{{ request.tod }}</td>
-                <td ng-if="ctrl.tableColumns[14].visible">{{ request.date_index }}</td>
-                <td ng-if="ctrl.tableColumns[15].visible">{{ request.admin }}</td>
+            <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
+                style="cursor: pointer" ng-class="{selected: item.id === item.id}">
+                <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
+                <td ng-if="ctrl.tableColumns[1].visible">{{ item.req_dt }}</td>
+                <td ng-if="ctrl.tableColumns[2].visible">{{ item.users.user }}</td>
+                <td ng-if="ctrl.tableColumns[3].visible"><textarea disabled>{{ item.descr }}</textarea></td>
+                <td ng-if="ctrl.tableColumns[4].visible">{{ item.periods.descr }}</td>
+                <td ng-if="ctrl.tableColumns[5].visible">{{ item.ps_id }}</td>
+                <td ng-if="ctrl.tableColumns[6].visible">{{ item.class_use }}</td>
+                <td ng-if="ctrl.tableColumns[7].visible">{{ item.links }}</td>
+                <td ng-if="ctrl.tableColumns[8].visible">{{ item.fromdt }}</td>
+                <td ng-if="ctrl.tableColumns[9].visible">{{ item.todt }}</td>
+                <td ng-if="ctrl.tableColumns[10].visible">{{ item.protocol_id }}</td>
+                <td ng-if="ctrl.tableColumns[11].visible">{{ item.req_status }}</td>
+                <td ng-if="ctrl.tableColumns[12].visible">{{ item.fromd }}</td>
+                <td ng-if="ctrl.tableColumns[13].visible">{{ item.tod }}</td>
+                <td ng-if="ctrl.tableColumns[14].visible">{{ item.date_index }}</td>
+                <td ng-if="ctrl.tableColumns[15].visible">{{ item.admin }}</td>
                 <td>
-                    <a href="#/requests/{{request.id}}" type="button" class="btn btn-info thumb"><span
-                            class="glyphicon glyphicon-pencil"></span></a>
-                    <a href="#/requests/{{request.id}}/rooms" type="button" class="btn btn-info thumb"><span
-                            class="glyphicon glyphicon-transfer"></span></a>
-                    <button ng-click="ctrl.delete(request)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
+                    <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id )}}"
+                                content="{{op.content}}" gicon="{{op.gicon}}"></operations>
+                    <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
                 </td>
             </tr>
             </tbody>

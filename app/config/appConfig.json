@@ -14,15 +14,15 @@
       "filter": ""
     },
     {
-      "column": "sname",
-      "title": "Επώνυμο",
+      "column": "fname",
+      "title": "Όνομα",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
-      "column": "fname",
-      "title": "Όνομα",
+      "column": "sname",
+      "title": "Επώνυμο",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -321,6 +321,139 @@
       "sorted": false,
       "filter": ""
     }
-
+  ],
+  "psstatsTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "ps_id",
+      "title": "Πρόγραμμα Σπουδών",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "diloseis",
+      "title": "Αριθμός Δηλώσεων",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "exetaseis",
+      "title": "Εξετάσεις",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "configTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "year",
+      "title": "Έτος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "status",
+      "title": "Κατάσταση",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "fromd",
+      "title": "Από ημ/νια",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tod",
+      "title": "Έως ημ/νια",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "synt",
+      "title": "Συντομογραφία",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "roomsTableConfOps": [
+    {
+      "hr": "#/rooms/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    },
+    {
+      "hr": "#/rooms/id/usages",
+      "content": "Χρήσεις αίθουσας",
+      "gicon": "glyphicon-import"
+    },
+    {
+      "hr": "#/rooms/id/requests",
+      "content": "Αιτήματα",
+      "gicon": "glyphicon-folder-open"
+    },
+    {
+      "hr": "#/rooms/id/items",
+      "content": "Εξοπλισμός",
+      "gicon": "glyphicon-blackboard"
+    },
+    {
+      "hr": "#/rooms/id/tms",
+      "content": "Τμήματα",
+      "gicon": "glyphicon-map-marker"
+    }
+  ],
+  "requestsTableConfOps": [
+    {
+      "hr": "#/requests/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    },
+    {
+      "hr": "#/requests/id/rooms",
+      "content": "Αιθουσες αιτήματος",
+      "gicon": "glyphicon-folder-open"
+    }
+  ],
+  "usersTableConfOps": [
+    {
+      "hr": "#/users/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    },
+    {
+      "hr": "#/users/id/roles",
+      "content": "Ρόλοι χρηστών",
+      "gicon": "glyphicon-import"
+    },
+    {
+      "hr": "#/users/id/requests",
+      "content": "Αιτήματα χρηστών",
+      "gicon": "glyphicon-transfer"
+    }
+  ],
+  "configTableConfOps": [
+    {
+      "hr": "#/config/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
   ]
+
 }
