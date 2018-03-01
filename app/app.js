@@ -22,6 +22,7 @@ angular.module('RoomCategory', []);
 angular.module('RoomUse', []);
 angular.module('RoomBook', []);
 angular.module('PsStats', []);
+angular.module('ReqGuests', []);
 
 
 // Declare app level module which depends on views, and components
@@ -53,7 +54,8 @@ angular.module('clrBooking', [
     'RoomBook',
     'PsStats',
     'GlobalVarsSrvs',
-    'Authentication'
+    'Authentication',
+    'ReqGuests'
 ])
 
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
@@ -186,7 +188,7 @@ angular.module('clrBooking', [
                     title: 'room category create',
                     template: '<room-category-profile></room-category-profile>'
                 })
-                .when('/roomcategory/:roomcategoryId', {
+                .when('/roomcategory/:id', {
                     title: 'room category',
                     template: '<room-category-profile></room-category-profile>'
                 })
@@ -199,7 +201,7 @@ angular.module('clrBooking', [
                     title: 'room use create',
                     template: '<room-use-profile></room-use-profile>'
                 })
-                .when('/roomuse/:roomuseId', {
+                .when('/roomuse/:id', {
                     title: 'room use',
                     template: '<room-use-profile></room-use-profile>'
                 })
@@ -245,7 +247,7 @@ angular.module('clrBooking', [
                     title: 'tm create',
                     template: '<tm-profile></tm-profile>'
                 })
-                .when('/tms/:tmId', {
+                .when('/tms/:id', {
                     title: 'tm',
                     template: '<tm-profile></tm-profile>'
                 })
@@ -258,7 +260,7 @@ angular.module('clrBooking', [
                     title: 'users categories create',
                     template: '<users-categories-profile></users-categories-profile>'
                 })
-                .when('/userscategories/:userscategoryId', {
+                .when('/userscategories/:id', {
                     title: 'users categories',
                     template: '<users-categories-profile></users-categories-profile>'
                 })
@@ -294,9 +296,22 @@ angular.module('clrBooking', [
                     title: 'statistics create',
                     template: '<ps-stats-profile></ps-stats-profile>'
                 })
-                .when('/psstats/:psstatId', {
+                .when('/psstats/:id', {
                     title: 'statistics',
                     template: '<ps-stats-profile></ps-stats-profile>'
+                })
+                .when('/reqguests', {
+                    title: 'reqguests',
+                    controller: 'reqGuestsController',
+                    templateUrl: 'modules/requests_guests/requestsguestsviews/requestsguests.html'
+                })
+                .when('/reqguests/create', {
+                    title: 'reqguests create',
+                    template: '<req-guests-profile></req-guests-profile>'
+                })
+                .when('/reqguests/:id', {
+                    title: 'reqguests',
+                    template: '<req-guests-profile></req-guests-profile>'
                 })
                 .when('/booking', {
                     title: 'booking',

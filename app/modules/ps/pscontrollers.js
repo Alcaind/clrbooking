@@ -14,6 +14,12 @@ angular.module('Ps', [
     .controller('PsProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
         $scope.ctrl = makeController.profileController('/kats', 'katTableConf');
         $scope.ctrl.init();
+
+        $scope.tms = {};
+
+        api.apiCall('GET', 'api/public/tms', function (results) {
+            $scope.tms = results.data;
+        });
     }])
 
     .component('psProfile', {

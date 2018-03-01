@@ -17,22 +17,21 @@
                     <th>...</th>
                 <tbody>
                 <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                    style="cursor: pointer" ng-class="{selected: item.id === item.id}">
+                    style="cursor: pointer">
                     <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
                     <td ng-if="ctrl.tableColumns[1].visible"><textarea disabled>{{ item.descr }}</textarea></td>
                     <td ng-if="ctrl.tableColumns[2].visible"><textarea disabled>{{ item.comments }}</textarea></td>
                     <td ng-if="ctrl.tableColumns[3].visible">{{ item.code }}</td>
                     <td ng-if="ctrl.tableColumns[4].visible">{{ item.status }}</td>
-                <td>
-                    <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
-                                content="{{op.content}}" gicon="{{op.gicon}}"></operations>
-                    <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
-                </td>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+                    <td>
+                        <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
+                                    content="{{op.content}}" gicon="{{op.gicon}}"></operations>
+                        <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <pre>total items list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
 </div>

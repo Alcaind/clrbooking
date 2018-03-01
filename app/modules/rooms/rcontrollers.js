@@ -4,12 +4,12 @@ angular.module('Rooms', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication'
+    'Authentication',
+    'GlobalVarsSrvs'
 ])
     .controller('RoomsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
 
-
-        $scope.ctrl = makeController.mainController('/rooms', 'roomsTableConf');
+        $scope.ctrl = makeController.mainController('/rooms', 'roomsTableConf', 'Κατάλογος Αιθουσών');
         $scope.ctrl.init();
 
     }])
@@ -58,7 +58,6 @@ angular.module('Rooms', [
                 exams_capasity: "",
                 capasity_categ: "",
                 tm_owner: "",
-                dt: "",
                 stat_comm: "",
                 conf_id: "",
                 category: ""

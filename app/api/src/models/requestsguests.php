@@ -13,4 +13,9 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 class Guests extends Model
 {
     protected $table = 'request_guests';
+
+    public function requests()
+    {
+        return $this->hasMany('\\App\\Models\\Requests', 'req_id');
+    }
 }

@@ -9,17 +9,17 @@
     <form class="requestForm" name="requestForm" novalidate>
         <div class="form-group">
             <label for="description">Περιγραφή:</label>
-            <textarea id="description" name="description" class="form-control" ng-model="item.descr"></textarea>
+            <textarea id="description" name="description" class="form-control" ng-model="ctrl.item.descr"></textarea>
         </div>
         <div class="form-group">
             <label for="comment">Σχόλια:</label>
-            <textarea id="comment" name="comment" class="form-control" ng-model="item.comment"></textarea>
+            <textarea id="comment" name="comment" class="form-control" ng-model="ctrl.item.comment"></textarea>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="updateUsersCategories(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.id>0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="saveUsersCategories(item)" style="padding: 5px"
-                ng-if="item.descr && !item.id">Αποθήκευση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.descr && !ctrl.item.id">Αποθήκευση
         </button>
     </form>
 </div>

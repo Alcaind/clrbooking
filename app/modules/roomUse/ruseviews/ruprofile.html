@@ -10,19 +10,19 @@
         <div class="form-group"
              ng-class="{ 'has-error' : roomUseForm.synt.$invalid && !roomUseForm.synt.$pristine }">
             <label class="required" for="synt">Συντομογραφία<span class="form-required">*</span>:</label>
-            <input id="synt" name="synt" class="form-control" type="text" ng-model="item.synt">
+            <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt">
             <p ng-show="roomUseForm.synt.$invalid && !roomUseForm.synt.$pristine" class="help-block">Εισάγετε
                 συντομογραφία.</p>
         </div>
         <div class="form-group">
             <label for="description">Περιγραφή:</label>
-            <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
+            <textarea id="description" name="comments" class="form-control" ng-model="ctrl.item.descr"></textarea>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="updateRoomUse(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.id>0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="saveRoomUse(item)" style="padding: 5px"
-                ng-if="item.synt && !item.id">Αποθήκευση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.synt && !ctrl.item.id">Αποθήκευση
         </button>
     </form>
 </div>

@@ -11,7 +11,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filter"
-            style="cursor: pointer" ng-class="{selected: item.id === item.id}">
+            style="cursor: pointer">
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
             <th>{{ item.pivot.comment }}</th>

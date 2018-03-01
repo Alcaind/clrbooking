@@ -9,32 +9,32 @@
     <form class="tmForm" name="tmForm" novalidate>
         <div class="form-group" ng-class="{ 'has-error' : tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine }">
             <label class="required" for="tm_code">Κωδικός τμήματος <span class="form-required">*</span>:</label>
-            <input id="tm_code" name="tm_code" class="form-control" type="text" ng-model="item.tm_code">
+            <input id="tm_code" name="tm_code" class="form-control" type="text" ng-model="ctrl.item.tm_code">
             <p ng-show="tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine" class="help-block">Εισάγετε κωδικό
                 τμήματος.</p>
         </div>
         <div class="form-group">
             <label for="descr" class="required">Περιγραφή <span class="form-required">*</span>:</label>
-            <input id="descr" name="descr" class="form-control" type="text" ng-model="item.descr">
+            <input id="descr" name="descr" class="form-control" type="text" ng-model="ctrl.item.descr">
             <p ng-show="tmForm.descr.$invalid && !tmForm.descr.$pristine" class="help-block">Εισάγετε περιγραφή.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : tmForm.title.$invalid && !tmForm.title.$pristine }">
             <label for="title" class="required">Τίτλος<span class="form-required">*</span>:</label>
-            <input id="title" name="title" class="form-control" type="text" ng-model="item.title">
+            <input id="title" name="title" class="form-control" type="text" ng-model="ctrl.item.title">
             <p ng-show="tmForm.title.$invalid && !tmForm.title.$pristine" class="help-block">Εισάγετε τίτλο
                 τμήματος.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine }">
             <label for="sxoli" class="required">Σχολή<span class="form-required">*</span>:</label>
-            <input id="sxoli" name="sxoli" class="form-control" type="text" ng-model="item.sxoli">
+            <input id="sxoli" name="sxoli" class="form-control" type="text" ng-model="ctrl.item.sxoli">
             <p ng-show="tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine" class="help-block">Εισάγετε το όνομα της
                 σχολής.</p>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="updateTm(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.id>0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="saveTm(item)" style="padding: 5px"
-                ng-if="item.tm_code && !item.id">Αποθήκευση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.tm_code && !ctrl.item.id">Αποθήκευση
         </button>
     </form>
 </div>

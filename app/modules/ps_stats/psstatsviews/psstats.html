@@ -1,47 +1,38 @@
 <div id="psstats_main">
-    <div><h2 style="text-align: center;"> {{ctrl.title}} </h2></div>
-    <div style="display: flex">
-        <input type="text" ng-model="filter" class="form-control" placeholder="search"
-               style="padding: 5px; width: 100%">
-        <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()"
-                style="min-width: 50px; border-radius: 0px;">
-            <span class="glyphicon glyphicon-cloud-download"></span>
-        </button>
-        <a href="#/psstats/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-            <span class="glyphicon glyphicon-plus"></span>
-        </a>
-    </div>
     <div>
-        <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
-                    num-pages="numPages"></pagination>
+        <dm-title></dm-title>
     </div>
-    <div id="data_tbl" class="table-responsive boxContent">
-        <table class="sorttable table table-hover table-striped table-responsive header-fixed">
-            <thead>
-            <tr>
-
-                <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"></th>
-                <th>...</th>
-
-            <tbody>
-            <tr ng-repeat="psstat in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter|orderBy:propertyName:reverse"
-                style="cursor: pointer" ng-class="{selected: psstat.id === item.id}">
-                <td ng-if="ctrl.tableColumns[0].visible">{{ psstat.id }}</td>
-                <td ng-if="ctrl.tableColumns[1].visible">{{ psstat.ps_id }}</td>
-                <td ng-if="ctrl.tableColumns[2].visible">{{ psstat.diloseis }}</td>
-                <td ng-if="ctrl.tableColumns[3].visible">{{ psstat.exetaseis }}</td>
-                <td>
-                    <a href="#/psstats/{{psstat.id}}" type="button" class="btn btn-info thumb"><span
-                            class="glyphicon glyphicon-pencil"></span></a>
-                    <button ng-click="ctrl.delete(psstat)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div style="padding: 15px">
+        <table-tools></table-tools>
+        <div>
+            <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+                        num-pages="numPages"></pagination>
+        </div>
+        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
+        <div id="data_tbl" class="table-responsive boxContent">
+            <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+                <thead>
+                <tr>
+                    <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"></th>
+                    <th>...</th>
+                <tbody>
+                <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
+                    style="cursor: pointer">
+                    <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.ps. }}</td>
+                    <td ng-if="ctrl.tableColumns[2].visible">{{ item.diloseis }}</td>
+                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.exetaseis }}</td>
+                    <td>
+                        <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
+                                    content="{{op.content}}" gicon="{{op.gicon}}"></operations>
+                        <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <pre>total ps statistics list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
-    <pre>total ps statistics list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
 </div>
 
 

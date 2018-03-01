@@ -308,7 +308,7 @@
       "filter": ""
     },
     {
-      "column": "config.year",
+      "column": "config_id",
       "title": "Έτος",
       "visible": true,
       "sorted": false,
@@ -602,6 +602,153 @@
       "filter": ""
     }
   ],
+  "roomcategoryTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "synt",
+      "title": "Συντομογραφία",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "descr",
+      "title": "Περιγραφή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "roomuseTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "synt",
+      "title": "Συντομογραφία",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "descr",
+      "title": "Περιγραφή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "tmsTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "tm_code",
+      "title": "Κωδικός τμήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "descr",
+      "title": "Περιγραφή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "title",
+      "title": "Τίτλος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "sxoli",
+      "title": "Σχολή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "userscategoriesTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "descr",
+      "title": "Περιγραφή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "comment",
+      "title": "Σχόλια",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "reqguestsTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "req_id",
+      "title": "Αίτημα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "name",
+      "title": "Όνοματεπώνυμο",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "uni",
+      "title": "Πανεπιστήμιο",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "email",
+      "title": "mail",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "phone",
+      "title": "Τηλέφωνο",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "comment",
+      "title": "Σχόλια",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
 
 
 
@@ -696,6 +843,50 @@
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil"
     }
+  ],
+  "roomcategoryTableConfOps": [
+    {
+      "hr": "#/roomcategory/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
+  ],
+  "roomuseTableConfOps": [
+    {
+      "hr": "#/roomuse/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
+  ],
+  "tmsTableConfOps": [
+    {
+      "hr": "#/tms/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
+  ],
+  "userscategoriesTableConfOps": [
+    {
+      "hr": "#/userscategories/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
+  ],
+  "psstatsTableConfOps": [
+    {
+      "hr": "#/psstats/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
+  ],
+  "reqguestsTableConfOps": [
+    {
+      "hr": "#/reqguests/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
   ]
+
+
 
 }

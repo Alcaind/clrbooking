@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                    style="cursor: pointer" ng-class="{selected: item.id === item.id}">
+                    style="cursor: pointer">
                     <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
                     <td ng-if="ctrl.tableColumns[1].visible">{{ item.user}}</td>
                     <td ng-if="ctrl.tableColumns[2].visible">{{ item.fname }}</td>

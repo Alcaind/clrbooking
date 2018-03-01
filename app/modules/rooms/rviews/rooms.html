@@ -1,19 +1,9 @@
 <div id="rooms_main">
     <div>
-        <h2 style="text-align: center;"> Κατάλογος Αιθουσών </h2>
+        <dm-title></dm-title>
     </div>
     <div style="padding: 15px">
-        <div style="display: flex">
-            <input type="text" ng-model="filter" class="form-control" placeholder="search"
-                   style="padding: 5px; width: 100%">
-            <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()"
-                    style="min-width: 50px; border-radius: 0px;">
-                <span class="glyphicon glyphicon-cloud-download"></span>
-            </button>
-            <a href="#/rooms/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-                <span class="glyphicon glyphicon-plus"></span>
-            </a>
-        </div>
+        <table-tools></table-tools>
         <div>
             <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
@@ -25,49 +15,44 @@
                 <tr>
                     <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"></th>
                     <th>...</th>
-                </tr>
-                </thead>
                 <tbody>
-                <tr ng-repeat="room in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                    style="cursor: pointer" ng-class="{selected: room.id === item.id}">
+                <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
+                    style="cursor: pointer">
 
-                    <td ng-if="ctrl.tableColumns[0].visible">{{room.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{room.name}}</td>
-                    <td ng-if="ctrl.tableColumns[2].visible">{{room.address }}</td>
-                    <td ng-if="ctrl.tableColumns[3].visible">{{room.building}}</td>
-                    <td ng-if="ctrl.tableColumns[4].visible">{{room.floor}}</td>
-                    <td ng-if="ctrl.tableColumns[5].visible">{{room.status}}</td>
-                    <td ng-if="ctrl.tableColumns[6].visible">{{room.active}}</td>
-                    <td ng-if="ctrl.tableColumns[7].visible">{{room.destroyed}}</td>
-                    <td ng-if="ctrl.tableColumns[8].visible">{{room.nonexist}}</td>
-                    <td ng-if="ctrl.tableColumns[9].visible">{{room.capasity}}</td>
-                    <td ng-if="ctrl.tableColumns[10].visible">{{room.width}}</td>
-                    <td ng-if="ctrl.tableColumns[11].visible">{{room.height }}</td>
-                    <td ng-if="ctrl.tableColumns[12].visible">{{room.xoros}}</td>
-                    <td ng-if="ctrl.tableColumns[13].visible">{{room.exams_capasity }}</td>
-                    <td ng-if="ctrl.tableColumns[14].visible">{{room.capasity_categ}}</td>
+                    <td ng-if="ctrl.tableColumns[0].visible">{{item.id }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{item.name}}</td>
+                    <td ng-if="ctrl.tableColumns[2].visible">{{item.address }}</td>
+                    <td ng-if="ctrl.tableColumns[3].visible">{{item.building}}</td>
+                    <td ng-if="ctrl.tableColumns[4].visible">{{item.floor}}</td>
+                    <td ng-if="ctrl.tableColumns[5].visible">{{item.status}}</td>
+                    <td ng-if="ctrl.tableColumns[6].visible">{{item.active}}</td>
+                    <td ng-if="ctrl.tableColumns[7].visible">{{item.destroyed}}</td>
+                    <td ng-if="ctrl.tableColumns[8].visible">{{item.nonexist}}</td>
+                    <td ng-if="ctrl.tableColumns[9].visible">{{item.capasity}}</td>
+                    <td ng-if="ctrl.tableColumns[10].visible">{{item.width}}</td>
+                    <td ng-if="ctrl.tableColumns[11].visible">{{item.height }}</td>
+                    <td ng-if="ctrl.tableColumns[12].visible">{{item.xoros}}</td>
+                    <td ng-if="ctrl.tableColumns[13].visible">{{item.exams_capasity }}</td>
+                    <td ng-if="ctrl.tableColumns[14].visible">{{item.capasity_categ}}</td>
 
                     <td ng-if="ctrl.tableColumns[15].visible">
-                        <li ng-repeat="tm in room.tms">{{tm.descr}}</li>
+                        <li ng-repeat="tm in item.tms">{{tm.descr}}</li>
                     </td>
 
-                    <td ng-if="ctrl.tableColumns[16].visible">{{room.stat_comm}}</td>
-                    <td ng-if="ctrl.tableColumns[17].visible">{{room.config.year}}</td>
-                    <td ng-if="ctrl.tableColumns[18].visible">{{room.room_category.descr}}</td>
+                    <td ng-if="ctrl.tableColumns[16].visible">{{item.stat_comm}}</td>
+                    <td ng-if="ctrl.tableColumns[17].visible">{{item.config.year}}</td>
+                    <td ng-if="ctrl.tableColumns[18].visible">{{item.room_category.descr}}</td>
                     <td ng-if="ctrl.tableColumns[19].visible">
-                        <li ng-repeat="use in room.room_use">
-                            <button ng-click="deleteUsage(room, use)">x</button>
+                        <li ng-repeat="use in item.room_use">
+                            <button ng-click="deleteUsageRoom(item, use)">x</button>
                             {{use.synt}}
                         </li>
                     </td>
                     <td>
-                        <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id',room.id)}}"
+                        <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id',item.id)}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>
                         <!--TODO:   BUTTON BOOKING THE ROOM   -->
-                        <button ng-click="ctrl.delete(room)" type="button" class="btn btn-danger" data-toggle="popover"
-                                data-content="Διαγραφή" data-trigger="hover">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
+                        <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
                     </td>
                 </tr>
                 </tbody>

@@ -1,4 +1,4 @@
-<div id="ps_main">
+<div id="psstats_main">
     <div>
         <dm-title></dm-title>
     </div>
@@ -18,17 +18,12 @@
                 <tbody>
                 <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
                     style="cursor: pointer">
-                    <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.tm.title }}</td>
-                    <td ng-if="ctrl.tableColumns[2].visible">{{ item.tm_per }}</td>
-                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.pm }}</td>
-                    <td ng-if="ctrl.tableColumns[4].visible">{{ item.tma_code }}</td>
-                    <td ng-if="ctrl.tableColumns[5].visible">{{ item.tma_per }}</td>
-                    <td ng-if="ctrl.tableColumns[6].visible">{{ item.ps_ex }}</td>
-                    <td ng-if="ctrl.tableColumns[7].visible">{{ item.ps_dm }}</td>
-                    <td ng-if="ctrl.tableColumns[8].visible">{{ item.ps_km }}</td>
-                    <td ng-if="ctrl.tableColumns[9].visible">{{ item.teacher }}</td>
-                    <td ng-if="ctrl.tableColumns[10].visible">{{ item.conf_id }}</td>
+                    <td ng-if="ctrl.tableColumns[0].visible">{{ item.requests.descr }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.name }}</td>
+                    <td ng-if="ctrl.tableColumns[2].visible">{{ item.uni }}</td>
+                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.email }}</td>
+                    <td ng-if="ctrl.tableColumns[4].visible">{{ item.phone }}</td>
+                    <td ng-if="ctrl.tableColumns[5].visible"><textarea>{{ item.comment }}</textarea></td>
                     <td>
                         <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>
@@ -38,7 +33,7 @@
                 </tbody>
             </table>
         </div>
-        <pre>total curriculum list : {{ctrl.dp.length}}  Page: {{ctrl.currentPage}} / {{ctrl.numPages}}</pre>
+        <pre>total guests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
 </div>
 

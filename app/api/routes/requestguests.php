@@ -10,24 +10,24 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \App\Models\ApiError as ApiError;
 
-$app->get('/requestguests', function (Request $request, Response $response) {
+$app->get('/reqguests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $guests = \App\Models\Guests::all();
+    $guests = \App\Models\Guests::with(['requests:id,descr'])->get();
     return $response->getBody()->write($guests->toJson());
 });
 
-$app->get('/requestguests/{id}', function (Request $request, Response $response, $args) {
+$app->get('/reqguests/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $guests = \App\Models\Guests::find($id);
+        $guests = \App\Models\Guests::with(['requests:id,descr'])->find($id);
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
     return $response->getBody()->write($guests->toJson());
 });
 
-$app->post('/requestguests', function (Request $request, Response $response) {
+$app->post('/reqguests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     try {
@@ -49,7 +49,7 @@ $app->post('/requestguests', function (Request $request, Response $response) {
     return $response->withStatus(201)->getBody()->write($guests->toJson());
 });
 
-$app->delete('/requestguests/{id}', function ($request, $response, $args) {
+$app->delete('/reqguests/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $guests = \App\Models\Guests::find($id);
@@ -60,7 +60,7 @@ $app->delete('/requestguests/{id}', function ($request, $response, $args) {
     return $response->withStatus(200)->getBody()->write($guests->toJson());
 });
 
-$app->put('/requestguests/{id}', function ($request, $response, $args) {
+$app->put('/reqguests/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
     print_r($data);
