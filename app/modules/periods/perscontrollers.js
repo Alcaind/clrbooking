@@ -16,6 +16,12 @@ angular.module('Periods', [
         $scope.ctrl = makeController.profileController('/periods', 'periodTableConf');
         $scope.ctrl.init();
 
+        $scope.configs = {};
+
+        api.apiCall('GET', 'api/public/config', function (results) {
+            $scope.configs = results.data;
+        });
+
     }])
     .component('periodProfile', {
         restrict: 'EA',

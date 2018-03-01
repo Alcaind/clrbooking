@@ -7,18 +7,14 @@
         </a>
     </div>
     <form class="psStatsForm" name="psStatsForm" novalidate>
-        <div class="form-group">
-            <label class="required" for="req_id">Αίτημα<span class="form-required">*</span>:</label>
-            <select id="req_id" name="req_id" ng-model="ctrl.item.req_id"
-                    ng-options="requests.id as requests.descr for requests in requests"></select>
-        </div>
+
         <div class="form-group">
             <label class="required" for="name">Όνοματεπώνυμο:</label>
-            <input id="name" name="name" class="form-control" type="number" ng-model="ctrl.item.name">
+            <input id="name" name="name" class="form-control" type="text" ng-model="ctrl.item.name">
         </div>
         <div class="form-group">
             <label class="required" for="uni">Πανεπιστήμιο:</label>
-            <input id="uni" name="uni" class="form-control" type="number" ng-model="ctrl.item.uni">
+            <input id="uni" name="uni" class="form-control" type="text" ng-model="ctrl.item.uni">
         </div>
         <div class="form-group">
             <label class="required" for="email">E-mail:</label>
@@ -30,14 +26,14 @@
         </div>
         <div class="form-group">
             <label class="required" for="comment">Σχόλια:</label>
-            <textarea id="comment" name="comment" class="form-control" type="number"
+            <textarea id="comment" name="comment" class="form-control" type="text"
                       ng-model="ctrl.item.comment"></textarea>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.update(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.id>0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.save(item)" style="padding: 5px"
-                ng-if="item.req_id && !item.id">Αποθήκευση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.req_id && !ctrl.item.id">Αποθήκευση
         </button>
     </form>
 </div>

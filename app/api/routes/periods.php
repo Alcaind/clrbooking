@@ -12,8 +12,14 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/periods', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $periods = \App\Models\Periods::all();
-
+    try {
+        $periods = \App\Models\Periods::with(['config'])->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
     return $response->getBody()->write($periods->toJson());
 });
 
@@ -21,9 +27,12 @@ $app->get('/periods/{id}', function (Request $request, Response $response, $args
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $periods = \App\Models\Periods::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+        $periods = \App\Models\Periods::with(['config'])->find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($periods->toJson());
 });
@@ -45,7 +54,7 @@ $app->post('/periods', function (Request $request, Response $response) {
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($periods->toJson());
@@ -56,8 +65,11 @@ $app->delete('/periods/{id}', function ($request, $response, $args) {
     try {
         $periods = \App\Models\Periods::find($id);
         $periods->delete();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($periods->toJson());
 });
@@ -77,8 +89,11 @@ $app->put('/periods/{id}', function ($request, $response, $args) {
         $periods->porder = $data['porder'] ?: $periods->order;
         $periods->status = $data['status'] ?: $periods->status;
         $periods->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($periods->toJson());
 });

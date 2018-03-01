@@ -16,30 +16,14 @@ class Config extends Model
 
     protected $table = 'config';
 
-//    public function periods()
-//    {
-//        try {
-//            $ret = $this->hasMany('\\App\\Models\\Periods', 'conf_id');
-//        } catch (\Exception $e) {
-//            return $e->getMessage();
-//        }
-//        return $ret;
-//    }
-
-//    public function ps()
-//    {
-//        try {
-//            $ret = $this->hasOne('\\App\\Models\\Ps', 'conf_id');
-//            //print_r($ret);
-//        } catch (\Exception $e) {
-//            return $e->getMessage();
-//        }
-//        return $ret;
-//    }
-
     public function rooms()
     {
         return $this->hasMany('\\App\\Models\\Rooms', 'conf_id');
+    }
+
+    public function periods()
+    {
+        return $this->hasMany('\\App\\Models\\Periods', 'conf_id');
     }
 
 

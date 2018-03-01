@@ -12,7 +12,14 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/rooms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $rooms = \App\Models\Rooms::with(['room_category:id,descr', 'config', 'room_use', 'tms'])->get();
+    try {
+        $rooms = \App\Models\Rooms::with(['room_category:id,descr', 'config', 'room_use', 'tms'])->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
     return $response->getBody()->write($rooms->toJson());
 });
 
@@ -21,8 +28,11 @@ $app->get('/rooms/{id}', function (Request $request, Response $response, $args) 
     $id = $args['id'];
     try {
         $room = \App\Models\Rooms::with(['room_category:id,descr', 'config', 'room_use', 'tms'])->find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($room->toJson());
 });
@@ -223,7 +233,7 @@ $app->delete('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from delete'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($room->items()->get()->toJson());
@@ -283,7 +293,7 @@ $app->delete('/rooms/{rid}/tms/{tid}', function ($request, $response, $args) {
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from delete'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($room->tms()->get()->toJson());

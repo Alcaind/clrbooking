@@ -18,11 +18,12 @@ class Periods extends Model
 
     public function config()
     {
-        $this->belongsTo('\\App\\Models\\Config', 'conf_id');
+        return $this->belongsTo('\\App\\Models\\Config', 'conf_id');
     }
 
     public function requests()
     {
-        $this->hasMany('\\App\\Models\\Requests', 'period');
+        return $this->hasMany('\\App\\Models\\Requests', 'period');
     }
+
 }

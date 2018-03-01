@@ -16,6 +16,6 @@ class Guests extends Model
 
     public function requests()
     {
-        return $this->hasMany('\\App\\Models\\Requests', 'req_id');
+        return $this->belongsTo('\\App\\Models\\Requests', 'req_id');
     }
 }

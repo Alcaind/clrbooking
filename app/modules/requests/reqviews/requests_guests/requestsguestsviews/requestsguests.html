@@ -18,12 +18,13 @@
                 <tbody>
                 <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
                     style="cursor: pointer">
-                    <td ng-if="ctrl.tableColumns[0].visible">{{ item.requests.descr }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.name }}</td>
-                    <td ng-if="ctrl.tableColumns[2].visible">{{ item.uni }}</td>
-                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.email }}</td>
-                    <td ng-if="ctrl.tableColumns[4].visible">{{ item.phone }}</td>
-                    <td ng-if="ctrl.tableColumns[5].visible"><textarea>{{ item.comment }}</textarea></td>
+                    <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.request.descr }}</td>
+                    <td ng-if="ctrl.tableColumns[2].visible">{{ item.name }}</td>
+                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.uni }}</td>
+                    <td ng-if="ctrl.tableColumns[4].visible">{{ item.email }}</td>
+                    <td ng-if="ctrl.tableColumns[5].visible">{{ item.phone }}</td>
+                    <td ng-if="ctrl.tableColumns[6].visible"><textarea>{{ item.comment }}</textarea></td>
                     <td>
                         <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>

@@ -22,8 +22,11 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     $id = $args['id'];
     try {
         $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr'])->find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($requests->toJson());
 });
@@ -182,8 +185,23 @@ $app->get('/requests/{id}/rooms', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $requests = \App\Models\Requests::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($requests->rooms()->get()->toJson());
+});
+$app->get('/requests/{id}/guests', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $requests = \App\Models\Requests::find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($requests->guests()->get()->toJson());
 });

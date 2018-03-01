@@ -57,7 +57,7 @@
     },
     {
       "column": "cat_id",
-      "title": "Κατευθυνση.",
+      "title": "Κατευθυνση",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -504,15 +504,15 @@
       "filter": ""
     },
     {
-      "column": "porder",
-      "title": "Σειρά περιόδου",
+      "column": "conf_id",
+      "title": "Έτος",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
-      "column": "conf_id",
-      "title": "Configuration",
+      "column": "porder",
+      "title": "Σειρά περιόδου",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -709,7 +709,7 @@
     {
       "column": "req_id",
       "title": "Αίτημα",
-      "visible": true,
+      "visible": false,
       "sorted": false,
       "filter": ""
     },
@@ -790,6 +790,11 @@
       "hr": "#/requests/id/rooms",
       "content": "Αιθουσες αιτήματος",
       "gicon": "glyphicon-folder-open"
+    },
+    {
+      "hr": "#/requests/id/guests",
+      "content": "Συμμετέχοντες αιτήματος",
+      "gicon": "glyphicon-transfer"
     }
   ],
   "usersTableConfOps": [
@@ -881,7 +886,7 @@
   ],
   "reqguestsTableConfOps": [
     {
-      "hr": "#/reqguests/id",
+      "hr": "#/requests/guests/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil"
     }

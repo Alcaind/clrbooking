@@ -22,7 +22,7 @@ angular.module('RoomCategory', []);
 angular.module('RoomUse', []);
 angular.module('RoomBook', []);
 angular.module('PsStats', []);
-angular.module('ReqGuests', []);
+
 
 
 // Declare app level module which depends on views, and components
@@ -55,7 +55,7 @@ angular.module('clrBooking', [
     'PsStats',
     'GlobalVarsSrvs',
     'Authentication',
-    'ReqGuests'
+
 ])
 
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
@@ -161,6 +161,19 @@ angular.module('clrBooking', [
                     title: 'requests rooms',
                     controller: 'RequestsRoomsController',
                     templateUrl: 'modules/requests/reqviews/rooms/mainn2n.html'
+                })
+                .when('/requests/:id/guests', {
+                    title: 'requests guests',
+                    controller: 'ReqGuestsController',
+                    templateUrl: 'modules/requests/reqviews/requests_guests/requestsguestsviews/requestsguests.html'
+                })
+                .when('/requests/:id/guests/create', {
+                    title: 'request guests create',
+                    template: '<req-guests-profile></req-guests-profile>'
+                })
+                .when('/requests/guests/:id', {
+                    title: 'request guests',
+                    template: '<req-guests-profile></req-guests-profile>'
                 })
                 .when('/roles', {
                     title: 'roles',
@@ -299,19 +312,6 @@ angular.module('clrBooking', [
                 .when('/psstats/:id', {
                     title: 'statistics',
                     template: '<ps-stats-profile></ps-stats-profile>'
-                })
-                .when('/reqguests', {
-                    title: 'reqguests',
-                    controller: 'reqGuestsController',
-                    templateUrl: 'modules/requests_guests/requestsguestsviews/requestsguests.html'
-                })
-                .when('/reqguests/create', {
-                    title: 'reqguests create',
-                    template: '<req-guests-profile></req-guests-profile>'
-                })
-                .when('/reqguests/:id', {
-                    title: 'reqguests',
-                    template: '<req-guests-profile></req-guests-profile>'
                 })
                 .when('/booking', {
                     title: 'booking',

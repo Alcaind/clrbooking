@@ -35,4 +35,9 @@ class Requests extends Model
         return $this->belongsTo('\\App\\Models\\Periods', 'period');
     }
 
+    public function guests()
+    {
+        return $this->hasMany('\\App\\Models\\Guests', 'req_id');
+    }
+
 }

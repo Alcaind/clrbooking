@@ -56,7 +56,7 @@ $app->post('/users', function (Request $request, Response $response) {
 //        $value = explode('\'', $errormessage)[1];
 //        $key = explode('\'', $errormessage)[3];
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        $error->setData($e->getCode(), $e->getMessage());
 //        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
 
         return $nr->write($error->toJson());
