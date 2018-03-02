@@ -176,7 +176,7 @@
     },
     {
       "column": "date_index",
-      "title": "Kαταχώρηση αιτήματος",
+      "title": "Ημ/νία καταχώρησης αιτήματος",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -575,7 +575,7 @@
     },
     {
       "column": "ps_dm",
-      "title": "Έτος",
+      "title": "Έτος-ps_dm",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -596,7 +596,14 @@
     },
     {
       "column": "conf_id",
-      "title": "Configuration",
+      "title": "Configuration -config_id",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "ps_id",
+      "title": "Πρόγραμμα σπουδων ID",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -886,12 +893,10 @@
   ],
   "reqguestsTableConfOps": [
     {
-      "hr": "#/requests/guests/id",
+      "hr": "#/requests/rid/guests",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil"
     }
   ]
-
-
 
 }

@@ -77,7 +77,6 @@ $app->delete('/periods/{id}', function ($request, $response, $args) {
 $app->put('/periods/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
     try {
         $periods = \App\Models\Periods::find($id);
         $periods->descr = $data['descr'] ?: $periods->descr;
@@ -85,8 +84,8 @@ $app->put('/periods/{id}', function ($request, $response, $args) {
         $periods->fromd = $data['fromd'] ?: $periods->fromd;
         $periods->tod = $data['tod'] ?: $periods->tod;
         $periods->comments = $data['comments'] ?: $periods->comments;
-        $periods->conf_id = $data['conf_id'] ?: $periods->status;
-        $periods->porder = $data['porder'] ?: $periods->order;
+        $periods->conf_id = $data['conf_id'] ?: $periods->conf_id;
+        $periods->porder = $data['porder'] ?: $periods->porder;
         $periods->status = $data['status'] ?: $periods->status;
         $periods->save();
     } catch (PDOException $e) {

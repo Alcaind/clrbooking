@@ -188,6 +188,24 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             }
         };
 
+
+        ctrl.cancelPivotData = function () {
+            ctrl.pivotData = null;
+            ctrl.currentRight = null;
+        };
+
+        ctrl.insertPivotItem = function (data) {
+            var method = "PUT";
+            if (ctrl.state === 0) method = "POST";
+            api.apiCall(method, ctrl.baseURL + "/" + $routeParams.id + '/' + table + '/' + ctrl.currentRight.id, function (results) {
+                data = {comment: '', status: '1'};
+                ctrl.ldp = results.data;
+                ctrl.compare(ctrl.ldp, ctrl.rdp);
+                ctrl.cancelPivotData();
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', ctrl.state === 0 ? 'Δημιουργήθηκε νέα εγγραφή.' : 'Η εγγραφή ανανεώθηκε.', 1);
+            }, undefined, data);
+        };
+
         return ctrl;
     }
 

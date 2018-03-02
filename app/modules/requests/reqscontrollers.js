@@ -19,12 +19,26 @@ angular.module('Requests', [
         $scope.users = {};
         $scope.periods = {};
 
+
         api.apiCall('GET', 'api/public/users', function (results) {
             $scope.users = results.data;
         });
         api.apiCall('GET', 'api/public/periods', function (results) {
             $scope.periods = results.data;
         });
+        $scope.admin = [];
+
+        api.apiCall('GET', 'api/public/users', function (results) {
+            for (var i = 0; i < results.data.length; i++) {
+                if (results.data[i].cat_id === 9) $scope.admin.push(results.data[i]);
+            }
+        });
+        $scope.getAdmin = function (adminId) {
+            for (var i = 0; i < $scope.admin.length; i++) {
+                if ($scope.admin[i].id === teacherId) return $scope.admin[i].user;
+            }
+        };
+
     }])
     .component('requestsProfile', {
         restrict: 'EA',

@@ -5,7 +5,7 @@
     <div style="padding: 15px">
         <table-tools></table-tools>
         <div>
-            <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+            <pagination current-page="currentPage" total-items="ctrl.totalItems" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
         </div>
         <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
@@ -19,7 +19,7 @@
                 <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
                     style="cursor: pointer">
                     <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.ps. }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.ps.tma_per }}</td>
                     <td ng-if="ctrl.tableColumns[2].visible">{{ item.diloseis }}</td>
                     <td ng-if="ctrl.tableColumns[3].visible">{{ item.exetaseis }}</td>
                     <td>

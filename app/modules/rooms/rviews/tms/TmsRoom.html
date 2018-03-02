@@ -18,7 +18,7 @@
                            style="padding: 5px; width: 100%">
                 </div>
                 <div>
-                    <pagination current-page="currentPageL" total-items="rLength" items-per-page="itemsPerPageL"
+                    <pagination current-page="currentPageL" total-items="ctrl.rLength" items-per-page="itemsPerPageL"
                                 num-pages="numPagesL"></pagination>
                     <r-tms-table></r-tms-table>
                     <pre>total tms usages : {{lLength}}  Page: {{currentPageL}} / {{numPagesL}}</pre>
@@ -37,7 +37,8 @@
                                style="padding: 5px; width: 100%">
                     </div>
                     <div>
-                        <pagination current-page="currentPageR" total-items="lLength" items-per-page="itemsPerPageR"
+                        <pagination current-page="currentPageR" total-items="ctrl.lLength"
+                                    items-per-page="itemsPerPageR"
                                     num-pages="numPagesR"></pagination>
                         <l-tms-table></l-tms-table>
                     </div>

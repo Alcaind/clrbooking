@@ -17,6 +17,6 @@ class Stats extends Model
 
     public function ps()
     {
-        return $this->hasMany('\\App\\Models\\Stats', 'ps_id');
+        return $this->hasOne('\\App\\Models\\Ps', 'ps_id');
     }
 }

@@ -25,7 +25,7 @@ $app->get('/requests/guests/{id}', function (Request $request, Response $respons
     return $response->getBody()->write($guests->toJson());
 });
 
-$app->post('/requests/{id}/guests', function (Request $request, Response $response) {
+$app->post('/requests/guests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     try {
@@ -36,7 +36,6 @@ $app->post('/requests/{id}/guests', function (Request $request, Response $respon
         $guests->email = $data['email'];
         $guests->phone = $data['phone'];
         $guests->comment = $data['comment'];
-
         $guests->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);

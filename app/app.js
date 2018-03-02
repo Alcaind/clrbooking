@@ -167,11 +167,11 @@ angular.module('clrBooking', [
                     controller: 'ReqGuestsController',
                     templateUrl: 'modules/requests/reqviews/requests_guests/requestsguestsviews/requestsguests.html'
                 })
-                .when('/requests/:id/guests/create', {
+                .when('/requests/:rid/guests/create', {
                     title: 'request guests create',
                     template: '<req-guests-profile></req-guests-profile>'
                 })
-                .when('/requests/guests/:id', {
+                .when('/requests/:rid/guests/:id', {
                     title: 'request guests',
                     template: '<req-guests-profile></req-guests-profile>'
                 })

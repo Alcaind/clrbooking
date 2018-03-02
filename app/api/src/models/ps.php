@@ -33,6 +33,6 @@ class Ps extends Model
 
     public function stats()
     {
-        return $this->belongsTo('\\App\\Models\\Ps', 'ps_id');
+        return $this->hasOne('\\App\\Models\\Stats', 'ps_id');
     }
 }

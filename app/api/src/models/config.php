@@ -26,5 +26,10 @@ class Config extends Model
         return $this->hasMany('\\App\\Models\\Periods', 'conf_id');
     }
 
+    public function ps()
+    {
+        return $this->hasMany('\\App\\Models\\Ps', 'conf_id');
+    }
+
 
 }

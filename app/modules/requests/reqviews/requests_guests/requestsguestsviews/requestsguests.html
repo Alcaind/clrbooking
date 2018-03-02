@@ -5,7 +5,7 @@
     <div style="padding: 15px">
         <table-tools></table-tools>
         <div>
-            <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+            <pagination current-page="currentPage" total-items="ctrl.totalItems" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
         </div>
         <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
@@ -19,14 +19,15 @@
                 <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
                     style="cursor: pointer">
                     <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.request.descr }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.req_id }}</td>
                     <td ng-if="ctrl.tableColumns[2].visible">{{ item.name }}</td>
                     <td ng-if="ctrl.tableColumns[3].visible">{{ item.uni }}</td>
                     <td ng-if="ctrl.tableColumns[4].visible">{{ item.email }}</td>
                     <td ng-if="ctrl.tableColumns[5].visible">{{ item.phone }}</td>
                     <td ng-if="ctrl.tableColumns[6].visible"><textarea>{{ item.comment }}</textarea></td>
                     <td>
-                        <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
+                        <operations ng-repeat="op in ctrl.operations"
+                                    hr="{{op.hr.replace('rid', item.req_id)+'/'+item.id}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>
                         <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
                     </td>

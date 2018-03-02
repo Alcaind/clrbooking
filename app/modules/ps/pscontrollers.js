@@ -8,17 +8,23 @@ angular.module('Ps', [
     'GlobalVarsSrvs'
 ]).controller('PsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
 
-    $scope.ctrl = makeController.mainController('/ps', 'katTableConf', ' Πρόγραμμα Σπουδων ');
+    $scope.ctrl = makeController.mainController('/ps', 'psTableConf', ' Πρόγραμμα Σπουδων ');
     $scope.ctrl.init();
 }])
     .controller('PsProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
-        $scope.ctrl = makeController.profileController('/kats', 'katTableConf');
+        $scope.ctrl = makeController.profileController('/ps', 'psTableConf');
         $scope.ctrl.init();
 
         $scope.tms = {};
+        $scope.configs = {};
+
 
         api.apiCall('GET', 'api/public/tms', function (results) {
             $scope.tms = results.data;
+        });
+
+        api.apiCall('GET', 'api/public/config', function (results) {
+            $scope.configs = results.data;
         });
     }])
 

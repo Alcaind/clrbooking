@@ -95,8 +95,11 @@
         </div>
         <div class="form-group">
             <label class="required" for="admin">Επιβλέπων Αιτήματος:</label>
-            <input id="admin" name="admin" class="form-control" type="text" ng-model="ctrl.item.admin">
+            <select id="admin" name="admin" ng-model="ctrl.pivotData.admin"
+                    ng-options="user.id as user.user for user in teachers"></select>
         </div>
+
+
         <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                 ng-if="ctrl.item.id>0">Ανανέωση
         </button>

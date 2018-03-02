@@ -47,14 +47,14 @@
             <p ng-show="psForm.ps_ex.$invalid && !psForm.ps_ex.$pristine" class="help-block">Εισάγετε εξάμημο.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : psForm.ps_dm.$invalid && !psForm.ps_dm.$pristine }">
-            <label class="required" for="ps_dm">Έτος<span class="form-required">*</span>:</label>
-            <input id="ps_dm" name="ps_dm" class="form-control" type="number" ng-model="ctrl.item.ps_dm">
+            <label class="required" for="ps_dm">Έτος-ps_dm<span class="form-required">*</span>:</label>
+            <input id="ps_dm" name="ps_dm" class="form-control" type="text" ng-model="ctrl.item.ps_dm">
             <p ng-show="psForm.ps_dm.$invalid && !psForm.ps_dm.$pristine" class="help-block">Εισάγετε έτος.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : psForm.ps_km.$invalid && !psForm.ps_km.$pristine }">
             <label class="required" for="ps_km">ps_km<span class="form-required">*</span>:</label>
-            <input id="ps_km" name="ps_km" class="form-control" type="number" ng-model="ctrl.item.ps_km">
+            <input id="ps_km" name="ps_km" class="form-control" type="text" ng-model="ctrl.item.ps_km">
             <p ng-show="psForm.ps_km.$invalid && !psForm.ps_km.$pristine" class="help-block">Enter
                 ps_km.</p>
         </div>
@@ -62,9 +62,17 @@
             <label class="required" for="teacher">Διδάσκων:</label>
             <input id="teacher" name="teacher" class="form-control" type="text" ng-model="ctrl.item.teacher">
         </div>
-        <div class="form-group" ng-class="{ 'has-error' : psForm.conf_id.$invalid && !psForm.conf_id.$pristine }">
-            <label class="required" for="conf_id">Configuration<span class="form-required">*</span>:</label>
-            <input id="conf_id" name="conf_id" class="form-control" type="number" ng-model="ctrl.item.conf_id">
+        <div class="form-group"
+             ng-class="{ 'has-error' : psForm.conf_id.$invalid && !psForm.conf_id.$pristine }">
+            <label class="required" for="conf_id">Configuration-config_id<span class="form-required">*</span>:</label>
+            <select id="conf_id" name="conf_id" ng-model="ctrl.item.conf_id"
+                    ng-options="config.id as config.year for config in configs"></select>
+            <p ng-show="psForm.conf_id.$invalid && !psForm.conf_id.$pristine" class="help-block">Εισάγετε
+                έτος.</p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : psForm.ps_id.$invalid && !psForm.ps_id.$pristine }">
+            <label class="required" for="ps_id">Πρόγραμμα σπουδών ID<span class="form-required">*</span>:</label>
+            <input id="ps_id" name="ps_id" class="form-control" type="number" ng-model="ctrl.item.ps_id">
         </div>
         <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                 ng-if="ctrl.item.id>0">Ανανέωση

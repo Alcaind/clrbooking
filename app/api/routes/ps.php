@@ -12,7 +12,14 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/ps', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $ps = \App\Models\Ps::all();
+    try {
+        $ps = \App\Models\Ps::with(['config'])->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
     return $response->getBody()->write($ps->toJson());
 });
 
@@ -20,10 +27,12 @@ $app->get('/ps/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $ps = \App\Models\Ps::find($id);
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+        $ps = \App\Models\Ps::with(['config'])->find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($ps->toJson());
 });
@@ -47,16 +56,8 @@ $app->post('/ps', function (Request $request, Response $response) {
         $ps->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
-//        $ps->errorText = $e->getMessage();
-//        $ps->errorCode = $e->getCode();
-//        $errormessage = explode(':', $e->getMessage())[2];
-//        $errormessage = explode('(', $errormessage)[0];
-//        $value = explode('\'', $errormessage)[1];
-//        $key = explode('\'', $errormessage)[3];
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
-//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
-
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($ps->toJson());
@@ -67,9 +68,11 @@ $app->delete('/ps/{id}', function ($request, $response, $args) {
     try {
         $ps = \App\Models\Ps::find($id);
         $ps->delete();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($ps->toJson());
 });
@@ -77,10 +80,10 @@ $app->delete('/ps/{id}', function ($request, $response, $args) {
 $app->put('/ps/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
     try {
         $ps = \App\Models\Ps::find($id);
 
+        $ps->id = $data['id'] ?: $ps->id;
         $ps->tm_code = $data['tm_code'] ?: $ps->tm_code;
         $ps->tm_per = $data['tm_per'] ?: $ps->tm_per;
         $ps->pm = $data['pm'] ?: $ps->pm;
@@ -93,18 +96,11 @@ $app->put('/ps/{id}', function ($request, $response, $args) {
         $ps->conf_id = $data['conf_id '] ?: $ps->conf_id;
         $ps->ps_id = $data['ps_id '] ?: $ps->ps_id;
         $ps->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($ps->toJson());
-});
-
-$app->get('/dp/{id}/requests', function ($request, $response, $args) {
-    $id = $args['id'];
-    try {
-        $configuration = \App\Models\Ps::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
-    }
-    return $response->getBody()->write($configuration->requests()->get()->toJson());
 });

@@ -17,7 +17,7 @@
                            style="padding: 5px; width: 100%">
                 </div>
                 <div>
-                    <pagination current-page="currentPageL" total-items="rLength" items-per-page="itemsPerPageL"
+                    <pagination current-page="currentPageL" total-items="ctrl.rLength" items-per-page="itemsPerPageL"
                                 num-pages="numPagesL"></pagination>
                     <r-item-table></r-item-table>
                     <pre>total rooms usages : {{lLength}}  Page: {{currentPageL}} / {{numPagesL}}</pre>
@@ -36,7 +36,7 @@
                                style="padding: 5px; width: 100%">
                     </div>
                     <div>
-                        <pagination current-page="currentPageR" total-items="lLength"
+                        <pagination current-page="currentPageR" total-items="ctrl.lLength"
                                     items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
                         <l-item-table></l-item-table>
                     </div>

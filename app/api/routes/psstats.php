@@ -12,7 +12,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/psstats', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $psstat = \App\Models\Stats::with(['ps:id,ps_id'])->get();
+    $psstat = \App\Models\Stats::with(['ps'])->get();
     return $response->getBody()->write($psstat->toJson());
 });
 
@@ -20,7 +20,7 @@ $app->get('/psstats/{id}', function (Request $request, Response $response, $args
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $psstat = \App\Models\Stats::with(['ps:id,ps_id'])->find($id);
+        $psstat = \App\Models\Stats::with(['ps'])->find($id);
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
@@ -40,7 +40,7 @@ $app->post('/psstats', function (Request $request, Response $response) {
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($psstat->toJson());
@@ -63,10 +63,10 @@ $app->put('/psstats/{id}', function ($request, $response, $args) {
     print_r($data);
     try {
         $psstat = \App\Models\Stats::find($id);
-
-        $psstat->ps_id = $data['ps_id '] ?: $psstat->ps_id;
+        $psstat->id = $data['id'] ?: $psstat->id;
+        $psstat->ps_id = $data['ps_id'] ?: $psstat->ps_id;
         $psstat->diloseis = $data['diloseis'] ?: $psstat->diloseis;
-        $psstat->exetaseis = $data['exetaseis '] ?: $psstat->exetaseis;
+        $psstat->exetaseis = $data['exetaseis'] ?: $psstat->exetaseis;
         $psstat->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

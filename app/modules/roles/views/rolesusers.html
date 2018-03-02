@@ -17,7 +17,7 @@
                            style="padding: 5px; width: 100%">
                 </div>
                 <div>
-                    <pagination current-page="currentPage" total-items="totalItemsL"
+                    <pagination current-page="currentPage" total-items="ctrl.totalItemsL"
                                 items-per-page="itemsPerPage" num-pages="numPages"></pagination>
                     <ur-user-table></ur-user-table>
                     <pre>total users : {{totalItemsL}}  Page: {{currentPage}} / {{numPages}}</pre>
@@ -36,7 +36,7 @@
                                style="padding: 5px; width: 100%">
                     </div>
                     <div>
-                        <pagination current-page="currentPageR" total-items="totalItemsR"
+                        <pagination current-page="currentPageR" total-items="ctrl.totalItemsR"
                                     items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
                         <evr-user-table></evr-user-table>
                     </div>

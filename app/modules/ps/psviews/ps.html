@@ -5,7 +5,7 @@
     <div style="padding: 15px">
         <table-tools></table-tools>
         <div>
-            <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+            <pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
         </div>
         <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
@@ -19,7 +19,7 @@
                 <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
                     style="cursor: pointer">
                     <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.tm.title }}</td>
+                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.tm_code }}</td>
                     <td ng-if="ctrl.tableColumns[2].visible">{{ item.tm_per }}</td>
                     <td ng-if="ctrl.tableColumns[3].visible">{{ item.pm }}</td>
                     <td ng-if="ctrl.tableColumns[4].visible">{{ item.tma_code }}</td>
@@ -28,7 +28,8 @@
                     <td ng-if="ctrl.tableColumns[7].visible">{{ item.ps_dm }}</td>
                     <td ng-if="ctrl.tableColumns[8].visible">{{ item.ps_km }}</td>
                     <td ng-if="ctrl.tableColumns[9].visible">{{ item.teacher }}</td>
-                    <td ng-if="ctrl.tableColumns[10].visible">{{ item.conf_id }}</td>
+                    <td ng-if="ctrl.tableColumns[10].visible">{{ item.config.year }}</td>
+                    <td ng-if="ctrl.tableColumns[10].visible">{{ item.ps_id }}</td>
                     <td>
                         <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>
@@ -38,7 +39,7 @@
                 </tbody>
             </table>
         </div>
-        <pre>total curriculum list : {{ctrl.dp.length}}  Page: {{ctrl.currentPage}} / {{ctrl.numPages}}</pre>
+        <pre>total curriculum list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
 </div>
 
