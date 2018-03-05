@@ -14,11 +14,13 @@ angular.module('Users', [
 
     }])
 
-    .controller('ProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
+    .controller('ProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, $routeParams, api, MakeModal, AuthenticationService, makeController, globalVarsSrv) {
+
+        $scope.ctrl = makeController.profileController('/users', 'usersTableConf');
+        $scope.ctrl.init();
 
         $scope.tms = {};
         $scope.ucategories = {};
-        $scope.baseURL = 'api/public/users';
 
         api.apiCall('GET', 'api/public/tms', function (results) {
             $scope.tms = results.data;
@@ -28,40 +30,6 @@ angular.module('Users', [
             $scope.ucategories = results.data;
         });
 
-        if (!$routeParams.id) {
-            $scope.item = {
-                tm_id: "",
-                fname: "",
-                sname: "",
-                phone: "",
-                em_main: "",
-                em_sec: "",
-                em_pant: "",
-                cat_id: "",
-                comments: "",
-                user: "",
-                hash: ""
-            };
-        } else {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id, function (results) {
-                $scope.item = results.data;
-            });
-        }
-
-        $scope.updateUser = function (item) {
-            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η εγγραφή του χρήστη ανανεώθηκε.', 1);
-                history.back();
-            }, undefined, item)
-
-        };
-
-        $scope.saveUser = function (item) {
-            api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νέα εγγραφή χρήστη δημιουργήθηκε.', 1);
-                history.back();
-            }, undefined, item)
-        };
     }])
 
     .component('usersProfile', {

@@ -11,7 +11,7 @@
         <div class="form-group" ng-class="{ 'has-error' : userForm.user.$invalid && !userForm.user.$pristine }">
             <label class="required" for="user">Username<span class="form-required">*</span>:</label>
             <div>
-                <input id="user" name="user" class="form-control" type="text" ng-model="item.user" ng-minlength="5"
+                <input id="user" name="user" class="form-control" type="text" ng-model="ctrl.item.user" ng-minlength="5"
                        ng-maxlength="30">
                 <p ng-show="userForm.user.$error.minlength" class="help-block">Το Username είναι πολύ μικρό.</p>
                 <p ng-show="userForm.user.$error.maxlength" class="help-block">Το Username είναι πολύ μεγάλο.</p>
@@ -21,7 +21,7 @@
         <div class="form-group">
             <div>
                 <label class="required" for="pw1">Κωδικός<span class="form-required">*</span>:</label>
-                <input id="pw1" name="pw1" class="form-control" type="{{passwordString1}}" ng-model="item.hash"
+                <input id="pw1" name="pw1" class="form-control" type="{{passwordString1}}" ng-model="ctrl.item.hash"
                        ng-init="passwordString1='password'" ng-required=""/>
                 <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
                    ng-click="passwordString1==='text'?passwordString1='password':passwordString1='text';errorString='*'+pw1+'*';">
@@ -44,64 +44,64 @@
         <!-- EMAIL FIRST MANDATORY -->
         <div class="form-group " ng-class="{ 'has-error' : userForm.email1.$invalid && !userForm.email1.$pristine }">
             <label class="required" for="email1">Email<span class="form-required">*</span>:</label>
-            <input id="email1" name="email1" class="form-control" type="email" ng-model="item.em_main" required>
+            <input id="email1" name="email1" class="form-control" type="email" ng-model="ctrl.item.em_main" required>
             <p ng-show="userForm.email1.$invalid && !userForm.email1.$pristine" class="help-block">Το e-mail δεν είναι
                 σωστό.</p>
         </div>
         <!-- EMAIL SECOND -->
         <div class="form-group" ng-class="{ 'has-error' : userForm.email2.$invalid  }">
             <label for="email2">Email 2ο:</label>
-            <input id="email2" name="email2" class="form-control" type="email" ng-model="item.em_sec">
+            <input id="email2" name="email2" class="form-control" type="email" ng-model="ctrl.item.em_sec">
             <p ng-show="userForm.email2.$invalid" class="help-block">Το e-mail δεν είναι σωστό.</p>
         </div>
         <!-- EMAIL PANTEIOY -->
         <div class="form-group" ng-class="{ 'has-error' : userForm.emailp.$invalid}">
             <label for="emailp">Email Παντείου:</label>
-            <input id="emailp" name="emailp" class="form-control" type="email" ng-model="item.em_pant">
+            <input id="emailp" name="emailp" class="form-control" type="email" ng-model="ctrl.item.em_pant">
             <p ng-show="userForm.emailp.$invalid" class="help-block">Το e-mail δεν είναι σωστό.</p>
         </div>
         <!-- FIRSTNAME -->
         <div class="form-group" ng-class="{ 'has-error' : userForm.fname.$invalid && !userForm.fname.$pristine }">
             <label for="fname" class="required">Όνομα<span class="form-required">*</span>:</label>
-            <input id="fname" name="fname" class="form-control" type="text" ng-model="item.fname">
+            <input id="fname" name="fname" class="form-control" type="text" ng-model="ctrl.item.fname">
             <p ng-show="userForm.fname.$invalid && !userForm.fname.$pristine" class="help-block">Εισάγετε όνομα
                 χρήστη.</p>
         </div>
         <!-- LASTNAME -->
         <div class="form-group" ng-class="{ 'has-error' : userForm.sname.$invalid && !userForm.sname.$pristine }">
             <label for="sname" class="required">Επώνυμο<span class="form-required">*</span>:</label>
-            <input id="sname" name="sname" class="form-control" type="text" ng-model="item.sname">
+            <input id="sname" name="sname" class="form-control" type="text" ng-model="ctrl.item.sname">
             <p ng-show="userForm.sname.$invalid && !userForm.sname.$pristine" class="help-block">Εισάγετε επώνυμο
                 χρήστη.</p>
         </div>
         <!--PHONE-->
         <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
             <label for="phone" class="required">Τηλέφωνο<span class="form-required">*</span>:</label>
-            <input id="phone" name="phone" class="form-control" type="number" ng-model="item.phone"
+            <input id="phone" name="phone" class="form-control" type="number" ng-model="ctrl.item.phone"
                    ng-minlength="5"
                    ng-maxlength="10">
             <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Εισάγετε τηλέφωνο.</p>
         </div>
         <div class="form-group">
             <label for="idtm">Τμήμα:</label>
-            <select id="idtm" ng-model="item.tm_id" ng-options="tm.id as tm.title for tm in tms"></select>
+            <select id="idtm" ng-model="ctrl.item.tm_id" ng-options="tm.id as tm.title for tm in tms"></select>
         </div>
         <!--Cat_ID-->
         <div class="form-group">
             <label for="catid">Κατηγορία:</label>
-            <select id="catid" ng-model="item.cat_id" class="form-control"
+            <select id="catid" ng-model="ctrl.item.cat_id" class="form-control"
                     ng-options="ucategorie.id as ucategorie.descr for ucategorie in ucategories"> </select>
         </div>
         <!--COMMENTS-->
         <div class="form-group">
             <label for="comments">Σχόλια:</label>
-            <textarea id="comments" name="comments" class="form-control" ng-model="item.comments"></textarea>
+            <textarea id="comments" name="comments" class="form-control" ng-model="ctrl.item.comments"></textarea>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="updateUser(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.id>0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="saveUser(item)" style="padding: 5px"
-                ng-if="item.fname && item.sname && !item.id">Αποθήκευση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.fname && ctrl.item.sname && !ctrl.item.id">Αποθήκευση
         </button>
     </form>
 </div>

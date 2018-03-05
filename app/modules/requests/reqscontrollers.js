@@ -17,15 +17,23 @@ angular.module('Requests', [
         $scope.ctrl.init();
 
         $scope.users = {};
-        $scope.periods = {};
-
 
         api.apiCall('GET', 'api/public/users', function (results) {
             $scope.users = results.data;
         });
+
+        // $scope.periods = {};
+        //
+        // api.apiCall('GET', 'api/public/periods', function (results) {
+        //     $scope.periods = results.data;
+        // });
+
+        $scope.periods = {};
+
         api.apiCall('GET', 'api/public/periods', function (results) {
             $scope.periods = results.data;
         });
+
         $scope.admin = [];
 
         api.apiCall('GET', 'api/public/users', function (results) {
@@ -33,11 +41,13 @@ angular.module('Requests', [
                 if (results.data[i].cat_id === 9) $scope.admin.push(results.data[i]);
             }
         });
+
         $scope.getAdmin = function (adminId) {
             for (var i = 0; i < $scope.admin.length; i++) {
-                if ($scope.admin[i].id === teacherId) return $scope.admin[i].user;
+                if ($scope.admin[i].id === adminId) return $scope.admin[i].user;
             }
         };
+
 
     }])
     .component('requestsProfile', {

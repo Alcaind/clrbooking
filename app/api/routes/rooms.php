@@ -224,11 +224,11 @@ $app->post('/rooms/{id}/items', function (Request $request, Response $response, 
     }
     return $response->withStatus(201)->getBody()->write($room->toJson());
 });
-$app->delete('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
-    $rid = $args['rid'];
+$app->delete('/rooms/{id}/items/{iid}', function ($request, $response, $args) {
+    $id = $args['id'];
     $iid = $args['iid'];
     try {
-        $room = \App\Models\Rooms::find($rid);
+        $room = \App\Models\Rooms::find($id);
         $room->items()->detach($iid);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -238,19 +238,19 @@ $app->delete('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
     }
     return $response->withStatus(200)->getBody()->write($room->items()->get()->toJson());
 });
-$app->post('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
+$app->post('/rooms/{id}/items/{iid}', function ($request, $response, $args) {
     $iid = $args['iid'];
-    $rid = $args['rid'];
+    $id = $args['id'];
     $data = $request->getParsedBody();
-    $room = \App\Models\Rooms::find($rid);
+    $room = \App\Models\Rooms::find($id);
     $room->items()->attach($iid, $data);
     return $response->getBody()->write($room->items()->get()->toJson());
 });
-$app->put('/rooms/{rid}/items/{iid}', function ($request, $response, $args) {
+$app->put('/rooms/{id}/items/{iid}', function ($request, $response, $args) {
     $iid = $args['iid'];
-    $rid = $args['rid'];
+    $id = $args['id'];
     $data = $request->getParsedBody();
-    $room = \App\Models\Rooms::find($rid);
+    $room = \App\Models\Rooms::find($id);
     $room->items()->updateExistingPivot($iid, $data);
     return $response->getBody()->write($room->items()->get()->toJson());
 });
@@ -319,10 +319,13 @@ $app->get('/rooms/{id}/requests', function (Request $request, Response $response
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Rooms::with('requests')->find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+        $rooms = \App\Models\Rooms::with('requests')->find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
-    return $response->getBody()->write($requests->toJson());
+    return $response->getBody()->write($rooms->toJson());
 });
 

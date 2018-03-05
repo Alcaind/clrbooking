@@ -23,10 +23,10 @@ angular.module('Requests')
         return {
             restrict: 'EA',
             templateUrl: 'modules/requests/reqviews/rooms/pivotForm.html',
-            controller: "FormController"
+            controller: "RequestFormController"
         }
     })
-    .controller('FormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
+    .controller('RequestFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
         $scope.baseURL = 'api/public/requests';
 
         $scope.teachers = [];

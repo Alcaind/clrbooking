@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="items in lData.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:filter"
+        <tr ng-repeat="items in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filter"
             style="cursor: pointer" ng-class="{selected: items.id === item.id}">
             <td>{{items.id }}</td>
             <td>{{items.descr}}</td>
@@ -21,10 +21,10 @@
             <td>{{items.pivot.from }}</td>
             <td>{{items.pivot.to }}</td>
             <td>
-                <button ng-click="editPivotData(items)" type="button" class="btn btn-info">
+                <button ng-click="ctrl.editPivotData(items)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button ng-click="deleteItemRoom(items.id)" type="button" class="btn btn-danger">
+                <button ng-click="ctrl.deleteData(items.id)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

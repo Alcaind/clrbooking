@@ -44,6 +44,19 @@ $app->get('/requests/users/{id}', function (Request $request, Response $response
     }
     return $response->getBody()->write($requests->toJson());
 });
+//$app->get('/requests/rooms/{id}', function (Request $request, Response $response, $args) {
+//    header("Content-Type: application/json");
+//    $id = $args['id'];
+//    try {
+//        $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr'])->where('user_id', '=', $id)->get();
+//    } catch (PDOException $e) {
+//        $nr = $response->withStatus(404);
+//        $error = new ApiError();
+//        $error->setData($e->getCode(), $e->getMessage());
+//        return $nr->write($error->toJson());
+//    }
+//    return $response->getBody()->write($requests->toJson());
+//});
 
 $checkRequestRules = function ($request, $response, $next) {
     //$response->getBody()->write('BEFORE');

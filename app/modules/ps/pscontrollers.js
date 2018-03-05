@@ -11,7 +11,7 @@ angular.module('Ps', [
     $scope.ctrl = makeController.mainController('/ps', 'psTableConf', ' Πρόγραμμα Σπουδων ');
     $scope.ctrl.init();
 }])
-    .controller('PsProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
+    .controller('PsProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, $routeParams, api, MakeModal, AuthenticationService, makeController, globalVarsSrv) {
         $scope.ctrl = makeController.profileController('/ps', 'psTableConf');
         $scope.ctrl.init();
 

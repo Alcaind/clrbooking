@@ -23,9 +23,11 @@ $app->get('/users/{id}', function (Request $request, Response $response, $args) 
     $id = $args['id'];
     try {
         $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr'])->find($id);
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($users->toJson());
 });
@@ -49,16 +51,8 @@ $app->post('/users', function (Request $request, Response $response) {
         $users->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
-//        $users->errorText = $e->getMessage();
-//        $users->errorCode = $e->getCode();
-//        $errormessage = explode(':', $e->getMessage())[2];
-//        $errormessage = explode('(', $errormessage)[0];
-//        $value = explode('\'', $errormessage)[1];
-//        $key = explode('\'', $errormessage)[3];
         $error = new ApiError();
         $error->setData($e->getCode(), $e->getMessage());
-//        $error->setData($e->getCode(),'διπλοεγγρεφη '.$value.' στη κολωνα '.$key);
-
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($users->toJson());
@@ -69,9 +63,11 @@ $app->delete('/users/{id}', function ($request, $response, $args) {
     try {
         $users = \App\Models\Users::find($id);
         $users->delete();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($users->toJson());
 });
@@ -94,8 +90,11 @@ $app->put('/users/{id}', function ($request, $response, $args) {
         $users->user = $data['user'] ?: $users->user;
         $users->hash = $data['hash'] ?: $users->hash;
         $users->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($users->toJson());
 });
@@ -130,19 +129,24 @@ $app->get('/users/{id}/roles', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $user = \App\Models\Users::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($user->roles()->get()->toJson());
 });
-
 
 $app->get('/users/{id}/requests', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $user = \App\Models\Users::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($user->requests()->get()->toJson());
 });
@@ -151,8 +155,11 @@ $app->get('/roombook/{id}/users', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $configuration = \App\Models\Users::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($configuration->roombook()->get()->toJson());
 });

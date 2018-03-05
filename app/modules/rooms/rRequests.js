@@ -1,30 +1,11 @@
 angular.module('Rooms')
-    .controller('RoomRequestsController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
+    .controller('RoomRequestsController', ['$scope', 'AuthenticationService', 'makeController', '$routeParams', 'api', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, $routeParams, api, globalVarsSrv) {
+        var room = {};
 
-        $scope.rRequest = [];
-        $scope.method = '';
-        $scope.baseURL = 'api/public/rooms';
+        api.apiCall('GET', globalVarsSrv.getGlobalVar('appUrl') + "/rooms/" + $routeParams.id, function (results) {
+            room = results.data;
+            $scope.ctrl = makeController.mainController('/requests/rooms/' + $routeParams.id, 'requestsTableConf', "Κατοχυρωμένα αιτήματα στην αίθουσα " + room.name);
+            $scope.ctrl.init();
 
-        $scope.propertyName = 'id';
-        $scope.reverse = true;
-        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
-
-        $scope.urData = null;
-
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id, function (results) {
-            $scope.urData = results.data;
         });
-
-        $scope.sortBy = function (propertyName) {
-            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-                ? !$scope.reverse : false;
-            $scope.propertyName = propertyName;
-        };
-
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.id + '/requests',
-            function (results) {
-                $scope.rRequest = results.data;
-                $scope.totalItems = $scope.rRequest.length;
-            });
-    }])
-;
+    }]);

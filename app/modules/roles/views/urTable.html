@@ -1,42 +1,30 @@
-<div id="data_tbl" class="table-responsive boxContent">
-    <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+<div>
+    <table class="table table-striped">
         <thead>
         <tr>
-            <th>
-                <button class="btn btn-link" ng-click="sortBy('user')">Όνομα Χρήστη</button>
-                <span class="sortorder" ng-show="propertyName === 'user'"
-                      ng-class="{reverse: reverse}"></span>
-            </th>
-            <th>
-                <button class="btn btn-link" ng-click="sortBy('fname')">Όνομα</button>
-                <span class="sortorder" ng-show="propertyName === 'fname'"
-                      ng-class="{reverse: reverse}"></span>
-            </th>
-            <th>
-                <button class="btn btn-link" ng-click="sortBy('sname')">Επώνυμο</button>
-                <span class="sortorder" ng-show="propertyName === 'sname'"
-                      ng-class="{reverse: reverse}"></span>
-            </th>
-            <th>
-                <button class="btn btn-link" ng-click="sortBy('pivot.exp_dt')">Ημ/νια Ληξης</button>
-                <span class="sortorder" ng-show="propertyName === 'pivot.exp_dt'"
-                      ng-class="{reverse: reverse}"></span>
-            </th>
+            <th>ID Χρήστη</th>
+            <th>Όνομα</th>
+            <th>Επώνυμο</th>
+            <th>Σχόλια</th>
+            <th>Ημ/νια λήξης</th>
+            <th>Κατάσταση</th>
             <th>...</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="user in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
-            style="cursor: pointer">
+        <tr ng-repeat="user in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filter"
+            style="cursor: pointer" ng-class="{selected: user.id === item.id}">
             <td>{{ user.user}}</td>
             <td>{{ user.fname }}</td>
             <td>{{ user.sname }}</td>
-            <td>{{ user.pivot.exp_dt }}</td>
+            <th>{{ user.pivot.comment }}</th>
+            <th>{{ user.pivot.exp_dt}}</th>
+            <th>{{ user.pivot.status}}</th>
             <td>
-                <button ng-click="editUrData(user)" type="button" class="btn btn-info">
+                <button ng-click="ctrl.editPivotData(user)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button ng-click="deleteUserRole(user)" type="button" class="btn btn-danger">
+                <button ng-click="ctrl.deleteData(user.id)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

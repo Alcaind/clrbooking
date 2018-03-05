@@ -21,8 +21,11 @@ $app->get('/roles/{id}', function (Request $request, Response $response, $args) 
     $id = $args['id'];
     try {
         $roles = \App\Models\Roles::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($roles->toJson());
 });
@@ -49,8 +52,11 @@ $app->delete('/roles/{id}', function ($request, $response, $args) {
     try {
         $role = \App\Models\Roles::find($id);
         $role->delete();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($role->toJson());
 });
@@ -63,8 +69,11 @@ $app->put('/roles/{id}', function ($request, $response, $args) {
         $role->role = $data['role'] ?: $role->role;
         $role->descr = $data['descr'] ?: $role->descr;
         $role->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($role->toJson());
 });
@@ -73,8 +82,37 @@ $app->get('/roles/{id}/users', function ($request, $response, $args) {
     $id = $args['id'];
     try {
         $role = \App\Models\Roles::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
+    return $response->getBody()->write($role->users()->get()->toJson());
+});
+
+$app->post('/roles/{id}/users/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $role = \App\Models\Roles::find($id);
+    $role->users()->attach($rid, $data);
+    return $response->getBody()->write($role->users()->get()->toJson());
+});
+
+$app->put('/roles/{id}/users/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $role = \App\Models\Roles::find($id);
+    $role->users()->updateExistingPivot($rid, $data);
+    return $response->getBody()->write($role->users()->get()->toJson());
+});
+
+$app->delete('/roles/{id}/users/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $role = \App\Models\Roles::find($id);
+    $role->users()->detach($rid);
     return $response->getBody()->write($role->users()->get()->toJson());
 });

@@ -316,7 +316,7 @@
     },
     {
       "column": "category",
-      "title": "Κατηγορια Αιθουσας",
+      "title": "Κατηγορια Αιθουσας Χρήση",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -756,6 +756,29 @@
       "filter": ""
     }
   ],
+  "rolesTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "role",
+      "title": "Ρόλος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "descr",
+      "title": "Περιγραφή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+
+
 
 
 
@@ -897,6 +920,19 @@
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil"
     }
+  ],
+  "rolesTableConfOps": [
+    {
+      "hr": "#/roles/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    },
+    {
+      "hr": "#/roles/id/users",
+      "content": "Χρήστες ρόλου",
+      "gicon": "glyphicon-import"
+    }
   ]
+
 
 }

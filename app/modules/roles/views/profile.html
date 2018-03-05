@@ -10,19 +10,19 @@
         <!-- ROLE -->
         <div class="form-group" ng-class="{ 'has-error' : roleForm.role.$invalid && !roleForm.role.$pristine }">
             <label class="required" for="role">Ρόλος<span class="form-required">*</span>:</label>
-            <input id="role" name="role" class="form-control" type="text" ng-model="item.role">
+            <input id="role" name="role" class="form-control" type="text" ng-model="ctrl.item.role">
             <p ng-show="roleForm.role.$invalid && !roleForm.role.$pristine" class="help-block">Εισάγετε ρόλο.</p>
         </div>
         <!--DESCRIPTION-->
         <div class="form-group">
             <label for="description">Περιγραφή ρόλου:</label>
-            <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
+            <textarea id="description" name="comments" class="form-control" ng-model="ctrl.item.descr"></textarea>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="updateRole(item)" style="padding: 5px"
-                ng-if="item.id > 0">Ανανέωση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.id > 0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="saveRole(item)" style="padding: 5px"
-                ng-if="item.role && !item.id ">Αποθήκευση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.role && !ctrl.item.id ">Αποθήκευση
         </button>
     </form>
 </div>

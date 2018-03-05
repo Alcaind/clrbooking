@@ -1,6 +1,5 @@
 <div>
     <table class="table table-striped">
-        <thead>
         <tr>
             <th>id</th>
             <th>Περιγραφή</th>
@@ -9,10 +8,9 @@
             <th>Κατάσταση</th>
             <th>...</th>
         </tr>
-        </thead>
         <tbody>
-        <tr ng-repeat="items in rData.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:filter"
-            style="cursor: pointer" ng-class="{selected: items.id === item.id}">
+        <tr ng-repeat="items in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
+            style="cursor: pointer">
             <td>{{items.id }}</td>
             <td>{{items.descr}}</td>
             <td>{{items.comments }}</td>
@@ -20,7 +18,7 @@
             <td>{{items.status }}</td>
 
             <td>
-                <button ng-click="items.disabled?null:showPivotData(items)" type="button"
+                <button ng-click="items.disabled?null:ctrl.showPivotData(items)" type="button"
                         class="btn {{items.disabled?'btn-regular disabled':'btn-success '}}">
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>

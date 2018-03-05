@@ -4,74 +4,18 @@ angular.module('Roles', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication'
+    'Authentication',
+    'GlobalVarsSrvs'
 ])
-    .controller('RolesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', '$routeParams', function ($scope, MakeModal, api, orderBy, AuthenticationService, $routeParams) {
-
-        $scope.dp = [];
-        $scope.item = {};
-        $scope.method = '';
-        $scope.baseURL = 'api/public/roles';
-
-    $scope.getRoles = function () {
-        api.apiCall('GET', $scope.baseURL, function (results) {
-            $scope.dp = results.data;
-            $scope.totalItems = $scope.dp.length;
-        });
-    };
-
-        $scope.deleteRole = function (item) {
-            api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
-                $scope.dp.splice($scope.dp.indexOf(item), 1);
-                $scope.item = {};
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Ο ρόλος διαγράφηκε.', 1)
-            });
-        };
-
-
-        $scope.propertyName = 'role';
-        $scope.reverse = true;
-        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
-
-        $scope.sortBy = function (propertyName) {
-            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-                ? !$scope.reverse : false;
-            $scope.propertyName = propertyName;
-        };
-
-        $scope.getRoles();
-
+    .controller('RolesController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
+        $scope.ctrl = makeController.mainController('/roles', 'rolesTableConf', 'Κατάλογος Ρόλων');
+        $scope.ctrl.init();
 
     }])
-    .controller('RoleProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
+    .controller('RoleProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, $routeParams, api, MakeModal, AuthenticationService, makeController, globalVarsSrv) {
 
-        $scope.baseURL = 'api/public/roles';
-
-        if (!$routeParams.roleId) {
-            $scope.item = {
-                role: "",
-                descr: ""
-            };
-        } else {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId, function (results) {
-                $scope.item = results.data;
-            });
-        }
-
-        $scope.updateRole = function (item) {
-            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Ο ρόλος ανανεώθηκε.', 1);
-                history.back();
-            }, undefined, item)
-
-        };
-
-        $scope.saveRole = function (item) {
-            api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νέος ρόλος δημιουργήθηκε.', 1);
-                history.back();
-            }, undefined, item)
-        };
+        $scope.ctrl = makeController.profileController('/roles', 'rolesTableConf');
+        $scope.ctrl.init();
     }])
 
 
@@ -91,80 +35,10 @@ angular.module('Roles', [
         },
         controller: 'RolesUserController'
     })
-    .controller('RolesUserController', ['$scope', 'MakeModal', 'api', '$routeParams', 'orderByFilter', function ($scope, MakeModal, api, $routeParams, orderBy) {
-        $scope.baseURL = 'api/public/roles';
-        $scope.dp = [];
-        $scope.currentRole = {};
-        $scope.userTable = {};
-        $scope.totalItemsL = $scope.totalItemsR = 0;
-        $scope.currentUser = null;
-        $scope.rData = {};
+    .controller('RolesUserController', ['$scope', 'AuthenticationService', 'makeController', function ($scope, AuthenticationService, makeController) {
 
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId, function (results) {
-            $scope.rData = results.data;
-        });
-
-        $scope.getUsersRole = function () {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId + '/users', function (results) {
-                $scope.dp = results.data;
-                $scope.totalItemsL = results.data.length;
-                if ($scope.userTable && $scope.userTable.length > 0) {
-                    $scope.compare();
-                }
-            });
-        };
-        $scope.getUsersRole();
-
-        $scope.deleteUserRole = function (item) {
-            api.apiCall('DELETE', 'api/public/users/' + item.id + "/roles/" + $routeParams.roleId, function (results) {
-                $scope.dp.splice($scope.dp.indexOf(item), 1);
-                $scope.item = {};
-                $scope.compare();
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Ο ρόλος από τον χρήστη διαγράφηκε.', 1)
-            });
-        };
-
-        api.apiCall('GET', 'api/public/users', function (results) {
-            $scope.userTable = results.data;
-            $scope.totalItemsR = results.data.length;
-            if ($scope.dp && $scope.dp.length > 0) {
-                $scope.compare();
-            }
-        });
-
-        api.apiCall('GET', $scope.baseURL + "/" + $routeParams.roleId, function (results) {
-            $scope.currentRole = results.data;
-        });
-
-        $scope.editUrData = function (user) {
-            $scope.urData = user.pivot;
-            $scope.currentUser = user;
-            $scope.state = 1;
-        };
-
-        $scope.showUrData = function (user) {
-            $scope.currentUser = user;
-            $scope.state = 0;
-        };
-
-        $scope.propertyName = 'user';
-        $scope.reverse = true;
-        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
-
-        $scope.sortBy = function (propertyName) {
-            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-                ? !$scope.reverse : false;
-            $scope.propertyName = propertyName;
-        };
-
-        $scope.compare = function () {
-            for (var i = 0; i < $scope.userTable.length; i++) {
-                $scope.userTable[i].disabled = false;
-                for (var j = 0; j < $scope.dp.length; j++)
-                    if (angular.equals($scope.dp[j].id, $scope.userTable[i].id))
-                        $scope.userTable[i].disabled = true;
-            }
-        }
+        $scope.ctrl = makeController.n2nController('/roles', 'users', {comment: '', exp_dt: '', status: '1'});
+        $scope.ctrl.init();
 
     }])
     .directive('urUserTable', function () {
@@ -188,23 +62,21 @@ angular.module('Roles', [
         }
     })
     .controller('EvUserRolesFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
-        $scope.urData = {comment: '', exp_dt: '', status: 1};
-        $scope.state = 1;
+        $scope.baseURL = 'api/public/roles';
+
+        $scope.cancelUrData = function () {
+            $scope.ctrl.pivotData = null;
+            $scope.ctrl.currentRight = null;
+        };
 
         $scope.insertRole = function () {
             var method = "PUT";
-            if ($scope.state === 0) method = "POST";
-            api.apiCall(method, 'api/public/users/' + $scope.currentUser.id + '/roles/' + $routeParams.roleId, function (results) {
-                $scope.uRoles = results.data;
-                $scope.urData = {comment: '', exp_dt: '', status: 1};
-                $scope.currentUser = null;
-                $scope.getUsersRole();
-            }, undefined, $scope.urData, undefined, $scope);
-
-            $scope.cancelUrData = function () {
-                $scope.urData = null;
-                $scope.currentUser = null;
-            };
+            if ($scope.ctrl.state === 0) method = "POST";
+            api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/users/' + $scope.ctrl.currentRight.id, function (results) {
+                $scope.ctrl.pivotData = Object.assign({}, $scope.ctrl.pivotTable);
+                $scope.ctrl.ldp = results.data;
+                $scope.ctrl.compare($scope.ctrl.ldp, $scope.ctrl.rdp);
+                $scope.cancelUrData();
+            }, undefined, $scope.ctrl.pivotData);
         };
-    }])
-;
+    }]);

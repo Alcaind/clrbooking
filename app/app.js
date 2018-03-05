@@ -184,13 +184,14 @@ angular.module('clrBooking', [
                     title: 'role create',
                     template: '<roles-profile></roles-profile>'
                 })
-                .when('/roles/:roleId', {
+                .when('/roles/:id', {
                     title: 'role',
                     template: '<roles-profile></roles-profile>'
                 })
-                .when('/roles/:roleId/users', {
-                    title: 'role',
-                    template: '<roles-users></roles-users>'
+                .when('/roles/:id/users', {
+                    title: 'role user',
+                    controller: 'RolesUserController',
+                    templateUrl: 'modules/roles/views/rolesusers.html'
                 })
                 .when('/roomcategory', {
                     title: 'room category',
@@ -249,7 +250,7 @@ angular.module('clrBooking', [
                 .when('/rooms/:id/requests', {
                     title: 'room requests',
                     controller: 'RoomRequestsController',
-                    templateUrl: 'modules/rooms/rviews/request/urequest.html'
+                    templateUrl: 'modules/rooms/rviews/request/roomRequest.html'
                 })
                 .when('/tms', {
                     title: 'tm',
