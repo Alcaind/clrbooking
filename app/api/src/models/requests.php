@@ -20,6 +20,11 @@ class Requests extends Model
         return $this->belongsTo('\\App\\Models\\Users', 'user_id');
     }
 
+    public function admin()
+    {
+        return $this->belongsTo('\\App\\Models\\Users', 'admin');
+    }
+
     public function ps()
     {
         return $this->belongsTo('\\App\\Models\\Ps', 'ps_id');

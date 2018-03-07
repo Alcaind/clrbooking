@@ -10,17 +10,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="room in lData.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:filter"
-            style="cursor: pointer" ng-class="{selected: room.id === item.id}">
-            <td>{{room.id }}</td>
-            <td>{{room.synt}}</td>
-            <td>{{room.descr }}</td>
-            <th>{{room.pivot.comment }}</th>
+        <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filterL"
+            style="cursor: pointer">
+            <td>{{item.id }}</td>
+            <td>{{item.synt}}</td>
+            <td>{{item.descr }}</td>
+            <th>{{item.pivot.comment }}</th>
             <td>
-                <button ng-click="editUrData(room)" type="button" class="btn btn-info">
+                <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button ng-click="deleteUsageRoom(room.id)" type="button" class="btn btn-danger">
+                <button ng-click="ctrl.deleteData(item.id)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

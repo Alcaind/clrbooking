@@ -308,7 +308,7 @@
       "filter": ""
     },
     {
-      "column": "config_id",
+      "column": "conf_id",
       "title": "Έτος",
       "visible": true,
       "sorted": false,
@@ -790,7 +790,7 @@
       "gicon": "glyphicon-pencil"
     },
     {
-      "hr": "#/rooms/id/usages",
+      "hr": "#/rooms/id/roomuse",
       "content": "Χρήσεις αίθουσας",
       "gicon": "glyphicon-import"
     },

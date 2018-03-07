@@ -93,37 +93,33 @@
             <input id="capasity_categ" name="capasity_categ" class="form-control" type="text"
                    ng-model="ctrl.item.capasity_categ">
         </div>
-
-        <!--&lt;!&ndash;tmhma&ndash;&gt;-->
-        <!--<div class="form-group" ng-class="{ 'has-error' : katForm.tm_id.$invalid && !katForm.tm_id.$pristine }">-->
-        <!--<label class="required" for="tm_id">Τμήμα<span class="form-required">*</span>:</label>-->
-        <!--<select id="tm_id" name="tm_id" ng-model="ctrl.item.tm_id"-->
-        <!--ng-options="tm.id as tm.title for tm in tms"></select>-->
-        <!--<p ng-show="katForm.tm_id.$invalid && !katForm.tm_id.$pristine" class="help-block">Εισάγετε ονομασία-->
-        <!--τμήματος.</p>-->
-        <!--</div>-->
-
         <!--stat_comm-->
         <div class="form-group">
             <label for="stat_comm" class="required">Σχόλια:</label>
             <input id="stat_comm" name="stat_comm" class="form-control" type="text" ng-model="ctrl.item.stat_comm">
         </div>
         <div class="form-group">
-            <label for="conf_id" class="required">Έτος:</label>
-            <select id="conf_id" ng-model="ctrl.item.conf_id"
+            <label class="required" for="conf_id">Έτος:</label>
+            <select id="conf_id" name="conf_id" ng-model="ctrl.item.conf_id"
                     ng-options="config.id as config.year for config in configs"></select>
+        </div>
+
+        <div class="form-group">
+            <label class="required" for="tm_owner">Τμήμα<span class="form-required">*</span>:</label>
+            <select id="tm_owner" name="tm_owner" ng-model="ctrl.item.tm_owner"
+                    ng-options="tm.id as tm.title for tm in tms"></select>
         </div>
         <!--type-->
         <div class="form-group">
             <label for="type" class="required">Κατηγορια Αιθουσας:</label>
-            <select id="type" ng-model="item.category" class="form-control"
-                    ng-options="ctrl.category.id as category.descr for category in categories"> </select>
+            <select id="type" ng-model="ctrl.item.category" class="form-control"
+                    ng-options="category.id as category.descr for category in categories"> </select>
         </div>
 
-        <button type="button" class="btn btn-primary" ng-click="ctrl.updateRoom(ctrl.item)" style="padding: 5px"
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                 ng-if="ctrl.item.id>0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.saveRoom(ctrl.item)" style="padding: 5px"
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
                 ng-if="ctrl.item.name && !ctrl.item.id">Αποθήκευση
         </button>
     </form>

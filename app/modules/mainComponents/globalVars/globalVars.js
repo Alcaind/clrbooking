@@ -64,7 +64,24 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($
 globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '$routeParams', 'MakeModal', function (globalVarsSrv, api, orderBy, $routeParams, MakeModal) {
     var makeController = {};
 
+    /**
+     *
+     * @param url -> Einai to URL tou api call
+     * @param table -> Einai o pinakas anaforas tou view
+     * @param title -> Einai o titlos tou para8yroy pou 8a emfanistei
+     * @returns {{dp: Array, Einai o Data Provider
+      *         baseURL: *,
+      *         totalRows: number,
+      *         tableColumns: *,
+      *         title: *,
+      *         operations: *,
+      *         url: *}}
+     */
     function mainController(url, table, title) {
+        /**
+         *
+         * @type {{dp: Array, baseURL: *, totalRows: number, tableColumns: *, title: *, operations: *, url: *}}
+         */
         var ctrl = {
             dp: [],
             baseURL: globalVarsSrv.getGlobalVar('appUrl') + url,
@@ -160,16 +177,10 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             });
         };
 
-        ctrl.editPivotData = function (role) {
-            ctrl.currentRight = role;
-            ctrl.pivotData = role.pivot;
+        ctrl.editPivotData = function (data) {
+            ctrl.currentRight = data;
+            ctrl.pivotData = data.pivot;
             ctrl.state = 1;
-        };
-
-        ctrl.showPivotData = function (role) {
-            ctrl.pivotData = Object.assign({}, ctrl.pivotTable); //ctrl.pivotTable;
-            ctrl.state = 0;
-            ctrl.currentRight = role;
         };
 
         ctrl.deleteData = function (id) {
@@ -177,6 +188,12 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
                 ctrl.ldp = results.data;
                 ctrl.compare(ctrl.ldp, ctrl.rdp);
             }, undefined, id);
+        };
+
+        ctrl.showPivotData = function (data) {
+            ctrl.pivotData = Object.assign({}, ctrl.pivotTable);
+            ctrl.state = 0;
+            ctrl.currentRight = data;
         };
 
         ctrl.compare = function (sdp, cdp) {
@@ -187,7 +204,6 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
                         cdp[i].disabled = true;
             }
         };
-
 
         ctrl.cancelPivotData = function () {
             ctrl.pivotData = null;

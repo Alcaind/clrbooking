@@ -33,7 +33,7 @@
                     <td ng-if="ctrl.tableColumns[12].visible">{{ item.fromd }}</td>
                     <td ng-if="ctrl.tableColumns[13].visible">{{ item.tod }}</td>
                     <td ng-if="ctrl.tableColumns[14].visible">{{ item.date_index }}</td>
-                    <td ng-if="ctrl.tableColumns[15].visible">{{ getAdmin(item.users.admin) }}</td>
+                    <td ng-if="ctrl.tableColumns[15].visible">{{ item.admin.user }}</td>
                     <td>
                         <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id )}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>

@@ -7,14 +7,21 @@ angular.module('Rooms', [
     'Authentication',
     'GlobalVarsSrvs'
 ])
-    .controller('RoomsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
+    .controller('RoomsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'api', '$routeParams', function ($scope, AuthenticationService, makeController, globalVarsSrv, api, $routeParams) {
 
         $scope.ctrl = makeController.mainController('/rooms', 'roomsTableConf', 'Κατάλογος Αιθουσών');
         $scope.ctrl.init();
 
+        $scope.deleteUsage = function (room, usage) {
+            api.apiCall('DELETE', $scope.baseURL + "/rooms/" + $routeParams.id + '/roomuse/' + usage + '/' + id, function (results) {
+                $scope.dp[$scope.dp.indexOf(room)].room_use.splice($scope.dp[$scope.dp.indexOf(room)].room_use.indexOf(usage), 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'room-use diagrafh', 1);
+            })
+        };
+
     }])
 
-    .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
+    .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, $routeParams, api, MakeModal, AuthenticationService, makeController, globalVarsSrv) {
         $scope.ctrl = makeController.profileController('/rooms', 'roomsTableConf');
         $scope.ctrl.init();
 

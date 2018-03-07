@@ -34,17 +34,14 @@
                     <td ng-if="ctrl.tableColumns[12].visible">{{item.xoros}}</td>
                     <td ng-if="ctrl.tableColumns[13].visible">{{item.exams_capasity }}</td>
                     <td ng-if="ctrl.tableColumns[14].visible">{{item.capasity_categ}}</td>
-
                     <td ng-if="ctrl.tableColumns[15].visible">
                         <li ng-repeat="tm in item.tms">{{tm.descr}}</li>
                     </td>
-
                     <td ng-if="ctrl.tableColumns[16].visible">{{item.stat_comm}}</td>
-                    <td ng-if="ctrl.tableColumns[17].visible">{{item.config.year}}</td>
-                    <td ng-if="ctrl.tableColumns[18].visible">{{item.room_category.descr}}</td>
-                    <td ng-if="ctrl.tableColumns[19].visible">
+                    <td ng-if="ctrl.tableColumns[17].visible">{{ item.config.year }}</td>
+                    <td ng-if="ctrl.tableColumns[18].visible">
                         <li ng-repeat="use in item.room_use">
-                            <button ng-click="deleteUsageRoom(item, use)">x</button>
+                            <button ng-click="deleteUsage(item, use)">x</button>
                             {{use.synt}}
                         </li>
                     </td>

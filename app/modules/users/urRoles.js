@@ -21,26 +21,8 @@ angular.module('Users')
     .directive('evRolesForm', function () {
         return {
             restrict: 'EA',
-            templateUrl: 'modules/users/uviews/evRolesForm.html',
-            controller: "EvRolesFormController"
+            templateUrl: 'modules/users/uviews/evRolesForm.html'
         }
     })
-    .controller('EvRolesFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
-        $scope.baseURL = 'api/public/users';
 
-        $scope.cancelUrData = function () {
-            $scope.ctrl.pivotData = null;
-            $scope.ctrl.currentRight = null;
-        };
-
-        $scope.insertRole = function () {
-            var method = "PUT";
-            if ($scope.ctrl.state === 0) method = "POST";
-            api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/roles/' + $scope.ctrl.currentRight.id, function (results) {
-                $scope.ctrl.pivotData = Object.assign({}, $scope.ctrl.pivotTable);
-                $scope.ctrl.ldp = results.data;
-                $scope.ctrl.compare($scope.ctrl.ldp, $scope.ctrl.rdp);
-                $scope.cancelUrData();
-            }, undefined, $scope.ctrl.pivotData);
-        };
-    }]);
+;

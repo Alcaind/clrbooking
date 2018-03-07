@@ -19,7 +19,7 @@ class Items extends Model
 
     public function rooms()
     {
-        return $this->belongsToMany("\\App\\Models\\Rooms", 'room_items', 'item_id', 'room_id');
+        return $this->belongsToMany("\\App\\Models\\Rooms", 'room_items', 'item_id', 'room_id')->withPivot('comments', 'stat', 'from', 'to');
     }
 
 }

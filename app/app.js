@@ -232,7 +232,7 @@ angular.module('clrBooking', [
                     title: 'rooms',
                     template: '<room-profile></room-profile>'
                 })
-                .when('/rooms/:id/usages', {
+                .when('/rooms/:id/roomuse', {
                     title: 'user request',
                     controller: 'RoomsUsagesController',
                     templateUrl: 'modules/rooms/rviews/UCroom.html'
@@ -250,7 +250,15 @@ angular.module('clrBooking', [
                 .when('/rooms/:id/requests', {
                     title: 'room requests',
                     controller: 'RoomRequestsController',
-                    templateUrl: 'modules/rooms/rviews/request/roomRequest.html'
+                    templateUrl: 'modules/requests/reqviews/requests.html'
+                })
+                .when('/rooms/:rid/requests/create', {
+                    title: 'request rooms create',
+                    template: '<req-rooms-profile></req-rooms-profile>'
+                })
+                .when('/rooms/:rid/requests/:id', {
+                    title: 'request rooms',
+                    template: '<req-rooms-profile></req-rooms-profile>'
                 })
                 .when('/tms', {
                     title: 'tm',

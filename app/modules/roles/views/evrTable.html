@@ -6,22 +6,17 @@
             <th>Επώνυμο</th>
             <th>...</th>
         </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="user in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
+        <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
             style="cursor: pointer">
-            <td>{{ user.user}}</td>
-            <td>{{ user.fname }}</td>
-            <td>{{ user.sname }}</td>
+            <td>{{ item.user}}</td>
+            <td>{{ item.fname }}</td>
+            <td>{{ item.sname }}</td>
             <td>
-                <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
-                        class="glyphicon glyphicon-pencil"></span></a>
-                <button ng-click="user.disabled?null:ctrl.showPivotData(user)" type="button"
-                        class="btn {{user.disabled?'btn-regular disabled':'btn-success '}}">
+                <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
+                        class="btn {{item.disabled?'btn-regular disabled':'btn-success '}}">
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
             </td>
         </tr>
-        </tbody>
     </table>
 </div>

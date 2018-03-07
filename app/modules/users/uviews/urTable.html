@@ -12,19 +12,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="role in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filter"
-            style="cursor: pointer" ng-class="{selected: role.id === item.id}">
-            <td>{{ role.id }}</td>
-            <td>{{ role.role }}</td>
-            <td>{{ role.descr }}</td>
-            <th>{{ role.pivot.comment }}</th>
-            <th>{{ role.pivot.exp_dt}}</th>
-            <th>{{ role.pivot.status}}</th>
+        <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filterL"
+            style="cursor: pointer">
+            <td>{{ item.id }}</td>
+            <td>{{ item.role }}</td>
+            <td>{{ item.descr }}</td>
+            <th>{{ item.pivot.comment }}</th>
+            <th>{{ item.pivot.exp_dt}}</th>
+            <th>{{ item.pivot.status}}</th>
             <td>
-                <button ng-click="ctrl.editPivotData(role)" type="button" class="btn btn-info">
+                <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button ng-click="ctrl.deleteData(role.id)" type="button" class="btn btn-danger">
+                <button ng-click="ctrl.deleteData(item.id)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

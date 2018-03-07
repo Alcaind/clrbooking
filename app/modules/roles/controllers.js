@@ -58,25 +58,6 @@ angular.module('Roles', [
         return {
             restrict: 'EA',
             templateUrl: 'modules/roles/views/evRolesForm.html',
-            controller: "EvUserRolesFormController"
         }
     })
-    .controller('EvUserRolesFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
-        $scope.baseURL = 'api/public/roles';
-
-        $scope.cancelUrData = function () {
-            $scope.ctrl.pivotData = null;
-            $scope.ctrl.currentRight = null;
-        };
-
-        $scope.insertRole = function () {
-            var method = "PUT";
-            if ($scope.ctrl.state === 0) method = "POST";
-            api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/users/' + $scope.ctrl.currentRight.id, function (results) {
-                $scope.ctrl.pivotData = Object.assign({}, $scope.ctrl.pivotTable);
-                $scope.ctrl.ldp = results.data;
-                $scope.ctrl.compare($scope.ctrl.ldp, $scope.ctrl.rdp);
-                $scope.cancelUrData();
-            }, undefined, $scope.ctrl.pivotData);
-        };
-    }]);
+;

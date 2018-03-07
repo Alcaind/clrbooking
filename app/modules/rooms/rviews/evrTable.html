@@ -7,15 +7,15 @@
             <th>Σχόλια</th>
             <th>...</th>
         </tr>
-        <tr ng-repeat="room in rData.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:filterR"
-            style="cursor: pointer" ng-class="{selected: room.id === item.id}">
-            <td>{{room.id }}</td>
-            <td>{{room.synt}}</td>
-            <td>{{room.descr }}</td>
-            <td>{{room.comment}}</td>
+        <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
+            style="cursor: pointer">
+            <td>{{item.id }}</td>
+            <td>{{item.synt}}</td>
+            <td>{{item.descr }}</td>
+            <td>{{item.comment}}</td>
             <td>
-                <button ng-click="room.disabled?null:showUrData(room)" type="button"
-                        class="btn {{room.disabled?'btn-regular disabled':'btn-success '}}">
+                <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
+                        class="btn {{item.disabled?'btn-regular disabled':'btn-success '}}">
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
             </td>

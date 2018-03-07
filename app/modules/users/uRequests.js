@@ -7,7 +7,6 @@ angular.module('Users')
             $scope.ctrl = makeController.mainController('/requests/users/' + $routeParams.id, 'requestsTableConf', "Κατοχυρωμένα αιτήματα στον " + user.user);
             $scope.ctrl.init();
 
-            });
-
+        });
     }])
 ;

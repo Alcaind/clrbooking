@@ -10,9 +10,10 @@
         </div>
         <label>Κατάσταση:<input type="text" ng-model="ctrl.pivotData.status" class="form-control"
                                 placeholder="status"></label><br>
-        <button type="button" class="btn btn-primary" ng-click="insertRole()" style="padding: 5px">ok
+        <button type="button" class="btn btn-primary" ng-click="ctrl.insertPivotItem(ctrl.pivotData)"
+                style="padding: 5px">ok
         </button>
-        <button type="button" class="btn btn-primary" ng-click="cancelUrData()" style="padding: 5px">
+        <button type="button" class="btn btn-primary" ng-click="ctrl.cancelPivotData()" style="padding: 5px">
             cancel
         </button>
     </form>

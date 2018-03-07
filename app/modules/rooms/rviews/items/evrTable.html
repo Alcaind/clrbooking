@@ -9,17 +9,17 @@
             <th>...</th>
         </tr>
         <tbody>
-        <tr ng-repeat="items in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
+        <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
             style="cursor: pointer">
-            <td>{{items.id }}</td>
-            <td>{{items.descr}}</td>
-            <td>{{items.comments }}</td>
-            <td>{{items.code }}</td>
-            <td>{{items.status }}</td>
+            <td>{{item.id }}</td>
+            <td>{{item.descr}}</td>
+            <td>{{item.comments }}</td>
+            <td>{{item.code }}</td>
+            <td>{{item.status }}</td>
 
             <td>
-                <button ng-click="items.disabled?null:ctrl.showPivotData(items)" type="button"
-                        class="btn {{items.disabled?'btn-regular disabled':'btn-success '}}">
+                <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
+                        class="btn {{item.disabled?'btn-regular disabled':'btn-success '}}">
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
             </td>

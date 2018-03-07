@@ -11,17 +11,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="tms in rData.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:filter"
-            style="cursor: pointer" ng-class="{selected: tms.id === item.id}">
-            <td>{{ tms.id }}</td>
-            <td>{{ tms.tm_code }}</td>
-            <td>{{ tms.descr}}</td>
-            <td>{{ tms.title}}</td>
-            <td>{{ tms.sxoli}}</td>
+        <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
+            style="cursor: pointer">
+            <td>{{ item.id }}</td>
+            <td>{{ item.tm_code }}</td>
+            <td>{{ item.descr}}</td>
+            <td>{{ item.title}}</td>
+            <td>{{ item.sxoli}}</td>
 
             <td>
-                <button ng-click="tms.disabled?null:showPivotData(tms)" type="button"
-                        class="btn {{tms.disabled?'btn-regular disabled':'btn-success '}}">
+                <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
+                        class="btn {{item.disabled?'btn-regular disabled':'btn-success '}}">
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
             </td>

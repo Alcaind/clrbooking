@@ -22,12 +22,6 @@ angular.module('Requests', [
             $scope.users = results.data;
         });
 
-        // $scope.periods = {};
-        //
-        // api.apiCall('GET', 'api/public/periods', function (results) {
-        //     $scope.periods = results.data;
-        // });
-
         $scope.periods = {};
 
         api.apiCall('GET', 'api/public/periods', function (results) {
