@@ -89,7 +89,7 @@
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.date_index.$invalid && !requestForm.date_index.$pristine }">
             <label class="required" for="date_index">Kαταχώρηση αιτήματος<span class="form-required">*</span>:</label>
-            <input id="date_index" name="date_index" class="form-control" type="text" ng-model="ctrl.item.date_index">
+            <input id="date_index" name="date_index" class="form-control" type="date" ng-model="ctrl.item.date_index">
             <p ng-show="requestForm.date_index.$invalid && !requestForm.date_index.$pristine" class="help-block">
                 Εισάγετε ημερομηνιά καταχώρησης του αιτήματος.</p>
         </div>

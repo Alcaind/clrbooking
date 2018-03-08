@@ -1,0 +1,13 @@
+<table class="sorttable table table-hover table-striped table-responsive header-fixed">
+    <thead>
+    <tr>
+        <th ng-repeat="day in days track by $index"> {{day}}</th>
+    <tbody>
+    <tr ng-repeat="hour in hours"
+        style="cursor: pointer">
+        <td style="background-color: {{calendarArray[$index][hour]>0?'#1d9ad6':'#ffffff'}}"
+            ng-repeat="day in days track by $index">{{calendarArray[$index][hour]}}
+        </td>
+    </tr>
+    </tbody>
+</table>

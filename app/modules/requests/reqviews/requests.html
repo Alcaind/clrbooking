@@ -45,6 +45,9 @@
         </div>
         <pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
     </div>
+    <div id="graphView" ng-show="calendar">
+        <calendar-book calendar-array="calendar" fromd="fromd" tod="tod"></calendar-book>
+    </div>
 </div>
 
 

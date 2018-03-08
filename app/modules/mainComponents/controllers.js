@@ -249,6 +249,7 @@ angular.module('MainComponents', [
             templateUrl: 'modules/mainComponents/views/tableTools.html'
         }
     })
+
 ;
 
 

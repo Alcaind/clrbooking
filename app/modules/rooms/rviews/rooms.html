@@ -41,7 +41,7 @@
                     <td ng-if="ctrl.tableColumns[17].visible">{{ item.config.year }}</td>
                     <td ng-if="ctrl.tableColumns[18].visible">
                         <li ng-repeat="use in item.room_use">
-                            <button ng-click="deleteUsage(item, use)">x</button>
+                            <button ng-click="ctrl.deleteData(item.id)">x</button>
                             {{use.synt}}
                         </li>
                     </td>

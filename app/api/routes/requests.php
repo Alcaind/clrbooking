@@ -123,7 +123,6 @@ $app->delete('/requests/{id}', function ($request, $response, $args) {
 $app->put('/requests/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
     try {
         $requests = \App\Models\Requests::find($id);
         $requests->req_dt = $data['req_dt'] ?: $requests->req_dt;

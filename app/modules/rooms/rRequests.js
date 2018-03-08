@@ -1,12 +1,22 @@
 angular.module('Rooms')
     .controller('RoomRequestsController', ['$scope', 'AuthenticationService', 'makeController', '$routeParams', 'api', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, $routeParams, api, globalVarsSrv) {
         var room = {};
+        $scope.fromd = '2018-04-04T00:00:00';
+        $scope.tod = '2018-05-04T00:00:00';
 
         api.apiCall('GET', globalVarsSrv.getGlobalVar('appUrl') + "/rooms/" + $routeParams.id, function (results) {
             room = results.data;
+            //$scope.calendar = [];
+
             $scope.ctrl = makeController.mainController('/rooms/' + $routeParams.id + '/requests', 'requestsTableConf', "Κατοχυρωμένα αιτήματα στην αίθουσα " + room.name);
             $scope.ctrl.init();
 
+            $scope.$watch('ctrl.dp', function () {
+                for (var i = 0; i < $scope.ctrl.dp.length; i++) {
+                    var mdt = new Date($scope.ctrl.dp[i].fromd + 'T' + $scope.ctrl.dp[i].fromdt);
+                    $scope.calendar[$scope.ctrl.dp[i].date_index][mdt.getHours()] = 1;
+                }
+            });
         })
     }])
     .controller('RoomRequestsProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {

@@ -1,0 +1,44 @@
+<div style="display: flex">
+    <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+        <tbody>
+        <tr>
+            <td>Χρήστης:</td>
+            <td>
+                <select id="user" name="user" ng-model="ctrl.item.user"
+                        ng-options="user.id as user.user for user in users"></select></td>
+        </tr>
+        <tr>
+            <td>Αιθουσα:</td>
+            <td><select id="room_id" name="room_id" ng-model="ctrl.item.room_id"
+                        ng-options="room.id as room.name for room in rooms"></select></td>
+        </tr>
+        <tr>
+            <td>Date_Index:</td>
+            <td><input type="date" id="date_index" name="date_index" ng-model="roombook.date_index"></td>
+        </tr>
+        <tr>
+            <td>Από Ημ/νία:</td>
+            <td><input type="date" id="fromd" name="fromd" ng-model="roombook.fromd"></td>
+        </tr>
+        <tr>
+            <td>Έως Ημ/νία:</td>
+            <td><input type="date" id="tod" name="tod" ng-model="roombook.tod"></td>
+        </tr>
+        <tr>
+            <td>Από Ώρα:</td>
+            <td><input type="time" id="fromt" name="fromt" ng-model="roombook.fromt"></td>
+        </tr>
+        <tr>
+            <td>Έως Ώρα:</td>
+            <td><input type="time" id="tot" name="tot" ng-model="roombook.tod"></td>
+        </tr>
+        <tr>
+            <td>Περίοδος:</td>
+            <td><select id="period" name="period" ng-model="ctrl.item.period"
+                        ng-options="period.id as period.descr for period in periods"></select></td>
+        </tr>
+        </tbody>
+    </table>
+    <button ng-click="getAll()">Get data</button>
+
+</div>
