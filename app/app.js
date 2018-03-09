@@ -327,6 +327,11 @@ angular.module('clrBooking', [
                     controller: 'BookController',
                     templateUrl: 'modules/bookview/bookview.html'
                 })
+                .when('/roombook/dates', {
+                    title: 'roombook',
+                    controller: 'BookController',
+                    templateUrl: 'modules/bookview/bookview.html'
+                })
 
                 /*.when('/', {
                     controller: 'HomeController',

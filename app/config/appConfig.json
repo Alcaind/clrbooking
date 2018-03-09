@@ -777,12 +777,97 @@
       "filter": ""
     }
   ],
-
-
-
-
-
-
+  "rooombookTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "user_id",
+      "title": "Χρήστης",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "date_index",
+      "title": "date_index",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "fromt",
+      "title": "fromt",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tot",
+      "title": "tot",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "type",
+      "title": "type",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "period",
+      "title": "period",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "room_id",
+      "title": "room_id",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "fromd",
+      "title": "fromd",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "tod",
+      "title": "tod",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "request_id",
+      "title": "request_id",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "status",
+      "title": "status",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "comment",
+      "title": "comment",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
   "roomsTableConfOps": [
     {
       "hr": "#/rooms/id",
@@ -933,6 +1018,4 @@
       "gicon": "glyphicon-import"
     }
   ]
-
-
 }

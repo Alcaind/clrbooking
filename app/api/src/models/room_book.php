@@ -8,6 +8,7 @@
 
 namespace App\Models;
 
+use  \Illuminate\Database\Eloquent\Model as Model;
 
 class RoomBook extends Model
 {
