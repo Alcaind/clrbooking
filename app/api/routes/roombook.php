@@ -12,7 +12,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/roombook', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $roombook = \App\Models\RoomBook::all();
+    $roombook = \App\Models\RoomBook::with('room')->get();
     return $response->getBody()->write($roombook->toJson());
 });
 
@@ -20,11 +20,11 @@ $app->post('/roombook/dates', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     //return $response->getBody()->write(json_encode($data));
-    $roombook = \App\Models\RoomBook::where('fromd', '>=', $data['fromd'])->where('fromd', '<=', $data['tod'])
+    $roombook = \App\Models\RoomBook::with('room')
+        ->where('fromd', '>=', $data['fromd'])->where('fromd', '<=', $data['tod'])
         ->orWhere(function ($query) use ($data) {
             $query->where('tod', '<=', $data['tod'])->where('tod', '>=', $data['fromd']);
-        })
-        ->get();
+        })->get();
     return $response->getBody()->write($roombook->toJson());
 });
 //

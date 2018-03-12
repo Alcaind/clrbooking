@@ -12,7 +12,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/config', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $config = \App\Models\Config::all();
+    $config = \App\Models\Config::with('periods')->get();
     return $response->getBody()->write($config->toJson());
 });
 
@@ -20,7 +20,7 @@ $app->get('/config/{id}', function (Request $request, Response $response, $args)
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $config = \App\Models\Config::find($id);
+        $config = \App\Models\Config::with('periods')->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();

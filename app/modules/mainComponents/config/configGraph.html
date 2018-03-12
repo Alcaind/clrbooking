@@ -1,0 +1,18 @@
+<div style="">
+    <div style="width: {{configuration.totalDays}}px;text-align: center;  background-color: #1d9ad6; "
+         data-toggle="popover"
+         data-content="{{configuration.fromd| date:'dd/MM/yyyy'}} - {{configuration.tod| date:'dd/MM/yyyy'}}"
+         data-trigger="hover">
+        {{configuration.year}}
+    </div>
+    <div style="display: contents;height: 25px;">
+        <div ng-repeat="p in configuration.periods"
+             style="width: {{p.totalDays}}px; background-color: cornflowerblue; cursor: pointer; color: #F1F1F1; text-align: center; margin: 2px; position: relative; left: {{p.fdIndex}}px; width: {{p.totalDays}}px; "
+             data-toggle="popover"
+             data-content="{{p.fromd| date:'dd/MM/yyyy'}} - {{p.tod| date:'dd/MM/yyyy'}} ({{p.comments}})"
+             data-trigger="hover"
+             ng-click="setPeriod(p)">
+            {{p.synt}}
+        </div>
+    </div>
+</div>

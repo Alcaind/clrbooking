@@ -1,12 +1,22 @@
-<table class="sorttable table table-hover table-striped table-responsive header-fixed">
+<table class="sorttable table table-hover table-striped table-responsive table-condensed table-bordered header-fixed">
     <thead>
     <tr>
+        <th>Ωρα</th>
         <th ng-repeat="day in days track by $index"> {{day}}</th>
     <tbody>
-    <tr ng-repeat="hour in hours"
+    <tr
         style="cursor: pointer">
-        <td style="background-color: {{calendarArray[$index][hour]>0?'#1d9ad6':'#ffffff'}}"
-            ng-repeat="day in days track by $index">{{calendarArray[$index][hour]}}
+        <td>
+            <div ng-repeat="hour in hours" style="top: {{$index*60}}px; height: 60px">{{$index}}:00</div>
+        </td>
+        <td ng-repeat="day in days track by $index">
+            <div style="display: flex;">
+                <button ng-repeat="book in calendarArray[$index]" class="info btn btn-info"
+                        style="margin: 2px; top: {{book.dist}}px; height: {{book.h}}px; position: relative; font-size: smaller"
+                        data-toggle="popover" data-content="{{book.room.name}} {{book.fromt}}-{{book.tot}}"
+                        data-trigger="hover">{{book.room.id}}
+                </button>
+            </div>
         </td>
     </tr>
     </tbody>

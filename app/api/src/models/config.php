@@ -13,7 +13,6 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 
 class Config extends Model
 {
-
     protected $table = 'config';
 
     public function rooms()

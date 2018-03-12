@@ -55,4 +55,9 @@ class Rooms extends Model
     {
         return $this->belongsToMany('\\App\\Models\\Requests', 'request_rooms', 'room_id', 'req_id')->withPivot(['comment', 'teacher']);
     }
+
+    public function books()
+    {
+        return $this->hasMany('\\App\\Models\\RoomBook');
+    }
 }

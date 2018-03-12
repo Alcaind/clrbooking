@@ -14,4 +14,9 @@ class RoomBook extends Model
 {
     protected $table = 'room_book';
 
+    public function room()
+    {
+        return $this->belongsTo('\\App\\Models\\Rooms');
+    }
+
 }
