@@ -7,16 +7,17 @@ angular.module('Rooms', [
     'Authentication',
     'GlobalVarsSrvs'
 ])
-    .controller('RoomsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, api) {
+    .controller('RoomsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'api', 'MakeModal', function ($scope, AuthenticationService, makeController, globalVarsSrv, api, MakeModal) {
 
         $scope.ctrl = makeController.mainController('/rooms', 'roomsTableConf', 'Κατάλογος Αιθουσών');
         $scope.ctrl.init();
 
-        $scope.deleteUsage = function (id) {
-            api.apiCall('DELETE', ctrl.baseURL + "/" + $routeParams.id + '/' + table + '/' + id, function (results) {
-                ctrl.ldp = results.data;
-                ctrl.compare(ctrl.ldp, ctrl.rdp);
-            }, undefined, id);
+        $scope.deleteUsage = function (item, usage) {
+            api.apiCall('DELETE', "api/public/rooms/" + item.id + '/usages/' + usage.id, function (results) {
+                $scope.ctrl.dp[$scope.ctrl.dp.indexOf(item)].room_use.splice($scope.ctrl.dp[$scope.ctrl.dp.indexOf(item)].room_use.indexOf(usage), 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Eπιτυχής διαγραφή', 1)
+            })
+
         };
 
     }])

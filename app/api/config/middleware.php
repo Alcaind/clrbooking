@@ -76,7 +76,7 @@ $container["HttpBasicAuthentication"] = function ($container) {
             "user" => "user",
             "hash" => "hash"
         ]),
-        "users" => ["tt" => "tt"],
+        "users" => '',
         "environment" => "REDIRECT_HTTP_AUTHORIZATION"
     ]);
 };

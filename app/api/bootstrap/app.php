@@ -38,7 +38,7 @@ require __DIR__ . '/../src/models/room_book.php';
 
 $app = new \Slim\App([
     'settings' => [
-        'displayErrorDetails' => true,
+        'displayErrorDetails' => false,
         "addContentLengthHeader" => false,
         'determineRouteBeforeAppMiddleware' => false,
         'db' => [

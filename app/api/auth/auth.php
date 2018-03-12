@@ -87,6 +87,7 @@ $app->post("/token", function (Request $request, Response $response) {
 $app->post("/login", function (Request $request, Response $response) {
     $now = new DateTime();
     $server = $request->getServerParams();
+    //print_r($server);
     $a = '';
     for ($i = 0; $i < 16; $i++) $a .= mt_rand(0, 9);
 
@@ -107,12 +108,15 @@ $app->post("/login", function (Request $request, Response $response) {
 
     $future = new DateTime("now +1 hour");
 
+    $roles = \App\Models\Users::with('roles')->where('user', '=', $server['PHP_AUTH_USER'])->get();
+    //print_r($roles);
     $payload = [
         "iat" => $now->getTimeStamp(),
         "exp" => $future->getTimeStamp(),
         "jti" => $jti,
         "sub" => $server["PHP_AUTH_USER"],
         "scope" => ["put", "get", "post"],
+        "roles" => $roles,
         "refresh-token" => $refreshToken
     ];
 

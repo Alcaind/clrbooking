@@ -34,7 +34,14 @@ angular.module('Login', ['Authentication', 'MainComponents'])
                             window.location('app.livepraktoreio.gr/' + $rootScope.app);
                             return;
                         }
-                        $location.path('/home');
+                        for (var i = 0; i < tokenPayload.roles[0].roles.length; i++) {
+                            if (tokenPayload.roles[0].roles[i].role === 'admin') {
+                                $location.path('/home');
+                                break;
+                            }
+                        }
+                        $location.path('/roles');
+
                     });
                 }
             }]);

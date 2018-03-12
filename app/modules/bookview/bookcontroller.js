@@ -52,6 +52,7 @@ angular.module('RoomBook', [
             * plotting the data
             * days parsing (cerful i is from 0 to diff the true date if holded in the dateIndex var ;)*/
             for (var i = 0; i < days; i++) {
+                calendar[i] = [];
                 /* search the book */
                 for (var j = 0; j < book.length; j++) {
                     /* get book dates */

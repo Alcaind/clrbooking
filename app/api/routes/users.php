@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/users', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr'])->get();
+    $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr', 'roles'])->get();
     return $response->getBody()->write($users->toJson());
 });
 
@@ -22,7 +22,7 @@ $app->get('/users/{id}', function (Request $request, Response $response, $args) 
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr'])->find($id);
+        $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr', 'roles'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -88,7 +88,7 @@ $app->put('/users/{id}', function ($request, $response, $args) {
         $users->cat_id = $data['cat_id'] ?: $users->cat_id;
         $users->comments = $data['comments'] ?: $users->comments;
         $users->user = $data['user'] ?: $users->user;
-        $users->hash = $data['hash'] ?: $users->hash;
+        $users->hash = password_hash($data['hash'], PASSWORD_DEFAULT) ?: $users->hash;
         $users->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);

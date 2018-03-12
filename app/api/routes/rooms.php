@@ -405,5 +405,20 @@ $app->get('/rooms/requests/rooms/{id}', function (Request $request, Response $re
     return $response->getBody()->write($requests->toJson());
 });
 
+$app->delete('/rooms/{id}/usages/{uid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $uid = $args['uid'];
+    try {
+        $room = \App\Models\Rooms::find($id);
+        $room->room_use()->detach($uid);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(200)->getBody()->write($room->toJson());
+});
+
 
 
