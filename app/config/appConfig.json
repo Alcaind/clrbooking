@@ -868,6 +868,138 @@
       "filter": ""
     }
   ],
+  "homeButtonAdminTableConf": [
+    {
+      "column": "roles",
+      "title": "Ρόλοι"
+    },
+    {
+      "column": "users",
+      "title": "Χρήστες"
+    },
+    {
+      "column": "kats",
+      "title": "Κατευθύνσεις"
+    },
+    {
+      "column": "requests",
+      "title": "Αιτήματα"
+    },
+    {
+      "column": "rooms",
+      "title": "Αίθουσες"
+    },
+    {
+      "column": "tms",
+      "title": "Τμήματα"
+    },
+    {
+      "column": "config",
+      "title": "Configuration"
+    },
+    {
+      "column": "items",
+      "title": "Εξοπλισμός"
+    },
+    {
+      "column": "periods",
+      "title": "Ακαδημαικοι Περίοδοι"
+    },
+    {
+      "column": "ps",
+      "title": "Προγραμμα σπουδών"
+    },
+    {
+      "column": "booking",
+      "title": "Κλείσιμο Αιθουσας not yet"
+    },
+    {
+      "column": "roombook",
+      "title": "Διαθεσιμότητα Αιθουσών"
+    },
+    {
+      "column": "userscategories",
+      "title": "Κατηγορίες Χρηστών"
+    },
+    {
+      "column": "roomcategory",
+      "title": "Κατηγορίες Αιθουσών"
+    },
+    {
+      "column": "roomuse",
+      "title": "Χρήση Αιθουσών"
+    },
+    {
+      "column": "psstats",
+      "title": "Στατιστικά"
+    },
+    {
+      "column": "roombook",
+      "title": "Διαθεσιμότητα"
+    },
+    {
+      "column": "usercreaterequests",
+      "title": "UserView"
+    }
+  ],
+  "homeButtonUserTableConf": [
+    {
+      "column": "kats",
+      "title": "Κατευθύνσεις"
+    },
+    {
+      "column": "requests",
+      "title": "Αιτήματα"
+    },
+    {
+      "column": "rooms",
+      "title": "Αίθουσες"
+    },
+    {
+      "column": "tms",
+      "title": "Τμήματα"
+    },
+    {
+      "column": "config",
+      "title": "Configuration"
+    },
+    {
+      "column": "items",
+      "title": "Εξοπλισμός"
+    },
+    {
+      "column": "periods",
+      "title": "Ακαδημαικοι Περίοδοι"
+    },
+    {
+      "column": "ps",
+      "title": "Προγραμμα σπουδών"
+    },
+    {
+      "column": "booking",
+      "title": "Κλείσιμο Αιθουσας not yet"
+    },
+    {
+      "column": "roombook",
+      "title": "Διαθεσιμότητα Αιθουσών"
+    },
+    {
+      "column": "userscategories",
+      "title": "Κατηγορίες Χρηστών"
+    },
+    {
+      "column": "roomcategory",
+      "title": "Κατηγορίες Αιθουσών"
+    },
+    {
+      "column": "roomuse",
+      "title": "Χρήση Αιθουσών"
+    },
+    {
+      "column": "psstats",
+      "title": "Στατιστικά"
+    }
+  ],
   "roomsTableConfOps": [
     {
       "hr": "#/rooms/id",

@@ -47,6 +47,8 @@ angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
                     auth.username = jwtHelper.decodeToken(store.get('jwt').token).sub;
                     auth.authdata = '';
                     globalVarsSrv.setGlobalVar('auth', auth);
+                    //globalVarsSrv.setGlobalVar('', null)
+                    globalVarsSrv.setGlobalVar('menuRole', null);
 
                     store.set('jwt', null);
                     store.set('rwt', null);

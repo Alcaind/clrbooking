@@ -42,6 +42,8 @@ $capsule->getContainer()->singleton(
     App\Exceptions\Handler::class
 );
 
+$container['capsule'] = $capsule;
+
 $container['db'] = function ($container) {
-    //return $capsule;
+    return $container['capsule'];
 };

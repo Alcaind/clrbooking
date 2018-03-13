@@ -4,12 +4,27 @@ var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies', 'M
 
 globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($http, $cookies, $window) {
     var globalVariables = {};
+    var listeners = [];
+
+    function addListener(varListen, listener) {
+        if (!listeners[varListen]) listeners[varListen] = [];
+        listeners[varListen].push(listener);
+    }
+
+    function removeListener(varListen, listener) {
+        listeners[varListen][listeners.indexOf(listener)].delete();
+    }
 
     function getGlobalVar(gVar) {
         return globalVariables[gVar];
     }
 
     function setGlobalVar(gVar, value) {
+        if (listeners[gVar])
+            for (var i = 0; i < listeners[gVar].length; i++) {
+                var listener = listeners[gVar][i];
+                listener(value, globalVariables[gVar]);
+            }
         globalVariables[gVar] = value;
     }
 
@@ -56,7 +71,8 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($
         'initFromFile': initFromFile,
         'appInit': appInit,
         'cookieGet': cookieGet,
-        'cookieSave': cookieSave
+        'cookieSave': cookieSave,
+        'addListener': addListener
     };
     return glbSrv;
 }]);

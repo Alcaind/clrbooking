@@ -1,8 +1,8 @@
 'use strict';
-angular.module('Login', ['Authentication', 'MainComponents'])
+angular.module('Login', ['Authentication', 'MainComponents', 'GlobalVarsSrvs'])
     .controller('LoginController',
-        ['$scope', '$http', '$rootScope', '$location', '$cookies', '$cookieStore', 'AuthenticationService', 'jwtHelper', 'store',
-            function ($scope, $http, $rootScope, $location, $cookies, $cookieStore, AuthenticationService, jwtHelper, store) {
+        ['$scope', '$http', '$rootScope', '$location', '$cookies', '$cookieStore', 'AuthenticationService', 'jwtHelper', 'store', 'globalVarsSrv',
+            function ($scope, $http, $rootScope, $location, $cookies, $cookieStore, AuthenticationService, jwtHelper, store, globalVarsSrv) {
 
                 $scope.errorString = 'Εισάγετε τα στοιχεία σας για να συνδεθείτε!';
                 $scope.login = function () {
@@ -24,19 +24,12 @@ angular.module('Login', ['Authentication', 'MainComponents'])
                         var expToken = response.data.token;
                         var tokenPayload = jwtHelper.decodeToken(expToken);
 
-                        //$rootScope.globals = {item: tokenPayload.curlResults};
-                        //$rootScope.user = $scope.usr;
-
-                        //$cookies.put('user', $rootScope.globals.item);
-                        //$cookieStore.put('user', $rootScope.globals.item);
-
-                        if ($rootScope.app) {
-                            window.location('app.livepraktoreio.gr/' + $rootScope.app);
-                            return;
-                        }
+                        globalVarsSrv.setGlobalVar('menuRole', 'user');
                         for (var i = 0; i < tokenPayload.roles[0].roles.length; i++) {
                             if (tokenPayload.roles[0].roles[i].role === 'admin') {
-                                $location.path('/home');
+                                globalVarsSrv.setGlobalVar('menuRole', 'admin');
+                                $location.path('/users');
+                                return;
                                 break;
                             }
                         }

@@ -53,6 +53,11 @@ angular.module('MainComponents', [
         }
     })
     .controller('NavmenuController', ['$scope', '$interval', 'AuthenticationService', 'globalVarsSrv', function ($scope, $interval, AuthenticationService, globalVarsSrv) {
+        function roleMenuListener(nv, ov) {
+            $scope.adminColums = globalVarsSrv.getGlobalVar(nv === 'admin' ? 'homeButtonAdminTableConf' : nv === null ? '' : 'homeButtonUserTableConf');
+        }
+
+        globalVarsSrv.addListener('menuRole', roleMenuListener);
         $scope.toggleDropdown = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -61,7 +66,8 @@ angular.module('MainComponents', [
 
         $scope.logout = function () {
             AuthenticationService.ClearCredentials();
-        }
+
+        };
 
         $scope.close = function () {
             globalVarsSrv.cookieSave();

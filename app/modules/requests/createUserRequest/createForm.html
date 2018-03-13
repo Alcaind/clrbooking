@@ -1,0 +1,53 @@
+<div ng-if="currentPage===0">
+    <label>Από Ημ/νία:
+        <pre> <em>{{item.fromd | date:'fullDate' }}</em></pre>
+    </label> <br>
+    <div style="display:flex; min-height:290px;">
+        <div uib-datepicker ng-model="item.fromd" class="well well-sm"></div>
+    </div>
+    <label>Μέχρι Ημ/νία:
+        <pre> <em>{{item.tod | date:'fullDate' }}</em></pre>
+    </label>
+    <div style="display:flex; min-height:290px;">
+        <div uib-datepicker ng-model="item.tod" class="well well-sm"></div>
+    </div>
+</div>
+
+<div ng-show="currentPage===1">
+    <label>Από Ημ/νία:
+        <pre> <em>{{item.fromd | date:'fullDate' }}</em></pre>
+    </label> <br>
+    <label>Μέχρι Ημ/νία:
+        <pre> <em>{{item.tod | date:'fullDate' }}</em></pre>
+    </label>
+    <div>
+        <table class="table table-striped" style="width:50%;">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Αίθουσα</th>
+                <th>...</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="room in rooms" ng-click="roomChecked(room)"
+                style="cursor: pointer">
+                <td>{{room.id }}</td>
+                <td>{{room.name}}</td>
+                <td>
+                    <!--<button ng-click="room.disabled?null:ctrl.showPivotData(room)" type="button"
+                            class="btn {{room.disabled?'btn-regular disabled':'btn-success '}}">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>-->
+                    ...
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <calendar-book calendar-array="calendar" fromd="item.fromd" tod="item.tod"></calendar-book>
+</div>
+
+<button ng-click="nextPage()">next -></button>
+<button ng-click="init()"> - init -</button>
+<button ng-click="nextPage()">prev -></button>

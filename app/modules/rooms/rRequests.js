@@ -8,7 +8,7 @@ angular.module('Rooms')
             room = results.data;
             //$scope.calendar = [];
 
-            $scope.ctrl = makeController.mainController('/rooms/' + $routeParams.id + '/requests', 'requestsTableConf', "Κατοχυρωμένα αιτήματα στην αίθουσα " + room.name);
+            $scope.ctrl = makeController.mainController('/requests/rooms/' + $routeParams.id, 'requestsTableConf', "Κατοχυρωμένα αιτήματα στην αίθουσα " + room.name);
             $scope.ctrl.init();
 
             $scope.$watch('ctrl.dp', function () {

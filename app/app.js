@@ -332,6 +332,12 @@ angular.module('clrBooking', [
                     controller: 'BookController',
                     templateUrl: 'modules/bookview/bookview.html'
                 })
+                .when('/usercreaterequests', {
+                    title: 'user create requests',
+                    controller: 'CreateFormController',
+                    templateUrl: 'modules/requests/createUserRequest/createForm.html'
+                })
+
 
                 /*.when('/', {
                     controller: 'HomeController',
@@ -436,12 +442,14 @@ angular.module('clrBooking', [
         $scope.close = function () {
             globalVarsSrv.cookieSave();
         };
-
+        console.log('in App ctrl');
         //$window.onclose =  $scope.close();
     }])
     .run(['$rootScope', '$location', '$http', 'globalVarsSrv', 'AuthenticationService',
         function ($rootScope, $location, $http, globalVarsSrv, AuthenticationService) {
             var usr = null;
             if (usr = AuthenticationService.CheckCredentials()) globalVarsSrv.appInit('config/appConfig.json', usr);
+
+            console.log('in App Run');
         }])
 ;

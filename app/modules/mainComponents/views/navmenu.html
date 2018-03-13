@@ -15,27 +15,14 @@
             </div>
         </a>
     </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbarpan " ng-class="!navCollapsed && 'in'">
+
+    <div class="collapse navbar-collapse navbarpan" ng-class="!navCollapsed && 'in'">
         <!--ng-if="globals.item.username && globals.item.username !== '' && globals.item.authdata"-->
         <ul class="nav navbar-nav">
-            <li><a href="#roles">Ρόλοι</a></li>
-            <li><a href="#users">Χρήστες</a></li>
-            <li><a href="#rooms">Αίθουσες</a></li>
-            <li><a href="#tms">Τμήματα</a></li>
-            <li><a href="#kats">Κατευθύνσεις</a></li>
-            <li><a href="#requests">Αιτήματα</a></li>
-            <li><a href="#config">Configuration</a></li>
-            <li><a href="#items">Εξοπλισμός</a></li>
-            <li><a href="#periods">Ακαδημαικοι Περίοδοι</a></li>
-            <li><a href="#ps">Προγραμμα σπουδών</a></li>
-            <!--<li><a href="#booking">Κλείσιμο Αιθουσας</a></li>-->
-            <li><a href="#userscategories">Κατηγορίες Χρηστών</a></li>
-            <li><a href="#roomcategory">Κατηγορίες Αιθουσών</a></li>
-            <li><a href="#roomuse">Χρήση Αιθουσών</a></li>
-            <li><a href="#psstats">Στατιστικά</a></li>
-
-
+            <li ng-repeat="option in adminColums" style="padding: 2px">
+                <!--<home-button-columns ></home-button-columns>-->
+                <a href="#{{option.column}}">{{option.title}}</a>
+            </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

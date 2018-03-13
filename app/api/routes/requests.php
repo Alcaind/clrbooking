@@ -49,7 +49,16 @@ $app->get('/requests/rooms/{id}', function (Request $request, Response $response
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['request_rooms:req_id,room _id', 'rooms'])->where('room_id', '=', $id)->get();
+        $room = \App\Models\Rooms::find($id);
+        $requests = $room->requests()->join('users AS admin', 'requests.admin', '=', 'admin.id')
+            ->get();
+        /*$requests = $this->container->db->table('requests')
+            ->join('request_rooms', 'requests.id', '=', 'request_rooms.req_id')
+            ->join('users AS admin', 'requests.admin', '=', 'admin.id')
+            ->where('request_rooms.room_id', '=', $id)
+            ->select('requests.*', 'admin.*')
+            ->get();*/
+        //$requests = \App\Models\Requests::with(['request_rooms:req_id,room _id', 'rooms','admin'])->where('room_id', '=', $id)->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
