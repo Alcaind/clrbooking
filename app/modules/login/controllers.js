@@ -23,6 +23,7 @@ angular.module('Login', ['Authentication', 'MainComponents', 'GlobalVarsSrvs'])
 
                         var expToken = response.data.token;
                         var tokenPayload = jwtHelper.decodeToken(expToken);
+                        globalVarsSrv.setGlobalVar('token', tokenPayload);
 
                         globalVarsSrv.setGlobalVar('menuRole', 'user');
                         for (var i = 0; i < tokenPayload.roles[0].roles.length; i++) {

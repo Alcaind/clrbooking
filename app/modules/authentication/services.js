@@ -68,6 +68,15 @@ angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
                         auth.username = jwtHelper.decodeToken(idToken).sub;
                         auth.authdata = jwtHelper.decodeToken(idToken);
                         globalVarsSrv.setGlobalVar('auth', auth);
+                        globalVarsSrv.setGlobalVar('token', auth.authdata);
+                        for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
+                            if (auth.authdata.roles[0].roles[i].role === 'admin') {
+                                globalVarsSrv.setGlobalVar('menuRole', 'admin');
+                                break;
+                            } else {
+                                globalVarsSrv.setGlobalVar('menuRole', 'user');
+                            }
+                        }
 
                         return jwtHelper.decodeToken(idToken).sub;
                     }

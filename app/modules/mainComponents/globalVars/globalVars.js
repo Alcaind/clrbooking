@@ -61,6 +61,8 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($
 
     function appInit(fName, usr) {
         if (!cookieGet(usr)) initFromFile(fName);
+
+
     }
 
     var glbSrv = {
@@ -77,7 +79,7 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($
     return glbSrv;
 }]);
 
-globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '$routeParams', 'MakeModal', function (globalVarsSrv, api, orderBy, $routeParams, MakeModal) {
+globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '$routeParams', 'MakeModal', 'AuthenticationService', function (globalVarsSrv, api, orderBy, $routeParams, MakeModal, AuthenticationService) {
     var makeController = {};
 
     /**
@@ -123,6 +125,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         };
 
         ctrl.init = function () {
+            AuthenticationService.CheckCredentials();
             ctrl.cth = ctrl.tableColumns[1];
             ctrl.getAll();
         };

@@ -58,6 +58,6 @@ class Rooms extends Model
 
     public function books()
     {
-        return $this->hasMany('\\App\\Models\\RoomBook');
+        return $this->hasMany('\\App\\Models\\RoomBook', 'room_id');
     }
 }

@@ -6,7 +6,6 @@ angular.module('Requests', [
     'ApiModules',
     'Authentication',
     'GlobalVarsSrvs'
-
 ]).controller('RequestsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
     $scope.ctrl = makeController.mainController('/requests', 'requestsTableConf', 'Κατάλογος Αιτημάτων');
     $scope.ctrl.init();
@@ -40,7 +39,6 @@ angular.module('Requests', [
                 if ($scope.admin[i].id === adminId) return $scope.admin[i].user;
             }
         };
-
 
     }])
     .component('requestsProfile', {

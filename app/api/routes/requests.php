@@ -163,14 +163,43 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
 $checkReqRooms = function ($request, $response, $next) {
     $res = null;
     $args = $request->getAttributes()['routeInfo'][2];
+    $req = \App\Models\Requests::find($args['id']);
     $data = $request->getParsedBody();
-    $req = \App\Models\Requests::with(['rooms'])->find($args['id']);
-    foreach ($req->rooms as $room) {
-        if ($room->pivot->teacher == $data['teacher']) {
+
+    $roombook = \App\Models\RoomBook::with('rooms')
+        ->where('fromd', '<=', $req->fromd)
+        ->where('fromd', '>=', $req->fromd)
+        /*->where('room_id', '=', $args['rid'])*/
+        ->get();
+
+    //$response->getBody()->write($roombook->toJson());
+
+    foreach ($roombook as $book) {
+        if ($book->teacher == $data['teacher']) {
             $nr = $response->withStatus(417);
             $error = new ApiError();
-            $error->setData(815, 'Teacher ' . \App\Models\Users::find($data['teacher'])->user . ' is already assigned to another room.');
+            $error->setData(815, 'Teacher ' . \App\Models\Users::find($book->teacher)->user . ' is already assigned to another room.');
             return $nr->write($error->toJson());
+        }
+
+        if ($req->fromd >= $book['fromd'] && $req->fromd <= $book['tod'] && $req->date_index == $book['date_index']) {
+            if ($req->fromdt >= $book['fromt'] && $req->fromdt <= $book['tot'])
+                if ($book->room_id == $args['rid']) {
+                    $nr = $response->withStatus(417);
+                    $error = new ApiError();
+                    $error->setData(816, 'Class ' . \App\Models\Rooms::find($args['rid'])->name . ' is already assigned to book.');
+                    return $nr->write($error->toJson());
+                }
+        }
+
+        if ($req->tod >= $book['fromd'] && $req->tod <= $book['tod'] && $req->date_index == $book['date_index']) {
+            if ($req->fromdt >= $book['fromt'] && $req->fromdt <= $book['tot'])
+                if ($book->room_id == $args['rid']) {
+                    $nr = $response->withStatus(417);
+                    $error = new ApiError();
+                    $error->setData(816, 'Class ' . \App\Models\Rooms::find($args['rid'])->name . ' is already assigned to book.');
+                    return $nr->write($error->toJson());
+                }
         }
     }
     $response = $next($request, $response);
@@ -184,7 +213,7 @@ $app->post('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $requests = \App\Models\Requests::find($id);
     $requests->rooms()->attach($rid, $data);
     return $response->getBody()->write($requests->rooms()->get()->toJson());
-});
+})->add($checkReqRooms);
 
 $app->put('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];
@@ -193,7 +222,7 @@ $app->put('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $requests = \App\Models\Requests::find($id);
     $requests->rooms()->updateExistingPivot($rid, $data);
     return $response->getBody()->write($requests->rooms()->get()->toJson());
-});
+})->add($checkReqRooms);
 
 $app->delete('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];

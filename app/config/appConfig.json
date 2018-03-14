@@ -1149,5 +1149,12 @@
       "content": "Χρήστες ρόλου",
       "gicon": "glyphicon-import"
     }
+  ],
+  "rooombookTableConfOps": [
+    {
+      "hr": "#/booking/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil"
+    }
   ]
 }
