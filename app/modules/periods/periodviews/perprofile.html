@@ -21,13 +21,13 @@
         <div class="form-group"
              ng-class="{ 'has-error' : periodForm.fromd.$invalid && !periodForm.fromd.$pristine }">
             <label class="required" for="fromd">Από ημ/νία<span class="form-required">*</span>:</label>
-            <input id="fromd" name="fromd" class="form-control" type="text" ng-model="ctrl.item.fromd">
+            <input id="fromd" name="fromd" class="form-control" type="date" ng-model="ctrl.item.fromd">
             <p ng-show="periodForm.fromd.$invalid && !periodForm.fromd.$pristine" class="help-block">Εισάγετε ημερομηνία
                 έναρξης.</p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : periodForm.tod.$invalid && !periodForm.tod.$pristine }">
             <label class="required" for="tod">Έως ημ/νία<span class="form-required">*</span>:</label>
-            <input id="tod" name="tod" class="form-control" type="text" ng-model="ctrl.item.tod">
+            <input id="tod" name="tod" class="form-control" type="date" ng-model="ctrl.item.tod">
             <p ng-show="periodForm.tod.$invalid && !periodForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνία
                 λήξης.</p>
         </div>
@@ -49,13 +49,9 @@
             <p ng-show="periodForm.porder.$invalid && !periodForm.porder.$pristine" class="help-block">Εισάγετε την
                 σειρά της περιόδου.</p>
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : periodForm.status.$invalid && !periodForm.status.$pristine }">
-            <label class="required" for="status">Κατάσταση<span class="form-required">*</span>:</label>
-            <input id="status" name="status" class="form-control" type="number" ng-model="ctrl.item.status">
-            <p ng-show="periodForm.status.$invalid && !periodForm.status.$pristine" class="help-block">Εισάγετε
-                κατάσταση.</p>
-        </div>
+        <status-selector status-title="Κατάσταση ρόλου" options="userRoleStatus"
+                         output-value="ctrl.status"></status-selector>
+
         <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                 ng-if="ctrl.item.id>0">Ανανέωση
         </button>

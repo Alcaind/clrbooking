@@ -69,7 +69,17 @@ angular.module('MainComponents', [
 
         $scope.close = function () {
             globalVarsSrv.cookieSave();
-        }
+        };
+
+        $scope.getProfile = function () {
+            $scope.users = {};
+
+            api.apiCall('GET', 'api/public/users', function (results) {
+                $scope.users = results.data;
+            });
+
+        };
+
     }])
     .directive('footer', function () {
         return {
@@ -253,6 +263,7 @@ angular.module('MainComponents', [
             templateUrl: 'modules/mainComponents/views/tableTools.html'
         }
     })
+
 
 ;
 

@@ -210,7 +210,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         };
 
         ctrl.showPivotData = function (data) {
-            ctrl.pivotData = Object.assign({}, ctrl.pivotTable);
+            ctrl.pivotData = Object.assign(ctrl.pivotTable);
             ctrl.state = 0;
             ctrl.currentRight = data;
         };

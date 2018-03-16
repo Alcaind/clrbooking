@@ -97,10 +97,10 @@ $app->post('/requests', function (Request $request, Response $response) {
         $requests->ps_id = $data['ps_id'];
         $requests->class_use = $data['class_use'];
         $requests->links = $data['links'];
-        $requests->fromdt = $data['fromdt'];
-        $requests->todt = $data['todt'];
+        $requests->fromt = $data['fromt'];
+        $requests->tot = $data['tot'];
         $requests->protocol_id = $data['protocol_id'];
-        $requests->req_status = $data['req_status'];
+        $requests->status = $data['status'];
         $requests->fromd = $data['fromd'];
         $requests->tod = $data['tod'];
         $requests->date_index = $data['date_index'];
@@ -141,10 +141,10 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->ps_id = $data['ps_id'] ?: $requests->ps_id;
         $requests->class_use = $data['class_use'] ?: $requests->class_use;
         $requests->links = $data['links'] ?: $requests->links;
-        $requests->fromdt = $data['fromdt'] ?: $requests->fromdt;
-        $requests->todt = $data['todt'] ?: $requests->todt;
+        $requests->fromt = $data['fromt'] ?: $requests->fromt;
+        $requests->tot = $data['tot'] ?: $requests->tot;
         $requests->protocol_id = $data['protocol_id'] ?: $requests->protocol_id;
-        $requests->req_status = $data['req_status'] ?: $requests->req_status;
+        $requests->status = $data['status'] ?: $requests->status;
         $requests->fromd = $data['fromd'] ?: $requests->fromd;
         $requests->tod = $data['tod'] ?: $requests->tod;
         $requests->date_index = $data['date_index'] ?: $requests->date_index;
@@ -183,7 +183,7 @@ $checkReqRooms = function ($request, $response, $next) {
         }
 
         if ($req->fromd >= $book['fromd'] && $req->fromd <= $book['tod'] && $req->date_index == $book['date_index']) {
-            if ($req->fromdt >= $book['fromt'] && $req->fromdt <= $book['tot'])
+            if ($req->fromt >= $book['fromt'] && $req->fromt <= $book['tot'])
                 if ($book->room_id == $args['rid']) {
                     $nr = $response->withStatus(417);
                     $error = new ApiError();
@@ -193,7 +193,7 @@ $checkReqRooms = function ($request, $response, $next) {
         }
 
         if ($req->tod >= $book['fromd'] && $req->tod <= $book['tod'] && $req->date_index == $book['date_index']) {
-            if ($req->fromdt >= $book['fromt'] && $req->fromdt <= $book['tot'])
+            if ($req->fromt >= $book['fromt'] && $req->fromt <= $book['tot'])
                 if ($book->room_id == $args['rid']) {
                     $nr = $response->withStatus(417);
                     $error = new ApiError();

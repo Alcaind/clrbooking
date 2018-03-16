@@ -20,7 +20,7 @@
                     style="cursor: pointer">
                     <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
                     <td ng-if="ctrl.tableColumns[1].visible">{{ item.year }}</td>
-                    <td ng-if="ctrl.tableColumns[2].visible">{{ item.status }}</td>
+                    <td ng-if="ctrl.tableColumns[2].visible">{{ statusOptions[item.status].text}}</td>
                     <td ng-if="ctrl.tableColumns[3].visible">{{ item.fromd }}</td>
                     <td ng-if="ctrl.tableColumns[4].visible">{{ item.tod }}</td>
                     <td ng-if="ctrl.tableColumns[5].visible">{{ item.synt }}</td>

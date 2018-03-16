@@ -1,0 +1,100 @@
+{
+  "userRoleStatus": [
+    {
+      "text": "In Progress",
+      "value": 0
+    },
+    {
+      "text": "Done",
+      "value": 1
+    },
+    {
+      "text": "Expired",
+      "value": 2
+    }
+  ],
+  "configStatus": [
+    {
+      "text": "In Progress",
+      "value": 0
+    },
+    {
+      "text": "Expired",
+      "value": 1
+    }
+  ],
+  "itemStatus": [
+    {
+      "text": "Broken",
+      "value": 0
+    },
+    {
+      "text": "Functional",
+      "value": 1
+    },
+    {
+      "text": "In Repair",
+      "value": 2
+    },
+    {
+      "text": "Booked",
+      "value": 3
+    },
+    {
+      "text": "Available",
+      "value": 4
+    }
+  ],
+  "periodStatus": [
+    {
+      "text": "In Progress",
+      "value": 0
+    },
+    {
+      "text": "Expired",
+      "value": 1
+    }
+  ],
+  "requestStatus": [
+    {
+      "text": "In Progress/Pending",
+      "value": 0
+    },
+    {
+      "text": "Done",
+      "value": 1
+    },
+    {
+      "text": "Expired",
+      "value": 2
+    }
+  ],
+  "roombookStatus": [
+    {
+      "text": "In Progress/Pending",
+      "value": 0
+    },
+    {
+      "text": "Done",
+      "value": 1
+    },
+    {
+      "text": "Expired",
+      "value": 2
+    }
+  ],
+  "roomStatus": [
+    {
+      "text": "In Repair",
+      "value": 0
+    },
+    {
+      "text": "Booked",
+      "value": 1
+    },
+    {
+      "text": "Available",
+      "value": 2
+    }
+  ]
+}

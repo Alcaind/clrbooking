@@ -33,10 +33,12 @@
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : roomBookForm.date_index.$invalid && !roomBookForm.date_index.$pristine }">
-            <label class="required" for="date_index">date_index<span class="form-required">*</span>:</label>
-            <input id="date_index" name="date_index" class="form-control" type="text" ng-model="item.date_index">
-            <p ng-show="roomBookForm.date_index.$invalid && !roomBookForm.date_index.$pristine" class="help-block">Enter
-                date_index.</p>
+            <label class="required" for="date_index">Ημέρα Kαταχώρηση αιτήματος<span
+                    class="form-required">*</span>:</label>
+            <input id="date_index" name="date_index" class="form-control" type="text" ng-model="ctrl.item.date_index"
+                   value="{{ctrl.item.date_index=ctrl.item.fromd.getDay()}}">
+            <p ng-show="roomBookForm.date_index.$invalid && !roomBookForm.date_index.$pristine" class="help-block">
+                Εισάγετε ημέρα καταχώρησης του αιτήματος.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : roomBookForm.fromd.$invalid && !roomBookForm.fromd.$pristine }">
@@ -59,10 +61,10 @@
             <p ng-show="roomBookForm.fromt.$invalid && !roomBookForm.fromd.$pristine" class="help-block">Enter
                 fromt.</p>
         </div>
-        <div class="form-group" ng-class="{ 'has-error' : roomBookForm.todt.$invalid && !roomBookForm.todt.$pristine }">
-            <label class="required" for="todt">Μέχρι ώρα<span class="form-required">*</span>:</label>
-            <input id="todt" name="todt" class="form-control" type="time" ng-model="item.todt">
-            <p ng-show="roomBookForm.todt.$invalid && !roomBookForm.todt.$pristine" class="help-block">Enter todt.</p>
+        <div class="form-group" ng-class="{ 'has-error' : roomBookForm.tot.$invalid && !roomBookForm.tot.$pristine }">
+            <label class="required" for="tot">Μέχρι ώρα<span class="form-required">*</span>:</label>
+            <input id="tot" name="tot" class="form-control" type="time" ng-model="item.tot">
+            <p ng-show="roomBookForm.tot.$invalid && !roomBookForm.tot.$pristine" class="help-block">Enter tot.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : roomBookForm.type.$invalid && !roomBookForm.type.$pristine }">

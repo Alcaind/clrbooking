@@ -150,26 +150,26 @@ CREATE INDEX request_rooms_users_id_fk
 
 create table requests
 (
-	id          int auto_increment
+  id          int auto_increment
 		primary key,
-	req_dt      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+  req_dt      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 	COMMENT 'Ημερομηνία Αιτήματος',
-	user_id     int                                 null,
-	descr       longtext                            null,
-	period      varchar(5)                          null,
-	ps_id       int                                 null,
-	class_use   varchar(255)                        null,
-	links       varchar(512)                        null,
-	fromdt      time                                null,
-	todt        time                                null,
-	protocol_id varchar(255)                        null,
-	req_status  int                                 null,
-	fromd       date                                null,
-	tod         date                                null,
-	date_index  int                                 null,
-	created_at  timestamp                           null,
-	updated_at  timestamp                           null,
-	admin       int                                 null
+  user_id     int                                 null,
+  descr       longtext                            null,
+  period      varchar(5)                          null,
+  ps_id       int                                 null,
+  class_use   varchar(255)                        null,
+  links       varchar(512)                        null,
+  fromt       TIME                                NULL,
+  tot         TIME                                NULL,
+  protocol_id varchar(255)                        null,
+  status      INT                                 NULL,
+  fromd       date                                null,
+  tod         date                                null,
+  date_index  int                                 null,
+  created_at  timestamp                           null,
+  updated_at  timestamp                           null,
+  admin       int                                 null
 )
 	ENGINE = InnoDB;
 

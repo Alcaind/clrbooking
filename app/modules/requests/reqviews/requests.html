@@ -26,10 +26,10 @@
                     <td ng-if="ctrl.tableColumns[5].visible">{{ item.ps_id }}</td>
                     <td ng-if="ctrl.tableColumns[6].visible">{{ item.class_use }}</td>
                     <td ng-if="ctrl.tableColumns[7].visible">{{ item.links }}</td>
-                    <td ng-if="ctrl.tableColumns[8].visible">{{ item.fromdt }}</td>
-                    <td ng-if="ctrl.tableColumns[9].visible">{{ item.todt }}</td>
+                    <td ng-if="ctrl.tableColumns[8].visible">{{ item.fromt }}</td>
+                    <td ng-if="ctrl.tableColumns[9].visible">{{ item.tot }}</td>
                     <td ng-if="ctrl.tableColumns[10].visible">{{ item.protocol_id }}</td>
-                    <td ng-if="ctrl.tableColumns[11].visible">{{ item.req_status }}</td>
+                    <td ng-if="ctrl.tableColumns[11].visible">{{ statusOptions[item.status].text }}</td>
                     <td ng-if="ctrl.tableColumns[12].visible">{{ item.fromd }}</td>
                     <td ng-if="ctrl.tableColumns[13].visible">{{ item.tod }}</td>
                     <td ng-if="ctrl.tableColumns[14].visible">{{ item.date_index }}</td>

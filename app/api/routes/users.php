@@ -32,6 +32,7 @@ $app->get('/users/{id}', function (Request $request, Response $response, $args) 
     return $response->getBody()->write($users->toJson());
 });
 
+
 $app->post('/users', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();

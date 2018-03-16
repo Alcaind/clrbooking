@@ -13,7 +13,7 @@ angular.module('Rooms')
 
             $scope.$watch('ctrl.dp', function () {
                 for (var i = 0; i < $scope.ctrl.dp.length; i++) {
-                    var mdt = new Date($scope.ctrl.dp[i].fromd + 'T' + $scope.ctrl.dp[i].fromdt);
+                    var mdt = new Date($scope.ctrl.dp[i].fromd + 'T' + $scope.ctrl.dp[i].fromt);
                     $scope.calendar[$scope.ctrl.dp[i].date_index][mdt.getHours()] = 1;
                 }
             });

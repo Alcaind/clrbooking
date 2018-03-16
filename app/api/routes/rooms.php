@@ -313,10 +313,10 @@ $app->post('/rooms/requests', function (Request $request, Response $response) {
         $requests->ps_id = $data['ps_id'];
         $requests->class_use = $data['class_use'];
         $requests->links = $data['links'];
-        $requests->fromdt = $data['fromdt'];
-        $requests->todt = $data['todt'];
+        $requests->fromt = $data['fromt'];
+        $requests->tot = $data['tot'];
         $requests->protocol_id = $data['protocol_id'];
-        $requests->req_status = $data['req_status'];
+        $requests->status = $data['status'];
         $requests->fromd = $data['fromd'];
         $requests->tod = $data['tod'];
         $requests->date_index = $data['date_index'];
@@ -358,10 +358,10 @@ $app->put('/rooms/requests/{id}', function ($request, $response, $args) {
         $requests->ps_id = $data['ps_id'] ?: $requests->ps_id;
         $requests->class_use = $data['class_use'] ?: $requests->class_use;
         $requests->links = $data['links'] ?: $requests->links;
-        $requests->fromdt = $data['fromdt'] ?: $requests->fromdt;
-        $requests->todt = $data['todt'] ?: $requests->todt;
+        $requests->fromt = $data['fromt'] ?: $requests->fromt;
+        $requests->tot = $data['tot'] ?: $requests->tot;
         $requests->protocol_id = $data['protocol_id'] ?: $requests->protocol_id;
-        $requests->req_status = $data['req_status'] ?: $requests->req_status;
+        $requests->status = $data['status'] ?: $requests->status;
         $requests->fromd = $data['fromd'] ?: $requests->fromd;
         $requests->tod = $data['tod'] ?: $requests->tod;
         $requests->date_index = $data['date_index'] ?: $requests->date_index;

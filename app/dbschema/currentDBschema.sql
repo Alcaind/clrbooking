@@ -78,25 +78,25 @@ engine=InnoDB
 
 create table requests
 (
-	id int auto_increment
+  id          int auto_increment
 		primary key,
-	req_dt timestamp default CURRENT_TIMESTAMP not null,
-	user_id int null,
-	descr longtext null,
-	period varchar(5) null,
-	ps_id int null,
-	teacher varchar(255) null,
-	class_use varchar(255) null,
-	links varchar(512) null,
-	fromdt time null,
-	todt time null,
-	protocol_id varchar(255) null,
-	req_status int null,
-	fromd date null,
-	tod date null,
-	date_index int null,
-	created_at timestamp null,
-	updated_at timestamp null
+  req_dt      timestamp default CURRENT_TIMESTAMP not null,
+  user_id     int                                 null,
+  descr       longtext                            null,
+  period      varchar(5)                          null,
+  ps_id       int                                 null,
+  teacher     varchar(255)                        null,
+  class_use   varchar(255)                        null,
+  links       varchar(512)                        null,
+  fromt       TIME                                NULL,
+  tot         TIME                                NULL,
+  protocol_id varchar(255)                        null,
+  status      INT                                 NULL,
+  fromd       date                                null,
+  tod         date                                null,
+  date_index  int                                 null,
+  created_at  timestamp                           null,
+  updated_at  timestamp                           null
 )
 engine=InnoDB
 ;

@@ -26,7 +26,7 @@
                     <td ng-if="ctrl.tableColumns[5].visible"><textarea disabled>{{ item.comments }}</textarea></td>
                     <td ng-if="ctrl.tableColumns[6].visible">{{ item.config.year }}</td>
                     <td ng-if="ctrl.tableColumns[7].visible">{{ item.porder }}</td>
-                    <td ng-if="ctrl.tableColumns[8].visible">{{ item.status }}</td>
+                    <td ng-if="ctrl.tableColumns[8].visible">{{ statusOptions[item.status].text }}</td>
                     <td>
                         <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>

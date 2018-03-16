@@ -48,16 +48,16 @@
             <input id="links" name="links" class="form-control" type="text" ng-model="ctrl.item.links">
         </div>
         <div class="form-group"
-             ng-class="{ 'has-error' : requestForm.fromdt.$invalid && !requestForm.fromdt.$pristine }">
-            <label class="required" for="fromdt">Από ώρα<span class="form-required">*</span>:</label>
-            <input id="fromdt" name="fromdt" class="form-control" type="text" ng-model="ctrl.item.fromdt">
-            <p ng-show="requestForm.fromdt.$invalid && !requestForm.fromdt.$pristine" class="help-block">Εισάγετε ώρα
+             ng-class="{ 'has-error' : requestForm.fromt.$invalid && !requestForm.fromt.$pristine }">
+            <label class="required" for="fromt">Από ώρα<span class="form-required">*</span>:</label>
+            <input id="fromt" name="fromt" class="form-control" type="text" ng-model="ctrl.item.fromt">
+            <p ng-show="requestForm.fromt.$invalid && !requestForm.fromt.$pristine" class="help-block">Εισάγετε ώρα
                 έναρξης.</p>
         </div>
-        <div class="form-group" ng-class="{ 'has-error' : requestForm.todt.$invalid && !requestForm.todt.$pristine }">
-            <label class="required" for="todt">Μέχρι ώρα<span class="form-required">*</span>:</label>
-            <input id="todt" name="todt" class="form-control" type="text" ng-model="ctrl.item.todt">
-            <p ng-show="requestForm.todt.$invalid && !requestForm.todt.$pristine" class="help-block">Εισάγετε ώρα
+        <div class="form-group" ng-class="{ 'has-error' : requestForm.tot.$invalid && !requestForm.tot.$pristine }">
+            <label class="required" for="tot">Μέχρι ώρα<span class="form-required">*</span>:</label>
+            <input id="tot" name="tot" class="form-control" type="text" ng-model="ctrl.item.tot">
+            <p ng-show="requestForm.tot.$invalid && !requestForm.tot.$pristine" class="help-block">Εισάγετε ώρα
                 λήξης.</p>
         </div>
         <div class="form-group">
@@ -65,24 +65,20 @@
             <input id="protocol_id" name="protocol_id" class="form-control" type="text"
                    ng-model="ctrl.item.protocol_id">
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : requestForm.req_status.$invalid && !requestForm.req_status.$pristine }">
-            <label class="required" for="req_status">Κατάσταση Αιτήματος<span class="form-required">*</span>:</label>
-            <input id="req_status" name="req_status" class="form-control" type="text" ng-model="ctrl.item.req_status">
-            <p ng-show="requestForm.req_status.$invalid && !requestForm.req_status.$pristine" class="help-block">
-                Εισάγετε κατάσταση αιτήματος.</p>
-        </div>
+        <status-selector status-title="Κατάσταση Αιτήματος" options="requestStatus"
+                         output-value="ctrl.item.status"></status-selector>
+
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.fromd.$invalid && !requestForm.fromd.$pristine }">
             <label class="required" for="fromd">Από ημέρα<span class="form-required">*</span>:</label>
-            <input id="fromd" name="fromd" class="form-control" type="text" ng-model="ctrl.item.fromd">
+            <input id="fromd" name="fromd" class="form-control" type="date" ng-model="ctrl.item.fromd">
             <p ng-show="requestForm.fromd.$invalid && !requestForm.fromd.$pristine" class="help-block">Εισάγετε
                 ημερομηνιά έναρξης.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.tod.$invalid && !requestForm.tod.$pristine }">
             <label class="required" for="tod">Μέχρι ημέρα<span class="form-required">*</span>:</label>
-            <input id="tod" name="tod" class="form-control" type="text" ng-model="ctrl.item.tod">
+            <input id="tod" name="tod" class="form-control" type="date" ng-model="ctrl.item.tod">
             <p ng-show="requestForm.tod.$invalid && !requestForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνιά
                 λήξης.</p>
         </div>
@@ -90,7 +86,8 @@
              ng-class="{ 'has-error' : requestForm.date_index.$invalid && !requestForm.date_index.$pristine }">
             <label class="required" for="date_index">Ημέρα Kαταχώρηση αιτήματος<span
                     class="form-required">*</span>:</label>
-            <input id="date_index" name="date_index" class="form-control" type="number" ng-model="ctrl.item.date_index">
+            <input id="date_index" name="date_index" class="form-control" type="text" ng-model="ctrl.item.date_index"
+                   value="{{ctrl.item.date_index=ctrl.item.fromd.getDay()}}">
             <p ng-show="requestForm.date_index.$invalid && !requestForm.date_index.$pristine" class="help-block">
                 Εισάγετε ημέρα καταχώρησης του αιτήματος.</p>
         </div>

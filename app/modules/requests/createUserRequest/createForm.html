@@ -3,13 +3,13 @@
 </div>
 <div ng-if="currentPage===0">
     <label>Από Ημ/νία:
-        <pre> <em>{{item.fromd | date:'fullDate' }}</em></pre>
+        <pre> <em>{{item.fromd | date:'EEEE , d/MMMM/y'}}</em></pre>
     </label> <br>
     <div style="display:flex; min-height:290px;">
         <div uib-datepicker ng-model="item.fromd" class="well well-sm"></div>
     </div>
     <label>Μέχρι Ημ/νία:
-        <pre> <em>{{item.tod | date:'fullDate' }}</em></pre>
+        <pre> <em>{{item.tod | date:'EEEE , d/MMMM/y' }}</em></pre>
     </label>
     <div style="display:flex; min-height:290px;">
         <div uib-datepicker ng-model="item.tod" class="well well-sm"></div>
@@ -18,13 +18,26 @@
 
 <div ng-show="currentPage===1">
     <label>Από Ημ/νία:
-        <pre> <em>{{item.fromd | date:'fullDate' }}</em></pre>
+        <pre> <em>{{item.fromd | date:'EEEE , d/MMMM/y' }}</em></pre>
     </label>
     <label>Μέχρι Ημ/νία:
-        <pre> <em>{{item.tod | date:'fullDate' }}</em></pre>
+        <pre> <em>{{item.tod | date:'EEEE , d/MMMM/y' }}</em></pre>
     </label>
     <input type="text" ng-model="filter" class="form-control" placeholder="search"
            style="padding: 5px; width: 100%; padding: 5px">
+    <div>
+        <label>Από ώρα:</label>
+        <input type="time" class="form-control" ng-model="item.fromt">
+    </div>
+    <div>
+        <label>Μέχρι ώρα:</label>
+        <input type="time" class="form-control" ng-model="item.tot">
+    </div>
+    <div>
+        <label>date_index:</label>
+        <input type="number" class="form-control" ng-model="item.date_index">
+    </div>
+    <button ng-click="showMyBook()">prev</button>
     <div style="overflow-y: auto; height: 200px; padding: 10px; border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
                     list-style: none; margin: 1em auto; padding: 0;">
@@ -36,6 +49,7 @@
                 </div>
                 <div>{{room.id }}</div>
                 <div>{{room.name}}</div>
+
             </div>
         </div>
     </div>

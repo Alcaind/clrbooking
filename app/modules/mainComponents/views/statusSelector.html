@@ -1,0 +1,6 @@
+<div><label for="status">{{ statusTitle }}:</label>
+    <select id="status" class="form-control-small"
+            ng-options="option.value as option.text for option in optStatus"
+            ng-model="outputValue">
+    </select>
+</div>

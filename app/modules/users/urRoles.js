@@ -1,9 +1,10 @@
 angular.module('Users')
-    .controller('URolesController', ['$scope', 'AuthenticationService', 'makeController', function ($scope, AuthenticationService, makeController) {
+    .controller('URolesController', ['$scope', 'AuthenticationService', 'makeController', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, ClrStatusSrv) {
 
-        $scope.ctrl = makeController.n2nController('/users', 'roles', {comment: '', exp_dt: '', status: '1'});
+        $scope.ctrl = makeController.n2nController('/users', 'roles', {comment: '', exp_dt: '', status: '0'});
         $scope.ctrl.init();
 
+        $scope.statusOptions = ClrStatusSrv.getStatus('userRoleStatus');
     }])
 
     .directive('urTable', function () {

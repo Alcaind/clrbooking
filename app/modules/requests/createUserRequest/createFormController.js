@@ -46,32 +46,63 @@ angular.module('Requests')
             for (var i = 0; i < days; i++) {
                 calendar[i] = [];
                 for (var j = 0; j < book.length; j++) {
-                    var bDays = findBookDates(book[j]);
+                    var bDays = findBookDates(book[j], 0);
                     if (book[j].date_index === dateIndex.getDay() && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
                         calendar[i].push(book[j]);
                     }
                 }
+                if ($scope.item.date_index && $scope.item.fromd && $scope.item.tod && $scope.item.fromt && $scope.item.tot) {
+                    $scope.item.color = '#856565';
+                    bDays = findBookDates($scope.item, 1);
+                    if ($scope.item.date_index === dateIndex.getDay() && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
+                        calendar[i].push($scope.item);
+                    }
+                }
+
                 dateIndex.setDate(dateIndex.getDate() + 1);
             }
         };
 
-        function findBookDates(book) {
-            book.fDay = new Date(book.fromd + 'T' + book.fromt);
-            book.tDay = new Date(book.tod + 'T' + book.fromt);
+        $scope.showMyBook = function () {
+            $scope.plotBook($scope.book, $scope.calendar);
+        };
 
-            book.h = (new Date(book.fromd + 'T' + book.tot) - book.fDay) / (1000 * 60);
-            book.dist = (book.fDay - new Date(book.fromd)) / (1000 * 60);
+        function findBookDates(book, ifItem) {
 
-            return {
-                fDay: new Date(book.fromd + 'T' + book.fromt), /* get book from day */
-                tDay: new Date(book.tod + 'T' + book.fromt) /* get book to day */
+            if (!ifItem) {
+                book.fDay = new Date(book.fromd + 'T' + book.fromt);
+                book.tDay = new Date(book.tod + 'T' + book.fromt);
+                book.h = (new Date(book.fromd + 'T' + book.tot) - book.fDay) / (1000 * 60);
+                book.dist = (book.fDay - new Date(book.fromd)) / (1000 * 60);
+
+                return {
+                    fDay: new Date(book.fromd + 'T' + book.fromt), /* get book from day */
+                    tDay: new Date(book.tod + 'T' + book.fromt) /* get book to day */
+                }
+            } else {
+                book.fDay = new Date(book.fromd);
+                book.tDay = new Date(book.tod);
+                book.h = (book.tot - book.fromt) / (1000 * 60);
+                book.dist = book.tot / (1000 * 60);
+
+                return {
+                    fDay: new Date(book.fromd), /* get book from day */
+                    tDay: new Date(book.tod) /* get book to day */
+                }
             }
+
+
         }
 
         $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
             if (!newVal.fromd) return;
             scope.item.fromd = new Date(newVal.fromd);
             scope.item.tod = new Date(newVal.tod);
+        });
+        $scope.$watch('item', function (newVal, oldVal, scope) {
+            if (scope.item.date_index && scope.item.fromd && scope.item.tod && scope.item.fromt && scope.item.tot) {
+                scope.plotBook(scope.book, scope.calendar);
+            }
         });
 
         $scope.init();

@@ -6,10 +6,12 @@ angular.module('Config', [
     'ApiModules',
     'Authentication',
     'GlobalVarsSrvs'
-]).controller('ConfigController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
+]).controller('ConfigController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv) {
 
     $scope.ctrl = makeController.mainController('/config', 'configTableConf', 'Configuration');
     $scope.ctrl.init();
+
+    $scope.statusOptions = ClrStatusSrv.getStatus('configStatus');
 
 }])
     .controller('ConfigProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {

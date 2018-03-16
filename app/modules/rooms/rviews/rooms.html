@@ -24,7 +24,7 @@
                     <td ng-if="ctrl.tableColumns[2].visible">{{item.address }}</td>
                     <td ng-if="ctrl.tableColumns[3].visible">{{item.building}}</td>
                     <td ng-if="ctrl.tableColumns[4].visible">{{item.floor}}</td>
-                    <td ng-if="ctrl.tableColumns[5].visible">{{item.status}}</td>
+                    <td ng-if="ctrl.tableColumns[5].visible">{{statusOptions[item.status].text}}</td>
                     <td ng-if="ctrl.tableColumns[6].visible">{{item.active}}</td>
                     <td ng-if="ctrl.tableColumns[7].visible">{{item.destroyed}}</td>
                     <td ng-if="ctrl.tableColumns[8].visible">{{item.nonexist}}</td>

@@ -34,8 +34,8 @@ class CreateRequestsTable extends Migration
             $table->integer('req_stat')->nullable()->default(null);
             $table->string('class_use')->nullable()->default(null);
             $table->string('links')->nullable()->default(null);
-            $table->timestamp('fromdt')->nullable()->default(null);
-            $table->timestamp('todt')->nullable()->default(null);
+            $table->timestamp('fromt')->nullable()->default(null);
+            $table->timestamp('tot')->nullable()->default(null);
             $table->string('protocol_id')->nullable()->default(null);
         });
     }

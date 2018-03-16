@@ -36,12 +36,9 @@
             <input id="floor" name="floor" class="form-control" type="text" ng-model="ctrl.item.floor">
         </div>
         <!--status-->
-        <div class="form-group" ng-class="{ 'has-error' : roomForm.status.$invalid && !roomForm.status.$pristine }">
-            <label for="status" class="required">Κατάσταση<span class="form-required">*</span>:</label>
-            <input id="status" name="status" class="form-control" type="text" ng-model="ctrl.item.status">
-            <p ng-show="roomForm.status.$invalid && !roomForm.status.$pristine" class="help-block">Εισάγετε
-                κατάσταση.</p>
-        </div>
+        <status-selector status-title="Κατάσταση αίθουσας" options="roomStatus"
+                         output-value="ctrl.item.status"></status-selector>
+
         <!--active-->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.active.$invalid && !roomForm.active.$pristine }">
             <label for="active" class="required">Ενεργά<span class="form-required">*</span>:</label>

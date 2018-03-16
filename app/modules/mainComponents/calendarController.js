@@ -25,7 +25,7 @@ angular.module('MainComponents')
             var options = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
 
             for (var j = 0; j < 24; j++) {
-                $scope.hours[j] = j;
+                $scope.hours[j] = {ht: j + ":00", booked: false};
             }
 
             for (var i = 0; i <= days; i++) {
@@ -34,6 +34,7 @@ angular.module('MainComponents')
                 //$scope.days.push(dateIndex.toDateString());
                 $scope.days.push(dateIndex.toLocaleDateString('gr-GR', options));
                 $scope.calendarArray[i] = [];
+
                 dateIndex.setDate(tdt + 1);
             }
         }

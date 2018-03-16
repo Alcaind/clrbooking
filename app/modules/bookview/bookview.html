@@ -16,15 +16,17 @@
     </tr>
     <tr>
         <td>Date_Index:</td>
-        <td><input type="number" id="date_index" name="date_index" ng-model="item.date_index"></td>
+        <td><input type="number" id="date_index" name="date_index" ng-model="item.date_index"
+                   value="{{item.date_index=item.fromd.getDay()}}"></td>
     </tr>
     <tr>
         <td>Από Ημ/νία:</td>
-        <td><input type="date" id="fromd" name="fromd" ng-model="item.fromd"></td>
+        <td><input type="date" id="fromd" name="fromd" ng-model="item.fromd" ng-bind="date | date:'EEEE , d/MMMM/y'">
+        </td>
     </tr>
     <tr>
         <td>Έως Ημ/νία:</td>
-        <td><input type="date" id="tod" name="tod" ng-model="item.tod"></td>
+        <td><input type="date" id="tod" name="tod" ng-model="item.tod" ng-bind="date | date:'EEEE , d/MMMM/y'"></td>
     </tr>
     <tr>
         <td>Από Ώρα:</td>

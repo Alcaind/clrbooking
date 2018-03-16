@@ -22,7 +22,7 @@
                     <td ng-if="ctrl.tableColumns[1].visible"><textarea disabled>{{ item.descr }}</textarea></td>
                     <td ng-if="ctrl.tableColumns[2].visible"><textarea disabled>{{ item.comments }}</textarea></td>
                     <td ng-if="ctrl.tableColumns[3].visible">{{ item.code }}</td>
-                    <td ng-if="ctrl.tableColumns[4].visible">{{ item.status }}</td>
+                    <td ng-if="ctrl.tableColumns[4].visible">{{ statusOptions[item.status].text }}</td>
                     <td>
                         <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>

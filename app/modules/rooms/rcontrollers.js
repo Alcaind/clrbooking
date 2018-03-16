@@ -7,10 +7,13 @@ angular.module('Rooms', [
     'Authentication',
     'GlobalVarsSrvs'
 ])
-    .controller('RoomsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'api', 'MakeModal', function ($scope, AuthenticationService, makeController, globalVarsSrv, api, MakeModal) {
+    .controller('RoomsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'api', 'MakeModal', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, api, MakeModal, ClrStatusSrv) {
 
         $scope.ctrl = makeController.mainController('/rooms', 'roomsTableConf', 'Κατάλογος Αιθουσών');
         $scope.ctrl.init();
+
+        $scope.statusOptions = ClrStatusSrv.getStatus('roomStatus');
+
 
         $scope.deleteUsage = function (item, usage) {
             api.apiCall('DELETE', "api/public/rooms/" + item.id + '/usages/' + usage.id, function (results) {

@@ -6,10 +6,12 @@ angular.module('Periods', [
     'ApiModules',
     'Authentication',
     'GlobalVarsSrvs'
-]).controller('PeriodsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
+]).controller('PeriodsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv) {
 
     $scope.ctrl = makeController.mainController('/periods', 'periodTableConf', 'Κατάλογος Περιόδων Ακαδημαϊκού Έτους');
     $scope.ctrl.init();
+    $scope.statusOptions = ClrStatusSrv.getStatus('periodStatus');
+
 
 }])
     .controller('PeriodProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
