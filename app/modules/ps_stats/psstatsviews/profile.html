@@ -10,7 +10,7 @@
         <div class="form-group"
              ng-class="{ 'has-error' : psStatsForm.ps_id.$invalid && !psStatsForm.ps_id.$pristine }">
             <label class="required" for="ps_id">Πρόγραμμα Σπουδών<span class="form-required">*</span>:</label>
-            <select id="ps_id" name="ps_id" ng-model="ctrl.item.ps_id"
+            <select id="ps_id" name="ps_id" class="form-control" ng-model="ctrl.item.ps_id"
                     ng-options="p.ps_id as p.tma_per for p in ps"></select>
             <p ng-show="psStatsForm.ps_id.$invalid && !psStatsForm.ps_id.$pristine" class="help-block">Εισάγετε
                 πρόγραμμα σπουδών.</p>

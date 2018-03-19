@@ -45,4 +45,9 @@ class Requests extends Model
         return $this->hasMany('\\App\\Models\\Guests', 'req_id');
     }
 
+    public function room_use()
+    {
+        return $this->belongsTo('\\App\\Models\\RoomUse', 'class_use');
+    }
+
 }

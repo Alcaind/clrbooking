@@ -24,11 +24,17 @@
                     </div>
                 </div>
                 <div style="display: flex; position: relative;top: -1440px;">
-                    <button ng-repeat="book in calendarArray[$index]" class="info btn btn-info"
-                            style="margin: 2px; top: {{book.dist}}px; height: {{book.h}}px; position: relative; font-size: smaller"
-                            data-toggle="popover" data-content="{{book.room.name}} {{book.fromt}}-{{book.tot}}"
-                            data-trigger="hover">{{book.room.id}}
-                    </button>
+                    <div ng-repeat="book in calendarArray[$index]" class="info btn"
+                         style="margin: 2px; top: {{book.dist}}px; height: {{book.h}}px; position: relative; font-size: smaller; background-color: #cecece; text-align: left"
+                         data-toggle="popover" data-content="{{book.fromt}}-{{book.tot}}"
+                         data-trigger="hover">
+
+                        <li ng-if="room" ng-repeat="room in book.rooms">{{room.name}}</li>
+                        <li ng-if="book.ps">{{book.ps.tma_code}}</li>
+                        <li ng-if="book.ps">{{book.ps.tm_per}}</li>
+                        <li ng-if="book.ps">{{book.ps.teacher}}</li>
+
+                    </div>
                 </div>
             </td>
         </tr>

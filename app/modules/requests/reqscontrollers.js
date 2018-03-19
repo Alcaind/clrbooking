@@ -28,6 +28,24 @@ angular.module('Requests', [
             $scope.periods = results.data;
         });
 
+        $scope.room_use = {};
+
+        api.apiCall('GET', 'api/public/roomuse', function (results) {
+            $scope.room_use = results.data;
+        });
+
+        $scope.tms = {};
+
+        api.apiCall('GET', 'api/public/tms', function (results) {
+            $scope.tms = results.data;
+        });
+
+        $scope.ps = {};
+
+        api.apiCall('GET', 'api/public/ps', function (results) {
+            $scope.ps = results.data;
+        });
+
         $scope.admin = [];
 
         api.apiCall('GET', 'api/public/users', function (results) {

@@ -17,7 +17,7 @@
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.user_id.$invalid && !requestForm.user_id.$pristine }">
             <label class="required" for="user_id">Username<span class="form-required">*</span>:</label>
-            <select id="user_id" name="user_id" ng-model="ctrl.item.user_id"
+            <select id="user_id" name="user_id" class="form-control" ng-model="ctrl.item.user_id"
                     ng-options="users.id as users.user for users in users"></select>
             <p ng-show="requestForm.user_id.$invalid && !requestForm.user_id.$pristine" class="help-block">Εισάγετε
                 όνομα χρήστη/username.</p>
@@ -29,7 +29,7 @@
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.period.$invalid && !requestForm.period.$pristine }">
             <label class="required" for="period">Ακαδημαϊκή Περίοδος<span class="form-required">*</span>:</label>
-            <select id="period" name="period" ng-model="ctrl.item.period"
+            <select id="period" name="period" class="form-control" ng-model="ctrl.item.period"
                     ng-options="period.id as period.descr for period in periods"></select>
             <p ng-show="requestForm.period.$invalid && !requestForm.period.$pristine" class="help-block">Εισάγετε
                 ακαδημαϊκή περίοδο.</p>
@@ -41,7 +41,8 @@
 
         <div class="form-group">
             <label class="required" for="class_use">Χρήση Αίθουσας:</label>
-            <input id="class_use" name="class_use" class="form-control" type="text" ng-model="ctrl.item.class_use">
+            <select id="class_use" name="class_use" class="form-control" ng-model="ctrl.item.class_use"
+                    ng-options="class_use.id as class_use.synt for class_use in room_use"></select>
         </div>
         <div class="form-group">
             <label class="required" for="links">Παραποµπές:</label>
@@ -93,7 +94,7 @@
         </div>
         <div class="form-group">
             <label class="required" for="admin">Επιβλέπων Αιτήματος:</label>
-            <select id="admin" name="admin" ng-model="ctrl.item.admin"
+            <select id="admin" name="admin" class="form-control" ng-model="ctrl.item.admin"
                     ng-options="user.id as user.user for user in users"></select>
         </div>
 

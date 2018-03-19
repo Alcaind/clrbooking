@@ -10,7 +10,7 @@
         <div class="form-group"
              ng-class="{ 'has-error' : roomBookForm.user_id.$invalid && !roomBookForm.user_id.$pristine }">
             <label class="required" for="user_id">Username<span class="form-required">*</span>:</label>
-            <select id="user_id" name="user_id" ng-model="item.user_id"
+            <select id="user_id" name="user_id" class="form-control" ng-model="item.user_id"
                     ng-options="users.id as users.user for users in users"></select>
             <p ng-show="roomBookForm.user_id.$invalid && !roomBookForm.user_id.$pristine" class="help-block">Enter
                 user_id.</p>
@@ -18,7 +18,7 @@
         <div class="form-group"
              ng-class="{ 'has-error' : roomBookForm.room_id.$invalid && !roomBookForm.room_id.$pristine }">
             <label class="required" for="room_id">roomID look for it <span class="form-required">*</span>:</label>
-            <select id="room_id" name="room_id" ng-model="item.room_id"
+            <select id="room_id" name="room_id" class="form-control" ng-model="item.room_id"
                     ng-options="users.id as users.user for users in users"></select>
             <p ng-show="roomBookForm.room_id.$invalid && !roomBookForm.room_id.$pristine" class="help-block">Enter
                 room_id.</p>
@@ -26,7 +26,7 @@
         <div class="form-group"
              ng-class="{ 'has-error' : roomBookForm.request_id.$invalid && !roomBookForm.request_id.$pristine }">
             <label class="required" for="request_id">requestID look for it <span class="form-required">*</span>:</label>
-            <select id="request_id" name="request_id" ng-model="item.request_id"
+            <select id="request_id" name="request_id" class="form-control" ng-model="item.request_id"
                     ng-options="users.id as users.user for users in users"></select>
             <p ng-show="roomBookForm.request_id.$invalid && !roomBookForm.request_id.$pristine" class="help-block">Enter
                 request_id.</p>

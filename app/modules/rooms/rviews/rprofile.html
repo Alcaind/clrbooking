@@ -97,19 +97,19 @@
         </div>
         <div class="form-group">
             <label class="required" for="conf_id">Έτος:</label>
-            <select id="conf_id" name="conf_id" ng-model="ctrl.item.conf_id"
+            <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
                     ng-options="config.id as config.year for config in configs"></select>
         </div>
 
         <div class="form-group">
             <label class="required" for="tm_owner">Τμήμα<span class="form-required">*</span>:</label>
-            <select id="tm_owner" name="tm_owner" ng-model="ctrl.item.tm_owner"
+            <select id="tm_owner" name="tm_owner" class="form-control" ng-model="ctrl.item.tm_owner"
                     ng-options="tm.id as tm.title for tm in tms"></select>
         </div>
         <!--type-->
         <div class="form-group">
             <label for="type" class="required">Κατηγορια Αιθουσας:</label>
-            <select id="type" ng-model="ctrl.item.category" class="form-control"
+            <select id="type" class="form-control" ng-model="ctrl.item.category" class="form-control"
                     ng-options="category.id as category.descr for category in categories"> </select>
         </div>
 

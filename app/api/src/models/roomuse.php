@@ -15,4 +15,14 @@ class RoomUse extends Model
 {
 
     protected $table = 'room_use';
+
+    public function requests()
+    {
+        try {
+            $ret = $this->hasMany('\\App\\Models\\Requests', 'class_use');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return $ret;
+    }
 }

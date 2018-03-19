@@ -24,11 +24,9 @@ angular.module('RoomBook', [
             api.apiCall('GET', 'api/public/rooms', function (result) {
                 $scope.rooms = result.data;
             });
-
             api.apiCall('GET', 'api/public/periods', function (result) {
                 $scope.periods = result.data;
             });
-
             api.apiCall('GET', 'api/public/users', function (result) {
                 $scope.users = result.data;
             });
@@ -57,6 +55,11 @@ angular.module('RoomBook', [
                 for (var j = 0; j < book.length; j++) {
                     /* get book dates */
                     var bDays = findBookDates(book[j]);
+                    book[j].tooltip = '';
+                    for (var r = 0; r < book[j].rooms.length; r++) {
+                        book[j].tooltip = " Αιθουσα " + book[j].rooms[r].name + ", "
+                    }
+                    book[j].tooltip += "\n" + book[j].fromt + "-" + book[j].tot;
                     /* check if we have booking for this day and */
                     if (book[j].date_index === dateIndex.getDay() && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
                         /* show it at the correct hour !! */

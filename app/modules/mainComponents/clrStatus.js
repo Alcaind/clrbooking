@@ -4,7 +4,7 @@ angular.module('MainComponents')
     .factory('ClrStatusSrv', function ($http) {
         var clrStatus = {};
 
-        $http.get('config/clrStatus.json')
+        $http.get('config/appConfig.json')
             .then(function (res) {
                 clrStatus = res.data;
             }, function (res) {

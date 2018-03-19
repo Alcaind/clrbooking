@@ -65,7 +65,7 @@
         <div class="form-group"
              ng-class="{ 'has-error' : psForm.conf_id.$invalid && !psForm.conf_id.$pristine }">
             <label class="required" for="conf_id">Configuration-config_id<span class="form-required">*</span>:</label>
-            <select id="conf_id" name="conf_id" ng-model="ctrl.item.conf_id"
+            <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
                     ng-options="config.id as config.year for config in configs"></select>
             <p ng-show="psForm.conf_id.$invalid && !psForm.conf_id.$pristine" class="help-block">Εισάγετε
                 έτος.</p>

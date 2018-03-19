@@ -38,7 +38,7 @@
         <div class="form-group"
              ng-class="{ 'has-error' : periodForm.conf_id.$invalid && !periodForm.conf_id.$pristine }">
             <label class="required" for="conf_id">Έτος<span class="form-required">*</span>:</label>
-            <select id="conf_id" name="conf_id" ng-model="ctrl.item.conf_id"
+            <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
                     ng-options="config.id as config.year for config in configs"></select>
             <p ng-show="periodForm.conf_id.$invalid && !periodForm.conf_id.$pristine" class="help-block">Εισάγετε
                 έτος.</p>

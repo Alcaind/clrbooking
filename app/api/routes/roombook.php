@@ -23,7 +23,7 @@ $app->post('/roombook/dates', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     //return $response->getBody()->write(json_encode($data));
-    $roombook = \App\Models\RoomBook::with('rooms')
+    $roombook = \App\Models\Requests::with('rooms', 'ps')
         ->where('fromd', '>=', $data['fromd'])->where('fromd', '<=', $data['tod'])
         ->orWhere(function ($query) use ($data) {
             $query->where('tod', '<=', $data['tod'])->where('tod', '>=', $data['fromd']);

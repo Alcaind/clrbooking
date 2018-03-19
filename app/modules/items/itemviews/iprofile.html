@@ -21,7 +21,7 @@
             <p ng-show="itemForm.code.$invalid && !itemForm.code.$pristine" class="help-block">Εισάγετε ημερομηνία
                 κωδικό.</p>
         </div>
-        <status-selector status-title="Κατάσταση περιόδου" options="periodStatus"
+        <status-selector status-title="Κατάσταση περιόδου" options="itemStatus"
                          output-value="ctrl.item.status"></status-selector>
 
         <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"

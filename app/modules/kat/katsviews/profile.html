@@ -9,7 +9,7 @@
     <form class="katForm" name="katForm" novalidate>
         <div class="form-group" ng-class="{ 'has-error' : katForm.tm_id.$invalid && !katForm.tm_id.$pristine }">
             <label class="required" for="tm_id">Τμήμα<span class="form-required">*</span>:</label>
-            <select id="tm_id" name="tm_id" ng-model="ctrl.item.tm_id"
+            <select id="tm_id" name="tm_id" class="form-control" ng-model="ctrl.item.tm_id"
                     ng-options="tm.id as tm.title for tm in tms"></select>
             <p ng-show="katForm.tm_id.$invalid && !katForm.tm_id.$pristine" class="help-block">Εισάγετε ονομασία
                 τμήματος.</p>

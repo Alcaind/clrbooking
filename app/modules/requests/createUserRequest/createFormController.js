@@ -45,10 +45,14 @@ angular.module('Requests')
             var days = Math.ceil(Math.abs(tod.getTime() - fromd.getTime()) / (1000 * 3600 * 24));
             for (var i = 0; i < days; i++) {
                 calendar[i] = [];
+
                 for (var j = 0; j < book.length; j++) {
                     var bDays = findBookDates(book[j], 0);
                     if (book[j].date_index === dateIndex.getDay() && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
-                        calendar[i].push(book[j]);
+                        for (var r = 0; r < book[j].rooms.length; r++)
+                            for (var k = 0; k < $scope.rooms.length; k++) {
+                                if (book[j].rooms[r].id === $scope.rooms[k].id && $scope.rooms[k].checked) calendar[i].push(book[j]);
+                            }
                     }
                 }
                 if ($scope.item.date_index && $scope.item.fromd && $scope.item.tod && $scope.item.fromt && $scope.item.tot) {

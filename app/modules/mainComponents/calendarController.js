@@ -10,6 +10,7 @@ angular.module('MainComponents')
 
         $scope.$watch('fromd', init);
         $scope.$watch('tod', init);
+        $scope.$watch('dates', init);
 
         function init() {
             if (!$scope.fromd || !$scope.tod) return;
@@ -29,8 +30,14 @@ angular.module('MainComponents')
             }
 
             for (var i = 0; i <= days; i++) {
-                $scope.calendarArray[i] = [];
+
                 var tdt = dateIndex.getDate();
+                if (!($scope.dates && $scope.dates.indexOf((i % 7).toString()) >= 0)) {
+                    dateIndex.setDate(tdt + 1);
+                    continue;
+                }
+                $scope.calendarArray[i] = [];
+
                 //$scope.days.push(dateIndex.toDateString());
                 $scope.days.push(dateIndex.toLocaleDateString('gr-GR', options));
                 $scope.calendarArray[i] = [];
@@ -47,7 +54,8 @@ angular.module('MainComponents')
             scope: {
                 calendarArray: "=",
                 fromd: "=",
-                tod: "="
+                tod: "=",
+                dates: "=" // '1,3,5'
             },
             controller: "CalendarContol",
             templateUrl: 'modules/mainComponents/views/calendar.html'
