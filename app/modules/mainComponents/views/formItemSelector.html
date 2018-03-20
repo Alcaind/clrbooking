@@ -1,0 +1,16 @@
+<!--<div class="form-group"
+     ng-class="{ 'has-error' : 'Form'.value.$invalid && !value+'Form'.value.$pristine }">
+    <label class="required" for=value>{{ valueTitle }}<span class="form-required">*</span>:</label>-->
+
+<label for="status">{{ selectorTitle }}:</label>
+<input ng-show="searchable" ng-model="myfilter" type="text">
+{{myfilter}}
+<select id="status" class="form-control"
+        ng-options="data[returnColumn] as data[viewColumn] for data in dp|filter:dataFilter(myfilter)"
+        ng-model="outputValue">
+</select>
+
+
+<!--
+    <p ng-show="value+'Form'.value.$invalid && !value+'Form'.value.$pristine" class="help-block">{{aletrText}}</p>
+</div>-->

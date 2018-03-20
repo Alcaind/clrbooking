@@ -25,7 +25,7 @@
                 </div>
                 <div style="display: flex; position: relative;top: -1440px;">
                     <div ng-repeat="book in calendarArray[$index]" class="info btn"
-                         style="margin: 2px; top: {{book.dist}}px; height: {{book.h}}px; position: relative; font-size: smaller; background-color: #cecece; text-align: left"
+                         style="margin: 2px; top: {{book.dist}}px; height: {{book.h}}px; position: relative; font-size: smaller; background-color: #cecece; text-align: left; background-color: {{book.color}}"
                          data-toggle="popover" data-content="{{book.fromt}}-{{book.tot}}"
                          data-trigger="hover">
 

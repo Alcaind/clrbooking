@@ -3,7 +3,7 @@
 var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies', 'MainComponents']);
 
 globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($http, $cookies, $window) {
-    var globalVariables = {};
+    var globalVariables = [];
     var listeners = [];
 
     function addListener(varListen, listener) {
@@ -61,8 +61,6 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($
 
     function appInit(fName, usr) {
         if (!cookieGet(usr)) initFromFile(fName);
-
-
     }
 
     var glbSrv = {

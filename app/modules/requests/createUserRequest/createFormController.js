@@ -51,6 +51,7 @@ angular.module('Requests')
                     if (book[j].date_index === dateIndex.getDay() && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
                         for (var r = 0; r < book[j].rooms.length; r++)
                             for (var k = 0; k < $scope.rooms.length; k++) {
+                                book[j].color = '#278572';
                                 if (book[j].rooms[r].id === $scope.rooms[k].id && $scope.rooms[k].checked) calendar[i].push(book[j]);
                             }
                     }
@@ -77,7 +78,7 @@ angular.module('Requests')
                 book.fDay = new Date(book.fromd + 'T' + book.fromt);
                 book.tDay = new Date(book.tod + 'T' + book.fromt);
                 book.h = (new Date(book.fromd + 'T' + book.tot) - book.fDay) / (1000 * 60);
-                book.dist = (book.fDay - new Date(book.fromd)) / (1000 * 60);
+                book.dist = Math.abs(book.fDay - new Date(book.fromd)) / (1000 * 60);
 
                 return {
                     fDay: new Date(book.fromd + 'T' + book.fromt), /* get book from day */

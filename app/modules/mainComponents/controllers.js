@@ -292,6 +292,6 @@ angular.module('MainComponents', [
             templateUrl: 'modules/mainComponents/config/configGraph.html'
         }
     });
-;
+
 
 

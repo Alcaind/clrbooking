@@ -1,6 +1,7 @@
 <div><label for="status">{{ statusTitle }}:</label>
+    <div><input ng-if="searchable" ng-model="searchFilter" type="text"></div>
     <select id="status" class="form-control"
-            ng-options="option.value as option.text for option in optStatus"
+            ng-options="option.value as option.text for option in optStatus|filter:searchFilter"
             ng-model="outputValue">
     </select>
 </div>

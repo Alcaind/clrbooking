@@ -61,6 +61,7 @@ angular.module('Requests', [
         };
 
     }])
+
     .component('requestsProfile', {
         restrict: 'EA',
         templateUrl: 'modules/requests/reqviews/profile.html',
@@ -68,5 +69,4 @@ angular.module('Requests', [
             method: '='
         },
         controller: 'RequestProfileController'
-    })
-;
+    });

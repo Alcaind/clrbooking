@@ -1218,5 +1218,45 @@
       "text": "Available",
       "value": 2
     }
+  ],
+  "roleUserStatus": [
+    {
+      "text": "Active",
+      "value": 0
+    },
+    {
+      "text": "NonActive",
+      "value": 1
+    }
+  ],
+  "weekdaysTableDateIndex": [
+    {
+      "text": "Κυριακή",
+      "value": 0
+    },
+    {
+      "text": "Δευτέρα",
+      "value": 1
+    },
+    {
+      "text": "Τρίτη",
+      "value": 2
+    },
+    {
+      "text": "Τετάρτη",
+      "value": 3
+    },
+    {
+      "text": "Πέμπτη",
+      "value": 4
+    },
+    {
+      "text": "Παρασκευή",
+      "value": 5
+    },
+    {
+      "text": "Σάββατο",
+      "value": 6
+    }
   ]
 }
