@@ -11,7 +11,7 @@
         <div class="form-group" ng-class="{ 'has-error' : userForm.user.$invalid && !userForm.user.$pristine }">
             <label class="required" for="user">Username<span class="form-required">*</span>:</label>
             <div>
-                <input id="user" name="user" class="form-control" type="text" ng-model="ctrl.item.user" ng-minlength="5"
+                <input id="user" name="user" type="text" ng-model="ctrl.item.user" ng-minlength="5"
                        ng-maxlength="30">
                 <p ng-show="userForm.user.$error.minlength" class="help-block">Το Username είναι πολύ μικρό.</p>
                 <p ng-show="userForm.user.$error.maxlength" class="help-block">Το Username είναι πολύ μεγάλο.</p>
@@ -21,7 +21,7 @@
         <div class="form-group">
             <div>
                 <label class="required" for="pw1">Κωδικός<span class="form-required">*</span>:</label>
-                <input id="pw1" name="pw1" class="form-control" type="{{passwordString1}}" ng-model="ctrl.item.hash"
+                <input id="pw1" name="pw1" type="{{passwordString1}}" ng-model="ctrl.item.hash"
                        ng-init="passwordString1='password'" ng-required=""/>
                 <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
                    ng-click="passwordString1==='text'?passwordString1='password':passwordString1='text';errorString='*'+pw1+'*';">
@@ -30,7 +30,7 @@
             </div>
             <div>
                 <label class="required" for="pw2">Επιβεβαίωση κωδικού<span class="form-required">*</span>:</label>
-                <input id="pw2" name="pw2" class="form-control" type="{{passwordString2}}"
+                <input id="pw2" name="pw2" type="{{passwordString2}}"
                        ng-model="pw2" ng-init="passwordString2='password'" pw-check="pw1" ng-required=""/>
                 <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
                    ng-click="passwordString2==='text'?passwordString2='password':passwordString2='text';errorString='*'+pw2+'*';">

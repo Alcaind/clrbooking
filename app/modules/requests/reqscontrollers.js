@@ -10,6 +10,7 @@ angular.module('Requests', [
     $scope.ctrl = makeController.mainController('/requests', 'requestsTableConf', 'Κατάλογος Αιτημάτων');
     $scope.ctrl.init();
     $scope.statusOptions = ClrStatusSrv.getStatus('requestStatus');
+    $scope.weekOptions = ClrStatusSrv.getStatus('weekdaysTableDateIndex');
 
 }])
     .controller('RequestProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {

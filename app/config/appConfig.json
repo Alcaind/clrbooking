@@ -649,6 +649,13 @@
       "visible": true,
       "sorted": false,
       "filter": ""
+    },
+    {
+      "column": "priority",
+      "title": "level",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
     }
   ],
   "tmsTableConf": [
@@ -910,10 +917,6 @@
       "title": "Προγραμμα σπουδών"
     },
     {
-      "column": "booking",
-      "title": "Κλείσιμο Αιθουσας not yet"
-    },
-    {
       "column": "roombook",
       "title": "Διαθεσιμότητα Αιθουσών"
     },
@@ -930,14 +933,6 @@
       "title": "Χρήση Αιθουσών"
     },
     {
-      "column": "psstats",
-      "title": "Στατιστικά"
-    },
-    {
-      "column": "roombook",
-      "title": "Διαθεσιμότητα"
-    },
-    {
       "column": "usercreaterequests",
       "title": "UserView"
     }
@@ -950,10 +945,6 @@
     {
       "column": "rooms",
       "title": "Αίθουσες"
-    },
-    {
-      "column": "booking",
-      "title": "Κλείσιμο Αιθουσας not yet"
     },
     {
       "column": "roombook",

@@ -21,6 +21,7 @@
                     <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
                     <td ng-if="ctrl.tableColumns[1].visible">{{ item.synt }}</td>
                     <td ng-if="ctrl.tableColumns[2].visible"><textarea disabled>{{ item.descr }}</textarea></td>
+                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.priority }}</td>
                     <td>
                         <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
                                     content="{{op.content}}" gicon="{{op.gicon}}"></operations>

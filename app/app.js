@@ -455,7 +455,6 @@ angular.module('clrBooking', [
             }
 
 
-
             console.log('in App Run');
-        }])
-;
+        }]);
+

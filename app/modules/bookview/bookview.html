@@ -15,10 +15,10 @@
                     ng-options="room.id as room.name for room in rooms"></select></td>
     </tr>
     <tr>
-        <td>Date_Index:</td>
-        <td><input type="text" id="date_index" name="date_index" ng-model="item.date_index"
-        ></td>
-        <!--value="{{item.fromd.getDay()}}"-->
+
+        <label>date_index:</label>
+        <input type="text" class="form-control" ng-model="item.date_index">
+
     </tr>
     <tr>
         <td>Από Ημ/νία:</td>
@@ -44,7 +44,7 @@
     </tr>
     </tbody>
 </table>
-<button ng-click="openCalendar(item)">Get data</button>
+<button ng-click="openCalendar(item)">Get data openCalendar</button>
 
 <!--<div id="graphView" ng-show="calendar">
 <calendar-book calendar-array="calendar" fromd="item.fromd" tod="item.tod"></calendar-book>

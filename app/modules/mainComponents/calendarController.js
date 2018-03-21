@@ -55,7 +55,7 @@ angular.module('MainComponents')
                 calendarArray: "=",
                 fromd: "=",
                 tod: "=",
-                dates: "=" // '1,3,5'
+                dates: "="
             },
             controller: "CalendarContol",
             templateUrl: 'modules/mainComponents/views/calendar.html'

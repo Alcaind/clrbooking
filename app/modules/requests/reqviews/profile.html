@@ -92,21 +92,14 @@
             <p ng-show="requestForm.tod.$invalid && !requestForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνιά
                 λήξης.</p>
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : requestForm.date_index.$invalid && !requestForm.date_index.$pristine }">
-            <label class="required" for="date_index">Ημέρα Kαταχώρηση αιτήματος<span
-                    class="form-required">*</span>:</label>
-            <input id="date_index" name="date_index" class="form-control" type="text" ng-model="ctrl.item.date_index"
-                   value="{{ctrl.item.date_index=ctrl.item.fromd.getDay()}}">
-            <p ng-show="requestForm.date_index.$invalid && !requestForm.date_index.$pristine" class="help-block">
-                Εισάγετε ημέρα καταχώρησης του αιτήματος.</p>
-        </div>
+        <status-selector status-title="Ημέρα Kαταχώρηση αιτήματος" options="weekdaysTableDateIndex"
+                         output-value="ctrl.item.date_index"
+                         value="{{ctrl.item.date_index=ctrl.item.fromd.getDay()}}"></status-selector>
         <div class="form-group">
             <label class="required" for="admin">Επιβλέπων Αιτήματος:</label>
             <select id="admin" name="admin" class="form-control" ng-model="ctrl.item.admin"
                     ng-options="user.id as user.user for user in users"></select>
         </div>
-
 
         <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                 ng-if="ctrl.item.id>0">Ανανέωση

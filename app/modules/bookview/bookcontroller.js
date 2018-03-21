@@ -92,5 +92,6 @@ angular.module('RoomBook', [
         });
 
         init();
-    }])
-;
+    }]);
+
+

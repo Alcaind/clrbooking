@@ -1,13 +1,15 @@
 'use strict';
 
 angular.module('Requests')
-    .controller('CreateFormController', ['$scope', 'api', function ($scope, api) {
+    .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', function ($scope, api, ClrStatusSrv) {
         $scope.item = {};
         $scope.views = [];
         $scope.currentPage = 0;
         $scope.book = [];
         $scope.rooms = [];
         $scope.selectedPeriod = {};
+
+        $scope.weekOptions = ClrStatusSrv.getStatus('weekdaysTableDateIndex');
 
         $scope.init = function () {
             $scope.currentPage = 0;
@@ -95,8 +97,6 @@ angular.module('Requests')
                     tDay: new Date(book.tod) /* get book to day */
                 }
             }
-
-
         }
 
         $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
