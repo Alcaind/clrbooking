@@ -3,9 +3,12 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>name</th>
-            <th>comment</th>
-            <th>teacher</th>
+            <th>Αίθουσα</th>
+            <th>Από ώρα</th>
+            <th>Μέχρι ώρα</th>
+            <th>Ημέρα</th>
+            <th>Καθηγητής</th>
+            <th>Σχόλια</th>
             <th>...</th>
         </tr>
         </thead>
@@ -14,13 +17,16 @@
             style="cursor: pointer">
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
-            <th>{{ item.pivot.comment }}</th>
+            <th>{{ item.pivot.fromt}}</th>
+            <th>{{ item.pivot.tot}}</th>
+            <th>{{ item.pivot.date_index}}</th>
             <th>{{ getTeacher(item.pivot.teacher) }}</th>
+            <th>{{ item.pivot.comment }}</th>
             <td>
                 <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button ng-click="ctrl.deleteData(item.id)" type="button" class="btn btn-danger">
+                <button ng-click="ctrl.deleteData(item.pivot.id)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

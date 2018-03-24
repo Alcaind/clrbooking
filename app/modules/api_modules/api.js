@@ -22,7 +22,7 @@ angular.module('ApiModules', [
                     if (successCallback) successCallback(results);
                     return results;
                 }, function (results) {
-                    MakeModal.generalInfoModal('sm', 'info', '  Error :' + results.data.errorCode, results.data.errorText);
+                    MakeModal.generalInfoModal('sm', 'Info', '  Error :' + results.data.errorCode, results.data.errorText);
                     if (errorCallBack) errorCallBack(results);
                     return results;
                 });
@@ -31,3 +31,6 @@ angular.module('ApiModules', [
         return factory;
     }])
 ;
+
+
+

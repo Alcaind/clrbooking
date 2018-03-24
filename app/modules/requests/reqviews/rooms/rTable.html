@@ -11,8 +11,12 @@
             <td>{{ item.name }}</td>
 
             <td>
-                <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
-                        class="btn {{item.disabled?'btn-regular disabled':'btn-success '}}">
+                <!--<button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"-->
+                <!--class="btn {{item.disabled?'btn-regular disabled':'btn-success '}}">-->
+                <!--<span class="glyphicon glyphicon-ok"></span>-->
+                <!--</button>-->
+                <button ng-click="ctrl.showPivotData(item)" type="button"
+                        class="btn btn-success">
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
             </td>

@@ -12,11 +12,12 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 
 class RoomBook extends Model
 {
-    protected $table = 'room_book';
+    protected $table = 'request_rooms';
 
-    public function rooms()
-    {
-        return $this->belongsTo('\\App\\Models\\Rooms', 'room_id');
-    }
-
+//    protected $table = 'room_book';
+//
+//    public function rooms()
+//    {
+//        return $this->belongsTo('\\App\\Models\\Rooms', 'room_id');
+//    }
 }

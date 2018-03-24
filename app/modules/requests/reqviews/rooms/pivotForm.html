@@ -4,6 +4,16 @@
             <label>Σχόλια:<input type="text" ng-model="ctrl.pivotData.comment" class="form-control"
                                  placeholder="comment"></label>
         </div>
+        <div>
+            <label for="fromt">Από ώρα:</label>
+            <input id="fromt" name="fromt" class="form-control" type="time" ng-model="ctrl.pivotData.fromt">
+        </div>
+        <div>
+            <label for="tot">Μέχρι ώρα:</label>
+            <input id="tot" name="tot" class="form-control" type="time" ng-model="ctrl.pivotData.tot">
+        </div>
+        <status-selector status-title="Ημέρα Διεξαγωγής" options="weekdaysTableDateIndex"
+                         output-value="ctrl.pivotData.date_index"></status-selector>
         <div class="form-group">
             <label class="required" for="teacher">Υπευθυνος Καθηγητης:</label>
             <select id="teacher" name="teacher" class="form-control" ng-model="ctrl.pivotData.teacher"

@@ -32,7 +32,7 @@ class Requests extends Model
 
     public function rooms()
     {
-        return $this->belongsToMany('\\App\\Models\\Rooms', 'request_rooms', 'req_id', 'room_id')->withPivot('comment', 'teacher');
+        return $this->belongsToMany('\\App\\Models\\Rooms', 'request_rooms', 'req_id', 'room_id')->withPivot('id', 'comment', 'teacher', 'fromt', 'tot', 'date_index');
     }
 
     public function periods()
@@ -48,6 +48,11 @@ class Requests extends Model
     public function room_use()
     {
         return $this->belongsTo('\\App\\Models\\RoomUse', 'class_use');
+    }
+
+    public function config()
+    {
+        return $this->belongsTo('\\App\\Models\\Config', 'conf_id');
     }
 
 }

@@ -2,7 +2,13 @@ angular.module('Requests')
     .controller('RequestsRoomsController', ['$scope', 'AuthenticationService', 'makeController', function ($scope, AuthenticationService, makeController) {
 
 
-        $scope.ctrl = makeController.n2nController('/requests', 'rooms', {comment: '', teacher: ''});
+        $scope.ctrl = makeController.n2nController('/requests', 'rooms', {
+            comment: '',
+            teacher: '',
+            fromt: '',
+            tot: '',
+            date_index: ''
+        });
         $scope.ctrl.init();
 
     }])

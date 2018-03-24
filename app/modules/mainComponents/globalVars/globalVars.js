@@ -134,6 +134,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             if (ctrl.cth === th) {
                 ctrl.cth.reverse = !ctrl.cth.reverse;
             } else {
+                ctrl.cth.sorted = false;
                 th.sorted = true;
                 ctrl.cth = th;
             }

@@ -133,20 +133,6 @@
       "filter": ""
     },
     {
-      "column": "fromt",
-      "title": "Από ώρα",
-      "visible": true,
-      "sorted": false,
-      "filter": ""
-    },
-    {
-      "column": "tot",
-      "title": "Μέχρι ώρα",
-      "visible": true,
-      "sorted": false,
-      "filter": ""
-    },
-    {
       "column": "protocol_id",
       "title": "Αρ.πρωτοκόλλου",
       "visible": true,
@@ -170,13 +156,6 @@
     {
       "column": "tod",
       "title": "Μέχρι ημέρα",
-      "visible": true,
-      "sorted": false,
-      "filter": ""
-    },
-    {
-      "column": "date_index",
-      "title": "Ημ/νία καταχώρησης αιτήματος",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -225,70 +204,70 @@
     },
     {
       "column": "status",
-      "title": "Κατασταση(status)",
+      "title": "Κατ/ση",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "active",
-      "title": "Ενεργά",
+      "title": "Εν.",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "destroyed",
-      "title": "Καταστροφές",
+      "title": "Κατεσ.",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "nonexist",
-      "title": "Ανενεργά",
+      "title": "Ανεν.",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "capasity",
-      "title": "Χωρητικότητα",
+      "title": "Χωρ.",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "width",
-      "title": "Πλάτος",
+      "title": "Πλ.",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "height",
-      "title": "Υψος/Βαθος",
+      "title": "Υψ.",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "xoros",
-      "title": "xoros",
+      "title": "Τυπος",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "exams_capasity",
-      "title": "Χωρητικότητα Εξετάσεων",
+      "title": "Χωρ. Εξ.",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "capasity_categ",
-      "title": "Χωρητικότητα/Κατηγορια",
+      "title": "Χωρ.Κατ.",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -316,7 +295,7 @@
     },
     {
       "column": "category",
-      "title": "Κατηγορια Αιθουσας Χρήση",
+      "title": "Χρήση",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -902,7 +881,7 @@
     },
     {
       "column": "config",
-      "title": "Configuration"
+      "title": "Config"
     },
     {
       "column": "items",
@@ -910,27 +889,27 @@
     },
     {
       "column": "periods",
-      "title": "Ακαδημαικοι Περίοδοι"
+      "title": "Ακαδ. Περίοδοι"
     },
     {
       "column": "ps",
-      "title": "Προγραμμα σπουδών"
+      "title": "Προγ/μα σπουδών"
     },
     {
       "column": "roombook",
-      "title": "Διαθεσιμότητα Αιθουσών"
+      "title": "Διαθ. Αιθουσών"
     },
     {
       "column": "userscategories",
-      "title": "Κατηγορίες Χρηστών"
+      "title": "Κατ. Χρηστών"
     },
     {
       "column": "roomcategory",
-      "title": "Κατηγορίες Αιθουσών"
+      "title": "Κατ. Αιθουσών"
     },
     {
       "column": "roomuse",
-      "title": "Χρήση Αιθουσών"
+      "title": "Χρήση Αιθ."
     },
     {
       "column": "usercreaterequests",

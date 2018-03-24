@@ -1,27 +1,34 @@
-<div>
-    <div style="text-align: left;padding-left: 5px;">
+<div class="pageHolder" style="padding:  20px;">
+    <div class="pageHeader">
         <a href back-button type="button" class="btn btn-warning">
             <span class="glyphicon glyphicon-chevron-left">
                 <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
             </span>
         </a>
     </div>
-    <form class="roomForm" name="roomForm" novalidate>
+    <form class="roomForm" name="roomForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
         <!-- NAME -->
-        <div class="form-group" ng-class="{ 'has-error' : roomForm.name.$invalid && !roomForm.name.$pristine }">
-            <label class="required" for="name">Όνομα Αιθουσας<span class="form-required">*</span>:</label>
-            <div>
-                <input id="name" name="name" class="form-control" type="text" ng-model="ctrl.item.name">
-                <p ng-show="roomForm.name.$invalid && !roomForm.name.$pristine" class="help-block">Εισάγετε όνομα
-                    αίθουσας.</p>
+        <div class="formGroupItems">
+            <div class="form-group row" ng-class="{ 'has-error' : roomForm.name.$invalid && !roomForm.name.$pristine }">
+                <label class="required col-sm-2 formItemLabel" for="name">Όνομα Αιθουσας<span
+                        class="form-required">*</span>:</label>
+                <div class="col-sm-10">
+                    <input id="name" name="name" class="form-control" type="text" ng-model="ctrl.item.name">
+                    <p ng-show="roomForm.name.$invalid && !roomForm.name.$pristine" class="help-block">Εισάγετε όνομα
+                        αίθουσας.</p>
+                </div>
             </div>
-        </div>
-        <!-- ADDRESS -->
-        <div class="form-group" ng-class="{ 'has-error' : roomForm.address.$invalid && !roomForm.address.$pristine }">
-            <label for="address" class="required">Διευθυνση<span class="form-required">*</span>:</label>
-            <input id="address" name="address" class="form-control" type="text" ng-model="ctrl.item.address">
-            <p ng-show="roomForm.address.$invalid && !roomForm.address.$pristine" class="help-block">Εισάγετε
-                διεύθυνση.</p>
+            <!-- ADDRESS -->
+            <div class="form-group row"
+                 ng-class="{ 'has-error' : roomForm.address.$invalid && !roomForm.address.$pristine }">
+                <label for="address" class="required col-sm-2 formItemLabel">Διευθυνση<span
+                        class="form-required">*</span>:</label>
+                <div class="col-sm-10">
+                    <input id="address" name="address" class="form-control" type="text" ng-model="ctrl.item.address">
+                    <p ng-show="roomForm.address.$invalid && !roomForm.address.$pristine" class="help-block">Εισάγετε
+                        διεύθυνση.</p>
+                </div>
+            </div>
         </div>
         <!-- building -->
         <div class="form-group" ng-class="{ 'has-error' : roomForm.building.$invalid && !roomForm.building.$pristine }">
@@ -84,12 +91,16 @@
             <input id="exams_capasity" name="exams_capasity" class="form-control" type="number"
                    ng-model="ctrl.item.exams_capasity">
         </div>
+
+
         <!--capasity_categ-->
         <div class="form-group">
             <label for="capasity_categ" class="required">Χωρητικότητα/Κατηγορια:</label>
             <input id="capasity_categ" name="capasity_categ" class="form-control" type="text"
                    ng-model="ctrl.item.capasity_categ">
         </div>
+
+
         <!--stat_comm-->
         <div class="form-group">
             <label for="stat_comm" class="required">Σχόλια:</label>
@@ -101,17 +112,21 @@
                     ng-options="config.id as config.year for config in configs"></select>
         </div>
 
+
         <div class="form-group">
             <label class="required" for="tm_owner">Τμήμα<span class="form-required">*</span>:</label>
             <select id="tm_owner" name="tm_owner" class="form-control" ng-model="ctrl.item.tm_owner"
                     ng-options="tm.id as tm.title for tm in tms"></select>
         </div>
+
+
         <!--type-->
         <div class="form-group">
             <label for="type" class="required">Κατηγορια Αιθουσας:</label>
             <select id="type" class="form-control" ng-model="ctrl.item.category" class="form-control"
                     ng-options="category.id as category.descr for category in categories"> </select>
         </div>
+
 
         <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                 ng-if="ctrl.item.id>0">Ανανέωση

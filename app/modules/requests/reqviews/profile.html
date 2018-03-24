@@ -11,7 +11,10 @@
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.req_dt.$invalid && !requestForm.req_dt.$pristine }">
             <label class="required" for="req_dt">Ημ/νία Αιτήματος<span class="form-required">*</span>:</label>
-            <input id="req_dt" name="req_dt" class="form-control" type="text" ng-model="ctrl.item.req_dt">
+            <input id="req_dt" name="req_dt" class="form-control" ng-model="ctrl.item.req_dt">
+            <script type="text/javascript">
+                document.getElementById('req_dt').value = Date();
+            </script>
             <p ng-show="requestForm.req_dt.$invalid && !requestForm.req_dt.$pristine" class="help-block">Εισάγετε
                 ημερομηνία αιτήματος.</p>
         </div>
@@ -37,17 +40,9 @@
         </div>
 
         <div class="form-group">
-            <form-item-selector output-value="ctrl.item.ps_id" selector-title="PS" searchable="true" dp="ps"
-                                view-column="tma_per" return-column="id"></form-item-selector>
-
-            <!--<label class="required" for="ps_id">Πρόγραμμα Σπουδών:</label>-->
-            <!--<input type="text" ng-change="ctrl.setFilter(ps.tma_per)" ng-model="ps.tma_per.filter"/>-->
-            <!--<select id="ps_id" type="text" name="ps_id" class="form-control" ng-model="ctrl.item.ps_id"-->
-            <!--ng-options="ps.id as ps.tma_per for ps in ps"></select>-->
-            <!--&lt;!&ndash;<input id="ps_id" name="ps_id" class="form-control" type="text" ng-model="ctrl.item.ps_id">&ndash;&gt;-->
+            <form-item-selector output-value="ctrl.item.ps_id" selector-title="Πρόγραμμα Σπουδών/Μάθημα"
+                                searchable="true" dp="ps" view-column="tma_per" return-column="id"></form-item-selector>
         </div>
-
-
         <div class="form-group">
             <label class="required" for="class_use">Χρήση Αίθουσας:</label>
             <select id="class_use" name="class_use" class="form-control" ng-model="ctrl.item.class_use"
@@ -56,19 +51,6 @@
         <div class="form-group">
             <label class="required" for="links">Παραποµπές:</label>
             <input id="links" name="links" class="form-control" type="text" ng-model="ctrl.item.links">
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : requestForm.fromt.$invalid && !requestForm.fromt.$pristine }">
-            <label class="required" for="fromt">Από ώρα<span class="form-required">*</span>:</label>
-            <input id="fromt" name="fromt" class="form-control" type="text" ng-model="ctrl.item.fromt">
-            <p ng-show="requestForm.fromt.$invalid && !requestForm.fromt.$pristine" class="help-block">Εισάγετε ώρα
-                έναρξης.</p>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : requestForm.tot.$invalid && !requestForm.tot.$pristine }">
-            <label class="required" for="tot">Μέχρι ώρα<span class="form-required">*</span>:</label>
-            <input id="tot" name="tot" class="form-control" type="text" ng-model="ctrl.item.tot">
-            <p ng-show="requestForm.tot.$invalid && !requestForm.tot.$pristine" class="help-block">Εισάγετε ώρα
-                λήξης.</p>
         </div>
         <div class="form-group">
             <label class="required" for="protocol_id">Αρ.πρωτοκόλλου:</label>
@@ -92,13 +74,16 @@
             <p ng-show="requestForm.tod.$invalid && !requestForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνιά
                 λήξης.</p>
         </div>
-        <status-selector status-title="Ημέρα Kαταχώρηση αιτήματος" options="weekdaysTableDateIndex"
-                         output-value="ctrl.item.date_index"
-                         value="{{ctrl.item.date_index=ctrl.item.fromd.getDay()}}"></status-selector>
-        <div class="form-group">
-            <label class="required" for="admin">Επιβλέπων Αιτήματος:</label>
-            <select id="admin" name="admin" class="form-control" ng-model="ctrl.item.admin"
-                    ng-options="user.id as user.user for user in users"></select>
+        <form-item-selector selector-title="Επιβλέπων" return-column="id" view-column="user" dp="users"
+                            searchable="false" output-value="ctrl.item.admin"></form-item-selector>
+
+        <div class="form-group"
+             ng-class="{ 'has-error' : requestForm.conf_id.$invalid && !requestForm.conf_id.$pristine }">
+            <label class="required" for="conf_id">Έτος<span class="form-required">*</span>:</label>
+            <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
+                    ng-options="config.id as config.year for config in configs"></select>
+            <p ng-show="requestForm.conf_id.$invalid && !requestForm.conf_id.$pristine" class="help-block">Εισάγετε
+                έτος.</p>
         </div>
 
         <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"

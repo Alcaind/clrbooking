@@ -1,61 +1,85 @@
-<div>
-    <config-book-graph selected-period="selectedPeriod"></config-book-graph>
-</div>
-<div ng-if="currentPage===0">
-    <label>Από Ημ/νία:
-        <pre> <em>{{item.fromd | date:'EEEE , d/MMMM/y'}}</em></pre>
-    </label> <br>
-    <div style="display:flex; min-height:290px;">
-        <div uib-datepicker ng-model="item.fromd" class="well well-sm"></div>
+<div style="width: 100%; height: 100%; padding: 10px; font-size: 10px">
+    <div style="padding: 5px; display: flex; width: 100%; border: 1px solid #acacac;">
+        <button ng-click="nextPage()" ng-disabled="currentPage>=0" class="btn btn-primary"
+                style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">
+            Προιγούμενο βήμα
+        </button>
+        <button ng-click="init()" class="btn btn-primary"
+                style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab"> -
+            Αρχικοποίηση -
+        </button>
+        <button ng-click="nextPage()" class="btn btn-primary"
+                style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab"
+                ng-disabled="currentPage<0">Επόμενο βήμα
+        </button>
     </div>
-    <label>Μέχρι Ημ/νία:
-        <pre> <em>{{item.tod | date:'EEEE , d/MMMM/y' }}</em></pre>
-    </label>
-    <div style="display:flex; min-height:290px;">
-        <div uib-datepicker ng-model="item.tod" class="well well-sm"></div>
-    </div>
-</div>
-
-<div ng-show="currentPage===1">
-    <label>Από Ημ/νία:
-        <pre> <em>{{item.fromd | date:'EEEE , d/MMMM/y' }}</em></pre>
-    </label>
-    <label>Μέχρι Ημ/νία:
-        <pre> <em>{{item.tod | date:'EEEE , d/MMMM/y' }}</em></pre>
-    </label>
-    <input type="text" ng-model="filter" class="form-control" placeholder="search"
-           style="padding: 5px; width: 100%; padding: 5px">
-    <div>
-        <label>Από ώρα:</label>
-        <input type="time" class="form-control" ng-model="item.fromt">
-    </div>
-    <div>
-        <label>Μέχρι ώρα:</label>
-        <input type="time" class="form-control" ng-model="item.tot">
-    </div>
-    <div>
-        <label>date_index:</label>
-        <input type="text" class="form-control" ng-model="item.date_index">
-    </div>
-    <button ng-click="showMyBook()">prev</button>
-    <div style="overflow-y: auto; height: 200px; padding: 10px; border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
-                    list-style: none; margin: 1em auto; padding: 0;">
-            <div ng-repeat="room in rooms|filter:filter" ng-click="roomChecked(room)"
-                 style="cursor: pointer; padding: 10px; background-color: {{room.checked ? '#1d9ad6':''}}; font-size: 6px;
-                 border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">
-                <div>
-                    <span class="glyphicon glyphicon-{{room.checked?'ok':'remove'}}"></span>
-                </div>
-                <div>{{room.id }}</div>
-                <div>{{room.name}}</div>
-
-            </div>
+    <div style="display: flex; border: 1px solid #ababab;">
+        <div style="width: 50%">
+            <config-book-graph selected-period="selectedPeriod"></config-book-graph>
+        </div>
+        <div style="width: 50%; padding: 4px 0px; text-align: center;">
+            <from-to-date-picker fromd="item.fromd" tod="item.tod"></from-to-date-picker>
+            <from-to-time-picker fromt="item.fromt" tot="item.tot"></from-to-time-picker>
         </div>
     </div>
-    <calendar-book calendar-array="calendar" fromd="item.fromd" tod="item.tod" dates="item.date_index"></calendar-book>
-</div>
+    <!--<div ng-if="currentPage===0">
+        <label>Από Ημ/νία:
+            <pre> <em>{{item.fromd | date:'EEEE , d/MMMM/y'}}</em></pre>
+        </label> <br>
+        <div style="display:flex; min-height:290px;">
+            <div uib-datepicker ng-model="item.fromd" class="well well-sm"></div>
+        </div>
+        <label>Μέχρι Ημ/νία:
+            <pre> <em>{{item.tod | date:'EEEE , d/MMMM/y' }}</em></pre>
+        </label>
+        <div style="display:flex; min-height:290px;">
+            <div uib-datepicker ng-model="item.tod" class="well well-sm"></div>
+        </div>
+    </div>-->
 
-<button ng-click="nextPage()">prev</button>
-<button ng-click="init()"> - init -</button>
-<button ng-click="nextPage()">next</button>
+    <div ng-show="currentPage===0" style="padding: 4px 4px 0px 4px;">
+        <div class="" style="display: flex; ">
+            <div ng-repeat="sday in selectedDays" ng-click="dayChecked(sday)"
+                 class="btn btn-{{sday.s?'success':'primary'}}"
+                 style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;
+                 border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">
+                <div>
+                    <span class="glyphicon glyphicon-{{sday.s?'ok':'remove'}}"></span>
+                    {{sday.d}}
+                </div>
+            </div>
+        </div>
+
+        <div style=" border: 1px solid #ababab;">
+
+            <div style="padding: 5px; display: flex">
+                <input type="text" ng-model="filter" class="form-control" placeholder="search"
+                       style="padding: 5px; width: 100%; padding: 5px">
+                <button ng-click="selectAllClasses()"><span class="glyphicon glyphicon-ok"></span></button>
+                <button ng-click="deselectAllClasses"><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+
+            <div style="overflow-y: auto; height: 100px; padding: 5px;  border: 1px solid #ababab;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
+                    list-style: none; margin: 1em auto; padding: 0;">
+                    <div ng-repeat="room in rooms|filter:filter" ng-click="roomChecked(room)"
+                         style="cursor: pointer; padding: 4px; background-color: {{room.checked ? '#1d9ad6':''}}; font-size: 12px;
+                 border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">
+                        <div>
+                            <span class="glyphicon glyphicon-{{room.checked?'ok':'remove'}}"></span>
+                            <div>{{room.name}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button ng-click="showMyBook()" class="btn btn-warning"
+                style="margin: 4px;width: 100%;border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">Έλεγχος
+            Διαθεσιμότητας ...
+        </button>
+
+        <calendar-book calendar-array="calendar" fromd="item.fromd" tod="item.tod" dates="item.date_index"
+                       book="book"></calendar-book>
+    </div>
+</div>

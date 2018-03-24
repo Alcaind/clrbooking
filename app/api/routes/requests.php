@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr', 'admin', 'room_use:id,synt'])->get();
+    $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr', 'admin', 'room_use:id,synt', 'ps', 'config'])->get();
     return $response->getBody()->write($requests->toJson());
 });
 
@@ -21,7 +21,7 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr', 'admin', 'room_use:id,synt'])->find($id);
+        $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr', 'admin', 'room_use:id,synt', 'ps', 'config'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -97,14 +97,12 @@ $app->post('/requests', function (Request $request, Response $response) {
         $requests->ps_id = $data['ps_id'];
         $requests->class_use = $data['class_use'];
         $requests->links = $data['links'];
-        $requests->fromt = $data['fromt'];
-        $requests->tot = $data['tot'];
         $requests->protocol_id = $data['protocol_id'];
         $requests->status = $data['status'];
         $requests->fromd = $data['fromd'];
         $requests->tod = $data['tod'];
-        $requests->date_index = $data['date_index'];
         $requests->admin = $data['admin'];
+        $requests->conf_id = $data['conf_id'];
         $requests->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -141,14 +139,12 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->ps_id = $data['ps_id'] ?: $requests->ps_id;
         $requests->class_use = $data['class_use'] ?: $requests->class_use;
         $requests->links = $data['links'] ?: $requests->links;
-        $requests->fromt = $data['fromt'] ?: $requests->fromt;
-        $requests->tot = $data['tot'] ?: $requests->tot;
         $requests->protocol_id = $data['protocol_id'] ?: $requests->protocol_id;
         $requests->status = $data['status'] ?: $requests->status;
         $requests->fromd = $data['fromd'] ?: $requests->fromd;
         $requests->tod = $data['tod'] ?: $requests->tod;
-        $requests->date_index = $data['date_index'] ?: $requests->date_index;
         $requests->admin = $data['admin'] ?: $requests->admin;
+        $requests->conf_id = $data['conf_id'] ?: $requests->conf_id;
 
         $requests->save();
     } catch (PDOException $e) {
@@ -163,45 +159,37 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
 $checkReqRooms = function ($request, $response, $next) {
     $res = null;
     $args = $request->getAttributes()['routeInfo'][2];
-    $req = \App\Models\Requests::find($args['id']);
+    $req = \App\Models\Requests::with('rooms')->find($args['id']);
     $data = $request->getParsedBody();
 
-    $roombook = \App\Models\RoomBook::with('rooms')
+    $roombook = \App\Models\Requests::with('rooms')
         ->where('fromd', '<=', $req->fromd)
         ->where('fromd', '>=', $req->fromd)
-        /*->where('room_id', '=', $args['rid'])*/
+//        ->where('room_id', '=', $args['rid'])
         ->get();
 
     //$response->getBody()->write($roombook->toJson());
-
     foreach ($roombook as $book) {
-        if ($book->teacher == $data['teacher']) {
-            $nr = $response->withStatus(417);
-            $error = new ApiError();
-            $error->setData(815, 'Teacher ' . \App\Models\Users::find($book->teacher)->user . ' is already assigned to another room.');
-            return $nr->write($error->toJson());
-        }
-
-        if ($req->fromd >= $book['fromd'] && $req->fromd <= $book['tod'] && $req->date_index == $book['date_index']) {
-            if ($req->fromt >= $book['fromt'] && $req->fromt <= $book['tot'])
-                if ($book->room_id == $args['rid']) {
-                    $nr = $response->withStatus(417);
-                    $error = new ApiError();
-                    $error->setData(816, 'Class ' . \App\Models\Rooms::find($args['rid'])->name . ' is already assigned to book.');
-                    return $nr->write($error->toJson());
+        foreach ($book->rooms()->get() as $room) {
+            if (($req->fromd >= $book['fromd'] || $req->tod >= $book['fromd']) && $req->fromd <= $book['tod']) {
+                if ($room->pivot->fromt >= $book['fromt'] && $room->pivot->fromt <= $book['tot']) {
+                    if ($room->pivot->room_id == $args['rid'] && $room->pivot->date_index == $data['date_index']) {
+                        $nr = $response->withStatus(417);
+                        $error = new ApiError();
+                        $error->setData(816, 'Class ' . \App\Models\Rooms::find($args['rid'])->name . ' is already assigned to book.');
+                        return $nr->write($error->toJson());
+                    }
+                    if ($room->pivot->teacher == $data['teacher']) {
+                        $nr = $response->withStatus(417);
+                        $error = new ApiError();
+                        $error->setData(815, 'Teacher ' . \App\Models\Users::find($room->pivot->teacher)->user . ' is already assigned to another room.');
+                        return $nr->write($error->toJson());
+                    }
                 }
-        }
-
-        if ($req->tod >= $book['fromd'] && $req->tod <= $book['tod'] && $req->date_index == $book['date_index']) {
-            if ($req->fromt >= $book['fromt'] && $req->fromt <= $book['tot'])
-                if ($book->room_id == $args['rid']) {
-                    $nr = $response->withStatus(417);
-                    $error = new ApiError();
-                    $error->setData(816, 'Class ' . \App\Models\Rooms::find($args['rid'])->name . ' is already assigned to book.');
-                    return $nr->write($error->toJson());
-                }
+            }
         }
     }
+
     $response = $next($request, $response);
     return $response;
 };
@@ -227,9 +215,8 @@ $app->put('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
 $app->delete('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];
     $rid = $args['rid'];
-    $requests = \App\Models\Requests::find($id);
-    $requests->rooms()->detach($rid);
-    return $response->getBody()->write($requests->rooms()->get()->toJson());
+    \App\Models\RoomBook::find($rid)->delete();
+    return $response->getBody()->write(\App\Models\Requests::find($id)->rooms()->get()->toJson());
 });
 
 $app->get('/requests/{id}/rooms', function ($request, $response, $args) {

@@ -30,5 +30,15 @@ class Config extends Model
         return $this->hasMany('\\App\\Models\\Ps', 'conf_id');
     }
 
+    public function requests()
+    {
+        try {
+            $ret = $this->hasMany('\\App\\Models\\Requests', 'conf_id');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return $ret;
+    }
+
 
 }

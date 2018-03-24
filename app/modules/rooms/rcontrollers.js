@@ -14,15 +14,12 @@ angular.module('Rooms', [
 
         $scope.statusOptions = ClrStatusSrv.getStatus('roomStatus');
 
-
         $scope.deleteUsage = function (item, usage) {
             api.apiCall('DELETE', "api/public/rooms/" + item.id + '/usages/' + usage.id, function (results) {
                 $scope.ctrl.dp[$scope.ctrl.dp.indexOf(item)].room_use.splice($scope.ctrl.dp[$scope.ctrl.dp.indexOf(item)].room_use.indexOf(usage), 1);
                 MakeModal.generalInfoModal('sm', 'Info', 'info', 'Eπιτυχής διαγραφή', 1)
             })
-
         };
-
     }])
 
     .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, $routeParams, api, MakeModal, AuthenticationService, makeController, globalVarsSrv) {
@@ -51,7 +48,6 @@ angular.module('Rooms', [
         api.apiCall('GET', 'api/public/tms', function (result) {
             $scope.tms = result.data;
         });
-
 
     }])
     .component('roomProfile', {

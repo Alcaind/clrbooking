@@ -47,6 +47,12 @@ angular.module('Requests', [
             $scope.ps = results.data;
         });
 
+        $scope.configs = {};
+
+        api.apiCall('GET', 'api/public/config', function (results) {
+            $scope.configs = results.data;
+        });
+
         $scope.admin = [];
 
         api.apiCall('GET', 'api/public/users', function (results) {
