@@ -1,28 +1,29 @@
 create table config
 (
-  id         INT AUTO_INCREMENT
-		primary key,
-  year       INT(4)     NULL,
-  status     INT        NULL,
-  created_at TIMESTAMP  NULL,
-  updated_at TIMESTAMP  NULL,
-  fromd      DATE       NULL,
-  tod        DATE       NULL,
-  synt       VARCHAR(9) NULL
+  id            INT AUTO_INCREMENT
+    PRIMARY KEY,
+  year          INT(4)     NULL,
+  status        INT        NULL,
+  created_at    TIMESTAMP  NULL,
+  updated_at    TIMESTAMP  NULL,
+  fromd         DATE       NULL,
+  tod           DATE       NULL,
+  synt          VARCHAR(9) NULL,
+  req_exp_dates INT        NULL
 )
   ENGINE = InnoDB
 ;
 
 create table items
 (
-	id int auto_increment
-		primary key,
-	descr varchar(255) null,
-	comments varchar(215) null,
-	code varchar(255) null,
-	status int null,
-	created_at timestamp null,
-	updated_at timestamp null
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  descr      VARCHAR(255) NULL,
+  comments   VARCHAR(215) NULL,
+  code       VARCHAR(255) NULL,
+  status     INT          NULL,
+  created_at TIMESTAMP    NULL,
+  updated_at TIMESTAMP    NULL
 )
   ENGINE = InnoDB
 ;
@@ -30,7 +31,7 @@ create table items
 create table kat
 (
   id         INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   tm_id      INT          NULL,
   decr       VARCHAR(32)  NULL,
   title      VARCHAR(255) NULL,
@@ -47,7 +48,7 @@ CREATE INDEX tm___fk
 create table periods
 (
   id         INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   descr      VARCHAR(64)  NULL,
   synt       VARCHAR(12)  NULL,
   fromd      DATE         NULL,
@@ -69,7 +70,7 @@ CREATE INDEX periods_config_id_fk
 create table ps
 (
   id         INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   tm_code    INT          NULL,
   tm_per     VARCHAR(255) NULL,
   pm         CHAR(3)      NULL,
@@ -94,7 +95,7 @@ CREATE INDEX ps_config_id_fk
 create table ps_stats
 (
   id         INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   ps_id      INT       NULL,
   diloseis   INT       NULL,
   exetaseis  INT       NULL,
@@ -109,7 +110,7 @@ CREATE INDEX ps_stats_ps_ps_id_fk
 create table request_guests
 (
   id         INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   req_id     INT          NULL,
   name       VARCHAR(255) NULL,
   uni        VARCHAR(255) NULL,
@@ -127,14 +128,18 @@ CREATE INDEX request_guests_requests_id_fk
 
 create table request_rooms
 (
-  id         int auto_increment
-		primary key,
-  req_id     int          null,
-  room_id    int          null,
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  req_id     INT          NULL,
+  room_id    INT          NULL,
   comment    VARCHAR(255) NULL,
-  created_at timestamp    null,
-  updated_at timestamp    null,
-  teacher    int          null comment 'from users'
+  created_at TIMESTAMP    NULL,
+  updated_at TIMESTAMP    NULL,
+  teacher    INT          NULL
+  COMMENT 'from users',
+  fromt      TIME         NULL,
+  tot        TIME         NULL,
+  date_index INT          NULL
 )
   COMMENT 'N-N requests rooms'
   ENGINE = MyISAM;
@@ -151,7 +156,7 @@ CREATE INDEX request_rooms_users_id_fk
 create table requests
 (
   id          INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   req_dt      DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
   COMMENT 'Ημερομηνία Αιτήματος',
   user_id     INT                                NULL,
@@ -193,12 +198,12 @@ CREATE INDEX requests_config_id_fk
 
 create table roles
 (
-	id int auto_increment
-		primary key,
-	role varchar(255) null,
-	descr varchar(255) null,
-	created_at timestamp null,
-	updated_at timestamp null
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  role       VARCHAR(255) NULL,
+  descr      VARCHAR(255) NULL,
+  created_at TIMESTAMP    NULL,
+  updated_at TIMESTAMP    NULL
 )
   ENGINE = InnoDB
 ;
@@ -206,7 +211,7 @@ create table roles
 create table room_book
 (
   id         INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   user_id    INT          NULL,
   date_index INT          NULL,
   fromt      TIME         NULL,
@@ -248,12 +253,12 @@ CREATE INDEX room_book_users_id_fk_2
 
 create table room_category
 (
-	id int auto_increment
-		primary key,
-	synt varchar(255) not null,
-	descr varchar(255) null,
-	created_at timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
-	updated_at timestamp default '0000-00-00 00:00:00' not null
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  synt       VARCHAR(255)                            NOT NULL,
+  descr      VARCHAR(255)                            NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP     NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL
 )
   COMMENT 'Κατηγορίες αιθουσών'
   ENGINE = InnoDB
@@ -261,17 +266,17 @@ create table room_category
 
 create table room_items
 (
-	id int auto_increment
-		primary key,
-	item_id int null,
-	comments varchar(255) null,
-	stat int null,
-	`from` timestamp null,
-	`to` timestamp null,
-	room_id int null,
-	created_at timestamp null,
-	updated_at timestamp null,
-	constraint room_items_items_id_fk
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  item_id    INT          NULL,
+  comments   VARCHAR(255) NULL,
+  stat       INT          NULL,
+  `from`     TIMESTAMP    NULL,
+  `to`       TIMESTAMP    NULL,
+  room_id    INT          NULL,
+  created_at TIMESTAMP    NULL,
+  updated_at TIMESTAMP    NULL,
+  CONSTRAINT room_items_items_id_fk
   FOREIGN KEY (item_id) REFERENCES items (id)
 )
   COMMENT 'N-N'
@@ -279,20 +284,20 @@ create table room_items
 ;
 
 create index room_items_items_id_fk
-	on room_items (item_id)
+  ON room_items (item_id)
 ;
 
 create index room_rooms___fk
-	on room_items (room_id)
+  ON room_items (room_id)
 ;
 
 create table room_use
 (
-  id         int auto_increment
-		primary key,
-  synt       varchar(4)   null,
-  descr      varchar(255) null,
-  created_at timestamp    null,
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  synt       VARCHAR(4)   NULL,
+  descr      VARCHAR(255) NULL,
+  created_at TIMESTAMP    NULL,
   updated_at TIMESTAMP    NULL,
   priority   INT          NULL
 )
@@ -302,7 +307,7 @@ create table room_use
 create table rooms
 (
   id             INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   name           VARCHAR(255)                             NULL,
   address        VARCHAR(512)                             NULL,
   building       VARCHAR(255)                             NULL,
@@ -344,24 +349,24 @@ ALTER TABLE room_book
 FOREIGN KEY (room_id) REFERENCES rooms (id);
 
 alter table room_items
-	add constraint room_rooms___fk
+  ADD CONSTRAINT room_rooms___fk
 FOREIGN KEY (room_id) REFERENCES rooms (id)
 ;
 
 create table rooms_room_use
 (
-	id int auto_increment
-		primary key,
-	rooms_id int not null,
-	room_use_id int not null,
-	comment varchar(255) null,
-	created_at timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
-	updated_at timestamp default '0000-00-00 00:00:00' not null,
-	constraint room_use__index
+  id          INT AUTO_INCREMENT
+    PRIMARY KEY,
+  rooms_id    INT                                     NOT NULL,
+  room_use_id INT                                     NOT NULL,
+  comment     VARCHAR(255)                            NULL,
+  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP     NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  updated_at  TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  CONSTRAINT room_use__index
   UNIQUE (rooms_id, room_use_id),
-	constraint rooms_room_use_rooms_id_fk
+  CONSTRAINT rooms_room_use_rooms_id_fk
   FOREIGN KEY (rooms_id) REFERENCES rooms (id),
-	constraint rooms_room_use_room_use_id_fk
+  CONSTRAINT rooms_room_use_room_use_id_fk
   FOREIGN KEY (room_use_id) REFERENCES room_use (id)
 )
   COMMENT 'N-N για χρήση αιθουσών'
@@ -369,8 +374,7 @@ create table rooms_room_use
 ;
 
 create index rooms_room_use_room_use_id_fk
-	on rooms_room_use (room_use_id)
-;
+  ON rooms_room_use (room_use_id);
 
 CREATE TABLE rooms_tms
 (
@@ -469,14 +473,14 @@ CREATE TABLE rooms_tranf3
 
 create table tm
 (
-	id int auto_increment
-		primary key,
-	tm_code varchar(32) null,
-	descr varchar(12) null,
-	title varchar(255) null,
-	sxoli varchar(64) null,
-	created_at timestamp null,
-	updated_at timestamp null
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  tm_code    VARCHAR(32)  NULL,
+  descr      VARCHAR(12)  NULL,
+  title      VARCHAR(255) NULL,
+  sxoli      VARCHAR(64)  NULL,
+  created_at TIMESTAMP    NULL,
+  updated_at TIMESTAMP    NULL
 )
   ENGINE = InnoDB;
 
@@ -496,15 +500,15 @@ FOREIGN KEY (tm_id) REFERENCES tm (id);
 
 create table transf_ps
 (
-	c1 varchar(255) null,
-	c2 varchar(255) null,
-	c3 varchar(255) null,
-	c4 varchar(255) null,
-	c5 varchar(255) null,
-	c6 varchar(255) null,
-	c7 varchar(255) null,
-	c8 varchar(255) null,
-	c9 varchar(255) null
+  c1 VARCHAR(255) NULL,
+  c2 VARCHAR(255) NULL,
+  c3 VARCHAR(255) NULL,
+  c4 VARCHAR(255) NULL,
+  c5 VARCHAR(255) NULL,
+  c6 VARCHAR(255) NULL,
+  c7 VARCHAR(255) NULL,
+  c8 VARCHAR(255) NULL,
+  c9 VARCHAR(255) NULL
 )
   COMMENT 'tmp'
   ENGINE = MyISAM
@@ -512,12 +516,12 @@ create table transf_ps
 
 create table ucategories
 (
-	id int auto_increment
-		primary key,
-	descr varchar(255) null,
-	comment varchar(255) null,
-	created_at timestamp null,
-	updated_at timestamp null
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  descr      VARCHAR(255) NULL,
+  comment    VARCHAR(255) NULL,
+  created_at TIMESTAMP    NULL,
+  updated_at TIMESTAMP    NULL
 )
   COMMENT 'user categories'
   ENGINE = InnoDB
@@ -526,7 +530,7 @@ create table ucategories
 create table users
 (
   id         INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   tm_id      INT          NULL,
   fname      VARCHAR(255) NULL,
   sname      VARCHAR(255) NULL,
@@ -577,7 +581,7 @@ create table users_roles
   exp_dt     TIMESTAMP    NULL,
   status     INT          NULL,
   id         INT AUTO_INCREMENT
-		primary key,
+    PRIMARY KEY,
   created_at TIMESTAMP    NULL,
   updated_at TIMESTAMP    NULL,
   CONSTRAINT users_roles_users_id_fk
