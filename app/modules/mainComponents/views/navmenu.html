@@ -21,13 +21,14 @@
         <ul class="nav navbar-nav">
             <li ng-repeat="option in adminColums" style="padding: 2px">
                 <!--<home-button-columns ></home-button-columns>-->
-                <a href="#{{option.column}}">{{option.title}}</a>
+                <a href="#{{option.column}}" style="line-height: 15px;">{{option.title}}</a>
             </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown" style="background: #5d0303;">
-                <a class="dropdown-toggle" data-toggle="dropdown">Ρυθμίσεις<b class="caret"></b></a>
+            <li class="dropdown" style="background: #5d0303;cursor: pointer;">
+                <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"
+                                                                        aria-hidden="true"></span><b class="caret"></b></a>
                 <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
                     <li role="menuitem"><a href="#users/{{users.id}}/roles">Προφίλ</a></li>
                     <li role="menuitem" ng-click="logout()"><a href="#login">Έξοδος</a></li>

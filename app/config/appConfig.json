@@ -369,6 +369,13 @@
       "visible": true,
       "sorted": false,
       "filter": ""
+    },
+    {
+      "column": "req_exp_dates",
+      "title": "Ημερες Ισχύος Αιτήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
     }
   ],
   "itemTableConf": [
@@ -932,6 +939,10 @@
     {
       "column": "usercreaterequests",
       "title": "UserView"
+    },
+    {
+      "column": "home",
+      "title": "Home"
     }
   ],
   "roomsTableConfOps": [
@@ -1159,6 +1170,10 @@
     {
       "text": "Expired",
       "value": 2
+    },
+    {
+      "text": "Draft",
+      "value": 3
     }
   ],
   "roombookStatus": [

@@ -5,11 +5,12 @@ angular.module('Requests')
         $scope.ctrl = makeController.n2nController('/requests', 'rooms', {
             comment: '',
             teacher: '',
-            fromt: '',
-            tot: '',
+            fromt: new Date(),
+            tot: new Date(),
             date_index: ''
         });
         $scope.ctrl.init();
+
 
     }])
 
@@ -57,8 +58,11 @@ angular.module('Requests')
         $scope.insertRoom = function () {
             var method = "PUT";
             if ($scope.ctrl.state === 0) method = "POST";
+            // $scope.ctrl.pivotData.fromt.setTime($scope.ctrl.pivotData.fromt.getTime() - ($scope.ctrl.pivotData.fromt.getTimezoneOffset() * 60000));
+            // $scope.ctrl.pivotData.tot.setTime($scope.ctrl.pivotData.tot.getTime() - ($scope.ctrl.pivotData.tot.getTimezoneOffset() * 60000));
             api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/rooms/' + $scope.ctrl.currentRight.id, function (results) {
                 $scope.ctrl.pivotData = Object.assign({}, $scope.ctrl.pivotTable);
+
                 $scope.ctrl.ldp = results.data;
                 $scope.ctrl.compare($scope.ctrl.ldp, $scope.ctrl.rdp);
                 $scope.cancelData();

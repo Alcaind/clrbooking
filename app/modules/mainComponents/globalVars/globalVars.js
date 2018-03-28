@@ -107,12 +107,19 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             operations: globalVarsSrv.getGlobalVar(table + "Ops"),
             url: url
         };
+        ctrl.selectedRow = null;
 
         ctrl.getAll = function () {
             api.apiCall('GET', ctrl.baseURL, function (results) {
                 ctrl.dp = results.data;
                 ctrl.totalRows = ctrl.dp.length;
             });
+        };
+
+        ctrl.selectRow = function (item) {
+            item.selected = true;
+            if (ctrl.selectedRow) ctrl.selectedRow.selected = false;
+            ctrl.selectedRow = item;
         };
 
         ctrl.delete = function (item) {
@@ -124,7 +131,8 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
 
         ctrl.init = function () {
             AuthenticationService.CheckCredentials();
-            ctrl.cth = ctrl.tableColumns[1];
+            ctrl.cth = ctrl.tableColumns[0];
+            ctrl.cth.sorted = true;
             ctrl.getAll();
         };
 
@@ -164,6 +172,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         };
 
         ctrl.init = function () {
+            AuthenticationService.CheckCredentials();
             ctrl.getMain();
             ctrl.getLeft();
             ctrl.getRight()
@@ -250,6 +259,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             tableColumns: globalVarsSrv.getGlobalVar(table)
         };
 
+
         ctrl.init = function () {
             if (!$routeParams.id) {
                 ctrl.tableColumns.map(function (tableColumn) {
@@ -258,6 +268,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             } else {
                 api.apiCall('GET', ctrl.baseURL + "/" + $routeParams.id, function (results) {
                     ctrl.item = results.data;
+
                 });
             }
         };

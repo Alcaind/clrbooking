@@ -28,8 +28,8 @@
                     <td ng-if="ctrl.tableColumns[7].visible">{{ item.links }}</td>
                     <td ng-if="ctrl.tableColumns[8].visible">{{ item.protocol_id }}</td>
                     <td ng-if="ctrl.tableColumns[9].visible">{{ statusOptions[item.status].text }}</td>
-                    <td ng-if="ctrl.tableColumns[10].visible">{{ item.fromd }}</td>
-                    <td ng-if="ctrl.tableColumns[11].visible">{{ item.tod }}</td>
+                    <td ng-if="ctrl.tableColumns[10].visible">{{ item.fromd |date:'dd-MM-yyyy' }}</td>
+                    <td ng-if="ctrl.tableColumns[11].visible">{{ item.tod |date:'dd-MM-yyyy' }}</td>
                     <td ng-if="ctrl.tableColumns[12].visible">{{ item.admin.user }}</td>
                     <td ng-if="ctrl.tableColumns[13].visible">{{ item.config.year }}</td>
                     </td>

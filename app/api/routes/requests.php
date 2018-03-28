@@ -145,7 +145,6 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->tod = $data['tod'] ?: $requests->tod;
         $requests->admin = $data['admin'] ?: $requests->admin;
         $requests->conf_id = $data['conf_id'] ?: $requests->conf_id;
-
         $requests->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -171,8 +170,19 @@ $checkReqRooms = function ($request, $response, $next) {
     //$response->getBody()->write($roombook->toJson());
     foreach ($roombook as $book) {
         foreach ($book->rooms()->get() as $room) {
+            $fromt = new DateTime($data['fromt']);
+            $tot = new DateTime($data['tot']);
+            //print_r( $fromt->diff($tot)->invert);
+            if ($fromt->diff($tot)->invert == 1) {
+                $nr = $response->withStatus(418);
+                $error = new ApiError();
+                $error->setData(818, 'To time must be greater than from time.');
+                return $nr->write($error->toJson());
+            }
+
             if (($req->fromd >= $book['fromd'] || $req->tod >= $book['fromd']) && $req->fromd <= $book['tod']) {
                 if ($room->pivot->fromt >= $book['fromt'] && $room->pivot->fromt <= $book['tot']) {
+
                     if ($room->pivot->room_id == $args['rid'] && $room->pivot->date_index == $data['date_index']) {
                         $nr = $response->withStatus(417);
                         $error = new ApiError();

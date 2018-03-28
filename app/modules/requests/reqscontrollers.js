@@ -13,9 +13,29 @@ angular.module('Requests', [
     $scope.weekOptions = ClrStatusSrv.getStatus('weekdaysTableDateIndex');
 
 }])
-    .controller('RequestProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
+    .controller('RequestProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', '$filter', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api, $filter) {
         $scope.ctrl = makeController.profileController('/requests', 'requestsTableConf');
         $scope.ctrl.init();
+
+        // function afterInit(res) {
+        //     res.fromd = new Date($filter('date')(res.fromd, "yyyy-MM-dd")); // $filter('date')(res.fromd, "yyyy-MM-dd");
+        //     res.tod = $filter('date')(res.tod, "yyyy-MM-dd");
+        // }
+
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
 
         $scope.users = {};
 

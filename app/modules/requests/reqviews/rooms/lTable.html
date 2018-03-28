@@ -17,8 +17,8 @@
             style="cursor: pointer">
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
-            <th>{{ item.pivot.fromt}}</th>
-            <th>{{ item.pivot.tot}}</th>
+            <th>{{ item.pivot.fromt | date:'shortTime'}}</th>
+            <th>{{ item.pivot.tot | date:'shortTime'}}</th>
             <th>{{ item.pivot.date_index}}</th>
             <th>{{ getTeacher(item.pivot.teacher) }}</th>
             <th>{{ item.pivot.comment }}</th>

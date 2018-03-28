@@ -12,9 +12,24 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/roombook', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $roombook = \App\Models\RoomBook::with('rooms')->get();
+    $roombook = \App\Models\RoomBook::with('requests', 'rooms', 'users')->get();
     return $response->getBody()->write($roombook->toJson());
 });
+
+$app->get('/roombook/{id}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $roombook = \App\Models\RoomBook::with('requests', 'rooms', 'users')->find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($roombook->toJson());
+});
+
 
 /**
  * returns the calendar from the given dates
@@ -30,18 +45,8 @@ $app->post('/roombook/dates', function (Request $request, Response $response) {
         })->get();
     return $response->getBody()->write($roombook->toJson());
 });
-//
-//$app->get('/roombook/{id}', function (Request $request, Response $response, $args) {
-//    header("Content-Type: application/json");
-//    $id = $args['id'];
-//    try {
-//        $roombook = \App\Models\RoomBook::find($id);
-//    } catch (\Exception $e) {
-//        return $response->withStatus(404)->getBody()->write($e->getMessage());
-//    }
-//    return $response->getBody()->write($roombook->toJson());
-//});
-//
+
+
 //$app->post('/roombook', function (Request $request, Response $response) {
 //    header("Content-Type: application/json");
 //    $data = $request->getParsedBody();

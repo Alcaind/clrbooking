@@ -1,8 +1,8 @@
 <div style="width: 100%; height: 100%; padding: 10px; font-size: 10px">
     <div style="padding: 5px; display: flex; width: 100%; border: 1px solid #acacac;">
-        <button ng-click="nextPage()" ng-disabled="currentPage>=0" class="btn btn-primary"
+        <button ng-click="nextPage()" ng-disabled="currentPage<=0" class="btn btn-primary"
                 style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">
-            Προιγούμενο βήμα
+            Προηγούμενο βήμα
         </button>
         <button ng-click="init()" class="btn btn-primary"
                 style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab"> -
@@ -10,16 +10,27 @@
         </button>
         <button ng-click="nextPage()" class="btn btn-primary"
                 style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab"
-                ng-disabled="currentPage<0">Επόμενο βήμα
+                ng-disabled="currentPage>2">Επόμενο βήμα
         </button>
     </div>
     <div style="display: flex; border: 1px solid #ababab;">
-        <div style="width: 50%">
+        <div style="width: 30%">
             <config-book-graph selected-period="selectedPeriod"></config-book-graph>
         </div>
-        <div style="width: 50%; padding: 4px 0px; text-align: center;">
+        <div style="width: 100%; padding: 4px 0px; text-align: center;">
             <from-to-date-picker fromd="item.fromd" tod="item.tod"></from-to-date-picker>
-            <from-to-time-picker fromt="item.fromt" tot="item.tot"></from-to-time-picker>
+            <div style="display: flex; ">
+                <div ng-repeat="sday in selectedDays" ng-click="dayChecked(sday)"
+                     class="btn btn-{{sday.s?'success':'primary'}}"
+                     style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;
+                 border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">
+                    <div>
+                        <!--<span class="glyphicon glyphicon-{{sday.s?'ok':'remove'}}"></span>-->
+                        {{sday.d}}
+                    </div>
+                </div>
+            </div>
+            <!--<from-to-time-picker fromt="item.fromt" tot="item.tot"></from-to-time-picker>-->
         </div>
     </div>
     <!--<div ng-if="currentPage===0">
@@ -38,20 +49,7 @@
     </div>-->
 
     <div ng-show="currentPage===0" style="padding: 4px 4px 0px 4px;">
-        <div class="" style="display: flex; ">
-            <div ng-repeat="sday in selectedDays" ng-click="dayChecked(sday)"
-                 class="btn btn-{{sday.s?'success':'primary'}}"
-                 style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;
-                 border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">
-                <div>
-                    <span class="glyphicon glyphicon-{{sday.s?'ok':'remove'}}"></span>
-                    {{sday.d}}
-                </div>
-            </div>
-        </div>
-
         <div style=" border: 1px solid #ababab;">
-
             <div style="padding: 5px; display: flex">
                 <input type="text" ng-model="filter" class="form-control" placeholder="search"
                        style="padding: 5px; width: 100%; padding: 5px">
@@ -59,27 +57,38 @@
                 <button ng-click="deselectAllClasses"><span class="glyphicon glyphicon-remove"></span></button>
             </div>
 
-            <div style="overflow-y: auto; height: 100px; padding: 5px;  border: 1px solid #ababab;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
+            <div style="overflow-y: auto; height: 100%; padding: 5px;  border: 1px solid #ababab;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
                     list-style: none; margin: 1em auto; padding: 0;">
                     <div ng-repeat="room in rooms|filter:filter" ng-click="roomChecked(room)"
-                         style="cursor: pointer; padding: 4px; background-color: {{room.checked ? '#1d9ad6':''}}; font-size: 12px;
+                         class="btn btn-{{room.checked?'success':'primary'}}"
+                         style="cursor: pointer; padding: 4px; font-size: 12px;
                  border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">
-                        <div>
+
+                        <div class="btn btn-primary" ng-if="room.checked" ng-click="roomUncheck(room)">
                             <span class="glyphicon glyphicon-{{room.checked?'ok':'remove'}}"></span>
+                        </div>
+                        <div>
                             <div>{{room.name}}</div>
+                            <div>{{room.capasity_categ}}</div>
+                            <div>{{room.address}}</div>
+                            <div ng-if="room.checked" style="display: grid; text-align: center; color: #575757">
+                                <div>Ώρες</div>
+                                <label>Από <input type="time" ng-model="room.fromt"></label>
+                                <label>Εως <input type="time" ng-model="room.tot"></label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
+    <div ng-show="currentPage===1" style="padding: 4px 4px 0px 4px;">
         <button ng-click="showMyBook()" class="btn btn-warning"
                 style="margin: 4px;width: 100%;border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">Έλεγχος
             Διαθεσιμότητας ...
         </button>
-
-        <calendar-book calendar-array="calendar" fromd="item.fromd" tod="item.tod" dates="item.date_index"
+        <calendar-book rooms="rooms" fromd="item.fromd" tod="item.tod" dates-index="item.date_index" item="item"
                        book="book"></calendar-book>
     </div>
 </div>

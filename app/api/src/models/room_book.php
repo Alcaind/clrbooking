@@ -14,10 +14,19 @@ class RoomBook extends Model
 {
     protected $table = 'request_rooms';
 
-//    protected $table = 'room_book';
-//
-//    public function rooms()
-//    {
-//        return $this->belongsTo('\\App\\Models\\Rooms', 'room_id');
-//    }
+
+    public function rooms()
+    {
+        return $this->belongsTo('\\App\\Models\\Rooms', 'room_id');
+    }
+
+    public function requests()
+    {
+        return $this->belongsTo('\\App\\Models\\Requests', 'req_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo('\\App\\Models\\Users', 'teacher');
+    }
 }

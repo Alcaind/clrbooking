@@ -55,4 +55,9 @@ class Requests extends Model
         return $this->belongsTo('\\App\\Models\\Config', 'conf_id');
     }
 
+    public function roombook()
+    {
+        return $this->hasMany('\\App\\Models\\RoomBook', 'req_id');
+    }
+
 }

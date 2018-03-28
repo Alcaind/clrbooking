@@ -40,6 +40,7 @@ $app->post('/config', function (Request $request, Response $response) {
         $config->fromd = $data['fromd'];
         $config->tod = $data['tod'];
         $config->synt = $data['synt'];
+        $config->req_exp_dates = $data['req_exp_dates'];
         $config->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -75,6 +76,7 @@ $app->put('/config/{id}', function ($request, $response, $args) {
         $config->fromd = $data['fromd'] ?: $config->fromd;
         $config->tod = $data['tod'] ?: $config->tod;
         $config->synt = $data['synt'] ?: $config->synt;
+        $config->req_exp_dates = $data['req_exp_dates'] ?: $config->req_exp_dates;
         $config->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);

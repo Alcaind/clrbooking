@@ -6,12 +6,16 @@
         </div>
         <div>
             <label for="fromt">Από ώρα:</label>
-            <input id="fromt" name="fromt" class="form-control" type="time" ng-model="ctrl.pivotData.fromt">
+            <div id="fromt" name="fromt" uib-timepicker ng-model="ctrl.pivotData.fromt" ng-change="changed()"
+                 show-meridian="false">
+                <div/>
         </div>
         <div>
             <label for="tot">Μέχρι ώρα:</label>
-            <input id="tot" name="tot" class="form-control" type="time" ng-model="ctrl.pivotData.tot">
+            <div id="tot" name="tot" uib-timepicker ng-model="ctrl.pivotData.tot" ng-change="changed()"
+                 show-meridian="false"></div>
         </div>
+            <div>{{ctrl.pivotData.tot | date:'shortTime' }}</div>
         <status-selector status-title="Ημέρα Διεξαγωγής" options="weekdaysTableDateIndex"
                          output-value="ctrl.pivotData.date_index"></status-selector>
         <div class="form-group">

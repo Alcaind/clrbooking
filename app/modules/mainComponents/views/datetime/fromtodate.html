@@ -1,0 +1,28 @@
+<div style="display: inline-flex">
+
+    <div style="width: 100%; display: flex">
+        <label class="required" for="tod">Από Ημ/νία : {{item.fromd | date:'d/M/y' }}</label>
+        <input id="fmod" name="tod" type="text" class="form-control"
+               style="max-width: 150px"
+               uib-datepicker-popup="{{'dd-MM-yyyy'}}" ng-init="fromVisible=false;"
+               ng-model="fromd" ng-value="fromd|date:'dd-MM-yyyy'"
+               is-open="fromVisible" ng-required="true" close-text="Close"/>
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="fromVisible=true;"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+    </div>
+
+    <div style="width: 100%; display: flex">
+        <label class="required" for="tod">Μέχρη Ημ/νία : {{item.tod | date:'d/M/y' }}</label>
+        <input id="tod" name="tod" type="text" class="form-control"
+               style="max-width: 150px"
+               uib-datepicker-popup="{{'dd-MM-yyyy'}}" ng-init="toVisible=false;"
+               ng-model="tod" ng-value="tod|date:'dd-MM-yyyy'"
+               is-open="toVisible" ng-required="true" close-text="Close"/>
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="toVisible=true;"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+    </div>
+</div>

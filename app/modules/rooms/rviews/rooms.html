@@ -1,61 +1,81 @@
-<div id="rooms_main">
-    <div>
-        <dm-title></dm-title>
+<div id="rooms_main" class="pageHolder">
+
+    <div class="pageHeader">
+        <table-tools class="pageButtons"></table-tools>
+        <dm-title class="pageTitle"></dm-title>
     </div>
-    <div style="padding: 15px">
-        <table-tools></table-tools>
+    <div style="min-width:{{((ctrl.operations.length+1)*46)+'px'}};width:{{((ctrl.operations.length+1)*46)+'px'}}">
+        <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id',ctrl.selectedRow.id)}}"
+                    content="{{op.content}}" gicon="{{op.gicon}}"></operations>
+        <!--TODO:   BUTTON BOOKING THE ROOM   -->
+        <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
+    </div>
+
+    <!--<div class="pageTools">
+        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
+    </div>-->
+
+
+    <div id="data_tbl" class="boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+            <thead class="header-fixed" style="background-color: #cecece;">
+            <tr>
+                <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"
+                    style="{{th.title.lastIndexOf('.')===th.title.length-1?'width:50px;':'width:'+(th.title.length*10+20)+'px;'}}min-width: 20px;max-width: 200px;padding: 0px 5px 2px 5px;font-size: 12px;font-weight: normal;{{$index === 0?'width:44px':''}}"></th>
+                <th class="columnSettings">
+                    <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
+                </th>
+            </tr>
+            </thead>
+            <tbody class="contentScroll">
+            <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
+                style="cursor: pointer;display: table-row; background-color: {{item.selected?'#787878':''}}"
+                ng-click="ctrl.selectRow(item)">
+                <td ng-if="ctrl.tableColumns[0].visible" style="max-width: 20px;text-align: center;">{{item.id }}</td>
+                <td ng-if="ctrl.tableColumns[1].visible"
+                    style="text-overflow: ellipsis;max-width: 250px;overflow: hidden;">{{item.name}}
+                </td>
+                <td ng-if="ctrl.tableColumns[2].visible"
+                    style="text-overflow: ellipsis;max-width: 250px;overflow: hidden;">{{item.address }}
+                </td>
+                <td ng-if="ctrl.tableColumns[3].visible"
+                    style="text-overflow: ellipsis;max-width: 250px;overflow: hidden;">{{item.building}}
+                </td>
+                <td ng-if="ctrl.tableColumns[4].visible">{{item.floor}}</td>
+                <td ng-if="ctrl.tableColumns[5].visible">{{statusOptions[item.status].text}}</td>
+                <td ng-if="ctrl.tableColumns[6].visible" style="max-width: 50px">{{item.active}}</td>
+                <td ng-if="ctrl.tableColumns[7].visible" style="max-width: 50px">{{item.destroyed}}</td>
+                <td ng-if="ctrl.tableColumns[8].visible" style="max-width: 50px">{{item.nonexist}}</td>
+                <td ng-if="ctrl.tableColumns[9].visible" style="max-width: 50px">{{item.capasity}}</td>
+                <td ng-if="ctrl.tableColumns[10].visible" style="max-width: 50px">{{item.width}}</td>
+                <td ng-if="ctrl.tableColumns[11].visible" style="max-width: 50px">{{item.height }}</td>
+                <td ng-if="ctrl.tableColumns[12].visible">{{item.xoros}}</td>
+                <td ng-if="ctrl.tableColumns[13].visible">{{item.exams_capasity }}</td>
+                <td ng-if="ctrl.tableColumns[14].visible">{{item.capasity_categ}}</td>
+                <td ng-if="ctrl.tableColumns[15].visible">
+                    <li ng-repeat="tm in item.tms">{{tm.descr}}</li>
+                </td>
+                <td ng-if="ctrl.tableColumns[16].visible">{{item.stat_comm}}</td>
+                <td ng-if="ctrl.tableColumns[17].visible">{{ item.config.year }}</td>
+                <td ng-if="ctrl.tableColumns[18].visible">
+                    <li ng-repeat="use in item.room_use">
+                        <button ng-click="deleteUsage(item, use)" class="btn btn-danger btn-xs">x</button>
+                        {{use.synt}}
+                    </li>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagePagination">
         <div>
             <pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
         </div>
-        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
-        <div id="data_tbl" class="table-responsive boxContent">
-            <table class="sorttable table table-hover table-striped table-responsive header-fixed">
-                <thead>
-                <tr>
-                    <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"></th>
-                    <th>...</th>
-                <tbody>
-                <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                    style="cursor: pointer">
-
-                    <td ng-if="ctrl.tableColumns[0].visible">{{item.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{item.name}}</td>
-                    <td ng-if="ctrl.tableColumns[2].visible">{{item.address }}</td>
-                    <td ng-if="ctrl.tableColumns[3].visible">{{item.building}}</td>
-                    <td ng-if="ctrl.tableColumns[4].visible">{{item.floor}}</td>
-                    <td ng-if="ctrl.tableColumns[5].visible">{{statusOptions[item.status].text}}</td>
-                    <td ng-if="ctrl.tableColumns[6].visible">{{item.active}}</td>
-                    <td ng-if="ctrl.tableColumns[7].visible">{{item.destroyed}}</td>
-                    <td ng-if="ctrl.tableColumns[8].visible">{{item.nonexist}}</td>
-                    <td ng-if="ctrl.tableColumns[9].visible">{{item.capasity}}</td>
-                    <td ng-if="ctrl.tableColumns[10].visible">{{item.width}}</td>
-                    <td ng-if="ctrl.tableColumns[11].visible">{{item.height }}</td>
-                    <td ng-if="ctrl.tableColumns[12].visible">{{item.xoros}}</td>
-                    <td ng-if="ctrl.tableColumns[13].visible">{{item.exams_capasity }}</td>
-                    <td ng-if="ctrl.tableColumns[14].visible">{{item.capasity_categ}}</td>
-                    <td ng-if="ctrl.tableColumns[15].visible">
-                        <li ng-repeat="tm in item.tms">{{tm.descr}}</li>
-                    </td>
-                    <td ng-if="ctrl.tableColumns[16].visible">{{item.stat_comm}}</td>
-                    <td ng-if="ctrl.tableColumns[17].visible">{{ item.config.year }}</td>
-                    <td ng-if="ctrl.tableColumns[18].visible">
-                        <li ng-repeat="use in item.room_use">
-                            <button ng-click="deleteUsage(item, use)">x</button>
-                            {{use.synt}}
-                        </li>
-                    </td>
-                    <td>
-                        <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id',item.id)}}"
-                                    content="{{op.content}}" gicon="{{op.gicon}}"></operations>
-                        <!--TODO:   BUTTON BOOKING THE ROOM   -->
-                        <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+        <!--<pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>-->
     </div>
+
 </div>
 

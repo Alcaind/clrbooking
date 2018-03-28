@@ -43,7 +43,7 @@ class Users extends Model {
     public function roombook()
     {
         try {
-            $ret = $this->hasMany('\\App\\Models\\RoomBook', 'users_id');
+            $ret = $this->hasMany('\\App\\Models\\RoomBook', 'teacher');
         } catch (\Exception $e) {
             return $e->getMessage();
         }

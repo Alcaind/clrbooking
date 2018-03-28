@@ -75,6 +75,19 @@ angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
                                 break;
                             } else {
                                 globalVarsSrv.setGlobalVar('menuRole', 'user');
+                                var url = $location.url();
+                                var routes = globalVarsSrv.getGlobalVar('homeButtonUserTableConf');
+                                if (routes) {
+                                    var exist = false;
+                                    for (var i = 0; i < routes.length; i++) {
+                                        if (url.indexOf(routes[i].column) >= 0) {
+                                            exist = true;
+                                        }
+                                    }
+                                    if (!exist) $location.path('/home');
+                                }
+
+
                             }
                         }
 

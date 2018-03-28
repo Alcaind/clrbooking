@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="modal-title">Πληροφορίες</h3>
+</div>
+<div class="modal-body">
+    <h5 class="text-center">{{mainData.rooms.name}}</h5>
+    <table class="table table-striped" id="tblGrid">
+        <thead id="tblHead">
+        <tr>
+            <th>Ονομα αίθουσας</th>
+            <th>Τμήμα</th>
+            <th>Ημέρα/ες διεξαγωγής</th>
+            <th>Ώρες</th>
+            <th>Διοργανωτής/Καθηγητης</th>
+            <th>Μάθημα</th>
+            <th>Περίοδος</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{mainData.rooms.name}}</td>
+            <td>{{requests.ps.tm_per}}</td>
+            <td>{{requests.fromd |date:'dd-MM-yyyy'}}- {{requests.tod |date:'dd-MM-yyyy'}}</td>
+            <td>{{ mainData.fromt}} - {{ mainData.tot | date:'shortTime'}}</td>
+            <td ng-click="mailTo(mainData.users)" style="cursor: pointer">{{mainData.users.fname}} {{
+                mainData.users.sname}}
+            </td>
+            <td>{{requests.ps.tma_per }}</td>
+            <td>{{requests.periods.descr}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+</div>

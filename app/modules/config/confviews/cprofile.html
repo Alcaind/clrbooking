@@ -1,44 +1,59 @@
-<div>
-    <div style="text-align: left;padding-left: 5px;">
-        <a href back-button type="button" class="btn btn-warning">
-            <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
-            </span>
-        </a>
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-chevron-left">
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+				</span>
+            </a>
+        </div>
+        <div class="pageTitle">Διαχείριση Configurations</div>
     </div>
-    <form class="configForm" name="configForm" novalidate>
-        <div class="form-group"
-             ng-class="{ 'has-error' : configForm.year.$invalid && !configForm.year.$pristine }">
-            <label class="required" for="year">Έτος<span class="form-required">*</span>:</label>
-            <input id="year" name="year" class="form-control" type="number" ng-model="ctrl.item.year">
-            <p ng-show="configForm.year.$invalid && !configForm.year.$pristine" class="help-block">Εισάγετε έτος.</p>
-        </div>
+    <div class="contentHolder">
+        <form class="configForm" name="configForm" novalidate>
+            <div class="form-group"
+                 ng-class="{ 'has-error' : configForm.year.$invalid && !configForm.year.$pristine }">
+                <label class="required" for="year">Έτος<span class="form-required">*</span>:</label>
+                <input id="year" name="year" class="form-control" type="number" ng-model="ctrl.item.year">
+                <p ng-show="configForm.year.$invalid && !configForm.year.$pristine" class="help-block">Εισάγετε έτος.</p>
+            </div>
 
-        <status-selector status-title="Κατάσταση configuration" options="configStatus"
-                         output-value="ctrl.item.status"></status-selector>
+            <status-selector status-title="Κατάσταση configuration" options="configStatus"
+                             output-value="ctrl.item.status"></status-selector>
 
-        <div class="form-group" ng-class="{ 'has-error' : configForm.fromd.$invalid && !configForm.fromd.$pristine }">
-            <label class="required" for="fromd">Από ημ/νία<span class="form-required">*</span>:</label>
-            <input id="fromd" name="fromd" class="form-control" type="date" ng-model="ctrl.item.fromd">
-            <p ng-show="configForm.fromd.$invalid && !configForm.fromd.$pristine" class="help-block">Εισάγετε ημερομηνία
-                έναρξης.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : configForm.tod.$invalid && !configForm.tod.$pristine }">
-            <label class="required" for="tod">Έως ημ/νία<span class="form-required">*</span>:</label>
-            <input id="tod" name="tod" class="form-control" type="date" ng-model="ctrl.item.tod">
-            <p ng-show="configForm.tod.$invalid && !configForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνία
-                λήξης.</p>
-        </div>
-        <div class="form-group">
-            <label class="required" for="tod">Συντομογραφία:</label>
-            <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt">
-        </div>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.id>0">Ανανέωση
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.year && !ctrl.item.id">Αποθήκευση
-        </button>
-    </form>
+            <div class="form-group" ng-class="{ 'has-error' : configForm.fromd.$invalid && !configForm.fromd.$pristine }">
+                <label class="required" for="fromd">Από ημ/νία<span class="form-required">*</span>:</label>
+                <input id="fromd" name="fromd" class="form-control" type="date" ng-model="ctrl.item.fromd">
+                <p ng-show="configForm.fromd.$invalid && !configForm.fromd.$pristine" class="help-block">Εισάγετε ημερομηνία
+                    έναρξης.</p>
+            </div>
+            <div class="form-group"
+                 ng-class="{ 'has-error' : configForm.tod.$invalid && !configForm.tod.$pristine }">
+                <label class="required" for="tod">Έως ημ/νία<span class="form-required">*</span>:</label>
+                <input id="tod" name="tod" class="form-control" type="date" ng-model="ctrl.item.tod">
+                <p ng-show="configForm.tod.$invalid && !configForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνία
+                    λήξης.</p>
+            </div>
+            <div class="form-group">
+                <label class="required" for="synt">Συντομογραφία:</label>
+                <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt">
+            </div>
+            <div class="form-group"
+                 ng-class="{ 'has-error' : configForm.req_exp_dates.$invalid && !configForm.req_exp_dates.$pristine }">
+                <label class="required" for="req_exp_dates">Έως ημ/νία<span class="form-required">*</span>:</label>
+                <input id="req_exp_dates" name="req_exp_dates" class="form-control" type="number"
+                       ng-model="ctrl.item.req_exp_dates">
+                <p ng-show="configForm.req_exp_dates.$invalid && !configForm.req_exp_dates.$pristine"
+                   class="help-block">Εισάγετε ημερομηνία
+                    λήξης.</p>
+            </div>
+
+            <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.id>0">Ανανέωση
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.year && !ctrl.item.id">Αποθήκευση
+            </button>
+        </form>
+</div>
 </div>

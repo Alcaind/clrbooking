@@ -63,20 +63,32 @@
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.fromd.$invalid && !requestForm.fromd.$pristine }">
             <label class="required" for="fromd">Από ημέρα<span class="form-required">*</span>:</label>
-            <input id="fromd" name="fromd" class="form-control" type="date" ng-model="ctrl.item.fromd">
+            <input id="fromd" name="fromd" type="text" class="form-control" uib-datepicker-popup="{{'dd-MM-yyyy'}}"
+                   ng-model="ctrl.item.fromd" ng-value="ctrl.item.fromd|date:'dd-MM-yyyy'"
+                   is-open="popup1.opened" ng-required="true" close-text="Close"/>
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
             <p ng-show="requestForm.fromd.$invalid && !requestForm.fromd.$pristine" class="help-block">Εισάγετε
                 ημερομηνιά έναρξης.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.tod.$invalid && !requestForm.tod.$pristine }">
             <label class="required" for="tod">Μέχρι ημέρα<span class="form-required">*</span>:</label>
-            <input id="tod" name="tod" class="form-control" type="date" ng-model="ctrl.item.tod">
+            <input id="tod" name="tod" type="text" class="form-control" uib-datepicker-popup="{{'dd-MM-yyyy'}}"
+                   ng-model="ctrl.item.tod" ng-value="ctrl.item.tod|date:'dd-MM-yyyy'"
+                   is-open="popup2.opened" ng-required="true" close-text="Close"/>
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open2()"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
             <p ng-show="requestForm.tod.$invalid && !requestForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνιά
                 λήξης.</p>
+
         </div>
         <form-item-selector selector-title="Επιβλέπων" return-column="id" view-column="user" dp="users"
                             searchable="false" output-value="ctrl.item.admin"></form-item-selector>
-
         <div class="form-group"
              ng-class="{ 'has-error' : requestForm.conf_id.$invalid && !requestForm.conf_id.$pristine }">
             <label class="required" for="conf_id">Έτος<span class="form-required">*</span>:</label>

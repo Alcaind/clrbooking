@@ -1,5 +1,5 @@
 <div>
-    <button ng-click="hideShowOptions()">Press to show columns</button>
+    <!--<button ng-click="hideShowOptions()">Press to show columns</button>
     <div ng-if="optionsVisible" style="display: flex">
         <div ng-repeat="option in columsVisibility" style="padding: 2px">
             <label style="padding: 2px">
@@ -7,6 +7,20 @@
                 {{option.title}}
             </label>
         </div>
-        <!--<button ng-click="changeColumnVisibility(option)">{{option.visible ? 'hide' : 'show' }}</button>-->
-    </div>
+        &lt;!&ndash;<button ng-click="changeColumnVisibility(option)">{{option.visible ? 'hide' : 'show' }}</button>&ndash;&gt;
+    </div>-->
+    <li class="dropdown" style="background: #5d0303;cursor: pointer;">
+        <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"
+                                                                aria-hidden="true"></span><b class="caret"></b></a>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+            <li role="menuitem" ng-repeat="option in columsVisibility">
+                <label style="padding: 2px">
+                    <input type="checkbox" ng-model="option.visible">
+                    {{option.title}}
+                </label>
+            </li>
+        </ul>
+    </li>
+
+
 </div>

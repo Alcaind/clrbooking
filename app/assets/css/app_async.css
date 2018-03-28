@@ -16,6 +16,7 @@ body {
     margin-right: auto;
     margin-left: auto;*/
     background-color: #f3f3f3 !important;
+    overflow-y: hidden;
 }
 
 #main {
@@ -102,7 +103,6 @@ nav.navbarpan > div > ul.nav.navbar-nav > li > a:active {
 }
 
 .div.navbar-collapse.collapse {
-
     display: block;
     overflow: hidden;
     max-height: 0px;
@@ -117,15 +117,14 @@ nav.navbarpan > div > ul.nav.navbar-nav > li > a:active {
 }
 
 .maincontainer {
-
     padding: 0px;
     margin-left: auto;
     background-color: #e6e6e6;
-    width: 80%;
+    width: 100%;
     height: calc(100vh - 102px);
     margin-right: auto;
     overflow-y: auto;
-
+    position: relative;
 }
 
 footer {
@@ -138,4 +137,85 @@ footer {
     color: #b2b3a8 !important;
     margin-top: 50px;
     text-align: center;
+}
+
+dm-title {
+    width: 100%;
+}
+
+.pageTools {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.boxContent {
+    position: relative;
+    overflow-y: auto;
+    height: calc(100% - 106px);
+}
+
+.table-header-fixed {
+    position: relative;
+    /*display: grid;*/
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+.header-fixed {
+    /*position: fixed;*/
+}
+
+.contentScroll {
+    height: calc(100% - 86px);
+    /*overflow-y: auto;
+    position: absolute;
+    top: 86px;*/
+    width: 100%;
+}
+
+/*.contentScroll tr{*/
+/*!*position: fixed;*!*/
+/*!*max-width: 100%;*!*/
+/*!*white-space: nowrap;*!*/
+/*!*overflow: hidden;*!*/
+/*!*text-overflow: ellipsis;*!*/
+/*!*height:fit-content ;*!*/
+/*white-space: nowrap;*/
+/*overflow: hidden;*/
+/*text-overflow: ellipsis;*/
+/*}*/
+
+.sortorder {
+    width: 20px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.tableColoumns {
+    padding: 2px !important;
+    height: 25px;
+}
+
+.pagination {
+    margin: 0px !important;
+}
+
+.columnSettings li {
+    background: none !important;
+    cursor: pointer;
+    list-style: none;
+}
+
+td li {
+    list-style: none;
+}
+
+.navbar {
+    margin-bottom: 0px !important;
+}
+
+table {
+    margin-bottom: 0px !important;
 }

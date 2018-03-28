@@ -34,7 +34,7 @@ angular.module('Login', ['Authentication', 'MainComponents', 'GlobalVarsSrvs'])
                                 break;
                             }
                         }
-                        $location.path('/roles');
+                        $location.path('/home');
 
                     });
                 }
