@@ -21,7 +21,14 @@
         <ul class="nav navbar-nav">
             <li ng-repeat="option in adminColums" style="padding: 2px">
                 <!--<home-button-columns ></home-button-columns>-->
-                <a href="#{{option.column}}" style="line-height: 15px;">{{option.title}}</a>
+                <a ng-if="!option.column" ng-init="option.sh=false"
+                   ng-click="option.sh = !option.sh;">{{option.title}}</a>
+                <a href="#{{option.column}}" ng-if="option.column" style="line-height: 15px;">{{option.title}}</a>
+                <ul ng-if="option.smenu && option.sh" class="nav navbar-nav">
+                    <li ng-repeat="smenu in option.smenu" style="padding: 2px">
+                        <a href="#{{smenu.column}}" style="line-height: 15px;" ng-click="option.sh = !option.sh;">{{smenu.title}}</a>
+                    </li>
+                </ul>
             </li>
         </ul>
 

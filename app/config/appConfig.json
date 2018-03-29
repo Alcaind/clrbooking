@@ -863,12 +863,17 @@
   ],
   "homeButtonAdminTableConf": [
     {
-      "column": "roles",
-      "title": "Ρόλοι"
-    },
-    {
-      "column": "users",
-      "title": "Χρήστες"
+      "title": "Χρήστες",
+      "smenu": [
+        {
+          "column": "users",
+          "title": "Χρήστες"
+        },
+        {
+          "column": "roles",
+          "title": "Ρόλοι"
+        }
+      ]
     },
     {
       "column": "kats",
@@ -949,157 +954,182 @@
     {
       "hr": "#/rooms/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     },
     {
       "hr": "#/rooms/id/roomuse",
       "content": "Χρήσεις αίθουσας",
-      "gicon": "glyphicon-import"
+      "gicon": "glyphicon-import",
+      "place": "bottom"
     },
     {
       "hr": "#/rooms/id/requests",
       "content": "Αιτήματα",
-      "gicon": "glyphicon-folder-open"
+      "gicon": "glyphicon-folder-open",
+      "place": "bottom"
     },
     {
       "hr": "#/rooms/id/items",
       "content": "Εξοπλισμός",
-      "gicon": "glyphicon-blackboard"
+      "gicon": "glyphicon-blackboard",
+      "place": "bottom"
     },
     {
       "hr": "#/rooms/id/tms",
       "content": "Τμήματα",
-      "gicon": "glyphicon-map-marker"
+      "gicon": "glyphicon-map-marker",
+      "place": "bottom"
     }
   ],
   "requestsTableConfOps": [
     {
       "hr": "#/requests/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     },
     {
       "hr": "#/requests/id/rooms",
       "content": "Αιθουσες αιτήματος",
-      "gicon": "glyphicon-folder-open"
+      "gicon": "glyphicon-folder-open",
+      "place": "bottom"
     },
     {
       "hr": "#/requests/id/guests",
       "content": "Συμμετέχοντες αιτήματος",
-      "gicon": "glyphicon-transfer"
+      "gicon": "glyphicon-transfer",
+      "place": "bottom"
     }
   ],
   "usersTableConfOps": [
     {
       "hr": "#/users/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     },
     {
       "hr": "#/users/id/roles",
       "content": "Ρόλοι χρηστών",
-      "gicon": "glyphicon-import"
+      "gicon": "glyphicon-import",
+      "place": "bottom"
     },
     {
       "hr": "#/users/id/requests",
       "content": "Αιτήματα χρηστών",
-      "gicon": "glyphicon-transfer"
+      "gicon": "glyphicon-transfer",
+      "place": "bottom"
     }
   ],
   "configTableConfOps": [
     {
       "hr": "#/config/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "itemTableConfOps": [
     {
       "hr": "#/items/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "katTableConfOps": [
     {
       "hr": "#/kats/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "periodTableConfOps": [
     {
       "hr": "#/periods/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "psTableConfOps": [
     {
       "hr": "#/ps/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "roomcategoryTableConfOps": [
     {
       "hr": "#/roomcategory/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "roomuseTableConfOps": [
     {
       "hr": "#/roomuse/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "tmsTableConfOps": [
     {
       "hr": "#/tms/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "userscategoriesTableConfOps": [
     {
       "hr": "#/userscategories/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "psstatsTableConfOps": [
     {
       "hr": "#/psstats/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "reqguestsTableConfOps": [
     {
       "hr": "#/requests/rid/guests",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "rolesTableConfOps": [
     {
       "hr": "#/roles/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     },
     {
       "hr": "#/roles/id/users",
       "content": "Χρήστες ρόλου",
-      "gicon": "glyphicon-import"
+      "gicon": "glyphicon-import",
+      "place": "bottom"
     }
   ],
   "rooombookTableConfOps": [
     {
       "hr": "#/booking/id",
       "content": "Επεξεργασία",
-      "gicon": "glyphicon-pencil"
+      "gicon": "glyphicon-pencil",
+      "place": "bottom"
     }
   ],
   "userRoleStatus": [

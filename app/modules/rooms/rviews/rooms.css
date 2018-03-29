@@ -30,6 +30,10 @@ room-profile {
     z-index: 100;
 }
 
+.hippo {
+    border-radius: 0px;
+}
+
 .pageTitle {
     font-size: 24px;
     font-weight: normal;

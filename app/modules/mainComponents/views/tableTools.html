@@ -1,12 +1,15 @@
 <div style="display: flex;float: right;">
     <!--<input type="text" ng-model="filter" class="form-control" placeholder="search"
            style="padding: 5px; width: 100%">-->
-    <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()" data-toggle="popover"
-            data-content="Get Data" data-trigger="hover" style="min-width: 50px; border-radius: 0px;">
+    <button tooltip-placement="bottom"
+            uib-tooltip="GetData" type="button" class="btn btn-primary hippo "
+            ng-click="ctrl.getAll()" style="min-width: 50px; border-radius: 0px;">
         <span class="glyphicon glyphicon-download"></span>
     </button>
-    <a href="#{{ctrl.url}}/create" class="btn btn-success thumb" data-toggle="popover"
-       data-content="Δημιουργία νέας εγγραφής" data-trigger="hover" style="min-width: 50px;border-radius: 0px;">
+    <a href="#{{ctrl.url}}/create" class="btn btn-success hippo " type="button" tooltip-placement="bottom"
+       uib-tooltip="Δημιουργία νέας εγγραφής"
+       style="min-width: 50px;border-radius: 0px;">
         <span class="glyphicon glyphicon-plus"></span>
     </a>
 </div>
+

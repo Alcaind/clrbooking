@@ -28,7 +28,7 @@
                     <td>
                         <operations ng-repeat="op in ctrl.operations"
                                     hr="{{op.hr.replace('rid', item.req_id)+'/'+item.id}}"
-                                    content="{{op.content}}" gicon="{{op.gicon}}"></operations>
+                                    content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
                         <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
                     </td>
                 </tr>

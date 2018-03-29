@@ -20,8 +20,8 @@ $app->post("/token", function (Request $request, Response $response) {
     //$params = 'ip=' . $server['REMOTE_ADDR'] . '&agent=' . $server['HTTP_USER_AGENT'] . '&cookie=0';
     //$params .= '&pswd=' . $urlParams["pswd"] . '&usr=' . $urlParams["usr"] . '&app=' . $urlParams["app"];
 
-    $pswd= $urlParams["pswd"];
-    $usr= $urlParams["usr"];
+    $pswd = $urlParams["pswd"];
+    $usr = $urlParams["usr"];
 
     $sql = "select * from users";
     try {
@@ -103,7 +103,7 @@ $app->post("/login", function (Request $request, Response $response) {
     ];
 
     $refreshToken = [];
-    $refreshToken["token"] =  JWT::encode($payload, $secret, "HS256");
+    $refreshToken["token"] = JWT::encode($payload, $secret, "HS256");
     $refreshToken["expires"] = $future->getTimeStamp();
 
     $future = new DateTime("now +1 hour");
@@ -119,6 +119,13 @@ $app->post("/login", function (Request $request, Response $response) {
         "roles" => $roles,
         "refresh-token" => $refreshToken
     ];
+
+    for ($i = 0; $i < sizeof($roles[0]->roles); $i++) {
+        if ($roles[0]->roles[$i]->role == 'admin') {
+            array_push($payload['scope'], 'delete');
+        }
+    }
+
 
     $token = JWT::encode($payload, $secret, "HS256");
     $data["token"] = $token;

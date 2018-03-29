@@ -21,16 +21,14 @@
                          data-trigger="hover">&nbsp;
                     </div>
                 </div>
-                <div style="display: flex; position: relative; top: -340px;">
+                <div style="display: flex; position: relative; top: -300px;">
                     <div ng-repeat="book in calendar[$index] track by $index" class="info"
                          style="margin: 2px; top: {{book.dist}}px; height: {{book.h}}px; min-width: {{book.new?20:40}}px; position: relative; font-size: smaller; background-color: {{book.color}}; text-align: left; border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab"
                          data-toggle="popover"
-                         data-content="{{book.ps.tma_per}} {{book.ps.teacher}} {{book.fromt}}-{{book.tot}}"
-                         data-trigger="hover">
-                        <li ng-if="room" ng-click="popup(room.pivot.id)" ng-repeat="room in book.rooms">{{room.name}}
-                        </li>
-                        <li ng-if="book.ps">{{book.ps.tma_code}}</li>
-
+                         data-content="{{book.book.ps.tma_per}} {{book.book.ps.teacher}} {{book.pivot.fromt}}-{{book.pivot.tot}}"
+                         data-trigger="hover"
+                         ng-click="popup(book.pivot.id)">
+                        {{book.name}} - {{book.book.ps.tma_code}}
                     </div>
                 </div>
             </td>

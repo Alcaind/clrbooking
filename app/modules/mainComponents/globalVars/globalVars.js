@@ -116,6 +116,8 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             });
         };
 
+        ctrl.ifDelete = globalVarsSrv.getGlobalVar('token').scope[3] === 'delete' ? true : false;
+
         ctrl.selectRow = function (item) {
             item.selected = true;
             if (ctrl.selectedRow) ctrl.selectedRow.selected = false;
@@ -207,6 +209,10 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         ctrl.editPivotData = function (data) {
             ctrl.currentRight = data;
             ctrl.pivotData = data.pivot;
+            if (data.pivot['fromt']) {
+                data.pivot['fromt'] = new Date('2018-01-01T' + data.pivot['fromt']);
+                data.pivot['tot'] = new Date('2018-01-01T' + data.pivot['tot']);
+            }
             ctrl.state = 1;
         };
 

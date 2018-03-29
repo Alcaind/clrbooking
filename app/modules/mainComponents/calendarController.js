@@ -21,16 +21,16 @@ angular.module('MainComponents')
         }
 
         function findBookDates(book) {
-            if (!book.fromd || !book.tod || !book.fromt || !book.tot) return null;
+            //if (!book.fromd || !book.tod || !book.fromt || !book.tot) return null;
             if (!book.new) {
-                book.fDay = new Date(book.fromd + 'T' + book.fromt);
-                book.tDay = new Date(book.tod + 'T' + book.fromt);
-                book.h = (new Date(book.fromd + 'T' + book.tot) - book.fDay) / (1000 * 60) / 3;
+                book.fDay = new Date(book.fromd + 'T' + book.pivot.fromt);
+                book.tDay = new Date(book.tod + 'T' + book.pivot.fromt);
+                book.h = (new Date(book.fromd + 'T' + book.pivot.tot) - book.fDay) / (1000 * 60) / 3;
                 book.dist = (Math.abs(book.fDay - new Date(book.fromd)) / (1000 * 60) - 420) / 3;
 
                 return {
-                    fDay: new Date(book.fromd + 'T' + book.fromt), /* get book from day */
-                    tDay: new Date(book.tod + 'T' + book.fromt) /* get book to day */
+                    fDay: new Date(book.fromd + 'T' + book.pivot.fromt), /* get book from day */
+                    tDay: new Date(book.tod + 'T' + book.pivot.fromt) /* get book to day */
                 }
             } else {
                 book.fDay = new Date(book.fromd);
@@ -55,34 +55,40 @@ angular.module('MainComponents')
             var dateIndex = new Date($scope.fromd.getTime());
             var tod = new Date($scope.tod);
             var days = Math.ceil(Math.abs(tod.getTime() - fromd.getTime()) / (1000 * 3600 * 24));
+            var cal = null;
             for (var i = 0; i < days; i++) {
                 var tdt = dateIndex.getDate();
-                var cal = null;
                 if ($scope.datesIndex && $scope.datesIndex.indexOf(dateIndex.getDay()) >= 0) {
                     $scope.days.push(new Date(dateIndex));
                     cal = $scope.calendar.push([]);
+                    $scope.item.new = true;
+                    $scope.item.color = '';
                     var bDays = findBookDates($scope.item);
                     if (bDays && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
-                        $scope.item.new = true;
-                        var bDays = findBookDates($scope.item);
                         $scope.calendar[cal - 1].push($scope.item);
                     }
                 }
 
                 for (var j = 0; j < book.length; j++) {
-                    var bDays = findBookDates(book[j]);
-                    if (book[j].date_index === dateIndex.getDay() && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
+                    //var bDays = findBookDates(book[j]);
+                    if (book[j].date_index === dateIndex.getDay() && new Date(book[j].fromd) <= dateIndex && new Date(book[j].tod) >= dateIndex) {
                         for (var r = 0; r < book[j].rooms.length; r++)
                             for (var k = 0; k < $scope.rooms.length; k++) {
-                                book[j].color = 'antiquewhite';
-                                if (book[j].rooms[r].id === $scope.rooms[k].id && $scope.rooms[k].checked)
-                                    $scope.calendar[cal - 1].push(book[j]);
+                                if (book[j].rooms[r].id === $scope.rooms[k].id && $scope.rooms[k].checked) {
+                                    book[j].rooms[r].fromd = book[j].fromd;
+                                    book[j].rooms[r].tod = book[j].tod;
+                                    findBookDates(book[j].rooms[r]);
+                                    var bookObj = Object.assign({}, book[j].rooms[r]);
+                                    bookObj.book = book[j];
+                                    bookObj.color = 'antiquewhite';
+                                    $scope.calendar[cal - 1].push(bookObj);
+                                }
                             }
                     }
                 }
                 dateIndex.setDate(dateIndex.getDate() + 1);
             }
-        };
+        }
         init();
     }])
     .directive('calendarBook', function () {

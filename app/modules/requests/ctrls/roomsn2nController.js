@@ -58,8 +58,15 @@ angular.module('Requests')
         $scope.insertRoom = function () {
             var method = "PUT";
             if ($scope.ctrl.state === 0) method = "POST";
-            // $scope.ctrl.pivotData.fromt.setTime($scope.ctrl.pivotData.fromt.getTime() - ($scope.ctrl.pivotData.fromt.getTimezoneOffset() * 60000));
-            // $scope.ctrl.pivotData.tot.setTime($scope.ctrl.pivotData.tot.getTime() - ($scope.ctrl.pivotData.tot.getTimezoneOffset() * 60000));
+
+            //$scope.ctrl.pivotData.fromt.setTime($scope.ctrl.pivotData.fromt.getTime() - ($scope.ctrl.pivotData.fromt.getTimezoneOffset() * 60000));
+            //$scope.ctrl.pivotData.tot.setTime($scope.ctrl.pivotData.tot.getTime() - ($scope.ctrl.pivotData.tot.getTimezoneOffset() * 60000));
+            console.log($scope.ctrl.pivotData);
+            console.log($scope.ctrl.pivotData.fromt.toUTCString());
+            console.log($scope.ctrl.pivotData.fromt.toString());
+            console.log($scope.ctrl.pivotData.fromt.toLocaleString());
+            console.log($scope.ctrl.pivotData.fromt.toLocaleTimeString());
+
             api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/rooms/' + $scope.ctrl.currentRight.id, function (results) {
                 $scope.ctrl.pivotData = Object.assign({}, $scope.ctrl.pivotTable);
 
