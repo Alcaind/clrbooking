@@ -35,4 +35,9 @@ class Ps extends Model
     {
         return $this->hasOne('\\App\\Models\\Stats', 'ps_id');
     }
+
+    public function tm()
+    {
+        return $this->belongsTo("\\App\\Models\\Tm", 'tm_code', 'tm_code');
+    }
 }

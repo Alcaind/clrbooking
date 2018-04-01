@@ -8,19 +8,16 @@ angular.module('Login', ['Authentication', 'MainComponents', 'GlobalVarsSrvs'])
                 $scope.login = function () {
                     $scope.errorString = null;
                     AuthenticationService.Login($scope.usr, $scope.pswd, function (response) {
-
                         if (response === 'fail') {
                             $rootScope.globals = {item: null};
                             //$location.path('/login');
                             return;
                         }
-
                         if (response.status === 401) {
                             $scope.errorString = 'Λάθος Στοιχεία Σύνδεσης! Προσπαθήστε ΞΑΝΑ!';
                             $rootScope.globals = {item: null};
                             return;
                         }
-
                         var expToken = response.data.token;
                         var tokenPayload = jwtHelper.decodeToken(expToken);
                         globalVarsSrv.setGlobalVar('token', tokenPayload);
@@ -35,7 +32,6 @@ angular.module('Login', ['Authentication', 'MainComponents', 'GlobalVarsSrvs'])
                             }
                         }
                         $location.path('/home');
-
                     });
                 }
             }]);

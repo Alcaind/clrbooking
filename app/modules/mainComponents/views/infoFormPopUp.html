@@ -19,7 +19,7 @@
         <tbody>
         <tr>
             <td>{{mainData.rooms.name}}</td>
-            <td>{{requests.ps.tm_per}}</td>
+            <td ng-click="mailTm(tm)" style="cursor: pointer">{{requests.ps.tm_per}}</td>
             <td>{{requests.fromd |date:'dd-MM-yyyy'}}- {{requests.tod |date:'dd-MM-yyyy'}}</td>
             <td>{{ mainData.fromt}} - {{ mainData.tot | date:'shortTime'}}</td>
             <td ng-click="mailTo(mainData.users)" style="cursor: pointer">{{mainData.users.fname}} {{

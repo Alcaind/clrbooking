@@ -8,9 +8,7 @@ angular.module('MainComponents')
         $scope.days = [];
         $scope.hours = [];
         $scope.options = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
-
         $scope.$watch('book', plotBook);
-
         $scope.popup = function (reqID) {
             MakeModal.infoBookRoom(reqID)
         };
@@ -27,7 +25,6 @@ angular.module('MainComponents')
                 book.tDay = new Date(book.tod + 'T' + book.pivot.fromt);
                 book.h = (new Date(book.fromd + 'T' + book.pivot.tot) - book.fDay) / (1000 * 60) / 3;
                 book.dist = (Math.abs(book.fDay - new Date(book.fromd)) / (1000 * 60) - 420) / 3;
-
                 return {
                     fDay: new Date(book.fromd + 'T' + book.pivot.fromt), /* get book from day */
                     tDay: new Date(book.tod + 'T' + book.pivot.fromt) /* get book to day */
@@ -37,7 +34,6 @@ angular.module('MainComponents')
                 book.tDay = new Date(book.tod);
                 book.h = (book.tot - book.fromt) / (1000 * 60 * 3);
                 book.dist = book.tot / (1000 * 60 * 3) - 420 / 3;
-
                 return {
                     fDay: new Date(book.fromd), /* get book from day */
                     tDay: new Date(book.tod) /* get book to day */
@@ -47,10 +43,8 @@ angular.module('MainComponents')
 
         function plotBook(book, calendar) {
             if (!$scope.fromd || !$scope.tod || !$scope.datesIndex || !book || !calendar) return;
-
             $scope.calendar = [];
             $scope.days = [];
-
             var fromd = new Date($scope.fromd.getTime());
             var dateIndex = new Date($scope.fromd.getTime());
             var tod = new Date($scope.tod);
@@ -89,6 +83,7 @@ angular.module('MainComponents')
                 dateIndex.setDate(dateIndex.getDate() + 1);
             }
         }
+
         init();
     }])
     .directive('calendarBook', function () {

@@ -25,6 +25,11 @@ class Users extends Model {
         return $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
     }
 
+    public function superTms()
+    {
+        return $this->hasMany('\\App\\Models\\Tm', 'supervisor');
+    }
+
     public function ucategories()
     {
         return $this->belongsTo('\\App\\Models\\Ucategories', 'cat_id');

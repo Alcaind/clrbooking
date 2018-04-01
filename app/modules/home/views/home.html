@@ -1,10 +1,5 @@
 <div class="row">
     <div ng-repeat="option in adminColums" class="col-sm-6" style="padding: 2px">
-        <a href="#{{option.column}}" class="btn btn-info homebtn" role="button">{{option.title}}</a>
+        <a href="#{{smenu.column}}" class="btn btn-info homebtn" role="button" ng-click="option.sh = !option.sh;">{{smenu.title}}</a>
     </div>
 </div>
-
-
-
-
-

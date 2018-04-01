@@ -677,6 +677,13 @@
       "visible": true,
       "sorted": false,
       "filter": ""
+    },
+    {
+      "column": "supervisor",
+      "title": "Υπευθυνος Σχολής",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
     }
   ],
   "userscategoriesTableConf": [
@@ -872,56 +879,66 @@
         {
           "column": "roles",
           "title": "Ρόλοι"
+        },
+        {
+          "column": "userscategories",
+          "title": "Κατ. Χρηστών"
         }
       ]
     },
     {
-      "column": "kats",
-      "title": "Κατευθύνσεις"
+      "title": "Αίθουσες",
+      "smenu": [
+        {
+          "column": "rooms",
+          "title": "Αίθουσες"
+        },
+        {
+          "column": "roomcategory",
+          "title": "Κατ. Αιθουσών"
+        },
+        {
+          "column": "roomuse",
+          "title": "Χρήση Αιθ."
+        },
+        {
+          "column": "items",
+          "title": "Εξοπλισμός"
+        },
+        {
+          "column": "kats",
+          "title": "Κατευθύνσεις"
+        }
+      ]
     },
     {
-      "column": "requests",
-      "title": "Αιτήματα"
-    },
-    {
-      "column": "rooms",
-      "title": "Αίθουσες"
-    },
-    {
-      "column": "tms",
-      "title": "Τμήματα"
+      "title": "Ακαδημαικοί Περίοδοι",
+      "smenu": [
+        {
+          "column": "periods",
+          "title": "Ακαδ. Περίοδοι"
+        },
+        {
+          "column": "ps",
+          "title": "Προγ/μα σπουδών"
+        },
+        {
+          "column": "tms",
+          "title": "Τμήματα"
+        }
+      ]
     },
     {
       "column": "config",
       "title": "Config"
     },
     {
-      "column": "items",
-      "title": "Εξοπλισμός"
-    },
-    {
-      "column": "periods",
-      "title": "Ακαδ. Περίοδοι"
-    },
-    {
-      "column": "ps",
-      "title": "Προγ/μα σπουδών"
+      "column": "requests",
+      "title": "Αιτήματα"
     },
     {
       "column": "roombook",
       "title": "Διαθ. Αιθουσών"
-    },
-    {
-      "column": "userscategories",
-      "title": "Κατ. Χρηστών"
-    },
-    {
-      "column": "roomcategory",
-      "title": "Κατ. Αιθουσών"
-    },
-    {
-      "column": "roomuse",
-      "title": "Χρήση Αιθ."
     },
     {
       "column": "usercreaterequests",
@@ -930,16 +947,8 @@
   ],
   "homeButtonUserTableConf": [
     {
-      "column": "requests",
-      "title": "Αιτήματα"
-    },
-    {
-      "column": "rooms",
-      "title": "Αίθουσες"
-    },
-    {
-      "column": "roombook",
-      "title": "Διαθεσιμότητα Αιθουσών"
+      "column": "dashboard",
+      "title": "Dashboard"
     },
     {
       "column": "usercreaterequests",
@@ -955,31 +964,31 @@
       "hr": "#/rooms/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     },
     {
       "hr": "#/rooms/id/roomuse",
       "content": "Χρήσεις αίθουσας",
       "gicon": "glyphicon-import",
-      "place": "bottom"
+      "place": "left"
     },
     {
       "hr": "#/rooms/id/requests",
       "content": "Αιτήματα",
       "gicon": "glyphicon-folder-open",
-      "place": "bottom"
+      "place": "left"
     },
     {
       "hr": "#/rooms/id/items",
       "content": "Εξοπλισμός",
       "gicon": "glyphicon-blackboard",
-      "place": "bottom"
+      "place": "left"
     },
     {
       "hr": "#/rooms/id/tms",
       "content": "Τμήματα",
       "gicon": "glyphicon-map-marker",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "requestsTableConfOps": [
@@ -987,19 +996,19 @@
       "hr": "#/requests/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     },
     {
       "hr": "#/requests/id/rooms",
       "content": "Αιθουσες αιτήματος",
       "gicon": "glyphicon-folder-open",
-      "place": "bottom"
+      "place": "left"
     },
     {
       "hr": "#/requests/id/guests",
       "content": "Συμμετέχοντες αιτήματος",
       "gicon": "glyphicon-transfer",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "usersTableConfOps": [
@@ -1007,19 +1016,19 @@
       "hr": "#/users/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     },
     {
       "hr": "#/users/id/roles",
       "content": "Ρόλοι χρηστών",
       "gicon": "glyphicon-import",
-      "place": "bottom"
+      "place": "left"
     },
     {
       "hr": "#/users/id/requests",
       "content": "Αιτήματα χρηστών",
       "gicon": "glyphicon-transfer",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "configTableConfOps": [
@@ -1027,7 +1036,7 @@
       "hr": "#/config/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "itemTableConfOps": [
@@ -1035,7 +1044,7 @@
       "hr": "#/items/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "katTableConfOps": [
@@ -1043,7 +1052,7 @@
       "hr": "#/kats/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "periodTableConfOps": [
@@ -1051,7 +1060,7 @@
       "hr": "#/periods/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "psTableConfOps": [
@@ -1059,7 +1068,7 @@
       "hr": "#/ps/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "roomcategoryTableConfOps": [
@@ -1067,7 +1076,7 @@
       "hr": "#/roomcategory/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "roomuseTableConfOps": [
@@ -1075,7 +1084,7 @@
       "hr": "#/roomuse/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "tmsTableConfOps": [
@@ -1083,7 +1092,7 @@
       "hr": "#/tms/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "userscategoriesTableConfOps": [
@@ -1091,7 +1100,7 @@
       "hr": "#/userscategories/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "psstatsTableConfOps": [
@@ -1099,7 +1108,7 @@
       "hr": "#/psstats/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "reqguestsTableConfOps": [
@@ -1107,7 +1116,7 @@
       "hr": "#/requests/rid/guests",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "rolesTableConfOps": [
@@ -1115,13 +1124,13 @@
       "hr": "#/roles/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     },
     {
       "hr": "#/roles/id/users",
       "content": "Χρήστες ρόλου",
       "gicon": "glyphicon-import",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "rooombookTableConfOps": [
@@ -1129,7 +1138,7 @@
       "hr": "#/booking/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
-      "place": "bottom"
+      "place": "left"
     }
   ],
   "userRoleStatus": [

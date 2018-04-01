@@ -26,12 +26,20 @@ angular.module('MainComponents')
             window.open('mailto:' + user.em_main);
         };
 
+        $scope.mailTm = function (tm) {
+            window.open('mailto:' + tm.supervisor.em_main);
+        };
+
         $scope.getPop = function () {
             api.apiCall('GET', baseURL + "/roombook/" + $scope.reqID, function (results) {
                 $scope.mainData = results.data;
                 $scope.requests = {};
+
                 api.apiCall('GET', baseURL + '/requests/' + $scope.mainData.req_id, function (results) {
                     $scope.requests = results.data;
+                    api.apiCall('GET', baseURL + "/tms/" + $scope.requests.users.tm_id, function (results) {
+                        $scope.tm = results.data;
+                    })
                 });
             });
         };

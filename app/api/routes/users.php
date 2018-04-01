@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/users', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr', 'roles'])->get();
+    $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr', 'roles', 'superTms'])->get();
     return $response->getBody()->write($users->toJson());
 });
 
@@ -22,7 +22,7 @@ $app->get('/users/{id}', function (Request $request, Response $response, $args) 
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr', 'roles'])->find($id);
+        $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr', 'roles', 'superTms'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();

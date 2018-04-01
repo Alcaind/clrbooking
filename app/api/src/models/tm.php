@@ -18,17 +18,27 @@ class Tm extends Model
 
     public function kat()
     {
-        $this->hasMany('\\App\\Models\\Kat', 'tm_id');;
+        return $this->hasMany('\\App\\Models\\Kat', 'tm_id');;
     }
 
     public function users()
     {
-        $this->hasMany('\\App\\Models\\Users', 'tm_id');
+        return $this->hasMany('\\App\\Models\\Users', 'tm_id');
+    }
+
+    public function supervisor()
+    {
+        return $this->belongsTo('\\App\\Models\\Users', 'supervisor');
     }
 
     public function rooms()
     {
         return $this->belongsToMany("\\App\\Models\\Rooms", 'rooms_tms', 'tm_id', 'room_id')->withPivot('comments');
+    }
+
+    public function ps()
+    {
+        return $this->hasMany("\\App\\Models\\Ps", 'tm_code', 'tm_code');
     }
 
 }

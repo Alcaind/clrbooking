@@ -25,6 +25,7 @@ angular.module('PsStats', []);
 angular.module('RoomBook', []);
 
 
+
 // Declare app level module which depends on views, and components
 angular.module('clrBooking', [
     'Authentication',
@@ -337,6 +338,11 @@ angular.module('clrBooking', [
                     controller: 'CreateFormController',
                     templateUrl: 'modules/requests/createUserRequest/createForm.html'
                 })
+                .when('/dashboard', {
+                    title: 'user view requests',
+                    controller: 'UserViewController',
+                    templateUrl: 'modules/userView/userHome/uhome.html'
+                })
 
 
                 /*.when('/', {
@@ -359,7 +365,6 @@ angular.module('clrBooking', [
                     sURLVariables = sPageURL.split('&'),
                     sParameterName,
                     i;
-
                 for (i = 0; i < sURLVariables.length; i++) {
                     sParameterName = sURLVariables[i].split('=');
 
@@ -450,11 +455,7 @@ angular.module('clrBooking', [
             var usr = null;
             if (usr = AuthenticationService.CheckCredentials()) {
                 globalVarsSrv.appInit('config/appConfig.json', usr);
-
-
             }
-
-
             console.log('in App Run');
         }]);
 

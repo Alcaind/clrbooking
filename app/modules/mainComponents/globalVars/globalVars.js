@@ -3,7 +3,7 @@
 var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies', 'MainComponents']);
 
 globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($http, $cookies, $window) {
-    var globalVariables = [];
+    var globalVariables = {};
     var listeners = [];
 
     function addListener(varListen, listener) {
@@ -33,7 +33,7 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($
     }
 
     function setGlobal(gVar) {
-        globalVariables = gVar;
+        globalVariables = globalVariables ? Object.assign(globalVariables, gVar) : gVar;
     }
 
     function flushGlobal() {
@@ -95,7 +95,6 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
      */
     function mainController(url, table, title) {
         /**
-         *
          * @type {{dp: Array, baseURL: *, totalRows: number, tableColumns: *, title: *, operations: *, url: *}}
          */
         var ctrl = {

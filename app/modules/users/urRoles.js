@@ -25,5 +25,4 @@ angular.module('Users')
             templateUrl: 'modules/users/uviews/evRolesForm.html'
         }
     })
-
 ;
