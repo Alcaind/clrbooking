@@ -1,0 +1,14 @@
+<div class="btn btn-primary" ng-click="roomChecked(room)">
+    <span class="glyphicon glyphicon-{{room.checked?'ok':'remove'}}"></span>
+</div>
+<div>
+    <div>{{room.name}}</div>
+    <div>{{room.capasity_categ}}</div>
+    <div>{{room.address}}</div>
+
+    <div ng-repeat="sday in selectedDays" ng-click="roomDaySelect(room, sday)" ng-if="room.checked">
+        <div ng-if="sday.s" style="background-color: {{(room.date_index.indexOf(sday.i)>=0)?'#aaeaea':''}}">
+            {{sday.d}}
+        </div>
+    </div>
+</div>

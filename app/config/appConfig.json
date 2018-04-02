@@ -953,10 +953,6 @@
     {
       "column": "usercreaterequests",
       "title": "UserView"
-    },
-    {
-      "column": "home",
-      "title": "Home"
     }
   ],
   "roomsTableConfOps": [

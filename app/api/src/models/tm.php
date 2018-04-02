@@ -18,7 +18,7 @@ class Tm extends Model
 
     public function kat()
     {
-        return $this->hasMany('\\App\\Models\\Kat', 'tm_id');;
+        return $this->hasMany('\\App\\Models\\Kat', 'tm_id');
     }
 
     public function users()

@@ -1,0 +1,21 @@
+<div id="rooms_main" class="pageHolder">
+    <div class="pageHeader">
+        <h2> Dashboard </h2>
+    </div>
+    <div style="display:contents; height: 100%">
+        <div style="display: flex; height: 50% ">
+            <dash-board-table title="Εκκρεμότητες" status="{status:0}" dp="requests"
+                              style="width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+            <dash-board-table title="Ολοκληρωμένα" status="{status:1}" dp="requests"
+                              style="width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+        </div>
+        <div style="display: flex; height: 50%">
+            <dash-board-table title="Ληγμένα" status="{status:2}" dp="requests"
+                              style="width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+            <dash-board-table title="Πρόχειρα" status="{status:3}" dp="requests"
+                              style="width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+        </div>
+
+    </div>
+</div>
+

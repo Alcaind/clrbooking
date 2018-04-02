@@ -1,0 +1,28 @@
+<div>
+    <h2>Επιλογή Μαθήματος</h2>
+</div>
+<div style=" border: 1px solid #ababab;">
+    <div style="padding: 5px; display: flex">
+        <input type="text" ng-model="filterTm" class="form-control" placeholder="search"
+               style="padding: 5px; width: 100%; padding: 5px">
+    </div>
+
+    <div style="overflow-y: auto; height: 100%; padding: 5px;  border: 1px solid #ababab;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
+                    list-style: none; margin: 1em auto; padding: 0;">
+            <div ng-repeat="course in courses.ps|filter:filterTm" ng-click="selectCourse(course)"
+                 class="btn btn-{{course.selected?'success':'primary'}}"
+                 style="cursor: pointer; padding: 4px; font-size: 12px;
+                 border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">
+
+                <!--<div class="btn btn-primary" >
+                    <span class="glyphicon glyphicon-{{course.selected?'ok':'remove'}}"></span>
+                </div>-->
+                <div>
+                    <div>{{course.tma_code}}</div>
+                    <div>{{course.tma_per}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

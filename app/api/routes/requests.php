@@ -113,6 +113,36 @@ $app->post('/requests', function (Request $request, Response $response) {
     return $response->withStatus(201)->getBody()->write($requests->toJson());
 });
 
+
+$app->post('/requests/userrequest', function (Request $request, Response $response) {
+    header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    try {
+        $requests = new \App\Models\Requests();
+        $requests->req_dt = $data['req_dt'];
+        $requests->user_id = $data['user_id'];
+        $requests->descr = $data['descr'];
+        $requests->period = $data['period'];
+        $requests->ps_id = $data['ps_id'];
+        $requests->class_use = $data['class_use'];
+        $requests->links = $data['links'];
+        $requests->status = $data['status'];
+        $requests->fromd = $data['fromd'];
+        $requests->tod = $data['tod'];
+        $requests->conf_id = $data['conf_id'];
+        $requests->save();
+
+        $requests->attach($data[rooms]);
+
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(201)->getBody()->write($requests->toJson());
+});
+
 $app->delete('/requests/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {

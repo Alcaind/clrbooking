@@ -1,0 +1,24 @@
+<h2>Τρέχουσες επιλογές</h2>
+<div id="selectedParams" style="display: flex">
+    <div id="selectedPeriod" style="width: 100%">
+        <div>Από {{item.fromd}} μέχρη {{item.tod}}</div>
+        <div>Ημέρες
+            <div ng-repeat="d in selectedDays" ng-if="d.s">{{d.d}}</div>
+        </div>
+    </div>
+    <div id="selectedUse" style="width: 100%">
+        <div>Χρήση {{selectedUse.synt}}</div>
+    </div>
+    <div id="selectedCourse" style="width: 100%">
+        <div>{{selectedCourse.tma_code}} - {{selectedCourse.tma_per}}</div>
+    </div>
+    <div id="selectedRoom" style="width: 100%">
+        <div ng-repeat="room in selectedRooms">- {{room.name}}</div>
+    </div>
+    <div>
+        <button tooltip-placement="left" uib-tooltip="POST" type="button" class="btn btn-primary hippo"
+                ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;">
+            <span class="glyphicon glyphicon-download"></span></button>
+    </div>
+</div>
+<req-navigation></req-navigation>

@@ -447,7 +447,7 @@ angular.module('clrBooking', [
         $scope.close = function () {
             globalVarsSrv.cookieSave();
         };
-        console.log('in App ctrl');
+        // console.log('in App ctrl');
         //$window.onclose =  $scope.close();
     }])
     .run(['$rootScope', '$location', '$http', 'globalVarsSrv', 'AuthenticationService',
@@ -456,6 +456,6 @@ angular.module('clrBooking', [
             if (usr = AuthenticationService.CheckCredentials()) {
                 globalVarsSrv.appInit('config/appConfig.json', usr);
             }
-            console.log('in App Run');
+            // console.log('in App Run');
         }]);
 

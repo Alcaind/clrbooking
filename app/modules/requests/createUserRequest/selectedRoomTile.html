@@ -1,0 +1,28 @@
+<div class="btn btn-primary" ng-click="removeSelectedRoom(room)">
+    <span class="glyphicon glyphicon-{{room.checked?'ok':'remove'}}"></span>
+</div>
+<div>
+    <div>{{room.name}}</div>
+    <div>{{room.capasity_categ}}</div>
+    <div>{{room.address}}</div>
+
+    <div style="background-color: #aaeaea">
+        {{selectedDays[room.date_index].d}}
+        <label>Σχόλια:<input type="text" ng-model="room.comment" class="form-control"
+                             placeholder="comment"></label>
+        <div>Ώρες</div>
+        <label>Από <input type="time" ng-model="room.fromt"></label>
+        <label>Εως <input type="time" ng-model="room.tot"></label>
+
+        <div>
+            <label class="required" for="teacher">Καθηγητης:</label>
+            <select id="teacher" name="teacher" class="form-control" ng-model="room.teacher"
+                    ng-options="user.id as user.user for user in teachers"></select>
+        </div>
+        <!--<span class="glyphicon glyphicon-{{sday.s?'ok':'remove'}}"></span>-->
+        <!--class="btn btn-{{sday.s?'success':'primary'}}"-->
+        <!--style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;-->
+        <!--border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab"-->
+
+    </div>
+</div>

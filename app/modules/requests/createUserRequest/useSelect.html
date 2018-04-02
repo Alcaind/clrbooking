@@ -1,0 +1,14 @@
+<div>
+    <h2>Επιλογή Χρήσης</h2>
+</div>
+<div style="display: flex; height: 40px; padding: 4px 0px; text-align: center;">
+    <div ng-repeat="rUse in roomUse" ng-click="selectUse(rUse)" ng-init="rUse.s=false"
+         class="btn btn-{{rUse.selected?'success':'primary'}}"
+         style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;
+                 border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">
+        <div>
+            <!--<span class="glyphicon glyphicon-{{sday.s?'ok':'remove'}}"></span>-->
+            {{rUse.descr}}
+        </div>
+    </div>
+</div>

@@ -56,10 +56,20 @@ angular.module('MainComponents')
                     $scope.days.push(new Date(dateIndex));
                     cal = $scope.calendar.push([]);
                     $scope.item.new = true;
-                    $scope.item.color = '';
-                    var bDays = findBookDates($scope.item);
-                    if (bDays && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
-                        $scope.calendar[cal - 1].push($scope.item);
+                    $scope.item.color = 'red';
+                    for (var k = 0; k < $scope.item.rooms.length; k++) {
+                        $scope.item.rooms[k].new = true;
+                        $scope.item.rooms[k].color = 'red';
+                        var bDays = findBookDates($scope.item);
+                        if (bDays && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
+                            findBookDates($scope.item.rooms[k]);
+                            var bookObj = Object.assign({}, $scope.item.rooms[k]);
+                            bookObj.book = $scope.item;
+                            bookObj.color = 'red';
+                            bookObj.fromd = $scope.item.fromd;
+                            bookObj.tod = $scope.item.tod;
+                            $scope.calendar[cal - 1].push(bookObj);
+                        }
                     }
                 }
 

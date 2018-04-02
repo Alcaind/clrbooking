@@ -26,12 +26,12 @@ angular.module('Login', ['Authentication', 'MainComponents', 'GlobalVarsSrvs'])
                         for (var i = 0; i < tokenPayload.roles[0].roles.length; i++) {
                             if (tokenPayload.roles[0].roles[i].role === 'admin') {
                                 globalVarsSrv.setGlobalVar('menuRole', 'admin');
-                                $location.path('/users');
+                                $location.path('/home');
                                 return;
                                 break;
                             }
                         }
-                        $location.path('/home');
+                        $location.path('/dashboard');
                     });
                 }
             }]);

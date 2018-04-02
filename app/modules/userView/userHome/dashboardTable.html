@@ -1,0 +1,31 @@
+<div id="data_tbl" class="boxContent">
+    <h3>{{title}}</h3>
+    <table class="table table-hover table-striped table-responsive table-condensed">
+        <thead style="background-color: #cecece;">
+        <tr>
+            <th>Ημ/νία Αιτήματος</th>
+            <th>Περιγραφή</th>
+            <th>Ακαδημαϊκή Περίοδος</th>
+            <th>Πρόγραμμα Σπουδών</th>
+            <th>Χρήση Αίθουσας</th>
+            <th>Αρ.πρωτοκόλλου</th>
+            <th>Από ημέρα</th>
+            <th>Έως ημέρα</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in dp |filter:status"
+            style="cursor: pointer; background-color: {{item.selected?'#787878':''}}"
+            ng-click="selectRow(item)">
+            <td>{{ item.req_dt }}</td>
+            <td>{{ item.descr }}</td>
+            <td>{{ item.periods.descr }}</td>
+            <td>{{ item.ps.tma_per }}</td>
+            <td>{{ item.room_use.synt }}</td>
+            <td>{{ item.protocol_id }}</td>
+            <td>{{ item.fromd |date:'dd-MM-yyyy'}}</td>
+            <td>{{ item.tod |date:'dd-MM-yyyy'}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
