@@ -1,27 +1,39 @@
-<div id="requests_main">
-    <div>
-        <dm-title></dm-title>
-    </div>
-    <div style="padding: 15px">
-        <table-tools></table-tools>
-        <div>
-            <pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"
-                        num-pages="numPages"></pagination>
+<div id="requests_main" class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <div class="operations">
+                <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id',ctrl.selectedRow.id)}}"
+                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
+                <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
+            </div>
+            <table-tools class="pageTools"></table-tools>
         </div>
+        <dm-title class="pageTitle"></dm-title>
+        </div>
+
+    <!--<div class="pageTools">
         <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
-        <div id="data_tbl" class="table-responsive boxContent">
-            <table class="sorttable table table-hover table-striped table-responsive header-fixed">
-                <thead>
+    </div>-->
+
+    <div id="data_tbl" class="boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+            <thead class="header-fixed" style="background-color: #cecece;">
                 <tr>
-                    <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"></th>
-                    <th>...</th>
-                <tbody>
+                    <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"
+                        style="{{th.title.lastIndexOf('.')===th.title.length-1?'width:50px;':'width:'+(th.title.length*10+20)+'px;'}}min-width: 20px;max-width: 200px;padding: 0px 5px 2px 5px;font-size: 12px;font-weight: normal;{{$index === 0?'width:44px':''}}"></th>
+                    <th class="columnSettings">
+                        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="contentScroll">
                 <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                    style="cursor: pointer">
+                    style="cursor: pointer;display: table-row; background-color: {{item.selected?'#787878':''}}"
+                    ng-click="ctrl.selectRow(item)">
                     <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
                     <td ng-if="ctrl.tableColumns[1].visible">{{ item.req_dt }}</td>
                     <td ng-if="ctrl.tableColumns[2].visible">{{ item.users.user }}</td>
-                    <td ng-if="ctrl.tableColumns[3].visible"><textarea disabled>{{ item.descr }}</textarea></td>
+                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.descr }}</td>
                     <td ng-if="ctrl.tableColumns[4].visible">{{ item.periods.descr }}</td>
                     <td ng-if="ctrl.tableColumns[5].visible">{{ item.ps.tma_per }}</td>
                     <td ng-if="ctrl.tableColumns[6].visible">{{ item.room_use.synt }}</td>
@@ -32,25 +44,16 @@
                     <td ng-if="ctrl.tableColumns[11].visible">{{ item.tod |date:'dd-MM-yyyy' }}</td>
                     <td ng-if="ctrl.tableColumns[12].visible">{{ item.admin.user }}</td>
                     <td ng-if="ctrl.tableColumns[13].visible">{{ item.config.year }}</td>
-                    </td>
-                    <td>
-                        <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id )}}"
-                                    content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
-                        <delete-row-button></delete-row-button>
-                    </td>
+                    <td style="width:30px;"></td>
                 </tr>
-                </tbody>
+            </tbody>
             </table>
         </div>
-        <pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
-    </div>
-    <div id="graphView" ng-show="calendar">
-        <calendar-book calendar-array="calendar" fromd="fromd" tod="tod"></calendar-book>
+    <div class="pagePagination">
+        <div>
+            <pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"
+                        num-pages="numPages"></pagination>
+        </div>
+        <!--<pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>-->
     </div>
 </div>
-
-
-
-
-
-

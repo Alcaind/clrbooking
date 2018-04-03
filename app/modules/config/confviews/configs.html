@@ -1,14 +1,19 @@
-<div xmlns: id="rooms_main" class="pageHolder">
+<div id="config_main" class="pageHolder">
     <div class="pageHeader">
-        <table-tools class="pageButtons"></table-tools>
+        <div class="pageButtons">
+            <div class="operations">
+                <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id',ctrl.selectedRow.id)}}"
+                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
+                <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
+            </div>
+            <table-tools class="pageTools"></table-tools>
+        </div>
         <dm-title class="pageTitle"></dm-title>
     </div>
 
-    <!--<div>-->
-    <!--<pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"-->
-    <!--num-pages="numPages"></pagination>-->
-    <!--</div>-->
-    <!--<show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>-->
+    <!--<div class="pageTools">
+        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
+    </div>-->
 
     <div id="data_tbl" class="boxContent">
         <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
@@ -23,7 +28,8 @@
             </thead>
             <tbody class="contentScroll">
             <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                style="cursor: pointer;display: table-row" ;>
+                style="cursor: pointer;display: table-row; background-color: {{item.selected?'#787878':''}}"
+                ng-click="ctrl.selectRow(item)">
                 <td ng-if="ctrl.tableColumns[0].visible" style="max-width: 20px;text-align: center;">{{ item.id }}</td>
                 <td ng-if="ctrl.tableColumns[1].visible">{{ item.year }}</td>
                 <td ng-if="ctrl.tableColumns[2].visible">{{ statusOptions[item.status].text}}</td>
@@ -31,28 +37,16 @@
                 <td ng-if="ctrl.tableColumns[4].visible">{{ item.tod }}</td>
                 <td ng-if="ctrl.tableColumns[5].visible">{{ item.synt }}</td>
                 <td ng-if="ctrl.tableColumns[6].visible">{{ item.req_exp_dates }}</td>
-
-                <td style="min-width:{{((ctrl.operations.length+1)*46)+'px'}};width:{{((ctrl.operations.length+1)*46)+'px'}}">
-                    <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id', item.id)}}"
-                                content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
-                    <delete-row-button ng-click="ctrl.delete(item)"></delete-row-button>
-                </td>
+                <td style="width:30px;"></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <!--<pre>total configs list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>-->
     <div class="pagePagination">
         <div>
             <pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
         </div>
+        <!--<pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>-->
     </div>
-
 </div>
-
-
-
-
-
-

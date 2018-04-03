@@ -1,6 +1,6 @@
-<div>
-    <table class="table table-striped">
-        <thead>
+<div id="data_tbl" class="boxContent">
+    <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+        <thead class="header-fixed" style="background-color: #cecece;">
         <tr>
             <th>id</th>
             <th>Κωδικός τμήματος</th>
@@ -10,7 +10,7 @@
             <th>...</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="contentScroll">
         <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
             style="cursor: pointer">
             <td>{{ item.id }}</td>
@@ -26,5 +26,12 @@
                 </button>
             </td>
         </tr>
+        </tbody>
     </table>
+</div>
+<div class="pagePagination">
+    <div>
+        <pagination current-page="currentPageR" total-items="ctrl.rdp.length"
+                    items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
+    </div>
 </div>

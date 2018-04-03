@@ -30,6 +30,17 @@
             <p ng-show="tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine" class="help-block">Εισάγετε το όνομα της
                 σχολής.</p>
         </div>
+        <div class="form-group" ng-class="{ 'has-error' : tmForm.supervisor.$invalid && !tmForm.supervisor.$pristine }">
+            <label for="supervisor" class="required">Υπεύθυνος Τμήματος<span class="form-required">*</span>:</label>
+            <input id="supervisor1" name="supervisor" class="form-control" type="text" ng-model="ctrl.item.supervisor">
+            <p ng-show="tmForm.supervisor.$invalid && !tmForm.supervisor.$pristine" class="help-block">Εισάγετε το όνομα
+                της
+                σχολής.</p>
+        </div>
+        <div class="longInput">
+            <select id="supervisor" name="supervisor" class="form-control" ng-model="ctrl.item.supervisor"
+                    ng-options="supervisor.id as supervisor.user for supervisor in supervisor"></select>
+        </div>
         <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                 ng-if="ctrl.item.id>0">Ανανέωση
         </button>

@@ -48,6 +48,7 @@ $app->post('/tms', function (Request $request, Response $response) {
         $tm->descr = $data['descr'];
         $tm->title = $data['title'];
         $tm->sxoli = $data['sxoli'];
+        $tm->supervisor = $data['supervisor'];
         $tm->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -80,6 +81,7 @@ $app->put('/tms/{id}', function ($request, $response, $args) {
         $tm->descr = $data['descr'] ?: $tm->descr;
         $tm->title = $data['title'] ?: $tm->title;
         $tm->sxoli = $data['sxoli'] ?: $tm->sxoli;
+        $tm->supervisor = $data['supervisor'] ?: $tm->supervisor;
         $tm->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

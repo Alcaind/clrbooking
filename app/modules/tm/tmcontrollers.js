@@ -16,6 +16,11 @@ angular.module('Tms', [
     .controller('TmProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
         $scope.ctrl = makeController.profileController('/tms', 'tmsTableConf');
         $scope.ctrl.init();
+
+        $scope.supervisor = [];
+        api.apiCall('GET', 'api/public/users', function (result) {
+            $scope.supervisor = result.data;
+        });
     }])
 
     .component('tmProfile', {

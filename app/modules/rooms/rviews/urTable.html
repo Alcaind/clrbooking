@@ -1,6 +1,6 @@
-<div>
-    <table class="table table-striped">
-        <thead>
+<div id="data_tbl" class="boxContent">
+    <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+        <thead class="header-fixed" style="background-color: #cecece;">
         <tr>
             <th>id</th>
             <th>Συντομογραφία</th>
@@ -9,8 +9,8 @@
             <th>...</th>
         </tr>
         </thead>
-        <tbody>
-        <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filterL"
+        <tbody class="contentScroll">
+        <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filter"
             style="cursor: pointer">
             <td>{{item.id }}</td>
             <td>{{item.synt}}</td>
@@ -27,4 +27,10 @@
         </tr>
         </tbody>
     </table>
+</div>
+<div class="pagePagination">
+    <div>
+        <pagination current-page="currentPageL" total-items="ctrl.ldp.length"
+                    items-per-page="itemsPerPageL" num-pages="numPagesL"></pagination>
+    </div>
 </div>

@@ -89,8 +89,29 @@ angular.module('Requests')
         });
 
         $scope.postUserRequest = function (item) {
-            api.apiCall('POST', 'api/public/requests/userrequest')
-        }
+            item.conf_id = 1;
+            item.status = 0;
+            item.user_id = $scope.user.authdata.roles[0].id;
+            item.req_dt = new Date();
+            item.pivot = [];
+            item.ps_id = $scope.selectedCourse.id;
+            item.class_use = $scope.selectedUse.id;
+            item.descr = item.descr ? item.descr : '';
+            item.period = item.period ? item.period : -1;
+            item.rooms.map(function (value) {
+                var newPivot = {
+                    comment: value['comment'],
+                    date_index: value['date_index'],
+                    fromt: value['fromt'],
+                    teacher: value['teacher'],
+                    tot: value['tot']
+                };
+                item.pivot.push(newPivot);
+            });
+            api.apiCall('POST', 'api/public/requests/userrequest', function (result) {
+                alert('ok');
+            }, undefined, item)
+        };
 
         $scope.getTeacher = function (teacherId) {
             for (var i = 0; i < $scope.teachers.length; i++) {
@@ -149,7 +170,7 @@ angular.module('Requests')
             day.s = !day.s;
             $scope.item.date_index = "";
             $scope.selectedDays.map(function (value) {
-                if (day.s) {
+                if (value.s) {
                     $scope.item.date_index += value.i
                 }
             })

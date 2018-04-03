@@ -9,7 +9,6 @@
     <div id="content" style="display: flex">
         <div id="leftColumn" class="table-responsive boxContent tableView" style="width: 100%">
             <div>
-
                 <h2 style="text-align: center;"> Κατοχυρωμένοι χρήστες στον ρόλο {{ctrl.mainData.role}} </h2>
             </div>
             <div style="padding: 15px">
@@ -19,10 +18,7 @@
                            style="padding: 5px; width: 100%">
                 </div>
                 <div>
-                    <pagination current-page="currentPageL" total-items="ctrl.ldp.length"
-                                items-per-page="itemsPerPageL" num-pages="numPagesL"></pagination>
                     <ur-user-table></ur-user-table>
-                    <pre>total users per role : {{ctrl.ldp.length}}  Page: {{currentPageL}} / {{numPagesL}}</pre>
                 </div>
             </div>
         </div>
@@ -38,11 +34,8 @@
                                style="padding: 5px; width: 100%">
                     </div>
                     <div>
-                        <pagination current-page="currentPageR" total-items="ctrl.rdp.length"
-                                    items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
                         <evr-user-table></evr-user-table>
                     </div>
-                    <pre>total users : {{ctrl.rdp.length}}  Page: {{currentPageR}} / {{numPagesR}}</pre>
                 </div>
             </div>
             <div ng-show="ctrl.pivotData" style="width: 100%">

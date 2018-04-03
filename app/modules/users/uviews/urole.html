@@ -18,10 +18,7 @@
                            style="padding: 5px; width: 100%">
                 </div>
                 <div>
-                    <pagination current-page="currentPageL" total-items="ctrl.ldp.length"
-                                items-per-page="itemsPerPageL" num-pages="numPagesL"></pagination>
                     <ur-table></ur-table>
-                    <pre>total roles per user : {{ctrl.ldp.length}}  Page: {{currentPageL}} / {{numPagesL}}</pre>
                 </div>
             </div>
         </div>
@@ -37,11 +34,8 @@
                                style="padding: 5px; width: 100%">
                     </div>
                     <div>
-                        <pagination current-page="currentPageR" total-items="ctrl.rdp.length"
-                                    items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
                         <evr-table></evr-table>
                     </div>
-                    <pre>total roles : {{ctrl.rdp.length}}  Page: {{currentPageR}} / {{numPagesR}}</pre>
                 </div>
             </div>
             <div ng-if="ctrl.pivotData" style="width: 100%">

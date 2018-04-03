@@ -19,10 +19,7 @@
                            style="padding: 5px; width: 100%">
                 </div>
                 <div>
-                    <pagination current-page="currentPageL" total-items="ctrl.ldp.length"
-                                items-per-page="itemsPerPageL" num-pages="numPagesL"></pagination>
                     <l-item-table></l-item-table>
-                    <pre>total items per room : {{ctrl.ldp.length}}  Page: {{currentPageL}} / {{numPagesL}}</pre>
                 </div>
             </div>
         </div>
@@ -38,11 +35,8 @@
                                style="padding: 5px; width: 100%">
                     </div>
                     <div>
-                        <pagination current-page="currentPageR" total-items="ctrl.rdp.length"
-                                    items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
                         <r-item-table></r-item-table>
                     </div>
-                    <pre>total items : {{ctrl.rdp.length}}  Page: {{currentPageR}} / {{numPagesR}}</pre>
                 </div>
             </div>
             <div ng-show="ctrl.pivotData" style="width: 100%">

@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $requests = \App\Models\Requests::with(['users', 'periods:id,descr', 'admin', 'room_use:id,synt', 'ps', 'config'])->get();
+    $requests = \App\Models\Requests::with(['users', 'periods:id,descr', 'admin', 'room_use:id,synt', 'ps', 'config', 'rooms'])->get();
     return $response->getBody()->write($requests->toJson());
 });
 
@@ -21,7 +21,7 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users', 'periods:id,descr', 'admin', 'room_use:id,synt', 'ps', 'config'])->find($id);
+        $requests = \App\Models\Requests::with(['users', 'periods:id,descr', 'admin', 'room_use:id,synt', 'ps', 'config', 'rooms'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -35,7 +35,7 @@ $app->get('/requests/users/{id}', function (Request $request, Response $response
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr', 'admin', 'ps', 'room_use'])->where('user_id', '=', $id)->get();
+        $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr', 'admin', 'ps', 'room_use', 'rooms'])->where('user_id', '=', $id)->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -121,19 +121,53 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         $requests = new \App\Models\Requests();
         $requests->req_dt = $data['req_dt'];
         $requests->user_id = $data['user_id'];
-        $requests->descr = $data['descr'];
-        $requests->period = $data['period'];
+        $requests->descr = $data['descr'] ?: '';
+        $requests->period = $data['period'] ?: '';
         $requests->ps_id = $data['ps_id'];
-        $requests->class_use = $data['class_use'];
-        $requests->links = $data['links'];
+        $requests->class_use = $data['class_use'] ?: '';
+        //$requests->links = $data['links']?:'';
         $requests->status = $data['status'];
         $requests->fromd = $data['fromd'];
         $requests->tod = $data['tod'];
         $requests->conf_id = $data['conf_id'];
         $requests->save();
 
-        $requests->attach($data[rooms]);
+        $attachArray = array();
+        for ($i = 0; $i < sizeof($data['pivot']); $i++) {
+            $attachArray["'" + $data['rooms'][$i]['id'] + "'"] = $data['pivot'][$i];
+        }
+        $requests->rooms()->attach($attachArray);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(201)->getBody()->write($requests->toJson());
+});
 
+$app->put('/requests/userrequest', function (Request $request, Response $response) {
+    header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    try {
+        $requests = new \App\Models\Requests();
+        $requests->req_dt = $data['req_dt'] ?: $requests->req_dt;
+        $requests->user_id = $data['user_id'] ?: $requests->user_id;
+        $requests->descr = $data['descr'] ?: $requests->descr;
+        $requests->period = $data['period'] ?: $requests->period;
+        $requests->ps_id = $data['ps_id'] ?: $requests->ps_id;
+        $requests->class_use = $data['class_use'] ?: $requests->class_use;
+        $requests->status = $data['status'] ?: $requests->status;
+        $requests->fromd = $data['fromd'] ?: $requests->fromd;
+        $requests->tod = $data['tod'] ?: $requests->tod;
+        $requests->conf_id = $data['conf_id'] ?: $requests->conf_id;
+        $requests->save();
+
+        $attachArray = array();
+        for ($i = 0; $i < sizeof($data[rooms]); $i++) {
+            $attachArray[$data[rooms][$i]['room_id']] = $data[rooms][$i];
+        }
+        $requests->rooms()->sync($attachArray);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
