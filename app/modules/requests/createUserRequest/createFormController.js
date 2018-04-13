@@ -192,15 +192,16 @@ angular.module('Requests')
                 $scope.getBook($scope.item)
             }
             $scope.currentPage++;
-            if ($scope.currentPage === 4 && !$scope.selectedUse.synt === 'ΤΗΛ') $scope.currentPage++;
+            if ($scope.currentPage === 4 && $scope.selectedUse.synt !== 'ΤΗΛ') $scope.currentPage++;
         };
 
         $scope.prevPage = function () {
             $scope.currentPage--;
-            if ($scope.currentPage === 4 && !$scope.selectedUse.synt === 'ΤΗΛ') $scope.currentPage--;
+            if ($scope.currentPage === 4 && $scope.selectedUse.synt !== 'ΤΗΛ') $scope.currentPage--;
         };
 
-        $scope.gotoPage = function (p) {
+        $scope.gotoPage = function (p, item) {
+            if (item && !item.active) return;
             $scope.currentPage = p;
         };
 

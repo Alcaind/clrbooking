@@ -118,8 +118,8 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         ctrl.ifDelete = globalVarsSrv.getGlobalVar('token').scope[3] === 'delete' ? true : false;
 
         ctrl.selectRow = function (item) {
-            item.selected = true;
             if (ctrl.selectedRow) ctrl.selectedRow.selected = false;
+            item.selected = true;
             ctrl.selectedRow = item;
         };
 

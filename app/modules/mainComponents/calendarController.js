@@ -51,6 +51,7 @@ angular.module('MainComponents')
             var days = Math.ceil(Math.abs(tod.getTime() - fromd.getTime()) / (1000 * 3600 * 24));
             var cal = null;
             for (var i = 0; i < days; i++) {
+                var newObject = {};
                 var tdt = dateIndex.getDate();
                 if ($scope.datesIndex && $scope.datesIndex.indexOf(dateIndex.getDay()) >= 0) {
                     $scope.days.push(new Date(dateIndex));
@@ -63,31 +64,42 @@ angular.module('MainComponents')
                         var bDays = findBookDates($scope.item);
                         if (bDays && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
                             findBookDates($scope.item.rooms[k]);
-                            var bookObj = Object.assign({}, $scope.item.rooms[k]);
-                            bookObj.book = $scope.item;
-                            bookObj.color = 'red';
-                            bookObj.fromd = $scope.item.fromd;
-                            bookObj.tod = $scope.item.tod;
-                            $scope.calendar[cal - 1].push(bookObj);
+                            newObject = Object.assign({}, $scope.item.rooms[k]);
+                            newObject.book = $scope.item;
+                            newObject.color = '#75a575';
+                            newObject.fromd = $scope.item.fromd;
+                            newObject.tod = $scope.item.tod;
+                            $scope.calendar[cal - 1].push(newObject);
                         }
                     }
-                }
 
-                for (var j = 0; j < book.length; j++) {
-                    //var bDays = findBookDates(book[j]);
-                    if (book[j].date_index === dateIndex.getDay() && new Date(book[j].fromd) <= dateIndex && new Date(book[j].tod) >= dateIndex) {
-                        for (var r = 0; r < book[j].rooms.length; r++)
-                            for (var k = 0; k < $scope.rooms.length; k++) {
-                                if (book[j].rooms[r].id === $scope.rooms[k].id && $scope.rooms[k].checked) {
-                                    book[j].rooms[r].fromd = book[j].fromd;
-                                    book[j].rooms[r].tod = book[j].tod;
-                                    findBookDates(book[j].rooms[r]);
-                                    var bookObj = Object.assign({}, book[j].rooms[r]);
-                                    bookObj.book = book[j];
-                                    bookObj.color = 'antiquewhite';
-                                    $scope.calendar[cal - 1].push(bookObj);
+                    for (var j = 0; j < book.length; j++) {
+                        //var bDays = findBookDates(book[j]);
+                        if (new Date(book[j].fromd) <= dateIndex && new Date(book[j].tod) >= dateIndex) {
+                            for (var r = 0; r < book[j].rooms.length; r++) {
+
+                                if (book[j].rooms[r].pivot.date_index !== dateIndex.getDay()) continue;
+
+                                for (var k = 0; k < $scope.rooms.length; k++) {
+                                    if (book[j].rooms[r].id === $scope.rooms[k].id && $scope.rooms[k].checked) {
+                                        book[j].rooms[r].fromd = book[j].fromd;
+                                        book[j].rooms[r].tod = book[j].tod;
+                                        findBookDates(book[j].rooms[r]);
+                                        var bookObj = Object.assign({}, book[j].rooms[r]);
+                                        bookObj.book = book[j];
+                                        var totCheck = new Date("1970-01-01T" + bookObj.pivot.tot);
+                                        var fromCheck = new Date("1970-01-01T" + bookObj.pivot.fromt);
+                                        if ((totCheck >= newObject.fromt && totCheck <= newObject.tot) || (fromCheck <= newObject.fromt && fromCheck >= newObject.tot)) {
+                                            bookObj.color = '#dd3030';
+                                        } else {
+                                            bookObj.color = '#287ed2';
+                                        }
+
+                                        $scope.calendar[cal - 1].push(bookObj);
+                                    }
                                 }
                             }
+                        }
                     }
                 }
                 dateIndex.setDate(dateIndex.getDate() + 1);

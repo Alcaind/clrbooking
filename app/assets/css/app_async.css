@@ -152,7 +152,11 @@ dm-title {
 }
 
 .dropdown-menu {
-    left: -130px ! important;
+    left: -160px ! important;
+}
+
+.center {
+    left: 0px ! important;
 }
 
 .boxContent {
@@ -229,4 +233,9 @@ table {
 .operations {
     display: flex;
     float: right;
+}
+
+.not-active {
+    pointer-events: none;
+    opacity: .5;
 }

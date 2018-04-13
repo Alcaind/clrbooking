@@ -21,10 +21,9 @@
         <ul class="nav navbar-nav">
             <li class="dropdown" ng-repeat="option in adminColums" style="padding: 2px">
                 <a ng-if="!option.column" data-toggle="dropdown">{{option.title}}</a>
-
                 <a href="#{{option.column}}" ng-if="option.column" style="line-height: 15px;">{{option.title}}</a>
 
-                <ul class="dropdown-menu" role="menu" aria-labelledby="simple-dropdown" data-placement="bottom">
+                <ul class="dropdown-menu center" role="menu" aria-labelledby="simple-dropdown" data-placement="bottom">
                     <li role="menuitem" ng-repeat="smenu in option.smenu" style="padding: 2px">
                         <a href="#{{smenu.column}}" style="line-height: 15px;">{{smenu.title}}</a>
                     </li>
@@ -39,7 +38,9 @@
                 <ul class="dropdown-menu" role="menu" aria-labelledby="btn-append-to-single-button">
                     <li role="menuitem"><a href="#users/{{users.id}}/roles">Προφίλ</a></li>
                     <li role="menuitem" ng-click="logout()"><a href="#login">Έξοδος</a></li>
-                    <li role="menuitem" ng-click="close()" type="button">Έξοδος Cookies</li>
+                    <li role="menuitem" ng-click="closeWithCookie()" type="button"><a>Αποθήκευσε τις επιλογές σου</a>
+                    </li>
+                </ul>
                 </ul>
             </li>
         </ul>

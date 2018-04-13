@@ -13,18 +13,15 @@
         <form class="roomForm" name="roomForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <!-- NAME -->
             <div class="formGroupItems">
-                <div class="form-group" ng-class="{ 'has-error' : roomForm.name.$invalid && !roomForm.name.$pristine }">
-                    <label class="required formItemLabel" for="name">Όνομα<span class="form-required">*</span>:</label>
+                <div class="form-group">
+                    <label class="required formItemLabel" for="name">Όνομα:</label>
                     <div class="longInput">
                         <input id="name" name="name" class="form-control" type="text" ng-model="ctrl.item.name">
-                        <p ng-show="roomForm.name.$invalid && !roomForm.name.$pristine" class="help-block">Εισάγετε
-                            όνομα αίθουσας.</p>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="required formItemLabel" for="tm_owner">Τμήμα<span
-                            class="form-required">*</span>:</label>
+                    <label class="required formItemLabel" for="tm_owner">Τμήμα:</label>
                     <div class="longInput">
                         <select id="tm_owner" name="tm_owner" class="form-control" ng-model="ctrl.item.tm_owner"
                                 ng-options="tm.id as tm.title for tm in tms"></select>
@@ -61,15 +58,11 @@
                 <span class="hrSeperator">Διεύθυνση</span>
 
                 <!-- ADDRESS -->
-                <div class="form-group"
-                     ng-class="{ 'has-error' : roomForm.address.$invalid && !roomForm.address.$pristine }">
-                    <label for="address" class="required formItemLabel">Διευθυνση<span
-                            class="form-required">*</span>:</label>
+                <div class="form-group">
+                    <label for="address" class="required formItemLabel">Διευθυνση:</label>
                     <div class="longInput">
                         <input id="address" name="address" class="form-control" type="text"
                                ng-model="ctrl.item.address">
-                        <p ng-show="roomForm.address.$invalid && !roomForm.address.$pristine" class="help-block">
-                            Εισάγετε διεύθυνση.</p>
                     </div>
                 </div>
 

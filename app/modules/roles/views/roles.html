@@ -2,7 +2,8 @@
     <div class="pageHeader">
         <div class="pageButtons">
             <div class="operations">
-                <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id',ctrl.selectedRow.id)}}"
+                <operations ng-repeat="op in ctrl.operations"
+                            hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
                             content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
                 <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
             </div>
@@ -10,11 +11,6 @@
         </div>
         <dm-title class="pageTitle"></dm-title>
     </div>
-
-    <!--<div class="pageTools">
-        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
-    </div>-->
-
     <div id="data_tbl" class="boxContent">
         <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
             <thead class="header-fixed" style="background-color: #cecece;">
@@ -32,7 +28,7 @@
                 ng-click="ctrl.selectRow(item)">
 
                 <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.role}}</td>
+                <td ng-if="ctrl.tableColumns[1].visible">{{ item.role}}</td>
                 <td ng-if="ctrl.tableColumns[2].visible">{{ item.descr }}</td>
                 <td style="width:30px;"></td>
             </tr>
