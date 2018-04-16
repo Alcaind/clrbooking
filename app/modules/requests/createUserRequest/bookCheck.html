@@ -4,5 +4,8 @@
         Διαθεσιμότητας ...
     </button>
     <calendar-book rooms="rooms" fromd="item.fromd" tod="item.tod" dates-index="item.date_index" item="item"
-                   book="book"></calendar-book>
+                   book="book" booking-errors="bookingErrors"></calendar-book>
+    <div ng-repeat="e in bookingErrors track by $index">
+        {{e}}
+    </div>
 </div>

@@ -35,6 +35,7 @@ require __DIR__ . '/../src/models/room_book.php';
 //require __DIR__ . '../src/models/dp.php';
 //$dotenv = new Dotenv\Dotenv(__DIR__);
 //$dotenv->load();
+ini_set('date.timezone', 'Europe/Athens');
 
 $app = new \Slim\App([
     'settings' => [

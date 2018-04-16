@@ -11,6 +11,7 @@ angular.module('Requests')
         $scope.user = globalVarsSrv.getGlobalVar('auth');
         $scope.courses = [];
         $scope.teachers = [];
+        $scope.bookingErrors = [];
 
         $scope.init = function () {
             $scope.item = {rooms: [], date_index: "", guests: []};
@@ -102,9 +103,9 @@ angular.module('Requests')
                 var newPivot = {
                     comment: value['comment'],
                     date_index: value['date_index'],
-                    fromt: value['fromt'],
+                    fromt: new Date(value['fromt'].getTime() + Math.abs(value['fromt'].getTimezoneOffset() * 1000 * 60)),
                     teacher: value['teacher'],
-                    tot: value['tot']
+                    tot: new Date(value['tot'].getTime() + Math.abs(value['tot'].getTimezoneOffset() * 1000 * 60))
                 };
                 item.pivot.push(newPivot);
             });
