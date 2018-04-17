@@ -177,17 +177,6 @@ angular.module('Requests')
             })
         };
 
-        $scope.roomDaySelect = function (room, day) {
-            var roomObj = Object.assign({}, room);
-            roomObj.date_index = day.i;
-            $scope.selectedRooms.push(roomObj);
-            $scope.item.rooms.push(roomObj);
-        };
-
-        $scope.removeSelectedRoom = function (room) {
-            $scope.selectedRooms.splice($scope.selectedRooms.indexOf(room), 1);
-        };
-
         $scope.nextPage = function () {
             if ($scope.currentPage === 5) {
                 $scope.getBook($scope.item)
@@ -227,8 +216,19 @@ angular.module('Requests')
         });
 
         $scope.init();
-
     }])
+    .controller('RoomSelectController', function ($scope) {
+        $scope.removeSelectedRoom = function (room) {
+            $scope.selectedRooms.splice($scope.selectedRooms.indexOf(room), 1);
+        };
+
+        $scope.roomDaySelect = function (room, day) {
+            var roomObj = Object.assign({}, room);
+            roomObj.date_index = day.i;
+            $scope.selectedRooms.push(roomObj);
+            $scope.item.rooms.push(roomObj);
+        };
+    })
     .directive('userRequestHeader', function () {
         return {
             restrict: "EA",
@@ -244,7 +244,9 @@ angular.module('Requests')
     .directive('roomSelect', function () {
         return {
             restrict: "EA",
+            controller: 'RoomSelectController',
             templateUrl: 'modules/requests/createUserRequest/roomSelect.html'
+
         }
     })
     .directive('bookCheck', function () {

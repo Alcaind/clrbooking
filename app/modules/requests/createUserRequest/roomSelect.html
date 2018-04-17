@@ -2,15 +2,16 @@
     <h2>Επιλογή Αίθουσας</h2>
 </div>
 <div style=" border: 1px solid #ababab; display: flex; width: 100%;">
-    <div id="roomsToSelect" style="width: 100%">
-        <div style="padding: 5px; display: flex">
-            <input type="text" ng-model="filter" class="form-control" placeholder="search"
-                   style="padding: 5px; width: 100%; padding: 5px">
-        </div>
-        <div style="overflow-y: auto; height: 100%; padding: 5px;  border: 1px solid #ababab;">
+    <div id="roomsToSelect" style="width: 100%; display: flex">
+
+        <div style="overflow-y: auto; height: 100%; padding: 5px;  border: 1px solid #ababab;width: 100%;">
+            <div style="padding: 5px; display: flex">
+                <input type="text" ng-model="roomsFilter" class="form-control" placeholder="search"
+                       style="padding: 5px; width: 100%; padding: 5px">
+            </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
                     list-style: none; margin: 1em auto; padding: 0;">
-                <div ng-repeat="room in rooms|filter:filter"
+                <div ng-repeat="room in rooms|filter:roomsFilter"
                      class="{{room.checked?'success':'primary'}}"
                      style="cursor: pointer; padding: 4px; font-size: 12px;
                  border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">

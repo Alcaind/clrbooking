@@ -114,6 +114,65 @@ $app->post('/requests', function (Request $request, Response $response) {
 });
 
 
+$checkUserRequestRules = function ($request, $response, $next) {
+    $res = null;
+    //$data = $request->getAttributes()['routeInfo'][2];
+    $data = $request->getParsedBody();
+    //print_r($data);
+
+    $roombook = \App\Models\Requests::with('rooms')
+        ->where('fromd', '<=', $data['fromd'])
+        ->where('fromd', '>=', $data['fromd'])
+//        ->where('room_id', '=', $args['rid'])
+        ->get();
+
+    //$response->getBody()->write($roombook->toJson());
+    foreach ($roombook as $book) {
+        foreach ($book->rooms()->get() as $room) {
+            foreach ($data['rooms'] as $reqRoom) {
+                $fromt = new DateTime($reqRoom['fromt']);
+                $tot = new DateTime($reqRoom['tot']);
+                //print_r( $fromt->diff($tot)->invert);
+                if ($fromt->diff($tot)->invert == 1) {
+                    $nr = $response->withStatus(418);
+                    $error = new ApiError();
+                    $error->setData(818, 'To time must be greater than from time.');
+                    return $nr->write($error->toJson());
+                }
+
+                $tmpStrFD = explode('T', $data['fromd'])[0];
+                $tmpStrTD = explode('T', $data['tod'])[0];
+                $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
+                $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
+
+
+                if (($tmpStrFD >= $book['fromd'] || $tmpStrTD >= $book['fromd']) && $tmpStrFD <= $book['tod']) {
+                    if ($room->pivot->fromt >= $tmpStrFT && $room->pivot->fromt <= $tmpStrTT) {
+
+                        if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
+                            $nr = $response->withStatus(417);
+                            $error = new ApiError();
+                            $req = \App\Models\Rooms::find($reqRoom['id'])->get();
+                            $error->setData(816, 'Class ' . $req->name . ' is already assigned to book.', $room);
+                            return $nr->write($error->toJson());
+                        }
+                        if ($room->pivot->teacher == $reqRoom['teacher']) {
+                            $nr = $response->withStatus(417);
+                            $error = new ApiError();
+                            $error->setData(815, 'Teacher ' . \App\Models\Users::find($room->pivot->teacher)->user . ' is already assigned to another room.', $room);
+                            return $nr->write($error->toJson());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    $response = $next($request, $response);
+    return $response;
+};
+
+
 $app->post('/requests/userrequest', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
@@ -137,6 +196,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
             $attachArray["'" + $data['rooms'][$i]['id'] + "'"] = $data['pivot'][$i];
         }
         $requests->rooms()->attach($attachArray);
+
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -144,7 +204,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());
-});
+})->add($checkUserRequestRules);
 
 $app->put('/requests/userrequest', function (Request $request, Response $response) {
     header("Content-Type: application/json");

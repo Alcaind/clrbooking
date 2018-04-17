@@ -58,6 +58,10 @@ angular.module('clrBooking', [
     'RoomBook'
 
 ])
+    .config(function ($locationProvider) {
+        $locationProvider.html5Mode(false);
+        $locationProvider.hashPrefix('');
+    })
 
     .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
         function ($locationProvider, $routeProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider) {

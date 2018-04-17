@@ -21,8 +21,8 @@
                          data-trigger="hover">&nbsp;
                     </div>
                 </div>
-                <div style="display: flex; position: relative; top: -340px;">
-                    <div ng-repeat="book in calendar[$index] track by $index" class="info"
+                <div style="display: flex; position: relative; top: -340px;" id="calendarPlot">
+                    <div ng-repeat="book in calendar[$index] track by $index" class="info" id="{{book.did}}"
                          style="margin: 2px; top: {{book.dist}}px; height: {{book.h}}px; min-width: {{book.new?20:40}}px; position: relative; font-size: smaller; background-color: {{book.color}}; text-align: left; border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab"
                          data-toggle="popover"
                          data-content="{{book.book.ps.tma_per}} {{book.book.ps.teacher}} {{book.pivot.fromt}}-{{book.pivot.tot}}"

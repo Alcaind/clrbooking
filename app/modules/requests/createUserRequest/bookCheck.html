@@ -3,9 +3,9 @@
             style="margin: 4px;width: 100%;border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">Έλεγχος
         Διαθεσιμότητας ...
     </button>
-    <calendar-book rooms="rooms" fromd="item.fromd" tod="item.tod" dates-index="item.date_index" item="item"
+    <calendar-book rooms="selectedRooms" fromd="item.fromd" tod="item.tod" dates-index="item.date_index" item="item"
                    book="book" booking-errors="bookingErrors"></calendar-book>
-    <div ng-repeat="e in bookingErrors track by $index">
-        {{e}}
-    </div>
+    <!--<div ng-repeat="e in bookingErrors track by $index">-->
+    <!--&lt;!&ndash;{{e}}&ndash;&gt;-->
+    <!--</div>-->
 </div>

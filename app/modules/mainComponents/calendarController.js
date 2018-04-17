@@ -41,6 +41,19 @@ angular.module('MainComponents')
             }
         }
 
+        function addConflict(did) {
+            var newEle = angular.element("<div class='red' style='position: absolute; top: 10px; left: 10px; width: 10px; height: 2px; background-color: #1d9ad6'></div>");
+            var target = document.getElementById('calendarPlot');
+            angular.element(target).append(newEle);
+        }
+
+        function compareCalendarDates(cal1, cal2) {
+            return (((totCheck >= calObjects[m].fromt && totCheck <= calObjects[m].tot)
+                || (fromCheck >= calObjects[m].fromt && fromCheck <= calObjects[m].tot))
+                || ((totCheck <= calObjects[m].tot && fromCheck >= calObjects[m].tot)
+                    || (fromCheck <= calObjects[m].fromt && totCheck >= calObjects[m].fromt)));
+        }
+
         function plotBook(book, calendar) {
             if (!$scope.fromd || !$scope.tod || !$scope.datesIndex || !book || !calendar) return;
             $scope.calendar = [];
@@ -70,10 +83,21 @@ angular.module('MainComponents')
                         newObject.color = '#75a575';
                         newObject.fromd = $scope.item.fromd;
                         newObject.tod = $scope.item.tod;
+                        newObject.did = "b" + i + '' + k;
                         var bDays = findBookDates(newObject);
                         if (bDays && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) {
                             $scope.calendar[cal - 1].push(newObject);
                             calObjects.push(newObject);
+                        }
+
+                        for (var m = 0; m < calObjects.length; m++) {
+                            if (((newObject.tot >= calObjects[m].fromt && newObject.tot <= calObjects[m].tot)
+                                    || (newObject.fromt >= calObjects[m].fromt && newObject.fromt <= calObjects[m].tot))
+                                || ((newObject.tot <= calObjects[m].tot && newObject.fromt >= calObjects[m].tot)
+                                    || (newObject.fromt <= calObjects[m].fromt && newObject.tot >= calObjects[m].fromt))) {
+                                newObject.color = "#e4e123";
+                                calObjects[m].color = "#e4e153"
+                            }
                         }
                     }
 
@@ -83,7 +107,7 @@ angular.module('MainComponents')
                             for (var r = 0; r < book[j].rooms.length; r++) {
                                 if (book[j].rooms[r].pivot.date_index !== dateIndex.getDay()) continue;
                                 for (k = 0; k < $scope.rooms.length; k++) {
-                                    if (book[j].rooms[r].id === $scope.rooms[k].id && $scope.rooms[k].checked) {
+                                    if (book[j].rooms[r].id === $scope.rooms[k].id) {
                                         book[j].rooms[r].fromd = book[j].fromd;
                                         book[j].rooms[r].tod = book[j].tod;
                                         findBookDates(book[j].rooms[r]);
@@ -92,21 +116,22 @@ angular.module('MainComponents')
                                         var totCheck = new Date("1970-01-01T" + bookObj.pivot.tot);
                                         var fromCheck = new Date("1970-01-01T" + bookObj.pivot.fromt);
                                         var ok = false;
-                                        for (var m = 0; m < calObjects.length; m++) {
-                                            if (((totCheck >= calObjects[m].fromt && totCheck <= calObjects[m].tot)
+                                        for (m = 0; m < calObjects.length; m++) {
+                                            if ((((totCheck >= calObjects[m].fromt && totCheck <= calObjects[m].tot)
                                                     || (fromCheck >= calObjects[m].fromt && fromCheck <= calObjects[m].tot))
                                                 || ((totCheck <= calObjects[m].tot && fromCheck >= calObjects[m].tot)
-                                                    || (fromCheck <= calObjects[m].fromt && totCheck >= calObjects[m].fromt))) {
+                                                        || (fromCheck <= calObjects[m].fromt && totCheck >= calObjects[m].fromt))) && calObjects[m].id === book[j].rooms[r].id) {
                                                 ok = true;
                                                 bookObj.color = '#dd3030';
                                                 calObjects[m].color = '#e4aba8';
                                                 bookObj.fromBookError = calObjects[m];
+                                                bookObj.did = i + '' + j + '' + r + '' + k;
                                                 $scope.bookingErrors.push(bookObj);
+                                                //addConflict(bookObj.did);
                                             } else {
                                                 bookObj.color = ok ? '#dd3030' : '#287ed2';
                                             }
                                         }
-
                                         $scope.calendar[cal - 1].push(bookObj);
                                     }
                                 }
