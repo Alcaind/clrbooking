@@ -16,7 +16,7 @@ return array(
     'm' => '1mo|:countmos',
     'week' => '1 week|:count weeks',
     'w' => '1w|:countw',
-    'day' => '1 day|:count days',
+    'day' => '1 day|:count headerDays',
     'd' => '1d|:countd',
     'hour' => '1 hour|:count hours',
     'h' => '1h|:counth',

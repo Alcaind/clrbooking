@@ -43,7 +43,7 @@ if (Carbon::now()->isWeekend()) {
 echo Carbon::now()->subMinutes(2)->diffForHumans(); // '2 minutes ago'
 
 // ... but also does 'from now', 'after' and 'before'
-// rolling up to seconds, minutes, hours, days, months, years
+// rolling up to seconds, minutes, hours, headerDays, months, years
 
 $daysSinceEpoch = Carbon::createFromTimestamp(0)->diffInDays();
 ```

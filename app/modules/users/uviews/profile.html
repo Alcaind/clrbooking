@@ -10,40 +10,77 @@
         <div class="pageTitle">Διαχείριση Χρήστη</div>
     </div>
     <div class="contentHolder">
-        <form class="userForm" name="userForm" novalidate>
+        <form class="userForm" name="userForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <!-- USERNAME -->
-            <div class="form-group" ng-class="{ 'has-error' : userForm.user.$invalid && !userForm.user.$pristine }">
-                <label class="required" for="user">Username<span class="form-required">*</span>:</label>
-                <div>
-                    <input id="user" name="user" type="text" ng-model="ctrl.item.user" ng-minlength="5"
-                           ng-maxlength="30">
+            <div class="formGroupItems">
+                <div class="form-group" ng-class="{ 'has-error' : userForm.user.$invalid && !userForm.user.$pristine }">
+                    <label class="required" for="user">Username<span class="form-required">*</span>:</label>
+                    <div class="longInput">
+                        <input id="user" name="user" type="text" ng-model="ctrl.item.user" ng-minlength="5"
+                               ng-maxlength="30">
+                    </div>
                     <p ng-show="userForm.user.$error.minlength" class="help-block">Το Username είναι πολύ μικρό.</p>
-                    <p ng-show="userForm.user.$error.maxlength" class="help-block">Το Username είναι πολύ μεγάλο.</p>
+                    <p ng-show="userForm.user.$error.maxlength" class="help-block">Το Username είναι πολύ
+                        μεγάλο.</p>
                 </div>
-            </div>
-            <!--PASSWORD-->
-            <div class="form-group">
-                <div>
-                    <label class="required" for="pw1">Κωδικός<span class="form-required">*</span>:</label>
-                    <input id="pw1" name="pw1" type="{{passwordString1}}" ng-model="ctrl.item.hash"
-                           ng-init="passwordString1='password'" ng-required=""/>
-                    <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
-                       ng-click="passwordString1==='text'?passwordString1='password':passwordString1='text';errorString='*'+pw1+'*';">
-                        <i class="glyphicon glyphicon-eye-open"></i>
-                    </a>
-                </div>
-                <div>
-                    <label class="required" for="pw2">Επιβεβαίωση κωδικού<span class="form-required">*</span>:</label>
-                    <input id="pw2" name="pw2" type="{{passwordString2}}"
-                           ng-model="pw2" ng-init="passwordString2='password'" pw-check="pw1" ng-required=""/>
-                    <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
-                       ng-click="passwordString2==='text'?passwordString2='password':passwordString2='text';errorString='*'+pw2+'*';">
-                        <i class="glyphicon glyphicon-eye-open"></i>
-                    </a>
-                    <div class="msg-block" ng-show="userForm.$error">
-                        <span class="msg-error" ng-show="userForm.pw2.$error.pwmatch">Ο κωδικός δεν ταιριάζει.</span>
+                <!--PASSWORD-->
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class="required" for="pw1">Κωδικός<span class="form-required">*</span>:</label>
+                        <input id="pw1" name="pw1" type="{{passwordString1}}" ng-model="ctrl.item.hash"
+                               ng-init="passwordString1='password'" ng-required=""/>
+                        <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
+                           ng-click="passwordString1==='text'?passwordString1='password':passwordString1='text';errorString='*'+pw1+'*';">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <label class="required" for="pw2">Επιβεβαίωση κωδικού<span
+                                class="form-required">*</span>:</label>
+                        <input id="pw2" name="pw2" type="{{passwordString2}}"
+                               ng-model="pw2" ng-init="passwordString2='password'" pw-check="pw1" ng-required=""/>
+                        <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
+                           ng-click="passwordString2==='text'?passwordString2='password':passwordString2='text';errorString='*'+pw2+'*';">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                        </a>
+                        <div class="msg-block" ng-show="userForm.$error">
+                            <span class="msg-error"
+                                  ng-show="userForm.pw2.$error.pwmatch">Ο κωδικός δεν ταιριάζει.</span>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="inlineItems">
+                <!-- FIRSTNAME -->
+                <div class="form-group"
+                     ng-class="{ 'has-error' : userForm.fname.$invalid && !userForm.fname.$pristine }">
+                    <label for="fname" class="required formItemLabel">Όνομα<span class="form-required">*</span>:</label>
+                    <div class="midInput">
+                        <input id="fname" name="fname" class="form-control" type="text" ng-model="ctrl.item.fname">
+                    </div>
+                    <p ng-show="userForm.fname.$invalid && !userForm.fname.$pristine" class="help-block">Εισάγετε όνομα
+                        χρήστη.</p>
+                </div>
+                <!-- LASTNAME -->
+                <div class="form-group"
+                     ng-class="{ 'has-error' : userForm.sname.$invalid && !userForm.sname.$pristine }">
+                    <label for="sname" class="required formItemLabel">Επώνυμο<span
+                            class="form-required">*</span>:</label>
+                    <input id="sname" name="sname" class="form-control" type="text" ng-model="ctrl.item.sname">
+                    <p ng-show="userForm.sname.$invalid && !userForm.sname.$pristine" class="help-block">Εισάγετε
+                        επώνυμο
+                        χρήστη.</p>
+                </div>
+            </div>
+            <!--PHONE-->
+            <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
+                <label for="phone" class="required">Τηλέφωνο<span class="form-required">*</span>:</label>
+                <input id="phone" name="phone" class="form-control" type="number" ng-model="ctrl.item.phone"
+                       ng-minlength="5"
+                       ng-maxlength="10">
+                <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Εισάγετε
+                    τηλέφωνο.</p>
             </div>
             <!-- EMAIL FIRST MANDATORY -->
             <div class="form-group "
@@ -67,29 +104,7 @@
                 <input id="emailp" name="emailp" class="form-control" type="email" ng-model="ctrl.item.em_pant">
                 <p ng-show="userForm.emailp.$invalid" class="help-block">Το e-mail δεν είναι σωστό.</p>
             </div>
-            <!-- FIRSTNAME -->
-            <div class="form-group" ng-class="{ 'has-error' : userForm.fname.$invalid && !userForm.fname.$pristine }">
-                <label for="fname" class="required">Όνομα<span class="form-required">*</span>:</label>
-                <input id="fname" name="fname" class="form-control" type="text" ng-model="ctrl.item.fname">
-                <p ng-show="userForm.fname.$invalid && !userForm.fname.$pristine" class="help-block">Εισάγετε όνομα
-                    χρήστη.</p>
-            </div>
-            <!-- LASTNAME -->
-            <div class="form-group" ng-class="{ 'has-error' : userForm.sname.$invalid && !userForm.sname.$pristine }">
-                <label for="sname" class="required">Επώνυμο<span class="form-required">*</span>:</label>
-                <input id="sname" name="sname" class="form-control" type="text" ng-model="ctrl.item.sname">
-                <p ng-show="userForm.sname.$invalid && !userForm.sname.$pristine" class="help-block">Εισάγετε επώνυμο
-                    χρήστη.</p>
-            </div>
-            <!--PHONE-->
-            <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
-                <label for="phone" class="required">Τηλέφωνο<span class="form-required">*</span>:</label>
-                <input id="phone" name="phone" class="form-control" type="number" ng-model="ctrl.item.phone"
-                       ng-minlength="5"
-                       ng-maxlength="10">
-                <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="help-block">Εισάγετε
-                    τηλέφωνο.</p>
-            </div>
+
             <div class="form-group">
                 <label for="idtm">Τμήμα:</label>
                 <select id="idtm" ng-model="ctrl.item.tm_id" class="form-control"

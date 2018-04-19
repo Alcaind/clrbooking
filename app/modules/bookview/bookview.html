@@ -1,52 +1,7 @@
 <div>
     <config-book-graph selected-period="selectedPeriod"></config-book-graph>
 </div>
-<table class="sorttable table table-hover table-striped table-responsive header-fixed">
-    <tbody>
-    <tr>
-        <td>Χρήστης:</td>
-        <td>
-            <select id="user" name="user" class="form-control" ng-model="item.user"
-                    ng-options="user.id as user.user for user in users"></select></td>
-    </tr>
-    <tr>
-        <td>Αιθουσα:</td>
-        <td><select id="room_id" name="room_id" class="form-control" ng-model="item.room_id"
-                    ng-options="room.id as room.name for room in rooms"></select></td>
-    </tr>
-    <tr>
-        <label>date_index:</label>
-        <input type="text" class="form-control" ng-model="item.date_index">
-    </tr>
-    <tr>
-        <td>Από Ημ/νία:</td>
-        <td><input type="date" id="fromd" name="fromd" ng-model="item.fromd" ng-bind="date | date:'EEEE , d/MMMM/y'">
-        </td>
-    </tr>
-    <tr>
-        <td>Έως Ημ/νία:</td>
-        <td><input type="date" id="tod" name="tod" ng-model="item.tod" ng-bind="date | date:'EEEE , d/MMMM/y'"></td>
-    </tr>
-    <tr>
-        <td>Από Ώρα:</td>
-        <td><input type="time" id="fromt" name="fromt" ng-model="item.fromt"></td>
-    </tr>
-    <tr>
-        <td>Έως Ώρα:</td>
-        <td><input type="time" id="tot" name="tot" ng-model="item.tod"></td>
-    </tr>
-    <tr>
-        <td>Περίοδος:</td>
-        <td><select id="period" name="period" class="form-control" ng-model="item.period"
-                    ng-options="period.id as period.descr for period in periods"></select></td>
-    </tr>
-    </tbody>
-</table>
-<button ng-click="openCalendar(item)">Get data openCalendar</button>
-
-<!--<div id="graphView" ng-show="calendar">
-<calendar-book calendar-array="calendar" fromd="item.fromd" tod="item.tod"></calendar-book>
-</div>-->
+<button ng-click="openCalendar(item)">openCalendar</button>
 
 <calendar-book calendar-array="calendar" fromd="item.fromd" tod="item.tod" dates="item.date_index"></calendar-book>
 

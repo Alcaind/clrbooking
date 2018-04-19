@@ -6,49 +6,50 @@ angular.module('RoomBook', [
     'ApiModules'
 ])
     .controller('BookController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, api) {
-        $scope.rooms = [];
         $scope.periods = [];
-        $scope.users = [];
+        // $scope.calendar = [];
+        $scope.headerTitle = [];
+        //$scope.users = [];
         $scope.selectedPeriod = {};
-        $scope.item = {fromd: "2018-01-01", tod: "2018-01-01"};
+        // $scope.item = {fromd: "2018-01-01", tod: "2018-01-01"};
 
-        $scope.openCalendar = function (item) {
-            api.apiCall('POST', 'api/public/roombook/dates', function (result) {
+        $scope.openCalendar = function () {
+            api.apiCall('GET', 'api/public/roombook', function (result) {
                 $scope.book = result.data;
-                $scope.plotBook($scope.book, $scope.calendar);
+                $scope.plotBook($scope.periods, $scope.book);
                 /* Plot the book data to the calendar array */
-            }, undefined, item);
+            }, undefined);
         };
 
         function init() {
-            api.apiCall('GET', 'api/public/rooms', function (result) {
-                $scope.rooms = result.data;
-            });
+            // api.apiCall('GET', 'api/public/rooms', function (result) {
+            //     $scope.rooms = result.data;
+            // });
             api.apiCall('GET', 'api/public/periods', function (result) {
                 $scope.periods = result.data;
             });
-            api.apiCall('GET', 'api/public/users', function (result) {
-                $scope.users = result.data;
-            });
+            // api.apiCall('GET', 'api/public/users', function (result) {
+            //     $scope.users = result.data;
+            // });
         }
 
         /**
-         * Plotting the given book at the given calendar array
+         * Plotting the given book at the calendar array
          *
          * @param book is the array with the data
          * @param calendar is the calendar array for view
          *
          */
         $scope.plotBook = function (book, calendar) {
-            var fromd = new Date($scope.item.fromd.getTime());
-            var dateIndex = new Date($scope.item.fromd.getTime());
-            var tod = new Date($scope.item.tod);
-            var days = Math.ceil(Math.abs(tod.getTime() - fromd.getTime()) / (1000 * 3600 * 24));
-            /* calculating the DIFF in days between fromd and tod */
+            var fromd = new Date($scope.periods.fromd.getTime());
+            var dateIndex = new Date($scope.periods.fromd.getTime());
+            var tod = new Date($scope.periods.tod.getTime());
+            var days = Math.ceil(Math.abs(tod - fromd) / (1000 * 3600 * 24));
+            $scope.calendar = [];
 
             /*
             * plotting the data
-            * days parsing (cerful i is from 0 to diff the true date if holded in the dateIndex var ;)*/
+            * headerDays parsing (careful i is from 0 to diff the true date if holded in the dateIndex var ;)*/
             for (var i = 0; i < days; i++) {
                 calendar[i] = [];
                 /* search the book */
@@ -73,25 +74,24 @@ angular.module('RoomBook', [
         };
 
         function findBookDates(book) {
-            book.fDay = new Date(book.fromd + 'T' + book.fromt);
-            book.tDay = new Date(book.tod + 'T' + book.fromt);
-
-            book.h = (new Date(book.fromd + 'T' + book.tot) - book.fDay) / (1000 * 60);
-            book.dist = (book.fDay - new Date(book.fromd)) / (1000 * 60);
-
+            book.fDay = new Date(book.fromd + 'T' + $scope.book.fromt);
+            book.tDay = new Date(book.tod + 'T' + $scope.book.fromt);
+            book.h = (new Date(book.fromd + 'T' + $scope.book.tot) - book.fDay) / (1000 * 60) / 3;
+            book.dist = (Math.abs(book.fDay - new Date(book.fromd + 'T00:00:00')) / (1000 * 60) - 420) / 3;
             return {
-                fDay: new Date(book.fromd + 'T' + book.fromt), /* get book from day */
-                tDay: new Date(book.tod + 'T' + book.fromt) /* get book to day */
+                fDay: new Date(book.fromd + 'T' + $scope.book.fromt),
+                tDay: new Date(book.tod + 'T' + $scope.book.fromt)
             }
         }
 
-        $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
-            if (!newVal.fromd) return;
-            scope.item.fromd = new Date(newVal.fromd);
-            scope.item.tod = new Date(newVal.tod);
-        });
+        //
+        // $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
+        //     if (!newVal.fromd) return;
+        //     scope.periods.fromd = new Date(newVal.fromd);
+        //     scope.periods.tod = new Date(newVal.tod);
+        // });
 
-        init();
+        // init();
     }]);
 
 

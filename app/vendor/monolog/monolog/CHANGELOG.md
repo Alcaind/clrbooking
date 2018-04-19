@@ -260,7 +260,7 @@
 
   * Fixed exception formatting in the LineFormatter to be more minimalistic
   * Fixed RavenHandler's handling of context/extra data, requires Raven client >0.1.0
-  * Fixed log rotation in RotatingFileHandler to work with long running scripts spanning multiple days
+  * Fixed log rotation in RotatingFileHandler to work with long running scripts spanning multiple headerDays
   * Fixed WebProcessor array access so it checks for data presence
   * Fixed Buffer, Group and FingersCrossed handlers to make use of their processors
 

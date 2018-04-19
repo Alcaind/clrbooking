@@ -3,7 +3,8 @@
         <thead>
         <tr>
             <th>Ωρα</th>
-            <th ng-repeat="day in days track by $index"> {{day.toLocaleDateString('el-GR',{ weekday: 'short', year:
+            <th ng-repeat="day in headerDays track by $index"> {{day.toLocaleDateString('el-GR',{ weekday: 'short',
+                year:
                 'numeric', month: 'short', day: 'numeric' })}}
             </th>
         <tbody>
@@ -12,7 +13,7 @@
             <td>
                 <div ng-repeat="hour in hours" style="top: {{$index*20}}px; height: 20px">{{hour.ht}}</div>
             </td>
-            <td ng-repeat="day in days track by $index">
+            <td ng-repeat="day in headerDays track by $index">
                 <div style="position: relative;top: 0px;">
                     <div ng-repeat="hour in hours"
                          style="border-bottom: 1px solid #eeeeee; width:100%;height: 20px;display: block;background-color: #cac{{(hour.i%6*2).toString(16)}}c{{(day.getDay()).toString(16)}}"
