@@ -342,6 +342,11 @@ angular.module('clrBooking', [
                     controller: 'CreateFormController',
                     templateUrl: 'modules/requests/createUserRequest/createForm.html'
                 })
+                .when('/usercreaterequests/:id', {
+                    title: 'user create requests',
+                    controller: 'CreateFormController',
+                    templateUrl: 'modules/requests/createUserRequest/createForm.html'
+                })
                 .when('/dashboard', {
                     title: 'user view requests',
                     controller: 'UserViewController',

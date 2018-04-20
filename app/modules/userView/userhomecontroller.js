@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Users')
-    .controller('UserViewController', ['$scope', 'globalVarsSrv', 'ClrStatusSrv', 'api', function ($scope, globalVarsSrv, ClrStatusSrv, api) {
+    .controller('UserViewController', ['$scope', 'globalVarsSrv', 'ClrStatusSrv', 'api', '$routeParams', '$location', function ($scope, globalVarsSrv, ClrStatusSrv, api, $routeParams, $location) {
         // $scope.baseURL = 'api/public/view';
         $scope.statusOptions = ClrStatusSrv.getStatus('requestStatus');
         $scope.item = {};
@@ -14,6 +14,10 @@ angular.module('Users')
             $scope.requests = results.data;
         });
 
+        $scope.selectRow = function (item) {
+            $location.url('/usercreaterequests/' + item.id);
+        }
+
     }])
     .directive('dashBoardTable', function () {
         return {
@@ -23,6 +27,7 @@ angular.module('Users')
                 status: "<",
                 dp: "="
             },
+            controller: 'UserViewController',
             templateUrl: 'modules/userView/userHome/dashboardTable.html'
         }
 

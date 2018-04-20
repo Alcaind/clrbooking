@@ -1209,6 +1209,14 @@
     {
       "text": "Draft",
       "value": 3
+    },
+    {
+      "text": "Canceled",
+      "value": 4
+    },
+    {
+      "text": "Working",
+      "value": 5
     }
   ],
   "roombookStatus": [

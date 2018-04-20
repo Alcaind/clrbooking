@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Requests')
-    .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', function ($scope, api, ClrStatusSrv, globalVarsSrv) {
+    .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams) {
 
         $scope.views = [];
         $scope.currentPage = 0;
@@ -12,76 +12,130 @@ angular.module('Requests')
         $scope.courses = [];
         $scope.teachers = [];
         $scope.bookingErrors = [];
+        $scope.selectedPeriod = {};
+        $scope.selectedRooms = [];
+        $scope.selectedCourse = {};
+        $scope.selectedUse = {};
+        $scope.selectedDays = [
+            {
+                "d": "Κυριακή",
+                "i": 0,
+                "s": false
+            },
+            {
+                "d": "Δευτέρα",
+                "i": 1,
+                "s": false
+            },
+            {
+                "d": "Τρίτη",
+                "i": 2,
+                "s": false
+            },
+            {
+                "d": "Τετάρτη",
+                "i": 3,
+                "s": false
+            },
+            {
+                "d": "Πέμπτη",
+                "i": 4,
+                "s": false
+            },
+            {
+                "d": "Παρασκευή",
+                "i": 5,
+                "s": false
+            },
+            {
+                "d": "Σάββατο",
+                "i": 6,
+                "s": false
+            }
+        ];
 
         $scope.init = function () {
-            $scope.item = {rooms: [], date_index: "", guests: []};
-            $scope.selectedDays = [
-                {
-                    "d": "Κυριακή",
-                    "i": 0,
-                    "s": false
-                },
-                {
-                    "d": "Δευτέρα",
-                    "i": 1,
-                    "s": false
-                },
-                {
-                    "d": "Τρίτη",
-                    "i": 2,
-                    "s": false
-                },
-                {
-                    "d": "Τετάρτη",
-                    "i": 3,
-                    "s": false
-                },
-                {
-                    "d": "Πέμπτη",
-                    "i": 4,
-                    "s": false
-                },
-                {
-                    "d": "Παρασκευή",
-                    "i": 5,
-                    "s": false
-                },
-                {
-                    "d": "Σάββατο",
-                    "i": 6,
-                    "s": false
-                }
-            ];
-            $scope.selectedPeriod = {};
-            $scope.selectedRooms = [];
-            $scope.selectedCourse = {};
-            $scope.selectedUse = {};
-            $scope.currentPage = 0;
-            $scope.steps = [
-                {text: "Επιλογή Χρήσης", active: true},
-                {text: "Επιλογή Περιόδου", active: true},
-                {text: "Επιλογή Μαθήματος", active: true},
-                {text: "Επιλογή Αίθουσας", active: true},
-                {text: "Ορισμός Παρευρισκομένων", active: false},
-                {text: "Ελεγχος Διαθεσιμότητας", active: true}
-            ];
+            if (!$routeParams.id) {
+                $scope.selectedPeriod = {};
+                $scope.selectedRooms = [];
+                $scope.selectedCourse = {};
+                $scope.selectedUse = {};
+                $scope.currentPage = 0;
+                $scope.item = {rooms: [], date_index: "", guests: []};
+            } else {
+                api.apiCall('GET', 'api/public/requests/' + $routeParams.id, function (result) {
 
-            api.apiCall('GET', 'api/public/rooms', function (result) {
-                $scope.rooms = result.data;
-                for (var i = 0; i < result.data.length; i++) {
-                    $scope.rooms[i].checked = false;
-                }
-            });
+                    $scope.item = result.data;
+                    $scope.selectedPeriod = $scope.item.periods;
 
-            api.apiCall('GET', 'api/public/roomuse', function (result) {
-                $scope.roomUse = result.data;
-            });
+                    for (var sr = 0; sr < $scope.item.rooms.length; sr++) {
+                        //$scope.roomChecked($scope.item.rooms[sr].pivot);
 
-            api.apiCall('GET', 'api/public/tms/' + $scope.user.authdata.roles[0].tm_id + '/ps', function (result) {
-                $scope.courses = result.data;
-            });
+                        var roomObj = Object.assign({}, $scope.item.rooms[sr]);
 
+                        $scope.item.rooms[sr].pivot.fromt = new Date('1970-01-01T' + $scope.item.rooms[sr].pivot.fromt);
+                        $scope.item.rooms[sr].pivot.tot = new Date('1970-01-01T' + $scope.item.rooms[sr].pivot.tot);
+                        roomObj = Object.assign(roomObj, $scope.item.rooms[sr].pivot);
+                        $scope.selectedRooms.push(roomObj);
+                        for (var r = 0; r < $scope.rooms.length; r++) {
+                            if ($scope.item.rooms[sr].id === $scope.rooms[r].id) {
+                                $scope.roomChecked($scope.rooms[r])
+                            }
+                        }
+                        $scope.item.rooms[sr] = Object.assign($scope.item.rooms[sr], $scope.item.rooms[sr].pivot);
+                    }
+
+                    for (var u = 0; u < $scope.roomUse.length; u++) {
+                        if ($scope.roomUse[u].id === $scope.item.room_use.id) {
+                            $scope.selectUse($scope.roomUse[u]);
+                        }
+                    }
+
+                    for (var c = 0; c < $scope.courses.ps.length; c++) {
+                        if ($scope.courses.ps[c].id === $scope.item.ps.id) {
+                            $scope.selectCourse($scope.courses.ps[c]);
+                        }
+                    }
+
+                    $scope.gotoPage(5, $scope.item);
+
+                    for (var i = 0; i < $scope.item.rooms.length; i++) {
+                        for (var j = 0; j < $scope.selectedDays.length; j++) {
+                            if (j === $scope.item.rooms[i].pivot.date_index) {
+                                $scope.selectedDays[j].s = true;
+                                $scope.item.date_index += j + '';
+                            }
+                        }
+                    }
+
+                    $scope.getBook($scope.item);
+                });
+            }
         };
+
+        $scope.steps = [
+            {text: "Επιλογή Χρήσης", active: true},
+            {text: "Επιλογή Περιόδου", active: true},
+            {text: "Επιλογή Μαθήματος", active: true},
+            {text: "Επιλογή Αίθουσας", active: true},
+            {text: "Ορισμός Παρευρισκομένων", active: false},
+            {text: "Ελεγχος Διαθεσιμότητας", active: true}
+        ];
+
+        api.apiCall('GET', 'api/public/rooms', function (result) {
+            $scope.rooms = result.data;
+            for (var i = 0; i < result.data.length; i++) {
+                $scope.rooms[i].checked = false;
+            }
+        });
+
+        api.apiCall('GET', 'api/public/roomuse', function (result) {
+            $scope.roomUse = result.data;
+        });
+
+        api.apiCall('GET', 'api/public/tms/' + $scope.user.authdata.roles[0].tm_id + '/ps', function (result) {
+            $scope.courses = result.data;
+        });
 
         api.apiCall('GET', 'api/public/users', function (results) {
             for (var i = 0; i < results.data.length; i++) {
@@ -205,11 +259,14 @@ angular.module('Requests')
             $scope.getBook($scope.item)
         };
         $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
-            if (!newVal.fromd) return;
+            if (!newVal || !newVal.fromd) return;
             scope.item.fromd = new Date(newVal.fromd);
             scope.item.tod = new Date(newVal.tod);
+            scope.item.period = newVal.id;
+
         });
         $scope.$watch('item', function (newVal, oldVal, scope) {
+            if (!scope.item) return;
             if (scope.item.date_index && scope.item.fromd && scope.item.tod && scope.item.fromt && scope.item.tot) {
                 scope.plotBook(scope.book, scope.calendar);
             }

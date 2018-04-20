@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $requests = \App\Models\Requests::with(['users', 'periods:id,descr', 'admin', 'room_use:id,synt', 'ps', 'config', 'rooms'])->get();
+    $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms'])->get();
     return $response->getBody()->write($requests->toJson());
 });
 
@@ -21,7 +21,7 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users', 'periods:id,descr', 'admin', 'room_use:id,synt', 'ps', 'config', 'rooms'])->find($id);
+        $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -35,7 +35,7 @@ $app->get('/requests/users/{id}', function (Request $request, Response $response
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user', 'periods:id,descr', 'admin', 'ps', 'room_use', 'rooms'])->where('user_id', '=', $id)->get();
+        $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms'])->where('user_id', '=', $id)->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
