@@ -25,6 +25,16 @@ class Users extends Model {
         return $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
     }
 
+    public function tmsUser()
+    {
+        return $this->belongsToMany('\\App\\Models\\Tm', 'tm_users', 'user_id', 'tm_id')->withPivot('comments');
+    }
+//
+//    public function teacher()
+//    {
+//        return $this->belongsToMany('\\App\\Models\\Ps', 'ps_teacher','tm_id', 'user_id')->withPivot ('comment');
+//    }
+
     public function superTms()
     {
         return $this->hasMany('\\App\\Models\\Tm', 'supervisor');

@@ -2,18 +2,18 @@
     <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
         <thead class="header-fixed" style="background-color: #cecece;">
         <tr>
-            <th>ID Χρήστη</th>
-            <th>Τίτλος</th>
-            <th>Επώνυμο</th>
+            <th>id</th>
+            <th>Κωδικός Τμήματος</th>
+            <th>Περιγραφή</th>
             <th>...</th>
         </tr>
         </thead>
         <tbody class="contentScroll">
         <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
             style="cursor: pointer">
-            <td>{{ item.id}}</td>
-            <td>{{ item.fname }}</td>
-            <td>{{ item.sname }}</td>
+            <td>{{item.id }}</td>
+            <td>{{item.tm_code}}</td>
+            <td>{{item.descr }}</td>
             <td>
                 <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
                         class="btn{{item.disabled?' btn-regular disabled':' btn-success'}}">

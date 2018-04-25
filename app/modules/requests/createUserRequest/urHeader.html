@@ -16,6 +16,13 @@
         <div ng-repeat="room in selectedRooms">- {{room.name}}</div>
     </div>
     <div>
+
+        <button tooltip-placement="left" uib-tooltip="COPY DAY" type="button" class="btn btn-primary hippo"
+                ng-click="copyDayRequest(calendarSelectedDay)" style="min-width: 50px; border-radius: 0px;">
+            <span class="glyphicon glyphicon-download"></span></button>
+    </div>
+
+    <div>
         <button tooltip-placement="left" uib-tooltip="POST" type="button" class="btn btn-primary hippo"
                 ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;">
             <span class="glyphicon glyphicon-download"></span></button>

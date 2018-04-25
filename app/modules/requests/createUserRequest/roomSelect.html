@@ -20,7 +20,9 @@
             </div>
         </div>
 
+
         <div id="selectedRoomsHolder" style="width: 30%; overflow: auto">
+            <default-room-tile room="defaultRoomSelection"></default-room-tile>
             <div ng-repeat="room in selectedRooms track by $index">
                 <selected-room-tile></selected-room-tile>
             </div>

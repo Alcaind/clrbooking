@@ -16,6 +16,7 @@ angular.module('Requests')
         $scope.selectedRooms = [];
         $scope.selectedCourse = {};
         $scope.selectedUse = {};
+        $scope.calendarSelectedDay = null;
         $scope.selectedDays = [
             {
                 "d": "Κυριακή",
@@ -53,6 +54,49 @@ angular.module('Requests')
                 "s": false
             }
         ];
+
+        $scope.copyDayRequest = function (day) {
+            var fd = day;
+            var td = new Date(day);
+            var td = new Date(td.setDate(td.getDate() + 1));
+
+            api.apiCall('POST', 'api/public/roombook/dates', function (result) {
+                var book = result.data;
+                var toCopyRooms = [];
+                book.map(function (request) {
+                    request.rooms.map(function (room) {
+                        if (room.pivot.date_index !== fd.getDay()) return;
+
+                        var roomObj = Object.assign({}, room);
+
+                        room.pivot.fromt = new Date('1970-01-01T' + room.pivot.fromt);
+                        room.pivot.tot = new Date('1970-01-01T' + room.pivot.tot);
+                        delete room.pivot.id;
+                        delete room.pivot.req_id;
+
+                        room.pivot.date_index = $scope.item.date_index * 1;
+                        roomObj = Object.assign(roomObj, room.pivot);
+                        $scope.selectedRooms.push(roomObj);
+                        for (var r = 0; r < $scope.rooms.length; r++) {
+                            if (room.id === $scope.rooms[r].id) {
+                                $scope.roomChecked($scope.rooms[r])
+                            }
+                        }
+                        room = Object.assign(room, room.pivot);
+
+                        /*var nRoom = Object.assign({}, room);
+                        var newPivot = Object.assign({}, room.pivot);
+                        delete newPivot.id;
+                        delete newPivot.req_id;
+                        nRoom.pivot = newPivot;
+                        toCopyRooms.push(nRoom);
+                        $scope.selectedRooms.push(nRoom)*/
+                    })
+                });
+                $scope.item.rooms = $scope.selectedRooms;
+            }, undefined, {fromd: fd, tod: td});
+        };
+
 
         $scope.init = function () {
             if (!$routeParams.id) {
@@ -232,6 +276,9 @@ angular.module('Requests')
         };
 
         $scope.nextPage = function () {
+            if ($scope.currentPage === 3) {
+                $scope.copyDefaultRoom();
+            }
             if ($scope.currentPage === 5) {
                 $scope.getBook($scope.item)
             }
@@ -240,11 +287,17 @@ angular.module('Requests')
         };
 
         $scope.prevPage = function () {
+            if ($scope.currentPage === 3) {
+                $scope.copyDefaultRoom();
+            }
             $scope.currentPage--;
             if ($scope.currentPage === 4 && $scope.selectedUse.synt !== 'ΤΗΛ') $scope.currentPage--;
         };
 
         $scope.gotoPage = function (p, item) {
+            if ($scope.currentPage === 3) {
+                $scope.copyDefaultRoom();
+            }
             if (item && !item.active) return;
             $scope.currentPage = p;
         };
@@ -275,11 +328,31 @@ angular.module('Requests')
         $scope.init();
     }])
     .controller('RoomSelectController', function ($scope) {
+
+        $scope.defaultRoomSelection = null;
+
         $scope.removeSelectedRoom = function (room) {
             $scope.selectedRooms.splice($scope.selectedRooms.indexOf(room), 1);
         };
 
+        $scope.copyDefaultRoom = function () {
+            if (!$scope.defaultRoomSelection) return;
+            $scope.defaultRoomSelection.fromt = $scope.defaultRoomSelection.fromt !== 0 ? $scope.defaultRoomSelection.fromt : new Date('1970-01-01T07:58:00');
+            $scope.defaultRoomSelection.tot = $scope.defaultRoomSelection.tot !== 0 ? $scope.defaultRoomSelection.tot : new Date('1970-01-01T07:59:00');
+
+            $scope.selectedRooms.map(function (selectedRoom) {
+                selectedRoom.fromt = selectedRoom.fromt === 0 ? $scope.defaultRoomSelection.fromt : selectedRoom.fromt;
+                selectedRoom.tot = selectedRoom.tot === 0 ? $scope.defaultRoomSelection.tot : selectedRoom.tot;
+                selectedRoom.comment = !selectedRoom.comment ? $scope.defaultRoomSelection.comment : selectedRoom.comment;
+                selectedRoom.teacher = !selectedRoom.teacher ? $scope.defaultRoomSelection.teacher : selectedRoom.teacher;
+            })
+        };
+
         $scope.roomDaySelect = function (room, day) {
+            if (!$scope.defaultRoomSelection) {
+                $scope.defaultRoomSelection = Object.assign({}, room);
+                $scope.defaultRoomSelection.date_index = day.i;
+            }
             var roomObj = Object.assign({}, room);
             roomObj.date_index = day.i;
             $scope.selectedRooms.push(roomObj);
@@ -322,6 +395,13 @@ angular.module('Requests')
         return {
             restrict: 'EA',
             templateUrl: 'modules/requests/createUserRequest/selectedRoomTile.html'
+        }
+    })
+    .directive('defaultRoomTile', function () {
+        return {
+            restrict: 'EA',
+            scope: {room: '='},
+            templateUrl: 'modules/requests/createUserRequest/defaultRoomTile.html'
         }
     })
     .directive('daySelect', function () {

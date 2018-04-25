@@ -314,6 +314,11 @@ angular.module('clrBooking', [
                     controller: 'URolesController',
                     templateUrl: 'modules/users/uviews/urole.html'
                 })
+                .when('/users/:id/tms', {
+                    title: 'user tms',
+                    controller: 'UsersTmsController',
+                    templateUrl: 'modules/users/utms/userTms.html'
+                })
                 .when('/psstats', {
                     title: 'statistics',
                     controller: 'PsStatsController',

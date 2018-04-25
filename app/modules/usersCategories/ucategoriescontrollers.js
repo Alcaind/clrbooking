@@ -6,6 +6,7 @@ angular.module('UsersCategories', [
     'ApiModules',
     'Authentication',
     'GlobalVarsSrvs'
+
 ])
     .controller('UsersCategoriesController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
 

@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 $app->get('/ps', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     try {
-        $ps = \App\Models\Ps::with(['config'])->get();
+        $ps = \App\Models\Ps::with('config', 'users')->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -27,7 +27,7 @@ $app->get('/ps/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $ps = \App\Models\Ps::with(['config'])->find($id);
+        $ps = \App\Models\Ps::with('config', 'users')->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();

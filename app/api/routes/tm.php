@@ -12,7 +12,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/tms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $tm = \App\Models\Tm::with('supervisor')->get();
+    $tm = \App\Models\Tm::with('supervisor', 'ps', 'users')->get();
 
     return $response->getBody()->write($tm->toJson());
 });
@@ -21,7 +21,7 @@ $app->get('/tms/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $tm = \App\Models\Tm::with('supervisor', 'ps')->find($id);
+        $tm = \App\Models\Tm::with('supervisor', 'ps', 'users')->find($id);
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }

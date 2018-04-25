@@ -2,15 +2,20 @@
 
 angular.module('MainComponents')
 
-    .controller('CalendarContol', ['$scope', 'MakeModal', '$compile', function ($scope, MakeModal, $compile) {
+    .controller('CalendarContol', ['$scope', 'MakeModal', '$compile', 'orderByFilter', '$filter', function ($scope, MakeModal, $compile, orderBy, $filter) {
         $scope.calendar = [];
         $scope.weekdays = ['Δ', 'Τ', 'Τ', 'Π', 'Π', 'Σ', 'Κ'];
         $scope.headerDays = [];
         $scope.hours = [];
         $scope.options = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
+
         $scope.$watch('book', plotBook);
         $scope.popup = function (reqID) {
             MakeModal.infoBookRoom(reqID)
+        };
+
+        $scope.selectDay = function (day) {
+            $scope.selectedDay = day;
         };
 
         function init() {
@@ -110,10 +115,10 @@ angular.module('MainComponents')
 
                             for (var m = 0; m < calObjects.length; m++) { // parse existing new rooms for this day to check for conflicts
                                 if (((newObject.tot >= calObjects[m].fromt && newObject.tot <= calObjects[m].tot)
-                                        || (newObject.fromt >= calObjects[m].fromt && newObject.fromt <= calObjects[m].tot))
+                                        || (newObject.fromt >= calObjects[m].fromt && newObject.fromt <= calObjects[m].tot)) && calObjects[m].id === newObject.id)
                                 /*|| ((newObject.tot <= calObjects[m].tot && newObject.fromt >= calObjects[m].tot)
                                     || (newObject.fromt <= calObjects[m].fromt && newObject.tot >= calObjects[m].fromt))*/
-                                ) {
+                                {
                                     newObject.color = "#e4e123";  // if conflict flag new & old rooms with color
                                     calObjects[m].color = "#e4e153"
                                 }
@@ -129,6 +134,7 @@ angular.module('MainComponents')
                             for (var r = 0; r < book[j].rooms.length; r++) { // parse request rooms
                                 if (book[j].rooms[r].pivot.date_index !== dateIndex.getDay()) continue; // Continue if dateIndex is different from room dateIndex
                                 for (k = 0; k < $scope.rooms.length; k++) {  // parse selected (input) rooms
+                                    if ($scope.rooms[k].date_index !== dateIndex.getDay()) continue; // Continue if dateIndex is different from room dateIndex)
                                     if (book[j].rooms[r].id === $scope.rooms[k].id) {  //requests room if equals with one of the selected rooms
                                         book[j].rooms[r].fromd = book[j].fromd;  //dirty room takes dates -> transfer requests data to the room data
                                         book[j].rooms[r].tod = book[j].tod;   //dirty room takes dates -> transfer requests data to the room data
@@ -150,7 +156,7 @@ angular.module('MainComponents')
                                                 bookObj.fromBookError.push(calObjects[m]); // push the conflict new room in book room error table
                                                 bookObj.did = 'b' + i + '' + j + '' + r + '' + k;  // the div id for view binding
                                                 $scope.bookingErrors.push(bookObj); // push it in the global errors array
-                                                addConflict(bookObj);
+                                                //addConflict(bookObj);
                                             } else {
                                                 if (ok) { // if conflict, flag with color
                                                     bookObj.color = '#dd3030'
@@ -164,6 +170,7 @@ angular.module('MainComponents')
                                 }
                             }
                         }
+                        $scope.calendar[calendarIndex - 1] = orderBy($scope.calendar[calendarIndex - 1], 'id'); //order already booked
                     }
                 }
                 dateIndex.setDate(dateIndex.getDate() + 1); // go to the next day
@@ -182,7 +189,8 @@ angular.module('MainComponents')
                 book: "=",
                 item: "<",
                 rooms: "<",
-                bookingErrors: "="
+                bookingErrors: "=",
+                selectedDay: '='
             },
             controller: "CalendarContol",
             templateUrl: 'modules/mainComponents/views/calendar.html'

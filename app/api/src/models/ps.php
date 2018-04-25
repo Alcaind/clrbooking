@@ -40,4 +40,9 @@ class Ps extends Model
     {
         return $this->belongsTo("\\App\\Models\\Tm", 'tm_code', 'tm_code');
     }
+
+//    public function teacher()
+//    {
+//        return $this->belongsToMany("\\App\\Models\\Users", 'ps_teachers', 'user_id','ps_id')->withPivot('comment');
+//    }
 }

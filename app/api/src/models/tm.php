@@ -26,6 +26,11 @@ class Tm extends Model
         return $this->hasMany('\\App\\Models\\Users', 'tm_id');
     }
 
+//    public function tmUsers()
+//    {
+//        return $this->belongsToMany('\\App\\Models\\Users', 'tm_users','user_id','tm_id')->withPivot('comments');
+//    }
+
     public function supervisor()
     {
         return $this->belongsTo('\\App\\Models\\Users', 'supervisor');
@@ -38,7 +43,7 @@ class Tm extends Model
 
     public function ps()
     {
-        return $this->hasMany("\\App\\Models\\Ps", 'tm_code', 'tm_code');
+        return $this->hasMany("\\App\\Models\\Ps", 'tm_code', 'id');
     }
 
 }

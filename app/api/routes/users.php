@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/users', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr', 'roles', 'superTms'])->get();
+    $users = \App\Models\Users::with(['tm', 'ucategories:id,descr', 'roles', 'superTms', 'tmsUser'])->get();
     return $response->getBody()->write($users->toJson());
 });
 
@@ -22,7 +22,7 @@ $app->get('/users/{id}', function (Request $request, Response $response, $args) 
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $users = \App\Models\Users::with(['tm:id,title,descr', 'ucategories:id,descr', 'roles', 'superTms'])->find($id);
+        $users = \App\Models\Users::with(['tm', 'ucategories:id,descr', 'roles', 'superTms', 'tmsUser'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -163,4 +163,44 @@ $app->get('/roombook/{id}/users', function ($request, $response, $args) {
         return $nr->write($error->toJson());
     }
     return $response->getBody()->write($configuration->roombook()->get()->toJson());
+});
+
+
+$app->post('/users/{id}/tms/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $user = \App\Models\Users::find($id);
+    $user->tmsUser()->attach($rid, $data);
+    return $response->getBody()->write($user->tmsUser()->get()->toJson());
+});
+
+$app->put('/users/{id}/tms/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $user = \App\Models\Users::find($id);
+    $user->tmsUser()->updateExistingPivot($rid, $data);
+    return $response->getBody()->write($user->tmsUser()->get()->toJson());
+});
+
+$app->delete('/users/{id}/tms/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $user = \App\Models\Users::find($id);
+    $user->tmsUser()->detach($rid);
+    return $response->getBody()->write($user->tmsUser()->get()->toJson());
+});
+
+$app->get('/users/{id}/tms', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $user = \App\Models\Users::find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($user->tmsUser()->get()->toJson());
 });

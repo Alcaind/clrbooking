@@ -1025,6 +1025,12 @@
       "content": "Αιτήματα χρηστών",
       "gicon": "glyphicon-transfer",
       "place": "left"
+    },
+    {
+      "hr": "#/users/id/tms",
+      "content": "Τμήματα",
+      "gicon": "glyphicon-map-marker",
+      "place": "left"
     }
   ],
   "configTableConfOps": [
