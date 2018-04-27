@@ -1,0 +1,24 @@
+<div>
+    <h2>Επιλογή Περιόδου και Ημερών</h2>
+</div>
+<div style="display: flex; border: 1px solid #ababab;">
+    <config-book-graph selected-period="selectedPeriod" style="width: 50%"></config-book-graph>
+    <div style="display: flex; ">
+        <div ng-repeat="sday in selectedDays" ng-click="dayChecked(sday)"
+             class="btn btn-{{sday.s?'success':'primary'}}"
+             style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;
+                 border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">
+            <div>
+                {{sday.d}}
+            </div>
+        </div>
+    </div>
+</div>
+<button ng-click="openCalendar(item)">openCalendar</button>
+<calendar-book calendar-array="calendar" fromd="item.fromd" tod="item.tod" dates="item.date_index"></calendar-book>
+
+
+
+
+
+

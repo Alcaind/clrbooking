@@ -204,7 +204,8 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());
-})->add($checkUserRequestRules);
+//})->add($checkUserRequestRules);
+});
 
 $app->put('/requests/userrequest', function (Request $request, Response $response) {
     header("Content-Type: application/json");

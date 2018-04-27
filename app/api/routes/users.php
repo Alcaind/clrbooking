@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/users', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $users = \App\Models\Users::with(['tm', 'ucategories:id,descr', 'roles', 'superTms', 'tmsUser'])->get();
+    $users = \App\Models\Users::with(['ucategories:id,descr', 'roles', 'superTms', 'tm'])->get();
     return $response->getBody()->write($users->toJson());
 });
 
@@ -22,7 +22,7 @@ $app->get('/users/{id}', function (Request $request, Response $response, $args) 
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $users = \App\Models\Users::with(['tm', 'ucategories:id,descr', 'roles', 'superTms', 'tmsUser'])->find($id);
+        $users = \App\Models\Users::with(['ucategories:id,descr', 'roles', 'superTms', 'tm'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -38,7 +38,6 @@ $app->post('/users', function (Request $request, Response $response) {
     $data = $request->getParsedBody();
     try {
         $users = new \App\Models\Users();
-        $users->tm_id = $data['tm_id'];
         $users->fname = $data['fname'];
         $users->sname = $data['sname'];
         $users->phone = $data['phone'];
@@ -79,7 +78,6 @@ $app->put('/users/{id}', function ($request, $response, $args) {
     print_r($data);
     try {
         $users = \App\Models\Users::find($id);
-        $users->tm_id = $data['tm_id'] ?: $users->tm_id;
         $users->fname = $data['fname'] ?: $users->fname;
         $users->sname = $data['sname'] ?: $users->sname;
         $users->phone = $data['phone'] ?: $users->phone;
@@ -171,8 +169,8 @@ $app->post('/users/{id}/tms/{rid}', function ($request, $response, $args) {
     $rid = $args['rid'];
     $data = $request->getParsedBody();
     $user = \App\Models\Users::find($id);
-    $user->tmsUser()->attach($rid, $data);
-    return $response->getBody()->write($user->tmsUser()->get()->toJson());
+    $user->tm()->attach($rid, $data);
+    return $response->getBody()->write($user->tm()->get()->toJson());
 });
 
 $app->put('/users/{id}/tms/{rid}', function ($request, $response, $args) {
@@ -180,16 +178,16 @@ $app->put('/users/{id}/tms/{rid}', function ($request, $response, $args) {
     $rid = $args['rid'];
     $data = $request->getParsedBody();
     $user = \App\Models\Users::find($id);
-    $user->tmsUser()->updateExistingPivot($rid, $data);
-    return $response->getBody()->write($user->tmsUser()->get()->toJson());
+    $user->tm()->updateExistingPivot($rid, $data);
+    return $response->getBody()->write($user->tm()->get()->toJson());
 });
 
 $app->delete('/users/{id}/tms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];
     $rid = $args['rid'];
     $user = \App\Models\Users::find($id);
-    $user->tmsUser()->detach($rid);
-    return $response->getBody()->write($user->tmsUser()->get()->toJson());
+    $user->tm()->detach($rid);
+    return $response->getBody()->write($user->tm()->get()->toJson());
 });
 
 $app->get('/users/{id}/tms', function ($request, $response, $args) {
@@ -202,5 +200,5 @@ $app->get('/users/{id}/tms', function ($request, $response, $args) {
         $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
-    return $response->getBody()->write($user->tmsUser()->get()->toJson());
+    return $response->getBody()->write($user->tm()->get()->toJson());
 });

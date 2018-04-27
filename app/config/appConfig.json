@@ -1219,10 +1219,6 @@
     {
       "text": "Canceled",
       "value": 4
-    },
-    {
-      "text": "Working",
-      "value": 5
     }
   ],
   "roombookStatus": [

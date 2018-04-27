@@ -14,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in dp |filter:status"
+        <tr ng-repeat="item in dp |filter:search"
             style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':''}}"
             ng-click="selectRow(item)">
             <td>{{ item.req_dt }}</td>

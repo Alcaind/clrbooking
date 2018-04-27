@@ -42,9 +42,43 @@ $app->post('/roombook/dates', function (Request $request, Response $response) {
             $query->Where('fromd', '<=', date('Y-m-d', strtotime($data['fromd'])))
                 ->Where('tod', '>=', date('Y-m-d', strtotime($data['fromd'])));
         })->orWhereBetween('tod', [$data['tod'], $data['fromd']])
-        ->orWhere(function ($query) use ($data) {
-            $query->Where('fromd', '<=', date('Y-m-d', strtotime($data['tod'])))
-                ->Where('tod', '>=', date('Y-m-d', strtotime($data['tod'])));
+        ->get();
+    return $response->getBody()->write($roombook->toJson());
+});
+
+$app->post('/roombook/view/by/course', function (Request $request, Response $response) {
+    header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    //return $response->getBody()->write(json_encode($data));
+    $roombook = \App\Models\Requests::with('rooms', 'ps')
+        ->whereIn('ps_id', $data['ps'])
+        ->where(function ($query) use ($data) {
+            $query->orWhereBetween('fromd', [$data['fromd'], $data['tod']])
+                ->orWhereBetween('tod', [$data['tod'], $data['fromd']])
+                ->orWhere(function ($query) use ($data) {
+                    $query->Where('fromd', '<=', date('Y-m-d', strtotime($data['fromd'])))
+                        ->Where('tod', '>=', date('Y-m-d', strtotime($data['fromd'])));
+                });
+        })
+        ->get();
+    return $response->getBody()->write($roombook->toJson());
+});
+$app->post('/roombook/view/by/room', function (Request $request, Response $response) {
+    header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    //return $response->getBody()->write(json_encode($data));
+    $roombook = \App\Models\Requests::with('rooms', 'ps')
+        ->whereHas('rooms', function ($query) use ($data) {
+            $query->whereIn('room_id', $data['rooms']);
+        })
+        ->where(function ($query) use ($data) {
+            $query->orWhereBetween('fromd', [$data['fromd'], $data['tod']])
+                ->orWhereBetween('tod', [$data['tod'], $data['fromd']])
+                ->orWhere(function ($query) use ($data) {
+                    $query->Where('fromd', '<=', date('Y-m-d', strtotime($data['fromd'])))
+                        ->Where('tod', '>=', date('Y-m-d', strtotime($data['fromd'])));
+                });
         })->get();
+    //return $response->getBody()->write($roombook);
     return $response->getBody()->write($roombook->toJson());
 });

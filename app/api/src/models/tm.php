@@ -21,15 +21,10 @@ class Tm extends Model
         return $this->hasMany('\\App\\Models\\Kat', 'tm_id');
     }
 
-    public function users()
+    public function Users()
     {
-        return $this->hasMany('\\App\\Models\\Users', 'tm_id');
+        return $this->belongsToMany('\\App\\Models\\Users', 'tm_users', 'user_id', 'tm_id')->withPivot('comments');
     }
-
-//    public function tmUsers()
-//    {
-//        return $this->belongsToMany('\\App\\Models\\Users', 'tm_users','user_id','tm_id')->withPivot('comments');
-//    }
 
     public function supervisor()
     {

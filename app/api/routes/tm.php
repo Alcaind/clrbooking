@@ -28,11 +28,17 @@ $app->get('/tms/{id}', function (Request $request, Response $response, $args) {
     return $response->getBody()->write($tm->toJson());
 });
 
-$app->get('/tms/{id}/ps', function (Request $request, Response $response, $args) {
+$app->post('/tms/ps', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
-    $id = $args['id'];
+    //$id = $args['id'];
+    $data = $request->getParsedBody();
+    $tms = array();
+    foreach ($data as $tm) {
+        array_push($tms, $tm['id']);
+    }
     try {
-        $tm = \App\Models\Tm::with('supervisor', 'ps')->find($id);
+        $tm = \App\Models\Tm::with('supervisor', 'ps')
+            ->whereIn('id', $tms)->get();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }

@@ -27,8 +27,7 @@ angular.module('MainComponents')
             scope: {
                 statusTitle: "@",
                 options: "@",
-                outputValue: "=",
-                searchable: "="
+                outputValue: "="
             },
             controller: "statusSelectorController",
             templateUrl: 'modules/mainComponents/views/statusSelector.html'

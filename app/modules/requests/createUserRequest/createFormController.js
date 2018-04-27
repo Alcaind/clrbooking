@@ -3,6 +3,7 @@
 angular.module('Requests')
     .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams) {
 
+        $scope.tmpDate = new Date();
         $scope.views = [];
         $scope.currentPage = 0;
         $scope.book = [];
@@ -69,8 +70,8 @@ angular.module('Requests')
 
                         var roomObj = Object.assign({}, room);
 
-                        room.pivot.fromt = new Date('1970-01-01T' + room.pivot.fromt);
-                        room.pivot.tot = new Date('1970-01-01T' + room.pivot.tot);
+                        room.pivot.fromt = new Date('1970-01-01 ' + room.pivot.fromt + ' ');
+                        room.pivot.tot = new Date('1970-01-01 ' + room.pivot.tot);
                         delete room.pivot.id;
                         delete room.pivot.req_id;
 
@@ -83,14 +84,6 @@ angular.module('Requests')
                             }
                         }
                         room = Object.assign(room, room.pivot);
-
-                        /*var nRoom = Object.assign({}, room);
-                        var newPivot = Object.assign({}, room.pivot);
-                        delete newPivot.id;
-                        delete newPivot.req_id;
-                        nRoom.pivot = newPivot;
-                        toCopyRooms.push(nRoom);
-                        $scope.selectedRooms.push(nRoom)*/
                     })
                 });
                 $scope.item.rooms = $scope.selectedRooms;
@@ -110,6 +103,7 @@ angular.module('Requests')
                 api.apiCall('GET', 'api/public/requests/' + $routeParams.id, function (result) {
 
                     $scope.item = result.data;
+                    $scope.item.active = true;
                     $scope.selectedPeriod = $scope.item.periods;
 
                     for (var sr = 0; sr < $scope.item.rooms.length; sr++) {
@@ -119,6 +113,7 @@ angular.module('Requests')
 
                         $scope.item.rooms[sr].pivot.fromt = new Date('1970-01-01T' + $scope.item.rooms[sr].pivot.fromt);
                         $scope.item.rooms[sr].pivot.tot = new Date('1970-01-01T' + $scope.item.rooms[sr].pivot.tot);
+                        delete $scope.item.rooms[sr].pivot.id;
                         roomObj = Object.assign(roomObj, $scope.item.rooms[sr].pivot);
                         $scope.selectedRooms.push(roomObj);
                         for (var r = 0; r < $scope.rooms.length; r++) {
@@ -135,9 +130,9 @@ angular.module('Requests')
                         }
                     }
 
-                    for (var c = 0; c < $scope.courses.ps.length; c++) {
-                        if ($scope.courses.ps[c].id === $scope.item.ps.id) {
-                            $scope.selectCourse($scope.courses.ps[c]);
+                    for (var c = 0; c < $scope.courses.length; c++) {
+                        if ($scope.courses[c].id === $scope.item.ps.id) {
+                            $scope.selectCourse($scope.courses[c]);
                         }
                     }
 
@@ -177,9 +172,13 @@ angular.module('Requests')
             $scope.roomUse = result.data;
         });
 
-        api.apiCall('GET', 'api/public/tms/' + $scope.user.authdata.roles[0].tm_id + '/ps', function (result) {
-            $scope.courses = result.data;
-        });
+        api.apiCall('POST', 'api/public/tms/ps', function (result) {
+            result.data.map(function (tm) {
+                tm.ps.map(function (ps) {
+                    $scope.courses.push(ps)
+                });
+            });
+        }, undefined, $scope.user.authdata.roles[0].tm);
 
         api.apiCall('GET', 'api/public/users', function (results) {
             for (var i = 0; i < results.data.length; i++) {
@@ -189,7 +188,7 @@ angular.module('Requests')
 
         $scope.postUserRequest = function (item) {
             item.conf_id = 1;
-            item.status = 0;
+            item.status = !item.status ? 0 : item.status;
             item.user_id = $scope.user.authdata.roles[0].id;
             item.req_dt = new Date();
             item.pivot = [];
@@ -201,9 +200,11 @@ angular.module('Requests')
                 var newPivot = {
                     comment: value['comment'],
                     date_index: value['date_index'],
-                    fromt: new Date(value['fromt'].getTime() + Math.abs(value['fromt'].getTimezoneOffset() * 1000 * 60)),
+                    // fromt: new Date(value['fromt'].getTime() + Math.abs(value['fromt'].getTimezoneOffset() * 1000 * 60)),
+                    fromt: value['fromt'].getMinutes() < 10 ? value['fromt'].getHours() + ':0' + value['fromt'].getMinutes() + ':00' : value['fromt'].getHours() + ':' + value['fromt'].getMinutes() + ':00',
                     teacher: value['teacher'],
-                    tot: new Date(value['tot'].getTime() + Math.abs(value['tot'].getTimezoneOffset() * 1000 * 60))
+                    // tot: new Date(value['tot'].getTime() + Math.abs(value['tot'].getTimezoneOffset() * 1000 * 60))
+                    tot: value['tot'].getMinutes() < 10 ? value['tot'].getHours() + ':0' + value['tot'].getMinutes() + ':00' : value['tot'].getHours() + ':' + value['tot'].getMinutes() + ':00'
                 };
                 item.pivot.push(newPivot);
             });

@@ -1,0 +1,24 @@
+<div style="padding: 5px; width: 100%; border: 1px solid #acacac;"> current step {{currentPage+1}} from 3
+    <div style="display: flex">
+        <div ng-repeat="s in steps"
+             style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab"
+             ng-click="gotoPage($index, s)" class="btn btn-{{$index === currentPage?'success':'primary'}}"
+             ng-disabled="!s.active">
+            <div>Βήμα {{$index+1}}ο {{s.text}}</div>
+        </div>
+    </div>
+    <div style="display: flex">
+        <button ng-click="prevPage()" ng-disabled="currentPage<=0" class="btn btn-primary"
+                style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">
+            Προηγούμενο βήμα
+        </button>
+        <button ng-click="init()" class="btn btn-primary"
+                style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab"> -
+            Αρχικοποίηση -
+        </button>
+        <button ng-click="nextPage()" class="btn btn-primary"
+                style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">Επόμενο
+            βήμα
+        </button>
+    </div>
+</div>

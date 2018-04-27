@@ -6,7 +6,7 @@ angular.module('Users')
         $scope.statusOptions = ClrStatusSrv.getStatus('requestStatus');
         $scope.item = {};
         $scope.requests = {};
-        $scope.search = {status: 2};
+        $scope.search = {status: $scope.status};
 
         var user = globalVarsSrv.getGlobalVar('auth');
 
@@ -15,7 +15,10 @@ angular.module('Users')
         });
 
         $scope.selectRow = function (item) {
+            if ($scope.status === 1 || $scope.status === 2) return;
             $location.url('/usercreaterequests/' + item.id);
+
+
         }
 
     }])

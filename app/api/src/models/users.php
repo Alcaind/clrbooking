@@ -20,12 +20,8 @@ class Users extends Model {
         return $this->belongsToMany('\\App\\Models\\Roles', 'users_roles', 'user_id', 'role_id')->withPivot('comment', 'exp_dt', 'status');
     }
 
-    public function tm()
-    {
-        return $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
-    }
 
-    public function tmsUser()
+    public function tm()
     {
         return $this->belongsToMany('\\App\\Models\\Tm', 'tm_users', 'user_id', 'tm_id')->withPivot('comments');
     }

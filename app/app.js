@@ -22,8 +22,6 @@ angular.module('RoomCategory', []);
 angular.module('RoomUse', []);
 angular.module('RoomBook', []);
 angular.module('PsStats', []);
-angular.module('RoomBook', []);
-
 
 
 // Declare app level module which depends on views, and components
@@ -335,12 +333,12 @@ angular.module('clrBooking', [
                 .when('/roombook', {
                     title: 'roombook',
                     controller: 'BookController',
-                    templateUrl: 'modules/bookview/bookview.html'
+                    templateUrl: 'modules/bookview/bookView.html'
                 })
                 .when('/roombook/dates', {
                     title: 'roombook',
                     controller: 'BookController',
-                    templateUrl: 'modules/bookview/bookview.html'
+                    templateUrl: 'modules/bookview/bookView.html'
                 })
                 .when('/usercreaterequests', {
                     title: 'user create requests',

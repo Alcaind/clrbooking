@@ -123,14 +123,16 @@ angular.module('MainComponents')
                                     calObjects[m].color = "#e4e153"
                                 }
                             }
-
                             calObjects.push(newObject); // push it in the calObjects array (holds the new rooms data);
                         }
                     }
 
                     for (var j = 0; j < book.length; j++) {
                         //var bDays = findBookDates(book[j]);
+                        if (($scope.item.id && book[j].id === $scope.item.id) || ([2, 4, 3].includes(book[j].status))) continue;
+
                         if (new Date(book[j].fromd) <= dateIndex && new Date(book[j].tod) >= dateIndex) { // check if the parsing date (dateIndsex) is between request dates (fDay, tDay)
+                            //if ($scope.item.id && book[j].id === $scope.item.id) return;
                             for (var r = 0; r < book[j].rooms.length; r++) { // parse request rooms
                                 if (book[j].rooms[r].pivot.date_index !== dateIndex.getDay()) continue; // Continue if dateIndex is different from room dateIndex
                                 for (k = 0; k < $scope.rooms.length; k++) {  // parse selected (input) rooms
@@ -146,10 +148,10 @@ angular.module('MainComponents')
                                         var fromCheck = new Date("1970-01-01T" + bookObj.pivot.fromt);
                                         var ok = false; // flag check for conflict;
                                         for (m = 0; m < calObjects.length; m++) {  // parse new req rooms for this day
-                                            if ((((totCheck >= calObjects[m].fromt && totCheck <= calObjects[m].tot)
-                                                    || (fromCheck >= calObjects[m].fromt && fromCheck <= calObjects[m].tot))
-                                                    || ((totCheck <= calObjects[m].tot && fromCheck >= calObjects[m].tot)
-                                                        || (fromCheck <= calObjects[m].fromt && totCheck >= calObjects[m].fromt))) && calObjects[m].id === book[j].rooms[r].id) { // check if we have date conflict and is the same room with existing room
+                                            if ((((totCheck > calObjects[m].fromt && totCheck < calObjects[m].tot)
+                                                    || (fromCheck > calObjects[m].fromt && fromCheck < calObjects[m].tot) || fromCheck.getTime() === calObjects[m].fromt.getTime())
+                                                    || ((totCheck < calObjects[m].tot && fromCheck > calObjects[m].tot)
+                                                        || (fromCheck < calObjects[m].fromt && totCheck > calObjects[m].fromt))) && calObjects[m].id === book[j].rooms[r].id) { // check if we have date conflict and is the same room with existing room
                                                 ok = true; // raise the conflict flag
                                                 bookObj.color = '#dd3030'; // flag the objects with color
                                                 calObjects[m].color = '#e4aba8';
@@ -170,8 +172,10 @@ angular.module('MainComponents')
                                 }
                             }
                         }
-                        $scope.calendar[calendarIndex - 1] = orderBy($scope.calendar[calendarIndex - 1], 'id'); //order already booked
+
+                        //$scope.calendar[calendarIndex - 1] = orderBy($scope.calendar[calendarIndex - 1], ''); //order already booked
                     }
+                    $scope.calendar[calendarIndex - 1] = orderBy($scope.calendar[calendarIndex - 1], ['id', 'pivot.fromt']); //order already booked
                 }
                 dateIndex.setDate(dateIndex.getDate() + 1); // go to the next day
             }

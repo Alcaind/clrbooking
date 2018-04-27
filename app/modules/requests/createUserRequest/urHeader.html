@@ -1,4 +1,5 @@
 <h2>Τρέχουσες επιλογές</h2>
+<!--<h1>{{tmpDate+''}}</h1>-->
 <div id="selectedParams" style="display: flex">
     <div id="selectedPeriod" style="width: 100%">
         <div>Από {{item.fromd}} Μέχρι {{item.tod}}</div>
@@ -15,13 +16,20 @@
     <div id="selectedRoom" style="width: 100%">
         <div ng-repeat="room in selectedRooms">- {{room.name}}</div>
     </div>
+    <div style="position: center ; width: 100%">
+        <status-selector options="requestStatus" status-title="Request status"
+                         output-value="item.status"></status-selector>
+    </div>
     <div>
-
+        <a tooltip-placement="left" uib-tooltip="NEW" type="button" class="btn btn-primary hippo"
+           href="#/usercreaterequests" style="min-width: 50px; border-radius: 0px;">
+            <span class="glyphicon glyphicon-download"></span></a>
+    </div>
+    <div>
         <button tooltip-placement="left" uib-tooltip="COPY DAY" type="button" class="btn btn-primary hippo"
                 ng-click="copyDayRequest(calendarSelectedDay)" style="min-width: 50px; border-radius: 0px;">
             <span class="glyphicon glyphicon-download"></span></button>
     </div>
-
     <div>
         <button tooltip-placement="left" uib-tooltip="POST" type="button" class="btn btn-primary hippo"
                 ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;">
