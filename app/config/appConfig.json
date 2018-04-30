@@ -943,6 +943,10 @@
     {
       "column": "usercreaterequests",
       "title": "UserView"
+    },
+    {
+      "column": "dashboard",
+      "title": "Dashboard"
     }
   ],
   "homeButtonUserTableConf": [
@@ -953,6 +957,10 @@
     {
       "column": "usercreaterequests",
       "title": "UserView"
+    },
+    {
+      "column": "roombook",
+      "title": "Διαθ. Αιθουσών"
     }
   ],
   "roomsTableConfOps": [

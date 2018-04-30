@@ -1,5 +1,13 @@
 <div>
-    <h2>Επιλογή Αίθουσας</h2>
+    <h3>Επιλογή Αίθουσας</h3>
+</div>
+<div ng-show="mode!=='inserting'">
+    <button tooltip-placement="right" uib-tooltip="SELECT ALL" class="btn btn-primary" ng-click="selectAllRoom()">
+        <span class="glyphicon glyphicon-asterisk"></span>
+    </button>
+    <button tooltip-placement="right" uib-tooltip="DESELECT ALL" class="btn btn-danger" ng-click="deselectAllRoom()">
+        <span class="glyphicon glyphicon-asterisk"></span>
+    </button>
 </div>
 <div style=" border: 1px solid #ababab; display: flex; width: 100%;">
     <div id="roomsToSelect" style="width: 100%; display: flex">
@@ -21,7 +29,7 @@
         </div>
 
 
-        <div id="selectedRoomsHolder" style="width: 30%; overflow: auto">
+        <div id="selectedRoomsHolder" style="width: 30%; overflow: auto" ng-if="mode !== 'reporting'">
             <default-room-tile room="defaultRoomSelection"></default-room-tile>
             <div ng-repeat="room in selectedRooms track by $index">
                 <selected-room-tile></selected-room-tile>

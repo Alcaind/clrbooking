@@ -55,6 +55,9 @@ angular.module('Requests')
                 "s": false
             }
         ];
+        $scope.mode = 'inserting';
+
+
 
         $scope.copyDayRequest = function (day) {
             var fd = day;
@@ -89,7 +92,6 @@ angular.module('Requests')
                 $scope.item.rooms = $scope.selectedRooms;
             }, undefined, {fromd: fd, tod: td});
         };
-
 
         $scope.init = function () {
             if (!$routeParams.id) {

@@ -1,6 +1,15 @@
 <div>
     <h2>Επιλογή Μαθήματος</h2>
 </div>
+<div ng-show="mode!=='inserting'">
+    <button tooltip-placement="right" uib-tooltip="SELECT ALL" class="btn btn-primary" ng-click="selectAllCourse()">
+        <span class="glyphicon glyphicon-asterisk"></span>
+    </button>
+    <button tooltip-placement="right" uib-tooltip="DESELECT ALL" class="btn btn-danger" ng-click="deselectAllCourse()">
+        <span class="glyphicon glyphicon-asterisk"></span>
+    </button>
+</div>
+
 <div style=" border: 1px solid #ababab;">
     <div style="padding: 5px; display: flex">
         <input type="text" ng-model="filterTm" class="form-control" placeholder="search"

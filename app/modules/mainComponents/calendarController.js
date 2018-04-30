@@ -135,50 +135,54 @@ angular.module('MainComponents')
                             //if ($scope.item.id && book[j].id === $scope.item.id) return;
                             for (var r = 0; r < book[j].rooms.length; r++) { // parse request rooms
                                 if (book[j].rooms[r].pivot.date_index !== dateIndex.getDay()) continue; // Continue if dateIndex is different from room dateIndex
+                                if ($scope.rooms.length === 0) plotTile(book[j].rooms[r], book[j], $scope.calendar[calendarIndex - 1], calObjects);
                                 for (k = 0; k < $scope.rooms.length; k++) {  // parse selected (input) rooms
                                     if ($scope.rooms[k].date_index !== dateIndex.getDay()) continue; // Continue if dateIndex is different from room dateIndex)
                                     if (book[j].rooms[r].id === $scope.rooms[k].id) {  //requests room if equals with one of the selected rooms
-                                        book[j].rooms[r].fromd = book[j].fromd;  //dirty room takes dates -> transfer requests data to the room data
-                                        book[j].rooms[r].tod = book[j].tod;   //dirty room takes dates -> transfer requests data to the room data
-                                        findBookDates(book[j].rooms[r]);   // create the room data. calc height, distance and real dates from room
-                                        var bookObj = Object.assign({}, book[j].rooms[r]); // copy room data to temp Object (bookObj)
-                                        bookObj.book = book[j];
-                                        bookObj.fromBookError = []; // holds the conflict room objects (book room error table)
-                                        var totCheck = new Date("1970-01-01T" + bookObj.pivot.tot); // create date datatype from strings (DB)
-                                        var fromCheck = new Date("1970-01-01T" + bookObj.pivot.fromt);
-                                        var ok = false; // flag check for conflict;
-                                        for (m = 0; m < calObjects.length; m++) {  // parse new req rooms for this day
-                                            if ((((totCheck > calObjects[m].fromt && totCheck < calObjects[m].tot)
-                                                    || (fromCheck > calObjects[m].fromt && fromCheck < calObjects[m].tot) || fromCheck.getTime() === calObjects[m].fromt.getTime())
-                                                    || ((totCheck < calObjects[m].tot && fromCheck > calObjects[m].tot)
-                                                        || (fromCheck < calObjects[m].fromt && totCheck > calObjects[m].fromt))) && calObjects[m].id === book[j].rooms[r].id) { // check if we have date conflict and is the same room with existing room
-                                                ok = true; // raise the conflict flag
-                                                bookObj.color = '#dd3030'; // flag the objects with color
-                                                calObjects[m].color = '#e4aba8';
-                                                bookObj.fromBookError.push(calObjects[m]); // push the conflict new room in book room error table
-                                                bookObj.did = 'b' + i + '' + j + '' + r + '' + k;  // the div id for view binding
-                                                $scope.bookingErrors.push(bookObj); // push it in the global errors array
-                                                //addConflict(bookObj);
-                                            } else {
-                                                if (ok) { // if conflict, flag with color
-                                                    bookObj.color = '#dd3030'
-                                                } else {
-                                                    bookObj.color = '#287ed2'
-                                                }
-                                            }
-                                        }
-                                        $scope.calendar[calendarIndex - 1].push(bookObj); // push it for view in the calendar array
+                                        plotTile(book[j].rooms[r], book[j], $scope.calendar[calendarIndex - 1], calObjects);
                                     }
                                 }
                             }
                         }
-
-                        //$scope.calendar[calendarIndex - 1] = orderBy($scope.calendar[calendarIndex - 1], ''); //order already booked
                     }
                     $scope.calendar[calendarIndex - 1] = orderBy($scope.calendar[calendarIndex - 1], ['id', 'pivot.fromt']); //order already booked
                 }
                 dateIndex.setDate(dateIndex.getDate() + 1); // go to the next day
             }
+        }
+
+        function plotTile(tile, book, cal, calObjects) {
+            tile.fromd = book.fromd;  //dirty room takes dates -> transfer requests data to the room data
+            tile.tod = book.tod;   //dirty room takes dates -> transfer requests data to the room data
+            findBookDates(tile);   // create the room data. calc height, distance and real dates from room
+            var bookObj = Object.assign({}, tile); // copy room data to temp Object (bookObj)
+            bookObj.book = book;
+            bookObj.fromBookError = []; // holds the conflict room objects (book room error table)
+            bookObj.color = '#287ed2';
+            var totCheck = new Date("1970-01-01T" + bookObj.pivot.tot); // create date datatype from strings (DB)
+            var fromCheck = new Date("1970-01-01T" + bookObj.pivot.fromt);
+            var ok = false; // flag check for conflict;
+            for (var m = 0; m < calObjects.length; m++) {  // parse new req rooms for this day
+                if ((((totCheck > calObjects[m].fromt && totCheck < calObjects[m].tot)
+                        || (fromCheck > calObjects[m].fromt && fromCheck < calObjects[m].tot) || fromCheck.getTime() === calObjects[m].fromt.getTime())
+                        || ((totCheck < calObjects[m].tot && fromCheck > calObjects[m].tot)
+                            || (fromCheck < calObjects[m].fromt && totCheck > calObjects[m].fromt))) && calObjects[m].id === tile.id) { // check if we have date conflict and is the same room with existing room
+                    ok = true; // raise the conflict flag
+                    bookObj.color = '#dd3030'; // flag the objects with color
+                    calObjects[m].color = '#e4aba8';
+                    bookObj.fromBookError.push(calObjects[m]); // push the conflict new room in book room error table
+                    bookObj.did = 'b' + i + '' + j + '' + r + '' + k;  // the div id for view binding
+                    $scope.bookingErrors.push(bookObj); // push it in the global errors array
+                    //addConflict(bookObj);
+                } else {
+                    if (ok) { // if conflict, flag with color
+                        bookObj.color = '#dd3030'
+                    } else {
+                        bookObj.color = '#287ed2'
+                    }
+                }
+            }
+            cal.push(bookObj); // push it for view in the calendar array
         }
 
         init();

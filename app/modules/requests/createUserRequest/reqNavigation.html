@@ -19,7 +19,7 @@
         </button>
         <button ng-click="nextPage()" class="btn btn-primary"
                 style="width: 100%; margin: 0px 4px; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab"
-                ng-disabled="currentPage>4">Επόμενο βήμα
+                ng-disabled="currentPage>=(steps.length-1)">Επόμενο βήμα
         </button>
     </div>
 </div>

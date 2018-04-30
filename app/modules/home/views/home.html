@@ -10,49 +10,60 @@
 -->
 
 <div class="row">
-    <div class="col-sm-6">
-        <a href="#roles" class="btn btn-info homebtn" role="button">Ρόλοι</a>
+
+    <div class="col-sm-6" role="menuitem" ng-repeat="option in adminColums">
+        <a href="#{{option.column}}" ng-if="option.column" class="homebtn"
+           type="button">{{option.title}}</a>
+        <div ng-repeat="smenu in option.smenu">
+            <a href="#{{smenu.column}}" type="button" class="homebtn">{{smenu.title}}</a></div>
     </div>
-    <div class="col-sm-6">
-        <a href="#users" class="btn btn-info homebtn" role="button">Χρήστες</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#kats" class="btn btn-info homebtn" role="button">Κατευθύνσεις</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#requests" class="btn btn-info homebtn" role="button">Αιτήματα</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#rooms" class="btn btn-info homebtn" role="button">Αίθουσες</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#tms" class="btn btn-info homebtn" role="button">Τμήματα</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#config" class="btn btn-info homebtn" role="button">Configuration</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#items" class="btn btn-info homebtn" role="button">Εξοπλισμός</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#periods" class="btn btn-info homebtn" role="button">Ακαδημαικοι Περίοδοι</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#ps" class="btn btn-info homebtn" role="button">Προγραμμα σπουδών</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#usercreaterequests" class="btn btn-info homebtn" role="button">Διαθεσιμότητα Αιθουσας</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#userscategories" class="btn btn-info homebtn" role="button">Κατηγορίες Χρηστών</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#roomcategory" class="btn btn-info homebtn" role="button">Κατηγορίες Αιθουσών</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#roomuse" class="btn btn-info homebtn" role="button">Χρήση Αιθουσών</a>
-    </div>
-    <div class="col-sm-6">
-        <a href="#psstats" class="btn btn-info homebtn" role="button">Στατιστικά</a>
-    </div>
+
+    <!---->
+    <!---->
+    <!---->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#roles" class="btn btn-info homebtn" role="button">Ρόλοι</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#users" class="btn btn-info homebtn" role="button">Χρήστες</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#kats" class="btn btn-info homebtn" role="button">Κατευθύνσεις</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#requests" class="btn btn-info homebtn" role="button">Αιτήματα</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#rooms" class="btn btn-info homebtn" role="button">Αίθουσες</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#tms" class="btn btn-info homebtn" role="button">Τμήματα</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#config" class="btn btn-info homebtn" role="button">Configuration</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#items" class="btn btn-info homebtn" role="button">Εξοπλισμός</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#periods" class="btn btn-info homebtn" role="button">Ακαδημαικοι Περίοδοι</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#ps" class="btn btn-info homebtn" role="button">Προγραμμα σπουδών</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#usercreaterequests" class="btn btn-info homebtn" role="button">Διαθεσιμότητα Αιθουσας</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#userscategories" class="btn btn-info homebtn" role="button">Κατηγορίες Χρηστών</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#roomcategory" class="btn btn-info homebtn" role="button">Κατηγορίες Αιθουσών</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#roomuse" class="btn btn-info homebtn" role="button">Χρήση Αιθουσών</a>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+    <!--<a href="#psstats" class="btn btn-info homebtn" role="button">Στατιστικά</a>-->
+    <!--</div>-->
 </div>

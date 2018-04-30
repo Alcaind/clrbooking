@@ -1,24 +1,20 @@
-<div>
-    <h2>Επιλογή Περιόδου και Ημερών</h2>
+<user-header></user-header>
+<div style="display: flex; width: 100%">
+    <req-user-navigation></req-user-navigation>
+    <day-select style="padding: 4px 0px 0px 4px; width: 100%"></day-select>
 </div>
-<div style="display: flex; border: 1px solid #ababab;">
-    <config-book-graph selected-period="selectedPeriod" style="width: 50%"></config-book-graph>
-    <div style="display: flex; ">
-        <div ng-repeat="sday in selectedDays" ng-click="dayChecked(sday)"
-             class="btn btn-{{sday.s?'success':'primary'}}"
-             style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;
-                 border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab">
-            <div>
-                {{sday.d}}
-            </div>
-        </div>
-    </div>
-</div>
-<button ng-click="openCalendar(item)">openCalendar</button>
-<calendar-book calendar-array="calendar" fromd="item.fromd" tod="item.tod" dates="item.date_index"></calendar-book>
 
+<button ng-click="openCourseCalendar(item)">Course Calendar</button>
+<button ng-click="openRoomCalendar(item)">Rooms Calendar</button>
 
+<course-select ng-show="currentPage===0" style="padding: 4px 4px 0px 4px;"></course-select>
+<room-select ng-show="currentPage===1" style="padding: 4px 4px 0px 4px;"></room-select>
 
-
+<calendar-book rooms="selectedRooms" fromd="item.fromd" tod="item.tod"
+               dates-index="item.date_index" item="item"
+               book="book" booking-errors="bookingErrors"
+               selected-day="calendarSelectedDay"
+               ng-show="currentPage===2">
+</calendar-book>
 
 

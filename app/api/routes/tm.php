@@ -38,7 +38,11 @@ $app->post('/tms/ps', function (Request $request, Response $response, $args) {
     }
     try {
         $tm = \App\Models\Tm::with('supervisor', 'ps')
-            ->whereIn('id', $tms)->get();
+            ->whereIn('id', $tms)
+            ->whereHas('ps', function ($query) use ($data) {
+                $query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)
+                    ->get(['id']))[0]->id);
+            })->get();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
     }
