@@ -1,28 +1,40 @@
-<div>
-    <div style="text-align: left;padding-left: 5px;">
-        <a href back-button type="button" class="btn btn-warning">
-            <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
-            </span>
-        </a>
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-chevron-left">
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+				</span>
+            </a>
+        </div>
+        <div class="pageTitle">Διαχείριση Ρόλου</div>
     </div>
-    <form class="roleForm" name="roleForm" novalidate>
-        <!-- ROLE -->
-        <div class="form-group" ng-class="{ 'has-error' : roleForm.role.$invalid && !roleForm.role.$pristine }">
-            <label class="required" for="role">Ρόλος<span class="form-required">*</span>:</label>
-            <input id="role" name="role" class="form-control" type="text" ng-model="ctrl.item.role">
-            <p ng-show="roleForm.role.$invalid && !roleForm.role.$pristine" class="help-block">Εισάγετε ρόλο.</p>
-        </div>
-        <!--DESCRIPTION-->
-        <div class="form-group">
-            <label for="description">Περιγραφή ρόλου:</label>
-            <textarea id="description" name="comments" class="form-control" ng-model="ctrl.item.descr"></textarea>
-        </div>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.id > 0">Ανανέωση
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.role && !ctrl.item.id ">Αποθήκευση
-        </button>
-    </form>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="formGroupItems">
+                <div class="form-group" ng-class="{ 'has-error' : itemForm.role.$invalid && !itemForm.role.$pristine }">
+                    <label class="required formItemLabel" for="role">Ρόλος<span class="form-required">*</span>:</label>
+                    <div class="longInput">
+                        <input id="role" name="role" class="form-control" type="text" ng-model="ctrl.item.role">
+                    </div>
+                    <p ng-show="itemForm.role.$invalid && !itemForm.role.$pristine" class="help-block">Εισάγετε
+                        ρόλο.</p>
+                </div>
+                <div class="form-group">
+                    <label for="descr" class="required formItemLabel">Περιγραφή ρόλου:</label>
+                    <div class="longInput">
+                        <textarea id="descr" name="descr" class="form-control" type="text"
+                                  ng-model="ctrl.item.descr"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.id > 0">Ανανέωση
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.role && !ctrl.item.id ">Αποθήκευση
+            </button>
+
+        </form>
+    </div>
 </div>

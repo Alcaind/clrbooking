@@ -7,47 +7,66 @@
 				</span>
             </a>
         </div>
-        <div class="pageTitle">Διαχείριση Configurations</div>
+        <div class="pageTitle">Διαχείριση Ακαδημαϊκών Ετών</div>
     </div>
     <div class="contentHolder">
-        <form class="configForm" name="configForm" novalidate>
-            <div class="form-group"
-                 ng-class="{ 'has-error' : configForm.year.$invalid && !configForm.year.$pristine }">
-                <label class="required" for="year">Έτος<span class="form-required">*</span>:</label>
-                <input id="year" name="year" class="form-control" type="number" ng-model="ctrl.item.year">
-                <p ng-show="configForm.year.$invalid && !configForm.year.$pristine" class="help-block">Εισάγετε έτος.</p>
-            </div>
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="formGroupItems">
+                <div class="inlineItems">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : configForm.year.$invalid && !configForm.year.$pristine }">
+                        <label class="required formItemLabel" for="year">Έτος<span
+                                class="form-required">*</span>:</label>
+                        <div class="midInput">
+                            <input id="year" name="year" class="form-control" type="number" ng-model="ctrl.item.year">
+                        </div>
+                        <p ng-show="configForm.year.$invalid && !configForm.year.$pristine" class="help-block">Εισάγετε
+                            έτος.</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="formItemLabel" for="synt">Συντομογραφία:</label>
+                        <div class="midInput">
+                            <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt">
+                        </div>
+                    </div>
+                </div>
+                <div class="inlineItems">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : configForm.fromd.$invalid && !configForm.fromd.$pristine }">
+                        <label class="required formItemLabel" for="fromd">Από ημ/νία<span class="form-required">*</span>:</label>
+                        <div class="midInput">
+                            <input id="fromd" name="fromd" class="form-control" type="date" ng-model="ctrl.item.fromd">
+                        </div>
+                        <p ng-show="configForm.fromd.$invalid && !configForm.fromd.$pristine" class="help-block">
+                            Εισάγετε ημερομηνία έναρξης.</p>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : configForm.tod.$invalid && !configForm.tod.$pristine }">
+                        <label class="required formItemLabel" for="tod">Έως ημ/νία<span class="form-required">*</span>:</label>
+                        <div class="midInput">
+                            <input id="tod" name="tod" class="form-control" type="date" ng-model="ctrl.item.tod">
+                        </div>
+                        <p ng-show="configForm.tod.$invalid && !configForm.tod.$pristine" class="help-block">Εισάγετε
+                            ημερομηνία
+                            λήξης.</p>
+                    </div>
+                </div>
 
-            <status-selector status-title="Κατάσταση configuration" options="configStatus"
-                             output-value="ctrl.item.status"></status-selector>
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class="required formItemLabel" for="req_exp_dates">Ημερες προθεσμίας:</label>
+                        <div class="midInput">
+                            <input id="req_exp_dates" name="req_exp_dates" class="form-control" type="number"
+                                   ng-model="ctrl.item.req_exp_dates">
+                        </div>
 
-            <div class="form-group" ng-class="{ 'has-error' : configForm.fromd.$invalid && !configForm.fromd.$pristine }">
-                <label class="required" for="fromd">Από ημ/νία<span class="form-required">*</span>:</label>
-                <input id="fromd" name="fromd" class="form-control" type="date" ng-model="ctrl.item.fromd">
-                <p ng-show="configForm.fromd.$invalid && !configForm.fromd.$pristine" class="help-block">Εισάγετε ημερομηνία
-                    έναρξης.</p>
+                    </div>
+                    <div class="directiveFormItemA">
+                        <status-selector status-title="Status" options="configStatus"
+                                         output-value="ctrl.item.status"></status-selector>
+                    </div>
+                </div>
             </div>
-            <div class="form-group"
-                 ng-class="{ 'has-error' : configForm.tod.$invalid && !configForm.tod.$pristine }">
-                <label class="required" for="tod">Έως ημ/νία<span class="form-required">*</span>:</label>
-                <input id="tod" name="tod" class="form-control" type="date" ng-model="ctrl.item.tod">
-                <p ng-show="configForm.tod.$invalid && !configForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνία
-                    λήξης.</p>
-            </div>
-            <div class="form-group">
-                <label class="required" for="synt">Συντομογραφία:</label>
-                <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt">
-            </div>
-            <div class="form-group"
-                 ng-class="{ 'has-error' : configForm.req_exp_dates.$invalid && !configForm.req_exp_dates.$pristine }">
-                <label class="required" for="req_exp_dates">Έως ημ/νία<span class="form-required">*</span>:</label>
-                <input id="req_exp_dates" name="req_exp_dates" class="form-control" type="number"
-                       ng-model="ctrl.item.req_exp_dates">
-                <p ng-show="configForm.req_exp_dates.$invalid && !configForm.req_exp_dates.$pristine"
-                   class="help-block">Εισάγετε ημερομηνία
-                    λήξης.</p>
-            </div>
-
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                     ng-if="ctrl.item.id>0">Ανανέωση
             </button>
@@ -55,5 +74,5 @@
                     ng-if="ctrl.item.year && !ctrl.item.id">Αποθήκευση
             </button>
         </form>
-</div>
+    </div>
 </div>

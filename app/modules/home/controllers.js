@@ -11,7 +11,5 @@ angular.module('Home', [
 
         $scope.adminColums = globalVarsSrv.getGlobalVar(globalVarsSrv.getGlobalVar('menuRole') === 'admin' ? 'homeButtonAdminTableConf' : 'homeButtonUserTableConf');
 
-        // console.log('in Home controller');
-
     }])
 ;

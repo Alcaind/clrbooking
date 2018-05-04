@@ -1,34 +1,50 @@
-<div>
-    <div style="text-align: left;padding-left: 5px;">
-        <a href back-button type="button" class="btn btn-warning">
-            <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
-            </span>
-        </a>
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-chevron-left">
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+				</span>
+            </a>
+        </div>
+        <div class="pageTitle">Διαχείριση Χρήστη</div>
     </div>
-    <form class="itemForm" name="itemForm" novalidate>
-        <div class="form-group">
-            <label for="description">Περιγραφή:</label>
-            <textarea id="description" name="comments" class="form-control" ng-model="ctrl.item.descr"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="comments">Σχόλια:</label>
-            <textarea id="comments" name="comments" class="form-control" ng-model="ctrl.item.comments"></textarea>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : itemForm.code.$invalid && !itemForm.code.$pristine }">
-            <label class="required" for="code">Κωδικός εξοπλισμού:<span class="form-required">*</span>:</label>
-            <input id="code" name="code" class="form-control" type="text" ng-model="ctrl.item.code">
-            <p ng-show="itemForm.code.$invalid && !itemForm.code.$pristine" class="help-block">Εισάγετε ημερομηνία
-                κωδικό.</p>
-        </div>
-        <status-selector status-title="Κατάσταση περιόδου" options="itemStatus"
-                         output-value="ctrl.item.status"></status-selector>
-
-        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.id>0">Ανανέωση
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.code && !ctrl.item.id">Αποθήκευση
-        </button>
-    </form>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="formGroupItems">
+                <div class="form-group">
+                    <label for="description" class="formItemLabel">Ονομασία:</label>
+                    <div class="longInput">
+                        <input id="description" name="comments" class="form-control" ng-model="ctrl.item.descr">
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : itemForm.code.$invalid && !itemForm.code.$pristine }">
+                    <label class="required formItemLabel" for="code">Κωδικός εξοπλισμού:<span
+                            class="form-required">*</span>:</label>
+                    <div class="longInput">
+                        <input id="code" name="code" class="form-control" type="text" ng-model="ctrl.item.code">
+                    </div>
+                    <p ng-show="itemForm.code.$invalid && !itemForm.code.$pristine" class="help-block">Εισάγετε
+                        ημερομηνία κωδικό.</p>
+                </div>
+                <div class="directiveFormItem">
+                    <status-selector status-title="Κατάσταση" options="itemStatus"
+                                     output-value="ctrl.item.status"></status-selector>
+                </div>
+                <div class="form-group">
+                    <label for="comments" class="required formItemLabel">Σχόλια:</label>
+                    <div class="longInput">
+                        <textarea id="comments" name="comments" class="form-control" type="text"
+                                  ng-model="ctrl.item.comments"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.id>0">Ανανέωση
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.code && !ctrl.item.id">Αποθήκευση
+            </button>
+        </form>
+    </div>
 </div>

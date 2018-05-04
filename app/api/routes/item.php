@@ -75,3 +75,54 @@ $app->put('/items/{id}', function ($request, $response, $args) {
     return $response->getBody()->write($item->toJson());
 });
 
+
+$app->get('/items/{id}/rooms', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $item = \App\Models\Items::find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($item->rooms()->get()->toJson());
+});
+
+$app->delete('/items/{id}/rooms/{iid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $iid = $args['iid'];
+    try {
+        $item = \App\Models\Items::find($id);
+        $item->rooms()->detach($iid);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(200)->getBody()->write($item->rooms()->get()->toJson());
+});
+
+$app->post('/items/{id}/rooms/{iid}', function ($request, $response, $args) {
+    $iid = $args['iid'];
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+    $item = \App\Models\Items::find($id);
+    $item->rooms()->attach($iid, $data);
+    return $response->getBody()->write($item->rooms()->get()->toJson());
+});
+
+$app->put('/items/{id}/rooms/{iid}', function ($request, $response, $args) {
+    $iid = $args['iid'];
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+    $item = \App\Models\Items::find($id);
+    $item->rooms()->updateExistingPivot($iid, $data);
+    return $response->getBody()->write($item->rooms()->get()->toJson());
+});
+
+
+
+

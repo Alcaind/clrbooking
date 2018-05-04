@@ -321,12 +321,12 @@ angular.module('Requests')
             scope.item.period = newVal.id;
 
         });
-        $scope.$watch('item', function (newVal, oldVal, scope) {
+        /*$scope.$watch('item', function (newVal, oldVal, scope) {
             if (!scope.item) return;
             if (scope.item.date_index && scope.item.fromd && scope.item.tod && scope.item.fromt && scope.item.tot) {
                 scope.plotBook(scope.book, scope.calendar);
             }
-        });
+        });*/
 
         $scope.init();
     }])

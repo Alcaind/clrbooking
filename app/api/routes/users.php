@@ -137,18 +137,18 @@ $app->get('/users/{id}/roles', function ($request, $response, $args) {
     return $response->getBody()->write($user->roles()->get()->toJson());
 });
 
-$app->get('/users/{id}/requests', function ($request, $response, $args) {
-    $id = $args['id'];
-    try {
-        $user = \App\Models\Users::find($id);
-    } catch (PDOException $e) {
-        $nr = $response->withStatus(404);
-        $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage());
-        return $nr->write($error->toJson());
-    }
-    return $response->getBody()->write($user->requests()->get()->toJson());
-});
+//$app->get('/users/{id}/requests', function ($request, $response, $args) {
+//    $id = $args['id'];
+//    try {
+//        $user = \App\Models\Users::find($id);
+//    } catch (PDOException $e) {
+//        $nr = $response->withStatus(404);
+//        $error = new ApiError();
+//        $error->setData($e->getCode(), $e->getMessage());
+//        return $nr->write($error->toJson());
+//    }
+//    return $response->getBody()->write($user->requests()->get()->toJson());
+//});
 
 $app->get('/roombook/{id}/users', function ($request, $response, $args) {
     $id = $args['id'];

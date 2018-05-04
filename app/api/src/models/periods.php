@@ -26,4 +26,5 @@ class Periods extends Model
         return $this->hasMany('\\App\\Models\\Requests', 'period');
     }
 
+
 }

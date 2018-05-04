@@ -882,7 +882,7 @@
         },
         {
           "column": "userscategories",
-          "title": "Κατ. Χρηστών"
+          "title": "Κατηγορίες Χρηστών"
         }
       ]
     },
@@ -895,11 +895,11 @@
         },
         {
           "column": "roomcategory",
-          "title": "Κατ. Αιθουσών"
+          "title": "Κατηγορίες Αιθουσών"
         },
         {
           "column": "roomuse",
-          "title": "Χρήση Αιθ."
+          "title": "Χρήση Αιθουσών."
         },
         {
           "column": "items",
@@ -912,7 +912,7 @@
       "smenu": [
         {
           "column": "periods",
-          "title": "Ακαδ. Περίοδοι"
+          "title": "Ακαδημαϊκοί Περίοδοι"
         },
         {
           "column": "ps",
@@ -963,6 +963,7 @@
       "title": "Διαθ. Αιθουσών"
     }
   ],
+
   "roomsTableConfOps": [
     {
       "hr": "#/rooms/id",
@@ -1047,6 +1048,12 @@
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
       "place": "left"
+    },
+    {
+      "hr": "#/config/id/ps",
+      "content": "Μαθηματα Ακαδημαϊκου ετους",
+      "gicon": "glyphicon-folder-open",
+      "place": "left"
     }
   ],
   "itemTableConfOps": [
@@ -1054,6 +1061,12 @@
       "hr": "#/items/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
+      "place": "left"
+    },
+    {
+      "hr": "#/items/id/rooms",
+      "content": "Εξοπλισμός Αιθουσών",
+      "gicon": "glyphicon-folder-open",
       "place": "left"
     }
   ],

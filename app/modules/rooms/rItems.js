@@ -1,5 +1,5 @@
 angular.module('Rooms')
-    .controller('RoomsItemsController', ['$scope', 'AuthenticationService', 'makeController', function ($scope, AuthenticationService, makeController) {
+    .controller('RoomsItemsController', ['$scope', 'AuthenticationService', 'makeController', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, ClrStatusSrv) {
 
         $scope.ctrl = makeController.n2nController('/rooms', 'items', {comments: '', stat: '', from: '', to: ''});
         $scope.ctrl.init();
@@ -21,6 +21,6 @@ angular.module('Rooms')
     .directive('evItemsForm', function () {
         return {
             restrict: 'EA',
-            templateUrl: 'modules/rooms/rviews/items/evItemsForm.html',
+            templateUrl: 'modules/rooms/rviews/items/evItemsForm.html'
         }
     });

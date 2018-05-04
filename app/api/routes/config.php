@@ -86,3 +86,31 @@ $app->put('/config/{id}', function ($request, $response, $args) {
     }
     return $response->getBody()->write($config->toJson());
 });
+
+//
+//$app->get('/config/{id}/ps ', function ($request, $response, $args) {
+//    $id = $args['id'];
+//    try {
+//        $config = \App\Models\Config::find($id);
+//    } catch (PDOException $e) {
+//        $nr = $response->withStatus(404);
+//        $error = new ApiError();
+//        $error->setData($e->getCode(), $e->getMessage());
+//        return $nr->write($error->toJson());
+//    }
+//    return $response->getBody()->write($config->ps()->get()->toJson());
+//});
+
+$app->get('/ps/config/{id}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $ps = \App\Models\Ps::with(['ps'])->where('conf_id', '=', $id)->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($ps->toJson());
+});

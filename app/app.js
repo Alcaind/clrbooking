@@ -95,6 +95,11 @@ angular.module('clrBooking', [
                     title: 'configuration',
                     template: '<config-profile></config-profile>'
                 })
+                .when('/config/:id/ps', {
+                    title: 'config ps',
+                    controller: 'ConfigPsController',
+                    templateUrl: 'modules/ps/psviews/ps.html'
+                })
                 .when('/items', {
                     title: 'items',
                     controller: 'ItemsController',
@@ -107,6 +112,11 @@ angular.module('clrBooking', [
                 .when('/items/:id', {
                     title: 'items',
                     template: '<items-profile></items-profile>'
+                })
+                .when('/items/:id/rooms', {
+                    title: 'room items',
+                    controller: 'ItemsRoomsController',
+                    templateUrl: 'modules/items/itemviews/rooms/ItemRoom.html'
                 })
                 .when('/kats', {
                     title: 'kat',
@@ -356,15 +366,6 @@ angular.module('clrBooking', [
                     templateUrl: 'modules/userView/userHome/uhome.html'
                 })
 
-
-                /*.when('/', {
-                    controller: 'HomeController',
-                    templateUrl: 'modules/home/views/home.html'
-                })
-                .when('/', {
-                    controller: 'HomeController',
-                    templateUrl: 'modules/home/views/home.html'
-                })*/
                 .otherwise({redirectTo: '/login'});
             /*$locationProvider.html5Mode({
                 enabled: true,

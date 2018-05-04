@@ -4,18 +4,4 @@
     overflow-y: auto;
 }
 
-.userForm {
-    /*max-width: 600px;*/
-    padding: 20px;
-    background-color: #cfcfcf;
-    border: 1px solid #cdcdcd;
-    width: 750px;
-    margin: 0px;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100%;
-    display: inline-table;
-
-}
 

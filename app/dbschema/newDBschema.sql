@@ -1,3 +1,23 @@
+CREATE TABLE cleanusers
+(
+  id         INT DEFAULT '0' NOT NULL,
+  tm_id      INT             NULL,
+  fname      VARCHAR(255)    NULL,
+  sname      VARCHAR(255)    NULL,
+  phone      INT(255)        NULL,
+  em_main    VARCHAR(128)    NULL,
+  em_sec     VARCHAR(128)    NULL,
+  em_pant    VARCHAR(128)    NULL,
+  cat_id     INT             NULL,
+  comments   VARCHAR(512)    NULL,
+  user       VARCHAR(64)     NULL,
+  hash       VARCHAR(255)    NULL,
+  created_at TIMESTAMP       NULL,
+  updated_at TIMESTAMP       NULL,
+  cnt        BIGINT(21)      NOT NULL
+)
+  ENGINE = InnoDB;
+
 create table config
 (
   id            INT AUTO_INCREMENT
@@ -74,16 +94,14 @@ create table ps
   tm_code    INT          NULL,
   tm_per     VARCHAR(255) NULL,
   pm         CHAR(3)      NULL,
-  tma_code   INT          NULL,
+  tma_code   VARCHAR(12)  NULL,
   tma_per    VARCHAR(255) NULL,
   ps_ex      INT          NULL,
   ps_dm      INT          NULL,
   ps_km      VARCHAR(4)   NULL,
-  teacher    VARCHAR(255) NULL,
   conf_id    INT          NULL,
   created_at TIMESTAMP    NULL,
   updated_at TIMESTAMP    NULL,
-  ps_id      INT          NULL,
   CONSTRAINT ps_config_id_fk
   FOREIGN KEY (conf_id) REFERENCES config (id)
 )
@@ -91,6 +109,43 @@ create table ps
 
 CREATE INDEX ps_config_id_fk
   ON ps (conf_id);
+
+CREATE TABLE ps_double
+(
+  c1  VARCHAR(255) NULL,
+  c2  VARCHAR(255) NULL,
+  c3  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL,
+  c5  VARCHAR(255) NULL,
+  c6  VARCHAR(255) NULL,
+  c7  VARCHAR(255) NULL,
+  c8  VARCHAR(255) NULL,
+  c9  VARCHAR(255) NULL,
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL,
+  c12 VARCHAR(255) NULL,
+  c13 VARCHAR(255) NULL,
+  cnt BIGINT(21)   NOT NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE ps_new_trans
+(
+  c1  VARCHAR(255) NULL,
+  c2  VARCHAR(255) NULL,
+  c3  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL,
+  c5  VARCHAR(255) NULL,
+  c6  VARCHAR(255) NULL,
+  c7  VARCHAR(255) NULL,
+  c8  VARCHAR(255) NULL,
+  c9  VARCHAR(255) NULL,
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL,
+  c12 VARCHAR(255) NULL,
+  c13 VARCHAR(255) NULL
+)
+  ENGINE = InnoDB;
 
 create table ps_stats
 (
@@ -106,6 +161,514 @@ create table ps_stats
 
 CREATE INDEX ps_stats_ps_ps_id_fk
   ON ps_stats (ps_id);
+
+CREATE TABLE ps_teachers
+(
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  ps_id      INT                                     NULL,
+  user_id    INT                                     NULL,
+  comment    VARCHAR(255)                            NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP     NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  CONSTRAINT ps_teachers_ps_id_fk
+  FOREIGN KEY (ps_id) REFERENCES ps (id)
+)
+  ENGINE = InnoDB;
+
+CREATE INDEX ps_teachers_ps_id_fk
+  ON ps_teachers (ps_id);
+
+CREATE INDEX ps_teachers_users_id_fk
+  ON ps_teachers (user_id);
+
+CREATE TABLE ps_tmp
+(
+  id         INT DEFAULT '0' NOT NULL,
+  tm_code    INT             NULL,
+  tm_per     VARCHAR(255)    NULL,
+  pm         CHAR(3)         NULL,
+  tma_code   VARCHAR(12)     NULL,
+  tma_per    VARCHAR(255)    NULL,
+  ps_ex      INT             NULL,
+  ps_dm      INT             NULL,
+  ps_km      VARCHAR(4)      NULL,
+  conf_id    INT             NULL,
+  created_at TIMESTAMP       NULL,
+  updated_at TIMESTAMP       NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE ps_trans
+(
+  c1  VARCHAR(255) NULL,
+  c2  VARCHAR(255) NULL,
+  c3  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL,
+  c5  VARCHAR(255) NULL,
+  c6  VARCHAR(255) NULL,
+  c7  VARCHAR(255) NULL,
+  c8  VARCHAR(255) NULL,
+  c9  VARCHAR(255) NULL,
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL,
+  c12 VARCHAR(255) NULL,
+  c13 VARCHAR(255) NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE ps_trans_check
+(
+  c1  VARCHAR(255) NULL,
+  c2  VARCHAR(255) NULL,
+  c3  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL,
+  c5  VARCHAR(255) NULL,
+  c6  VARCHAR(255) NULL,
+  c7  VARCHAR(255) NULL,
+  c8  VARCHAR(255) NULL,
+  c9  VARCHAR(255) NULL,
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL,
+  c12 VARCHAR(255) NULL,
+  c13 VARCHAR(255) NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE ps_vas
+(
+  c1  VARCHAR(255) NULL,
+  c2  VARCHAR(255) NULL,
+  c3  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL,
+  c5  VARCHAR(255) NULL,
+  c6  VARCHAR(255) NULL,
+  c7  VARCHAR(255) NULL,
+  c8  VARCHAR(255) NULL,
+  c9  VARCHAR(255) NULL,
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL,
+  c12 VARCHAR(255) NULL,
+  c13 VARCHAR(255) NULL,
+  id  INT AUTO_INCREMENT
+    PRIMARY KEY
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE req_transf
+(
+  c1  VARCHAR(255) NULL,
+  c2  VARCHAR(255) NULL,
+  c3  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL,
+  c5  VARCHAR(255) NULL,
+  c6  VARCHAR(255) NULL,
+  c7  VARCHAR(255) NULL,
+  c8  VARCHAR(255) NULL,
+  c9  VARCHAR(255) NULL,
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL,
+  c12 VARCHAR(255) NULL,
+  c13 VARCHAR(255) NULL,
+  c14 VARCHAR(255) NULL,
+  c15 VARCHAR(255) NULL,
+  c16 VARCHAR(255) NULL,
+  c17 VARCHAR(255) NULL,
+  c18 VARCHAR(255) NULL,
+  c19 VARCHAR(255) NULL,
+  c20 VARCHAR(255) NULL,
+  c21 VARCHAR(255) NULL,
+  c22 VARCHAR(255) NULL,
+  c23 VARCHAR(255) NULL,
+  c24 VARCHAR(255) NULL,
+  c25 VARCHAR(255) NULL,
+  c26 VARCHAR(255) NULL,
+  c27 VARCHAR(255) NULL,
+  c28 VARCHAR(255) NULL,
+  c29 VARCHAR(255) NULL,
+  c30 VARCHAR(255) NULL,
+  c31 VARCHAR(255) NULL,
+  c32 VARCHAR(255) NULL,
+  c33 VARCHAR(255) NULL,
+  c34 VARCHAR(255) NULL,
+  c35 VARCHAR(255) NULL,
+  c36 VARCHAR(255) NULL,
+  c37 VARCHAR(255) NULL,
+  c38 VARCHAR(255) NULL,
+  c39 VARCHAR(255) NULL,
+  c40 VARCHAR(255) NULL,
+  c41 VARCHAR(255) NULL,
+  c42 VARCHAR(255) NULL,
+  c43 VARCHAR(255) NULL,
+  c44 VARCHAR(255) NULL,
+  c45 VARCHAR(255) NULL,
+  c46 VARCHAR(255) NULL,
+  c47 VARCHAR(255) NULL,
+  c48 VARCHAR(255) NULL,
+  c49 VARCHAR(255) NULL,
+  c50 VARCHAR(255) NULL,
+  c51 VARCHAR(255) NULL,
+  c52 VARCHAR(255) NULL,
+  c53 VARCHAR(255) NULL,
+  c54 VARCHAR(255) NULL,
+  c55 VARCHAR(255) NULL,
+  c56 VARCHAR(255) NULL,
+  c57 VARCHAR(255) NULL,
+  c58 VARCHAR(255) NULL,
+  c59 VARCHAR(255) NULL,
+  c60 VARCHAR(255) NULL,
+  c61 VARCHAR(255) NULL,
+  c62 VARCHAR(255) NULL,
+  c63 VARCHAR(255) NULL,
+  c64 VARCHAR(255) NULL,
+  c65 VARCHAR(255) NULL,
+  c66 VARCHAR(255) NULL,
+  c67 VARCHAR(255) NULL,
+  c68 VARCHAR(255) NULL,
+  c69 VARCHAR(255) NULL,
+  c70 VARCHAR(255) NULL,
+  c71 VARCHAR(255) NULL,
+  c72 VARCHAR(255) NULL,
+  c73 VARCHAR(255) NULL,
+  c74 VARCHAR(255) NULL,
+  c75 VARCHAR(255) NULL,
+  c76 VARCHAR(255) NULL,
+  c77 VARCHAR(255) NULL,
+  c78 VARCHAR(255) NULL,
+  id  INT AUTO_INCREMENT
+    PRIMARY KEY
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE req_transf_clean_c8
+(
+  c1  VARCHAR(255) NULL,
+  c2  VARCHAR(255) NULL,
+  c3  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL,
+  c5  VARCHAR(255) NULL,
+  c6  VARCHAR(255) NULL,
+  c7  VARCHAR(255) NULL,
+  c8  VARCHAR(255) NULL,
+  c9  VARCHAR(255) NULL,
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL,
+  c12 VARCHAR(255) NULL,
+  c13 VARCHAR(255) NULL,
+  c14 VARCHAR(255) NULL,
+  c15 VARCHAR(255) NULL,
+  c16 VARCHAR(255) NULL,
+  c17 VARCHAR(255) NULL,
+  c18 VARCHAR(255) NULL,
+  c19 VARCHAR(255) NULL,
+  c20 VARCHAR(255) NULL,
+  c21 VARCHAR(255) NULL,
+  c22 VARCHAR(255) NULL,
+  c23 VARCHAR(255) NULL,
+  c24 VARCHAR(255) NULL,
+  c25 VARCHAR(255) NULL,
+  c26 VARCHAR(255) NULL,
+  c27 VARCHAR(255) NULL,
+  c28 VARCHAR(255) NULL,
+  c29 VARCHAR(255) NULL,
+  c30 VARCHAR(255) NULL,
+  c31 VARCHAR(255) NULL,
+  c32 VARCHAR(255) NULL,
+  c33 VARCHAR(255) NULL,
+  c34 VARCHAR(255) NULL,
+  c35 VARCHAR(255) NULL,
+  c36 VARCHAR(255) NULL,
+  c37 VARCHAR(255) NULL,
+  c38 VARCHAR(255) NULL,
+  c39 VARCHAR(255) NULL,
+  c40 VARCHAR(255) NULL,
+  c41 VARCHAR(255) NULL,
+  c42 VARCHAR(255) NULL,
+  c43 VARCHAR(255) NULL,
+  c44 VARCHAR(255) NULL,
+  c45 VARCHAR(255) NULL,
+  c46 VARCHAR(255) NULL,
+  c47 VARCHAR(255) NULL,
+  c48 VARCHAR(255) NULL,
+  c49 VARCHAR(255) NULL,
+  c50 VARCHAR(255) NULL,
+  c51 VARCHAR(255) NULL,
+  c52 VARCHAR(255) NULL,
+  c53 VARCHAR(255) NULL,
+  c54 VARCHAR(255) NULL,
+  c55 VARCHAR(255) NULL,
+  c56 VARCHAR(255) NULL,
+  c57 VARCHAR(255) NULL,
+  c58 VARCHAR(255) NULL,
+  c59 VARCHAR(255) NULL,
+  c60 VARCHAR(255) NULL,
+  c61 VARCHAR(255) NULL,
+  c62 VARCHAR(255) NULL,
+  c63 VARCHAR(255) NULL,
+  c64 VARCHAR(255) NULL,
+  c65 VARCHAR(255) NULL,
+  c66 VARCHAR(255) NULL,
+  c67 VARCHAR(255) NULL,
+  c68 VARCHAR(255) NULL,
+  c69 VARCHAR(255) NULL,
+  c70 VARCHAR(255) NULL,
+  c71 VARCHAR(255) NULL,
+  c72 VARCHAR(255) NULL,
+  c73 VARCHAR(255) NULL,
+  c74 VARCHAR(255) NULL,
+  c75 VARCHAR(255) NULL,
+  c76 VARCHAR(255) NULL,
+  c77 VARCHAR(255) NULL,
+  c78 VARCHAR(255) NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE req_transf_exams
+(
+  c1  VARCHAR(255)    NULL,
+  c2  VARCHAR(255)    NULL,
+  c3  VARCHAR(255)    NULL,
+  c4  VARCHAR(255)    NULL,
+  c5  VARCHAR(255)    NULL,
+  c6  VARCHAR(255)    NULL,
+  c7  VARCHAR(255)    NULL,
+  c8  VARCHAR(255)    NULL,
+  c9  VARCHAR(255)    NULL,
+  c10 VARCHAR(255)    NULL,
+  c11 VARCHAR(255)    NULL,
+  c12 VARCHAR(255)    NULL,
+  c13 VARCHAR(255)    NULL,
+  c14 VARCHAR(255)    NULL,
+  c15 VARCHAR(255)    NULL,
+  c16 VARCHAR(255)    NULL,
+  c17 VARCHAR(255)    NULL,
+  c18 VARCHAR(255)    NULL,
+  c19 VARCHAR(255)    NULL,
+  c20 VARCHAR(255)    NULL,
+  c21 VARCHAR(255)    NULL,
+  c22 VARCHAR(255)    NULL,
+  c23 VARCHAR(255)    NULL,
+  c24 VARCHAR(255)    NULL,
+  c25 VARCHAR(255)    NULL,
+  c26 VARCHAR(255)    NULL,
+  c27 VARCHAR(255)    NULL,
+  c28 VARCHAR(255)    NULL,
+  c29 VARCHAR(255)    NULL,
+  c30 VARCHAR(255)    NULL,
+  c31 VARCHAR(255)    NULL,
+  c32 VARCHAR(255)    NULL,
+  c33 VARCHAR(255)    NULL,
+  c34 VARCHAR(255)    NULL,
+  c35 VARCHAR(255)    NULL,
+  c36 VARCHAR(255)    NULL,
+  c37 VARCHAR(255)    NULL,
+  c38 VARCHAR(255)    NULL,
+  c39 VARCHAR(255)    NULL,
+  c40 VARCHAR(255)    NULL,
+  c41 VARCHAR(255)    NULL,
+  c42 VARCHAR(255)    NULL,
+  c43 VARCHAR(255)    NULL,
+  c44 VARCHAR(255)    NULL,
+  c45 VARCHAR(255)    NULL,
+  c46 VARCHAR(255)    NULL,
+  c47 VARCHAR(255)    NULL,
+  c48 VARCHAR(255)    NULL,
+  c49 VARCHAR(255)    NULL,
+  c50 VARCHAR(255)    NULL,
+  c51 VARCHAR(255)    NULL,
+  c52 VARCHAR(255)    NULL,
+  c53 VARCHAR(255)    NULL,
+  c54 VARCHAR(255)    NULL,
+  c55 VARCHAR(255)    NULL,
+  c56 VARCHAR(255)    NULL,
+  c57 VARCHAR(255)    NULL,
+  c58 VARCHAR(255)    NULL,
+  c59 VARCHAR(255)    NULL,
+  c60 VARCHAR(255)    NULL,
+  c61 VARCHAR(255)    NULL,
+  c62 VARCHAR(255)    NULL,
+  c63 VARCHAR(255)    NULL,
+  c64 VARCHAR(255)    NULL,
+  c65 VARCHAR(255)    NULL,
+  c66 VARCHAR(255)    NULL,
+  c67 VARCHAR(255)    NULL,
+  c68 VARCHAR(255)    NULL,
+  c69 VARCHAR(255)    NULL,
+  c70 VARCHAR(255)    NULL,
+  c71 VARCHAR(255)    NULL,
+  c72 VARCHAR(255)    NULL,
+  c73 VARCHAR(255)    NULL,
+  c74 VARCHAR(255)    NULL,
+  c75 VARCHAR(255)    NULL,
+  c76 VARCHAR(255)    NULL,
+  c77 VARCHAR(255)    NULL,
+  c78 VARCHAR(255)    NULL,
+  id  INT DEFAULT '0' NOT NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE req_transf_tmp
+(
+  c1  VARCHAR(255) NULL,
+  c2  VARCHAR(255) NULL,
+  c3  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL,
+  c5  VARCHAR(255) NULL,
+  c6  VARCHAR(255) NULL,
+  c7  VARCHAR(255) NULL,
+  c8  VARCHAR(255) NULL,
+  c9  VARCHAR(255) NULL,
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL,
+  c12 VARCHAR(255) NULL,
+  c13 VARCHAR(255) NULL,
+  c14 VARCHAR(255) NULL,
+  c15 VARCHAR(255) NULL,
+  c16 VARCHAR(255) NULL,
+  c17 VARCHAR(255) NULL,
+  c18 VARCHAR(255) NULL,
+  c19 VARCHAR(255) NULL,
+  c20 VARCHAR(255) NULL,
+  c21 VARCHAR(255) NULL,
+  c22 VARCHAR(255) NULL,
+  c23 VARCHAR(255) NULL,
+  c24 VARCHAR(255) NULL,
+  c25 VARCHAR(255) NULL,
+  c26 VARCHAR(255) NULL,
+  c27 VARCHAR(255) NULL,
+  c28 VARCHAR(255) NULL,
+  c29 VARCHAR(255) NULL,
+  c30 VARCHAR(255) NULL,
+  c31 VARCHAR(255) NULL,
+  c32 VARCHAR(255) NULL,
+  c33 VARCHAR(255) NULL,
+  c34 VARCHAR(255) NULL,
+  c35 VARCHAR(255) NULL,
+  c36 VARCHAR(255) NULL,
+  c37 VARCHAR(255) NULL,
+  c38 VARCHAR(255) NULL,
+  c39 VARCHAR(255) NULL,
+  c40 VARCHAR(255) NULL,
+  c41 VARCHAR(255) NULL,
+  c42 VARCHAR(255) NULL,
+  c43 VARCHAR(255) NULL,
+  c44 VARCHAR(255) NULL,
+  c45 VARCHAR(255) NULL,
+  c46 VARCHAR(255) NULL,
+  c47 VARCHAR(255) NULL,
+  c48 VARCHAR(255) NULL,
+  c49 VARCHAR(255) NULL,
+  c50 VARCHAR(255) NULL,
+  c51 VARCHAR(255) NULL,
+  c52 VARCHAR(255) NULL,
+  c53 VARCHAR(255) NULL,
+  c54 VARCHAR(255) NULL,
+  c55 VARCHAR(255) NULL,
+  c56 VARCHAR(255) NULL,
+  c57 VARCHAR(255) NULL,
+  c58 VARCHAR(255) NULL,
+  c59 VARCHAR(255) NULL,
+  c60 VARCHAR(255) NULL,
+  c61 VARCHAR(255) NULL,
+  c62 VARCHAR(255) NULL,
+  c63 VARCHAR(255) NULL,
+  c64 VARCHAR(255) NULL,
+  c65 VARCHAR(255) NULL,
+  c66 VARCHAR(255) NULL,
+  c67 VARCHAR(255) NULL,
+  c68 VARCHAR(255) NULL,
+  c69 VARCHAR(255) NULL,
+  c70 VARCHAR(255) NULL,
+  c71 VARCHAR(255) NULL,
+  c72 VARCHAR(255) NULL,
+  c73 VARCHAR(255) NULL,
+  c74 VARCHAR(255) NULL,
+  c75 VARCHAR(255) NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE req_transf_vas
+(
+  c1  VARCHAR(255) NULL,
+  c2  VARCHAR(255) NULL,
+  c3  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL,
+  c5  VARCHAR(255) NULL,
+  c6  VARCHAR(255) NULL,
+  c7  VARCHAR(255) NULL,
+  c8  VARCHAR(255) NULL,
+  c9  VARCHAR(255) NULL,
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL,
+  c12 VARCHAR(255) NULL,
+  c13 VARCHAR(255) NULL,
+  c14 VARCHAR(255) NULL,
+  c15 VARCHAR(255) NULL,
+  c16 VARCHAR(255) NULL,
+  c17 VARCHAR(255) NULL,
+  c18 VARCHAR(255) NULL,
+  c19 VARCHAR(255) NULL,
+  c20 VARCHAR(255) NULL,
+  c21 VARCHAR(255) NULL,
+  c22 VARCHAR(255) NULL,
+  c23 VARCHAR(255) NULL,
+  c24 VARCHAR(255) NULL,
+  c25 VARCHAR(255) NULL,
+  c26 VARCHAR(255) NULL,
+  c27 VARCHAR(255) NULL,
+  c28 VARCHAR(255) NULL,
+  c29 VARCHAR(255) NULL,
+  c30 VARCHAR(255) NULL,
+  c31 VARCHAR(255) NULL,
+  c32 VARCHAR(255) NULL,
+  c33 VARCHAR(255) NULL,
+  c34 VARCHAR(255) NULL,
+  c35 VARCHAR(255) NULL,
+  c36 VARCHAR(255) NULL,
+  c37 VARCHAR(255) NULL,
+  c38 VARCHAR(255) NULL,
+  c39 VARCHAR(255) NULL,
+  c40 VARCHAR(255) NULL,
+  c41 VARCHAR(255) NULL,
+  c42 VARCHAR(255) NULL,
+  c43 VARCHAR(255) NULL,
+  c44 VARCHAR(255) NULL,
+  c45 VARCHAR(255) NULL,
+  c46 VARCHAR(255) NULL,
+  c47 VARCHAR(255) NULL,
+  c48 VARCHAR(255) NULL,
+  c49 VARCHAR(255) NULL,
+  c50 VARCHAR(255) NULL,
+  c51 VARCHAR(255) NULL,
+  c52 VARCHAR(255) NULL,
+  c53 VARCHAR(255) NULL,
+  c54 VARCHAR(255) NULL,
+  c55 VARCHAR(255) NULL,
+  c56 VARCHAR(255) NULL,
+  c57 VARCHAR(255) NULL,
+  c58 VARCHAR(255) NULL,
+  c59 VARCHAR(255) NULL,
+  c60 VARCHAR(255) NULL,
+  c61 VARCHAR(255) NULL,
+  c62 VARCHAR(255) NULL,
+  c63 VARCHAR(255) NULL,
+  c64 VARCHAR(255) NULL,
+  c65 VARCHAR(255) NULL,
+  c66 VARCHAR(255) NULL,
+  c67 VARCHAR(255) NULL,
+  c68 VARCHAR(255) NULL,
+  c69 VARCHAR(255) NULL,
+  c70 VARCHAR(255) NULL,
+  c71 VARCHAR(255) NULL,
+  c72 VARCHAR(255) NULL,
+  c73 VARCHAR(255) NULL,
+  c74 VARCHAR(255) NULL,
+  c75 VARCHAR(255) NULL,
+  c76 VARCHAR(255) NULL,
+  c77 VARCHAR(255) NULL,
+  c78 VARCHAR(255) NULL
+)
+  ENGINE = InnoDB;
 
 create table request_guests
 (
@@ -165,13 +728,10 @@ create table requests
   ps_id       INT                                NULL,
   class_use   VARCHAR(255)                       NULL,
   links       VARCHAR(512)                       NULL,
-  fromt       TIME                               NULL,
-  tot         TIME                               NULL,
   protocol_id VARCHAR(255)                       NULL,
   status      INT                                NULL,
   fromd       DATE                               NULL,
   tod         DATE                               NULL,
-  date_index  INT                                NULL,
   created_at  TIMESTAMP                          NULL,
   updated_at  TIMESTAMP                          NULL,
   admin       INT                                NULL,
@@ -206,49 +766,6 @@ create table roles
   updated_at TIMESTAMP    NULL
 )
   ENGINE = InnoDB
-;
-
-create table room_book
-(
-  id         INT AUTO_INCREMENT
-    PRIMARY KEY,
-  user_id    INT          NULL,
-  date_index INT          NULL,
-  fromt      TIME         NULL,
-  tot        TIME         NULL,
-  type       INT          NULL,
-  period     INT          NULL,
-  room_id    INT          NULL,
-  fromd      DATE         NULL,
-  tod        DATE         NULL,
-  request_id INT          NULL,
-  created_at TIMESTAMP    NULL,
-  updated_at TIMESTAMP    NULL,
-  status     INT          NULL,
-  comment    VARCHAR(255) NULL,
-  teacher    INT          NULL,
-  CONSTRAINT room_book_periods_id_fk
-  FOREIGN KEY (period) REFERENCES periods (id),
-  CONSTRAINT room_book_requests_id_fk
-  FOREIGN KEY (request_id) REFERENCES requests (id)
-)
-  COMMENT 'N-N'
-  ENGINE = InnoDB;
-
-CREATE INDEX room_book_users_id_fk
-  ON room_book (user_id);
-
-CREATE INDEX room_book_periods_id_fk
-  ON room_book (period);
-
-CREATE INDEX room_book_rooms_id_fk
-  ON room_book (room_id);
-
-CREATE INDEX room_book_requests_id_fk
-  ON room_book (request_id);
-
-CREATE INDEX room_book_users_id_fk_2
-  ON room_book (teacher)
 ;
 
 create table room_category
@@ -328,6 +845,7 @@ create table rooms
   category       INT(64)                                  NULL,
   created_at     TIMESTAMP                                NULL,
   updated_at     TIMESTAMP                                NULL,
+  synt           VARCHAR(255)                             NULL,
   CONSTRAINT rooms_config_id_fk
   FOREIGN KEY (conf_id) REFERENCES config (id),
   CONSTRAINT rooms_room_category_id_fk
@@ -343,10 +861,6 @@ CREATE INDEX rooms_config_id_fk
 
 CREATE INDEX rooms_room_category_id_fk
   ON rooms (category);
-
-ALTER TABLE room_book
-  ADD CONSTRAINT room_book_rooms_id_fk
-FOREIGN KEY (room_id) REFERENCES rooms (id);
 
 alter table room_items
   ADD CONSTRAINT room_rooms___fk
@@ -471,6 +985,15 @@ CREATE TABLE rooms_tranf3
 )
   ENGINE = MyISAM;
 
+CREATE TABLE teacher_tmp2
+(
+  c12 VARCHAR(255) NULL,
+  fn  TEXT         NULL,
+  ln  VARCHAR(255) NULL,
+  c4  VARCHAR(255) NULL
+)
+  ENGINE = InnoDB;
+
 create table tm
 (
   id         INT AUTO_INCREMENT
@@ -480,9 +1003,13 @@ create table tm
   title      VARCHAR(255) NULL,
   sxoli      VARCHAR(64)  NULL,
   created_at TIMESTAMP    NULL,
-  updated_at TIMESTAMP    NULL
+  updated_at TIMESTAMP    NULL,
+  supervisor INT          NULL
 )
   ENGINE = InnoDB;
+
+CREATE INDEX tm_users_id_fk
+  ON tm (supervisor);
 
 ALTER TABLE kat
   ADD CONSTRAINT tm___fk
@@ -497,6 +1024,24 @@ FOREIGN KEY (tm_owner) REFERENCES tm (id);
 ALTER TABLE rooms_tms
   ADD CONSTRAINT rooms_tms_tm_id_fk
 FOREIGN KEY (tm_id) REFERENCES tm (id);
+
+CREATE TABLE tm_users
+(
+  id         INT AUTO_INCREMENT
+    PRIMARY KEY,
+  user_id    INT                                     NULL,
+  tm_id      INT                                     NULL,
+  comments   VARCHAR(255)                            NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP     NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL
+)
+  ENGINE = InnoDB;
+
+CREATE INDEX tm_users_users_id_fk
+  ON tm_users (user_id);
+
+CREATE INDEX tm_users_tm_id_fk
+  ON tm_users (tm_id);
 
 create table transf_ps
 (
@@ -531,7 +1076,6 @@ create table users
 (
   id         INT AUTO_INCREMENT
     PRIMARY KEY,
-  tm_id      INT          NULL,
   fname      VARCHAR(255) NULL,
   sname      VARCHAR(255) NULL,
   phone      INT(255)     NULL,
@@ -544,18 +1088,17 @@ create table users
   hash       VARCHAR(255) NULL,
   created_at TIMESTAMP    NULL,
   updated_at TIMESTAMP    NULL,
-  CONSTRAINT users_tm_id_fk
-  FOREIGN KEY (tm_id) REFERENCES tm (id),
   CONSTRAINT users_ucategories_id_fk
   FOREIGN KEY (cat_id) REFERENCES ucategories (id)
 )
   ENGINE = InnoDB;
 
-CREATE INDEX users_tm_id_fk
-  ON users (tm_id);
-
 CREATE INDEX users_ucategories_id_fk
   ON users (cat_id);
+
+ALTER TABLE ps_teachers
+  ADD CONSTRAINT ps_teachers_users_id_fk
+FOREIGN KEY (user_id) REFERENCES users (id);
 
 ALTER TABLE requests
   ADD CONSTRAINT requests_users_id_fk
@@ -565,13 +1108,48 @@ ALTER TABLE requests
   ADD CONSTRAINT requests_users_id_fk_2
 FOREIGN KEY (admin) REFERENCES users (id);
 
-ALTER TABLE room_book
-  ADD CONSTRAINT room_book_users_id_fk
+ALTER TABLE tm
+  ADD CONSTRAINT tm_users_id_fk
+FOREIGN KEY (supervisor) REFERENCES users (id);
+
+ALTER TABLE tm_users
+  ADD CONSTRAINT tm_users_users_id_fk
 FOREIGN KEY (user_id) REFERENCES users (id);
 
-ALTER TABLE room_book
-  ADD CONSTRAINT room_book_users_id_fk_2
-FOREIGN KEY (teacher) REFERENCES users (id);
+CREATE TABLE users_bkp
+(
+  id         INT DEFAULT '0' NOT NULL,
+  tm_id      INT             NULL,
+  fname      VARCHAR(255)    NULL,
+  sname      VARCHAR(255)    NULL,
+  phone      INT(255)        NULL,
+  em_main    VARCHAR(128)    NULL,
+  em_sec     VARCHAR(128)    NULL,
+  em_pant    VARCHAR(128)    NULL,
+  cat_id     INT             NULL,
+  comments   VARCHAR(512)    NULL,
+  user       VARCHAR(64)     NULL,
+  hash       VARCHAR(255)    NULL,
+  created_at TIMESTAMP       NULL,
+  updated_at TIMESTAMP       NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE users_requests
+(
+  id          INT AUTO_INCREMENT
+    PRIMARY KEY,
+  from_user   INT          NULL,
+  to_users    INT          NULL,
+  comments    VARCHAR(255) NULL,
+  req_room_id INT          NULL,
+  tou_comment VARCHAR(255) NULL,
+  confitm     TINYINT(1)   NULL,
+  status      INT          NULL,
+  created_at  TIMESTAMP    NULL,
+  updated_at  TIMESTAMP    NULL
+)
+  ENGINE = InnoDB;
 
 create table users_roles
 (
@@ -597,4 +1175,30 @@ CREATE INDEX users_roles_users_id_fk
 
 CREATE INDEX users_roles_roles_id_fk
   ON users_roles (role_id);
+
+CREATE TABLE users_vas
+(
+  c10 VARCHAR(255) NULL,
+  c11 VARCHAR(255) NULL
+)
+  ENGINE = InnoDB;
+
+CREATE TABLE userscheck
+(
+  id         INT DEFAULT '0' NOT NULL,
+  tm_id      INT             NULL,
+  fname      VARCHAR(255)    NULL,
+  sname      VARCHAR(255)    NULL,
+  phone      INT(255)        NULL,
+  em_main    VARCHAR(128)    NULL,
+  em_sec     VARCHAR(128)    NULL,
+  em_pant    VARCHAR(128)    NULL,
+  cat_id     INT             NULL,
+  comments   VARCHAR(512)    NULL,
+  user       VARCHAR(64)     NULL,
+  hash       VARCHAR(255)    NULL,
+  created_at TIMESTAMP       NULL,
+  updated_at TIMESTAMP       NULL
+)
+  ENGINE = InnoDB;
 

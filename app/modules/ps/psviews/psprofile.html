@@ -1,84 +1,145 @@
-<div>
-    <div style="text-align: left;padding-left: 5px;">
-        <a href back-button type="button" class="btn btn-warning">
-            <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
-            </span>
-        </a>
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-chevron-left">
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+				</span>
+            </a>
+        </div>
+        <div class="pageTitle">Διαχείριση Προγράμματος Σπουδών</div>
     </div>
-    <form class="psForm" name="psForm" novalidate>
-        <div class="form-group"
-             ng-class="{ 'has-error' : psForm.tm_code.$invalid && !psForm.tm_code.$pristine }">
-            <label class="required" for="tm_code">Κωδικός τμήματος<span class="form-required">*</span>:</label>
-            <input id="tm_code" name="tm_code" class="form-control" type="number" ng-model="ctrl.item.tm_code">
-            <p ng-show="psForm.tm_code.$invalid && !psForm.tm_code.$pristine" class="help-block">Εισάγετε κωδικό
-                τμήματος.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : psForm.tm_per.$invalid && !psForm.tm_per.$pristine }">
-            <label class="required" for="tm_per">Περιγραφή τμήματος<span class="form-required">*</span>:</label>
-            <input id="tm_per" name="tm_per" class="form-control" type="text" ng-model="ctrl.item.tm_per">
-            <p ng-show="psForm.tm_per.$invalid && !psForm.tm_per.$pristine" class="help-block">Εισάγετε περιγραφή
-                τμήματος.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : psForm.pm.$invalid && !psForm.pm.$pristine }">
-            <label class="required" for="pm">Είδος<span class="form-required">*</span>:</label>
-            <input id="pm" name="pm" class="form-control" type="text" ng-model="ctrl.item.pm">
-            <p ng-show="psForm.pm.$invalid && !psForm.pm.$pristine" class="help-block">Εισάγετ είδος.</p>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : psForm.tma_code.$invalid && !psForm.tma_code.$pristine }">
-            <label class="required" for="tma_code">Κωδικός μαθήματος<span class="form-required">*</span>:</label>
-            <input id="tma_code" name="tma_code" class="form-control" type="number" ng-model="ctrl.item.tma_code">
-            <p ng-show="psForm.tma_code.$invalid && !psForm.tma_code.$pristine" class="help-block">Εισάγετε κωδικός
-                μαθήματος.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : psForm.tma_per.$invalid && !psForm.tma_per.$pristine }">
-            <label class="required" for="tma_per">Περιγραφή μαθήματος<span class="form-required">*</span>:</label>
-            <input id="tma_per" name="tma_per" class="form-control" type="text" ng-model="ctrl.item.tma_per">
-            <p ng-show="psForm.tma_per.$invalid && !psForm.tma_per.$pristine" class="help-block">Εισάγετε περιγραφή
-                μαθήματος.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : psForm.ps_ex.$invalid && !psForm.ps_ex.$pristine }">
-            <label class="required" for="ps_ex">Εξάμημο<span class="form-required">*</span>:</label>
-            <input id="ps_ex" name="ps_ex" class="form-control" type="number" ng-model="ctrl.item.ps_ex">
-            <p ng-show="psForm.ps_ex.$invalid && !psForm.ps_ex.$pristine" class="help-block">Εισάγετε εξάμημο.</p>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : psForm.ps_dm.$invalid && !psForm.ps_dm.$pristine }">
-            <label class="required" for="ps_dm">Έτος-ps_dm<span class="form-required">*</span>:</label>
-            <input id="ps_dm" name="ps_dm" class="form-control" type="text" ng-model="ctrl.item.ps_dm">
-            <p ng-show="psForm.ps_dm.$invalid && !psForm.ps_dm.$pristine" class="help-block">Εισάγετε έτος.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : psForm.ps_km.$invalid && !psForm.ps_km.$pristine }">
-            <label class="required" for="ps_km">ps_km<span class="form-required">*</span>:</label>
-            <input id="ps_km" name="ps_km" class="form-control" type="text" ng-model="ctrl.item.ps_km">
-            <p ng-show="psForm.ps_km.$invalid && !psForm.ps_km.$pristine" class="help-block">Enter
-                ps_km.</p>
-        </div>
-        <div class="form-group">
-            <label class="required" for="teacher">Διδάσκων:</label>
-            <input id="teacher" name="teacher" class="form-control" type="text" ng-model="ctrl.item.teacher">
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : psForm.conf_id.$invalid && !psForm.conf_id.$pristine }">
-            <label class="required" for="conf_id">Configuration-config_id<span class="form-required">*</span>:</label>
-            <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
-                    ng-options="config.id as config.year for config in configs"></select>
-            <p ng-show="psForm.conf_id.$invalid && !psForm.conf_id.$pristine" class="help-block">Εισάγετε
-                έτος.</p>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : psForm.ps_id.$invalid && !psForm.ps_id.$pristine }">
-            <label class="required" for="ps_id">Πρόγραμμα σπουδών ID<span class="form-required">*</span>:</label>
-            <input id="ps_id" name="ps_id" class="form-control" type="number" ng-model="ctrl.item.ps_id">
-        </div>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.id>0">Ανανέωση
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.tm_code && !ctrl.item.id">Αποθήκευση
-        </button>
-    </form>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="formGroupItems">
+                <div class="inlineItems">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.tma_code.$invalid && !itemForm.tma_code.$pristine }">
+                        <label class="required formItemLabel" for="tma_code">Κωδικός μαθήματος<span
+                                class="form-required">*</span>:</label>
+                        <div class="smallInput">
+                            <input id="tma_code" name="tma_code" class="form-control" type="text"
+                                   ng-model="ctrl.item.tma_code">
+                        </div>
+                        <p ng-show="itemForm.tma_code.$invalid && !itemForm.tma_code.$pristine" class="help-block">
+                            Εισάγετε κωδικός μαθήματος.</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="required formItemLabel" for="teacher">Καθηγητης:</label>
+                        <div class="smallInput">
+                            <select id="teacher" name="teacher" class="form-control" ng-model="ctrl.item.teacher"
+                                    ng-options="user.id as user.user for user in teachers"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-class="{ 'has-error' : itemForm.tma_per.$invalid && !itemForm.tma_per.$pristine }">
+                    <label class="required formItemLabel" for="tma_per">Ονομασία μαθήματος<span
+                            class="form-required">*</span>:</label>
+                    <div class="longInput">
+                        <input id="tma_per" name="tma_per" class="form-control" type="text"
+                               ng-model="ctrl.item.tma_per">
+                    </div>
+                    <p ng-show="itemForm.tma_per.$invalid && !itemForm.tma_per.$pristine" class="help-block">Εισάγετε
+                        περιγραφή μαθήματος.</p>
+                </div>
+                <hr class="myHr"/>
+                <span class="hrSeperator">Τμήμα</span>
+                <div class="inlineItems">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.tm_code.$invalid && !itemForm.tm_code.$pristine }">
+                        <label class="required formItemLabel" for="tm_code">Κωδικός τμήματος<span
+                                class="form-required">*</span>:</label>
+                        <div class="smallInput">
+                            <input id="tm_code" name="tm_code" class="form-control" type="text"
+                                   ng-model="ctrl.item.tm_code">
+                        </div>
+                        <p ng-show="itemForm.tm_code.$invalid && !itemForm.tm_code.$pristine" class="help-block">
+                            Εισάγετε
+                            κωδικό τμήματος.</p>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.tm_per.$invalid && !itemForm.tm_per.$pristine }">
+                        <label class="required formItemLabel" for="tm_per">Τμήμα<span
+                                class="form-required">*</span>:</label>
+                        <div class="smallInput">
+                            <input id="tm_per" name="tm_per" class="form-control" type="text"
+                                   ng-model="ctrl.item.tm_per">
+                        </div>
+                        <p ng-show="itemForm.tm_per.$invalid && !itemForm.tm_per.$pristine" class="help-block">Εισάγετε
+                            τμήμα.</p>
+                    </div>
+                </div>
+                <hr class="myHr"/>
+                <span class="hrSeperator">Λεμπτομέριες</span>
+                <div class="inlineItems">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.pm.$invalid && !itemForm.pm.$pristine }">
+                        <label class="required formItemLabel" for="pm">ΠΡΟ/ΜΕΤ<span
+                                class="form-required">*</span>:</label>
+                        <div class="smallInput">
+                            <input id="pm" name="pm" class="form-control" type="text" ng-model="ctrl.item.pm">
+                        </div>
+                        <p ng-show="itemForm.pm.$invalid && !itemForm.pm.$pristine" class="help-block">Εισάγετ
+                            είδος.</p>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.ps_ex.$invalid && !itemForm.ps_ex.$pristine }">
+                        <label class="required formItemLabel" for="ps_ex">Εξάμημο<span
+                                class="form-required">*</span>:</label>
+                        <div class="smallInput">
+                            <input id="ps_ex" name="ps_ex" class="form-control" type="number"
+                                   ng-model="ctrl.item.ps_ex">
+                        </div>
+                        <p ng-show="itemForm.ps_ex.$invalid && !itemForm.ps_ex.$pristine" class="help-block">Εισάγετε
+                            εξάμημο.</p>
+                    </div>
+                </div>
+                <div class="inlineItems">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.ps_dm.$invalid && !itemForm.ps_dm.$pristine }">
+                        <label class="required formItemLabel" for="ps_dm">Διδακτικές μονάδες<span class="form-required">*</span>:</label>
+                        <div class="smallInput">
+                            <input id="ps_dm" name="ps_dm" class="form-control" type="text" ng-model="ctrl.item.ps_dm">
+                        </div>
+                        <p ng-show="itemForm.ps_dm.$invalid && !itemForm.ps_dm.$pristine" class="help-block">Εισάγετε
+                            έτος.</p>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.ps_km.$invalid && !itemForm.ps_km.$pristine }">
+                        <label class="required formItemLabel" for="ps_km">ps_km<span
+                                class="form-required">*</span>:</label>
+                        <div class="smallInput">
+                            <input id="ps_km" name="ps_km" class="form-control" type="text" ng-model="ctrl.item.ps_km">
+                        </div>
+                        <p ng-show="itemForm.ps_km.$invalid && !itemForm.ps_km.$pristine" class="help-block">Enter
+                            ps_km.</p>
+                    </div>
+                </div>
+                <hr class="myHr"/>
+                <span class="hrSeperator">Configurations</span>
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class="formItemLabel" for="conf_id">Configuration-config_id:</label>
+                        <div class="smallInput">
+                            <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
+                                    ng-options="config.id as config.year for config in configs"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="formItemLabel" for="ps_id">Πρόγραμμα σπουδών ID:</label>
+                        <div class="smallInput">
+                            <input id="ps_id" name="ps_id" class="form-control" type="text" ng-model="ctrl.item.ps_id">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.id>0">Ανανέωση
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.tm_code && !ctrl.item.id">Αποθήκευση
+            </button>
+        </form>
+    </div>
 </div>

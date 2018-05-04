@@ -10,7 +10,7 @@
         <div class="pageTitle">Διαχείριση Αίθουσας</div>
     </div>
     <div class="contentHolder">
-        <form class="roomForm" name="roomForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <!-- NAME -->
             <div class="formGroupItems">
                 <div class="form-group">
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="type" class="required formItemLabel">Κατηγορια:</label>
                         <div class="extraSmallInput">
-                            <select id="type" class="form-control" ng-model="ctrl.item.category" class="form-control"
+                            <select id="type" class="form-control" ng-model="ctrl.item.category"
                                     ng-options="category.id as category.descr for category in categories"> </select>
                         </div>
                     </div>
@@ -50,7 +50,6 @@
                 </div>
                 <hr class="myHr"/>
                 <span class="hrSeperator">Διεύθυνση</span>
-
                 <!-- ADDRESS -->
                 <div class="form-group">
                     <label for="address" class="required formItemLabel">Διευθυνση:</label>
@@ -59,17 +58,16 @@
                                ng-model="ctrl.item.address">
                     </div>
                 </div>
-
                 <div class="inlineItems">
                     <!-- building -->
                     <div class="form-group"
-                         ng-class="{ 'has-error' : roomForm.building.$invalid && !roomForm.building.$pristine }">
+                         ng-class="{ 'has-error' : itemForm.building.$invalid && !itemForm.building.$pristine }">
                         <label for="building" class="required formItemLabel">Κτίριο<span class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="building" name="building" class="form-control" type="text"
                                    ng-model="ctrl.item.building">
                         </div>
-                        <p ng-show="roomForm.building.$invalid && !roomForm.building.$pristine" class="help-block">
+                        <p ng-show="itemForm.building.$invalid && !itemForm.building.$pristine" class="help-block">
                             Εισάγετε κτίριο.</p>
                     </div>
                     <!--floor-->
@@ -80,23 +78,20 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="formGroupItems">
                 <hr class="myHr"/>
                 <span class="hrSeperator">Έδρανα</span>
-
                 <div class="inlineItems">
                     <!--active-->
                     <div class="form-group"
-                         ng-class="{ 'has-error' : roomForm.active.$invalid && !roomForm.active.$pristine }">
+                         ng-class="{ 'has-error' : itemForm.active.$invalid && !itemForm.active.$pristine }">
                         <label for="active" class="required formItemLabel smallInputLabel">Ενεργά<span
                                 class="form-required">*</span>:</label>
                         <div class="extraSmallInput">
                             <input id="active" name="active" class="form-control" type="number"
                                    ng-model="ctrl.item.active">
-                            <p ng-show="roomForm.active.$invalid && !roomForm.active.$pristine" class="help-block">
+                            <p ng-show="itemForm.active.$invalid && !itemForm.active.$pristine" class="help-block">
                                 Εισάγετε ενεργά καθίσματα.</p>
                         </div>
                     </div>
@@ -110,13 +105,13 @@
                     </div>
                     <!--nonexist-->
                     <div class="form-group"
-                         ng-class="{ 'has-error' : roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine }">
+                         ng-class="{ 'has-error' : itemForm.nonexist.$invalid && !itemForm.nonexist.$pristine }">
                         <label for="nonexist" class="required formItemLabel midInputLabel">Ανενεργά<span
                                 class="form-required">*</span>:</label>
                         <div class="extraSmallInput">
                             <input id="nonexist" name="nonexist" class="form-control" type="text"
                                    ng-model="ctrl.item.nonexist">
-                            <p ng-show="roomForm.nonexist.$invalid && !roomForm.nonexist.$pristine" class="help-block">
+                            <p ng-show="itemForm.nonexist.$invalid && !itemForm.nonexist.$pristine" class="help-block">
                                 Εισάγετε ανενεργά καθίσματα.</p>
                         </div>
                     </div>
@@ -166,7 +161,6 @@
                                    ng-model="ctrl.item.width">
                         </div>
                     </div>
-
                     <!--capasity_categ-->
                     <div class="form-group">
                         <label for="capasity_categ" class="required formItemLabel midInputLabel">Κατηγ. Χωρητ.:</label>
@@ -175,9 +169,7 @@
                                    ng-model="ctrl.item.capasity_categ">
                         </div>
                     </div>
-
                 </div>
-
                 <!--xoros-->
                 <div class="form-group">
                     <label for="xoros" class="required formItemLabel">Χώρος:</label>
@@ -185,9 +177,7 @@
                         <input id="xoros" name="xoros" class="form-control" type="text" ng-model="ctrl.item.xoros">
                     </div>
                 </div>
-
             </div>
-
             <div class="formGroupItems">
                 <!--stat_comm-->
                 <div class="form-group">
@@ -198,7 +188,6 @@
                     </div>
                 </div>
             </div>
-
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                     ng-if="ctrl.item.id>0">Ανανέωση
             </button>

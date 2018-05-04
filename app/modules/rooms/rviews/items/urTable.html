@@ -14,17 +14,17 @@
         <tbody class="contentScroll">
         <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filter"
             style="cursor: pointer">
-            <td>{{items.id }}</td>
-            <td>{{items.descr}}</td>
-            <td>{{items.pivot.comments }}</td>
-            <td>{{items.pivot.stat }}</td>
-            <td>{{items.pivot.from }}</td>
-            <td>{{items.pivot.to }}</td>
+            <td>{{item.id }}</td>
+            <td>{{item.descr}}</td>
+            <td>{{item.pivot.comments }}</td>
+            <td>{{item.pivot.stat }}</td>
+            <td>{{item.pivot.from }}</td>
+            <td>{{item.pivot.to }}</td>
             <td>
-                <button ng-click="ctrl.editPivotData(items)" type="button" class="btn btn-info">
+                <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button ng-click="ctrl.deleteData(items.id)" type="button" class="btn btn-danger">
+                <button ng-click="ctrl.deleteData(item.id)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>

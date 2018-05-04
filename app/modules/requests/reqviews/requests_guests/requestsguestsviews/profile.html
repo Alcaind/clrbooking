@@ -1,39 +1,62 @@
-<div>
-    <div style="text-align: left;padding-left: 5px;">
-        <a href back-button type="button" class="btn btn-warning">
-            <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
-            </span>
-        </a>
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-chevron-left">
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+				</span>
+            </a>
+        </div>
+        <div class="pageTitle">Διαχείριση μελών τηλεδιάσκεψης</div>
     </div>
-    <form class="psStatsForm" name="psStatsForm" novalidate>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="formGroupItems">
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class="required formItemLabel" for="name">Όνοματεπώνυμο:</label>
+                        <div class="smallInput">
+                            <input id="name" name="name" class="form-control" type="text" ng-model="ctrl.item.name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="required formItemLabel" for="uni">Πανεπιστήμιο:</label>
+                        <div class="smallInput">
+                            <input id="uni" name="uni" class="form-control" type="text" ng-model="ctrl.item.uni"></div>
 
-        <div class="form-group">
-            <label class="required" for="name">Όνοματεπώνυμο:</label>
-            <input id="name" name="name" class="form-control" type="text" ng-model="ctrl.item.name">
-        </div>
-        <div class="form-group">
-            <label class="required" for="uni">Πανεπιστήμιο:</label>
-            <input id="uni" name="uni" class="form-control" type="text" ng-model="ctrl.item.uni">
-        </div>
-        <div class="form-group">
-            <label class="required" for="email">E-mail:</label>
-            <input id="email" name="email" class="form-control" type="email" ng-model="ctrl.item.email">
-        </div>
-        <div class="form-group">
-            <label class="required" for="phone">Τηλέφωνο:</label>
-            <input id="phone" name="phone" class="form-control" type="number" ng-model="ctrl.item.phone">
-        </div>
-        <div class="form-group">
-            <label class="required" for="comment">Σχόλια:</label>
-            <textarea id="comment" name="comment" class="form-control" type="text"
-                      ng-model="ctrl.item.comment"></textarea>
-        </div>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.id>0">Ανανέωση
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                ng-if="ctrl.item.name && !ctrl.item.id">Αποθήκευση
-        </button>
-    </form>
+                    </div>
+                </div>
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class="required formItemLabel" for="email">E-mail:</label>
+                        <div class="smallInput">
+                            <input id="email" name="email" class="form-control" type="email" ng-model="ctrl.item.email">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="required formItemLabel" for="phone">Τηλέφωνο:</label>
+                        <div class="smallInput">
+                            <input id="phone" name="phone" class="form-control" type="number"
+                                   ng-model="ctrl.item.phone">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="required formItemLabel" for="comment">Σχόλια:</label>
+                    <div class="longInput">
+                        <textarea id="comment" name="comment" class="form-control" type="text"
+                                  ng-model="ctrl.item.comment"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.id>0">Ανανέωση
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.name && !ctrl.item.id">Αποθήκευση
+            </button>
+        </form>
+    </div>
 </div>
