@@ -868,6 +868,7 @@
       "filter": ""
     }
   ],
+
   "homeButtonAdminTableConf": [
     {
       "title": "Χρήστες",
@@ -899,7 +900,7 @@
         },
         {
           "column": "roomuse",
-          "title": "Χρήση Αιθουσών."
+          "title": "Χρήση Αιθουσών"
         },
         {
           "column": "items",
@@ -921,10 +922,6 @@
         {
           "column": "tms",
           "title": "Τμήματα"
-        },
-        {
-          "column": "kats",
-          "title": "Κατευθύνσεις"
         }
       ]
     },

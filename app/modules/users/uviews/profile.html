@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <label class="required formItemLabel smallInputLabel" for="pw2">Επιβεβαίωση<span
                                 class="form-required">*</span>:</label>
-                        <input id="pw2" name="pw2" type="{{passwordString2}}" ng-model="ctrl.item.hash"
+                        <input id="pw2" name="pw2" type="{{passwordString2}}" ng-model="pw2"
                                ng-init="passwordString2='password'" pw-check="pw1" ng-required=""/>
                         <a type="button" class="btn btn-success btn-eye" style="background:#800000;"
                            ng-click="passwordString2==='text'?passwordString2='password':passwordString2='text';errorString='*'+pw2+'*';">
@@ -41,7 +41,7 @@
                         </a>
                         <div class="msg-block" ng-show="itemForm.$error">
                             <span class="msg-error"
-                                  ng-show="itemForm.pw2.$error.pw1">Ο κωδικός δεν ταιριάζει.</span>
+                                  ng-show="itemForm.pw2.$error.pwmatch">Ο κωδικός δεν ταιριάζει.</span>
                         </div>
                     </div>
                 </div>

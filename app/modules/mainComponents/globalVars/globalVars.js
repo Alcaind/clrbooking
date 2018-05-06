@@ -2,7 +2,7 @@
 
 var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies', 'MainComponents']);
 
-globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($http, $cookies, $window) {
+globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', 'api', function ($http, $cookies, $window, api) {
     var globalVariables = {};
     var listeners = [];
 
@@ -41,12 +41,17 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', function ($
     }
 
     function initFromFile(fName) {
-        $http.get(fName)
+        api.apiCall('GET', '/panteion/app/api/' + fName, function (res) {
+            setGlobal(res.data);
+        }, function (res) {
+            console.log(res | JSON);
+        });
+        /*$http.get(fName)
             .then(function (res) {
                 setGlobal(res.data);
             }, function (res) {
                 console.log(res | JSON);
-            });
+            });*/
     }
 
     function cookieSave() {

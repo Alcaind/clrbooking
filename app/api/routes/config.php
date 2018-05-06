@@ -114,3 +114,17 @@ $app->get('/ps/config/{id}', function (Request $request, Response $response, $ar
     }
     return $response->getBody()->write($ps->toJson());
 });
+
+$app->get('/appconfig/{param}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $param = $args['param'];
+    try {
+        $result = \App\Models\Params::where('name', '=', $param)->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($result->toJson());
+});
