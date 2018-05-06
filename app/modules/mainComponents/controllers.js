@@ -7,7 +7,6 @@ angular.module('MainComponents', [
 ])
 
     .controller('MainComponentsController', ['$scope', '$interval', '$rootScope', '$location', function ($scope, $interval, $rootScope, $location) {
-
     }])
     .run(['$rootScope', '$location', '$cookies', '$http', 'AuthenticationService',
         function ($rootScope, $location, $cookies, $http, AuthenticationService) {
@@ -21,26 +20,6 @@ angular.module('MainComponents', [
             }
 
             $rootScope.inAuthentication = true;
-
-            /*AuthenticationService.Login('', '', function (response) {
-                $rootScope.inAuthentication = false;
-                if (response === 'fail') {
-                    $rootScope.globals = {item: null};
-                    $location.path('/login');
-                    return;
-                }
-
-                if (!response.data.success || typeof response.data.success !== 'object') {
-                    $rootScope.errorString = 'Δεν υπάρχει ενεργό login στην Υπηρεσία! Προσπαθήστε ΞΑΝΑ!';
-                    $rootScope.globals = {item: null};
-                    $location.path('/login');
-                    return;
-                }
-
-                $rootScope.globals = {item: {}};
-                $rootScope.globals.item = response.data.success;
-                $rootScope.user = $rootScope.globals.item.user;
-            })*/
         }
     ])
     .directive('navmenu', function () {
@@ -64,10 +43,9 @@ angular.module('MainComponents', [
 
         $scope.logout = function () {
             AuthenticationService.ClearCredentials();
-
         };
 
-        $scope.close = function () {
+        $scope.closeWithCookie = function () {
             globalVarsSrv.cookieSave();
         };
 
@@ -77,9 +55,7 @@ angular.module('MainComponents', [
             api.apiCall('GET', 'api/public/users', function (results) {
                 $scope.users = results.data;
             });
-
         };
-
     }])
     .directive('footer', function () {
         return {
@@ -117,17 +93,30 @@ angular.module('MainComponents', [
             return $myModalInstance
         };
 
+        factory.infoBookRoom = function (reqID, okCallback, cancelCallback) {
+            var $myModalInstance = $uibModal.open({
+                templateUrl: 'modules/mainComponents/views/infoFormPopUp.html',
+                controller: 'infoFormPopUpController',
+                size: 'lg',
+                resolve: {
+                    config: function () {
+                        return {reqID: reqID}
+                    }
+                }
+            });
+            $myModalInstance.result.then(okCallback, cancelCallback);
+            return $myModalInstance;
+        };
+
         return factory;
     }])
     .controller("PopupController", ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
-
         $scope.ok = function () {
             $uibModalInstance.close('ok');
         };
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-
     }])
     .controller("gneralInfoPopupController", ['$scope', '$uibModalInstance', 'config', function ($scope, $uibModalInstance, config) {
         $scope.title = config.title ? config.title : "Info";
@@ -200,7 +189,7 @@ angular.module('MainComponents', [
         }
     })
     .controller('showHideOptionsController', ['$scope', function ($scope) {
-        $scope.optionsVisible = true;
+        $scope.optionsVisible = false;
 
         $scope.hideShowOptions = function () {
             $scope.optionsVisible = !$scope.optionsVisible;
@@ -215,9 +204,7 @@ angular.module('MainComponents', [
             templateUrl: 'modules/mainComponents/views/dmth.html'
         }
     })
-
     //little pop-up mouse-over
-
     .directive('toggle', function () {
         return {
             restrict: 'A',
@@ -231,19 +218,18 @@ angular.module('MainComponents', [
             }
         };
     })
-
     .directive('operations', function () {
         return {
             restrict: "EA",
             scope: {
                 hr: "@",
                 content: "@",
-                gicon: "@"
+                gicon: "@",
+                place: "@"
             },
             templateUrl: 'modules/mainComponents/views/buttonPopUp.html'
         }
     })
-
     .directive('deleteRowButton', function () {
         return {
             restrict: "EA",
@@ -256,23 +242,23 @@ angular.module('MainComponents', [
             templateUrl: 'modules/mainComponents/views/dmTitle.html'
         }
     })
-
     .directive('tableTools', function () {
         return {
             restrict: "EA",
             templateUrl: 'modules/mainComponents/views/tableTools.html'
         }
     })
-
     .controller('configController', ['$scope', 'api', function ($scope, api) {
         $scope.configuration = {};
         api.apiCall('GET', 'api/public/config/1', function (result) {
             $scope.configuration = result.data;
+            $scope.configuration.s = false;
             $scope.configuration.totalDays = calcDaysDiff($scope.configuration.tod, $scope.configuration.fromd);
             for (var i = 0; i < $scope.configuration.periods.length; i++) {
                 $scope.configuration.periods[i].totalDays = calcDaysDiff($scope.configuration.periods[i].tod, $scope.configuration.periods[i].fromd);
                 $scope.configuration.periods[i].fdIndex = calcDaysDiff($scope.configuration.fromd, $scope.configuration.periods[i].fromd);
                 $scope.configuration.periods[i].tdIndex = $scope.configuration.periods[i].fdIndex + $scope.configuration.periods[i].totalDays;
+                $scope.configuration.periods[i].s = false;
             }
         });
 
@@ -281,6 +267,8 @@ angular.module('MainComponents', [
         }
 
         $scope.setPeriod = function (period) {
+            $scope.selectedPeriod.s = false;
+            period.s = true;
             $scope.selectedPeriod = period;
         }
     }])
@@ -291,7 +279,21 @@ angular.module('MainComponents', [
             controller: "configController",
             templateUrl: 'modules/mainComponents/config/configGraph.html'
         }
-    });
+    })
+    .directive('fromToDatePicker', function () {
+        return {
+            restrict: "EA",
+            scope: {fromd: "=", tod: "="},
+            templateUrl: 'modules/mainComponents/views/datetime/fromtodate.html'
+        }
+    })
+    .directive('fromToTimePicker', function () {
+        return {
+            restrict: "EA",
+            scope: {fromt: "=", tot: "="},
+            templateUrl: 'modules/mainComponents/views/datetime/fromtotime.html'
+        }
+    })
 
-
+;
 

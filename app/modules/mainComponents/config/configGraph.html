@@ -1,13 +1,15 @@
-<div style="">
-    <div style="width: {{configuration.totalDays}}px;text-align: center;  background-color: #1d9ad6; "
+<div style="padding: 4px">
+    <div style="width: {{configuration.totalDays}}px;text-align: center; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab; font-size: 10px;"
+         class="btn btn-{{configuration.s?'success':'primary'}}"
          data-toggle="popover"
          data-content="{{configuration.fromd| date:'dd/MM/yyyy'}} - {{configuration.tod| date:'dd/MM/yyyy'}}"
-         data-trigger="hover">
+         data-trigger="hover"
+         ng-click="setPeriod(configuration)">
         {{configuration.year}}
     </div>
-    <div style="display: contents;height: 25px;">
-        <div ng-repeat="p in configuration.periods"
-             style="width: {{p.totalDays}}px; background-color: cornflowerblue; cursor: pointer; color: #F1F1F1; text-align: center; margin: 2px; position: relative; left: {{p.fdIndex}}px; width: {{p.totalDays}}px; "
+    <div style="display: flex;height: 25px; ">
+        <div ng-repeat="p in configuration.periods" class="btn btn-{{p.s?'success':'primary'}}"
+             style="width: {{p.totalDays}}px; position: sticky; cursor: pointer; color: #F1F1F1; text-align: center; margin: 2px; left: {{p.fdIndex}}px; width: {{p.totalDays}}px; font-size: small; border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab; font-size: 10px;"
              data-toggle="popover"
              data-content="{{p.fromd| date:'dd/MM/yyyy'}} - {{p.tod| date:'dd/MM/yyyy'}} ({{p.comments}})"
              data-trigger="hover"
