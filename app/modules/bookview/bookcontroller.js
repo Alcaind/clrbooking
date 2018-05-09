@@ -7,7 +7,7 @@ angular.module('RoomBook', [
     'Authentication',
     'GlobalVarsSrvs'
 ])
-    .controller('BookController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams) {
+    .controller('BookController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService) {
         $scope.periods = [];
         $scope.tmpDate = new Date();
         $scope.views = [];
@@ -68,6 +68,7 @@ angular.module('RoomBook', [
         ];
         $scope.mode = 'reporting';
 
+        AuthenticationService.CheckCredentials();
 
         $scope.dayChecked = function (day) {
             day.s = !day.s;

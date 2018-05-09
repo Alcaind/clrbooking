@@ -3,7 +3,7 @@
     <!--<h1>{{tmpDate+''}}</h1>-->
     <div id="selectedParams" style="display: flex">
         <div id="selectedPeriod" style="width: 100%">
-            <div>Από {{item.fromd}} Μέχρι {{item.tod}}</div>
+            <div>Από {{item.fromd | date : "dd-MM-yyyy" :"GMT" }} Μέχρι {{item.tod | date : "dd-MM-yyyy" :"GMT"}}</div>
             <div>Ημέρες
                 <div ng-repeat="d in selectedDays" ng-if="d.s">{{d.d}}</div>
             </div>

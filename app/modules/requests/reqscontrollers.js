@@ -9,8 +9,8 @@ angular.module('Requests', [
 ]).controller('RequestsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv) {
     $scope.ctrl = makeController.mainController('/requests', 'requestsTableConf', 'Κατάλογος Αιτημάτων');
     $scope.ctrl.init();
-    $scope.statusOptions = ClrStatusSrv.getStatus('requestStatus');
-    $scope.weekOptions = ClrStatusSrv.getStatus('weekdaysTableDateIndex');
+    $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
+    $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
 
 }])
     .controller('RequestProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', '$filter', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api, $filter) {

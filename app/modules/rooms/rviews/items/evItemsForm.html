@@ -1,29 +1,43 @@
-<div>
-    <form><br>
-        <label>Σχόλια:<input type="text" ng-model="ctrl.pivotData.comments" class="form-control"
-                             placeholder="comment"></label><br>
-        <br>
-        <label>Κατάσταση:<input type="text" ng-model="ctrl.pivotData.stat" class="form-control"
-                                placeholder="comment"></label><br>
-        <br>
-        <label>Από Ημ/νία:
-            <pre> <em>{{ctrl.pivotData.from | date:'fullDate' }}</em></pre>
-        </label> <br>
-        <div style="display:flex; min-height:290px;">
-            <div uib-datepicker ng-model="ctrl.pivotData.from" class="well well-sm"></div>
-        </div>
-        <label>Μέχρι Ημ/νία:
-            <pre> <em>{{ctrl.pivotData.to | date:'fullDate' }}</em></pre>
-        </label> <br>
-        <div style="display:flex; min-height:290px;">
-            <div uib-datepicker ng-model="ctrl.pivotData.to" class="well well-sm"></div>
-        </div>
-
-        <button type="button" class="btn btn-primary" ng-click="ctrl.insertPivotItem(ctrl.pivotData)"
-                style="padding: 5px">ok
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="ctrl.cancelPivotData()" style="padding: 5px">
-            cancel
-        </button>
-    </form>
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageTitle">Επεξεργασία εξοπλισμού</div>
+    </div>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="form-group">
+                <label for="stat_comm" class=" formItemLabel">Σχόλια:</label>
+                <div class="longInput">
+                        <textarea id="stat_comm" name="stat_comm" class="form-control" type="text"
+                                  ng-model="ctrl.pivotData.comments"></textarea>
+                </div>
+                <div class="directiveFormItemA">
+                    <status-selector status-title="Κατάσταση" options="itemStatus"
+                                     output-value="ctrl.pivotData.stat"></status-selector>
+                </div>
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="fromd">Από ημ/νία:</label>
+                        <div class="midInput">
+                            <input id="fromd" name="fromd" class="form-control" type="date"
+                                   ng-model="ctrl.pivotData.from">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="tod">Έως ημ/νία:</label>
+                        <div class="midInput">
+                            <input id="tod" name="tod" class="form-control" type="date"
+                                   ng-model="ctrl.pivotData.to">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.insertPivotItem(ctrl.pivotData)"
+                    style="padding: 5px; float: right">ok
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.cancelPivotData()"
+                    style="padding: 5px; float: right">
+                cancel
+            </button>
+        </form>
+    </div>
 </div>

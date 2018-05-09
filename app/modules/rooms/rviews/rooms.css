@@ -2,7 +2,7 @@
     padding: 8px;
 }
 
-item-profile {
+.item-profile {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -48,6 +48,12 @@ item-profile {
     height: calc(100% - 70px);
     display: flex;
     width: 100%;
+
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+
 }
 
 .itemForm {
@@ -163,4 +169,21 @@ item-profile {
 .myHr {
     margin-bottom: 10px;
     border-top: 1px solid #c56a6a;
+}
+
+.directiveFormItemA status-selector div label {
+    min-width: 180px;
+    max-width: 180px;
+    width: 100%;
+    line-height: 34px;
+    text-align: -webkit-right;
+    padding-right: 10px;
+}
+
+.directiveFormItemA status-selector div select#status {
+    width: 180px;
+}
+
+.directiveFormItemA status-selector div {
+    display: flex;
 }

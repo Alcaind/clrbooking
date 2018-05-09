@@ -160,7 +160,7 @@ angular.module('MainComponents', [
         }
     })
     .controller('PaginationController', ['$scope', function ($scope) {
-        $scope.pageThresholds = [{th: 1}, {th: 3}, {th: 5}, {th: 10}, {th: 20}, {th: 50}];
+        $scope.pageThresholds = [{th: 1}, {th: 3}, {th: 5}, {th: 10}, {th: 20}, {th: 50}, {th: 'all'}];
         $scope.currentPage = 1;
         $scope.maxSize = 5;
         $scope.itemsPerPage = 10;

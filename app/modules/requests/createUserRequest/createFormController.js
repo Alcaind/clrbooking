@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('Requests')
-    .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams) {
+    .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService) {
 
         $scope.tmpDate = new Date();
         $scope.views = [];
         $scope.currentPage = 0;
         $scope.book = [];
         $scope.rooms = [];
-        $scope.weekOptions = ClrStatusSrv.getStatus('weekdaysTableDateIndex');
+        $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
         $scope.user = globalVarsSrv.getGlobalVar('auth');
         $scope.courses = [];
         $scope.teachers = [];
@@ -56,6 +56,8 @@ angular.module('Requests')
             }
         ];
         $scope.mode = 'inserting';
+
+        AuthenticationService.CheckCredentials();
 
 
 

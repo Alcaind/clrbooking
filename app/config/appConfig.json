@@ -273,13 +273,6 @@
       "filter": ""
     },
     {
-      "column": "tm_owner",
-      "title": "Τμήμα",
-      "visible": true,
-      "sorted": false,
-      "filter": ""
-    },
-    {
       "column": "stat_comm",
       "title": "Σχόλια",
       "visible": true,
@@ -868,7 +861,6 @@
       "filter": ""
     }
   ],
-
   "homeButtonAdminTableConf": [
     {
       "title": "Χρήστες",
@@ -900,7 +892,7 @@
         },
         {
           "column": "roomuse",
-          "title": "Χρήση Αιθουσών"
+          "title": "Χρήση Αιθουσών."
         },
         {
           "column": "items",
@@ -984,12 +976,6 @@
       "hr": "#/rooms/id/items",
       "content": "Εξοπλισμός",
       "gicon": "glyphicon-blackboard",
-      "place": "left"
-    },
-    {
-      "hr": "#/rooms/id/tms",
-      "content": "Τμήματα",
-      "gicon": "glyphicon-map-marker",
       "place": "left"
     }
   ],

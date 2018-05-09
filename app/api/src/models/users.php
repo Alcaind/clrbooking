@@ -25,11 +25,11 @@ class Users extends Model {
     {
         return $this->belongsToMany('\\App\\Models\\Tm', 'tm_users', 'user_id', 'tm_id')->withPivot('comments');
     }
-//
-//    public function teacher()
-//    {
-//        return $this->belongsToMany('\\App\\Models\\Ps', 'ps_teacher','tm_id', 'user_id')->withPivot ('comment');
-//    }
+
+    public function teacher()
+    {
+        return $this->belongsToMany('\\App\\Models\\Ps', 'ps_teachers', 'tm_id', 'user_id')->withPivot('comment');
+    }
 
     public function superTms()
     {

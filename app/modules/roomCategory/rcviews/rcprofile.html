@@ -13,7 +13,7 @@
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <div class="formGroupItems">
                 <div class="form-group" ng-class="{ 'has-error' : itemForm.synt.$invalid && !itemForm.synt.$pristine }">
-                    <label class="required formItemLabel" for="synt">Συντομογραφία<span class="form-required">*</span>:</label>
+                    <label class=" formItemLabel" for="synt">Συντομογραφία<span class="form-required">*</span>:</label>
                     <div class="longInput">
                         <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt">
                     </div>
@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="descr" class="required formItemLabel">Περιγραφή:</label>
+                    <label for="descr" class=" formItemLabel">Περιγραφή:</label>
                     <div class="longInput">
                         <textarea id="descr" name="descr" class="form-control" type="text"
                                   ng-model="ctrl.item.descr"></textarea>

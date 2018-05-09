@@ -37,8 +37,9 @@ angular.module('MainComponents')
 
                 api.apiCall('GET', baseURL + '/requests/' + $scope.mainData.req_id, function (results) {
                     $scope.requests = results.data;
-                    api.apiCall('GET', baseURL + "/tms/" + $scope.requests.users.tm_id, function (results) {
+                    api.apiCall('GET', baseURL + "/tms/" + $scope.requests.ps.tm_code, function (results) {
                         $scope.tm = results.data;
+
                     })
                 });
             });

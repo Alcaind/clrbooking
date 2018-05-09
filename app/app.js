@@ -467,7 +467,7 @@ angular.module('clrBooking', [
         function ($rootScope, $location, $http, globalVarsSrv, AuthenticationService) {
             var usr = null;
             if (usr = AuthenticationService.CheckCredentials()) {
-                /*globalVarsSrv.appInit('config/appConfig.json', usr);*/
+                // globalVarsSrv.appInit('config/appConfig.json', usr);
                 globalVarsSrv.appInit('appConfig', usr);
             }
             // console.log('in App Run');

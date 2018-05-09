@@ -13,7 +13,7 @@
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <div class="formGroupItems">
                 <div class="form-group" ng-class="{ 'has-error' : itemForm.role.$invalid && !itemForm.role.$pristine }">
-                    <label class="required formItemLabel" for="role">Ρόλος<span class="form-required">*</span>:</label>
+                    <label class=" formItemLabel" for="role">Ρόλος<span class="form-required">*</span>:</label>
                     <div class="longInput">
                         <input id="role" name="role" class="form-control" type="text" ng-model="ctrl.item.role">
                     </div>
@@ -21,7 +21,7 @@
                         ρόλο.</p>
                 </div>
                 <div class="form-group">
-                    <label for="descr" class="required formItemLabel">Περιγραφή ρόλου:</label>
+                    <label for="descr" class=" formItemLabel">Περιγραφή ρόλου:</label>
                     <div class="longInput">
                         <textarea id="descr" name="descr" class="form-control" type="text"
                                   ng-model="ctrl.item.descr"></textarea>

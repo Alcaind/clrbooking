@@ -58,12 +58,7 @@ angular.module('MainComponents')
 
         }
 
-        /*        function compareCalendarDates(cal1, cal2) {
-                    return (((totCheck >= calObjects[m].fromt && totCheck <= calObjects[m].tot)
-                        || (fromCheck >= calObjects[m].fromt && fromCheck <= calObjects[m].tot))
-                        || ((totCheck <= calObjects[m].tot && fromCheck >= calObjects[m].tot)
-                            || (fromCheck <= calObjects[m].fromt && totCheck >= calObjects[m].fromt)));
-                }         */
+        $scope.newCalendar = [];
 
         /**
          * Plotting requests (new & old)
@@ -83,6 +78,7 @@ angular.module('MainComponents')
             var days = Math.ceil(Math.abs(tod.getTime() - fromd.getTime()) / (1000 * 3600 * 24)); // calculate & holds the distance in headerDays between fromd and tod
             var calendarIndex = null; // pointer in the calendar (creation proccess)
             var calObjects = []; // keeps only the new calendar requests per day (checking perpuse)
+
 
 
             for (var i = 0; i < days; i++) {  // loop parsing all holle days
@@ -146,9 +142,21 @@ angular.module('MainComponents')
                         }
                     }
                     $scope.calendar[calendarIndex - 1] = orderBy($scope.calendar[calendarIndex - 1], ['id', 'pivot.fromt']); //order already booked
+
+                    if (!$scope.newCalendar[calendarIndex - 1]) $scope.newCalendar[calendarIndex - 1] = {};
+                    $scope.calendar[calendarIndex - 1].map(function (book) {
+                        if ($scope.newCalendar[calendarIndex - 1][book.name])
+                            $scope.newCalendar[calendarIndex - 1][book.name].push(book);
+                        else {
+                            $scope.newCalendar[calendarIndex - 1][book.name] = [];
+                            $scope.newCalendar[calendarIndex - 1][book.name].push(book);
+                        }
+                    });
+                    //  $scope.calendar[calendarIndex - 1] = $scope.newCalendar[calendarIndex - 1];
                 }
                 dateIndex.setDate(dateIndex.getDate() + 1); // go to the next day
             }
+
         }
 
         function plotTile(tile, book, cal, calObjects) {
@@ -171,7 +179,7 @@ angular.module('MainComponents')
                     bookObj.color = '#dd3030'; // flag the objects with color
                     calObjects[m].color = '#e4aba8';
                     bookObj.fromBookError.push(calObjects[m]); // push the conflict new room in book room error table
-                    bookObj.did = 'b' + i + '' + j + '' + r + '' + k;  // the div id for view binding
+                    bookObj.did = 'b' + m + calObjects[m].did;  // the div id for view binding
                     $scope.bookingErrors.push(bookObj); // push it in the global errors array
                     //addConflict(bookObj);
                 } else {

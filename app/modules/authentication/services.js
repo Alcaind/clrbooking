@@ -79,7 +79,7 @@ angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
                                 var routes = globalVarsSrv.getGlobalVar('homeButtonUserTableConf');
                                 if (routes) {
                                     var exist = false;
-                                    for (var i = 0; i < routes.length; i++) {
+                                    for (i = 0; i < routes.length; i++) {
                                         if (url.indexOf(routes[i].column) >= 0) {
                                             exist = true;
                                         }

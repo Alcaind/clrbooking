@@ -33,7 +33,8 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', 'api', func
     }
 
     function setGlobal(gVar) {
-        globalVariables = globalVariables ? Object.assign(globalVariables, gVar) : gVar;
+        globalVariables = Object.assign(globalVariables, gVar);
+        cookieSave();
     }
 
     function flushGlobal() {
@@ -41,31 +42,32 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', 'api', func
     }
 
     function initFromFile(fName) {
-        api.apiCall('GET', '/panteion/app/api/' + fName, function (res) {
-            setGlobal(res.data);
+        /*api.apiCall('GET', '/panteion/app/api/public/appconfig/' + fName, function (res) {
+            setGlobal(JSON.parse(res.data[0].value));
         }, function (res) {
             console.log(res | JSON);
-        });
-        /*$http.get(fName)
+        });*/
+        $http.get('config/appConfig.json')
             .then(function (res) {
                 setGlobal(res.data);
             }, function (res) {
                 console.log(res | JSON);
-            });*/
+            });
     }
 
     function cookieSave() {
         $window.localStorage['appConf' + getGlobalVar('auth')['username']] = JSON.stringify(globalVariables);
+
     }
 
     function cookieGet(usr) {
         var appConf = $window.localStorage['appConf' + usr];
-        globalVariables = appConf ? JSON.parse(appConf) : null;
+        globalVariables = appConf ? Object.assign(globalVariables, JSON.parse(appConf)) : globalVariables;
         return globalVariables;
     }
 
     function appInit(fName, usr) {
-        if (!cookieGet(usr)) initFromFile(fName);
+        if (!cookieGet(usr) || !globalVariables['appUrl']) initFromFile(fName);
     }
 
     var glbSrv = {

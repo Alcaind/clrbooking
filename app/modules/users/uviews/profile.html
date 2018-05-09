@@ -13,7 +13,7 @@
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <div class="formGroupItems">
                 <div class="form-group">
-                    <label class="required formItemLabel" for="user">Username:</label>
+                    <label class=" formItemLabel" for="user">Username:</label>
                     <div class="longInput">
                         <input id="user" name="user" type="text" class="form-control" ng-model="ctrl.item.user">
                     </div>
@@ -21,7 +21,7 @@
                 <!--PASSWORD-->
                 <div class="inlineItems">
                     <div class="form-group">
-                        <label class="required formItemLabel " for="pw1">Κωδικός<span
+                        <label class=" formItemLabel " for="pw1">Κωδικός<span
                                 class="form-required">*</span>:</label>
                         <input id="pw1" name="pw1" type="{{passwordString1}}" class="form-control"
                                ng-model="ctrl.item.hash" ng-init="passwordString1='password'" ng-required=""/>
@@ -31,7 +31,7 @@
                         </a>
                     </div>
                     <div class="form-group">
-                        <label class="required formItemLabel smallInputLabel" for="pw2">Επιβεβαίωση<span
+                        <label class=" formItemLabel smallInputLabel" for="pw2">Επιβεβαίωση<span
                                 class="form-required">*</span>:</label>
                         <input id="pw2" name="pw2" type="{{passwordString2}}" ng-model="pw2"
                                ng-init="passwordString2='password'" pw-check="pw1" ng-required=""/>
@@ -53,7 +53,7 @@
                     <!-- FIRSTNAME -->
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.fname.$invalid && !itemForm.fname.$pristine }">
-                        <label for="fname" class="required formItemLabel">Όνομα<span
+                        <label for="fname" class=" formItemLabel">Όνομα<span
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="fname" name="fname" class="form-control" type="text" ng-model="ctrl.item.fname">
@@ -64,7 +64,7 @@
                     <!-- LASTNAME -->
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.sname.$invalid && !itemForm.sname.$pristine }">
-                        <label for="sname" class="required">Επώνυμο<span
+                        <label for="sname" class="">Επώνυμο<span
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="sname" name="sname" class="form-control" type="text" ng-model="ctrl.item.sname">
@@ -76,7 +76,7 @@
                 <div class="inlineItems">
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.phone.$invalid && !itemForm.phone.$pristine }">
-                        <label for="phone" class="required formItemLabel">Τηλέφωνο<span
+                        <label for="phone" class=" formItemLabel">Τηλέφωνο<span
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="phone" name="phone" class="form-control" type="number"
@@ -87,7 +87,7 @@
                             τηλέφωνο.</p>
                     </div>
                     <div class="form-group">
-                        <label for="catid" class="required">Κατηγορία:</label>
+                        <label for="catid" class="">Κατηγορία:</label>
                         <select id="catid" ng-model="ctrl.item.cat_id" class="form-control"
                                 ng-options="ucategorie.id as ucategorie.descr for ucategorie in ucategories"> </select>
                     </div>
@@ -98,7 +98,7 @@
                 <span class="hrSeperator">E-mail</span>
                 <div class="form-group"
                      ng-class="{ 'has-error' : itemForm.email1.$invalid && !itemForm.email1.$pristine }">
-                    <label class="required formItemLabel" for="email1">Email<span
+                    <label class=" formItemLabel" for="email1">Email<span
                             class="form-required">*</span>:</label>
                     <div class="longInput">
                         <input id="email1" name="email1" class="form-control" type="email"
@@ -108,7 +108,7 @@
                         δεν είναι σωστό.</p>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : itemForm.email2.$invalid  }">
-                    <label for="email2" class="required formItemLabel">Email 2ο:</label>
+                    <label for="email2" class=" formItemLabel">Email 2ο:</label>
                     <div class="longInput">
                         <input id="email2" name="email2" class="form-control" type="email"
                                ng-model="ctrl.item.em_sec">
@@ -116,7 +116,7 @@
                     <p ng-show="itemForm.email2.$invalid" class="help-block">Το e-mail δεν είναι σωστό.</p>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : itemForm.emailp.$invalid}">
-                    <label for="emailp" class="required formItemLabel">Email Παντείου:</label>
+                    <label for="emailp" class=" formItemLabel">Email Παντείου:</label>
                     <div class="longInput">
                         <input id="emailp" name="emailp" class="form-control" type="email"
                                ng-model="ctrl.item.em_pant">
@@ -127,7 +127,7 @@
             <div class="formGroupItems">
                 <!--stat_comm-->
                 <div class="form-group">
-                    <label for="comments" class="required formItemLabel">Σχόλια:</label>
+                    <label for="comments" class=" formItemLabel">Σχόλια:</label>
                     <div class="longInput">
                         <textarea id="comments" name="comments" class="form-control" type="text"
                                   ng-model="ctrl.item.comments"></textarea>

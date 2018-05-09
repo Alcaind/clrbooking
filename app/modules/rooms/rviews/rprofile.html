@@ -14,13 +14,13 @@
             <!-- NAME -->
             <div class="formGroupItems">
                 <div class="form-group">
-                    <label class="required formItemLabel" for="name">Όνομα:</label>
+                    <label class=" formItemLabel" for="name">Όνομα:</label>
                     <div class="longInput">
                         <input id="name" name="name" class="form-control" type="text" ng-model="ctrl.item.name">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="required formItemLabel" for="tm_owner">Τμήμα:</label>
+                    <label class=" formItemLabel" for="tm_owner">Τμήμα:</label>
                     <div class="longInput">
                         <select id="tm_owner" name="tm_owner" class="form-control" ng-model="ctrl.item.tm_owner"
                                 ng-options="tm.id as tm.title for tm in tms"></select>
@@ -29,7 +29,7 @@
                 <div class="inlineItems">
                     <!--type-->
                     <div class="form-group">
-                        <label for="type" class="required formItemLabel">Κατηγορια:</label>
+                        <label for="type" class=" formItemLabel">Κατηγορια:</label>
                         <div class="extraSmallInput">
                             <select id="type" class="form-control" ng-model="ctrl.item.category"
                                     ng-options="category.id as category.descr for category in categories"> </select>
@@ -41,7 +41,7 @@
                                          output-value="ctrl.item.status"></status-selector>
                     </div>
                     <div class="form-group">
-                        <label class="required formItemLabel smallInputLabel" for="conf_id">Έτος:</label>
+                        <label class=" formItemLabel smallInputLabel" for="conf_id">Έτος:</label>
                         <div class="extraSmallInput">
                             <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
                                     ng-options="config.id as config.year for config in configs"></select>
@@ -52,7 +52,7 @@
                 <span class="hrSeperator">Διεύθυνση</span>
                 <!-- ADDRESS -->
                 <div class="form-group">
-                    <label for="address" class="required formItemLabel">Διευθυνση:</label>
+                    <label for="address" class=" formItemLabel">Διευθυνση:</label>
                     <div class="longInput">
                         <input id="address" name="address" class="form-control" type="text"
                                ng-model="ctrl.item.address">
@@ -62,7 +62,7 @@
                     <!-- building -->
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.building.$invalid && !itemForm.building.$pristine }">
-                        <label for="building" class="required formItemLabel">Κτίριο<span class="form-required">*</span>:</label>
+                        <label for="building" class=" formItemLabel">Κτίριο<span class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="building" name="building" class="form-control" type="text"
                                    ng-model="ctrl.item.building">
@@ -72,7 +72,7 @@
                     </div>
                     <!--floor-->
                     <div class="form-group">
-                        <label for="floor" class="required formItemLabel smallInputLabel">Όροφος:</label>
+                        <label for="floor" class=" formItemLabel smallInputLabel">Όροφος:</label>
                         <div class="smallInput">
                             <input id="floor" name="floor" class="form-control" type="text" ng-model="ctrl.item.floor">
                         </div>
@@ -86,7 +86,7 @@
                     <!--active-->
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.active.$invalid && !itemForm.active.$pristine }">
-                        <label for="active" class="required formItemLabel smallInputLabel">Ενεργά<span
+                        <label for="active" class=" formItemLabel smallInputLabel">Ενεργά<span
                                 class="form-required">*</span>:</label>
                         <div class="extraSmallInput">
                             <input id="active" name="active" class="form-control" type="number"
@@ -97,7 +97,7 @@
                     </div>
                     <!--destroyed-->
                     <div class="form-group">
-                        <label for="destroyed" class="required formItemLabel midInputLabel">Καταστροφές:</label>
+                        <label for="destroyed" class=" formItemLabel midInputLabel">Καταστροφές:</label>
                         <div class="extraSmallInput">
                             <input id="destroyed" name="destroyed" class="form-control" type="text"
                                    ng-model="ctrl.item.destroyed">
@@ -106,7 +106,7 @@
                     <!--nonexist-->
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.nonexist.$invalid && !itemForm.nonexist.$pristine }">
-                        <label for="nonexist" class="required formItemLabel midInputLabel">Ανενεργά<span
+                        <label for="nonexist" class=" formItemLabel midInputLabel">Ανενεργά<span
                                 class="form-required">*</span>:</label>
                         <div class="extraSmallInput">
                             <input id="nonexist" name="nonexist" class="form-control" type="text"
@@ -126,7 +126,7 @@
                 <div class="inlineItems">
                     <!--capasity-->
                     <div class="form-group">
-                        <label for="capasity" class="required formItemLabel">Εδρανα Διδασκαλίας:</label>
+                        <label for="capasity" class=" formItemLabel">Εδρανα Διδασκαλίας:</label>
                         <div class="extraSmallInput">
                             <input id="capasity" name="capasity" class="form-control" type="number"
                                    ng-model="ctrl.item.capasity">
@@ -135,7 +135,7 @@
 
                     <!--exams_capasity-->
                     <div class="form-group">
-                        <label for="exams_capasity" class="required formItemLabel">Εδρανα Εξετάσεων:</label>
+                        <label for="exams_capasity" class=" formItemLabel">Εδρανα Εξετάσεων:</label>
                         <div class="extraSmallInput">
                             <input id="exams_capasity" name="exams_capasity" class="form-control" type="number"
                                    ng-model="ctrl.item.exams_capasity">
@@ -146,7 +146,7 @@
                 <div class="inlineItems">
                     <!--height-->
                     <div class="form-group">
-                        <label for="height" class="required formItemLabel">Υψος/Βαθος:</label>
+                        <label for="height" class=" formItemLabel">Υψος/Βαθος:</label>
                         <div class="extraSmallInput">
                             <input id="height" name="height" class="form-control" type="number"
                                    ng-model="ctrl.item.height">
@@ -155,7 +155,7 @@
 
                     <!--width-->
                     <div class="form-group">
-                        <label for="width" class="required formItemLabel smallInputLabel">Πλάτος:</label>
+                        <label for="width" class=" formItemLabel smallInputLabel">Πλάτος:</label>
                         <div class="extraSmallInput">
                             <input id="width" name="width" class="form-control" type="number"
                                    ng-model="ctrl.item.width">
@@ -163,7 +163,7 @@
                     </div>
                     <!--capasity_categ-->
                     <div class="form-group">
-                        <label for="capasity_categ" class="required formItemLabel midInputLabel">Κατηγ. Χωρητ.:</label>
+                        <label for="capasity_categ" class=" formItemLabel midInputLabel">Κατηγ. Χωρητ.:</label>
                         <div class="extraSmallInput">
                             <input id="capasity_categ" name="capasity_categ" class="form-control" type="text"
                                    ng-model="ctrl.item.capasity_categ">
@@ -172,7 +172,7 @@
                 </div>
                 <!--xoros-->
                 <div class="form-group">
-                    <label for="xoros" class="required formItemLabel">Χώρος:</label>
+                    <label for="xoros" class=" formItemLabel">Χώρος:</label>
                     <div class="longInput">
                         <input id="xoros" name="xoros" class="form-control" type="text" ng-model="ctrl.item.xoros">
                     </div>
@@ -181,7 +181,7 @@
             <div class="formGroupItems">
                 <!--stat_comm-->
                 <div class="form-group">
-                    <label for="stat_comm" class="required formItemLabel">Σχόλια:</label>
+                    <label for="stat_comm" class=" formItemLabel">Σχόλια:</label>
                     <div class="longInput">
                         <textarea id="stat_comm" name="stat_comm" class="form-control" type="text"
                                   ng-model="ctrl.item.stat_comm"></textarea>

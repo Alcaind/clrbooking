@@ -1,7 +1,8 @@
-<label for="status">{{ selectorTitle }}:</label>
-<input ng-show="searchable" ng-model="myfilter" type="text">
-{{myfilter}}
+<div class="inlineItems">
+    <label class=" formItemLabel" for="status">{{ selectorTitle }}:</label>
+    <input ng-show="searchable" ng-model="myfilter" type="text">
 <select id="status" class="form-control"
         ng-options="data[returnColumn] as data[viewColumn] for data in dp|filter:dataFilter(myfilter)"
         ng-model="outputValue">
 </select>
+</div>

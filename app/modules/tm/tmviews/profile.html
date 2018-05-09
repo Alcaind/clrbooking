@@ -15,7 +15,7 @@
                 <div class="inlineItems">
                     <div class="form-group"
                          ng-class="{ 'has-error' : tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine }">
-                        <label class="required formItemLabel" for="tm_code">Κωδικός τμήματος <span
+                        <label class=" formItemLabel" for="tm_code">Κωδικός τμήματος <span
                                 class="form-required">*</span>:</label>
                         <div class="smallInput">
                             <input id="tm_code" name="tm_code" class="form-control" type="text"
@@ -26,7 +26,7 @@
                             τμήματος.</p>
                     </div>
                     <div class="form-group">
-                        <label for="descr" class="required formItemLabel">Συντομογραφία <span
+                        <label for="descr" class=" formItemLabel">Συντομογραφία <span
                                 class="form-required">*</span>:</label>
                         <div class="smallInput">
                             <input id="descr" name="descr" class="form-control" type="text" ng-model="ctrl.item.descr">
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group" ng-class="{ 'has-error' : tmForm.title.$invalid && !tmForm.title.$pristine }">
-                    <label for="title" class="required formItemLabel">Τίτλος<span
+                    <label for="title" class=" formItemLabel">Τίτλος<span
                             class="form-required">*</span>:</label>
                     <div class="longInput">
                         <input id="title" name="title" class="form-control" type="text" ng-model="ctrl.item.title">
@@ -49,7 +49,7 @@
                 <div class="inlineItems">
                     <div class="form-group"
                          ng-class="{ 'has-error' : tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine }">
-                        <label for="sxoli" class="required formItemLabel">Σχολή<span
+                        <label for="sxoli" class=" formItemLabel">Σχολή<span
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="sxoli" name="sxoli" class="form-control" type="text" ng-model="ctrl.item.sxoli">
@@ -61,7 +61,7 @@
                     </div>
                     <!--<div class="form-group"-->
                     <!--ng-class="{ 'has-error' : tmForm.supervisor.$invalid && !tmForm.supervisor.$pristine }">-->
-                    <!--<label for="supervisor" class="required">Υπεύθυνος Τμήματος<span-->
+                    <!--<label for="supervisor" class="">Υπεύθυνος Τμήματος<span-->
                     <!--class="form-required formItemLabel">*</span>:</label>-->
                     <!--<input id="supervisor1" name="supervisor" class="form-control" type="text"-->
                     <!--ng-model="ctrl.item.supervisor">-->
@@ -76,7 +76,7 @@
                     <!--</div>-->
                     <div class="form-group"
                          ng-class="{ 'has-error' : tmForm.supervisor.$invalid && !tmForm.supervisor.$pristine }">
-                        <label for="supervisor" class="required">Υπεύθυνος Τμήματος<span
+                        <label for="supervisor" class="">Υπεύθυνος Τμήματος<span
                                 class="form-required formItemLabel">*</span>:</label>
                         <div class="smallInput">
                             <select id="supervisor" name="supervisor" class="form-control"

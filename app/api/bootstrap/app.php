@@ -30,8 +30,6 @@ require __DIR__ . '/../src/models/room_category.php';
 require __DIR__ . '/../src/models/room_book.php';
 require __DIR__ . '/../src/models/params.php';
 
-//require __DIR__ . '../src/models/Users.php';
-//require __DIR__ . '../src/models/Roles.php';
 //require __DIR__ . '../src/models/dp.php';
 //$dotenv = new Dotenv\Dotenv(__DIR__);
 //$dotenv->load();
@@ -47,10 +45,10 @@ $app = new \Slim\App([
             'driver' => 'mysql',
             'host' => 'localhost',
             'database' => 'clrbooking',
-            'username' => 'lpadmin',
-            'password' => 'OKEcmRv1UAa0Fqrb',
-            //'username' => 'root',
-            //'password' => '',
+//            'username' => 'lpadmin',
+//            'password' => 'OKEcmRv1UAa0Fqrb',
+            'username' => 'root',
+            'password' => '',
             'charset' => 'utf8',
             'collation' => 'utf8_general_ci',
             'prefix'    => ''
