@@ -59,6 +59,12 @@ angular.module('MainComponents')
         }
 
         $scope.newCalendar = [];
+        $scope.reqPerRoom = {};
+
+        function dictionary(book, room) {
+            if (!$scope.reqPerRoom[room.name]) $scope.reqPerRoom[room.name] = [];
+            if (!$scope.reqPerRoom[room.name].includes(book)) $scope.reqPerRoom[room.name].push(book);
+        }
 
         /**
          * Plotting requests (new & old)
@@ -135,13 +141,14 @@ angular.module('MainComponents')
                                 for (k = 0; k < $scope.rooms.length; k++) {  // parse selected (input) rooms
                                     if ($scope.rooms[k].date_index !== dateIndex.getDay()) continue; // Continue if dateIndex is different from room dateIndex)
                                     if (book[j].rooms[r].id === $scope.rooms[k].id) {  //requests room if equals with one of the selected rooms
+
                                         plotTile(book[j].rooms[r], book[j], $scope.calendar[calendarIndex - 1], calObjects);
                                     }
                                 }
                             }
                         }
                     }
-                    $scope.calendar[calendarIndex - 1] = orderBy($scope.calendar[calendarIndex - 1], ['id', 'pivot.fromt']); //order already booked
+                    //$scope.calendar[calendarIndex - 1] = orderBy($scope.calendar[calendarIndex - 1], ['id', 'pivot.fromt']); //order already booked
 
                     if (!$scope.newCalendar[calendarIndex - 1]) $scope.newCalendar[calendarIndex - 1] = {};
                     $scope.calendar[calendarIndex - 1].map(function (book) {
@@ -160,6 +167,7 @@ angular.module('MainComponents')
         }
 
         function plotTile(tile, book, cal, calObjects) {
+            dictionary(book, tile);
             tile.fromd = book.fromd;  //dirty room takes dates -> transfer requests data to the room data
             tile.tod = book.tod;   //dirty room takes dates -> transfer requests data to the room data
             findBookDates(tile);   // create the room data. calc height, distance and real dates from room
@@ -242,6 +250,12 @@ angular.module('MainComponents')
                 element.css(elemCSS);
                 //element.rotate(fromDom.top - toDom.top);
             }
+        }
+    })
+    .directive('reportsError', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/reportsError.html'
         }
     })
 ;

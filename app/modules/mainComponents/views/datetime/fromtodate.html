@@ -13,11 +13,11 @@
     </div>
 
     <div style="width: 100%; display: flex">
-        <label class=" formItemLabel" for="tod">Μέχρι Ημ/νία: {{item.fromd | date:'d/M/y' }}</label>
+        <label class=" formItemLabel" for="tod">Μέχρι Ημ/νία: {{item.tod | date:'d/M/y' }}</label>
         <div class="input-group" style="max-width: 300px">
             <input id="tod" name="tod" type="text" class="form-control"
                    uib-datepicker-popup="{{'dd-MM-yyyy'}}"
-                   ng-model="tod" ng-value="fromd|date:'dd-MM-yyyy'"
+                   ng-model="tod" ng-value="tod|date:'dd-MM-yyyy'"
                    is-open="toVisible" ng-required="true" close-text="Close"/>
             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="toVisible=true;">

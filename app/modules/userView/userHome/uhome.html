@@ -1,21 +1,66 @@
-<div id="rooms_main" class="pageHolder" ng-controller="UserViewController">
+<div id="rooms_main" class="pageHolder" style="overflow-y: auto;" ng-controller="UserViewController">
     <div class="pageHeader">
         <h2> Dashboard </h2>
     </div>
-    <div style="display:contents; height: 100%">
-        <div style="display: flex; height: 50% ">
+    <div style="display:contents; height: auto">
+        <form-item-selector selector-title="Config" return-column="id" view-column="year"
+                            dp="config" searchable="false" output-value="config_id" class="longInput">
+        </form-item-selector>
+        <div style="display: flex; height: 35% ">
             <dash-board-table title="Εκκρεμότητες" status="0" dp="requests"
-                              style="width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+                              style=" height:100% ;width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+        </div>
+        <div style="display: flex; height: 35% ">
             <dash-board-table title="Ολοκληρωμένα" status="1" dp="requests"
-                              style="width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+                              style="height:100% ; width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
         </div>
-        <div style="display: flex; height: 50%">
+        <div style="display: flex; height: 35%">
             <dash-board-table title="Ληγμένα" status="2" dp="requests"
-                              style="width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
-            <dash-board-table title="Πρόχειρα" status="3" dp="requests"
-                              style="width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+                              style="height:100% ;width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
         </div>
+        <div style="display: flex; height: 35% ">
+            <dash-board-table title="Πρόχειρα" status="3" dp="requests"
+                              style="height:100% ;width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+        </div>
+        <div style="display: flex; height: 35% ;height: 100%; ">
+            <h3>Αιτήματα προς Διαχειριση</h3>
+            <table class="table table-hover table-striped table-responsive table-condensed">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Από Χρήστη</th>
+                    <th>Προς Χρήστη</th>
+                    <th>Σχόλια Αιτούντα</th>
+                    <th>ID Αιτήματος</th>
+                    <th>Σχόλια δικά σου</th>
+                    <th>Επιβεβαίωση</th>
+                    <th>Status</th>
+                    <th>...</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in usersrequests |filter:search"
+                    style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':''}}">
+                    <td>{{item.id}}</td>
+                    <td>{{ item.fromuser.user_id }}</td>
+                    <td>{{ item.tousers.fname }}</td>
+                    <td>{{ item.comments }}</td>
+                    <td>{{ item.rr_id }}</td>
+                    <td>{{ item.to_comment }}</td>
+                    <td>{{ item.confirm }}</td>
+                    <td>{{ item.status}}</td>
+                    <!--ng-show="showStatus()"-->
+                    <td>
+                        <input type="button" class="btn btn-success hippo" tooltip-placement="left"
+                               uib-tooltip="Έγκριση" value='Accept' ng-click="acceptReq(item)"/>
 
+                        <input type="button" class="btn btn-danger hippo" tooltip-placement="left"
+                               uib-tooltip="Απόρριψη" value='Decline' ng-click="declineReq(item)"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

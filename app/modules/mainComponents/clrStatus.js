@@ -77,12 +77,13 @@ angular.module('MainComponents')
     .controller('FormItemSelectorController', function ($scope) {
         //$scope.optFormItem = ClrFormItemSrv.getFormItem($scope.value);
         $scope.dp = [];
+        $scope.myfilter = [];
 
         $scope.dataFilter = function (myfilter) {
             return function (item) {
                 if (item.id === $scope.outputValue) return true;
                 if (!$scope.outputValue) $scope.outputValue = item.id;
-                return myfilter ? (item[$scope.viewColumn]).indexOf(myfilter) >= 0 : true;
+                return myfilter ? (item[$scope.viewColumn] + '').indexOf(myfilter) >= 0 : true;
             };
             //console.log(myfilter);
         }

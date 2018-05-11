@@ -115,11 +115,16 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         };
         ctrl.selectedRow = null;
 
-        ctrl.getAll = function () {
-            api.apiCall('GET', ctrl.baseURL, function (results) {
+        ctrl.getAll = function (url) {
+            if (!url) api.apiCall('GET', ctrl.baseURL, function (results) {
                 ctrl.dp = results.data;
                 ctrl.totalRows = ctrl.dp.length;
             });
+            else api.apiCall('GET', url, function (results) {
+                ctrl.dp = results.data;
+                ctrl.totalRows = ctrl.dp.length;
+            });
+
         };
 
         ctrl.ifDelete = globalVarsSrv.getGlobalVar('token').scope[3] === 'delete' ? true : false;
@@ -141,7 +146,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             AuthenticationService.CheckCredentials();
             ctrl.cth = ctrl.tableColumns[0];
             ctrl.cth.sorted = true;
-            ctrl.getAll();
+            // ctrl.getAll();
         };
 
         ctrl.cth = {};

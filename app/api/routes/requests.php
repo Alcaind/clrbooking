@@ -31,11 +31,49 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     return $response->getBody()->write($requests->toJson());
 });
 
+
+$app->get('/requests/config/{id}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $requests = \App\Models\Requests::with(['users:id,user', 'config', 'periods', 'admin', 'ps', 'room_use', 'rooms'])
+            ->where('conf_id', '=', $id)
+            ->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError('hello');
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($requests->toJson());
+});
+
 $app->get('/requests/users/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms'])->where('user_id', '=', $id)->get();
+        $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms'])
+            ->where('user_id', '=', $id)
+            ->where('conf_id', '=', 1)
+            ->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($requests->toJson());
+});
+
+$app->get('/requests/users/{id}/config/{cid}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    $cid = $args['cid'];
+    try {
+        $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms'])
+            ->where('user_id', '=', $id)
+            ->where('conf_id', '=', $cid)
+            ->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();

@@ -19,12 +19,8 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="modules/home/views/home.css"/>
     <link rel="stylesheet" href="modules/login/logincss/login_style.css"/>
-    <link rel="stylesheet" href="modules/roles/views/roles.css"/>
-    <link rel="stylesheet" href="modules/users/uviews/users.css"/>
     <link rel="stylesheet" href="modules/rooms/rviews/rooms.css"/>
-    <link rel="stylesheet" href="modules/tm/tmviews/tms.css"/>
-    <link rel="stylesheet" href="modules/kat/katsviews/kats.css"/>
-    <link rel="stylesheet" href="modules/requests/reqviews/requests.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -37,7 +33,14 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <navmenu menu="{{menu}}"></navmenu>
-<div ng-controller="Controller" class="maincontainer" ng-view></div>
+<div ng-controller="Controller" class="maincontainer" ng-view>
+</div>
+<p class="text-center text-muted" if-loading
+   style="position: absolute; top:0px; left: 0; width: 100%; height: 100%; background-color: #57575788">
+    <span class="fa fa-spinner fa-spin fa-4x"></span>
+    <br/><br/>
+    Loading, please wait...
+</p>
 <footer></footer>
 
 

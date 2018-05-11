@@ -1,0 +1,23 @@
+<div id="errorLog" style="width: 100%; height: 300px; overflow-y: auto">
+    <div ng-repeat="error in bookingErrors" style="padding: 5px">
+
+        {{error.name}} {{weekdays[error.pivot.date_index]}} {{error.pivot.fromt}} {{error.pivot.tot}}
+        <div>
+            <li ng-repeat="fromBook in error.fromBookError">
+                {{fromBook.name}} {{fromBook.date_index}} {{fromBook.fromt}} {{fromBook.tot}}
+            </li>
+        </div>
+    </div>
+</div>
+
+<div id="report">
+    <ul ng-repeat="(name, room) in reqPerRoom">
+        {{name}}
+        <li ng-repeat="req in room track by $index">
+            {{req.fromd}} {{req.tod}}
+            <div ng-repeat="r in req.rooms" ng-if="r.name === name">
+                {{weekdays[r.pivot.date_index-1]}} {{r.pivot.fromt}} {{r.pivot.tot}}
+            </div>
+        </li>
+    </ul>
+</div>

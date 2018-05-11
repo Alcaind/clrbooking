@@ -14,6 +14,7 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 class Users extends Model {
 
     protected $table = 'users';
+    protected $hidden = ['hash'];
 
     public function roles()
     {

@@ -6,7 +6,20 @@ angular.module('Requests', [
     'ApiModules',
     'Authentication',
     'GlobalVarsSrvs'
-]).controller('RequestsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv) {
+]).controller('RequestsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv, api) {
+    $scope.configs = {};
+
+    //$scope.url = null;
+    api.apiCall('GET', 'api/public/config', function (results) {
+        $scope.configs = results.data;
+    });
+
+    $scope.config_id = 1;
+    $scope.url = 'api/public/requests/config/1';
+    $scope.$watch('config_id', function (newVal) {
+        $scope.url = 'api/public/requests/config/' + newVal;
+    });
+
     $scope.ctrl = makeController.mainController('/requests', 'requestsTableConf', 'Κατάλογος Αιτημάτων');
     $scope.ctrl.init();
     $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
