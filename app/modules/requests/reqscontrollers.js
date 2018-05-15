@@ -25,6 +25,17 @@ angular.module('Requests', [
     $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
     $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
 
+    $scope.THLbutton = function (item) {
+        $scope.ctrl.operations[2].ifVisible = true;
+        if (item.room_use.id != 7) {
+            $scope.ctrl.operations[2].ifVisible = false;
+
+
+            // console.log("there u are");
+            //ng-disabled="false"
+        }
+    }
+
 }])
     .controller('RequestProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', '$filter', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api, $filter) {
         $scope.ctrl = makeController.profileController('/requests', 'requestsTableConf');

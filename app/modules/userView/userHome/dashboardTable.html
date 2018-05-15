@@ -1,4 +1,4 @@
-<div id="data_tbl" class="boxContent">
+<div id="data_tbl" class="boxContent" style="height: 100%;">
     <h3>{{title}}</h3>
     <table class="table table-hover table-striped table-responsive table-condensed">
         <thead style="background-color: #cecece;">
@@ -15,8 +15,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="item in dp |filter:search"
-            style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':''}}"
-            ng-click="selectRow(item)">
+            style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':''}}" ng-click="selectRow(item)">
             <td>{{ item.req_dt }}</td>
             <td>{{ item.descr }}</td>
             <td>{{ item.periods.descr }}</td>

@@ -113,6 +113,11 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             operations: globalVarsSrv.getGlobalVar(table + "Ops"),
             url: url
         };
+
+        ctrl.operations.map(function (op) {
+            op.ifVisible = true
+        });
+
         ctrl.selectedRow = null;
 
         ctrl.getAll = function (url) {
@@ -183,6 +188,8 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             baseURL: globalVarsSrv.getGlobalVar('appUrl') + url,
             mainData: {}
         };
+
+        //ctrl.operations.map(function (op) { op.ifVisible = true });
 
         ctrl.init = function () {
             AuthenticationService.CheckCredentials();

@@ -198,6 +198,7 @@ angular.module('MainComponents', [
             column.visible = state ? state : !column.visible;
         }
     }])
+
     .directive('dmTh', function () {
         return {
             restrict: "EA",
@@ -225,7 +226,8 @@ angular.module('MainComponents', [
                 hr: "@",
                 content: "@",
                 gicon: "@",
-                place: "@"
+                place: "@",
+                item: "<"
             },
             templateUrl: 'modules/mainComponents/views/buttonPopUp.html'
         }
