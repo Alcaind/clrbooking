@@ -1,9 +1,25 @@
 <div style="width: 100%; height: 100%; padding: 10px;">
     <user-request-header></user-request-header>
-    <use-select ng-show="currentPage===0" style="padding: 4px 4px 0px 4px;"></use-select>
-    <day-select ng-show="currentPage===1" style="padding: 4px 4px 0px 4px;"></day-select>
-    <course-select ng-show="currentPage===2" style="padding: 4px 4px 0px 4px;"></course-select>
-    <room-select ng-show="currentPage===3" style="padding: 4px 4px 0px 4px;"></room-select>
-    <select-guest ng-show="currentPage===4" style="padding: 4px 4px 0px 4px;"></select-guest>
-    <book-check ng-show="currentPage===5" style="padding: 4px 4px 0px 4px;"></book-check>
+
+    <show-hide sh-title="Επιλογή Χρήσης, Περιόδου">
+        <use-select style="padding: 4px 4px 0px 4px;"></use-select>
+        <day-select style="padding: 4px 4px 0px 4px;"></day-select>
+    </show-hide>
+
+    <show-hide sh-title="Επιλογή Μαθήματος">
+        <course-select style="padding: 4px 4px 0px 4px;"></course-select>
+    </show-hide>
+
+    <show-hide sh-title="Επιλογή Αίθουσας">
+        <room-select style="padding: 4px 4px 0px 4px;"></room-select>
+    </show-hide>
+
+    <show-hide sh-title="Παρευρισκόμενοι" ng-show="selectedUse.synt === 'ΤΗΛ'">
+        <select-guest style="padding: 4px 4px 0px 4px;"></select-guest>
+    </show-hide>
+
+    <show-hide sh-title="Ελεγχος Διαθεσιμότητας">
+        <book-check style="padding: 4px 4px 0px 4px;"></book-check>
+    </show-hide>
+
 </div>

@@ -15,7 +15,7 @@ class usersRequests extends Model
 {
     protected $table = 'users_requests';
 
-    public function fromusers()
+    public function fromuser()
     {
         return $this->belongsTo('\\App\\Models\\Users', 'from_user');
     }

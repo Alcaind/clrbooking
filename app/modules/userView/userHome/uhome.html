@@ -7,7 +7,7 @@
                             dp="config" searchable="false" output-value="config_id" class="longInput">
         </form-item-selector>
         <div style="display: flex; height: 35% ">
-            <dash-board-table title="Εκκρεμότητες" status="0" dp="requests"
+            <dash-board-table title="Εκκρεμότητες" status="0" dp="requests" ng-click="getPendingRequests"
                               style=" height:100% ;width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
         </div>
         <div style="display: flex; height: 35% ">
@@ -29,10 +29,10 @@
                 <tr>
                     <th>ID</th>
                     <th>Από Χρήστη</th>
-                    <th>Προς Χρήστη</th>
+                    <!--<th>Προς Χρήστη</th>-->
                     <th>Σχόλια Αιτούντα</th>
                     <th>ID Αιτήματος</th>
-                    <th>Σχόλια δικά σου</th>
+                    <th>Σχόλια απαντητικό</th>
                     <th>Επιβεβαίωση</th>
                     <th>Status</th>
                     <th>...</th>
@@ -42,11 +42,12 @@
                 <tr ng-repeat="item in usersrequests |filter:search"
                     style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':''}}">
                     <td>{{item.id}}</td>
-                    <td>{{ item.fromuser.user_id }}</td>
-                    <td>{{ item.tousers.fname }}</td>
+                    <td>{{ item.fromuser.fname }} {{item.fromuser.sname}}</td>
+                    <!--<td>{{ item.tousers.fname }}</td>-->
                     <td>{{ item.comments }}</td>
                     <td>{{ item.rr_id }}</td>
-                    <td>{{ item.to_comment }}</td>
+                    <td><input type="text" ng-model="item.to_comment" class="form-control input-sm"/></td>
+                    <!--{{ item.to_comment }}</td>-->
                     <td>{{ item.confirm }}</td>
                     <td>{{ item.status}}</td>
                     <!--ng-show="showStatus()"-->

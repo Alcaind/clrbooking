@@ -1292,5 +1292,19 @@
       "text": "Σάββατο",
       "value": 6
     }
+  ],
+  "userRequestStatus": [
+    {
+      "text": "In Progress/Pending",
+      "value": 0
+    },
+    {
+      "text": "Done",
+      "value": 1
+    },
+    {
+      "text": "Canceled",
+      "value": -1
+    }
   ]
 }

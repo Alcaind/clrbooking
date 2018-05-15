@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/usersrequests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $usreq = \App\Models\usersRequests::with(['roombook', 'fromusers', 'tousers'])->get();
+    $usreq = \App\Models\usersRequests::with(['roombook', 'fromuser', 'tousers'])->get();
     return $response->getBody()->write($usreq->toJson());
 });
 
@@ -22,7 +22,26 @@ $app->get('/usersrequests/{id}', function (Request $request, Response $response,
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $usreq = \App\Models\usersRequests::with(['roombook', 'fromusers', 'tousers'])->find($id);
+        $usreq = \App\Models\usersRequests::with(['roombook', 'fromuser', 'tousers'])
+            ->where('to_users', '=', $id)
+            ->where('status', '=', 0)
+            ->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($usreq->toJson());
+});
+
+$app->get('/pendingrequests/{id}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $usreq = \App\Models\usersRequests::with(['roombook', 'fromuser', 'tousers'])
+            ->where('rr_id', '=', $id)
+            ->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -83,6 +102,18 @@ $app->put('/usersrequests/{id}', function ($request, $response, $args) {
         $usreq->confirm = $data['confirm'] ?: $usreq->confirm;
         $usreq->status = $data['status'] ?: $usreq->status;
         $usreq->save();
+
+        $totalPending = \App\Models\usersRequests::where('rr_id', '=', $data['rr_id'])->get();
+        $confirmed = 0;
+        for ($i = 0; $i < $totalPending->count(); $i++) {
+            if ($totalPending[$i]->status == 1) $confirmed++;
+        }
+        if ($totalPending->count() == $confirmed) {
+            $req = \App\Models\Requests::find($data['rr_id']);
+            $req->status = 1;
+            $req->save();
+        }
+
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();

@@ -52,12 +52,9 @@
                 <td ng-if="ctrl.tableColumns[12].visible">{{item.xoros}}</td>
                 <td ng-if="ctrl.tableColumns[13].visible">{{item.exams_capasity }}</td>
                 <td ng-if="ctrl.tableColumns[14].visible">{{item.capasity_categ}}</td>
-                <td ng-if="ctrl.tableColumns[15].visible">
-                    <li ng-repeat="tm in item.tms">{{tm.descr}}</li>
-                </td>
-                <td ng-if="ctrl.tableColumns[16].visible">{{item.stat_comm}}</td>
-                <td ng-if="ctrl.tableColumns[17].visible">{{ item.config.year }}</td>
-                <td ng-if="ctrl.tableColumns[18].visible">
+                <td ng-if="ctrl.tableColumns[15].visible">{{item.stat_comm}}</td>
+                <td ng-if="ctrl.tableColumns[16].visible">{{ item.config.year }}</td>
+                <td ng-if="ctrl.tableColumns[17].visible">
                     <li ng-repeat="use in item.room_use">
                         <button ng-click="deleteUsage(item, use)" class="btn btn-danger btn-xs hippo">x</button>
                         {{use.synt}}

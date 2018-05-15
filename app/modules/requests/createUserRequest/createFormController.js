@@ -2,7 +2,6 @@
 
 angular.module('Requests')
     .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService) {
-
         $scope.tmpDate = new Date();
         $scope.views = [];
         $scope.currentPage = 0;
@@ -58,8 +57,6 @@ angular.module('Requests')
         $scope.mode = 'inserting';
 
         AuthenticationService.CheckCredentials();
-
-
 
         $scope.copyDayRequest = function (day) {
             var fd = day;
@@ -140,7 +137,7 @@ angular.module('Requests')
                         }
                     }
 
-                    $scope.gotoPage(5, $scope.item);
+                    //$scope.gotoPage(4, $scope.item);
 
                     for (var i = 0; i < $scope.item.rooms.length; i++) {
                         for (var j = 0; j < $scope.selectedDays.length; j++) {
@@ -157,8 +154,7 @@ angular.module('Requests')
         };
 
         $scope.steps = [
-            {text: "Επιλογή Χρήσης", active: true},
-            {text: "Επιλογή Περιόδου", active: true},
+            {text: "Επιλογή Χρήσης / Περιόδου", active: true},
             {text: "Επιλογή Μαθήματος", active: true},
             {text: "Επιλογή Αίθουσας", active: true},
             {text: "Ορισμός Παρευρισκομένων", active: false},
@@ -233,8 +229,8 @@ angular.module('Requests')
             $scope.selectedUse.selected = false;
             use.selected = true;
             $scope.selectedUse = use;
-            $scope.steps[4].active = false;
-            if ($scope.selectedUse.synt === 'ΤΗΛ') $scope.steps[4].active = true;
+            $scope.steps[3].active = false;
+            if ($scope.selectedUse.synt === 'ΤΗΛ') $scope.steps[3].active = true;
         };
 
         $scope.newGuest = function () {
@@ -278,33 +274,6 @@ angular.module('Requests')
                     $scope.item.date_index += value.i
                 }
             })
-        };
-
-        $scope.nextPage = function () {
-            if ($scope.currentPage === 3) {
-                $scope.copyDefaultRoom();
-            }
-            if ($scope.currentPage === 5) {
-                $scope.getBook($scope.item)
-            }
-            $scope.currentPage++;
-            if ($scope.currentPage === 4 && $scope.selectedUse.synt !== 'ΤΗΛ') $scope.currentPage++;
-        };
-
-        $scope.prevPage = function () {
-            if ($scope.currentPage === 3) {
-                $scope.copyDefaultRoom();
-            }
-            $scope.currentPage--;
-            if ($scope.currentPage === 4 && $scope.selectedUse.synt !== 'ΤΗΛ') $scope.currentPage--;
-        };
-
-        $scope.gotoPage = function (p, item) {
-            if ($scope.currentPage === 3) {
-                $scope.copyDefaultRoom();
-            }
-            if (item && !item.active) return;
-            $scope.currentPage = p;
         };
 
         $scope.getBook = function (item) {

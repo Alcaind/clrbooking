@@ -60,7 +60,7 @@ angular.module('Roles', [
     .directive('evUsersRolesForm', function () {
         return {
             restrict: 'EA',
-            templateUrl: 'modules/roles/views/evRolesForm.html',
+            templateUrl: 'modules/roles/views/evRolesForm.html'
         }
     })
 ;

@@ -1,6 +1,3 @@
-<div>
-    <h3>Επιλογή Αίθουσας</h3>
-</div>
 <div ng-show="mode!=='inserting'">
     <button tooltip-placement="right" uib-tooltip="SELECT ALL" class="btn btn-primary" ng-click="selectAllRoom()">
         <span class="glyphicon glyphicon-asterisk"></span>
@@ -27,7 +24,6 @@
                 </div>
             </div>
         </div>
-
 
         <div id="selectedRoomsHolder" style="width: 30%; overflow: auto" ng-if="mode !== 'reporting'">
             <default-room-tile room="defaultRoomSelection"></default-room-tile>

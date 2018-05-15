@@ -8,61 +8,52 @@
                 <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
             </div>
             <table-tools class="pageTools"></table-tools>
+            <div class="form-group">
+                <form-item-selector selector-title="Config" return-column="id" view-column="year"
+                                    dp="configs" searchable="false" output-value="config_id" class="midInput"
+                                    style=" margin: 0px 1500px ; min-width: 314px;"></form-item-selector>
+            </div>
         </div>
         <dm-title class="pageTitle"></dm-title>
-        </div>
-
-    <!--<div class="pageTools">
-        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
-    </div>-->
-
-
-    <!--<p class="text-center text-muted" if-loading>-->
-    <!--<span class="fa fa-spinner fa-spin fa-4x"></span>-->
-    <!--<br /><br />-->
-    <!--Loading, please wait...-->
-    <!--</p>-->
-    <form-item-selector selector-title="Config" return-column="id" view-column="year"
-                        dp="configs" searchable="false" output-value="config_id" class="midInput"></form-item-selector>
+    </div>
     <div id="data_tbl" class="boxContent">
         <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
             <thead class="header-fixed" style="background-color: #cecece;">
-                <tr>
-                    <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"
-                        style="{{th.title.lastIndexOf('.')===th.title.length-1?'width:50px;':'width:'+(th.title.length*10+20)+'px;'}}min-width: 20px;max-width: 200px;padding: 0px 5px 2px 5px;font-size: 12px;font-weight: normal;{{$index === 0?'width:44px':''}}"></th>
-                    <th class="columnSettings">
-                        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
-                    </th>
-                </tr>
+            <tr>
+                <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"
+                    style="{{th.title.lastIndexOf('.')===th.title.length-1?'width:50px;':'width:'+(th.title.length*10+20)+'px;'}}min-width: 20px;max-width: 200px;padding: 0px 5px 2px 5px;font-size: 12px;font-weight: normal;{{$index === 0?'width:44px':''}}"></th>
+                <th class="columnSettings">
+                    <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
+                </th>
+            </tr>
             </thead>
             <tbody class="contentScroll">
-                <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                    style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
-                    ng-click="ctrl.selectRow(item)">
-                    <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.req_dt }}</td>
-                    <td ng-if="ctrl.tableColumns[2].visible">{{ item.users.user }}</td>
-                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.descr }}</td>
-                    <td ng-if="ctrl.tableColumns[4].visible">{{ item.periods.descr }}</td>
-                    <td ng-if="ctrl.tableColumns[5].visible">{{ item.ps.tma_per }}</td>
-                    <td ng-if="ctrl.tableColumns[6].visible">{{ item.room_use.synt }}</td>
-                    <td ng-if="ctrl.tableColumns[7].visible">{{ item.links }}</td>
-                    <td ng-if="ctrl.tableColumns[8].visible">{{ item.protocol_id }}</td>
-                    <td ng-if="ctrl.tableColumns[9].visible">{{ statusOptions[item.status].text }}</td>
-                    <td ng-if="ctrl.tableColumns[10].visible">{{ item.fromd |date:'dd-MM-yyyy' }}</td>
-                    <td ng-if="ctrl.tableColumns[11].visible">{{ item.tod |date:'dd-MM-yyyy' }}</td>
-                    <td ng-if="ctrl.tableColumns[12].visible">{{ item.admin.user }}</td>
-                    <td ng-if="ctrl.tableColumns[13].visible">{{ item.config.year }}</td>
-                    <td style="width:30px;"></td>
-                </tr>
+            <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
+                style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
+                ng-click="ctrl.selectRow(item)">
+                <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
+                <td ng-if="ctrl.tableColumns[1].visible">{{ item.req_dt }}</td>
+                <td ng-if="ctrl.tableColumns[2].visible">{{ item.users.user }}</td>
+                <td ng-if="ctrl.tableColumns[3].visible">{{ item.descr }}</td>
+                <td ng-if="ctrl.tableColumns[4].visible">{{ item.periods.descr }}</td>
+                <td ng-if="ctrl.tableColumns[5].visible">{{ item.ps.tma_per }}</td>
+                <td ng-if="ctrl.tableColumns[6].visible">{{ item.room_use.synt }}</td>
+                <td ng-if="ctrl.tableColumns[7].visible">{{ item.links }}</td>
+                <td ng-if="ctrl.tableColumns[8].visible">{{ item.protocol_id }}</td>
+                <td ng-if="ctrl.tableColumns[9].visible">{{ statusOptions[item.status].text }}</td>
+                <td ng-if="ctrl.tableColumns[10].visible">{{ item.fromd |date:'dd-MM-yyyy' }}</td>
+                <td ng-if="ctrl.tableColumns[11].visible">{{ item.tod |date:'dd-MM-yyyy' }}</td>
+                <td ng-if="ctrl.tableColumns[12].visible">{{ item.admin.user }}</td>
+                <td ng-if="ctrl.tableColumns[13].visible">{{ item.config.year }}</td>
+                <td style="width:30px;"></td>
+            </tr>
             </tbody>
-            </table>
-        </div>
+        </table>
+    </div>
     <div class="pagePagination">
         <div>
             <pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
         </div>
-        <!--<pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>-->
     </div>
 </div>

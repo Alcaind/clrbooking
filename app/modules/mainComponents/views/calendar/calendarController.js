@@ -184,7 +184,8 @@ angular.module('MainComponents')
                         || ((totCheck < calObjects[m].tot && fromCheck > calObjects[m].tot)
                             || (fromCheck < calObjects[m].fromt && totCheck > calObjects[m].fromt))) && calObjects[m].id === tile.id) { // check if we have date conflict and is the same room with existing room
                     ok = true; // raise the conflict flag
-                    bookObj.color = '#dd3030'; // flag the objects with color
+                    //bookObj.color = '#dd3030'; // flag the objects with color
+                    bookObj.color = '#287ed2'
                     calObjects[m].color = '#e4aba8';
                     bookObj.fromBookError.push(calObjects[m]); // push the conflict new room in book room error table
                     bookObj.did = 'b' + m + calObjects[m].did;  // the div id for view binding
@@ -192,7 +193,8 @@ angular.module('MainComponents')
                     //addConflict(bookObj);
                 } else {
                     if (ok) { // if conflict, flag with color
-                        bookObj.color = '#dd3030'
+                        //bookObj.color = '#dd3030'
+                        bookObj.color = '#287ed2'
                     } else {
                         bookObj.color = '#287ed2'
                     }
@@ -217,7 +219,7 @@ angular.module('MainComponents')
                 selectedDay: '='
             },
             controller: "CalendarContol",
-            templateUrl: 'modules/mainComponents/views/calendar.html'
+            templateUrl: 'modules/mainComponents/views/calendar/calendar.html'
         }
     })
     .directive('arrowError', function () {
@@ -255,7 +257,7 @@ angular.module('MainComponents')
     .directive('reportsError', function () {
         return {
             restrict: "EA",
-            templateUrl: 'modules/mainComponents/views/reportsError.html'
+            templateUrl: 'modules/mainComponents/views/calendar/reportsError.html'
         }
     })
 ;

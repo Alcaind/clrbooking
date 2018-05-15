@@ -1,21 +1,34 @@
 'use strict';
 
 angular.module('Users')
-    .controller('UserViewTableController', ['$scope', '$location', 'api', function ($scope, $location, api) {
+    .controller('UserViewTableController', ['$scope', '$location', 'api', '$uibModal', function ($scope, $location, api, $uibModal) {
         // $scope.baseURL = 'api/public/view';
 
         $scope.search = {status: $scope.status};
 
         $scope.selectRow = function (item) {
-            if ($scope.status === 1 || $scope.status === 2) return;
+
+            var $myModalInstance = $uibModal.open({
+                templateUrl: 'modules/userview/userHome/popInfoPendingRequest.html',
+                controller: 'popupUserReq',
+                size: 'lg',
+                resolve: {
+                    config: function () {
+                        return {rrID: item.id}
+                    }
+                }
+            });
+            //$myModalInstance.result.then(okCallback, cancelCallback);
+
+            if ($scope.status === 3)
             $location.url('/usercreaterequests/' + item.id);
         };
-
-        $scope.showStatus = function () {
-            if ($scope.search === 3 || $scope.search === 0) {
-                return true;
-            }
-        };
+        //
+        // $scope.showStatus = function () {
+        //     if ($scope.search === 3) {
+        //         return true;
+        //     }
+        // };
 
     }])
     .controller('UserViewController', ['$scope', 'globalVarsSrv', 'ClrStatusSrv', 'api', '$routeParams', '$location', 'AuthenticationService',
@@ -40,7 +53,7 @@ angular.module('Users')
             });
 
             $scope.usersrequests = {};
-            api.apiCall('GET', 'api/public/usersrequests', function (results) {
+            api.apiCall('GET', 'api/public/usersrequests/' + user.authdata.roles[0].id, function (results) {
                 $scope.usersrequests = results.data;
             });
 
@@ -51,19 +64,33 @@ angular.module('Users')
                 api.apiCall('PUT', 'api/public/usersrequests/' + item.id, function (results) {
                     $scope.usersrequests.splice($scope.usersrequests.indexOf(item), 1);
                 }, undefined, item);
-
-
             };
+
             $scope.declineReq = function (item) {
                 item.status = -1;
-                item.to_comment = item.to_comment + ' decline from ' + item.tousers.fname;  //toDo check from whom admin VS supervisor (VS maybe ps_teacher)
+                item.to_comment = item.to_comment + ' decline from ' + item.tousers.fname;
 
                 api.apiCall('PUT', 'api/public/usersrequests/' + item.id, function (results) {
                     $scope.usersrequests.splice($scope.usersrequests.indexOf(item), 1);
                 }, undefined, item);
             };
-        }
-    ])
+
+        }])
+    //.controller('popInfoPendingRequestController', ['api','$scope',  '$uibModalInstance','config',function (api,$scope,$uibModalInstance,config) {
+    .controller('popupUserReq', ['api', '$scope', '$uibModalInstance', 'config', function (api, $scope, $uibModalInstance, config) {
+
+        $scope.rrID = config.rrID;
+        $scope.dp = [];
+
+
+        $scope.ok = function () {
+            $uibModalInstance.close('ok')
+        };
+
+        api.apiCall('GET', 'api/public/pendingrequests/' + $scope.rrID, function (results) {
+            $scope.dp = results.data;
+        });
+    }])
     .directive('dashBoardTable', function () {
         return {
             restrict: 'EA',
@@ -75,4 +102,7 @@ angular.module('Users')
             controller: 'UserViewTableController',
             templateUrl: 'modules/userView/userHome/dashboardTable.html'
         }
-    });
+    })
+
+
+;

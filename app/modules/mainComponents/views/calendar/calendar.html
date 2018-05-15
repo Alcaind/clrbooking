@@ -20,7 +20,7 @@
             <thead>
             <tr>
                 <th ng-repeat="day in headerDays track by $index" ng-init="headerDaysIndex = $index"
-                    style="min-width: 60px">
+                    style="min-width: 160px">
                     {{day.toLocaleDateString('el-GR',{ weekday: 'short',
                     year:'numeric', month: 'short', day: 'numeric' })}}
                 </th>
@@ -49,17 +49,17 @@
                         <!--{{calendar[$index]}}-->
                         <div ng-repeat="(key, room) in newCalendar[tdDaysIndex] track by $index"
                              ng-init="newCalendarIndex = $index" class="info"
-                             style="display: flex;position: relative;height:340px;width: 107px ; padding-left:5px;padding-right:5px; border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab ">
-                            <div style="margin: 2px; top: 340px; height: 60px; width: 100%;
+                             style="display: flex;position: relative;height:340px;width: 100%; border-right: 1px solid #9b9c91">
+                            <div style="top: 340px; height: 60px; width: 100%;
                              position: absolute; font-size: smaller;
-                             background-color: #F1F1F1; text-align: left; border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab">
+                             background-color: #F1F1F1; text-align: center; border-right: 1px solid #9b9c91">
                                 {{key}}
                             </div>
                             <div ng-repeat="book in room track by $index" ng-init="roomIndex = $index" class="info"
                                  id="{{book.did}}"
-                                 style="margin: 2px; top: {{book.dist}}px; height: {{book.h}}px; min-width:80px; width: 90px;
-                             position: absolute; font-size: smaller;
-                             background-color: {{book.color}}{{book.new?'66':'33'}}; text-align: left; border: 1px solid #ababab; box-shadow: 2px 2px 6px #ababab"
+                                 style="top: {{book.dist}}px; height: {{book.h}}px; min-width:80px; width: 100%;
+                             position: absolute;
+                             background-color: {{book.color}}{{book.new?'66':'33'}}; text-align: center; border: 2px solid #ababab; "
                                  data-toggle="popover"
                                  data-content="{{book.book.ps.tma_per}} {{book.book.ps.teacher}} {{book.pivot.fromt}}-{{book.pivot.tot}}"
                                  data-trigger="hover"

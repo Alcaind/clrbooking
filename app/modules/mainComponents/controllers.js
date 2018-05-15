@@ -302,8 +302,6 @@ angular.module('MainComponents', [
 
                 scope.$watch(scope.isLoading, toggleElement);
 
-                ////////
-
                 function toggleElement(loading) {
                     if (loading) {
                         elem.show();
@@ -317,6 +315,31 @@ angular.module('MainComponents', [
                 }
             }
         }
-    });
+    })
+    .directive('showHide', function ($http) {
+        function link(scope, element, attrs) {
+            scope.collapsed = true;
+            scope.title = attrs.shTitle;
 
-ifLoading.$inject = ['$http'];
+            scope.toggle = function collapsibleToggle(e) {
+                e.preventDefault();
+                scope.collapsed = !scope.collapsed;
+            };
+        }
+
+        return {
+            scope: {},
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'modules/mainComponents/views/showHide.html',
+            link: link
+        }
+
+    })
+    .directive('testTransclude', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'modules/mainComponents/views/showHide.html'
+        }
+    });
