@@ -7,7 +7,7 @@
         </a>
     </div>
     <div id="content" style="display: flex">
-        <div id="leftColumn" class="table-responsive boxContent tableView" style="width: 100%">
+        <div class="leftColumn" id="leftColumn" class="table-responsive boxContent tableView">
             <div>
                 <h2 style="text-align: center;"> Κατοχυρωμένος εξοπλισμός στην {{ctrl.mainData.name}} </h2>
                 <!--{{ctrl.ldp.name}}-->
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div id="rightColumn" style="width: 100%">
+        <div class="rightColumn" id="rightColumn">
             <div class="table-responsive boxContent" ng-if="!ctrl.pivotData">
                 <div>
                     <h2 style="text-align: center;"> Διαθέσιμος εξοπλισμός </h2>

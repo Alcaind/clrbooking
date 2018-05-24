@@ -34,6 +34,7 @@ angular.module('MainComponents')
         }
     })
     .controller('statusSelectorController', function ($scope, ClrStatusSrv) {
+
         $scope.optStatus = ClrStatusSrv.getStatus($scope.options);
     })
 
@@ -53,7 +54,7 @@ angular.module('MainComponents')
             api.apiCall('GET', ctrl.baseURL, function (results) {
                 return results.data;
             });
-        };
+        }
 
         return srv;
 

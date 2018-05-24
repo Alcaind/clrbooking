@@ -1,15 +1,19 @@
 'use strict';
 
 angular.module('Users')
-    .controller('UserViewTableController', ['$scope', '$location', 'api', '$uibModal', function ($scope, $location, api, $uibModal) {
+    .controller('UserViewTableController', ['$scope', '$location', 'api', '$uibModal', 'MakeModal', function ($scope, $location, api, $uibModal, MakeModal) {
         // $scope.baseURL = 'api/public/view';
-
-        $scope.search = {status: $scope.status};
+        //$scope.search = {status: $scope.status};
 
         $scope.selectRow = function (item) {
 
+            if ($scope.status === 3) {
+                $location.url('/usercreaterequests/' + item.id);
+                return
+            }
+
             var $myModalInstance = $uibModal.open({
-                templateUrl: 'modules/userview/userHome/popInfoPendingRequest.html',
+                templateUrl: 'modules/userView/userHome/popInfoPendingRequest.html',
                 controller: 'popupUserReq',
                 size: 'lg',
                 resolve: {
@@ -19,10 +23,17 @@ angular.module('Users')
                 }
             });
             //$myModalInstance.result.then(okCallback, cancelCallback);
-
-            if ($scope.status === 3)
-            $location.url('/usercreaterequests/' + item.id);
         };
+
+        $scope.deleteDraft = function (item, $event) {
+            if (item.status != 3) return;
+            api.apiCall('DELETE', 'api/public/requests/' + item.id, function (results) {
+                $scope.dp.splice($scope.dp.indexOf(item), 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Eπιτυχής διαγραφή', 1)
+            });
+            $event.stopPropagation();
+        };
+
         //
         // $scope.showStatus = function () {
         //     if ($scope.search === 3) {
@@ -45,10 +56,34 @@ angular.module('Users')
             });
 
             $scope.config_id = 1;
+            $scope.expiredRequests = [];
+            $scope.canceledRequests = [];
+            $scope.doneRequests = [];
+            $scope.draftRequests = [];
+            $scope.pendingRequests = [];
+
             $scope.$watch('config_id', function (newVal) {
                 api.apiCall('GET', 'api/public/requests/users/' + user.authdata.roles[0].id + '/config/' + newVal, function (results) {
-                    $scope.requests = results.data;
-
+                    var r = $scope.requests = results.data;
+                    r.map(function (req) {
+                        switch (req.status) {
+                            case 0:
+                                $scope.pendingRequests.push(req);
+                                break;
+                            case 1:
+                                $scope.doneRequests.push(req);
+                                break;
+                            case 2:
+                                $scope.expiredRequests.push(req);
+                                break;
+                            case 3:
+                                $scope.draftRequests.push(req);
+                                break;
+                            case 4:
+                                $scope.doneRequests.push(req);
+                                break;
+                        }
+                    })
                 });
             });
 
@@ -76,7 +111,6 @@ angular.module('Users')
             };
 
         }])
-    //.controller('popInfoPendingRequestController', ['api','$scope',  '$uibModalInstance','config',function (api,$scope,$uibModalInstance,config) {
     .controller('popupUserReq', ['api', '$scope', '$uibModalInstance', 'config', function (api, $scope, $uibModalInstance, config) {
 
         $scope.rrID = config.rrID;

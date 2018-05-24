@@ -1,21 +1,40 @@
-<user-header></user-header>
-<div style="display: flex; width: 100%">
-    <req-user-navigation></req-user-navigation>
-    <day-select style="padding: 4px 0px 0px 4px; width: 100%"></day-select>
+<div style="width: 100%; height: 100%; padding: 10px;">
+    <!--<user-header></user-header>-->
+    <div style="display: flex; width: 100%;border: 1px solid #ababab; padding: 2px">
+        <!--<req-user-navigation></req-user-navigation>-->
+        <day-select style="padding: 4px 0px 0px 4px; width: 100%"></day-select>
+        <button ng-click="reload()" class="btn btn-warning" style="margin: 4px; border: 1px solid #ababab; ">
+            Αρχηκοποίηση
+        </button>
+    </div>
+
+    <show-hide sh-title="Επιλογή Μαθήματος" style="border: 1px solid #ababab; padding: 2px">
+        <course-select style="padding: 4px 4px 0px 4px;"></course-select>
+    </show-hide>
+
+    <show-hide sh-title="Επιλογή Αίθουσας" style="border: 1px solid #ababab; padding: 2px">
+        <room-select style="padding: 4px 4px 0px 4px;"></room-select>
+    </show-hide>
+
+    <!--<show-hide sh-title="Ελεγχος Διαθεσιμότητας" style="border: 1px solid #ababab; padding: 2px">-->
+    <div style="padding: 4px 4px 0px 4px;">
+        <div style="width: 100%; display: flex">
+            <button class="btn btn-warning" ng-click="openCourseCalendar(item)"
+                    style="margin: 4px;width: 100%;border: 1px solid #ababab;">Έλεγχος για τα επιλεγμένα ΜΑΘΗΜΑΤΑ
+            </button>
+            <button class="btn btn-warning" ng-click="openRoomCalendar(item)"
+                    style="margin: 4px;width: 100%;border: 1px solid #ababab;">Έλεγχος για τις επιλεγμένες ΑΙΘΟΥΣΕΣ
+            </button>
+        </div>
+
+        <calendar-book rooms="selectedRooms" fromd="item.fromd" tod="item.tod"
+                       dates-index="item.date_index" item="item"
+                       book="book" booking-errors="bookingErrors"
+                       selected-day="calendarSelectedDay">
+        </calendar-book>
+        <!--<div ng-repeat="e in bookingErrors track by $index">-->
+        <!--&lt;!&ndash;{{e}}&ndash;&gt;-->
+        <!--</div>-->
+    </div>
+    <!--</show-hide>-->
 </div>
-
-<button ng-click="openCourseCalendar(item)">Course Calendar</button>
-<button ng-click="openRoomCalendar(item)">Rooms Calendar</button>
-
-<course-select ng-show="currentPage===0" style="padding: 4px 4px 0px 4px;"></course-select>
-<room-select ng-show="currentPage===1" style="padding: 4px 4px 0px 4px;"></room-select>
-
-<calendar-book rooms="selectedRooms" fromd="item.fromd" tod="item.tod"
-               dates-index="item.date_index" item="item"
-               book="book" booking-errors="bookingErrors"
-               selected-day="calendarSelectedDay"
-               ng-show="currentPage===2">
-</calendar-book>
-
-
-

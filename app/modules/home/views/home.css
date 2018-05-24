@@ -50,3 +50,8 @@
     background-color: #e6e6e6;
     color: #800000;
 }
+
+.row > div > div > .homebtn2:hover {
+    background-color: #e6e6e6;
+    color: #800000;
+}

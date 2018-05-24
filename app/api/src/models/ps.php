@@ -38,7 +38,7 @@ class Ps extends Model
 
     public function tm()
     {
-        return $this->belongsTo("\\App\\Models\\Tm", 'tm_code', 'tm_code');
+        return $this->belongsTo("\\App\\Models\\Tm", 'tm_code');
     }
 
     public function users()

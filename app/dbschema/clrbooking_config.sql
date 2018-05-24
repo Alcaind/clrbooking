@@ -1,4 +1,5 @@
-INSERT INTO clrbooking.config (id, year, dt, status, created_at, updated_at)
-VALUES (1, 2017, '2017-11-12 14:11:45', 1, NULL, NULL);
-INSERT INTO clrbooking.config (id, year, dt, status, created_at, updated_at)
-VALUES (2, 2017, '2017-11-12 14:11:45', 1, NULL, NULL);
+INSERT INTO clrbooking.config (id, year, status, created_at, updated_at, fromd, tod, synt, req_exp_dates) VALUES (1, 2017, 1, '2018-02-15 17:45:18', '2018-03-27 10:01:50', '2017-09-15', '2018-09-15', '2017-18', 6);
+INSERT INTO clrbooking.config (id, year, status, created_at, updated_at, fromd, tod, synt, req_exp_dates) VALUES (3, 2016, -1, null, null, '2016-09-15', '2017-09-14', '2016-17', 10);
+INSERT INTO clrbooking.config (id, year, status, created_at, updated_at, fromd, tod, synt, req_exp_dates) VALUES (6, 2014, -1, null, null, '2014-09-15', '2015-09-14', '2014-15', 1);
+INSERT INTO clrbooking.config (id, year, status, created_at, updated_at, fromd, tod, synt, req_exp_dates) VALUES (7, 2015, -1, null, null, '2015-09-15', '2016-09-14', '2015-16', 20);
+INSERT INTO clrbooking.config (id, year, status, created_at, updated_at, fromd, tod, synt, req_exp_dates) VALUES (8, 2018, 2, null, null, '2018-09-15', '2019-09-14', '2018-19', 5);

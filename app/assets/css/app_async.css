@@ -220,3 +220,15 @@ span.form-required {
     margin-left: 5px;
     color: red;
 }
+
+.rightColumn {
+    height: calc(100vh - 122px);
+    overflow-y: auto;
+    width: 100%;
+}
+
+.leftColumn {
+    height: calc(100vh - 122px);
+    overflow-y: auto;
+    width: 100%;
+}

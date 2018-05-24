@@ -120,7 +120,11 @@ angular.module('RoomBook', [
             }, undefined, $scope.item);
         };
 
+        $scope.reload = function () {
+            location.reload();
+        };
         $scope.init = function () {
+            $scope.book = [];
             if (!$routeParams.id) {
                 $scope.selectedPeriod = {};
                 $scope.selectedRooms = [];
@@ -182,7 +186,7 @@ angular.module('RoomBook', [
             course.selected = !course.selected;
             //$scope.selectedCourse = course;
         };
-
+        $scope.fromAnotherPage = true;
         $scope.selectAllCourse = function () {
             $scope.courses.map(function (course) {
                 course.selected = true;
@@ -261,6 +265,7 @@ angular.module('RoomBook', [
 
         api.apiCall('GET', 'api/public/rooms', function (result) {
             $scope.rooms = result.data;
+            $scope.tileRooms = $scope.rooms;
         });
         api.apiCall('GET', 'api/public/periods', function (result) {
                 $scope.periods = result.data;
@@ -271,12 +276,14 @@ angular.module('RoomBook', [
         api.apiCall('POST', 'api/public/tms/ps', function (result) {
             result.data.map(function (tm) {
                 tm.ps.map(function (ps) {
-                    $scope.courses.push(ps)
+                    if (ps.conf_id === 1) $scope.courses.push(ps)
                 });
             });
         }, undefined, $scope.user.authdata.roles[0].tm);
 
         $scope.init();
+
+        //$scope.rootFilter ='';
 
     }])
     .directive('bookView', function () {

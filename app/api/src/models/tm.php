@@ -38,7 +38,7 @@ class Tm extends Model
 
     public function ps()
     {
-        return $this->hasMany("\\App\\Models\\Ps", 'tm_code', 'id');
+        return $this->hasMany("\\App\\Models\\Ps", 'tm_code');
     }
 
 }

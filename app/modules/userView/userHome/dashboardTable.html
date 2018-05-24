@@ -1,5 +1,7 @@
-<div id="data_tbl" class="boxContent" style="height: 100%;">
-    <h3>{{title}}</h3>
+<div id="data_tbl" class="boxContent" style="height: 100%; padding: 5px">
+    <div style="width: 100%; text-align: center; font-size: 18px; font-weight: 500; background-color: moccasin">
+        {{title}}
+    </div>
     <table class="table table-hover table-striped table-responsive table-condensed">
         <thead style="background-color: #cecece;">
         <tr>
@@ -11,11 +13,15 @@
             <th>Αρ.πρωτοκόλλου</th>
             <th>Από ημέρα</th>
             <th>Έως ημέρα</th>
+
+            <th ng-hide="item.status!='3' ">...</th>
+
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in dp |filter:search"
-            style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':''}}" ng-click="selectRow(item)">
+        <tr ng-repeat="item in dp"
+            style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':item.status===4?'#f7c7be':item.status===1?'#c8e6d2':''}}"
+            ng-click="selectRow(item)">
             <td>{{ item.req_dt }}</td>
             <td>{{ item.descr }}</td>
             <td>{{ item.periods.descr }}</td>
@@ -24,6 +30,10 @@
             <td>{{ item.protocol_id }}</td>
             <td>{{ item.fromd |date:'dd-MM-yyyy'}}</td>
             <td>{{ item.tod |date:'dd-MM-yyyy'}}</td>
+
+            <td ng-hide="item.status!='3'"><input type="button" class="btn btn-danger hippo" tooltip-placement="left"
+                                                  uib-tooltip="Διαγραφή" value='Διαγραφή'
+                                                  ng-click="deleteDraft(item, $event)"/></td>
         </tr>
         </tbody>
     </table>

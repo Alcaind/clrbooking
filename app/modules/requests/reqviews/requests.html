@@ -1,6 +1,11 @@
 <div id="requests_main" class="pageHolder">
     <div class="pageHeader">
         <div class="pageButtons">
+            <div ng-if="fromAnotherPage" style="text-align: left;padding-left: 5px;">
+                <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span></span></a>
+            </div>
             <div class="operations">
                 <operations ng-repeat="op in ctrl.operations"
                             hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
@@ -9,11 +14,11 @@
                 <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
             </div>
             <table-tools class="pageTools"></table-tools>
-            <div class="form-group">
-                <form-item-selector selector-title="Config" return-column="id" view-column="year"
-                                    dp="configs" searchable="false" output-value="config_id" class="midInput"
-                                    style=" margin: 0px 1500px ; min-width: 314px;"></form-item-selector>
-            </div>
+            <!--<div class="form-group">-->
+            <!--<form-item-selector selector-title="Config" return-column="id" view-column="year"-->
+            <!--dp="configs" searchable="false" output-value="config_id" class="midInput"-->
+            <!--style=" margin: 0px 1500px ; min-width: 314px;"></form-item-selector>-->
+            <!--</div>-->
         </div>
         <dm-title class="pageTitle"></dm-title>
     </div>

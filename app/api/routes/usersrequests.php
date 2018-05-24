@@ -91,7 +91,7 @@ $app->delete('/usersrequests/{id}', function ($request, $response, $args) {
 $app->put('/usersrequests/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    //print_r($data);
     try {
         $usreq = \App\Models\usersRequests::find($id);
         $usreq->from_user = $data['from_user'] ?: $usreq->from_user;
@@ -105,14 +105,24 @@ $app->put('/usersrequests/{id}', function ($request, $response, $args) {
 
         $totalPending = \App\Models\usersRequests::where('rr_id', '=', $data['rr_id'])->get();
         $confirmed = 0;
+        $canceled = 0;
         for ($i = 0; $i < $totalPending->count(); $i++) {
             if ($totalPending[$i]->status == 1) $confirmed++;
+            if ($totalPending[$i]->status == -1) $canceled++;
         }
+        print_r($totalPending);
+        echo $confirmed . '\n';
         if ($totalPending->count() == $confirmed) {
             $req = \App\Models\Requests::find($data['rr_id']);
             $req->status = 1;
             $req->save();
         }
+        if ($totalPending->count() == ($confirmed + $canceled)) {
+            $req = \App\Models\Requests::find($data['rr_id']);
+            $req->status = 4;
+            $req->save();
+        }
+
 
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);

@@ -28,20 +28,24 @@ $app->get('/tms/{id}', function (Request $request, Response $response, $args) {
     return $response->getBody()->write($tm->toJson());
 });
 
+//(SQL: select * from `ps`, tm
+//where `tm`.`id` = `ps`.`tm_code` and `conf_id` = 1)
+
 $app->post('/tms/ps', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     //$id = $args['id'];
     $data = $request->getParsedBody();
     $tms = array();
     foreach ($data as $tm) {
+        //if ($tm['config_id'] == $data['config_id'])
         array_push($tms, $tm['id']);
     }
     try {
         $tm = \App\Models\Tm::with('supervisor', 'ps')
             ->whereIn('id', $tms)
             ->whereHas('ps', function ($query) use ($data) {
-                $query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)
-                    ->get(['id']))[0]->id);
+                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
+                $query->where('conf_id', '=', 1);
             })->get();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());

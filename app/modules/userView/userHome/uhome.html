@@ -1,31 +1,48 @@
-<div id="rooms_main" class="pageHolder" style="overflow-y: auto;" ng-controller="UserViewController">
-    <div class="pageHeader">
-        <h2> Dashboard </h2>
-    </div>
-    <div style="display:contents; height: auto">
+<div id="rooms_main" class="pageHolder" style="overflow-y: auto; padding: 5px;border: 1px solid #ababab;"
+     ng-controller="UserViewController">
+    <div style="display: block; border: 1px solid #ababab; ">
+        <div style="width: 100%; text-align: center; font-size: 18px; font-weight: 600; background-color: moccasin; padding: 6px">
+            Πίνακας ελέγχου
+        </div>
         <form-item-selector selector-title="Config" return-column="id" view-column="year"
-                            dp="config" searchable="false" output-value="config_id" class="longInput">
+                            dp="config" searchable="false" output-value="config_id"
+                            style="width: 100%">
         </form-item-selector>
-        <div style="display: flex; height: 35% ">
-            <dash-board-table title="Εκκρεμότητες" status="0" dp="requests" ng-click="getPendingRequests"
-                              style=" height:100% ;width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+    </div>
+
+    <div id="daBoMenu" style="border: 1px solid #ababab; padding: 2px; display: flex; width: 100%;height: 51px">
+        <div class="btn-group" ng-init="selPage=0" style="width: 100%; display: contents;">
+            <button type="button" class="btn btn-primary btn-md" ng-click="selPage = 0"
+                    style="width: 100%; padding: 2px">Προς έγκριση
+            </button>
+            <button type="button" class="btn btn-primary btn-md" ng-click="selPage = 1"
+                    style="width: 100%; padding: 2px">Διεκπεραιωμένα
+            </button>
+            <button type="button" class="btn btn-primary btn-md" ng-click="selPage = 2"
+                    style="width: 100%; padding: 2px">Πρόχειρα
+            </button>
+            <button type="button" class="btn btn-primary btn-md" ng-click="selPage = 3"
+                    style="width: 100%; padding: 2px">Αιτήματα προς Διαχειριση
+            </button>
         </div>
-        <div style="display: flex; height: 35% ">
-            <dash-board-table title="Ολοκληρωμένα" status="1" dp="requests"
-                              style="height:100% ; width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
-        </div>
-        <div style="display: flex; height: 35%">
-            <dash-board-table title="Ληγμένα" status="2" dp="requests"
-                              style="height:100% ;width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
-        </div>
-        <div style="display: flex; height: 35% ">
-            <dash-board-table title="Πρόχειρα" status="3" dp="requests"
-                              style="height:100% ;width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
-        </div>
-        <div style="display: flex; height: 35% ;height: 100%; ">
-            <h3>Αιτήματα προς Διαχειριση</h3>
+    </div>
+    <div style="display:contents; height: auto; border: 1px solid #ababab; padding: 2px; width: 100%">
+
+        <dash-board-table title="Προς έγκριση" status="0" dp="pendingRequests" ng-if="selPage===0"
+                          style=" height:100% ;width: 100%;"></dash-board-table>
+
+        <dash-board-table title="Διεκπεραιωμένα" status="1" dp="doneRequests" ng-if="selPage===1"
+                          style="height:100% ; width: 100%;"></dash-board-table>
+
+        <dash-board-table title="Πρόχειρα" status="3" dp="draftRequests" ng-if="selPage===2"
+                          style="height:100% ;width: 100%; "></dash-board-table>
+
+        <div id="data_tbl" class="boxContent" style="height: 100%;" ng-if="selPage===3">
+            <div style="width: 100%; text-align: center; font-size: 18px; font-weight: 600; background-color: moccasin; padding: 6px">
+                Αιτήματα προς Διαχειριση
+            </div>
             <table class="table table-hover table-striped table-responsive table-condensed">
-                <thead>
+                <thead style="background-color: #cecece;">
                 <tr>
                     <th>ID</th>
                     <th>Από Χρήστη</th>
@@ -62,6 +79,13 @@
                 </tbody>
             </table>
         </div>
+
+        <!--TODO: To parakatv e;inai gia ta expired-->
+        <!--<div style="display: flex; height: 35%">
+            <dash-board-table title="Ληγμένα" status="2" dp="expiredRequests"
+                              style="height:100% ;width: 100%; margin: 5px; border: 1px solid #5d0303"></dash-board-table>
+        </div>-->
+
     </div>
 </div>
 

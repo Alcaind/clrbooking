@@ -5,7 +5,6 @@
                 <operations ng-repeat="op in ctrl.operations"
                             hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
                             content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
-
                 <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
             </div>
             <table-tools class="pageTools"></table-tools>
@@ -39,7 +38,9 @@
                 <td ng-if="ctrl.tableColumns[6].visible">{{ item.em_sec}}</td>
                 <td ng-if="ctrl.tableColumns[7].visible">{{ item.em_pant}}</td>
                 <td ng-if="ctrl.tableColumns[8].visible">{{ item.ucategories.descr}}</td>
-                <td ng-if="ctrl.tableColumns[9].visible">{{ item.tm.title }}</td>
+                <td ng-if="ctrl.tableColumns[9].visible">
+                    <li ng-repeat="tm in item.tm">{{ tm.descr }}</li>
+                </td>
                 <td ng-if="ctrl.tableColumns[10].visible">{{ item.comments}}</td>
                 <td style="width:30px;"></td>
             </tr>

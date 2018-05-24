@@ -29,7 +29,7 @@ angular.module('MainComponents', [
             templateUrl: 'modules/mainComponents/views/navmenu.html'
         }
     })
-    .controller('NavmenuController', ['$scope', '$interval', 'AuthenticationService', 'globalVarsSrv', function ($scope, $interval, AuthenticationService, globalVarsSrv) {
+    .controller('NavmenuController', ['$scope', '$interval', 'AuthenticationService', 'globalVarsSrv', '$location', function ($scope, $interval, AuthenticationService, globalVarsSrv, $location) {
         function roleMenuListener(nv, ov) {
             $scope.adminColums = globalVarsSrv.getGlobalVar(nv === 'admin' ? 'homeButtonAdminTableConf' : nv === null ? '' : 'homeButtonUserTableConf');
         }
@@ -41,6 +41,12 @@ angular.module('MainComponents', [
             $scope.status.isopen = !$scope.status.isopen;
         };
 
+        $scope.getProfile = function () {
+            var user = globalVarsSrv.getGlobalVar('auth');
+            $scope.curUser = user.authdata.roles[0].id;
+            $location.path('/users/' + $scope.curUser);
+        };
+
         $scope.logout = function () {
             AuthenticationService.ClearCredentials();
         };
@@ -49,13 +55,6 @@ angular.module('MainComponents', [
             globalVarsSrv.cookieSave();
         };
 
-        $scope.getProfile = function () {
-            $scope.users = {};
-
-            api.apiCall('GET', 'api/public/users', function (results) {
-                $scope.users = results.data;
-            });
-        };
     }])
     .directive('footer', function () {
         return {
@@ -135,7 +134,6 @@ angular.module('MainComponents', [
     .directive('backButton', function () {
         return {
             restrict: 'A',
-
             link: function (scope, element, attrs) {
                 element.bind('click', goBack);
 
@@ -196,8 +194,30 @@ angular.module('MainComponents', [
         };
         $scope.changeColumnVisibility = function (column, state) {
             column.visible = state ? state : !column.visible;
-        }
+        };
     }])
+
+
+    .directive('showHide', function ($http) {
+        function link(scope, element, attrs) {
+            scope.collapsed = true;
+            scope.title = attrs.shTitle;
+
+            scope.toggle = function collapsibleToggle(e) {
+                e.preventDefault();
+                scope.collapsed = !scope.collapsed;
+            };
+        }
+
+        return {
+            scope: {},
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'modules/mainComponents/views/showHide.html',
+            link: link
+        }
+
+    })
 
     .directive('dmTh', function () {
         return {
@@ -318,26 +338,7 @@ angular.module('MainComponents', [
             }
         }
     })
-    .directive('showHide', function ($http) {
-        function link(scope, element, attrs) {
-            scope.collapsed = true;
-            scope.title = attrs.shTitle;
 
-            scope.toggle = function collapsibleToggle(e) {
-                e.preventDefault();
-                scope.collapsed = !scope.collapsed;
-            };
-        }
-
-        return {
-            scope: {},
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'modules/mainComponents/views/showHide.html',
-            link: link
-        }
-
-    })
     .directive('testTransclude', function () {
         return {
             restrict: 'E',

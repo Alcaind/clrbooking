@@ -153,16 +153,20 @@ $app->post('/requests', function (Request $request, Response $response) {
 
 
 $checkUserRequestRules = function ($request, $response, $next) {
+    $response = $next($request, $response);
     $res = null;
     //$data = $request->getAttributes()['routeInfo'][2];
-    $data = $request->getParsedBody();
-    //print_r($data);
+    //$data = $request->getParsedBody();
+    $data = $response->getBody();
+    print_r($data);
 
     $roombook = \App\Models\Requests::with('rooms')
         ->where('fromd', '<=', $data['fromd'])
         ->where('fromd', '>=', $data['fromd'])
 //        ->where('room_id', '=', $args['rid'])
         ->get();
+
+    $days = array('Κυριακή', 'Δευτερα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκέυη', 'Saturday');
 
     //$response->getBody()->write($roombook->toJson());
     foreach ($roombook as $book) {
@@ -174,7 +178,7 @@ $checkUserRequestRules = function ($request, $response, $next) {
                 if ($fromt->diff($tot)->invert == 1) {
                     $nr = $response->withStatus(418);
                     $error = new ApiError();
-                    $error->setData(818, 'To time must be greater than from time.');
+                    $error->setData(818, 'Η ώρα λήξης πρέπει να είναι μεγαλύτερα από την ώρα έναρξης.');
                     return $nr->write($error->toJson());
                 }
 
@@ -183,30 +187,38 @@ $checkUserRequestRules = function ($request, $response, $next) {
                 $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
                 $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
 
-
                 if (($tmpStrFD >= $book['fromd'] || $tmpStrTD >= $book['fromd']) && $tmpStrFD <= $book['tod']) {
                     if ($room->pivot->fromt >= $tmpStrFT && $room->pivot->fromt <= $tmpStrTT) {
 
                         if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
-                            $nr = $response->withStatus(417);
-                            $error = new ApiError();
-                            $req = \App\Models\Rooms::find($reqRoom['id'])->get();
-                            $error->setData(816, 'Class ' . $req->name . ' is already assigned to book.', $room);
-                            return $nr->write($error->toJson());
+                            if ($data['status'] == 0) {
+                                $uMessage = new \App\Models\usersRequests();
+                                $uMessage->from_user = $data['user_id'];
+                                $uMessage->to_users = $book['user_id'];
+                                $uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . $days[$room->pivot->date_index] . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
+                                $uMessage->rr_id = $data['id'] ?: '';
+                                $uMessage->status = 0;
+                                $uMessage->save();
+                            } else {
+                                $nr = $response->withStatus(417);
+                                $error = new ApiError();
+                                $req = \App\Models\Rooms::find($reqRoom['id'])->get();
+                                $error->setData(816, 'Class ' . $req->name . ' is already assigned to book.', $room);
+                                return $nr->write($error->toJson());
+                            }
                         }
-                        if ($room->pivot->teacher == $reqRoom['teacher']) {
-                            $nr = $response->withStatus(417);
-                            $error = new ApiError();
-                            $error->setData(815, 'Teacher ' . \App\Models\Users::find($room->pivot->teacher)->user . ' is already assigned to another room.', $room);
-                            return $nr->write($error->toJson());
-                        }
+                        if (property_exists($room->pivot, 'teacher'))
+                            if ($room->pivot->teacher == $reqRoom['teacher']) {
+                                $nr = $response->withStatus(417);
+                                $error = new ApiError();
+                                $error->setData(815, 'Ο καθηγητής ' . \App\Models\Users::find($room->pivot->teacher)->user . ' διδάσκει στην αίθουσα' . $room . '.');
+                                return $nr->write($error->toJson());
+                            }
                     }
                 }
             }
         }
     }
-
-    $response = $next($request, $response);
     return $response;
 };
 
@@ -214,13 +226,14 @@ $checkUserRequestRules = function ($request, $response, $next) {
 $app->post('/requests/userrequest', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
+    $errors = array();
     try {
         $requests = new \App\Models\Requests();
         $requests->req_dt = $data['req_dt'];
         $requests->user_id = $data['user_id'];
         $requests->descr = $data['descr'] ?: '';
         $requests->period = $data['period'] ?: '';
-        $requests->ps_id = $data['ps_id'];
+        $requests->ps_id = $data['ps_id'] ?: null;
         $requests->class_use = $data['class_use'] ?: '';
         //$requests->links = $data['links']?:'';
         $requests->status = $data['status'];
@@ -229,27 +242,231 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         $requests->conf_id = $data['conf_id'];
         $requests->save();
 
-        $attachArray = array();
-        for ($i = 0; $i < sizeof($data['pivot']); $i++) {
-            $attachArray["'" + $data['rooms'][$i]['id'] + "'"] = $data['pivot'][$i];
+        $data['id'] = $requests['id'];
+        $roombook = \App\Models\Requests::with('rooms')
+            ->where('fromd', '<=', $data['fromd'])
+            ->where('tod', '>=', $data['tod'])
+            //->where('room_id', '=', $args['rid'])
+            ->where('status', '=', 1)
+            ->get();
+
+        //$response->getBody()->write($roombook->toJson());
+        foreach ($roombook as $book) {
+            foreach ($book->rooms()->get() as $room) {
+                foreach ($data['rooms'] as $reqRoom) {
+                    $fromt = new DateTime($reqRoom['fromt']);
+                    $tot = new DateTime($reqRoom['tot']);
+
+                    if ($data['status'] == 3) continue;
+
+                    //print_r( $fromt->diff($tot)->invert);
+                    if ($fromt->diff($tot)->invert == 1) {
+                        $nr = $response->withStatus(418);
+                        $error = new ApiError();
+                        $requests->delete();
+                        $error->setData(818, 'To time must be greater than from time.');
+                        return $nr->write($error->toJson());
+                    }
+
+                    $tmpStrFD = explode('T', $data['fromd'])[0];
+                    $tmpStrTD = explode('T', $data['tod'])[0];
+                    $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
+                    $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
+
+                    if (($tmpStrFD >= $book['fromd'] || $tmpStrTD >= $book['fromd']) && $tmpStrFD <= $book['tod']) {
+                        if ($room->pivot->fromt >= $tmpStrFT && $room->pivot->fromt <= $tmpStrTT) {
+
+                            if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
+                                if ($data['status'] == 0) {
+                                    $uMessage = new \App\Models\usersRequests();
+                                    $uMessage->from_user = $data['user_id'];
+                                    $uMessage->to_users = $book['user_id'];
+                                    $uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . $room->pivot->date_index . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
+                                    $uMessage->rr_id = $data['id'] ?: '';
+                                    $uMessage->status = 0;
+                                    $uMessage->save();
+                                }
+
+                                $tt = new stdClass();
+                                $tt->fromRoom = $reqRoom;
+                                $tt->toRoom = $room;
+
+                                array_push($errors, $tt);
+
+                            }
+                            if (property_exists($room->pivot, 'teacher'))
+                                if ($room->pivot->teacher == $reqRoom['teacher']) {
+
+                                    array_push($errors, \App\Models\Users::find($room->pivot->teacher)->user);
+                                    /*$nr = $response->withStatus(417);
+                                    $error = new ApiError();
+                                    $error->setData(815, 'Teacher ' . \App\Models\Users::find($room->pivot->teacher)->user . ' is already assigned to another room.', $room);
+                                    return $nr->write($error->toJson());*/
+                                }
+                        }
+                    }
+                }
+            }
         }
-        $requests->rooms()->attach($attachArray);
+
+        if (sizeof($errors) == 0 && $data['status'] != 3) {
+            $requests->status = 1;
+            $requests->save();
+        }
+
+        //$attachArray = array();
+        //$deletedRows = \App\Models\RoomBook::where('req_id', '=', $requests['id'])->delete();
+        for ($i = 0; $i < sizeof($data['pivot']); $i++) {
+            //$attachArray["'" + $data['rooms'][$i]['id'] + "'"] = $data['pivot'][$i];
+            $rb = new \App\Models\RoomBook();
+            $rb->req_id = $requests['id'];
+            $rb->room_id = $data['rooms'][$i]['id'];
+            $rb->comment = $data['pivot'][$i]['comment'];
+            $rb->teacher = $data['pivot'][$i]['teacher'];
+            $rb->fromt = $data['pivot'][$i]['fromt'];
+            $rb->tot = $data['pivot'][$i]['tot'];
+            $rb->date_index = $data['pivot'][$i]['date_index'];
+            $rb->save();
+        }
+        //$requests->rooms()->delete() attach($attachArray);
 
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage());
+        $error->setData($e->getCode(), $e->getMessage(), $data);
+        return $nr->write($error->toJson());
+    }
+    if (sizeof($errors) != 0) {
+        $nr = $response->withStatus(417);
+        $error = new ApiError();
+        //$req = \App\Models\Rooms::find($reqRoom['id'])->get();
+        $error->setData(816, 'Σφάλματα αίτησης ', $errors);
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());
-//})->add($checkUserRequestRules);
-});
+});//->add($checkUserRequestRules);
 
 $app->put('/requests/userrequest', function (Request $request, Response $response) {
+
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
+    $errors = array();
     try {
-        $requests = new \App\Models\Requests();
+        //$requests = new \App\Models\Requests();
+        $requests = \App\Models\Requests::find($data['id']);
+        $requests->req_dt = $data['req_dt'];
+        $requests->user_id = $data['user_id'];
+        $requests->descr = $data['descr'] ?: '';
+        $requests->period = $data['period'] ?: '';
+        $requests->ps_id = $data['ps_id'] ?: null;
+        $requests->class_use = $data['class_use'] ?: '';
+        //$requests->links = $data['links']?:'';
+        $requests->status = $data['status'];
+        $requests->fromd = $data['fromd'];
+        $requests->tod = $data['tod'];
+        $requests->conf_id = $data['conf_id'];
+        $requests->save();
+
+        $data['id'] = $requests['id'];
+        $roombook = \App\Models\Requests::with('rooms')
+            ->where('fromd', '<=', $data['fromd'])
+            ->where('tod', '>=', $data['tod'])
+            //->where('room_id', '=', $args['rid'])
+            ->where('status', '=', 1)
+            ->get();
+
+        //$response->getBody()->write($roombook->toJson());
+        foreach ($roombook as $book) {
+            foreach ($book->rooms()->get() as $room) {
+                foreach ($data['rooms'] as $reqRoom) {
+                    $fromt = new DateTime($reqRoom['fromt']);
+                    $tot = new DateTime($reqRoom['tot']);
+
+                    if ($data['status'] == 3) continue;
+
+                    //print_r( $fromt->diff($tot)->invert);
+                    if ($fromt->diff($tot)->invert == 1) {
+                        $nr = $response->withStatus(418);
+                        $error = new ApiError();
+                        $requests->delete();
+                        $error->setData(818, 'To time must be greater than from time.');
+                        return $nr->write($error->toJson());
+                    }
+
+                    $tmpStrFD = explode('T', $data['fromd'])[0];
+                    $tmpStrTD = explode('T', $data['tod'])[0];
+                    $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
+                    $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
+
+                    if (($tmpStrFD >= $book['fromd'] || $tmpStrTD >= $book['fromd']) && $tmpStrFD <= $book['tod']) {
+                        if ($room->pivot->fromt >= $tmpStrFT && $room->pivot->fromt <= $tmpStrTT) {
+
+                            if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
+                                if ($data['status'] == 0) {
+                                    $uMessage = new \App\Models\usersRequests();
+                                    $uMessage->from_user = $data['user_id'];
+                                    $uMessage->to_users = $book['user_id'];
+                                    $uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . $room->pivot->date_index . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
+                                    $uMessage->rr_id = $data['id'] ?: '';
+                                    $uMessage->status = 0;
+                                    $uMessage->save();
+                                }
+
+                                $tt = new stdClass();
+                                $tt->fromRoom = $reqRoom;
+                                $tt->toRoom = $room;
+
+                                array_push($errors, $tt);
+
+                            }
+                            if (property_exists($room->pivot, 'teacher'))
+                                if ($room->pivot->teacher == $reqRoom['teacher']) {
+
+                                    array_push($errors, \App\Models\Users::find($room->pivot->teacher)->user);
+                                    /*$nr = $response->withStatus(417);
+                                    $error = new ApiError();
+                                    $error->setData(815, 'Teacher ' . \App\Models\Users::find($room->pivot->teacher)->user . ' is already assigned to another room.', $room);
+                                    return $nr->write($error->toJson());*/
+                                }
+                        }
+                    }
+                }
+            }
+        }
+
+        $deletedRows = \App\Models\RoomBook::where('req_id', '=', $requests['id'])->delete();
+        for ($i = 0; $i < sizeof($data['pivot']); $i++) {
+            //$attachArray["'" + $data['rooms'][$i]['id'] + "'"] = $data['pivot'][$i];
+            $rb = new \App\Models\RoomBook();
+            $rb->req_id = $requests['id'];
+            $rb->room_id = $data['rooms'][$i]['id'];
+            $rb->comment = $data['pivot'][$i]['comment'];
+            $rb->teacher = $data['pivot'][$i]['teacher'];
+            $rb->fromt = $data['pivot'][$i]['fromt'];
+            $rb->tot = $data['pivot'][$i]['tot'];
+            $rb->date_index = $data['pivot'][$i]['date_index'];
+            $rb->save();
+        }
+
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage(), $data);
+        return $nr->write($error->toJson());
+    }
+    if (sizeof($errors) != 0) {
+        $nr = $response->withStatus(417);
+        $error = new ApiError();
+        //$req = \App\Models\Rooms::find($reqRoom['id'])->get();
+        $error->setData(816, 'Σφάλματα αίτησης ', $errors);
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(201)->getBody()->write($requests->toJson());
+
+    /*header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    try {
+        $requests = \App\Models\Requests::find($data['id']);
         $requests->req_dt = $data['req_dt'] ?: $requests->req_dt;
         $requests->user_id = $data['user_id'] ?: $requests->user_id;
         $requests->descr = $data['descr'] ?: $requests->descr;
@@ -263,8 +480,8 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
         $requests->save();
 
         $attachArray = array();
-        for ($i = 0; $i < sizeof($data[rooms]); $i++) {
-            $attachArray[$data[rooms][$i]['room_id']] = $data[rooms][$i];
+        for ($i = 0; $i < sizeof($data['rooms']); $i++) {
+            $attachArray[$data['rooms'][$i]['room_id']] = $data['pivot'][$i];
         }
         $requests->rooms()->sync($attachArray);
     } catch (PDOException $e) {
@@ -273,8 +490,8 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
         $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
-    return $response->withStatus(201)->getBody()->write($requests->toJson());
-});
+    return $response->withStatus(201)->getBody()->write($requests->toJson());*/
+});//->add($checkUserRequestRules);
 
 $app->delete('/requests/{id}', function ($request, $response, $args) {
     $id = $args['id'];

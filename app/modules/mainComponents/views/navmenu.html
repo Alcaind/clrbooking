@@ -36,7 +36,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"
                                                                         aria-hidden="true"></span><b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="btn-append-to-single-button">
-                    <li role="menuitem"><a href="#users/{{users.id}}/roles">Προφίλ</a></li>
+                    <li role="menuitem" ng-click="getProfile()" type="button"><a>Προφίλ</a></li>
                     <li role="menuitem" ng-click="logout()"><a href="#login">Έξοδος</a></li>
                     <li role="menuitem" ng-click="closeWithCookie()" type="button"><a>Αποθήκευσε τις επιλογές σου</a>
                     </li>

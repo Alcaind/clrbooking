@@ -10,31 +10,37 @@ angular.module('Requests', [
     $scope.configs = {};
 
     //$scope.url = null;
+
+    //$scope.config_id = 1;
+    //$scope.url = 'api/public/requests/config/1';
+    $scope.$watch('config_id', function (newVal) {
+        $scope.urlr = '/requests/config/' + newVal;
+        $scope.ctrl.setUrl($scope.urlr);
+    });
+
     api.apiCall('GET', 'api/public/config', function (results) {
         $scope.configs = results.data;
+        $scope.configs.map(function (cfg) {
+            if (cfg.status === 1) $scope.config_id = cfg.id;
+        });
+        $scope.urlr = '/requests/config/' + $scope.config_id;
+        $scope.ctrl = makeController.mainController('', 'requestsTableConf', 'Κατάλογος Αιτημάτων');
+        $scope.ctrl.setUrl($scope.urlr);
+        $scope.ctrl.init();
+
+        $scope.THLbutton = function (item) {
+            $scope.ctrl.operations[2].ifVisible = true;
+            if (item.room_use.id !== 7) {
+                $scope.ctrl.operations[2].ifVisible = false;
+            }
+        };
     });
 
-    $scope.config_id = 1;
-    $scope.url = 'api/public/requests/config/1';
-    $scope.$watch('config_id', function (newVal) {
-        $scope.url = 'api/public/requests/config/' + newVal;
-    });
 
-    $scope.ctrl = makeController.mainController('/requests', 'requestsTableConf', 'Κατάλογος Αιτημάτων');
-    $scope.ctrl.init();
     $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
     $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
 
-    $scope.THLbutton = function (item) {
-        $scope.ctrl.operations[2].ifVisible = true;
-        if (item.room_use.id != 7) {
-            $scope.ctrl.operations[2].ifVisible = false;
 
-
-            // console.log("there u are");
-            //ng-disabled="false"
-        }
-    }
 
 }])
     .controller('RequestProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', '$filter', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api, $filter) {

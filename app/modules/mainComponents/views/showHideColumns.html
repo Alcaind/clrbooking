@@ -2,11 +2,12 @@
     <li class="dropdown" style="background: #5d0303;cursor: pointer;">
         <a class="dropdown-toggle" data-toggle="dropdown">
             <span class="glyphicon glyphicon-cog" ng-click="hideShowOptions()" aria-hidden="true"></span>
-            <b class="caret"></b></a>
-        <ul class="" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button"
+            <b class="caret" ng-click="hideShowOptions()"></b></a>
+        <ul class="dropdown-menu dropdown-menu-left" uib-dropdown-menu role="menu"
+            aria-labelledby="btn-append-to-single-button"
             ng-show="optionsVisible">
             <li role="menuitem" ng-repeat="option in columsVisibility">
-                <label style="padding: 2px">
+                <label style="padding: 2px" ng-model="option.visible">
                     <input type="checkbox" ng-model="option.visible">
                     {{option.title}}
                 </label>

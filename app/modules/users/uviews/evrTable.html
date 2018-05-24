@@ -12,7 +12,7 @@
         <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
             style="cursor: pointer">
             <td>{{ item.id }}</td>
-            <td>{{ item.item }}</td>
+            <td>{{ item.role }}</td>
             <td>{{ item.descr }}</td>
             <td>
                 <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"

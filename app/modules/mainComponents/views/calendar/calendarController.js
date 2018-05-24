@@ -8,6 +8,7 @@ angular.module('MainComponents')
         $scope.headerDays = [];
         $scope.hours = [];
         $scope.options = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
+        $scope.showErrors = $scope.showErrors ? $scope.showErrors : false;
 
         $scope.$watch('book', plotBook);
         $scope.popup = function (reqID) {
@@ -74,6 +75,14 @@ angular.module('MainComponents')
          */
         function plotBook(book, calendar) {
             // check if all input data is ok
+            //if (book.length === 0) {
+            $scope.calendar = [];
+            $scope.newCalendar = [];
+            $scope.reqPerRoom = {};
+            $scope.bookingErrors = [];
+            $scope.headerDays = [];
+            //$scope.datesIndex = '';
+            //}
             if (!$scope.fromd || !$scope.tod || !$scope.datesIndex || !book || !calendar) return;
             // init variables
             $scope.calendar = []; // erase all existing data
@@ -84,7 +93,6 @@ angular.module('MainComponents')
             var days = Math.ceil(Math.abs(tod.getTime() - fromd.getTime()) / (1000 * 3600 * 24)); // calculate & holds the distance in headerDays between fromd and tod
             var calendarIndex = null; // pointer in the calendar (creation proccess)
             var calObjects = []; // keeps only the new calendar requests per day (checking perpuse)
-
 
 
             for (var i = 0; i < days; i++) {  // loop parsing all holle days
@@ -185,7 +193,7 @@ angular.module('MainComponents')
                             || (fromCheck < calObjects[m].fromt && totCheck > calObjects[m].fromt))) && calObjects[m].id === tile.id) { // check if we have date conflict and is the same room with existing room
                     ok = true; // raise the conflict flag
                     //bookObj.color = '#dd3030'; // flag the objects with color
-                    bookObj.color = '#287ed2'
+                    bookObj.color = '#287ed2';
                     calObjects[m].color = '#e4aba8';
                     bookObj.fromBookError.push(calObjects[m]); // push the conflict new room in book room error table
                     bookObj.did = 'b' + m + calObjects[m].did;  // the div id for view binding
@@ -216,7 +224,8 @@ angular.module('MainComponents')
                 item: "<",
                 rooms: "<",
                 bookingErrors: "=",
-                selectedDay: '='
+                selectedDay: '=',
+                showErrors: '<'
             },
             controller: "CalendarContol",
             templateUrl: 'modules/mainComponents/views/calendar/calendar.html'
@@ -258,6 +267,18 @@ angular.module('MainComponents')
         return {
             restrict: "EA",
             templateUrl: 'modules/mainComponents/views/calendar/reportsError.html'
+        }
+    })
+    .directive('reportErrors', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/calendar/reportErrors.html'
+        }
+    })
+    .directive('reportCalendar', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/calendar/reportCalendar.html'
         }
     })
 ;

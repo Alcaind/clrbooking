@@ -62,6 +62,7 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', 'api', func
 
     function cookieGet(usr) {
         var appConf = $window.localStorage['appConf' + usr];
+        if (usr !== getGlobalVar('auth')['username']) return;
         globalVariables = appConf ? Object.assign(globalVariables, JSON.parse(appConf)) : globalVariables;
         return globalVariables;
     }
@@ -104,6 +105,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         /**
          * @type {{dp: Array, baseURL: *, totalRows: number, tableColumns: *, title: *, operations: *, url: *}}
          */
+
         var ctrl = {
             dp: [],
             baseURL: globalVarsSrv.getGlobalVar('appUrl') + url,
@@ -120,12 +122,20 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
 
         ctrl.selectedRow = null;
 
+        ctrl.setUrl = function (url) {
+            ctrl.url = url;
+            ctrl.baseURL = globalVarsSrv.getGlobalVar('appUrl') + url;
+        };
+
         ctrl.getAll = function (url) {
+
             if (!url) api.apiCall('GET', ctrl.baseURL, function (results) {
+                ctrl.dp = [];
                 ctrl.dp = results.data;
                 ctrl.totalRows = ctrl.dp.length;
             });
             else api.apiCall('GET', url, function (results) {
+                ctrl.dp = [];
                 ctrl.dp = results.data;
                 ctrl.totalRows = ctrl.dp.length;
             });
@@ -151,7 +161,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             AuthenticationService.CheckCredentials();
             ctrl.cth = ctrl.tableColumns[0];
             ctrl.cth.sorted = true;
-            // ctrl.getAll();
+            ctrl.getAll();
         };
 
         ctrl.cth = {};
