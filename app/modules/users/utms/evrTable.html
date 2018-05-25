@@ -5,6 +5,9 @@
             <th>id</th>
             <th>Κωδικός Τμήματος</th>
             <th>Περιγραφή</th>
+            <th>Κωδικός(KU/MKU)</th>
+            <th>Περιγραφή(KU/MKU)</th>
+
             <th>...</th>
         </tr>
         </thead>
@@ -12,8 +15,10 @@
         <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
             style="cursor: pointer">
             <td>{{item.id }}</td>
-            <td>{{item.tm_code}}</td>
+            <td>{{item.ku_code}}</td>
             <td>{{item.descr }}</td>
+            <td>{{item.ku_code?'ΠΡΟ - '+item.ku_code:item.mku_code?'ΜΕΤ - '+item.mku_code:'no id'}}</td>
+            <td>{{item.ku_per?item.ku_per:item.mku_per?item.mku_per:'no desc' }}</td>
             <td>
                 <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
                         class="btn{{item.disabled?' btn-regular disabled':' btn-success'}}">

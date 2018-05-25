@@ -1,0 +1,10 @@
+<div style="display:inline-block; width:100%; position:relative; border: 1px solid #cecece; font-size: medium">
+    <button type="button" class="btn btn-info btn-medium" ng-click="toggle($event)"
+            style="text-align: center; width: 100%">
+        <span class="glyphicon glyphicon-chevron-{{collapsed?'up':'down'}}"></span>
+        <span>{{title}}</span>
+    </button>
+    <div ng-transclude ng-show="!collapsed">
+    </div>
+</div>
+

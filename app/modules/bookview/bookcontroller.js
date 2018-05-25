@@ -67,6 +67,7 @@ angular.module('RoomBook', [
             }
         ];
         $scope.mode = 'reporting';
+        $scope.coursesDp = [];
 
         AuthenticationService.CheckCredentials();
 
@@ -102,7 +103,7 @@ angular.module('RoomBook', [
         };
 
         $scope.openCourseCalendar = function () {
-            $scope.courses.map(function (course) {
+            $scope.coursesDp.map(function (course) {
                 if (course.selected) {
                     if (!$scope.item.ps.includes(course.id)) $scope.item.ps.push(course.id)
                 }
@@ -187,16 +188,19 @@ angular.module('RoomBook', [
             //$scope.selectedCourse = course;
         };
         $scope.fromAnotherPage = true;
+
         $scope.selectAllCourse = function () {
-            $scope.courses.map(function (course) {
+            $scope.coursesDp.map(function (course) {
                 course.selected = true;
             });
         };
 
         $scope.deselectAllCourse = function () {
-            $scope.courses.map(function (course) {
+            $scope.coursesDp.map(function (course) {
                 course.selected = false;
             });
+            $scope.item.ps = [];
+
         };
 
         $scope.selectAllRoom = function () {
@@ -273,8 +277,14 @@ angular.module('RoomBook', [
         api.apiCall('GET', 'api/public/users', function (result) {
             $scope.users = result.data;
         });
+        $scope.tms = [];
         api.apiCall('POST', 'api/public/tms/ps', function (result) {
+
             result.data.map(function (tm) {
+                $scope.tms.push({
+                    id: tm.id,
+                    per: tm.descr + " - " + tm.ku_per + " - " + tm.mp_per + " - " + tm.mku_per
+                });
                 tm.ps.map(function (ps) {
                     if (ps.conf_id === 1) $scope.courses.push(ps)
                 });
@@ -283,6 +293,21 @@ angular.module('RoomBook', [
 
         $scope.init();
 
+        $scope.defaultCourseSelection = null;
+        $scope.courseFilterObj = {tm: null, km: null, ex: null, pm: null, gen: null};
+
+        $scope.filterCourses = function (filteredArray, inputArray, courseFilterObj) {
+            $scope.coursesDp = [];
+            inputArray.map(function (course) {
+                var exists = true;
+                exists = (!courseFilterObj.tm || course.tm_code === courseFilterObj.tm) ? true : false;
+                exists = ((!courseFilterObj.psex || courseFilterObj.psex.indexOf(course.ps_ex) >= 0) && exists) ? true : false;
+                exists = ((!courseFilterObj.pskm || courseFilterObj.pskm.indexOf(course.ps_km) >= 0) && exists) ? true : false;
+                exists = ((!courseFilterObj.pm || courseFilterObj.pm.indexOf(course.pm) >= 0) && exists) ? true : false;
+
+                if (exists) $scope.coursesDp.push(course);
+            });
+        };
         //$scope.rootFilter ='';
 
     }])

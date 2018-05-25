@@ -1,7 +1,5 @@
 angular.module('Requests')
     .controller('RequestsRoomsController', ['$scope', 'AuthenticationService', 'makeController', function ($scope, AuthenticationService, makeController) {
-
-
         $scope.ctrl = makeController.n2nController('/requests', 'rooms', {
             comment: '',
             teacher: '',
@@ -33,9 +31,11 @@ angular.module('Requests')
             controller: "RequestFormController"
         }
     })
-    .controller('RequestFormController', ['$scope', 'api', '$routeParams', function ($scope, api, $routeParams) {
+    .controller('RequestFormController', ['$scope', 'api', '$routeParams', 'ClrStatusSrv', function ($scope, api, $routeParams, ClrStatusSrv) {
+
         $scope.baseURL = 'api/public/requests';
 
+        $scope.statusOptions = ClrStatusSrv.getStatus('weekdaysTableDateIndex');
         $scope.teachers = [];
 
         api.apiCall('GET', 'api/public/users', function (results) {
@@ -46,7 +46,7 @@ angular.module('Requests')
 
         $scope.getTeacher = function (teacherId) {
             for (var i = 0; i < $scope.teachers.length; i++) {
-                if ($scope.teachers[i].id === teacherId) return $scope.teachers[i].user;
+                if ($scope.teachers[i].id === teacherId) return $scope.teachers[i].sname + ' ' + $scope.teachers[i].fname;
             }
         };
 
@@ -61,11 +61,12 @@ angular.module('Requests')
 
             //$scope.ctrl.pivotData.fromt.setTime($scope.ctrl.pivotData.fromt.getTime() - ($scope.ctrl.pivotData.fromt.getTimezoneOffset() * 60000));
             //$scope.ctrl.pivotData.tot.setTime($scope.ctrl.pivotData.tot.getTime() - ($scope.ctrl.pivotData.tot.getTimezoneOffset() * 60000));
-            console.log($scope.ctrl.pivotData);
-            console.log($scope.ctrl.pivotData.fromt.toUTCString());
-            console.log($scope.ctrl.pivotData.fromt.toString());
-            console.log($scope.ctrl.pivotData.fromt.toLocaleString());
-            console.log($scope.ctrl.pivotData.fromt.toLocaleTimeString());
+
+            // console.log($scope.ctrl.pivotData);
+            // console.log($scope.ctrl.pivotData.fromt.toUTCString());
+            // console.log($scope.ctrl.pivotData.fromt.toString());
+            // console.log($scope.ctrl.pivotData.fromt.toLocaleString());
+            // console.log($scope.ctrl.pivotData.fromt.toLocaleTimeString());
 
             api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/rooms/' + $scope.ctrl.currentRight.id, function (results) {
                 $scope.ctrl.pivotData = Object.assign({}, $scope.ctrl.pivotTable);

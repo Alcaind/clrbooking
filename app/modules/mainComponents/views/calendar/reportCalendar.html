@@ -1,0 +1,19 @@
+<div id="report" style="display: flex">
+    <ul ng-repeat="(name, room) in reqPerRoom" style="display: block">
+        {{name}}
+        <!--<div ng-repeat="req in room track by $index| orderBy:['rooms.pivot.date_index', 'rooms.pivot.fromt']">-->
+        <div ng-repeat="req in room track by $index">
+            <div ng-if="$index === 0">
+                <div>
+                    {{req.fromd | date : 'd-M-y'}} {{req.tod | date : 'd-M-y'}}
+                </div>
+            </div>
+
+            <li ng-repeat="r in req.rooms " ng-if="r.name === name" style="min-width: 200px;">
+                <!--TODO : na parei hmera apo ton global lookup table-->
+                {{weekdays[r.pivot.date_index-1]}} {{r.pivot.fromt | date : 'shortTime' }} {{r.pivot.tot | date :
+                'shortTime'}}
+            </li>
+        </div>
+    </ul>
+</div>

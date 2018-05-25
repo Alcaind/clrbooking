@@ -43,6 +43,6 @@ class Ps extends Model
 
     public function users()
     {
-        return $this->belongsToMany("\\App\\Models\\Users", 'ps_teachers', 'user_id', 'ps_id')->withPivot('comment');
+        return $this->belongsToMany("\\App\\Models\\Users", 'ps_teachers', 'ps_id', 'user_id')->withPivot('comment');
     }
 }

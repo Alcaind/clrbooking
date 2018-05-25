@@ -33,26 +33,38 @@
                 <div class="inlineItems">
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.fromd.$invalid && !itemForm.fromd.$pristine }">
-                        <label class=" formItemLabel" for="fromd">Από ημ/νία<span
+                        <label class=" formItemLabel" for="fromd">Από ημέρα<span
                                 class="form-required">*</span>:</label>
-                        <div class="midInput">
-                            <input id="fromd" name="fromd" class="form-control" type="date" ng-model="ctrl.item.fromd">
+                        <div class="input-group">
+                            <input id="fromd" name="fromd" type="text" class="form-control"
+                                   uib-datepicker-popup="{{'dd-MM-yyyy'}}"
+                                   ng-model="ctrl.item.fromd" ng-value="ctrl.item.fromd|date:'dd-MM-yyyy'"
+                                   is-open="popup1.opened" ng-required="true" close-text="Close"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()">
+                                    <i class="glyphicon glyphicon-calendar"></i></button></span>
                         </div>
-                        <p ng-show="itemForm.fromd.$invalid && !itemForm.fromd.$pristine" class="help-block">
-                            Εισάγετε ημερομηνία έναρξης.</p>
+                        <p ng-show="itemForm.fromd.$invalid && !itemForm.fromd.$pristine" class="help-block">Εισάγετε
+                            ημερομηνιά έναρξης.</p>
                     </div>
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.tod.$invalid && !itemForm.tod.$pristine }">
-                        <label class=" formItemLabel" for="tod">Έως ημ/νία<span class="form-required">*</span>:</label>
-                        <div class="midInput">
-                            <input id="tod" name="tod" class="form-control" type="date" ng-model="ctrl.item.tod">
+                        <label class=" formItemLabel" for="tod">Μέχρι ημέρα<span
+                                class="form-required">*</span>:</label>
+                        <div class="input-group">
+                            <input id="tod" name="tod" type="text" class="form-control"
+                                   uib-datepicker-popup="{{'dd-MM-yyyy'}}"
+                                   ng-model="ctrl.item.tod" ng-value="ctrl.item.tod|date:'dd-MM-yyyy'"
+                                   is-open="popup2.opened" ng-required="true" close-text="Close"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open2()">
+                                    <i class="glyphicon glyphicon-calendar"></i></button></span>
                         </div>
                         <p ng-show="itemForm.tod.$invalid && !itemForm.tod.$pristine" class="help-block">Εισάγετε
-                            ημερομηνία
+                            ημερομηνιά
                             λήξης.</p>
                     </div>
                 </div>
-
                 <div class="inlineItems">
                     <div class="form-group">
                         <label class=" formItemLabel" for="req_exp_dates">Ημερες προθεσμίας:</label>

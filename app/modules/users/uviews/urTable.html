@@ -18,7 +18,7 @@
             <td>{{ item.role }}</td>
             <td>{{ item.descr }}</td>
             <th>{{ item.pivot.comment }}</th>
-            <th>{{ item.pivot.exp_dt}}</th>
+            <th>{{ item.pivot.exp_dt |date:'dd-MM-yyyy'}}</th>
             <th>{{ statusOptions[item.pivot.status].text}}</th>
             <td>
                 <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">

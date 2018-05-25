@@ -50,9 +50,9 @@ $app->post('/ps', function (Request $request, Response $response) {
         $ps->ps_ex = $data['ps_ex'];
         $ps->ps_dm = $data['ps_dm'];
         $ps->ps_km = $data['ps_km'];
-        // $ps->teacher = $data['teacher'];
+        //$ps->teacher = $data['teacher'];
         $ps->conf_id = $data['conf_id'];
-        $ps->ps_id = $data['ps_id'];
+        $ps->ps_code = $data['ps_code'];
         $ps->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -94,7 +94,7 @@ $app->put('/ps/{id}', function ($request, $response, $args) {
         $ps->ps_km = $data['ps_km'] ?: $ps->ps_km;
         // $ps->teacher = $data['teacher'] ?: $ps->teacher;
         $ps->conf_id = $data['conf_id '] ?: $ps->conf_id;
-        $ps->ps_id = $data['ps_id '] ?: $ps->ps_id;
+        $ps->ps_code = $data['ps_code '] ?: $ps->ps_code;
         $ps->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);

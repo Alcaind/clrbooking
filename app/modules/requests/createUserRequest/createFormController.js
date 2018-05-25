@@ -9,13 +9,17 @@ angular.module('Requests')
         $scope.rooms = [];
         $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
         $scope.user = globalVarsSrv.getGlobalVar('auth');
-        $scope.courses = [];
+
         $scope.teachers = [];
         $scope.bookingErrors = [];
         $scope.selectedPeriod = {};
         $scope.selectedRooms = [];
+
+        $scope.courses = [];
         $scope.selectedCourse = {};
-        $scope.selectedUse = {};
+        $scope.coursesDp = [];
+
+        $scope.selectedUse = {selected: false};
         $scope.calendarSelectedDay = null;
         $scope.selectedDays = [
             {
@@ -195,8 +199,14 @@ angular.module('Requests')
             checkState();
         });
 
+        $scope.tms = [];
         api.apiCall('POST', 'api/public/tms/ps', function (result) {
+
             result.data.map(function (tm) {
+                $scope.tms.push({
+                    id: tm.id,
+                    per: tm.descr + " - " + tm.ku_per + " - " + tm.mp_per + " - " + tm.mku_per
+                });
                 tm.ps.map(function (ps) {
                     if (ps.conf_id === 1) $scope.courses.push(ps)
                 });
@@ -212,6 +222,28 @@ angular.module('Requests')
             $scope.finishedLoaders++;
             checkState();
         });
+
+        $scope.newUserRequest = function () {
+
+            $scope.selectedRooms = [];
+            $scope.selectedCourse.selected = false;
+            $scope.selectedCourse = {};
+            $scope.book = [];
+            for (var i = 0; i < $scope.rooms.length; i++) {
+                $scope.rooms[i].checked = false;
+            }
+        };
+
+        $scope.enablePost = function () {
+            if (!$scope.item) return false;
+            if (!($scope.item.fromd && $scope.item.tod && $scope.item.date_index != '' && $scope.selectedUse.selected)) {
+                return false;
+            }
+
+            return true;
+            //$scope.postUserRequest(item);
+        };
+
 
         $scope.postUserRequest = function (item) {
             item.conf_id = 1;
@@ -236,7 +268,7 @@ angular.module('Requests')
                 item.pivot.push(newPivot);
             });
             api.apiCall($routeParams.id ? 'PUT' : 'POST', 'api/public/requests/userrequest', function (result) {
-                alert('Το αίτημά σας καταχωρήθικε με επιτυχία.');
+                alert('Το αίτημά σας καταχωρήθηκε με επιτυχία.');
                 //$scope.reload()
             }, undefined, item)
         };
@@ -337,11 +369,30 @@ angular.module('Requests')
             }
         });*/
 
+        $scope.coursesDp = [];
+
+        $scope.defaultCourseSelection = null;
+        $scope.courseFilterObj = {tm: null, km: null, ex: null, pm: null, gen: null};
+
+        $scope.filterCourses = function (filteredArray, inputArray, courseFilterObj) {
+            $scope.coursesDp = [];
+            inputArray.map(function (course) {
+                var exists = true;
+                exists = (!courseFilterObj.tm || course.tm_code === courseFilterObj.tm) ? true : false;
+                exists = ((!courseFilterObj.psex || courseFilterObj.psex.indexOf(course.ps_ex) >= 0) && exists) ? true : false;
+                exists = ((!courseFilterObj.pskm || courseFilterObj.pskm.indexOf(course.ps_km) >= 0) && exists) ? true : false;
+                exists = ((!courseFilterObj.pm || courseFilterObj.pm.indexOf(course.pm) >= 0) && exists) ? true : false;
+
+                if (exists) $scope.coursesDp.push(course);
+            });
+        };
         //$scope.init();
     }])
     .controller('RoomSelectController', function ($scope) {
 
         $scope.defaultRoomSelection = null;
+        $scope.filterObj = {tm: null, km: null, ex: null, pm: null, gen: null};
+
 
         $scope.removeSelectedRoom = function (room) {
             $scope.selectedRooms.splice($scope.selectedRooms.indexOf(room), 1);
@@ -370,6 +421,7 @@ angular.module('Requests')
             $scope.selectedRooms.push(roomObj);
             $scope.item.rooms.push(roomObj);
         };
+
     })
     .directive('userRequestHeader', function () {
         return {

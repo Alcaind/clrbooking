@@ -106,11 +106,11 @@ angular.module('MainComponents')
                     $scope.item.new = true; // declare the input request as new (flag)
                     calObjects = []; // init table to hold new data for this day
 
-                    for (var k = 0; k < $scope.item.rooms.length; k++) { // parse the rooms from the input request
-                        if ($scope.item.rooms[k].date_index !== dateIndex.getDay()) continue; // Continue if dateIndex is different from room dateIndex
-                        $scope.item.rooms[k].new = true; // flag the request room as new
+                    for (var k = 0; k < $scope.rooms.length; k++) { // parse the rooms from the input request
+                        if ($scope.rooms[k].date_index !== dateIndex.getDay()) continue; // Continue if dateIndex is different from room dateIndex
+                        $scope.rooms[k].new = true; // flag the request room as new
 
-                        newObject = Object.assign({}, $scope.item.rooms[k]);  // Copy the room data to newObject (keep clean the real data for the api call !!)
+                        newObject = Object.assign({}, $scope.rooms[k]);  // Copy the room data to newObject (keep clean the real data for the api call !!)
                         // init the dirty Object (newObject) with view & logic data perpuse
                         newObject.book = $scope.item;
                         newObject.color = '#75a575';

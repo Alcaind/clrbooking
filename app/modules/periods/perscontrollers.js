@@ -24,6 +24,21 @@ angular.module('Periods', [
             $scope.configs = results.data;
         });
 
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
+
     }])
     .component('periodProfile', {
         restrict: 'EA',

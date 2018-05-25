@@ -3,39 +3,38 @@
     <!--<h1>{{tmpDate+''}}</h1>-->
     <div id="selectedParams" style="display: flex">
         <!--<div>Τρέχουσες επιλογές</div>-->
-        <div id="selectedPeriod" style="width: 100%">
-            <div>Από {{item.fromd | date : "dd-MM-yyyy" :"GMT" }} Μέχρι {{item.tod | date : "dd-MM-yyyy" :"GMT"}}</div>
-            <div style="display: flex">Ημέρες :
-                <div ng-repeat="d in selectedDays" ng-if="d.s" style="padding-left: 2px;padding-right: 3px">{{d.d}}
-                </div>
-            </div>
-        </div>
-        <div id="selectedUse" style="width: 100%">
-            <div>Χρήση : {{selectedUse.synt}}</div>
-        </div>
-        <div id="selectedCourse" style="width: 100%">
-            <div>Μάθημα : {{selectedCourse.tma_code}} - {{selectedCourse.tma_per}}</div>
-        </div>
+        <!-- <div id="selectedUse" style="width: 100%">
+             <div>Χρήση : {{selectedUse.synt}}</div>
+         </div>
+         <div id="selectedCourse" style="width: 100%">
+             <div>Μάθημα : {{selectedCourse.tma_code}} - {{selectedCourse.tma_per}}</div>
+         </div>-->
         <!--<div id="selectedRoom" style="width: 100%; display: flex; overflow-x: auto;">
             <div ng-repeat="room in selectedRooms">- {{room.name}}</div>
         </div>-->
+        <button ng-click="reload()" class="btn btn-warning"
+                style="margin: 4px; border: 1px solid #ababab; ">Αρχηκοποίηση
+        </button>
         <div style="position: center ; width: 100%">
-            <status-selector options="requestStatus" status-title="Request status"
+            <status-selector options="requestViewStatus" status-title="Request status"
                              output-value="item.status"></status-selector>
         </div>
         <div>
             <a tooltip-placement="left" uib-tooltip="NEW" type="button" class="btn btn-primary hippo"
-               href="#/usercreaterequests" style="min-width: 50px; border-radius: 0px;">
+               ng-click="newUserRequest()" style="min-width: 50px; border-radius: 0px;">
                 <span class="glyphicon glyphicon-plus"></span></a>
         </div>
-        <div>
-            <button tooltip-placement="left" uib-tooltip="COPY DAY" type="button" class="btn btn-primary hippo"
-                    ng-click="copyDayRequest(calendarSelectedDay)" style="min-width: 50px; border-radius: 0px;">
-                <span class="glyphicon glyphicon-copy"></span></button>
-        </div>
+        <!--href="#/usercreaterequests"-->
+
+        <!--<div>-->
+        <!--<button tooltip-placement="left" uib-tooltip="COPY DAY" type="button" class="btn btn-primary hippo"-->
+        <!--ng-click="copyDayRequest(calendarSelectedDay)" style="min-width: 50px; border-radius: 0px;">-->
+        <!--<span class="glyphicon glyphicon-copy"></span></button>-->
+        <!--</div>-->
         <div>
             <button tooltip-placement="left" uib-tooltip="POST" type="button" class="btn btn-primary hippo"
-                    ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;">
+                    ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;"
+                    ng-show="enablePost(item)">
                 <span class="glyphicon glyphicon-saved"></span></button>
         </div>
     </div>

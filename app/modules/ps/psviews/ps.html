@@ -1,10 +1,15 @@
 <div id="ps_main" class="pageHolder">
     <div class="pageHeader">
         <div class="pageButtons">
+            <div ng-if="fromAnotherPage" style="text-align: left;padding-left: 5px;">
+                <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span></span></a>
+            </div>
             <div class="operations">
-                <operations ng-repeat="op in ctrl.operations"
-                            hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
-                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
+                <!--<operations ng-repeat="op in ctrl.operations"-->
+                <!--hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"-->
+                <!--content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>-->
                 <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
             </div>
             <table-tools class="pageTools"></table-tools>
@@ -40,9 +45,12 @@
                     <td ng-if="ctrl.tableColumns[6].visible">{{ item.ps_ex }}</td>
                     <td ng-if="ctrl.tableColumns[7].visible">{{ item.ps_dm }}</td>
                     <td ng-if="ctrl.tableColumns[8].visible">{{ item.ps_km }}</td>
-                    <td ng-if="ctrl.tableColumns[9].visible">{{ item.teacher }}</td>
+                    <td ng-if="ctrl.tableColumns[9].visible">
+                        <li ng-repeat="user in item.users"></li>
+                        {{ user.sname }}{{ user.fname }}
+                    </td>
                     <td ng-if="ctrl.tableColumns[10].visible">{{ item.config.year }}</td>
-                    <td ng-if="ctrl.tableColumns[10].visible">{{ item.ps_id }}</td>
+                    <td ng-if="ctrl.tableColumns[11].visible">{{ item.ps_code }}</td>
                     <td style="width:30px;"></td>
                 </tr>
                 </tbody>

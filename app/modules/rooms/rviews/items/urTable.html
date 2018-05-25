@@ -18,8 +18,8 @@
             <td>{{item.descr}}</td>
             <td>{{item.pivot.comments }}</td>
             <td>{{item.pivot.stat }}</td>
-            <td>{{item.pivot.from }}</td>
-            <td>{{item.pivot.to }}</td>
+            <td>{{item.pivot.from |date:'dd-MM-yyyy' }}</td>
+            <td>{{item.pivot.to |date:'dd-MM-yyyy' }}</td>
             <td>
                 <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>

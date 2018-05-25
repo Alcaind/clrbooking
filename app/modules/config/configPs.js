@@ -7,6 +7,9 @@ angular.module('Config')
             $scope.ctrl = makeController.mainController('/ps/config/' + $routeParams.id, 'psTableConf', "Κατοχυρωμένα μαθήματα στο ακαδημαϊκό έτος " + config.year);
             $scope.ctrl.init();
 
+            $scope.fromAnotherPage = true;
+
+
         });
     }])
 ;

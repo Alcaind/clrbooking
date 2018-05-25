@@ -18,6 +18,22 @@ angular.module('Config', [
         $scope.ctrl = makeController.profileController('/config', 'configTableConf');
         $scope.ctrl.init();
 
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
+
+
     }])
     .component('configProfile', {
         restrict: 'EA',

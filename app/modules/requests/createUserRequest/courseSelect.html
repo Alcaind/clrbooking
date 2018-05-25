@@ -4,7 +4,62 @@
 
 <div style=" border: 1px solid #ababab;">
     <div style="padding: 5px; display: flex">
-        <input type="text" class="form-control" placeholder="search" style="padding: 5px; width: 100%; padding: 5px">
+
+        <!--<input type="text" class="form-control" placeholder="search" style="padding: 5px; width: 100%; padding: 5px">-->
+
+        <!--<input type="text" ng-model="courseFilterObj.gen" class="form-control" placeholder="search"
+               style="padding: 5px; width: 100%; padding: 5px">-->
+
+        <select name="ckm" id="ckm" ng-model="courseFilterObj.pskm">
+            <option value="">Ολες Κατ. Μαθ.</option> <!-- not selected / blank option -->
+            <option value="ΥΠ">ΥΠ</option> <!-- interpolation -->
+            <option value="ΕΥ">ΕΥ</option>
+            <option value="ΕΕ">ΕΕ</option>
+            <option value="ΣΕ">ΣΕ</option>
+            <option value="ΕΡΓ">ΕΡΓ</option>
+            <option value="ΥΑ">ΥΑ</option>
+        </select>
+
+        <!--<input type="text" ng-model="courseFilterObj.pskm" class="form-control" placeholder="Κατ. Μαθ."
+               style="padding: 5px; width: 100%; padding: 5px">-->
+        <!--<input type="text" ng-model="courseFilterObj.psex" class="form-control" placeholder="Εξάμηνο"
+               style="padding: 5px; width: 100%; padding: 5px">-->
+        <select name="cpm" id="cpm" ng-model="courseFilterObj.psex">
+            <option value="">Όλα τα εξάμηνα</option> <!-- not selected / blank option -->
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <select name="cpm" id="cpm2" ng-model="courseFilterObj.pm">
+            <option value="">Προπτυχιακά & Μεταπτυχιακά</option> <!-- not selected / blank option -->
+            <option value="ΠΡΟ">Προπτυχιακά</option> <!-- interpolation -->
+            <option value="ΜΕΤ">Μεταπτυχιακά</option>
+        </select>
+        <!--<input type="text" ng-model="courseFilterObj.pm" class="form-control" placeholder="Π/Μ"
+               style="padding: 5px; width: 100%; padding: 5px">-->
+
+        <!--<form-item-selector selector-title="Τμήμα" return-column="id" view-column="per" ng-show="fromAnotherPage"-->
+        <!--dp="tms" searchable="false" output-value="courseFilterObj.tm" class="longInput">-->
+        <!--</form-item-selector>-->
+
+        <select id="tm" ng-options="tm.id as tm.per for tm in tms"
+                ng-model="courseFilterObj.tm" ng-show="fromAnotherPage">
+        </select>
+
+        <!--<input type="text" ng-model="courseFilterObj.tm" class="form-control" placeholder="Τμήμα" ng-if="fromAnotherPage"
+               style="padding: 5px; width: 100%; padding: 5px">-->
+
+        <button tooltip-placement="left" uib-tooltip="Φίλτρο" class="btn btn-primary"
+                ng-click="filterCourses(coursesDp, courses, courseFilterObj)">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
         <button tooltip-placement="left" uib-tooltip="Επιλογή όλων" class="btn btn-primary" ng-click="selectAllCourse()"
                 ng-if="fromAnotherPage">
             <span class="glyphicon glyphicon-asterisk"></span>
@@ -17,7 +72,7 @@
     <div style="overflow-y: auto; height: 100%; padding: 5px;  border: 1px solid #ababab;">
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
                     list-style: none; margin: 1em auto; padding: 0;">
-            <div ng-repeat="course in courses|filter:filterTm" ng-click="selectCourse(course)"
+            <div ng-repeat="course in coursesDp" ng-click="selectCourse(course)"
                  class="btn btn-{{course.selected?'success':'primary'}}"
                  style="cursor: pointer; padding: 4px; font-size: 12px;
                  border: 1px solid #ababab; ">

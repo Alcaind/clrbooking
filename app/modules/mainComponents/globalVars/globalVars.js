@@ -221,8 +221,19 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
                 if (ctrl.rdp && ctrl.rdp.length > 0) {
                     ctrl.compare(ctrl.ldp, ctrl.rdp);
                 }
+                ;
+                makeTimes(ctrl.ldp);
             });
         };
+
+        function makeTimes(item) {
+            item.map(function (value) {
+                if (value.pivot['fromt']) {
+                    value.pivot['fromt'] = new Date('1970-01-01 ' + value.pivot['fromt']);
+                    value.pivot['tot'] = new Date('1970-01-01 ' + value.pivot['tot']);
+                }
+            })
+        }
 
         ctrl.getRight = function () {
             api.apiCall('GET', globalVarsSrv.getGlobalVar('appUrl') + '/' + table, function (results) {
@@ -237,10 +248,10 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         ctrl.editPivotData = function (data) {
             ctrl.currentRight = data;
             ctrl.pivotData = data.pivot;
-            if (data.pivot['fromt']) {
-                data.pivot['fromt'] = new Date('2018-01-01T' + data.pivot['fromt']);
-                data.pivot['tot'] = new Date('2018-01-01T' + data.pivot['tot']);
-            }
+            /*if (data.pivot['fromt']) {
+                data.pivot['fromt'] = new Date('2018-01-01 ' + data.pivot['fromt']);
+                data.pivot['tot'] = new Date('2018-01-01 ' + data.pivot['tot']);
+            }*/
             ctrl.state = 1;
         };
 
@@ -248,6 +259,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             api.apiCall('DELETE', ctrl.baseURL + "/" + $routeParams.id + '/' + table + '/' + id, function (results) {
                 ctrl.ldp = results.data;
                 ctrl.compare(ctrl.ldp, ctrl.rdp);
+                makeTimes(ctrl.ldp);
             }, undefined, id);
         };
 
@@ -274,10 +286,15 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         ctrl.insertPivotItem = function (data) {
             var method = "PUT";
             if (ctrl.state === 0) method = "POST";
+            if (data.fromt) {
+                data.fromt = data['fromt'].getMinutes() < 10 ? data['fromt'].getHours() + ':0' + data['fromt'].getMinutes() + ':00' : data['fromt'].getHours() + ':' + data['fromt'].getMinutes() + ':00';
+                data.tot = data['tot'].getMinutes() < 10 ? data['tot'].getHours() + ':0' + data['tot'].getMinutes() + ':00' : data['tot'].getHours() + ':' + data['tot'].getMinutes() + ':00';
+            }
             api.apiCall(method, ctrl.baseURL + "/" + $routeParams.id + '/' + table + '/' + ctrl.currentRight.id, function (results) {
                 data = {comment: '', status: '1'};
                 ctrl.ldp = results.data;
                 ctrl.compare(ctrl.ldp, ctrl.rdp);
+                makeTimes(ctrl.ldp);
                 ctrl.cancelPivotData();
                 MakeModal.generalInfoModal('sm', 'Info', 'Info', ctrl.state === 0 ? 'Δημιουργήθηκε νέα εγγραφή.' : 'Η εγγραφή ανανεώθηκε.', 1);
             }, undefined, data);

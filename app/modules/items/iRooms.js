@@ -1,9 +1,10 @@
 angular.module('Items')
-    .controller('ItemsRoomsController', ['$scope', 'AuthenticationService', 'makeController', function ($scope, AuthenticationService, makeController) {
+    .controller('ItemsRoomsController', ['$scope', 'AuthenticationService', 'makeController', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, ClrStatusSrv) {
 
 
         $scope.ctrl = makeController.n2nController('/items', 'rooms', {comments: '', stat: '', from: '', to: ''});
         $scope.ctrl.init();
+        $scope.statusOptions = ClrStatusSrv.getStatus('itemStatus');
 
     }])
 

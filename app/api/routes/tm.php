@@ -42,7 +42,7 @@ $app->post('/tms/ps', function (Request $request, Response $response, $args) {
     }
     try {
         $tm = \App\Models\Tm::with('supervisor', 'ps')
-            ->whereIn('id', $tms)
+            //->whereIn('id', $tms)
             ->whereHas('ps', function ($query) use ($data) {
                 /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
                 $query->where('conf_id', '=', 1);
@@ -63,6 +63,15 @@ $app->post('/tms', function (Request $request, Response $response) {
         $tm->title = $data['title'];
         $tm->sxoli = $data['sxoli'];
         $tm->supervisor = $data['supervisor'];
+        $tm->ku_code = $data['ku_code'];
+        $tm->ku_per = $data['ku_per'];
+        $tm->mku_code = $data['mku_code'];
+        $tm->mku_per = $data['mku_per'];
+        $tm->pro_met = $data['pro_met'];
+        $tm->mp_code = $data['mp_code'];
+        $tm->mp_per = $data['mp_per'];
+
+
         $tm->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -96,6 +105,13 @@ $app->put('/tms/{id}', function ($request, $response, $args) {
         $tm->title = $data['title'] ?: $tm->title;
         $tm->sxoli = $data['sxoli'] ?: $tm->sxoli;
         $tm->supervisor = $data['supervisor'] ?: $tm->supervisor;
+        $tm->ku_code = $data['ku_code'] ?: $tm->ku_code;
+        $tm->ku_per = $data['ku_per'] ?: $tm->ku_per;
+        $tm->mku_code = $data['mku_code'] ?: $tm->mku_code;
+        $tm->mku_per = $data['mku_per'] ?: $tm->mku_per;
+        $tm->pro_met = $data['pro_met'] ?: $tm->pro_met;
+        $tm->mp_code = $data['mp_code'] ?: $tm->mp_code;
+        $tm->mp_per = $data['mp_per'] ?: $tm->mp_per;
         $tm->save();
     } catch (\Exception $e) {
         return $response->withStatus(404)->getBody()->write($e->getMessage());
