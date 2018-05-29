@@ -8,11 +8,15 @@
                     {{req.fromd | date : 'd-M-y'}} {{req.tod | date : 'd-M-y'}}
                 </div>
             </div>
-
             <li ng-repeat="r in req.rooms " ng-if="r.name === name" style="min-width: 200px;">
                 <!--TODO : na parei hmera apo ton global lookup table-->
-                {{weekdays[r.pivot.date_index-1]}} {{r.pivot.fromt | date : 'shortTime' }} {{r.pivot.tot | date :
-                'shortTime'}}
+                <div>
+                    {{weekdays[r.pivot.date_index-1]}} {{r.pivot.fromt | date : 'shortTime' }} {{r.pivot.tot | date :
+                    'shortTime'}}
+                </div>
+                <div>
+                    {{req.ps.tma_per}}
+                </div>
             </li>
         </div>
     </ul>

@@ -1,10 +1,7 @@
-<div ng-show="mode!=='inserting'">
+<div style="display: flex; width: 100%;">
+    <div id="roomsToSelect" style="width: 100%; display: block">
 
-</div>
-<div style=" border: 1px solid #ababab; display: flex; width: 100%;">
-    <div id="roomsToSelect" style="width: 100%; display: flex">
-
-        <div style="overflow-y: auto; height: 100%; padding: 5px;  border: 1px solid #ababab;width: 100%;">
+        <div style="overflow-y: auto; padding: 5px; width: 100%;">
             <div style="padding: 5px; display: flex">
                 <input type="text" ng-model="roomsFilter" class="form-control" placeholder="search"
                        style="padding: 5px; width: 100%; padding: 5px">
@@ -18,20 +15,23 @@
                 </button>
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
-                    list-style: none; margin: 1em auto; padding: 0;">
+                    list-style: none;padding: 0;overflow-y: auto; height: 350px; border: #cecece solid 1px">
                 <div ng-repeat="room in tileRooms|filter:roomsFilter"
                      class="{{room.checked?'success':'primary'}}"
-                     style="cursor: pointer; padding: 4px; font-size: 12px;
-                 border: 1px solid #ababab; ">
+                     style="cursor: pointer; padding: 4px; font-size: 12px; border: 1px solid #ababab; ">
                     <room-tile></room-tile>
                 </div>
             </div>
         </div>
 
-        <div id="selectedRoomsHolder" style="width: 30%; overflow: auto" ng-if="mode !== 'reporting'">
-            <default-room-tile room="defaultRoomSelection"></default-room-tile>
-            <div ng-repeat="room in selectedRooms track by $index">
-                <selected-room-tile></selected-room-tile>
+        <div id="selectedRoomsHolder" style="width: 100%; overflow: auto;" ng-if="mode !== 'reporting'">
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
+                    list-style: none; overflow-y: auto; height: 350px; border: #cecece solid 1px">
+                <default-room-tile></default-room-tile>
+                <div ng-repeat="room in selectedRooms track by $index">
+                    <selected-room-tile></selected-room-tile>
+                </div>
             </div>
         </div>
     </div>

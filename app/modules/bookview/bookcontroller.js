@@ -7,7 +7,7 @@ angular.module('RoomBook', [
     'Authentication',
     'GlobalVarsSrvs'
 ])
-    .controller('BookController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService) {
+    .controller('BookController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', 'MakeModal', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService, MakeModal) {
         $scope.periods = [];
         $scope.tmpDate = new Date();
         $scope.views = [];
@@ -82,6 +82,7 @@ angular.module('RoomBook', [
         };
 
         $scope.openRoomCalendar = function () {
+
             $scope.rooms.map(function (room) {
                 $scope.selectedDays.map(function (day) {
                     if (room.checked && day.s) {
@@ -94,6 +95,9 @@ angular.module('RoomBook', [
             $scope.selectedRooms.map(function (value) {
                 if (!$scope.item.rooms.includes(value.id)) $scope.item.rooms.push(value.id)
             });
+
+            if (!checkInput('r')) return;
+
             api.apiCall('POST', 'api/public/roombook/view/by/room', function (result) {
                 $scope.book = result.data;
                 $scope.item.active = true;
@@ -102,17 +106,56 @@ angular.module('RoomBook', [
             }, undefined, $scope.item);
         };
 
+        function checkInput(type) {
+            if (!$scope.item.fromd || $scope.item.fromd === '') {
+                MakeModal.generalInfoModal('sm', 'Πληροφορία', '', 'Παρακαλώ συμπληρώστε ημερομηνίες.', 1);
+                return false;
+            }
+            if (type === 'r') {
+                if ($scope.item.date_index.length === 0) {
+                    MakeModal.generalInfoModal('sm', 'Πληροφορία', '', 'Παρακαλώ επιλέξτε ημέρες.', 1);
+                    return false;
+                }
+                if ($scope.selectedRooms.length === 0) {
+                    MakeModal.generalInfoModal('sm', 'Πληροφορία', '', 'Παρακαλώ επιλέξτε αίθουσες.', 1);
+                    return false;
+                }
+            }
+            if (type === 'c') {
+                if (!$scope.item.ps || $scope.item.ps.length === 0) {
+                    MakeModal.generalInfoModal('sm', 'Πληροφορία', '', 'Παρακαλώ επιλέξτε μάθημα.', 1);
+                    return false;
+                }
+            }
+            return true
+        }
+
         $scope.openCourseCalendar = function () {
-            $scope.coursesDp.map(function (course) {
+
+            $scope.courses.map(function (course) {
                 if (course.selected) {
                     if (!$scope.item.ps.includes(course.id)) $scope.item.ps.push(course.id)
                 }
             });
+
             $scope.item.date_index = '';
+
+            var daySelected = false;
             $scope.selectedDays.map(function (day) {
-                day.s = true;
-                $scope.item.date_index += day.i + '';
+                if (day.s) {
+                    daySelected = true;
+                    $scope.item.date_index += day.i + '';
+                }
             });
+
+            if (!daySelected)
+                $scope.selectedDays.map(function (day) {
+                    day.s = true;
+                    $scope.item.date_index += day.i + '';
+                });
+
+            if (!checkInput('c')) return;
+
             api.apiCall('POST', 'api/public/roombook/view/by/course', function (result) {
                 $scope.book = result.data;
                 $scope.item.active = true;
@@ -272,8 +315,8 @@ angular.module('RoomBook', [
             $scope.tileRooms = $scope.rooms;
         });
         api.apiCall('GET', 'api/public/periods', function (result) {
-                $scope.periods = result.data;
-            });
+            $scope.periods = result.data;
+        });
         api.apiCall('GET', 'api/public/users', function (result) {
             $scope.users = result.data;
         });

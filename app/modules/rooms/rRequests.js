@@ -3,6 +3,8 @@ angular.module('Rooms')
         var room = {};
         $scope.fromd = '2018-04-04T00:00:00';
         $scope.tod = '2018-05-04T00:00:00';
+        $scope.fromAnotherPage = true;
+
 
         api.apiCall('GET', globalVarsSrv.getGlobalVar('appUrl') + "/rooms/" + $routeParams.id, function (results) {
             room = results.data;

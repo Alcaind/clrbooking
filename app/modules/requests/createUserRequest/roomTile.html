@@ -6,7 +6,8 @@
     <div>{{room.capasity_categ}}</div>
     <div>{{room.address}}</div>
 
-    <div ng-repeat="sday in selectedDays" ng-click="roomDaySelect(room, sday)" ng-if="room.checked">
+    <div ng-repeat="sday in selectedDays" ng-click="roomDaySelect(room, sday)"
+         ng-if="(room.checked && mode==='inserting')">
         <div class="btn btn-default" ng-if="sday.s"
              style="background-color: {{(room.date_index.indexOf(sday.i)>=0)?'#5bc0de66':''}}; width: 100%">
             {{sday.d}}

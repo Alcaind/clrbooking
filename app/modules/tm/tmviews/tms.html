@@ -36,7 +36,15 @@
                 <td ng-if="ctrl.tableColumns[2].visible">{{ item.descr}}</td>
                 <td ng-if="ctrl.tableColumns[3].visible">{{ item.title}}</td>
                 <td ng-if="ctrl.tableColumns[4].visible">{{ item.sxoli}}</td>
-                <td ng-if="ctrl.tableColumns[5].visible">{{ item.supervisor.em_pant}}</td>
+                <td ng-if="ctrl.tableColumns[5].visible">{{ item.ku_code}}</td>
+                <td ng-if="ctrl.tableColumns[6].visible">{{ item.ku_per}}</td>
+                <td ng-if="ctrl.tableColumns[7].visible">{{ item.mp_code}}</td>
+                <td ng-if="ctrl.tableColumns[8].visible">{{ item.mku_code}}</td>
+                <td ng-if="ctrl.tableColumns[9].visible">{{ item.mku_per}}</td>
+                <td ng-if="ctrl.tableColumns[10].visible">{{ item.pro_met}}</td>
+                <td ng-if="ctrl.tableColumns[11].visible">{{ item.mp_code}}</td>
+                <td ng-if="ctrl.tableColumns[12].visible">{{ item.supervisor.em_main}}</td>
+
                 <td style="width:30px;"></td>
             </tr>
             </tbody>

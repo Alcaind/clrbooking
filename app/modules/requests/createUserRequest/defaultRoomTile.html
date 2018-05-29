@@ -1,12 +1,12 @@
 <div>
-    <div style="background-color: #5bc0de66">
+    <div style="background-color: #5bc0de66; display: block">
         <div class="btn btn-primary" ng-click="copyDefaultRoom()">
-            Copy to all
+            Αντιγραφή στις επιλεγμένες αίθουσες
         </div>
-        <label>Σχόλια:<input type="text" ng-model="room.comment" class="form-control"
-                             placeholder="comment"></label>
-        <div>Ώρες</div>
-        <label>Από <input type="time" ng-model="room.fromt"></label>
-        <label>Εως <input type="time" ng-model="room.tot"></label>
+        <from-to-time-picker fromt="defaultRoomSelection.fromt" tot="defaultRoomSelection.tot"></from-to-time-picker>
+        <div style="display: flex; width: 100%">
+            <input type="text" ng-model="defaultRoomSelection.comment" class="form-control" placeholder="Σχόλια"
+                   style="width: 100%">
+        </div>
     </div>
 </div>

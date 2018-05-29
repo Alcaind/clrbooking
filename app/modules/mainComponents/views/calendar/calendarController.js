@@ -4,7 +4,7 @@ angular.module('MainComponents')
 
     .controller('CalendarContol', ['$scope', 'MakeModal', '$compile', 'orderByFilter', '$filter', function ($scope, MakeModal, $compile, orderBy, $filter) {
         $scope.calendar = [];
-        $scope.weekdays = ['Δ', 'Τ', 'Τ', 'Π', 'Π', 'Σ', 'Κ'];
+        $scope.weekdays = ['Δ', 'Τρ', 'Τετ', 'Πεμ', 'Παρ', 'Σ', 'Κ'];
         $scope.headerDays = [];
         $scope.hours = [];
         $scope.options = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
@@ -39,7 +39,16 @@ angular.module('MainComponents')
                 book.fDay = new Date(book.fromd);
                 book.tDay = new Date(book.tod);
                 book.h = (book.tot - book.fromt) / (1000 * 60) / 3;
-                book.dist = ((book.fromt.getTime()) / (1000 * 60) - 420 + Math.abs(book.fromt.getTimezoneOffset())) / 3;
+
+                var tmpDay = new Date(book.fromt);
+                tmpDay.setHours(0, 0, 0, 0);
+                book.dist = (Math.abs(book.fromt - tmpDay) / (1000 * 60) - 420) / 3;
+                book.fromt = new Date(book.fromt - tmpDay);
+                book.fromt.setHours(book.fromt.getHours() + book.fromt.getTimezoneOffset() / 60);
+                book.tot = new Date(book.tot - tmpDay);
+                book.tot.setHours(book.tot.getHours() + book.tot.getTimezoneOffset() / 60);
+
+                //book.dist = ((book.fromt.getTime()) / (1000 * 60) - 420 + Math.abs(book.fromt.getTimezoneOffset())) / 3;
                 return {
                     fDay: new Date(book.fromd), /* get book from day */
                     tDay: new Date(book.tod) /* get book to day */
@@ -188,9 +197,11 @@ angular.module('MainComponents')
             var ok = false; // flag check for conflict;
             for (var m = 0; m < calObjects.length; m++) {  // parse new req rooms for this day
                 if ((((totCheck > calObjects[m].fromt && totCheck < calObjects[m].tot)
-                        || (fromCheck > calObjects[m].fromt && fromCheck < calObjects[m].tot) || fromCheck.getTime() === calObjects[m].fromt.getTime())
+                        || (fromCheck > calObjects[m].fromt && fromCheck < calObjects[m].tot)
+                        //|| fromCheck.getTime() === calObjects[m].fromt.getTime())
                         || ((totCheck < calObjects[m].tot && fromCheck > calObjects[m].tot)
-                            || (fromCheck < calObjects[m].fromt && totCheck > calObjects[m].fromt))) && calObjects[m].id === tile.id) { // check if we have date conflict and is the same room with existing room
+                            || (fromCheck < calObjects[m].fromt && totCheck > calObjects[m].fromt))) && calObjects[m].id === tile.id)) {
+                    // check if we have date conflict and is the same room with existing room
                     ok = true; // raise the conflict flag
                     //bookObj.color = '#dd3030'; // flag the objects with color
                     bookObj.color = '#287ed2';

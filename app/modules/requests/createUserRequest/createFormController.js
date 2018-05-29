@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Requests')
-    .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService) {
+    .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', 'MakeModal', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService, MakeModal) {
         $scope.tmpDate = new Date();
         $scope.views = [];
         $scope.currentPage = 0;
@@ -9,16 +9,16 @@ angular.module('Requests')
         $scope.rooms = [];
         $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
         $scope.user = globalVarsSrv.getGlobalVar('auth');
-
         $scope.teachers = [];
+        $scope.allTeachers = [];
+        $scope.psTeachers = [];
         $scope.bookingErrors = [];
         $scope.selectedPeriod = {};
         $scope.selectedRooms = [];
-
+        $scope.tms = [];
         $scope.courses = [];
         $scope.selectedCourse = {};
         $scope.coursesDp = [];
-
         $scope.selectedUse = {selected: false};
         $scope.calendarSelectedDay = null;
         $scope.selectedDays = [
@@ -111,7 +111,7 @@ angular.module('Requests')
                 $scope.selectedCourse = {};
                 $scope.selectedUse = {};
                 $scope.currentPage = 0;
-                $scope.item = {status: 0, rooms: [], date_index: "", guests: [], ps_id: null};
+                $scope.item = {status: 0, rooms: [], date_index: "", guests: [], ps_id: null, class_use: null};
             } else {
                 api.apiCall('GET', 'api/public/requests/' + $routeParams.id, function (result) {
 
@@ -182,6 +182,43 @@ angular.module('Requests')
             if ($scope.maxLoaders === $scope.finishedLoaders) $scope.init();
         }
 
+        function checkInput(type) {
+            if (!$scope.item.fromd || $scope.item.fromd === '') {
+                MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ συμπληρώστε ημερομηνίες.', 1);
+                return false;
+            }
+            if (type === 'a') {
+                if ($scope.item.date_index.length === 0) {
+                    MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε ημέρες.', 1);
+                    return false;
+                }
+                if (!$scope.selectedUse.selected) {
+                    MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε χρήση αίθουσας.', 1);
+                    return false;
+                }
+                if ($scope.coursesDp.length === 0 && '4912'.indexOf($scope.selectedUse.id) >= 0) {
+                    MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε μάθημα.', 1);
+                    return false;
+                }
+                if ($scope.selectedRooms.length === 0) {
+                    MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε αίθουσες.', 1);
+                    return false;
+                }
+
+            }
+            if (type === 'r') {
+                if ($scope.item.date_index.length === 0) {
+                    MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε ημέρες.', 1);
+                    return false;
+                }
+                if ($scope.selectedRooms.length === 0) {
+                    MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε αίθουσες.', 1);
+                    return false;
+                }
+            }
+            return true;
+        }
+
         api.apiCall('GET', 'api/public/rooms', function (result) {
             $scope.rooms = result.data;
             for (var i = 0; i < result.data.length; i++) {
@@ -199,7 +236,7 @@ angular.module('Requests')
             checkState();
         });
 
-        $scope.tms = [];
+
         api.apiCall('POST', 'api/public/tms/ps', function (result) {
 
             result.data.map(function (tm) {
@@ -217,11 +254,12 @@ angular.module('Requests')
 
         api.apiCall('GET', 'api/public/users', function (results) {
             for (var i = 0; i < results.data.length; i++) {
-                if (results.data[i].cat_id === 7) $scope.teachers.push(results.data[i]);
+                if (results.data[i].cat_id === 7) $scope.allTeachers.push(results.data[i]);
             }
             $scope.finishedLoaders++;
             checkState();
         });
+
 
         $scope.newUserRequest = function () {
 
@@ -233,17 +271,6 @@ angular.module('Requests')
                 $scope.rooms[i].checked = false;
             }
         };
-
-        $scope.enablePost = function () {
-            if (!$scope.item) return false;
-            if (!($scope.item.fromd && $scope.item.tod && $scope.item.date_index != '' && $scope.selectedUse.selected)) {
-                return false;
-            }
-
-            return true;
-            //$scope.postUserRequest(item);
-        };
-
 
         $scope.postUserRequest = function (item) {
             item.conf_id = 1;
@@ -280,9 +307,18 @@ angular.module('Requests')
         };
 
         $scope.selectCourse = function (course) {
-            $scope.selectedCourse.selected = false;
-            course.selected = true;
-            $scope.selectedCourse = course;
+            if (!course.selected) {
+                $scope.selectedCourse.selected = false;
+                course.selected = true;
+                $scope.selectedCourse = course;
+                api.apiCall('GET', 'api/public/ps/' + $scope.selectedCourse.id + '/teacher', function (results) {
+                    $scope.teachers = results.data.users;
+                });
+            } else {
+                $scope.selectedCourse.selected = false;
+                $scope.teachers = $scope.allTeachers;
+            }
+
         };
 
         $scope.selectUse = function (use) {
@@ -323,7 +359,6 @@ angular.module('Requests')
                     room.fromt = new Date().setTime(0);
                     room.tot = new Date().setTime(0);
                 }
-
             } else {
                 for (var i = $scope.selectedRooms.length - 1; i >= 0; i--) {
                     if ($scope.selectedRooms[i].id === room.id) {
@@ -351,15 +386,35 @@ angular.module('Requests')
         };
 
         $scope.showMyBook = function () {
+            if (!checkInput('a')) return;
+            $scope.enablePost = function () {
+                if (!$scope.item) return false;
+                return true;
+            };
             $scope.book = [];
-            $scope.getBook($scope.item)
+            $scope.getBook($scope.item);
+
         };
+
+        $scope.$watch('item.fromd', function (newVal, oldvalue, scope) {
+            if (!scope.item) return;
+            if (!scope.item.fromd) return;
+            var dayName = scope.item.fromd.getDay();
+            if (!scope.selectedDays[dayName].s)
+                scope.dayChecked(scope.selectedDays[dayName]);
+        });
 
         $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
             if (!newVal || !newVal.fromd) return;
             scope.item.fromd = new Date(newVal.fromd);
             scope.item.tod = new Date(newVal.tod);
             scope.item.period = newVal.id;
+
+            if (!scope.item) return;
+            if (!scope.item.fromd) return;
+            var dayName = scope.item.fromd.getDay();
+            if (!scope.selectedDays[dayName].s)
+                scope.dayChecked(scope.selectedDays[dayName]);
 
         });
         /*$scope.$watch('item', function (newVal, oldVal, scope) {
@@ -386,13 +441,11 @@ angular.module('Requests')
                 if (exists) $scope.coursesDp.push(course);
             });
         };
-        //$scope.init();
+//$scope.init();
     }])
     .controller('RoomSelectController', function ($scope) {
-
-        $scope.defaultRoomSelection = null;
+        $scope.defaultRoomSelection = {fromt: null, tot: null, comment: null, teacher: null};
         $scope.filterObj = {tm: null, km: null, ex: null, pm: null, gen: null};
-
 
         $scope.removeSelectedRoom = function (room) {
             $scope.selectedRooms.splice($scope.selectedRooms.indexOf(room), 1);
@@ -440,7 +493,6 @@ angular.module('Requests')
             restrict: "EA",
             controller: 'RoomSelectController',
             templateUrl: 'modules/requests/createUserRequest/roomSelect.html'
-
         }
     })
     .directive('bookCheck', function () {
@@ -464,7 +516,6 @@ angular.module('Requests')
     .directive('defaultRoomTile', function () {
         return {
             restrict: 'EA',
-            scope: {room: '='},
             templateUrl: 'modules/requests/createUserRequest/defaultRoomTile.html'
         }
     })

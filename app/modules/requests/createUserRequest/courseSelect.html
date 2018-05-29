@@ -3,14 +3,9 @@
 </div>
 
 <div style=" border: 1px solid #ababab;">
-    <div style="padding: 5px; display: flex">
+    <div style="padding: 5px; display: flex" class="inlineItems">
 
-        <!--<input type="text" class="form-control" placeholder="search" style="padding: 5px; width: 100%; padding: 5px">-->
-
-        <!--<input type="text" ng-model="courseFilterObj.gen" class="form-control" placeholder="search"
-               style="padding: 5px; width: 100%; padding: 5px">-->
-
-        <select name="ckm" id="ckm" ng-model="courseFilterObj.pskm">
+        <select name="ckm" id="ckm" ng-model="courseFilterObj.pskm" class="midInput">
             <option value="">Ολες Κατ. Μαθ.</option> <!-- not selected / blank option -->
             <option value="ΥΠ">ΥΠ</option> <!-- interpolation -->
             <option value="ΕΥ">ΕΥ</option>
@@ -20,11 +15,7 @@
             <option value="ΥΑ">ΥΑ</option>
         </select>
 
-        <!--<input type="text" ng-model="courseFilterObj.pskm" class="form-control" placeholder="Κατ. Μαθ."
-               style="padding: 5px; width: 100%; padding: 5px">-->
-        <!--<input type="text" ng-model="courseFilterObj.psex" class="form-control" placeholder="Εξάμηνο"
-               style="padding: 5px; width: 100%; padding: 5px">-->
-        <select name="cpm" id="cpm" ng-model="courseFilterObj.psex">
+        <select name="cpm" id="cpm" ng-model="courseFilterObj.psex" class="midInput">
             <option value="">Όλα τα εξάμηνα</option> <!-- not selected / blank option -->
             <option value="1">1</option>
             <option value="2">2</option>
@@ -37,24 +28,15 @@
             <option value="9">9</option>
             <option value="10">10</option>
         </select>
-        <select name="cpm" id="cpm2" ng-model="courseFilterObj.pm">
+        <select name="cpm" id="cpm2" ng-model="courseFilterObj.pm" class="midInput">
             <option value="">Προπτυχιακά & Μεταπτυχιακά</option> <!-- not selected / blank option -->
             <option value="ΠΡΟ">Προπτυχιακά</option> <!-- interpolation -->
             <option value="ΜΕΤ">Μεταπτυχιακά</option>
         </select>
-        <!--<input type="text" ng-model="courseFilterObj.pm" class="form-control" placeholder="Π/Μ"
-               style="padding: 5px; width: 100%; padding: 5px">-->
-
-        <!--<form-item-selector selector-title="Τμήμα" return-column="id" view-column="per" ng-show="fromAnotherPage"-->
-        <!--dp="tms" searchable="false" output-value="courseFilterObj.tm" class="longInput">-->
-        <!--</form-item-selector>-->
 
         <select id="tm" ng-options="tm.id as tm.per for tm in tms"
-                ng-model="courseFilterObj.tm" ng-show="fromAnotherPage">
+                ng-model="courseFilterObj.tm" ng-show="fromAnotherPage" style="min-width: 0px;">
         </select>
-
-        <!--<input type="text" ng-model="courseFilterObj.tm" class="form-control" placeholder="Τμήμα" ng-if="fromAnotherPage"
-               style="padding: 5px; width: 100%; padding: 5px">-->
 
         <button tooltip-placement="left" uib-tooltip="Φίλτρο" class="btn btn-primary"
                 ng-click="filterCourses(coursesDp, courses, courseFilterObj)">
@@ -69,16 +51,13 @@
             <span class="glyphicon glyphicon-asterisk"></span>
         </button>
     </div>
-    <div style="overflow-y: auto; height: 100%; padding: 5px;  border: 1px solid #ababab;">
+    <div style="overflow-y: auto; height: 350px; padding: 5px;  border: 1px solid #ababab;">
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
                     list-style: none; margin: 1em auto; padding: 0;">
             <div ng-repeat="course in coursesDp" ng-click="selectCourse(course)"
                  class="btn btn-{{course.selected?'success':'primary'}}"
                  style="cursor: pointer; padding: 4px; font-size: 12px;
                  border: 1px solid #ababab; ">
-                <!--<div class="btn btn-primary" >
-                    <span class="glyphicon glyphicon-{{course.selected?'ok':'remove'}}"></span>
-                </div>-->
                 <div>
                     <div>{{course.tma_code}}</div>
                     <div>{{course.tma_per}}</div>

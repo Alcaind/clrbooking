@@ -232,3 +232,30 @@ span.form-required {
     overflow-y: auto;
     width: 100%;
 }
+
+.uib-time input {
+    width: 24px;
+    padding: 0;
+    height: 21px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.uib-time > .btn-default {
+    padding: 0;
+    height: 21px;
+    width: 23px;
+    margin-left: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    position: relative;
+    bottom: 1px;
+}
+
+.uib-separator {
+    font-weight: 600;
+}
+
+.uib-increment > .btn-link, .uib-decrement > .btn-link {
+    padding: 0;
+}
