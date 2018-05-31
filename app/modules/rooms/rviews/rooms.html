@@ -29,7 +29,7 @@
             </thead>
             <tbody class="contentScroll">
             <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
+                style="cursor: pointer;display: table-row; background-color: {{item.selected ?'#b2b2b2':''}}"
                 ng-click="ctrl.selectRow(item)">
                 <td ng-if="ctrl.tableColumns[0].visible" style="max-width: 20px;text-align: center;">{{item.id }}</td>
                 <td ng-if="ctrl.tableColumns[1].visible"

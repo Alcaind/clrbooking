@@ -276,6 +276,7 @@ angular.module('MainComponents', [
             $scope.configuration = result.data;
             $scope.configuration.s = false;
             $scope.configuration.totalDays = calcDaysDiff($scope.configuration.tod, $scope.configuration.fromd);
+
             for (var i = 0; i < $scope.configuration.periods.length; i++) {
                 $scope.configuration.periods[i].totalDays = calcDaysDiff($scope.configuration.periods[i].tod, $scope.configuration.periods[i].fromd);
                 $scope.configuration.periods[i].fdIndex = calcDaysDiff($scope.configuration.fromd, $scope.configuration.periods[i].fromd);

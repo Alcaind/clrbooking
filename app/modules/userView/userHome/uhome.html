@@ -48,7 +48,7 @@
                     <th>Από Χρήστη</th>
                     <!--<th>Προς Χρήστη</th>-->
                     <th>Σχόλια Αιτούντα</th>
-                    <th>ID Αιτήματος</th>
+                    <!--<th>ID Αιτήματος</th>-->
                     <th>Σχόλια απαντητικό</th>
                     <th>Επιβεβαίωση</th>
                     <th>Status</th>
@@ -62,7 +62,7 @@
                     <td>{{ item.fromuser.fname }} {{item.fromuser.sname}}</td>
                     <!--<td>{{ item.tousers.fname }}</td>-->
                     <td>{{ item.comments }}</td>
-                    <td>{{ item.rr_id }}</td>
+                    <!--<td>{{ item.rr_id }}</td>-->
                     <td><input type="text" ng-model="item.to_comment" class="form-control input-sm"/></td>
                     <!--{{ item.to_comment }}</td>-->
                     <td>{{ item.confirm }}</td>
@@ -70,10 +70,13 @@
                     <!--ng-show="showStatus()"-->
                     <td>
                         <input type="button" class="btn btn-success hippo" tooltip-placement="left"
-                               uib-tooltip="Έγκριση" value='Accept' ng-click="acceptReq(item)"/>
+                               uib-tooltip="Έγκριση" value='Έγκριση' ng-click="acceptReq(item)"/>
 
                         <input type="button" class="btn btn-danger hippo" tooltip-placement="left"
-                               uib-tooltip="Απόρριψη" value='Decline' ng-click="declineReq(item)"/>
+                               uib-tooltip="Απόρριψη" value='Απόρριψη' ng-click="declineReq(item)"/>
+
+                        <input type="button" class="btn btn-success hippo" tooltip-placement="left"
+                               uib-tooltip="Επισκόπηση" value='Επισκόπηση' ng-click="selectRRid(item.rr_id)"/>
                     </td>
                 </tr>
                 </tbody>

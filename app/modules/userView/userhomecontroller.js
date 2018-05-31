@@ -6,10 +6,11 @@ angular.module('Users')
         //$scope.search = {status: $scope.status};
 
         $scope.selectRow = function (item) {
+            if ($scope.status === 1) return;
 
             if ($scope.status === 3) {
                 $location.url('/usercreaterequests/' + item.id);
-                return
+                return;
             }
 
             var $myModalInstance = $uibModal.open({
@@ -25,14 +26,21 @@ angular.module('Users')
             //$myModalInstance.result.then(okCallback, cancelCallback);
         };
 
-        $scope.deleteDraft = function (item, $event) {
-            if (item.status != 3) return;
+        $scope.deleteDashReq = function (item, $event) {
+
             api.apiCall('DELETE', 'api/public/requests/' + item.id, function (results) {
                 $scope.dp.splice($scope.dp.indexOf(item), 1);
                 MakeModal.generalInfoModal('sm', 'Info', 'info', 'Eπιτυχής διαγραφή', 1)
             });
             $event.stopPropagation();
         };
+
+
+        $scope.editDashReq = function (item, $event) {
+            $location.url('/usercreaterequests/' + item.id);
+            $event.stopPropagation();
+        };
+
 
         //
         // $scope.showStatus = function () {
@@ -108,6 +116,12 @@ angular.module('Users')
                 api.apiCall('PUT', 'api/public/usersrequests/' + item.id, function (results) {
                     $scope.usersrequests.splice($scope.usersrequests.indexOf(item), 1);
                 }, undefined, item);
+
+            };
+
+            $scope.selectRRid = function (id) {
+                $location.url('/usercreaterequests/' + id);
+                return;
             };
 
         }])

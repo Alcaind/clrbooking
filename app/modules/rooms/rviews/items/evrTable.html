@@ -17,7 +17,7 @@
             <td>{{item.descr}}</td>
             <td>{{item.comments }}</td>
             <td>{{item.code }}</td>
-            <td>{{item.status }}</td>
+            <td>{{statusOptions[item.status].text}}</td>
 
             <td>
                 <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"

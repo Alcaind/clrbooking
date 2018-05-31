@@ -17,7 +17,7 @@
             <td>{{item.id }}</td>
             <td>{{item.descr}}</td>
             <td>{{item.pivot.comments }}</td>
-            <td>{{item.pivot.stat }}</td>
+            <td>{{statusOptions[item.pivot.stat].text}}</td>
             <td>{{item.pivot.from |date:'dd-MM-yyyy' }}</td>
             <td>{{item.pivot.to |date:'dd-MM-yyyy' }}</td>
             <td>

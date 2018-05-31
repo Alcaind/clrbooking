@@ -82,3 +82,68 @@ $app->post('/roombook/view/by/room', function (Request $request, Response $respo
     //return $response->getBody()->write($roombook);
     return $response->getBody()->write($roombook->toJson());
 });
+
+
+$app->post('/roombook/copyday', function (Request $request, Response $response) {
+    header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    //return $response->getBody()->write(json_encode($data));
+    $fd = new DateTime($data['fromd']);
+
+    $data['ntd'] = new DateTime($data['fromd']);
+    $data['ntd']->add(new DateInterval('PT24H'));
+    $roombooks = \App\Models\Requests::with('rooms', 'ps')
+        ->whereBetween('fromd', [$data['fromd'], $data['ntd']])
+        ->orWhere(function ($query) use ($data) {
+            $query->Where('fromd', '<=', date('Y-m-d', strtotime($data['fromd'])))
+                ->Where('tod', '>=', date('Y-m-d', strtotime($data['fromd'])));
+        })->orWhereBetween('tod', [$data['ntd'], $data['fromd']])
+        ->get();
+
+    foreach ($roombooks as $roombook) {
+        try {
+            $newReq = new \App\Models\Requests();
+            //$newReq->req_dt = $newReq['req_dt'];
+            $newReq->user_id = $roombook['user_id'];
+            $newReq->descr = $roombook['descr'];
+            $newReq->period = $roombook['period'];
+            $newReq->ps_id = $roombook['ps_id'];
+            $newReq->class_use = $roombook['class_use'];
+            $newReq->links = $roombook['links'];
+            $newReq->protocol_id = $roombook['protocol_id'];
+            $newReq->status = 3;
+            $newReq->fromd = $data['tod'];
+            $dtd = new DateTime($data['tod']);
+            $dtd->add(new DateInterval('PT24H'));
+            $newReq->tod = $dtd;
+            //$newReq->admin = $roombook['admin'];
+            $newReq->conf_id = $roombook['conf_id'];
+            $newReq->save();
+
+            foreach ($roombook['rooms'] as $rb) {
+                //echo 'ok for';
+                //print_r($rb);
+//                echo " = \n";
+//                print_r(date("l", $fd->getTimestamp()));
+//                echo "--------------- \n";
+
+                if ($rb['pivot']['date_index'] == date("w", $fd->getTimestamp())) {
+//                    echo 'if ok';
+                    $rb['pivot']['req_id'] = $newReq['id'];
+                    $rb['pivot']['id'] = null;
+                    $newReq->rooms()->attach($rb['pivot']['room_id'], $rb['pivot']->toArray());
+//                    print_r($rb);
+                }
+            }
+        } catch (PDOException $e) {
+            $nr = $response->withStatus(404);
+            $error = new ApiError();
+            $error->setData($e->getCode(), $e->getMessage(), $data);
+            return $nr->write($error->toJson());
+        }
+    }
+
+
+    return $response->withStatus(201)->getBody()->write('ok');
+});
+

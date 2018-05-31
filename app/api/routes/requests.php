@@ -225,7 +225,9 @@ $checkUserRequestRules = function ($request, $response, $next) {
 
 $app->post('/requests/userrequest', function (Request $request, Response $response) {
     header("Content-Type: application/json");
+    //header("Content-Type: html/text");
     $data = $request->getParsedBody();
+    $myData = $request->getParsedBody();
     $errors = array();
     try {
         $requests = new \App\Models\Requests();
@@ -243,6 +245,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         $requests->save();
 
         $data['id'] = $requests['id'];
+
         $roombook = \App\Models\Requests::with('rooms')
             ->where('fromd', '<=', $data['fromd'])
             ->where('tod', '>=', $data['tod'])
@@ -250,16 +253,17 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
             ->where('status', '=', 1)
             ->get();
 
-        //$response->getBody()->write($roombook->toJson());
+
+        print_r($myData);
         foreach ($roombook as $book) {
             foreach ($book->rooms()->get() as $room) {
+                $cntRoom = 0;
                 foreach ($data['rooms'] as $reqRoom) {
-                    $fromt = new DateTime($reqRoom['fromt']);
-                    $tot = new DateTime($reqRoom['tot']);
+
+                    $fromt = new DateTime($myData['pivot'][$cntRoom]['fromt']);
+                    $tot = new DateTime($myData['pivot'][$cntRoom++]['tot']);
 
                     if ($data['status'] == 3) continue;
-
-                    //print_r( $fromt->diff($tot)->invert);
                     if ($fromt->diff($tot)->invert == 1) {
                         $nr = $response->withStatus(418);
                         $error = new ApiError();
@@ -270,13 +274,18 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
 
                     $tmpStrFD = explode('T', $data['fromd'])[0];
                     $tmpStrTD = explode('T', $data['tod'])[0];
-                    $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
-                    $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
+//                    $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
+//                    $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
 
                     if (($tmpStrFD >= $book['fromd'] || $tmpStrTD >= $book['fromd']) && $tmpStrFD <= $book['tod']) {
-                        if ($room->pivot->fromt >= $tmpStrFT && $room->pivot->fromt <= $tmpStrTT) {
+                        if ((new DateTime($room->pivot->tot) > $fromt && new DateTime($room->pivot->tot) < $tot) ||
+                            (new DateTime($room->pivot->fromt) > $fromt && new DateTime($room->pivot->fromt) < $tot) ||
+                            (new DateTime($room->pivot->fromt) == $fromt) ||
+                            (new DateTime($room->pivot->tot) > $tot && new DateTime($room->pivot->fromt) < $tot) ||
+                            (new DateTime($room->pivot->fromt) < $fromt && new DateTime($room->pivot->tot) > $tot)) {
 
                             if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
+
                                 if ($data['status'] == 0) {
                                     $uMessage = new \App\Models\usersRequests();
                                     $uMessage->from_user = $data['user_id'];

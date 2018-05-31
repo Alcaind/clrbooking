@@ -1,4 +1,4 @@
-div id="data_tbl" class="boxContent" style="height: 100%; padding: 5px">
+<div id="data_tbl" class="boxContent" style="height: 100%; padding: 5px">
     <div style="width: 100%; text-align: center; font-size: 18px; font-weight: 500; background-color: moccasin">
         {{title}}
     </div>
@@ -20,8 +20,7 @@ div id="data_tbl" class="boxContent" style="height: 100%; padding: 5px">
         </thead>
         <tbody>
         <tr ng-repeat="item in dp"
-            style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':item.status===4?'#f7c7be':item.status===1?'#c8e6d2':''}}"
-            ng-click="selectRow(item)">
+            style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':item.status===4?'#f7c7be':item.status===1?'#c8e6d2':''}}">
             <td>{{ item.req_dt }}</td>
             <td>{{ item.descr }}</td>
             <td>{{ item.periods.descr }}</td>
@@ -31,9 +30,14 @@ div id="data_tbl" class="boxContent" style="height: 100%; padding: 5px">
             <td>{{ item.fromd |date:'dd-MM-yyyy'}}</td>
             <td>{{ item.tod |date:'dd-MM-yyyy'}}</td>
 
-            <td ng-hide="item.status!='3'"><input type="button" class="btn btn-danger hippo" tooltip-placement="left"
-                                                  uib-tooltip="Διαγραφή" value='Διαγραφή'
-                                                  ng-click="deleteDraft(item, $event)"/></td>
+            <td><input type="button" class="btn btn-danger hippo" tooltip-placement="left"
+                       uib-tooltip="Επεξεργασία" value='Επεξεργασία'
+                       ng-click="editDashReq(item, $event)"/>
+                <input type="button" class="btn btn-danger hippo" tooltip-placement="left"
+                       uib-tooltip="Διαγραφή" value='Διαγραφή'
+                       ng-click="deleteDashReq(item, $event)"/>
+
+            </td>
         </tr>
         </tbody>
     </table>
