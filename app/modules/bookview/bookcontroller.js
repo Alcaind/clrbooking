@@ -7,7 +7,7 @@ angular.module('RoomBook', [
     'Authentication',
     'GlobalVarsSrvs'
 ])
-    .controller('BookController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', 'MakeModal', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService, MakeModal) {
+    .controller('BookController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', 'MakeModal', '$location', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService, MakeModal, $location) {
         $scope.periods = [];
         $scope.tmpDate = new Date();
         $scope.views = [];
@@ -166,6 +166,7 @@ angular.module('RoomBook', [
 
         $scope.reload = function () {
             location.reload();
+            //$location.path('/roombook');
         };
         $scope.init = function () {
             $scope.book = [];
@@ -302,11 +303,26 @@ angular.module('RoomBook', [
             })
         };
 
+        $scope.$watch('item.fromd', function (newVal, oldvalue, scope) {
+            if (!scope.item) return;
+            if (!scope.item.fromd) return;
+            var dayName = scope.item.fromd.getDay();
+            if (!scope.selectedDays[dayName].s)
+                scope.dayChecked(scope.selectedDays[dayName]);
+        });
+
         $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
             if (!newVal || !newVal.fromd) return;
             scope.item.fromd = new Date(newVal.fromd);
             scope.item.tod = new Date(newVal.tod);
             scope.item.period = newVal.id;
+
+
+            if (!scope.item) return;
+            if (!scope.item.fromd) return;
+            var dayName = scope.item.fromd.getDay();
+            if (!scope.selectedDays[dayName].s)
+                scope.dayChecked(scope.selectedDays[dayName]);
 
         });
 
@@ -322,31 +338,45 @@ angular.module('RoomBook', [
         });
         $scope.tms = [];
         api.apiCall('POST', 'api/public/tms/ps', function (result) {
-
             result.data.map(function (tm) {
-                $scope.tms.push({
-                    id: tm.id,
-                    per: tm.descr + " - " + tm.ku_per + " - " + tm.mp_per + " - " + tm.mku_per
-                });
+                var ifExists = false;
+                for (var i = 0; i < $scope.tms.length; i++) {
+                    if ($scope.tms[i].id === tm.tm_code) {
+                        ifExists = true;
+                        break
+                    }
+                }
+
+                if (!ifExists)
+                    $scope.tms.push({
+                        id: tm.tm_code,
+                        per: tm.descr
+                    });
                 tm.ps.map(function (ps) {
-                    if (ps.conf_id === 1) $scope.courses.push(ps)
+                    var tmpPs = Object.assign({}, tm);
+                    tmpPs.tmID = tmpPs.id;
+                    tmpPs = Object.assign(tmpPs, ps);
+                    delete tmpPs.ps;
+                    if (ps.conf_id === 1) $scope.courses.push(tmpPs);
+
                 });
             });
-        }, undefined, $scope.user.authdata.roles[0].tm);
+        });
 
         $scope.init();
 
         $scope.defaultCourseSelection = null;
-        $scope.courseFilterObj = {tm: null, km: null, ex: null, pm: null, gen: null};
+        $scope.courseFilterObj = {tm: null, km: null, ex: null, pm: null, gen: null, tma: null};
 
         $scope.filterCourses = function (filteredArray, inputArray, courseFilterObj) {
             $scope.coursesDp = [];
             inputArray.map(function (course) {
                 var exists = true;
-                exists = (!courseFilterObj.tm || course.tm_code === courseFilterObj.tm) ? true : false;
+                exists = (!courseFilterObj.tm || course.tm_per == courseFilterObj.tm) ? true : false;
                 exists = ((!courseFilterObj.psex || courseFilterObj.psex.indexOf(course.ps_ex) >= 0) && exists) ? true : false;
                 exists = ((!courseFilterObj.pskm || courseFilterObj.pskm.indexOf(course.ps_km) >= 0) && exists) ? true : false;
                 exists = ((!courseFilterObj.pm || courseFilterObj.pm.indexOf(course.pm) >= 0) && exists) ? true : false;
+                exists = ((!courseFilterObj.tma || course.tma_code.indexOf(courseFilterObj.tma) >= 0) && exists) ? true : false;
 
                 if (exists) $scope.coursesDp.push(course);
             });

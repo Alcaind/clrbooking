@@ -33,6 +33,20 @@ $app->get('/tms/{id}', function (Request $request, Response $response, $args) {
 
 $app->post('/tms/ps', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
+    try {
+        $tm = \App\Models\Tm::with('supervisor', 'ps')
+            ->whereHas('ps', function ($query) {
+                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
+                $query->where('conf_id', '=', 1);
+            })->get();
+    } catch (\Exception $e) {
+        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    }
+    return $response->getBody()->write($tm->toJson());
+});
+
+$app->post('/user/tms/ps', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
     //$id = $args['id'];
     $data = $request->getParsedBody();
     $tms = array();
@@ -42,7 +56,7 @@ $app->post('/tms/ps', function (Request $request, Response $response, $args) {
     }
     try {
         $tm = \App\Models\Tm::with('supervisor', 'ps')
-            //->whereIn('id', $tms)
+            ->whereIn('id', $tms)
             ->whereHas('ps', function ($query) use ($data) {
                 /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
                 $query->where('conf_id', '=', 1);

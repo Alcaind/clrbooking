@@ -5,10 +5,12 @@ angular.module('Users')
         // $scope.baseURL = 'api/public/view';
         //$scope.search = {status: $scope.status};
 
-        $scope.selectRow = function (item) {
-            if ($scope.status === 1) return;
+        $scope.weekdays = ['Δ', 'Τρ', 'Τετ', 'Πεμ', 'Παρ', 'Σ', 'Κ'];
 
-            if ($scope.status === 3) {
+        $scope.selectRow = function (item) {
+            if (item.status === 1) return;
+
+            if (item.status === 3) {
                 $location.url('/usercreaterequests/' + item.id);
                 return;
             }
@@ -39,6 +41,7 @@ angular.module('Users')
         $scope.editDashReq = function (item, $event) {
             $location.url('/usercreaterequests/' + item.id);
             $event.stopPropagation();
+
         };
 
 
@@ -119,8 +122,16 @@ angular.module('Users')
 
             };
 
-            $scope.selectRRid = function (id) {
+            $scope.selectRRid = function (id, item) {
+
+                if (item.status === 0) {
+                    globalVarsSrv.setGlobalVar('cur', false)
+                } else {
+                    globalVarsSrv.setGlobalVar('cur', true)
+                }
                 $location.url('/usercreaterequests/' + id);
+
+
                 return;
             };
 

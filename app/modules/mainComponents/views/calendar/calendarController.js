@@ -13,6 +13,7 @@ angular.module('MainComponents')
         $scope.$watch('book', plotBook);
         $scope.popup = function (reqID) {
             MakeModal.infoBookRoom(reqID)
+
         };
 
         $scope.selectDay = function (day) {

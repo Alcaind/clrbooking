@@ -22,7 +22,7 @@ angular.module('ApiModules', [
                     if (successCallback) successCallback(results);
                     return results;
                 }, function (results) {
-                    MakeModal.generalInfoModal('sm', 'Info', '  Warming :' + results.data.errorCode, results.data.errorText);
+                    MakeModal.generalInfoModal('sm', 'Info', '  Warning :' + results.data.errorCode, results.data.errorText);
                     if (errorCallBack) errorCallBack(results);
                     return results;
                 });

@@ -34,10 +34,12 @@
             <option value="ΜΕΤ">Μεταπτυχιακά</option>
         </select>
 
-        <select id="tm" ng-options="tm.id as tm.per for tm in tms"
+        <select id="tm" ng-options="tm.per as tm.per for tm in tms"
                 ng-model="courseFilterObj.tm" ng-show="fromAnotherPage" style="min-width: 0px;">
         </select>
-
+        <input type="text" ng-model="courseFilterObj.tma"
+               class="form-control ng-valid ng-dirty ng-valid-parse ng-empty ng-touched" placeholder="search"
+               style="padding: 5px; width: 20%; padding: 5px">
         <button tooltip-placement="left" uib-tooltip="Φίλτρο" class="btn btn-primary"
                 ng-click="filterCourses(coursesDp, courses, courseFilterObj)">
             <span class="glyphicon glyphicon-search"></span>
@@ -54,13 +56,14 @@
     <div style="overflow-y: auto; height: 350px; padding: 5px;  border: 1px solid #ababab;">
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
                     list-style: none; margin: 1em auto; padding: 0;">
-            <div ng-repeat="course in coursesDp" ng-click="selectCourse(course)"
+            <div ng-repeat="course in coursesDp track by $index" ng-click="selectCourse(course)"
                  class="btn btn-{{course.selected?'success':'primary'}}"
                  style="cursor: pointer; padding: 4px; font-size: 12px;
                  border: 1px solid #ababab; ">
                 <div>
                     <div>{{course.tma_code}}</div>
                     <div>{{course.tma_per}}</div>
+                    <div>{{course.ku_code}} - {{course.mku_code}} - {{course.mp_code}}</div>
                 </div>
             </div>
         </div>

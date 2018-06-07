@@ -1,11 +1,17 @@
+<!--<div class="inlineItems" style="display: flex; height: 40px; text-align: center;" ng-repeat="rUse in roomUse">-->
+<!--<button ng-click="selectUse(rUse)" ng-init="rUse.s=false"-->
+<!--class="btn btn-{{rUse.selected?'success':'primary'}}"ng-hide="rUse.useVisibility">{{rUse.descr}}</button>-->
+
+<!--&lt;!&ndash;style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;"&ndash;&gt;-->
+
+
+<!--</div>-->
+
+
 <div style="display: flex; height: 40px; text-align: center;">
     <div ng-repeat="rUse in roomUse" ng-click="selectUse(rUse)" ng-init="rUse.s=false"
-         class="btn btn-{{rUse.selected?'success':'primary'}}"
+         class="btn btn-{{rUse.selected?'success':'primary'}}" ng-hide="rUse.useVisibility"
          style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;">
         <div> {{rUse.descr}}</div>
     </div>
 </div>
-
-
-<!--ng-show="rUse.useVisibility"
-ng-hide="item.status!='3'"-->

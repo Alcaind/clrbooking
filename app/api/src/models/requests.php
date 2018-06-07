@@ -60,4 +60,9 @@ class Requests extends Model
         return $this->hasMany('\\App\\Models\\RoomBook', 'req_id');
     }
 
+    public function usersRequests()
+    {
+        return $this->belongsToMany('\\App\\Models\\Rooms', 'request_rooms', 'req_id', 'room_id')->withPivot('id', 'comment', 'teacher', 'fromt', 'tot', 'date_index');
+    }
+
 }

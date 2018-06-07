@@ -57,10 +57,12 @@
                              position: absolute; font-size: smaller;
                              background-color: {{book.color}}{{book.new?'66':'33'}}; text-align: left; border: 1px solid #ababab;"
                                  data-toggle="popover"
-                                 data-content="{{book.book.ps.tma_per}} {{book.book.ps.teacher}} {{book.pivot.fromt.toLocaleTimeString('en-GB')}}-{{book.pivot.tot.toLocaleTimeString('en-GB')}}"
+                                 data-content="{{book.book.ps.tma_per}} {{book.book.ps.teacher}} {{book.pivot.fromt}}-{{book.pivot.tot}}"
                                  data-trigger="hover"
                                  ng-click="popup(book.pivot.id)">
-                                {{book.book.ps.tma_code}}
+                                <div>{{book.book.ps.tma_code}}</div>
+                                <div>{{book.book.ps.tm_per}}</div>
+
                             </div>
                             <div style="top: 340px; height: 40px;
                              position: absolute; font-size: smaller; max-width: 60px">

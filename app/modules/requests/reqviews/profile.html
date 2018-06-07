@@ -25,7 +25,7 @@
                             class="form-required">*</span>:</label>
                     <div class="longInput">
                         <select id="user_id" name="user_id" class="form-control" ng-model="ctrl.item.user_id"
-                                ng-options="users.id as users.user for users in users"></select>
+                                ng-options="users.id as (users.sname+' ' + users.fname) for users in users"></select>
                     </div>
                     <p ng-show="itemForm.user_id.$invalid && !itemForm.user_id.$pristine" class="help-block">
                         Εισάγετε
@@ -58,7 +58,7 @@
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <select id="period" name="period" class="form-control" ng-model="ctrl.item.period"
-                                    ng-options="period.id as period.descr for period in periods"></select>
+                                    ng-options="period.id as period.descr for period in periods "></select>
                         </div>
                         <p ng-show="itemForm.period.$invalid && !itemForm.period.$pristine" class="help-block">
                             Εισάγετε
@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <form-item-selector selector-title="Επιβλέπων" return-column="id" view-column="user"
+                    <form-item-selector selector-title="Επιβλέπων" return-column="id" view-column="sname"
                                         dp="users" searchable="false" output-value="ctrl.item.admin" class="longInput">
 
                     </form-item-selector>

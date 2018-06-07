@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Requests')
-    .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', 'MakeModal', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService, MakeModal) {
+    .controller('CreateFormController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', 'MakeModal', '$location', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService, MakeModal, $location) {
         $scope.tmpDate = new Date();
         $scope.views = [];
         $scope.currentPage = 0;
@@ -61,6 +61,7 @@ angular.module('Requests')
         $scope.mode = 'inserting';
         $scope.maxLoaders = 4;
         $scope.finishedLoaders = 0;
+        $scope.screenState = 'normal';
 
         AuthenticationService.CheckCredentials();
 
@@ -117,6 +118,7 @@ angular.module('Requests')
 
         $scope.reload = function () {
             location.reload();
+            $location.path('/usercreaterequests');
         };
 
         $scope.init = function () {
@@ -131,6 +133,7 @@ angular.module('Requests')
             } else {
                 api.apiCall('GET', 'api/public/requests/' + $routeParams.id, function (result) {
 
+                    $scope.screenState = 'edit';
                     $scope.item = result.data;
                     $scope.item.active = true;
                     $scope.selectedPeriod = $scope.item.periods;
@@ -250,18 +253,40 @@ angular.module('Requests')
             $scope.roomUse = result.data;
             $scope.finishedLoaders++;
             checkState();
+
+            var auth = globalVarsSrv.getGlobalVar('auth');
+            $scope.roomUse.map(function (use) {
+                var cnt = 0;
+                for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
+                    if (auth.authdata.roles[0].roles[i].id !== 4 && use.synt === "Αργ") {
+                        use.useVisibility = true;
+                        cnt++;
+                    }
+                }
+                if (cnt === 1) {
+                    use.useVisibility = false;
+                }
+            })
         });
 
 
-        api.apiCall('POST', 'api/public/tms/ps', function (result) {
+        api.apiCall('POST', 'api/public/user/tms/ps', function (result) {
 
             result.data.map(function (tm) {
-                $scope.tms.push({
-                    id: tm.id,
-                    per: tm.descr + " - " + tm.ku_per + " - " + tm.mp_per + " - " + tm.mku_per
-                });
+                if (!$scope.tms.includes({
+                        id: tm.tm_code,
+                        per: tm.descr
+                    }))
+                    $scope.tms.push({
+                        id: tm.tm_code,
+                        per: tm.descr
+                    });
                 tm.ps.map(function (ps) {
-                    if (ps.conf_id === 1) $scope.courses.push(ps)
+                    var tmpPs = Object.assign({}, tm);
+                    tmpPs.tmID = tmpPs.id;
+                    tmpPs = Object.assign(tmpPs, ps);
+                    delete tmpPs.ps;
+                    if (ps.conf_id === 1) $scope.courses.push(Object.assign(tmpPs))
                 });
             });
             $scope.finishedLoaders++;
@@ -310,8 +335,10 @@ angular.module('Requests')
                 };
                 item.pivot.push(newPivot);
             });
+
             api.apiCall($routeParams.id ? 'PUT' : 'POST', 'api/public/requests/userrequest', function (result) {
-                alert('Το αίτημά σας καταχωρήθηκε με επιτυχία.');
+                // alert('Το αίτημά σας καταχωρήθηκε με επιτυχία.');
+                MakeModal.generalInfoModal('sm', 'info', '', 'Το αίτημά σας καταχωρήθηκε με επιτυχία.', 1);
                 //$scope.reload()
             }, undefined, item)
         };
@@ -337,20 +364,14 @@ angular.module('Requests')
 
         };
 
+
         $scope.selectUse = function (use) {
+            use.useVisibility = false;
             $scope.selectedUse.selected = false;
             use.selected = true;
             $scope.selectedUse = use;
             $scope.steps[3].active = false;
-            use.useVisibility = true;
             if ($scope.selectedUse.synt === 'ΤΗΛ') $scope.steps[3].active = true;
-
-            var auth = globalVarsSrv.getGlobalVar('auth');
-            var i = 0;
-            if ($scope.selectedUse.synt === 'Αργ' && auth.authdata.roles[0].roles[i].role != 'admin') {
-                use.useVisibility = false;
-                i++;
-            }
 
             //TODO : uncomment to filter rooms
             /*$scope.tileRooms = [];
@@ -386,6 +407,7 @@ angular.module('Requests')
             } else {
                 for (var i = $scope.selectedRooms.length - 1; i >= 0; i--) {
                     if ($scope.selectedRooms[i].id === room.id) {
+                        $scope.item.rooms.splice($scope.item.rooms.indexOf($scope.selectedRooms[i]), 1);
                         $scope.selectedRooms.splice(i, 1);
                     }
                 }
@@ -420,12 +442,11 @@ angular.module('Requests')
         $scope.showMyBook = function () {
             if (!checkInput('a')) return;
             $scope.enablePost = function () {
-                if (!$scope.item) return false;
+                if (!$scope.item && !globalVarsSrv.getGlobalVar('cur')) return false;
                 return true;
             };
             $scope.book = [];
             $scope.getBook($scope.item);
-
         };
 
         $scope.$watch('item.fromd', function (newVal, oldvalue, scope) {
@@ -437,7 +458,12 @@ angular.module('Requests')
         });
 
         $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
+
             if (!newVal || !newVal.fromd) return;
+            if (scope.screenState === 'edit') {
+                scope.screenState = 'normal';
+                //return;
+            }
             scope.item.fromd = new Date(newVal.fromd);
             scope.item.tod = new Date(newVal.tod);
             scope.item.period = newVal.id;
@@ -469,6 +495,7 @@ angular.module('Requests')
                 exists = ((!courseFilterObj.psex || courseFilterObj.psex.indexOf(course.ps_ex) >= 0) && exists) ? true : false;
                 exists = ((!courseFilterObj.pskm || courseFilterObj.pskm.indexOf(course.ps_km) >= 0) && exists) ? true : false;
                 exists = ((!courseFilterObj.pm || courseFilterObj.pm.indexOf(course.pm) >= 0) && exists) ? true : false;
+                exists = ((!courseFilterObj.tma || course.tma_code.indexOf(courseFilterObj.tma) >= 0) && exists) ? true : false;
 
                 if (exists) $scope.coursesDp.push(course);
             });
@@ -480,6 +507,7 @@ angular.module('Requests')
         $scope.filterObj = {tm: null, km: null, ex: null, pm: null, gen: null};
 
         $scope.removeSelectedRoom = function (room) {
+            $scope.item.rooms.splice($scope.item.rooms.indexOf(room), 1);
             $scope.selectedRooms.splice($scope.selectedRooms.indexOf(room), 1);
         };
 

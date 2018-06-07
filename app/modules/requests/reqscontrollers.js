@@ -41,7 +41,6 @@ angular.module('Requests', [
     $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
 
 
-
 }])
     .controller('RequestProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', '$filter', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api, $filter) {
         $scope.ctrl = makeController.profileController('/requests', 'requestsTableConf');
@@ -73,12 +72,6 @@ angular.module('Requests', [
             $scope.users = results.data;
         });
 
-        $scope.periods = {};
-
-        api.apiCall('GET', 'api/public/periods', function (results) {
-            $scope.periods = results.data;
-        });
-
         $scope.room_use = {};
 
         api.apiCall('GET', 'api/public/roomuse', function (results) {
@@ -98,9 +91,25 @@ angular.module('Requests', [
         });
 
         $scope.configs = {};
+        $scope.periods = {};
+
+        $scope.$watch('ctrl.item.conf_id', function (newVal, oldVal) {
+            $scope.configs.map(function (value) {
+                if (value.id === newVal) {
+                    $scope.periods = value.periods;
+                }
+            });
+        });
 
         api.apiCall('GET', 'api/public/config', function (results) {
             $scope.configs = results.data;
+            var curConf = {};
+            $scope.configs.map(function (value) {
+                if (value.status === 1) {
+                    curConf = value;
+                    $scope.periods = value.periods;
+                }
+            });
         });
 
         $scope.admin = [];
@@ -117,7 +126,8 @@ angular.module('Requests', [
             }
         };
 
-    }])
+    }
+    ])
 
     .component('requestsProfile', {
         restrict: 'EA',

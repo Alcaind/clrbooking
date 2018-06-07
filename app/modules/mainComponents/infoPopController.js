@@ -10,7 +10,7 @@ angular.module('MainComponents')
         }
     })
 
-    .controller('infoFormPopUpController', ['$scope', 'globalVarsSrv', '$uibModalInstance', 'api', 'config', function ($scope, globalVarsSrv, $uibModalInstance, api, config) {
+    .controller('infoFormPopUpController', ['$scope', 'globalVarsSrv', '$uibModalInstance', 'api', 'config', '$location', function ($scope, globalVarsSrv, $uibModalInstance, api, config, $location) {
         var baseURL = globalVarsSrv.getGlobalVar('appUrl');
         $scope.reqID = config.reqID;
 
@@ -30,6 +30,12 @@ angular.module('MainComponents')
             window.open('mailto:' + tm.supervisor.em_main);
         };
 
+
+        // $scope.adminReq=function (id) {
+        //     $location.path('/requests/'+id);
+        //     $uibModalInstance.close();
+        // };
+
         $scope.getPop = function () {
             api.apiCall('GET', baseURL + "/roombook/" + $scope.reqID, function (results) {
                 $scope.mainData = results.data;
@@ -43,6 +49,20 @@ angular.module('MainComponents')
                     })
                 });
             });
+        };
+        $scope.uAdmin = function () {
+            var auth = globalVarsSrv.getGlobalVar('auth');
+            var cnt = 0;
+            for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
+                if (auth.authdata.roles[0].roles[i].id === 4) {
+                    cnt++;
+                    return false;
+
+                }
+            }
+            if (cnt === 1) {
+                return true;
+            }
         };
         $scope.getPop();
     }]);

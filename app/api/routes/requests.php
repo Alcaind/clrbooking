@@ -31,7 +31,6 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     return $response->getBody()->write($requests->toJson());
 });
 
-
 $app->get('/requests/config/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
@@ -247,28 +246,36 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         $data['id'] = $requests['id'];
 
         $roombook = \App\Models\Requests::with('rooms')
-            ->where('fromd', '<=', $data['fromd'])
-            ->where('tod', '>=', $data['tod'])
-            //->where('room_id', '=', $args['rid'])
+//            /*->whereHas('rooms', function ($query)  use ($data) {
+//                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
+//                $rm = array();
+//               // $di = array();
+//                foreach ($data['rooms'] as $reqRoom) {
+//                    array_push($rm, $reqRoom['id']);
+//                    //array_push($di, $reqRoom['date_index']);
+//                    }
+//                $query->where('id', 'in', $rm);
+//            })
+            ->WhereBetween('fromd', [$data['fromd'], $data['tod']])
+            ->orWhereBetween('tod', [$data['fromd'], $data['tod']])
+            //->where('date_index','=',$data[])
+            ->where('conf_id', '=', 1)
             ->where('status', '=', 1)
             ->get();
 
-
-        print_r($myData);
         foreach ($roombook as $book) {
             foreach ($book->rooms()->get() as $room) {
+
                 $cntRoom = 0;
                 foreach ($data['rooms'] as $reqRoom) {
-
                     $fromt = new DateTime($myData['pivot'][$cntRoom]['fromt']);
                     $tot = new DateTime($myData['pivot'][$cntRoom++]['tot']);
-
                     if ($data['status'] == 3) continue;
                     if ($fromt->diff($tot)->invert == 1) {
                         $nr = $response->withStatus(418);
                         $error = new ApiError();
                         $requests->delete();
-                        $error->setData(818, 'To time must be greater than from time.');
+                        $error->setData(818, 'Η ώρα λήξης πρέπει να είναι μεγαλύτερη από την ώρα έναρξης.', $requests);
                         return $nr->write($error->toJson());
                     }
 
@@ -277,15 +284,14 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
 //                    $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
 //                    $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
 
-                    if (($tmpStrFD >= $book['fromd'] || $tmpStrTD >= $book['fromd']) && $tmpStrFD <= $book['tod']) {
+
+                    if (($tmpStrFD >= $book['fromd'] || $tmpStrTD > $book['fromd']) && $tmpStrFD < $book['tod']) {
                         if ((new DateTime($room->pivot->tot) > $fromt && new DateTime($room->pivot->tot) < $tot) ||
                             (new DateTime($room->pivot->fromt) > $fromt && new DateTime($room->pivot->fromt) < $tot) ||
                             (new DateTime($room->pivot->fromt) == $fromt) ||
                             (new DateTime($room->pivot->tot) > $tot && new DateTime($room->pivot->fromt) < $tot) ||
                             (new DateTime($room->pivot->fromt) < $fromt && new DateTime($room->pivot->tot) > $tot)) {
-
                             if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
-
                                 if ($data['status'] == 0) {
                                     $uMessage = new \App\Models\usersRequests();
                                     $uMessage->from_user = $data['user_id'];
@@ -359,59 +365,72 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
 
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
+    $myData = $request->getParsedBody();
     $errors = array();
+    $roombook = \App\Models\Requests::with('rooms')
+//            /*->whereHas('rooms', function ($query)  use ($data) {
+//                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
+//                $rm = array();
+//               // $di = array();
+//                foreach ($data['rooms'] as $reqRoom) {
+//                    array_push($rm, $reqRoom['id']);
+//                    //array_push($di, $reqRoom['date_index']);
+//                    }
+//                $query->where('id', 'in', $rm);
+//            })
+        ->WhereBetween('fromd', [$data['fromd'], $data['tod']])
+        ->orWhereBetween('tod', [$data['fromd'], $data['tod']])
+        //->where('date_index','=',$data[])
+        ->where('conf_id', '=', 1)
+        ->where('status', '=', 1)
+        ->where('id', '!=', $data['id'])
+        ->get();
     try {
         //$requests = new \App\Models\Requests();
+
+
         $requests = \App\Models\Requests::find($data['id']);
-        $requests->req_dt = $data['req_dt'];
-        $requests->user_id = $data['user_id'];
-        $requests->descr = $data['descr'] ?: '';
-        $requests->period = $data['period'] ?: '';
-        $requests->ps_id = $data['ps_id'] ?: null;
-        $requests->class_use = $data['class_use'] ?: '';
-        //$requests->links = $data['links']?:'';
-        $requests->status = $data['status'];
-        $requests->fromd = $data['fromd'];
-        $requests->tod = $data['tod'];
-        $requests->conf_id = $data['conf_id'];
-        $requests->save();
 
-        $data['id'] = $requests['id'];
-        $roombook = \App\Models\Requests::with('rooms')
-            ->where('fromd', '<=', $data['fromd'])
-            ->where('tod', '>=', $data['tod'])
-            //->where('room_id', '=', $args['rid'])
-            ->where('status', '=', 1)
-            ->get();
+        if ($data['status'] == 3) {
+            if ($requests->status == 0) {
+                $urs = \App\Models\usersRequests::where('rr_id', $data['id'])->get();
+                foreach ($urs as $ur) {
+                    $ur->delete();
+                }
+            }
+        }
 
-        //$response->getBody()->write($roombook->toJson());
         foreach ($roombook as $book) {
             foreach ($book->rooms()->get() as $room) {
+
+                $cntRoom = 0;
                 foreach ($data['rooms'] as $reqRoom) {
-                    $fromt = new DateTime($reqRoom['fromt']);
-                    $tot = new DateTime($reqRoom['tot']);
+                    $fromt = new DateTime($myData['pivot'][$cntRoom]['fromt']);
+                    $tot = new DateTime($myData['pivot'][$cntRoom++]['tot']);
 
                     if ($data['status'] == 3) continue;
-
-                    //print_r( $fromt->diff($tot)->invert);
                     if ($fromt->diff($tot)->invert == 1) {
                         $nr = $response->withStatus(418);
                         $error = new ApiError();
                         $requests->delete();
-                        $error->setData(818, 'To time must be greater than from time.');
+                        $error->setData(818, 'Η ώρα λήξης πρέπει να είναι μεγαλύτερη από την ώρα έναρξης.', $requests);
                         return $nr->write($error->toJson());
                     }
 
                     $tmpStrFD = explode('T', $data['fromd'])[0];
                     $tmpStrTD = explode('T', $data['tod'])[0];
-                    $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
-                    $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
+//                    $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
+//                    $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
 
-                    if (($tmpStrFD >= $book['fromd'] || $tmpStrTD >= $book['fromd']) && $tmpStrFD <= $book['tod']) {
-                        if ($room->pivot->fromt >= $tmpStrFT && $room->pivot->fromt <= $tmpStrTT) {
 
+                    if (($tmpStrFD >= $book['fromd'] || $tmpStrTD > $book['fromd']) && $tmpStrFD < $book['tod']) {
+                        if ((new DateTime($room->pivot->tot) > $fromt && new DateTime($room->pivot->tot) < $tot) ||
+                            (new DateTime($room->pivot->tot) > $tot && new DateTime($room->pivot->fromt) < $tot) ||
+                            (new DateTime($room->pivot->fromt) > $fromt && new DateTime($room->pivot->fromt) < $tot) ||
+                            (new DateTime($room->pivot->fromt) == $fromt) ||
+                            (new DateTime($room->pivot->fromt) < $fromt && new DateTime($room->pivot->tot) > $tot)) {
                             if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
-                                if ($data['status'] == 0) {
+                                if ($data['status'] == 0 && $book['id'] !== $data['id']) {
                                     $uMessage = new \App\Models\usersRequests();
                                     $uMessage->from_user = $data['user_id'];
                                     $uMessage->to_users = $book['user_id'];
@@ -443,6 +462,12 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
             }
         }
 
+        if (sizeof($errors) == 0 && $data['status'] != 3) {
+            $requests->status = 1;
+            //$requests->save();
+        }
+
+        //$attachArray = array();
         $deletedRows = \App\Models\RoomBook::where('req_id', '=', $requests['id'])->delete();
         for ($i = 0; $i < sizeof($data['pivot']); $i++) {
             //$attachArray["'" + $data['rooms'][$i]['id'] + "'"] = $data['pivot'][$i];
@@ -456,6 +481,22 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
             $rb->date_index = $data['pivot'][$i]['date_index'];
             $rb->save();
         }
+        //$requests->rooms()->delete() attach($attachArray);
+
+        $requests->req_dt = $data['req_dt'];
+        $requests->user_id = $data['user_id'];
+        $requests->descr = $data['descr'] ?: '';
+        $requests->period = $data['period'] ?: '';
+        $requests->ps_id = $data['ps_id'] ?: null;
+        $requests->class_use = $data['class_use'] ?: '';
+        //$requests->links = $data['links']?:'';
+        $requests->status = $data['status'];
+        $requests->fromd = $data['fromd'];
+        $requests->tod = $data['tod'];
+        $requests->conf_id = $data['conf_id'];
+        $data['id'] = $requests['id'];
+        $requests->status = $data['status'];
+        $requests->save();
 
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -466,10 +507,10 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
     if (sizeof($errors) != 0) {
         $nr = $response->withStatus(417);
         $error = new ApiError();
-        //$req = \App\Models\Rooms::find($reqRoom['id'])->get();
         $error->setData(816, 'Σφάλματα αίτησης ', $errors);
         return $nr->write($error->toJson());
     }
+
     return $response->withStatus(201)->getBody()->write($requests->toJson());
 
     /*header("Content-Type: application/json");
