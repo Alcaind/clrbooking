@@ -29,4 +29,5 @@ class RoomBook extends Model
     {
         return $this->belongsTo('\\App\\Models\\Users', 'teacher');
     }
+
 }
