@@ -117,6 +117,7 @@ angular.module('Requests')
         };
 
         $scope.reload = function () {
+            globalVarsSrv.setGlobalVar('cur', true);
             location.reload();
             $location.path('/usercreaterequests');
         };
@@ -175,6 +176,7 @@ angular.module('Requests')
 
                     //$scope.gotoPage(4, $scope.item);
 
+                    $scope.item.date_index = '';
                     for (var i = 0; i < $scope.item.rooms.length; i++) {
                         for (var j = 0; j < $scope.selectedDays.length; j++) {
                             if (j === $scope.item.rooms[i].pivot.date_index) {
@@ -183,7 +185,6 @@ angular.module('Requests')
                             }
                         }
                     }
-
                     $scope.getBook($scope.item);
                 });
             }
@@ -223,7 +224,6 @@ angular.module('Requests')
                     MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε αίθουσες.', 1);
                     return false;
                 }
-
             }
             if (type === 'r') {
                 if ($scope.item.date_index.length === 0) {
@@ -248,13 +248,14 @@ angular.module('Requests')
             checkState();
 
         });
+        var auth = globalVarsSrv.getGlobalVar('auth');
+        $scope.personalTms = auth.authdata.roles[0].tm;
 
         api.apiCall('GET', 'api/public/roomuse', function (result) {
             $scope.roomUse = result.data;
             $scope.finishedLoaders++;
             checkState();
 
-            var auth = globalVarsSrv.getGlobalVar('auth');
             $scope.roomUse.map(function (use) {
                 var cnt = 0;
                 for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
@@ -268,7 +269,6 @@ angular.module('Requests')
                 }
             })
         });
-
 
         api.apiCall('POST', 'api/public/user/tms/ps', function (result) {
 
@@ -303,7 +303,7 @@ angular.module('Requests')
 
 
         $scope.newUserRequest = function () {
-
+            globalVarsSrv.setGlobalVar('cur', true);
             $scope.selectedRooms = [];
             $scope.selectedCourse.selected = false;
             $scope.selectedCourse = {};
@@ -438,15 +438,35 @@ angular.module('Requests')
 
             }, undefined, item);
         };
-
+        $scope.checkBookIsClicked = false;
         $scope.showMyBook = function () {
+
             if (!checkInput('a')) return;
-            $scope.enablePost = function () {
-                if (!$scope.item && !globalVarsSrv.getGlobalVar('cur')) return false;
-                return true;
-            };
+            $scope.checkBookIsClicked = true;
+
             $scope.book = [];
             $scope.getBook($scope.item);
+        };
+
+        if (globalVarsSrv.getGlobalVar('cur') === 'undefined') globalVarsSrv.setGlobalVar('cur', true);
+
+        $scope.enablePost = function () {
+            if (!$scope.item || !globalVarsSrv.getGlobalVar('cur') || !$scope.checkBookIsClicked) return false;
+            return true;
+        };
+
+        var user = globalVarsSrv.getGlobalVar('auth');
+        var cnt = 0;
+        $scope.adminConfiguration = function () {
+            for (var i = 0; i < user.authdata.roles[0].roles.length; i++) {
+                if (user.authdata.roles[0].roles[i].id === 4) {
+                    cnt++;
+                    return false;
+                }
+            }
+            if (cnt === 0) {
+                return true;
+            }
         };
 
         $scope.$watch('item.fromd', function (newVal, oldvalue, scope) {
@@ -462,7 +482,8 @@ angular.module('Requests')
             if (!newVal || !newVal.fromd) return;
             if (scope.screenState === 'edit') {
                 scope.screenState = 'normal';
-                //return;
+                scope.item.period = newVal.id;
+                return;
             }
             scope.item.fromd = new Date(newVal.fromd);
             scope.item.tod = new Date(newVal.tod);

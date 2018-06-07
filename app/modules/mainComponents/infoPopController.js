@@ -31,10 +31,11 @@ angular.module('MainComponents')
         };
 
 
-        // $scope.adminReq=function (id) {
-        //     $location.path('/requests/'+id);
-        //     $uibModalInstance.close();
-        // };
+        $scope.adminReq = function (id) {
+            $location.path('/requests/' + id);
+            $uibModalInstance.close();
+        };
+
 
         $scope.getPop = function () {
             api.apiCall('GET', baseURL + "/roombook/" + $scope.reqID, function (results) {
@@ -43,10 +44,10 @@ angular.module('MainComponents')
 
                 api.apiCall('GET', baseURL + '/requests/' + $scope.mainData.req_id, function (results) {
                     $scope.requests = results.data;
-                    api.apiCall('GET', baseURL + "/tms/" + $scope.requests.ps.tm_code, function (results) {
-                        $scope.tm = results.data;
+                    // api.apiCall('GET', baseURL + "/tms/" + $scope.requests.ps.tm_code, function (results) {
+                    //     $scope.tm = results.data;
 
-                    })
+//                    })
                 });
             });
         };
@@ -60,7 +61,7 @@ angular.module('MainComponents')
 
                 }
             }
-            if (cnt === 1) {
+            if (cnt === 0) {
                 return true;
             }
         };

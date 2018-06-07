@@ -66,6 +66,9 @@ angular.module('Requests', [
             opened: false
         };
 
+        var auth = globalVarsSrv.getGlobalVar('auth');
+        $scope.personalTms = auth.authdata.roles[0].tm;
+
         $scope.users = {};
 
         api.apiCall('GET', 'api/public/users', function (results) {

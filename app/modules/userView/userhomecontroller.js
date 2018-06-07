@@ -72,6 +72,7 @@ angular.module('Users')
             $scope.doneRequests = [];
             $scope.draftRequests = [];
             $scope.pendingRequests = [];
+            $scope.configurationRequests = [];
 
             $scope.$watch('config_id', function (newVal) {
                 api.apiCall('GET', 'api/public/requests/users/' + user.authdata.roles[0].id + '/config/' + newVal, function (results) {
@@ -92,6 +93,9 @@ angular.module('Users')
                                 break;
                             case 4:
                                 $scope.doneRequests.push(req);
+                                break;
+                            case 5:
+                                $scope.configurationRequests.push(req);
                                 break;
                         }
                     })
@@ -122,6 +126,7 @@ angular.module('Users')
 
             };
 
+            globalVarsSrv.setGlobalVar('cur', true);
             $scope.selectRRid = function (id, item) {
 
                 if (item.status === 0) {
@@ -130,11 +135,22 @@ angular.module('Users')
                     globalVarsSrv.setGlobalVar('cur', true)
                 }
                 $location.url('/usercreaterequests/' + id);
-
-
                 return;
             };
 
+
+            var cnt = 0;
+            $scope.adminConfiguration = function () {
+                for (var i = 0; i < user.authdata.roles[0].roles.length; i++) {
+                    if (user.authdata.roles[0].roles[i].id === 4) {
+                        cnt++;
+                        return false;
+                    }
+                }
+                if (cnt === 0) {
+                    return true;
+                }
+            };
         }])
     .controller('popupUserReq', ['api', '$scope', '$uibModalInstance', 'config', function (api, $scope, $uibModalInstance, config) {
 
@@ -162,6 +178,4 @@ angular.module('Users')
             templateUrl: 'modules/userView/userHome/dashboardTable.html'
         }
     })
-
-
 ;

@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms'])->get();
+    $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms', 'tm'])->get();
     return $response->getBody()->write($requests->toJson());
 });
 
@@ -21,7 +21,7 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms'])->find($id);
+        $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms', 'tm'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -35,7 +35,7 @@ $app->get('/requests/config/{id}', function (Request $request, Response $respons
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user', 'config', 'periods', 'admin', 'ps', 'room_use', 'rooms'])
+        $requests = \App\Models\Requests::with(['users:id,user', 'config', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
             ->where('conf_id', '=', $id)
             ->get();
     } catch (PDOException $e) {
@@ -51,7 +51,7 @@ $app->get('/requests/users/{id}', function (Request $request, Response $response
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms'])
+        $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
             ->where('user_id', '=', $id)
             ->where('conf_id', '=', 1)
             ->get();
@@ -69,7 +69,7 @@ $app->get('/requests/users/{id}/config/{cid}', function (Request $request, Respo
     $id = $args['id'];
     $cid = $args['cid'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms'])
+        $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
             ->where('user_id', '=', $id)
             ->where('conf_id', '=', $cid)
             ->get();
@@ -140,6 +140,7 @@ $app->post('/requests', function (Request $request, Response $response) {
         $requests->tod = $data['tod'];
         $requests->admin = $data['admin'];
         $requests->conf_id = $data['conf_id'];
+        $requests->tm_id = $data['tm_id'];
         $requests->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -241,6 +242,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         $requests->fromd = $data['fromd'];
         $requests->tod = $data['tod'];
         $requests->conf_id = $data['conf_id'];
+        $requests->tm_id = $data['tm_id'];
         $requests->save();
 
         $data['id'] = $requests['id'];
@@ -367,7 +369,7 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
     $data = $request->getParsedBody();
     $myData = $request->getParsedBody();
     $errors = array();
-    $roombook = \App\Models\Requests::with('rooms')
+    $roombook = \App\Models\Requests::with('rooms', 'tm')
 //            /*->whereHas('rooms', function ($query)  use ($data) {
 //                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
 //                $rm = array();
@@ -496,6 +498,7 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
         $requests->conf_id = $data['conf_id'];
         $data['id'] = $requests['id'];
         $requests->status = $data['status'];
+        $requests->tm_id = $data['tm_id'];
         $requests->save();
 
     } catch (PDOException $e) {
@@ -575,6 +578,7 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->tod = $data['tod'] ?: $requests->tod;
         $requests->admin = $data['admin'] ?: $requests->admin;
         $requests->conf_id = $data['conf_id'] ?: $requests->conf_id;
+        $requests->tm_id = $data['tm_id'] ?: $requests->tm_id;
         $requests->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);

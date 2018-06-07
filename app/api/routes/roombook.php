@@ -36,7 +36,7 @@ $app->post('/roombook/dates', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     //return $response->getBody()->write(json_encode($data));
-    $roombook = \App\Models\Requests::with('rooms', 'ps')
+    $roombook = \App\Models\Requests::with('rooms', 'ps', 'tm')
         ->whereBetween('fromd', [$data['fromd'], $data['tod']])
         ->orWhere(function ($query) use ($data) {
             $query->Where('fromd', '<=', date('Y-m-d', strtotime($data['fromd'])))

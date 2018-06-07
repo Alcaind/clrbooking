@@ -151,7 +151,7 @@ angular.module('MainComponents')
                         //var bDays = findBookDates(book[j]);
                         if (($scope.item.id && book[j].id === $scope.item.id) || ([2, 4, 3].includes(book[j].status))) continue;
 
-                        if (new Date(book[j].fromd) <= dateIndex && new Date(book[j].tod) >= dateIndex) { // check if the parsing date (dateIndsex) is between request dates (fDay, tDay)
+                        if (new Date(book[j].fromd + ' 00:00:00') <= dateIndex && new Date(book[j].tod + ' 00:00:00') >= dateIndex) { // check if the parsing date (dateIndsex) is between request dates (fDay, tDay)
                             //if ($scope.item.id && book[j].id === $scope.item.id) return;
                             for (var r = 0; r < book[j].rooms.length; r++) { // parse request rooms
                                 if (book[j].rooms[r].pivot.date_index !== dateIndex.getDay()) continue; // Continue if dateIndex is different from room dateIndex

@@ -18,7 +18,7 @@
         <tbody>
         <tr>
             <td>{{mainData.rooms.name}}</td>
-            <td ng-click="mailTm(tm)" style="cursor: pointer">{{requests.ps.tm_per}}</td>
+            <td ng-click="mailTm(tm)" style="cursor: pointer">{{requests.tm.descr}}</td>
             <td>{{requests.fromd |date:'dd-MM-yyyy'}}- {{requests.tod |date:'dd-MM-yyyy'}}</td>
             <td>{{ mainData.fromt}} - {{ mainData.tot | date:'shortTime'}}</td>
             <td ng-click="mailTo(mainData.users.em_main)" style="cursor: pointer">{{mainData.users.fname}} {{
@@ -32,5 +32,6 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-primary" type="button" ng-click="adminReq()" ng-hide="uAdmin()">Admin Edit</button>
+    <button class="btn btn-primary" type="button" ng-click="adminReq(requests.id)" ng-hide="uAdmin()">Admin Edit
+    </button>
 </div>

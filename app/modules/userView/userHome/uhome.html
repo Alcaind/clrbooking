@@ -21,6 +21,9 @@
             <button type="button" class="btn btn-primary btn-md" ng-click="selPage = 2"
                     style="width: 100%; padding: 2px">Πρόχειρα
             </button>
+            <button ng-hide="adminConfiguration()" type="button" class="btn btn-primary btn-md" ng-click="selPage = 4"
+                    style="width: 100%; padding: 2px">Προς Διαμόρφωση
+            </button>
             <button type="button" class="btn btn-primary btn-md" ng-click="selPage = 3"
                     style="width: 100%; padding: 2px">Αιτήματα προς Διαχειριση
             </button>
@@ -35,6 +38,9 @@
                           style="height:100% ; width: 100%;"></dash-board-table>
 
         <dash-board-table title="Πρόχειρα" status="3" dp="draftRequests" ng-if="selPage===2"
+                          style="height:100% ;width: 100%; "></dash-board-table>
+
+        <dash-board-table title="Προς Διαμόρφωση" status="5" dp="configurationRequests" ng-if="selPage===4"
                           style="height:100% ;width: 100%; "></dash-board-table>
 
         <div id="data_tbl" class="boxContent" style="height: 100%;" ng-if="selPage===3">

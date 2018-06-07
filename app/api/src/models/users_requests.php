@@ -29,5 +29,4 @@ class usersRequests extends Model
     {
         return $this->belongsTo('\\App\\Models\\RoomBook', 'rr_id');
     }
-
 }

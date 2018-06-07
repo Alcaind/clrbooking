@@ -19,6 +19,13 @@
             <status-selector options="requestViewStatus" status-title="Request status"
                              output-value="item.status"></status-selector>
         </div>
+        <div style="position: center ; width: 30%">
+            <label>Τμήματα :</label>
+            <select id="tm"
+                    ng-options="tm.id as (tm.descr)+(tm.ku_code?' / '+tm.ku_code:' / - ')+(tm.mku_code?' / '+tm.mku_code:' / - ')+(tm.mp_code?' / '+tm.mp_code:'') for tm in personalTms"
+                    ng-model="item.tm_id" style="min-width: 0px;">
+            </select>
+        </div>
         <div>
             <a tooltip-placement="left" uib-tooltip="NEW" type="button" class="btn btn-primary hippo"
                ng-click="newUserRequest()" style="min-width: 50px; border-radius: 0px;">
@@ -27,14 +34,16 @@
         <!--href="#/usercreaterequests"-->
 
         <div>
-            <button tooltip-placement="left" uib-tooltip="COPY DAY" type="button" class="btn btn-primary hippo"
+            <button ng-hide="adminConfiguration()" tooltip-placement="left" uib-tooltip="COPY DAY" type="button"
+                    class="btn btn-primary hippo"
                     ng-click="copyDayRequest(calendarSelectedDay)" style="min-width: 50px; border-radius: 0px;">
                 <span class="glyphicon glyphicon-copy"></span></button>
         </div>
         <div>
-            <button tooltip-placement="left" uib-tooltip="POST" type="button" class="btn btn-primary hippo"
+            <button ng-hide="enablePost(item)" tooltip-placement="left" uib-tooltip="POST" type="button"
+                    class="btn btn-primary hippo"
                     ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;"
-                    ng-show="enablePost(item)">
+            >
                 <span class="glyphicon glyphicon-saved"></span></button>
         </div>
     </div>
