@@ -12,6 +12,10 @@
                     {{sday.d}}
                 </div>
             </div>
+            <button ng-click="selectAllDays()" class="btn btn-{{sday.s?'success':'warning'}}"
+                    style="margin: 4px; border: 1px solid #ababab; " ng-show="fromAnotherPage">
+                {{dayState?'Απεπιλ.':'Επιλ.'}} όλων
+            </button>
         </div>
     </div>
 </div>

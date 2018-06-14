@@ -1,13 +1,10 @@
 'use strict';
 
-angular.module('RoomBook', [
-    'MainComponents',
-    'ui.bootstrap',
-    'ApiModules',
-    'Authentication',
-    'GlobalVarsSrvs'
-])
-    .controller('BookController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'AuthenticationService', 'MakeModal', '$location', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, AuthenticationService, MakeModal, $location) {
+angular.module('RoomBook')
+    .controller('RoomPublicController', ['$scope', 'api', 'ClrStatusSrv', 'globalVarsSrv', '$routeParams', 'MakeModal', '$location', 'AuthenticationService', function ($scope, api, ClrStatusSrv, globalVarsSrv, $routeParams, MakeModal, $location, AuthenticationService) {
+        // var baseURL = globalVarsSrv.getGlobalVar('appUrl');
+        $scope.baseURL = 'api/public';
+        $scope.publicUser = true;
         $scope.periods = [];
         $scope.tmpDate = new Date();
         $scope.views = [];
@@ -68,8 +65,7 @@ angular.module('RoomBook', [
         ];
         $scope.mode = 'reporting';
         $scope.coursesDp = [];
-        $scope.roomsFilter = '';
-        AuthenticationService.CheckCredentials();
+        // AuthenticationService.CheckCredentials();
         $scope.dayState = false;
         $scope.selectAllDays = function () {
             $scope.item.date_index = '';
@@ -257,12 +253,9 @@ angular.module('RoomBook', [
 
         };
 
-
         $scope.selectAllRoom = function () {
-
             $scope.rooms.map(function (room) {
-                if (JSON.stringify(room).indexOf($scope.courseFilterObj.room) >= 0)
-                    room.checked = true;
+                room.checked = true;
             });
         };
 
@@ -395,7 +388,7 @@ angular.module('RoomBook', [
         $scope.init();
 
         $scope.defaultCourseSelection = null;
-        $scope.courseFilterObj = {tm: null, km: null, ex: null, pm: null, gen: null, tma: null, room: null};
+        $scope.courseFilterObj = {tm: null, km: null, ex: null, pm: null, gen: null, tma: null};
 
         $scope.filterCourses = function (filteredArray, inputArray, courseFilterObj) {
             $scope.coursesDp = [];

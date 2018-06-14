@@ -33,9 +33,9 @@
                              style="border-bottom: 1px solid #eeeeee; width:100%;height: 20px;display: block;
 
                             background-color: #cacacaaa"
-                             data-toggle="popover"
-                             data-content="{{day.toLocaleDateString({weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}} - {{hour.ht}}"
-                             data-trigger="hover">&nbsp;{{}}
+                             tooltip-placement="left"
+                             uib-tooltip="{{day.toLocaleDateString({weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}} - {{hour.ht}}">
+                            &nbsp;{{}}
                         </div>
                     </div>
                     <!--<ul ng-repeat="(key, value) in calendar[$index] | groupBy: 'name'">
@@ -56,13 +56,10 @@
                                  style="top: {{book.dist}}px; height: {{book.h}}px; min-width:80px; width: 90px;
                              position: absolute; font-size: smaller;
                              background-color: {{book.color}}{{book.new?'66':'33'}}; text-align: left; border: 1px solid #ababab;"
-                                 data-toggle="popover"
-                                 data-content="{{book.book.ps.tma_per}} {{book.book.ps.teacher}} {{book.pivot.fromt}}-{{book.pivot.tot}}"
-                                 data-trigger="hover"
+                                 uib-tooltip="{{book.book.ps.tma_per}} {{book.book.ps.teacher}} {{book.pivot.fromt}}-{{book.pivot.tot}}-{{book.book.ps.ps_ex}}o Εξ.-{{book.book.ps.ps_km}}"
                                  ng-click="popup(book.pivot.id)">
                                 <div>{{book.book.ps.tma_code}}</div>
                                 <div>{{book.book.tm.descr}}</div>
-
                             </div>
                             <div style="top: 340px; height: 40px;
                              position: absolute; font-size: smaller; max-width: 60px">

@@ -15,17 +15,15 @@
         <button ng-click="reload()" class="btn btn-warning"
                 style="margin: 4px; border: 1px solid #ababab; ">Αρχηκοποίηση
         </button>
-        <div style="position: center ; width: 100%">
+        <div style=" width: 100%; padding-top: 6px;   padding-right: 6px;">
+            <input type="text" ng-model="item.descr"
+                   class="form-control ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched"
+                   placeholder="Αιτιολογία αιτήματος"></div>
+        <div style="position: center ">
             <status-selector options="requestViewStatus" status-title="Request status"
                              output-value="item.status"></status-selector>
         </div>
-        <div style="position: center ; width: 30%">
-            <label>Τμήματα :</label>
-            <select id="tm"
-                    ng-options="tm.id as (tm.descr)+(tm.ku_code?' / '+tm.ku_code:' / - ')+(tm.mku_code?' / '+tm.mku_code:' / - ')+(tm.mp_code?' / '+tm.mp_code:'') for tm in personalTms"
-                    ng-model="item.tm_id" style="min-width: 0px;">
-            </select>
-        </div>
+
         <div>
             <a tooltip-placement="left" uib-tooltip="NEW" type="button" class="btn btn-primary hippo"
                ng-click="newUserRequest()" style="min-width: 50px; border-radius: 0px;">

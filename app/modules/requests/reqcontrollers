@@ -5,6 +5,8 @@ angular.module('Requests', [
     'ui.bootstrap'
 ]).controller('RequestsController', ['$scope', '$http', function ($scope, $http) {
 
+    $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
+    $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
     $scope.requests = [];
     $scope.currentRequest = {};
 

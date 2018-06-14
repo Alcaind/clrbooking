@@ -3,8 +3,8 @@ angular.module('Requests')
         $scope.ctrl = makeController.n2nController('/requests', 'rooms', {
             comment: '',
             teacher: '',
-            fromt: new Date(),
-            tot: new Date(),
+            fromt: '',
+            tot: '',
             date_index: ''
         });
         $scope.ctrl.init();
@@ -59,8 +59,11 @@ angular.module('Requests')
             var method = "PUT";
             if ($scope.ctrl.state === 0) method = "POST";
 
-            //$scope.ctrl.pivotData.fromt.setTime($scope.ctrl.pivotData.fromt.getTime() - ($scope.ctrl.pivotData.fromt.getTimezoneOffset() * 60000));
-            //$scope.ctrl.pivotData.tot.setTime($scope.ctrl.pivotData.tot.getTime() - ($scope.ctrl.pivotData.tot.getTimezoneOffset() * 60000));
+            // data.fromt = data['fromt'].getMinutes() < 10 ? data['fromt'].getHours() + ':0' + data['fromt'].getMinutes() + ':00' : data['fromt'].getHours() + ':' + data['fromt'].getMinutes() + ':00';
+            // data.tot = data['tot'].getMinutes() < 10 ? data['tot'].getHours() + ':0' + data['tot'].getMinutes() + ':00' : data['tot'].getHours() + ':' + data['tot'].getMinutes() + ':00';
+
+            $scope.ctrl.pivotData.fromt.setTime($scope.ctrl.pivotData.fromt.getTime() - ($scope.ctrl.pivotData.fromt.getTimezoneOffset() * 60000));
+            $scope.ctrl.pivotData.tot.setTime($scope.ctrl.pivotData.tot.getTime() - ($scope.ctrl.pivotData.tot.getTimezoneOffset() * 60000));
 
             // console.log($scope.ctrl.pivotData);
             // console.log($scope.ctrl.pivotData.fromt.toUTCString());
@@ -68,7 +71,8 @@ angular.module('Requests')
             // console.log($scope.ctrl.pivotData.fromt.toLocaleString());
             // console.log($scope.ctrl.pivotData.fromt.toLocaleTimeString());
 
-            api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/rooms/' + $scope.ctrl.currentRight.id, function (results) {
+            $scope.ctrl.pivotData.room_id = $scope.ctrl.currentRight.id;
+            api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/rooms/' + $scope.ctrl.pivotData.id, function (results) {
                 $scope.ctrl.pivotData = Object.assign({}, $scope.ctrl.pivotTable);
 
                 $scope.ctrl.ldp = results.data;

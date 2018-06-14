@@ -2,9 +2,8 @@
     <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
         <thead class="header-fixed" style="background-color: #cecece;">
         <tr>
-            <th>id</th>
-            <th>Τίτλος Τμήματος</th>
-            <th>Προεπι/νο Τμήμα</th>
+            <th>Όνομα</th>
+            <th>Αίθουσα</th>
             <th>Σχόλια</th>
             <th>...</th>
         </tr>
@@ -12,10 +11,9 @@
         <tbody class="contentScroll">
         <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filter"
             style="cursor: pointer">
-            <td>{{item.id }}</td>
-            <td>{{item.title}}</td>
-            <td>{{item.pivot.defaultTm }}</td>
-            <th>{{item.pivot.comments }}</th>
+            <td>{{item.pivot.users_id }}</td>
+            <td>{{item.pivot.room_id }}</td>
+            <td>{{item.pivot.comment }}</td>
             <td>
                 <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>

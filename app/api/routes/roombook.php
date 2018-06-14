@@ -29,6 +29,24 @@ $app->get('/roombook/{id}', function (Request $request, Response $response, $arg
     }
     return $response->getBody()->write($roombook->toJson());
 });
+
+$app->get('/publicroombook/{id}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $roombook = \App\Models\RoomBook::with('requests', 'rooms', 'users')->find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($roombook->toJson());
+});
+
+
+
+
 /**
  * returns the calendar from the given dates
  */
@@ -50,7 +68,7 @@ $app->post('/roombook/view/by/course', function (Request $request, Response $res
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     //return $response->getBody()->write(json_encode($data));
-    $roombook = \App\Models\Requests::with('rooms', 'ps')
+    $roombook = \App\Models\Requests::with('rooms', 'ps', 'tm')
         ->whereIn('ps_id', $data['ps'])
         ->where(function ($query) use ($data) {
             $query->orWhereBetween('fromd', [$data['fromd'], $data['tod']])
@@ -67,7 +85,7 @@ $app->post('/roombook/view/by/room', function (Request $request, Response $respo
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     //return $response->getBody()->write(json_encode($data));
-    $roombook = \App\Models\Requests::with('rooms', 'ps')
+    $roombook = \App\Models\Requests::with('rooms', 'ps', 'tm')
         ->whereHas('rooms', function ($query) use ($data) {
             $query->whereIn('room_id', $data['rooms']);
         })

@@ -77,8 +77,8 @@ angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
                                 globalVarsSrv.setGlobalVar('menuRole', 'user');
                                 var url = $location.url();
                                 var routes = globalVarsSrv.getGlobalVar('homeButtonUserTableConf');
+                                var exist = false;
                                 if (routes) {
-                                    var exist = false;
                                     for (i = 0; i < routes.length; i++) {
                                         if (url.indexOf(routes[i].column) >= 0) {
                                             exist = true;
@@ -94,7 +94,6 @@ angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
                         return jwtHelper.decodeToken(idToken).sub;
                     }
                 };
-
                 return service;
             }])
 

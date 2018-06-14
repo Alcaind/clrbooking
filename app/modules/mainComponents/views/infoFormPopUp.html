@@ -18,11 +18,17 @@
         <tbody>
         <tr>
             <td>{{mainData.rooms.name}}</td>
-            <td ng-click="mailTm(tm)" style="cursor: pointer">{{requests.tm.descr}}</td>
+            <td>
+                <button tooltip-placement="left" uib-tooltip="E-mail τμήματος" ng-click="mailTm(requests)"
+                        style="cursor: pointer">{{requests.tm.descr}}
+                </button>
+            </td>
             <td>{{requests.fromd |date:'dd-MM-yyyy'}}- {{requests.tod |date:'dd-MM-yyyy'}}</td>
             <td>{{ mainData.fromt}} - {{ mainData.tot | date:'shortTime'}}</td>
-            <td ng-click="mailTo(mainData.users.em_main)" style="cursor: pointer">{{mainData.users.fname}} {{
-                mainData.users.sname}}
+            <td>
+                <button tooltip-placement="left" uib-tooltip="E-mail καθηγητή" ng-click="mailTo(mainData.users.em_main)"
+                        style="cursor: pointer">{{mainData.users.fname}}{{mainData.users.sname}}
+                </button>
             </td>
             <td>{{requests.ps.tma_per }}</td>
             <td>{{requests.periods.descr}}</td>

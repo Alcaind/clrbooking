@@ -7,9 +7,17 @@ angular.module('RoomCategory', [
     'Authentication',
     'GlobalVarsSrvs'
 ]).controller('RoomCategoryController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
-
+    AuthenticationService.CheckCredentials();
     $scope.ctrl = makeController.mainController('/roomcategory', 'roomcategoryTableConf', 'Κατηγορίες Αιθουσών');
     $scope.ctrl.init();
+
+    $scope.userview = true;
+    var auth = globalVarsSrv.getGlobalVar('auth');
+    auth.authdata.roles[0].roles.map(function (value) {
+        if (value.id === 4) {
+            $scope.userview = false;
+        }
+    });
 
 }])
     .controller('RoomCategoryProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {

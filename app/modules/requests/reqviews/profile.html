@@ -25,65 +25,56 @@
                             class="form-required">*</span>:</label>
                     <div class="longInput">
                         <select id="user_id" name="user_id" class="form-control" ng-model="ctrl.item.user_id"
-                                ng-options="users.id as (users.sname+' ' + users.fname) for users in users"></select>
+                                ng-options="users.id as (users.sname+' ' + users.fname) for users in users |orderBy:['sname'] "></select>
                     </div>
                     <p ng-show="itemForm.user_id.$invalid && !itemForm.user_id.$pristine" class="help-block">
                         Εισάγετε
                         όνομα χρήστη/username.</p>
                 </div>
-                <div class="inlineItems">
-                    <div class="form-group"
-                         ng-class="{ 'has-error' : itemForm.req_dt.$invalid && !itemForm.req_dt.$pristine }">
-                        <label class=" formItemLabel" for="req_dt">Ημ/νία Αιτήματος<span
-                                class="form-required">*</span>:</label>
-                        <div class="midInput">
-                            <input id="req_dt" name="req_dt" class="form-control" ng-model="ctrl.item.req_dt">
-                            <script type="text/javascript">
-                                document.getElementById('req_dt').value = new Date();
-                            </script>
-                        </div>
-                        <p ng-show="itemForm.req_dt.$invalid && !itemForm.req_dt.$pristine" class="help-block">
-                            Εισάγετε
-                            ημερομηνία αιτήματος.</p>
-                    </div>
+                <!--<div class="inlineItems">-->
+                <!--<div class="form-group"-->
+                <!--ng-class="{ 'has-error' : itemForm.req_dt.$invalid && !itemForm.req_dt.$pristine }">-->
+                <!--<label class=" formItemLabel" for="req_dt">Ημ/νία Αιτήματος<span-->
+                <!--class="form-required">*</span>:</label>-->
+                <!--<div class="midInput">-->
+                <!--<input id="req_dt" name="req_dt" class="form-control" ng-model="ctrl.item.req_dt">-->
+                <!--<script type="text/javascript">-->
+                <!--document.getElementById('req_dt').value = new Date();-->
+                <!--</script>-->
+                <!--</div>-->
+                <!--<p ng-show="itemForm.req_dt.$invalid && !itemForm.req_dt.$pristine" class="help-block">-->
+                <!--Εισάγετε-->
+                <!--ημερομηνία αιτήματος.</p>-->
+                <!--</div>-->
                     <div class="directiveFormItem">
                         <status-selector status-title="Κατάσταση" options="requestStatus"
                                          output-value="ctrl.item.status"></status-selector>
                     </div>
-                </div>
+                <!--</div>-->
                 <div class="inlineItems">
-                    <div class="form-group"
-                         ng-class="{ 'has-error' : itemForm.period.$invalid && !itemForm.period.$pristine }">
+                    <div class="form-group">
                         <label class=" formItemLabel" for="period">Ακαδημαϊκή Περίοδος<span
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <select id="period" name="period" class="form-control" ng-model="ctrl.item.period"
                                     ng-options="period.id as period.descr for period in periods "></select>
                         </div>
-                        <p ng-show="itemForm.period.$invalid && !itemForm.period.$pristine" class="help-block">
-                            Εισάγετε
-                            ακαδημαϊκή περίοδο.</p>
                     </div>
-                    <div class="form-group"
-                         ng-class="{ 'has-error' : itemForm.conf_id.$invalid && !itemForm.conf_id.$pristine }">
+                    <div class="form-group">
                         <label class=" formItemLabel" for="conf_id" style="min-width: 90px;">Έτος<span
                                 class="form-required">*</span>:</label>
                         <div class="smallInput">
                             <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
                                     ng-options="config.id as config.year for config in configs"></select>
                         </div>
-                        <p ng-show="itemForm.conf_id.$invalid && !itemForm.conf_id.$pristine" class="help-block">
-                            Εισάγετε
-                            έτος.</p>
                     </div>
                 </div>
-
-
                 <div class="form-group">
                     <form-item-selector class="longInput" output-value="ctrl.item.ps_id"
                                         selector-title="Πρόγραμμα Σπουδών"
                                         searchable="true" dp="ps" view-column="tma_per"
-                                        return-column="id"></form-item-selector>
+                                        return-column="id">
+                    </form-item-selector>
 
                 </div>
                 <div class="inlineItems">
@@ -145,17 +136,17 @@
                             λήξης.</p>
                     </div>
                 </div>
-                <div class="form-group">
-                    <form-item-selector selector-title="Επιβλέπων" return-column="id" view-column="sname"
-                                        dp="users" searchable="false" output-value="ctrl.item.admin" class="longInput">
+                <!--<div class="form-group">-->
+                <!--<form-item-selector selector-title="Επιβλέπων" return-column="id" view-column="sname"-->
+                <!--dp="users" searchable="false" output-value="ctrl.item.admin" class="longInput">-->
 
-                    </form-item-selector>
-                </div>
+                <!--</form-item-selector>-->
+                <!--</div>-->
 
                 <div class="form-group">
                     <label>Τμήματα :</label>
                     <select id="tm"
-                            ng-options="tm.id as (tm.descr)+(tm.ku_code?' / '+tm.ku_code:' / - ')+(tm.mku_code?' / '+tm.mku_code:' / - ')+(tm.mp_code?' / '+tm.mp_code:'') for tm in personalTms"
+                            ng-options="tm.id as (tm.descr)+(tm.ku_code?' / '+tm.ku_code:' / - ')+(tm.mku_code?' / '+tm.mku_code:' / - ')+(tm.mp_code?' / '+tm.mp_code:'') for tm in personalTms |orderBy:['descr'] "
                             ng-model="ctrl.item.tm_id" style="min-width: 0px;">
                     </select>
                 </div>
@@ -164,7 +155,7 @@
                     ng-if="ctrl.item.id>0">Ανανέωση
             </button>
             <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.req_dt && !ctrl.item.id">Αποθήκευση
+                    ng-if="!ctrl.item.id && ctrl.item.user_id">Αποθήκευση
             </button>
         </form>
     </div>

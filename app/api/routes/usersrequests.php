@@ -40,8 +40,8 @@ $app->get('/pendingrequests/{id}', function (Request $request, Response $respons
     $id = $args['id'];
     try {
         $usreq = \App\Models\usersRequests::with(['roombook', 'fromuser', 'tousers'])
-            ->where('rr_id', '=', $id)
-            ->get();
+            ->where('rr_id', '=', $id)->get();
+        print_r($usreq);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();

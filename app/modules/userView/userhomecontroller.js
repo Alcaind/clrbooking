@@ -8,7 +8,7 @@ angular.module('Users')
         $scope.weekdays = ['Δ', 'Τρ', 'Τετ', 'Πεμ', 'Παρ', 'Σ', 'Κ'];
 
         $scope.selectRow = function (item) {
-            if (item.status === 1) return;
+            // if (item.status === 1) return;
 
             if (item.status === 3) {
                 $location.url('/usercreaterequests/' + item.id);
@@ -155,7 +155,7 @@ angular.module('Users')
     .controller('popupUserReq', ['api', '$scope', '$uibModalInstance', 'config', function (api, $scope, $uibModalInstance, config) {
 
         $scope.rrID = config.rrID;
-        $scope.dp = [];
+        $scope.dataRRID = [];
 
 
         $scope.ok = function () {
@@ -163,7 +163,7 @@ angular.module('Users')
         };
 
         api.apiCall('GET', 'api/public/pendingrequests/' + $scope.rrID, function (results) {
-            $scope.dp = results.data;
+            $scope.dataRRID = results.data;
         });
     }])
     .directive('dashBoardTable', function () {

@@ -4,10 +4,11 @@
             <div class="operations">
                 <operations ng-repeat="op in ctrl.operations"
                             hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
-                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
-                <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
+                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"
+                            ng-hide="userview"></operations>
+                <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)" ng-hide="userview"></delete-row-button>
             </div>
-            <table-tools class="pageTools"></table-tools>
+            <table-tools class="pageTools" ng-hide="userview"></table-tools>
         </div>
         <dm-title class="pageTitle"></dm-title>
     </div>
@@ -56,7 +57,9 @@
                 <td ng-if="ctrl.tableColumns[16].visible">{{ item.config.year }}</td>
                 <td ng-if="ctrl.tableColumns[17].visible">
                     <li ng-repeat="use in item.room_use">
-                        <button ng-click="deleteUsage(item, use)" class="btn btn-danger btn-xs hippo">x</button>
+                        <button ng-hide="userview" ng-click="deleteUsage(item, use)"
+                                class="btn btn-danger btn-xs hippo">x
+                        </button>
                         {{use.synt}}
                     </li>
                 </td>

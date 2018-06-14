@@ -1,7 +1,7 @@
 <div style="display: flex;padding-top:  10px;padding-bottom:  10px;border-radius: 4px;background-color: #f5f5f5;border: 1px solid #ccc;">
     <div style="height: 30px;line-height: 30px;padding-left: 20px;padding-right: 20px;width: 500px;">
         Βλέπετε <select ng-model="itemsPerPage" ng-change="setItemsPerPage(itemsPerPage)"
-                        ng-options="pg.th as pg.th for pg in pageThresholds"></select> Αποτελέσματα / Σελίδα, σε Σύνολο
+                        ng-options="pg.th as pg.th for pg in pageThresholds "></select> Αποτελέσματα / Σελίδα, σε Σύνολο
         {{totalItems}} Εγγραφών.
     </div>
     <div style="width:50%;text-align: center">

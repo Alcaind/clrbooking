@@ -23,7 +23,7 @@ class Users extends Model {
 
     public function tm()
     {
-        return $this->belongsToMany('\\App\\Models\\Tm', 'tm_users', 'user_id', 'tm_id')->withPivot('comments');
+        return $this->belongsToMany('\\App\\Models\\Tm', 'tm_users', 'user_id', 'tm_id')->withPivot('comments', 'defaultTm');
     }
 
     public function teacher()
@@ -31,7 +31,7 @@ class Users extends Model {
         return $this->belongsToMany('\\App\\Models\\Ps', 'ps_teachers', 'tm_id', 'user_id')->withPivot('comment');
     }
 
-    public function superTms()
+    public function supervisor()
     {
         return $this->hasMany('\\App\\Models\\Tm', 'supervisor');
     }
@@ -59,6 +59,11 @@ class Users extends Model {
             return $e->getMessage();
         }
         return $ret;
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany('\\App\\Models\\Rooms', 'users_rooms', 'room_id', 'users_id')->withPivot('comment');
     }
 
 }

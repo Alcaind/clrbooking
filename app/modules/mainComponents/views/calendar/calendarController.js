@@ -199,9 +199,11 @@ angular.module('MainComponents')
             for (var m = 0; m < calObjects.length; m++) {  // parse new req rooms for this day
                 //calObjects[m].fromt = new Date("1970-01-01T" + calObjects[m].fromt.getMinutes() < 10 ? calObjects[m].fromt.getHours() + ':0' + calObjects[m].fromt.getMinutes() + ':00' : calObjects[m].fromt.getHours() + ':' + calObjects[m].fromt.getMinutes() + ':00');
                 //calObjects[m].tot = new Date("1970-01-01T" + calObjects[m].tot.getMinutes() < 10 ? calObjects[m].tot.getHours() + ':0' + calObjects[m].tot.getMinutes() + ':00' : calObjects[m].tot.getHours() + ':' + calObjects[m].tot.getMinutes() + ':00');
+                calObjects[m].fromt.setSeconds(0);
+                calObjects[m].tot.setSeconds(0);
+                fromCheck.setSeconds(30);
                 if ((((totCheck > calObjects[m].fromt && totCheck < calObjects[m].tot)
                         || (fromCheck > calObjects[m].fromt && fromCheck < calObjects[m].tot)
-                        || fromCheck.getTime() === calObjects[m].fromt.getTime()
                         || ((totCheck < calObjects[m].tot && fromCheck > calObjects[m].tot)
                             || (fromCheck < calObjects[m].fromt && totCheck > calObjects[m].fromt))) && calObjects[m].id === tile.id)) {
 

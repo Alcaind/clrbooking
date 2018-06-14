@@ -11,6 +11,17 @@
                                   ng-model="ctrl.pivotData.comments"></textarea>
                 </div>
             </div>
+            <div class="form-group">
+                <label class=" formItemLabel" for="tmuser">Τμήμα:</label>
+                <div class="longInput">
+                    <select id="tmuser" name="tmuser" class="form-control" ng-model="ctrl.pivotData.defaultTm"
+                            ng-options="tm.id as (tm.descr)+(tm.ku_code?' / '+tm.ku_code:' / - ')+(tm.mku_code?' / '+tm.mku_code:' / - ')+(tm.mp_code?' / '+tm.mp_code:'') for tm in tms">
+                        <option value="0">Προεπιλεγμένο Τμήμα</option>
+                    </select>
+
+                </div>
+            </div>
+
             <button type="button" class="btn btn-primary" ng-click="ctrl.insertPivotItem(ctrl.pivotData)"
                     style="padding: 5px ; float: right;">ok
             </button>

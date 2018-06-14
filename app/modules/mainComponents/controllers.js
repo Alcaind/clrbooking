@@ -149,7 +149,7 @@ angular.module('MainComponents', [
             restrict: "EA",
             scope: {
                 currentPage: "=",
-                totalItems: "<",
+                totalItems: "=",
                 itemsPerPage: "=",
                 numPages: "="
             },
@@ -162,6 +162,14 @@ angular.module('MainComponents', [
         $scope.currentPage = 1;
         $scope.maxSize = 5;
         $scope.itemsPerPage = 10;
+
+        //$scope.setItemsPerPage($scope.pageThresholds[6].th);
+
+        $scope.$watch('totalItems', function (newVal, oldVal) {
+            $scope.itemsPerPage = newVal;
+        });
+
+        //$scope.setItemsPerPage($scope.pageThresholds[6].th);
         $scope.numPages = $scope.totalItems / $scope.itemsPerPage;
 
 
@@ -173,6 +181,8 @@ angular.module('MainComponents', [
             $scope.itemsPerPage = num === 'all' ? $scope.totalItems : num;
             $scope.currentPage = 1; //reset to first page
             $scope.numPages = $scope.totalItems / $scope.itemsPerPage;
+            // $scope.selectedItem=$scope.itemsPerPage.num;
+            // return $scope.selectedItem;
         };
 
     }])
@@ -207,10 +217,14 @@ angular.module('MainComponents', [
                 e.preventDefault();
                 scope.collapsed = !scope.collapsed;
             };
+
+            scope.$watch('sh', function (newVal, oldVal) {
+                if (!newVal) scope.collapsed = true;
+            });
         }
 
         return {
-            scope: {},
+            scope: {sh: '='},
             restrict: 'E',
             transclude: true,
             templateUrl: 'modules/mainComponents/views/showHide.html',

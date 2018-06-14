@@ -64,7 +64,8 @@
                         ng-click="deleteDashReq(item, $event)">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>
-                <button ng-hide="item.status===3" type="button" class="btn btn-info hippo" tooltip-placement="left"
+                <button ng-hide="item.status===3 || item.status=== 5" type="button" class="btn btn-info hippo"
+                        tooltip-placement="left"
                         uib-tooltip="Προεπισκόπηση" value='Προεπισκόπηση'
                         ng-click="selectRow(item)">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

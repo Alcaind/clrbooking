@@ -15,6 +15,12 @@
             <option value="ΥΑ">ΥΑ</option>
         </select>
 
+        <select name="cpm" id="xepm" ng-model="courseFilterObj.psex" class="midInput">
+            <option value="">Χ/Ε</option> <!-- not selected / blank option -->
+            <option value="1357">Χ</option>
+            <option value="2468">Ε</option>
+        </select>
+
         <select name="cpm" id="cpm" ng-model="courseFilterObj.psex" class="midInput">
             <option value="">Όλα τα εξάμηνα</option> <!-- not selected / blank option -->
             <option value="1">1</option>
@@ -25,8 +31,6 @@
             <option value="6">6</option>
             <option value="7">7</option>
             <option value="8">8</option>
-            <!--<option value="9">9</option>-->
-            <!--<option value="10">10</option>-->
         </select>
         <select name="cpm" id="cpm2" ng-model="courseFilterObj.pm" class="midInput">
             <option value="">Προπτυχιακά & Μεταπτυχιακά</option> <!-- not selected / blank option -->
@@ -34,12 +38,17 @@
             <option value="ΜΕΤ">Μεταπτυχιακά</option>
         </select>
 
-        <select id="tm" ng-options="tm.per as tm.per for tm in tms"
+        <select id="tmRoomBook" ng-options="tm.per as tm.per for tm in tms"
                 ng-model="courseFilterObj.tm" ng-show="fromAnotherPage" style="min-width: 0px;">
         </select>
         <input type="text" ng-model="courseFilterObj.tma"
                class="form-control ng-valid ng-dirty ng-valid-parse ng-empty ng-touched" placeholder="search"
                style="padding: 5px; width: 20%; padding: 5px">
+        <select id="myTm"
+                ng-options="tm.id as (tm.descr)+(tm.ku_code?' / '+tm.ku_code:' / - ')+(tm.mku_code?' / '+tm.mku_code:' / - ')+(tm.mp_code?' / '+tm.mp_code:'') for tm in personalTms"
+                ng-model="courseFilterObj.tm" style="min-width: 0px;" ng-show="createFormControllerNotV">
+            <option value="">Τμήμα</option>
+        </select>
         <button tooltip-placement="left" uib-tooltip="Φίλτρο" class="btn btn-primary"
                 ng-click="filterCourses(coursesDp, courses, courseFilterObj)">
             <span class="glyphicon glyphicon-search"></span>
@@ -58,6 +67,7 @@
                     list-style: none; margin: 1em auto; padding: 0;">
             <div ng-repeat="course in coursesDp track by $index" ng-click="selectCourse(course)"
                  class="btn btn-{{course.selected?'success':'primary'}}"
+                 uib-tooltip="{{course.tma_per}} {{course.teacher}} {{course.pivot.fromt}}-{{course.pivot.tot}}-{{course.ps_ex}}o Εξ.-{{course.ps_km}} - {{course.ku_per}} - {{course.mku_per}} - {{course.mp_per}}"
                  style="cursor: pointer; padding: 4px; font-size: 12px;
                  border: 1px solid #ababab; ">
                 <div>

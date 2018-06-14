@@ -26,8 +26,9 @@ angular.module('MainComponents')
             window.open('mailto:' + user.em_main);
         };
 
-        $scope.mailTm = function (tm) {
-            window.open('mailto:' + tm.supervisor.em_main);
+        $scope.mailTm = function (requests) {
+            // window.open('mailto:' + tm.supervisor.em_main);
+            window.open('mailto:' + requests.users.em_main);
         };
 
 
@@ -36,8 +37,19 @@ angular.module('MainComponents')
             $uibModalInstance.close();
         };
 
-
         $scope.getPop = function () {
+            if ($location.url() === '/publicroombook') {
+                baseURL = 'api/public';
+                api.apiCall('GET', baseURL + "/publicroombook/" + $scope.reqID, function (results) {
+                    $scope.mainData = results.data;
+                    $scope.requests = {};
+
+                    api.apiCall('GET', baseURL + '/requests/' + $scope.mainData.req_id, function (results) {
+                        $scope.requests = results.data;
+                    });
+                });
+            }
+
             api.apiCall('GET', baseURL + "/roombook/" + $scope.reqID, function (results) {
                 $scope.mainData = results.data;
                 $scope.requests = {};
@@ -53,12 +65,14 @@ angular.module('MainComponents')
         };
         $scope.uAdmin = function () {
             var auth = globalVarsSrv.getGlobalVar('auth');
+            if (!auth && $location.path('/publicroombook')) {
+                return true;
+            }
             var cnt = 0;
             for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
                 if (auth.authdata.roles[0].roles[i].id === 4) {
                     cnt++;
                     return false;
-
                 }
             }
             if (cnt === 0) {

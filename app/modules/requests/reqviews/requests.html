@@ -1,11 +1,9 @@
 <div id="requests_main" class="pageHolder">
     <div class="pageHeader">
         <div class="pageButtons">
-            <div ng-if="fromAnotherPage" style="text-align: left;padding-left: 5px;">
-                <a href back-button type="button" class="btn btn-warning">
+            <a ng-if="fromAnotherPage" href back-button type="button" class="btn btn-warning">
             <span class="glyphicon glyphicon-chevron-left">
                 <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span></span></a>
-            </div>
             <div class="operations">
                 <operations ng-repeat="op in ctrl.operations"
                             hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
@@ -14,11 +12,15 @@
                 <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
             </div>
             <table-tools class="pageTools"></table-tools>
-            <!--<div class="form-group">-->
-            <!--<form-item-selector selector-title="Config" return-column="id" view-column="year"-->
-            <!--dp="configs" searchable="false" output-value="config_id" class="midInput"-->
-            <!--style=" margin: 0px 1500px ; min-width: 314px;"></form-item-selector>-->
-            <!--</div>-->
+
+
+            <div class="form-group" style="width: 315px; float: right;">
+                <form-item-selector selector-title="Config" return-column="id" view-column="year"
+                                    dp="configs" searchable="false" output-value="config_id" class="midInput"
+                                    style="min-width: 314px; "></form-item-selector>
+            </div>
+
+
         </div>
         <dm-title class="pageTitle"></dm-title>
     </div>
@@ -37,7 +39,7 @@
             <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
                 style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
                 ng-click="ctrl.selectRow(item); THLbutton(item)">
-                <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
+                <td ng-if="ctrl.tableColumns[0].visible">{{ item.id}}</td>
                 <td ng-if="ctrl.tableColumns[1].visible">{{ item.req_dt }}</td>
                 <td ng-if="ctrl.tableColumns[2].visible">{{ item.users.user }}</td>
                 <td ng-if="ctrl.tableColumns[3].visible">{{ item.descr }}</td>

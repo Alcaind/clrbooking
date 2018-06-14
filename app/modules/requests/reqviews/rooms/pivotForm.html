@@ -11,7 +11,7 @@
         <div class="form-group">
             <label class="" for="teacher">Υπευθυνος Καθηγητης:</label>
             <select id="teacher" name="teacher" class="form-control" ng-model="ctrl.pivotData.teacher"
-                    ng-options="user.id as user.user for user in teachers"></select>
+                    ng-options="user.id as (user.sname + ' ' +user.fname) for user in teachers |orderBy :'sname'"></select>
         </div>
         <button type="button" class="btn btn-primary" ng-click="insertRoom()" style="padding: 5px">ok
         </button>

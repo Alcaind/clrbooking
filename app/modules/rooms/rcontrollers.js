@@ -8,7 +8,7 @@ angular.module('Rooms', [
     'GlobalVarsSrvs'
 ])
     .controller('RoomsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'api', 'MakeModal', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, api, MakeModal, ClrStatusSrv) {
-
+        AuthenticationService.CheckCredentials();
         $scope.ctrl = makeController.mainController('/rooms', 'roomsTableConf', 'Κατάλογος Αιθουσών');
         $scope.ctrl.init();
 
@@ -20,6 +20,15 @@ angular.module('Rooms', [
                 MakeModal.generalInfoModal('sm', 'Info', 'info', 'Eπιτυχής διαγραφή', 1)
             })
         };
+
+        $scope.userview = true;
+        var auth = globalVarsSrv.getGlobalVar('auth');
+        auth.authdata.roles[0].roles.map(function (value) {
+            if (value.id === 4) {
+                $scope.userview = false;
+            }
+        });
+
     }])
 
     .controller('RoomProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, $routeParams, api, MakeModal, AuthenticationService, makeController, globalVarsSrv) {

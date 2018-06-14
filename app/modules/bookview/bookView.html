@@ -6,9 +6,10 @@
         <button ng-click="reload()" class="btn btn-warning" style="margin: 4px; border: 1px solid #ababab; ">
             Αρχηκοποίηση
         </button>
+
     </div>
 
-    <show-hide sh-title="Επιλογή Μαθήματος" style="padding: 2px">
+    <show-hide ng-hide="publicUser" sh-title="Επιλογή Μαθήματος" style="padding: 2px">
         <course-select style=""></course-select>
     </show-hide>
 
@@ -19,7 +20,7 @@
     <!--<show-hide sh-title="Ελεγχος Διαθεσιμότητας" style="border: 1px solid #ababab; padding: 2px">-->
     <div style="padding: 4px 4px 0px 4px;">
         <div style="width: 100%; display: flex">
-            <button class="btn btn-warning" ng-click="openCourseCalendar(item)"
+            <button ng-hide="publicUser" class="btn btn-warning" ng-click="openCourseCalendar(item)"
                     style="margin: 4px;width: 100%;border: 1px solid #ababab;">Έλεγχος για τα επιλεγμένα ΜΑΘΗΜΑΤΑ
             </button>
             <button class="btn btn-warning" ng-click="openRoomCalendar(item)"

@@ -83,7 +83,7 @@ angular.module('MainComponents')
         $scope.dataFilter = function (myfilter) {
             return function (item) {
                 if (item.id === $scope.outputValue) return true;
-                if (!$scope.outputValue) $scope.outputValue = item.id;
+                // if (!$scope.outputValue) $scope.outputValue = item.id;
                 return myfilter ? (item[$scope.viewColumn] + '').indexOf(myfilter) >= 0 : true;
             };
             //console.log(myfilter);

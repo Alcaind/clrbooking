@@ -14,14 +14,15 @@
             <div class="formGroupItems">
                 <div class="inlineItems">
                     <div class="form-group"
-                         ng-class="{ 'has-error' : tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine }">
+                         ng-class="{ 'has-error' : itemForm.tm_code.$invalid && !itemForm.tm_code.$pristine }">
                         <label class=" formItemLabel" for="tm_code">Κωδικός τμήματος <span
                                 class="form-required">*</span>:</label>
                         <div class="smallInput">
                             <input id="tm_code" name="tm_code" class="form-control" type="text"
                                    ng-model="ctrl.item.tm_code">
                         </div>
-                        <p ng-show="tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine" class="help-block">Εισάγετε
+                        <p ng-show="itemForm.tm_code.$invalid && !itemForm.tm_code.$pristine" class="help-block">
+                            Εισάγετε
                             κωδικό
                             τμήματος.</p>
                     </div>
@@ -31,61 +32,111 @@
                         <div class="smallInput">
                             <input id="descr" name="descr" class="form-control" type="text" ng-model="ctrl.item.descr">
                         </div>
-                        <p ng-show="tmForm.descr.$invalid && !tmForm.descr.$pristine" class="help-block">Εισάγετε
+                        <p ng-show="itemForm.descr.$invalid && !itemForm.descr.$pristine" class="help-block">Εισάγετε
                             περιγραφή.</p>
                     </div>
                 </div>
 
-                <div class="form-group" ng-class="{ 'has-error' : tmForm.title.$invalid && !tmForm.title.$pristine }">
+                <div class="form-group"
+                     ng-class="{ 'has-error' : itemForm.title.$invalid && !itemForm.title.$pristine }">
                     <label for="title" class=" formItemLabel">Τίτλος<span
                             class="form-required">*</span>:</label>
                     <div class="longInput">
                         <input id="title" name="title" class="form-control" type="text" ng-model="ctrl.item.title">
                     </div>
-                    <p ng-show="tmForm.title.$invalid && !tmForm.title.$pristine" class="help-block">Εισάγετε τίτλο
+                    <p ng-show="itemForm.title.$invalid && !itemForm.title.$pristine" class="help-block">Εισάγετε τίτλο
                         τμήματος.</p>
                 </div>
 
+
+                <div class="form-group"
+                     ng-class="{ 'has-error' : itemForm.sxoli.$invalid && !itemForm.sxoli.$pristine }">
+                    <label for="sxoli" class=" formItemLabel">Σχολή<span
+                            class="form-required">*</span>:</label>
+                    <div class="midInput">
+                        <input id="sxoli" name="sxoli" class="form-control" type="text" ng-model="ctrl.item.sxoli">
+                    </div>
+                    <p ng-show="itemForm.sxoli.$invalid && !itemForm.sxoli.$pristine" class="help-block">Εισάγετε το
+                        όνομα
+                        της
+                        σχολής.</p>
+                </div>
                 <div class="inlineItems">
                     <div class="form-group"
-                         ng-class="{ 'has-error' : tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine }">
-                        <label for="sxoli" class=" formItemLabel">Σχολή<span
-                                class="form-required">*</span>:</label>
-                        <div class="midInput">
-                            <input id="sxoli" name="sxoli" class="form-control" type="text" ng-model="ctrl.item.sxoli">
-                        </div>
-                        <p ng-show="tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine" class="help-block">Εισάγετε το
-                            όνομα
-                            της
-                            σχολής.</p>
-                    </div>
-                    <!--<div class="form-group"-->
-                    <!--ng-class="{ 'has-error' : tmForm.supervisor.$invalid && !tmForm.supervisor.$pristine }">-->
-                    <!--<label for="supervisor" class="">Υπεύθυνος Τμήματος<span-->
-                    <!--class="form-required formItemLabel">*</span>:</label>-->
-                    <!--<input id="supervisor1" name="supervisor" class="form-control" type="text"-->
-                    <!--ng-model="ctrl.item.supervisor">-->
-                    <!--<p ng-show="tmForm.supervisor.$invalid && !tmForm.supervisor.$pristine" class="help-block">Εισάγετε-->
-                    <!--το όνομα-->
-                    <!--της-->
-                    <!--σχολής.</p>-->
-                    <!--</div>-->
-                    <!--<div class="longInput">-->
-                    <!--<select id="supervisor" name="supervisor" class="form-control" ng-model="ctrl.item.supervisor"-->
-                    <!--ng-options="supervisor.id as supervisor.user for supervisor in supervisor"></select>-->
-                    <!--</div>-->
-                    <div class="form-group"
-                         ng-class="{ 'has-error' : tmForm.supervisor.$invalid && !tmForm.supervisor.$pristine }">
-                        <label for="supervisor" class="">Υπεύθυνος Τμήματος<span
+                         ng-class="{ 'has-error' : itemForm.supervisor.$invalid && !itemForm.supervisor.$pristine }">
+                        <label for="supervisor" class=" formItemLabel">Υπεύθυνος Τμήματος<span
                                 class="form-required formItemLabel">*</span>:</label>
                         <div class="smallInput">
                             <select id="supervisor" name="supervisor" class="form-control"
                                     ng-model="ctrl.item.supervisor"
-                                    ng-options="supervisor.id as supervisor.user for supervisor in supervisor"></select>
+                                    ng-options="user.id as (user.sname+' '+user.fname) for user in supervisor | orderBy:['sname'] track by user.id"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="pro_met">Προπτ/Μεταπτ :</label>
+                        <div class="smallInput">
+                            <select name="pro_met" id="pro_met" ng-model="ctrl.item.pro_met" class="form-control">
+                                <option value="0">Προπτυχιακό</option>
+                                <option value="1">Μεταπτυχιακό</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="ku_code">Κωδικός KU :</label>
+                        <div class="smallInput">
+                            <input id="ku_code" name="ku_code" class="form-control" type="text"
+                                   ng-model="ctrl.item.ku_code">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descr" class=" formItemLabel">Περιγραφή KU :</label>
+                        <div class="smallInput">
+                            <input id="ku_per" name="ku_per" class="form-control" type="text"
+                                   ng-model="ctrl.item.ku_per">
+                        </div>
+                    </div>
+                </div>
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="mku_code">Κωδικός MKU :</label>
+                        <div class="smallInput">
+                            <input id="mku_code" name="mku_code" class="form-control" type="text"
+                                   ng-model="ctrl.item.mku_code">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descr" class=" formItemLabel">Περιγραφή MKU :</label>
+                        <div class="smallInput">
+                            <input id="mku_per" name="mku_per" class="form-control" type="text"
+                                   ng-model="ctrl.item.mku_per">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="mp_code">Κωδικός MP :</label>
+                        <div class="smallInput">
+                            <input id="mp_code" name="mp_code" class="form-control" type="text"
+                                   ng-model="ctrl.item.mp_code">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descr" class=" formItemLabel">Περιγραφή MP :</label>
+                        <div class="smallInput">
+                            <input id="mp_per" name="mp_per" class="form-control" type="text"
+                                   ng-model="ctrl.item.mp_per">
+                        </div>
+                    </div>
+                </div>
             </div>
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
                     ng-if="ctrl.item.id>0">Ανανέωση

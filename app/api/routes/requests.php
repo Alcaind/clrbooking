@@ -13,7 +13,9 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms', 'tm'])->get();
+    $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms', 'tm'])
+        ->orderBy('id', 'desc')
+        ->get();
     return $response->getBody()->write($requests->toJson());
 });
 
@@ -37,6 +39,7 @@ $app->get('/requests/config/{id}', function (Request $request, Response $respons
     try {
         $requests = \App\Models\Requests::with(['users:id,user', 'config', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
             ->where('conf_id', '=', $id)
+            ->orderBy('id', 'desc')
             ->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -54,6 +57,7 @@ $app->get('/requests/users/{id}', function (Request $request, Response $response
         $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
             ->where('user_id', '=', $id)
             ->where('conf_id', '=', 1)
+            ->orderBy('id', 'desc')
             ->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -72,6 +76,7 @@ $app->get('/requests/users/{id}/config/{cid}', function (Request $request, Respo
         $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
             ->where('user_id', '=', $id)
             ->where('conf_id', '=', $cid)
+            ->orderBy('id', 'desc')
             ->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -127,7 +132,7 @@ $app->post('/requests', function (Request $request, Response $response) {
     $data = $request->getParsedBody();
     try {
         $requests = new \App\Models\Requests();
-        $requests->req_dt = $data['req_dt'];
+//        $requests->req_dt = $data['req_dt'];
         $requests->user_id = $data['user_id'];
         $requests->descr = $data['descr'];
         $requests->period = $data['period'];
@@ -163,6 +168,7 @@ $checkUserRequestRules = function ($request, $response, $next) {
     $roombook = \App\Models\Requests::with('rooms')
         ->where('fromd', '<=', $data['fromd'])
         ->where('fromd', '>=', $data['fromd'])
+
 //        ->where('room_id', '=', $args['rid'])
         ->get();
 
@@ -576,7 +582,7 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->status = $data['status'] ?: $requests->status;
         $requests->fromd = $data['fromd'] ?: $requests->fromd;
         $requests->tod = $data['tod'] ?: $requests->tod;
-        $requests->admin = $data['admin'] ?: $requests->admin;
+        $requests->admin = $data['admin'] ?: '1';
         $requests->conf_id = $data['conf_id'] ?: $requests->conf_id;
         $requests->tm_id = $data['tm_id'] ?: $requests->tm_id;
         $requests->save();
@@ -643,7 +649,18 @@ $app->post('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $rid = $args['rid'];
     $data = $request->getParsedBody();
     $requests = \App\Models\Requests::find($id);
-    $requests->rooms()->attach($rid, $data);
+
+    $rb = new \App\Models\RoomBook();
+    $rb->req_id = $id;
+    $rb->room_id = $data['room_id'];
+    $rb->comment = $data['comment'];
+    $rb->teacher = $data['teacher'];
+    $rb->fromt = $data['fromt'];
+    $rb->tot = $data['tot'];
+    $rb->date_index = $data['date_index'];
+    $rb->save();
+
+    //$requests->rooms()->attach($rid, $data);
     return $response->getBody()->write($requests->rooms()->get()->toJson());
 })->add($checkReqRooms);
 
@@ -652,9 +669,24 @@ $app->put('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $rid = $args['rid'];
     $data = $request->getParsedBody();
     $requests = \App\Models\Requests::find($id);
-    $requests->rooms()->updateExistingPivot($rid, $data);
+
+    //$deletedRows = \App\Models\RoomBook::where('req_id', '=', $requests['id'])->delete();
+    //for ($i = 0; $i < sizeof($data['pivot']); $i++) {
+    //$attachArray["'" + $data['rooms'][$i]['id'] + "'"] = $data['pivot'][$i];
+    $rb = \App\Models\RoomBook::find($rid);
+    $rb->req_id = $id;
+    $rb->room_id = $data['room_id'];
+    $rb->comment = $data['comment'];
+    $rb->teacher = $data['teacher'];
+    $rb->fromt = $data['fromt'];
+    $rb->tot = $data['tot'];
+    $rb->date_index = $data['date_index'];
+    $rb->save();
+    //}
+
     return $response->getBody()->write($requests->rooms()->get()->toJson());
-})->add($checkReqRooms);
+});
+//->add($checkReqRooms)
 
 $app->delete('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];

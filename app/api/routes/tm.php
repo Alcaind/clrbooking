@@ -22,8 +22,11 @@ $app->get('/tms/{id}', function (Request $request, Response $response, $args) {
     $id = $args['id'];
     try {
         $tm = \App\Models\Tm::with('supervisor', 'ps', 'users')->find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($tm->toJson());
 });
@@ -39,8 +42,11 @@ $app->post('/tms/ps', function (Request $request, Response $response, $args) {
                 /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
                 $query->where('conf_id', '=', 1);
             })->get();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($tm->toJson());
 });
@@ -61,8 +67,11 @@ $app->post('/user/tms/ps', function (Request $request, Response $response, $args
                 /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
                 $query->where('conf_id', '=', 1);
             })->get();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($tm->toJson());
 });
@@ -101,8 +110,11 @@ $app->delete('/tms/{id}', function ($request, $response, $args) {
     try {
         $tm = \App\Models\Tm::find($id);
         $tm->delete();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($tm->toJson());
 });
@@ -110,25 +122,26 @@ $app->delete('/tms/{id}', function ($request, $response, $args) {
 $app->put('/tms/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
     try {
         $tm = \App\Models\Tm::find($id);
-
         $tm->tm_code = $data['tm_code'] ?: $tm->tm_code;
         $tm->descr = $data['descr'] ?: $tm->descr;
         $tm->title = $data['title'] ?: $tm->title;
         $tm->sxoli = $data['sxoli'] ?: $tm->sxoli;
         $tm->supervisor = $data['supervisor'] ?: $tm->supervisor;
-        $tm->ku_code = $data['ku_code'] ?: $tm->ku_code;
-        $tm->ku_per = $data['ku_per'] ?: $tm->ku_per;
-        $tm->mku_code = $data['mku_code'] ?: $tm->mku_code;
-        $tm->mku_per = $data['mku_per'] ?: $tm->mku_per;
-        $tm->pro_met = $data['pro_met'] ?: $tm->pro_met;
-        $tm->mp_code = $data['mp_code'] ?: $tm->mp_code;
-        $tm->mp_per = $data['mp_per'] ?: $tm->mp_per;
+        $tm->ku_code = $data['ku_code'] ?: null;
+        $tm->ku_per = $data['ku_per'] ?: null;
+        $tm->mku_code = $data['mku_code'] ?: null;
+        $tm->mku_per = $data['mku_per'] ?: null;
+        $tm->pro_met = $data['pro_met'] ?: null;
+        $tm->mp_code = $data['mp_code'] ?: null;
+        $tm->mp_per = $data['mp_per'] ?: null;
         $tm->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($tm->toJson());
 });
@@ -138,8 +151,11 @@ $app->get('/tms/{id}/kat', function ($request, $response, $args) {
     try {
         $tm = \App\Models\Tm::find($id);
 
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($tm->kat()->get()->toJson());
 });

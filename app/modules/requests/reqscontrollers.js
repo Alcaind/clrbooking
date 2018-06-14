@@ -11,11 +11,13 @@ angular.module('Requests', [
 
     //$scope.url = null;
 
-    //$scope.config_id = 1;
+    $scope.config_id = 1;
     //$scope.url = 'api/public/requests/config/1';
+
     $scope.$watch('config_id', function (newVal) {
+        if (!newVal) return;
         $scope.urlr = '/requests/config/' + newVal;
-        $scope.ctrl.setUrl($scope.urlr);
+        if ($scope.ctrl) $scope.ctrl.setUrl($scope.urlr);
     });
 
     api.apiCall('GET', 'api/public/config', function (results) {
@@ -46,10 +48,15 @@ angular.module('Requests', [
         $scope.ctrl = makeController.profileController('/requests', 'requestsTableConf');
         $scope.ctrl.init();
 
+
+        $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
+        $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
+
         // function afterInit(res) {
         //     res.fromd = new Date($filter('date')(res.fromd, "yyyy-MM-dd")); // $filter('date')(res.fromd, "yyyy-MM-dd");
         //     res.tod = $filter('date')(res.tod, "yyyy-MM-dd");
         // }
+
 
         $scope.open1 = function () {
             $scope.popup1.opened = true;
@@ -67,6 +74,7 @@ angular.module('Requests', [
         };
 
         var auth = globalVarsSrv.getGlobalVar('auth');
+        $scope.ctrl.item.admin = auth.authdata.roles[0].id;
         $scope.personalTms = auth.authdata.roles[0].tm;
 
         $scope.users = {};
@@ -84,24 +92,39 @@ angular.module('Requests', [
         $scope.tms = {};
 
         api.apiCall('GET', 'api/public/tms', function (results) {
-            $scope.tms = results.data;
+            $scope.personalTms = results.data;
         });
 
         $scope.ps = {};
+        $scope.configs = null;
+        $scope.periods = [];
 
-        api.apiCall('GET', 'api/public/ps', function (results) {
-            $scope.ps = results.data;
-        });
+        $scope.$watch('ctrl.item.conf_id', function (newVal) {
+            if (newVal && $scope.configs) {
+                $scope.configs.map(function (value) {
+                    if (value.id === newVal) {
+                        $scope.periods.push(value.periods);
+                    }
+                });
+                api.apiCall('GET', 'api/public/ps/config/' + newVal, function (results) {
 
-        $scope.configs = {};
-        $scope.periods = {};
+                    var tmp = [{
+                        "id": null,
+                        "tm_code": null,
+                        "tm_per": "---",
+                        "pm": null,
+                        "tma_code": null,
+                        "tma_per": "---",
+                        "conf_id": 1
+                    }];
+                    results.data.map(function (value) {
+                        tmp.push(value);
+                    });
 
-        $scope.$watch('ctrl.item.conf_id', function (newVal, oldVal) {
-            $scope.configs.map(function (value) {
-                if (value.id === newVal) {
-                    $scope.periods = value.periods;
-                }
-            });
+                    $scope.ps = tmp;
+
+                });
+            }
         });
 
         api.apiCall('GET', 'api/public/config', function (results) {

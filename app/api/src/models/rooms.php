@@ -60,4 +60,9 @@ class Rooms extends Model
     {
         return $this->hasMany('\\App\\Models\\RoomBook', 'room_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('\\App\\Models\\Users', 'users_rooms', 'users_id', 'room_id')->withPivot('comment');
+    }
 }
