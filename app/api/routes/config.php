@@ -105,7 +105,7 @@ $app->get('/ps/config/{id}', function (Request $request, Response $response, $ar
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $ps = \App\Models\Ps::with(['config'])->where('conf_id', '=', $id)->get();
+        $ps = \App\Models\Ps::with(['config', 'users'])->where('conf_id', '=', $id)->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();

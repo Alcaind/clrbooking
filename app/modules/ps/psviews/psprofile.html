@@ -28,21 +28,21 @@
                         <label class=" formItemLabel" for="teacher">Καθηγητης:</label>
                         <div class="smallInput">
                             <select id="teacher" name="teacher" class="form-control" ng-model="ctrl.item.teacher"
-                                    ng-options="user.id as user.user for user in teachers"></select>
+                                    ng-options="user.id as (user.sname+' '+user.fname) for user in teachers |orderBy:['sname']"></select>
                         </div>
                     </div>
                 </div>
-                <div class="form-group"
-                     ng-class="{ 'has-error' : itemForm.tma_per.$invalid && !itemForm.tma_per.$pristine }">
-                    <label class=" formItemLabel" for="tma_per">Ονομασία μαθήματος<span
-                            class="form-required">*</span>:</label>
-                    <div class="longInput">
-                        <input id="tma_per" name="tma_per" class="form-control" type="text"
-                               ng-model="ctrl.item.tma_per">
-                    </div>
-                    <p ng-show="itemForm.tma_per.$invalid && !itemForm.tma_per.$pristine" class="help-block">Εισάγετε
-                        περιγραφή μαθήματος.</p>
-                </div>
+                <!--<div class="form-group"-->
+                <!--ng-class="{ 'has-error' : itemForm.tma_per.$invalid && !itemForm.tma_per.$pristine }">-->
+                <!--<label class=" formItemLabel" for="tma_per">Ονομασία μαθήματος<span-->
+                <!--class="form-required">*</span>:</label>-->
+                <!--<div class="longInput">-->
+                <!--<input id="tma_per" name="tma_per" class="form-control" type="text"-->
+                <!--ng-model="ctrl.item.pivot.tma_per">-->
+                <!--</div>-->
+                <!--<p ng-show="itemForm.tma_per.$invalid && !itemForm.tma_per.$pristine" class="help-block">Εισάγετε-->
+                <!--περιγραφή μαθήματος.</p>-->
+                <!--</div>-->
                 <hr class="myHr"/>
                 <span class="hrSeperator">Τμήμα</span>
                 <div class="inlineItems">
@@ -51,8 +51,11 @@
                         <label class=" formItemLabel" for="tm_code">Κωδικός τμήματος<span
                                 class="form-required">*</span>:</label>
                         <div class="smallInput">
-                            <input id="tm_code" name="tm_code" class="form-control" type="text"
-                                   ng-model="ctrl.item.tm_code">
+
+                            <select id="tm_code" name="tm_code" class="form-control"
+                                    ng-options="tm as (tm.descr)+(tm.ku_code?' / '+tm.ku_code:' / - ')+(tm.mku_code?' / '+tm.mku_code:' / - ')+(tm.mp_code?' / '+tm.mp_code:'') for tm in tms |orderBy:['descr'] "
+                                    ng-model="ctrl.item.tm" style="min-width: 0px;">
+                            </select>
                         </div>
                         <p ng-show="itemForm.tm_code.$invalid && !itemForm.tm_code.$pristine" class="help-block">
                             Εισάγετε
@@ -60,11 +63,12 @@
                     </div>
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.tm_per.$invalid && !itemForm.tm_per.$pristine }">
-                        <label class=" formItemLabel" for="tm_per">Τμήμα<span
+                        <label class=" formItemLabel" for="tm_per">Τμήμα <span
                                 class="form-required">*</span>:</label>
                         <div class="smallInput">
-                            <input id="tm_per" name="tm_per" class="form-control" type="text"
-                                   ng-model="ctrl.item.tm_per">
+                            <label id="tm_per" name="tm_per" class="form-control">
+                                {{ctrl.item.tm_per}}
+                            </label>
                         </div>
                         <p ng-show="itemForm.tm_per.$invalid && !itemForm.tm_per.$pristine" class="help-block">Εισάγετε
                             τμήμα.</p>
@@ -77,9 +81,11 @@
                          ng-class="{ 'has-error' : itemForm.pm.$invalid && !itemForm.pm.$pristine }">
                         <label class=" formItemLabel" for="pm">ΠΡΟ/ΜΕΤ<span
                                 class="form-required">*</span>:</label>
-                        <div class="smallInput">
-                            <input id="pm" name="pm" class="form-control" type="text" ng-model="ctrl.item.pm">
-                        </div>
+                        <select id="pm" name="pm" ng-model="ctrl.item.pm" class="midInput">
+                            <option value=""></option> <!-- not selected / blank option -->
+                            <option value="ΠΡΟ">Προπτυχιακά</option> <!-- interpolation -->
+                            <option value="ΜΕΤ">Μεταπτυχιακά</option>
+                        </select>
                         <p ng-show="itemForm.pm.$invalid && !itemForm.pm.$pristine" class="help-block">Εισάγετ
                             είδος.</p>
                     </div>
@@ -120,7 +126,7 @@
                 <span class="hrSeperator">Configurations</span>
                 <div class="inlineItems">
                     <div class="form-group">
-                        <label class="formItemLabel" for="conf_id">Configuration-config_id:</label>
+                        <label class="formItemLabel" for="conf_id">Έτος:</label>
                         <div class="smallInput">
                             <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
                                     ng-options="config.id as config.year for config in configs"></select>
@@ -129,7 +135,8 @@
                     <div class="form-group">
                         <label class="formItemLabel" for="ps_id">Πρόγραμμα σπουδών ID:</label>
                         <div class="smallInput">
-                            <input id="ps_id" name="ps_id" class="form-control" type="text" ng-model="ctrl.item.ps_id">
+                            <input id="ps_id" name="ps_id" class="form-control" type="text"
+                                   ng-model="ctrl.item.ps_code">
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,14 @@
-<div id="psstats_main" class="pageHolder">
+<div id="requests_main" class="pageHolder">
     <div class="pageHeader">
         <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span></span></a>
             <div class="operations">
-                <operations ng-repeat="op in ctrl.operations" hr="{{op.hr.replace('id',ctrl.selectedRow.id)}}"
-                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
+                <operations ng-repeat="op in ctrl.operations"
+                            hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
+                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}" ng-if="op.ifVisible">
+                </operations>
                 <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
             </div>
             <table-tools class="pageTools"></table-tools>

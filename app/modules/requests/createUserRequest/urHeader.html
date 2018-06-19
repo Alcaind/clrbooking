@@ -29,8 +29,6 @@
                ng-click="newUserRequest()" style="min-width: 50px; border-radius: 0px;">
                 <span class="glyphicon glyphicon-plus"></span></a>
         </div>
-        <!--href="#/usercreaterequests"-->
-
         <div>
             <button ng-hide="adminConfiguration()" tooltip-placement="left" uib-tooltip="COPY DAY" type="button"
                     class="btn btn-primary hippo"
@@ -38,10 +36,10 @@
                 <span class="glyphicon glyphicon-copy"></span></button>
         </div>
         <div>
-            <button ng-hide="enablePost(item)" tooltip-placement="left" uib-tooltip="POST" type="button"
+            <!--ng-hide="enablePost()"-->
+            <button ng-show="checkBookIsClicked" tooltip-placement="left" uib-tooltip="POST" type="button"
                     class="btn btn-primary hippo"
-                    ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;"
-            >
+                    ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;">
                 <span class="glyphicon glyphicon-saved"></span></button>
         </div>
     </div>

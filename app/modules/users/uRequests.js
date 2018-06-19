@@ -5,7 +5,6 @@ angular.module('Users')
             $scope.configs = {};
             $scope.fromAnotherPage = true;
 
-
             api.apiCall('GET', globalVarsSrv.getGlobalVar('appUrl') + '/users/' + $routeParams.id, function (results) {
             user = results.data;
             $scope.ctrl = makeController.mainController('/requests/users/' + $routeParams.id, 'requestsTableConf', "Κατοχυρωμένα αιτήματα στον " + user.user);

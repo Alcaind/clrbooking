@@ -6,6 +6,7 @@
     <table class="table table-striped" id="tblGrid">
         <thead id="tblHead">
         <tr>
+            <th>id</th>
             <th>Ονομα αίθουσας</th>
             <th>Τμήμα</th>
             <th>Ημέρα/ες διεξαγωγής</th>
@@ -17,6 +18,7 @@
         </thead>
         <tbody>
         <tr>
+            <td>{{mainData.requests.id}}</td>
             <td>{{mainData.rooms.name}}</td>
             <td>
                 <button tooltip-placement="left" uib-tooltip="E-mail τμήματος" ng-click="mailTm(requests)"
@@ -26,11 +28,24 @@
             <td>{{requests.fromd |date:'dd-MM-yyyy'}}- {{requests.tod |date:'dd-MM-yyyy'}}</td>
             <td>{{ mainData.fromt}} - {{ mainData.tot | date:'shortTime'}}</td>
             <td>
-                <button tooltip-placement="left" uib-tooltip="E-mail καθηγητή" ng-click="mailTo(mainData.users.em_main)"
+                <button ng-show="showddps" tooltip-placement="left" uib-tooltip="E-mail καθηγητή"
+                        ng-click="mailTo(mainData.users.em_main)"
                         style="cursor: pointer">{{mainData.users.fname}}{{mainData.users.sname}}
                 </button>
+                <div ng-show="!showddps">
+                    <select id="teacher" name="teacher" class="form-control" ng-model="mainData.teacher"
+                            ng-options="user.id as (user.sname+' ' + user.fname) for user in teachers"></select>
+                </div>
             </td>
-            <td>{{requests.ps.tma_per }}</td>
+            <td>
+                <a ng-show="showddps">{{requests.ps.tma_per }}</a>
+                <div ng-show="!showddps">
+                    <select id="ps_id" name="ps_id" class="form-control" ng-model="currentPs"
+                            ng-options="p as p.tma_per for p in ps">
+                        <option value="{{requests.ps_id}}">{{requests.ps.tma_per}}</option>
+                    </select>
+                </div>
+            </td>
             <td>{{requests.periods.descr}}</td>
         </tr>
         </tbody>
@@ -38,6 +53,9 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-primary" type="button" ng-click="adminReq(requests.id)" ng-hide="uAdmin()">Admin Edit
+    <button class="btn btn-primary" type="button" ng-click="adminReq(requests.id)" ng-show="!uAdmin()">Admin Edit
     </button>
+    <a href="{{'#/usercreaterequests/'+requests.id }}" class="btn btn-info" role="button" style="padding: 5px"
+       ng-show="!uAdmin()">Admin Edit Graph</a>
+
 </div>

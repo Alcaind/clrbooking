@@ -253,7 +253,7 @@ angular.module('Requests')
         $scope.personalTms = auth.authdata.roles[0].tm;
 
         api.apiCall('GET', 'api/public/rooms', function (result) {
-            $scope.rooms = $scope.personalRooms.length > 0 ? $scope.personalRooms : result.data;
+            $scope.rooms = ($scope.personalRooms && $scope.personalRooms.length > 0) ? $scope.personalRooms : result.data;
             for (var i = 0; i < $scope.rooms.length; i++) {
                 $scope.rooms[i].checked = false;
             }
@@ -262,7 +262,6 @@ angular.module('Requests')
             checkState();
 
         });
-
 
         api.apiCall('GET', 'api/public/roomuse', function (result) {
             $scope.roomUse = result.data;
@@ -450,6 +449,11 @@ angular.module('Requests')
         };
 
         $scope.getBook = function (item) {
+            if (globalVarsSrv.getGlobalVar('cur') === 'undefined') globalVarsSrv.setGlobalVar('cur', true);
+            if ($scope.item && globalVarsSrv.getGlobalVar('cur') === false && $scope.checkBookIsClicked === true) {
+                $scope.checkBookIsClicked = false;
+            }
+
             api.apiCall('POST', 'api/public/roombook/dates', function (result) {
                 /*result.data.map(function (req) {
                     if (req.class_use === '12') {
@@ -462,23 +466,14 @@ angular.module('Requests')
 
             }, undefined, item);
         };
+
         $scope.checkBookIsClicked = false;
         $scope.showMyBook = function () {
-
             if (!checkInput('a')) return;
             $scope.checkBookIsClicked = true;
-
             $scope.book = [];
             $scope.getBook($scope.item);
         };
-
-        if (globalVarsSrv.getGlobalVar('cur') === 'undefined') globalVarsSrv.setGlobalVar('cur', true);
-
-        $scope.enablePost = function () {
-            if (!$scope.item || !globalVarsSrv.getGlobalVar('cur') || !$scope.checkBookIsClicked) return false;
-            return true;
-        };
-
         var user = globalVarsSrv.getGlobalVar('auth');
         var cnt = 0;
         $scope.adminConfiguration = function () {
@@ -499,7 +494,8 @@ angular.module('Requests')
             var dayName = scope.item.fromd.getDay();
             if (!scope.selectedDays[dayName].s)
                 scope.dayChecked(scope.selectedDays[dayName]);
-            scope.item.tod = new Date(scope.item.fromd.getTime() + 86400000);
+
+            scope.item.tod = scope.item.tod ? scope.item.tod : new Date(scope.item.fromd.getTime() + 86400000);
 
             if (scope.item.tod && scope.item.fromd >= scope.item.tod) {
                 scope.item.tod = new Date(scope.item.fromd.getTime() + 86400000);
@@ -514,9 +510,10 @@ angular.module('Requests')
             if (scope.item.fromd && scope.item.fromd >= scope.item.tod) {
                 scope.item.tod = new Date(scope.item.fromd.getTime() + 86400000);
             }
-
+            var dayName = scope.item.fromd.getDay();
+            if (!scope.selectedDays[dayName].s)
+                scope.dayChecked(scope.selectedDays[dayName]);
         });
-
 
         $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
 
@@ -531,8 +528,14 @@ angular.module('Requests')
             scope.item.tod = new Date(scope.item.tod.getTime() + 86400000);
             scope.item.period = newVal.id;
 
+            $scope.selectedDays.map(function (value) {
+                value.s = false;
+                $scope.item.date_index = '';
+            });
+
             if (!scope.item) return;
             if (!scope.item.fromd) return;
+
             var dayName = scope.item.fromd.getDay();
             if (!scope.selectedDays[dayName].s)
                 scope.dayChecked(scope.selectedDays[dayName]);

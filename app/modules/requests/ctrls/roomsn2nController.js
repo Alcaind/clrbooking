@@ -1,5 +1,5 @@
 angular.module('Requests')
-    .controller('RequestsRoomsController', ['$scope', 'AuthenticationService', 'makeController', function ($scope, AuthenticationService, makeController) {
+    .controller('RequestsRoomsController', ['$scope', 'AuthenticationService', 'makeController', 'ClrStatusSrv', 'api', function ($scope, AuthenticationService, makeController, ClrStatusSrv, api) {
         $scope.ctrl = makeController.n2nController('/requests', 'rooms', {
             comment: '',
             teacher: '',
@@ -8,32 +8,6 @@ angular.module('Requests')
             date_index: ''
         });
         $scope.ctrl.init();
-
-
-    }])
-
-    .directive('leftTable', function () {
-        return {
-            restrict: 'EA',
-            templateUrl: 'modules/requests/reqviews/rooms/lTable.html'
-        }
-    })
-    .directive('rightTable', function () {
-        return {
-            restrict: 'EA',
-            templateUrl: 'modules/requests/reqviews/rooms/rTable.html'
-        }
-    })
-    .directive('pivotForm', function () {
-        return {
-            restrict: 'EA',
-            templateUrl: 'modules/requests/reqviews/rooms/pivotForm.html',
-            controller: "RequestFormController"
-        }
-    })
-    .controller('RequestFormController', ['$scope', 'api', '$routeParams', 'ClrStatusSrv', function ($scope, api, $routeParams, ClrStatusSrv) {
-
-        $scope.baseURL = 'api/public/requests';
 
         $scope.statusOptions = ClrStatusSrv.getStatus('weekdaysTableDateIndex');
         $scope.teachers = [];
@@ -72,7 +46,7 @@ angular.module('Requests')
             // console.log($scope.ctrl.pivotData.fromt.toLocaleTimeString());
 
             $scope.ctrl.pivotData.room_id = $scope.ctrl.currentRight.id;
-            api.apiCall(method, $scope.baseURL + "/" + $routeParams.id + '/rooms/' + $scope.ctrl.pivotData.id, function (results) {
+            api.apiCall(method, 'api/public/requests/rooms/' + $scope.ctrl.pivotData.id, function (results) {
                 $scope.ctrl.pivotData = Object.assign({}, $scope.ctrl.pivotTable);
 
                 $scope.ctrl.ldp = results.data;
@@ -80,4 +54,47 @@ angular.module('Requests')
                 $scope.cancelData();
             }, undefined, $scope.ctrl.pivotData);
         };
-    }]);
+
+    }])
+
+    .directive('leftTable', function () {
+        return {
+            restrict: 'EA',
+            templateUrl: 'modules/requests/reqviews/rooms/lTable.html'
+        }
+    })
+    .directive('rightTable', function () {
+        return {
+            restrict: 'EA',
+            templateUrl: 'modules/requests/reqviews/rooms/rTable.html'
+        }
+    })
+    .directive('pivotForm', function () {
+        return {
+            restrict: 'EA',
+            templateUrl: 'modules/requests/reqviews/rooms/pivotForm.html'
+            // ,
+            // controller: "RequestFormController"
+        }
+    });
+// .controller('RequestFormController', ['$scope', 'api', '$routeParams', 'ClrStatusSrv', function ($scope, api, $routeParams, ClrStatusSrv) {
+//
+//     $scope.baseURL = 'api/public/requests';
+//
+//     $scope.statusOptions = ClrStatusSrv.getStatus('weekdaysTableDateIndex');
+//     $scope.teachers = [];
+//
+//     api.apiCall('GET', 'api/public/users', function (results) {
+//         for (var i = 0; i < results.data.length; i++) {
+//             if (results.data[i].cat_id === 7) $scope.teachers.push(results.data[i]);
+//         }
+//     });
+//
+//     $scope.getTeacher = function (teacherId) {
+//         for (var i = 0; i < $scope.teachers.length; i++) {
+//             if ($scope.teachers[i].id === teacherId) return $scope.teachers[i].sname + ' ' + $scope.teachers[i].fname;
+//         }
+//     };
+//
+
+//}]);

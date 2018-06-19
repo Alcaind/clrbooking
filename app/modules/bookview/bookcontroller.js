@@ -71,6 +71,7 @@ angular.module('RoomBook', [
         $scope.roomsFilter = '';
         AuthenticationService.CheckCredentials();
         $scope.dayState = false;
+
         $scope.selectAllDays = function () {
             $scope.item.date_index = '';
             $scope.dayState = !$scope.dayState;
@@ -91,7 +92,7 @@ angular.module('RoomBook', [
         };
 
         $scope.openRoomCalendar = function () {
-
+            $scope.book = [];
             $scope.rooms.map(function (room) {
                 $scope.selectedDays.map(function (day) {
                     if (room.checked && day.s) {
@@ -257,11 +258,14 @@ angular.module('RoomBook', [
 
         };
 
-
         $scope.selectAllRoom = function () {
 
             $scope.rooms.map(function (room) {
-                if (JSON.stringify(room).indexOf($scope.courseFilterObj.room) >= 0)
+                if (!$scope.courseFilterObj.room || $scope.courseFilterObj.room == '') {
+                    room.checked = true;
+                    return
+                }
+                if (JSON.stringify(room).toLowerCase().indexOf($scope.courseFilterObj.room.toLowerCase()) >= 0)
                     room.checked = true;
             });
         };
@@ -326,12 +330,13 @@ angular.module('RoomBook', [
 
         $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
             if (!newVal || !newVal.fromd) return;
+
             scope.item.fromd = new Date(newVal.fromd);
             scope.item.tod = new Date(newVal.tod);
             scope.item.tod = new Date(scope.item.tod.getTime() + 86400000);
             scope.item.period = newVal.id;
-
-
+            scope.dayState = true;
+            scope.selectAllDays();
             if (!scope.item) return;
             if (!scope.item.fromd) return;
             var dayName = scope.item.fromd.getDay();

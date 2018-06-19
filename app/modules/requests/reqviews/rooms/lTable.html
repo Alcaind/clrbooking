@@ -17,9 +17,9 @@
             style="cursor: pointer">
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
-            <th>{{ item.pivot.fromt.toTimeString('en_GB') }}</th>
-            <th>{{ item.pivot.tot.toTimeString('en_GB') }}</th>
-            <th>{{ item.pivot.date_index}}</th>
+            <th>{{ item.pivot.fromt}}</th>
+            <th>{{ item.pivot.tot}}</th>
+            <th>{{ statusOptions[item.pivot.date_index].text}}</th>
             <th>{{ getTeacher(item.pivot.teacher) }}</th>
             <th>{{ item.pivot.comment }}</th>
             <td>

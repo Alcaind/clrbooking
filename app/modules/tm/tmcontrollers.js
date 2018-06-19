@@ -14,8 +14,6 @@ angular.module('Tms', [
 }])
 
     .controller('TmProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
-
-
         $scope.supervisor = [];
         api.apiCall('GET', 'api/public/users', function (result) {
             result.data.map(function (value) {

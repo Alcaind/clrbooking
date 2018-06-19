@@ -75,7 +75,6 @@
                                         searchable="true" dp="ps" view-column="tma_per"
                                         return-column="id">
                     </form-item-selector>
-
                 </div>
                 <div class="inlineItems">
                     <div class="form-group">
@@ -157,6 +156,8 @@
             <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
                     ng-if="!ctrl.item.id && ctrl.item.user_id">Αποθήκευση
             </button>
+            <a href="{{'#/requests/'+ctrl.item.id +'/rooms'}}" class="btn btn-info" role="button" style="padding: 5px">Αίθουσες
+                Αιτήματος</a>
         </form>
     </div>
 </div>

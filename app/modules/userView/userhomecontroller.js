@@ -14,17 +14,23 @@ angular.module('Users')
                 $location.url('/usercreaterequests/' + item.id);
                 return;
             }
+            if (item.status === 1) {
+                MakeModal.generalInfoModal('sm', 'info', 'Επιβεβαίωση', 'Το αίτημα σας για το τμήμα: ' + item.tm.descr + ' είναι καταχωρημένο επιτυχώς ', 1);
 
-            var $myModalInstance = $uibModal.open({
-                templateUrl: 'modules/userView/userHome/popInfoPendingRequest.html',
-                controller: 'popupUserReq',
-                size: 'lg',
-                resolve: {
-                    config: function () {
-                        return {rrID: item.id}
+            }
+            if (item.status !== 1) {
+                var $myModalInstance = $uibModal.open({
+                    templateUrl: 'modules/userView/userHome/popInfoPendingRequest.html',
+                    controller: 'popupUserReq',
+                    size: 'lg',
+                    resolve: {
+                        config: function () {
+                            return {rrID: item.id}
+                        }
                     }
-                }
-            });
+                });
+            }
+
             //$myModalInstance.result.then(okCallback, cancelCallback);
         };
 

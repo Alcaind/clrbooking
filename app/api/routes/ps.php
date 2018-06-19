@@ -104,3 +104,41 @@ $app->put('/ps/{id}', function ($request, $response, $args) {
     }
     return $response->getBody()->write($ps->toJson());
 });
+
+$app->get('/ps/{id}/users', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $ps = \App\Models\Ps::find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($ps->users()->get()->toJson());
+});
+$app->post('/ps/{id}/users/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $ps = \App\Models\Ps::find($id);
+    $ps->users()->attach($rid, $data);
+    return $response->getBody()->write($ps->users()->get()->toJson());
+});
+
+$app->put('/ps/{id}/users/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $ps = \App\Models\Ps::find($id);
+    $ps->users()->updateExistingPivot($rid, $data);
+    return $response->getBody()->write($ps->users()->get()->toJson());
+});
+
+$app->delete('/ps/{id}/users/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $ps = \App\Models\Ps::find($id);
+    $ps->users()->detach($rid);
+    return $response->getBody()->write($ps->users()->get()->toJson());
+});

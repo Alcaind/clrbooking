@@ -35,23 +35,6 @@ $app->get('/usersrequests/{id}', function (Request $request, Response $response,
     return $response->getBody()->write($usreq->toJson());
 });
 
-$app->get('/pendingrequests/{id}', function (Request $request, Response $response, $args) {
-    header("Content-Type: application/json");
-    $id = $args['id'];
-    try {
-        $usreq = \App\Models\usersRequests::with(['roombook', 'fromuser', 'tousers'])
-            ->where('rr_id', '=', $id)->get();
-        print_r($usreq);
-    } catch (PDOException $e) {
-        $nr = $response->withStatus(404);
-        $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage());
-        return $nr->write($error->toJson());
-    }
-    return $response->getBody()->write($usreq->toJson());
-});
-
-
 $app->post('/usersrequests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
@@ -101,6 +84,7 @@ $app->put('/usersrequests/{id}', function ($request, $response, $args) {
         $usreq->to_comment = $data['to_comment'] ?: $usreq->to_comment;
         $usreq->confirm = $data['confirm'] ?: $usreq->confirm;
         $usreq->status = $data['status'] ?: $usreq->status;
+        $usreq->rb_id = $data['rb_id'] ?: '';
         $usreq->save();
 
         $totalPending = \App\Models\usersRequests::where('rr_id', '=', $data['rr_id'])->get();
@@ -110,12 +94,16 @@ $app->put('/usersrequests/{id}', function ($request, $response, $args) {
             if ($totalPending[$i]->status == 1) $confirmed++;
             if ($totalPending[$i]->status == -1) $canceled++;
         }
-        print_r($totalPending);
-        echo $confirmed . '\n';
         if ($totalPending->count() == $confirmed) {
             $req = \App\Models\Requests::find($data['rr_id']);
             $req->status = 1;
             $req->save();
+            foreach ($totalPending as $ur) {
+                print_r($ur->rb_id);
+                $tmp = \App\Models\usersRequests::find($ur->rb_id);
+                print_r($tmp);
+                $tmp->delete();
+            }
         }
         if ($totalPending->count() == ($confirmed + $canceled)) {
             $req = \App\Models\Requests::find($data['rr_id']);
@@ -130,5 +118,23 @@ $app->put('/usersrequests/{id}', function ($request, $response, $args) {
         $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
+    return $response->getBody()->write($totalPending->toJson());
+});
+
+
+$app->get('/pendingrequests/{id}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $usreq = \App\Models\usersRequests::with(['roombook', 'fromuser', 'tousers'])
+            ->where('rr_id', '=', $id)->get();
+
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    // print_r($usreq);
     return $response->getBody()->write($usreq->toJson());
 });

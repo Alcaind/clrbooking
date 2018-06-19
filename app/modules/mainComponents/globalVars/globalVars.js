@@ -221,7 +221,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
                 if (ctrl.rdp && ctrl.rdp.length > 0) {
                     ctrl.compare(ctrl.ldp, ctrl.rdp);
                 }
-                ;
+
                 makeTimes(ctrl.ldp);
             });
         };
@@ -325,11 +325,20 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         };
 
         ctrl.save = function (item) {
+            makeDates(item);
             api.apiCall('POST', ctrl.baseURL, function (results) {
                 MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Δημιουργήθηκε νέα εγγραφή.', 1);
                 history.back();
             }, undefined, item)
+
         };
+
+        function makeDates(item) {
+            if (item['fromd']) {
+                item['fromd'] = new Date(item['fromd'].getTime() - item['fromd'].getTimezoneOffset() * 60000);
+                item['tod'] = new Date(item['tod'].getTime() - item['tod'].getTimezoneOffset() * 60000);
+            }
+        }
 
         ctrl.update = function (item) {
             api.apiCall('PUT', ctrl.baseURL + "/" + item.id, function (results) {

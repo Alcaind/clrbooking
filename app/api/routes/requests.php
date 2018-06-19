@@ -132,7 +132,10 @@ $app->post('/requests', function (Request $request, Response $response) {
     $data = $request->getParsedBody();
     try {
         $requests = new \App\Models\Requests();
-//        $requests->req_dt = $data['req_dt'];
+        $requests->req_dt = null;
+        //$requests->req_dt = new DateTime('now');
+        //$requests->req_dt = $requests->req_dt->getTimestamp();
+        //print_r($requests->req_dt);
         $requests->user_id = $data['user_id'];
         $requests->descr = $data['descr'];
         $requests->period = $data['period'];
@@ -237,7 +240,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
     $errors = array();
     try {
         $requests = new \App\Models\Requests();
-        $requests->req_dt = $data['req_dt'];
+        $requests->req_dt = null;
         $requests->user_id = $data['user_id'];
         $requests->descr = $data['descr'] ?: '';
         $requests->period = $data['period'] ?: '';
@@ -304,8 +307,10 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
                                     $uMessage = new \App\Models\usersRequests();
                                     $uMessage->from_user = $data['user_id'];
                                     $uMessage->to_users = $book['user_id'];
-                                    $uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . $room->pivot->date_index . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
+                                    $uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . $room->pivot->date_index . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ. ' . $room->pivot->id;
                                     $uMessage->rr_id = $data['id'] ?: '';
+
+                                    $uMessage->rb_id = $room->pivot->id ?: '';
                                     $uMessage->status = 0;
                                     $uMessage->save();
                                 }
@@ -399,14 +404,14 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
 
         $requests = \App\Models\Requests::find($data['id']);
 
-        if ($data['status'] == 3) {
-            if ($requests->status == 0) {
+//        if ($data['status'] == 3) {
+//            if ($requests->status == 0) {
                 $urs = \App\Models\usersRequests::where('rr_id', $data['id'])->get();
                 foreach ($urs as $ur) {
                     $ur->delete();
                 }
-            }
-        }
+//            }
+//        }
 
         foreach ($roombook as $book) {
             foreach ($book->rooms()->get() as $room) {
@@ -437,6 +442,8 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
                             (new DateTime($room->pivot->fromt) > $fromt && new DateTime($room->pivot->fromt) < $tot) ||
                             (new DateTime($room->pivot->fromt) == $fromt) ||
                             (new DateTime($room->pivot->fromt) < $fromt && new DateTime($room->pivot->tot) > $tot)) {
+                            //print_r($reqRoom);
+                            //print_r($room->pivot);
                             if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
                                 if ($data['status'] == 0 && $book['id'] !== $data['id']) {
                                     $uMessage = new \App\Models\usersRequests();
@@ -444,16 +451,16 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
                                     $uMessage->to_users = $book['user_id'];
                                     $uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . $room->pivot->date_index . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
                                     $uMessage->rr_id = $data['id'] ?: '';
+                                    $uMessage->rb_id = $room['pivot']['id'] ?: '';
                                     $uMessage->status = 0;
                                     $uMessage->save();
+
+                                    $tt = new stdClass();
+                                    $tt->fromRoom = $reqRoom;
+                                    $tt->toRoom = $room;
+
+                                    array_push($errors, $tt);
                                 }
-
-                                $tt = new stdClass();
-                                $tt->fromRoom = $reqRoom;
-                                $tt->toRoom = $room;
-
-                                array_push($errors, $tt);
-
                             }
                             if (property_exists($room->pivot, 'teacher'))
                                 if ($room->pivot->teacher == $reqRoom['teacher']) {
@@ -468,11 +475,6 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
                     }
                 }
             }
-        }
-
-        if (sizeof($errors) == 0 && $data['status'] != 3) {
-            $requests->status = 1;
-            //$requests->save();
         }
 
         //$attachArray = array();
@@ -504,6 +506,10 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
         $requests->conf_id = $data['conf_id'];
         $data['id'] = $requests['id'];
         $requests->status = $data['status'];
+        if (sizeof($errors) == 0 && $data['status'] != 3) {
+            $requests->status = 1;
+            //$requests->save();
+        }
         $requests->tm_id = $data['tm_id'];
         $requests->save();
 
@@ -571,7 +577,7 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
     $data = $request->getParsedBody();
     try {
         $requests = \App\Models\Requests::find($id);
-        $requests->req_dt = $data['req_dt'] ?: $requests->req_dt;
+        //$requests->req_dt = $data['req_dt'] ?: $requests->req_dt;
         $requests->user_id = $data['user_id'] ?: $requests->user_id;
         $requests->descr = $data['descr'] ?: $requests->descr;
         $requests->period = $data['period'] ?: $requests->period;
@@ -652,7 +658,7 @@ $app->post('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
 
     $rb = new \App\Models\RoomBook();
     $rb->req_id = $id;
-    $rb->room_id = $data['room_id'];
+    $rb->room_id = $rid;
     $rb->comment = $data['comment'];
     $rb->teacher = $data['teacher'];
     $rb->fromt = $data['fromt'];
@@ -664,29 +670,43 @@ $app->post('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     return $response->getBody()->write($requests->rooms()->get()->toJson());
 })->add($checkReqRooms);
 
-$app->put('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
+$app->put('/requests/rooms/{id}', function ($request, $response, $args) {
     $id = $args['id'];
-    $rid = $args['rid'];
     $data = $request->getParsedBody();
-    $requests = \App\Models\Requests::find($id);
 
-    //$deletedRows = \App\Models\RoomBook::where('req_id', '=', $requests['id'])->delete();
-    //for ($i = 0; $i < sizeof($data['pivot']); $i++) {
-    //$attachArray["'" + $data['rooms'][$i]['id'] + "'"] = $data['pivot'][$i];
-    $rb = \App\Models\RoomBook::find($rid);
-    $rb->req_id = $id;
-    $rb->room_id = $data['room_id'];
-    $rb->comment = $data['comment'];
-    $rb->teacher = $data['teacher'];
-    $rb->fromt = $data['fromt'];
-    $rb->tot = $data['tot'];
-    $rb->date_index = $data['date_index'];
-    $rb->save();
-    //}
+    try {
+        $rb = \App\Models\RoomBook::find($id);
+        $rb->room_id = $data['room_id'];
+        $rb->comment = $data['comment'];
+        $rb->teacher = $data['teacher'];
+        $rb->fromt = $data['fromt'];
+        $rb->tot = $data['tot'];
+        $rb->date_index = $data['date_index'];
+        $rb->save();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+
+    $requests = \App\Models\Requests::find($rb->req_id);
 
     return $response->getBody()->write($requests->rooms()->get()->toJson());
 });
 //->add($checkReqRooms)
+
+$app->put('/requests/{id}/{ps}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $ps = $args['ps'];
+    $data = $request->getParsedBody();
+
+    $rb = \App\Models\Requests::find($id);
+    $rb->ps_id = $ps;
+    $rb->save();
+
+    return $response->getBody()->write($rb->toJson());
+});
 
 $app->delete('/requests/{id}/rooms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];

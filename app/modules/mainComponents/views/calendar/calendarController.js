@@ -13,7 +13,6 @@ angular.module('MainComponents')
         $scope.$watch('book', plotBook);
         $scope.popup = function (reqID) {
             MakeModal.infoBookRoom(reqID)
-
         };
 
         $scope.selectDay = function (day) {
@@ -181,6 +180,7 @@ angular.module('MainComponents')
                 }
                 dateIndex.setDate(dateIndex.getDate() + 1); // go to the next day
             }
+            //  console.log($scope.newCalendar);
 
         }
 
@@ -220,6 +220,7 @@ angular.module('MainComponents')
                     //addConflict(bookObj);
                 } else {
                     if (ok) { // if conflict, flag with color
+                        //TODO: wanna be check room uses levels old requests not new one(yellow)
                         //bookObj.color = '#dd3030'
                         bookObj.color = '#287ed2'
                     } else {
