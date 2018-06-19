@@ -1,0 +1,55 @@
+<div>
+    <div style="text-align: left;padding-left: 5px;">
+        <a href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+            </span>
+        </a>
+    </div>
+    <div id="content" style="display: flex">
+        <div class="leftColumn" id="leftColumn" class="table-responsive boxContent tableView">
+            <div>
+                <h2 style="text-align: center;"> Καθηγητής στο μάθημα {{ctrl.mainData.tma_per}}</h2>
+                <!--{{ctrl.ldp.name}}-->
+            </div>
+            <div style="padding: 15px">
+                <div style="display: flex">
+                    <input name="searchownroles" type="text" ng-model="ctrl.filter" class="form-control"
+                           placeholder="search"
+                           style="padding: 5px; width: 100%">
+                </div>
+                <div>
+                    <l-teacher-ps-table></l-teacher-ps-table>
+                </div>
+            </div>
+        </div>
+        <div class="rightColumn" id="rightColumn">
+            <div class="table-responsive boxContent" ng-if="!ctrl.pivotData">
+                <div>
+                    <h2 style="text-align: center;"> Διαθέσιμοι Καθηγητές </h2>
+                </div>
+                <div style="padding: 15px">
+                    <div style="display: flex">
+                        <input name="searchexistroles" type="text" ng-model="ctrl.filterR" class="form-control"
+                               placeholder="search"
+                               style="padding: 5px; width: 100%">
+                    </div>
+                    <div>
+                        <r-teacher-ps-table></r-teacher-ps-table>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="ctrl.pivotData" style="width: 100%">
+                <div class="table-responsive boxContent">
+                    <div style="padding: 15px">
+                        <div>
+                            <ev-teacher-ps-form></ev-teacher-ps-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

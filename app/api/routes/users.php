@@ -13,7 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/users', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $users = \App\Models\Users::with(['ucategories:id,descr', 'roles', 'superTms', 'tm'])->get();
+    $users = \App\Models\Users::with(['ucategories:id,descr', 'roles', 'supervisor', 'tm', 'rooms'])->get();
     return $response->getBody()->write($users->toJson());
 });
 
@@ -22,13 +22,26 @@ $app->get('/users/{id}', function (Request $request, Response $response, $args) 
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $users = \App\Models\Users::with(['ucategories:id,descr', 'roles', 'superTms', 'tm'])->find($id);
+        $users = \App\Models\Users::with(['ucategories:id,descr', 'roles', 'supervisor', 'tm', 'rooms'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
         $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
+    return $response->getBody()->write($users->toJson());
+});
+
+$app->get('/ps/{id}/teacher', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    $userst = \App\Models\Ps::with(['config', 'users'])->find($id);
+    return $response->getBody()->write($userst->toJson());
+});
+
+$app->get('/teacher', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $users = \App\Models\Users::where('cat_id', '=', 7)->orderBy('sname')->get();
     return $response->getBody()->write($users->toJson());
 });
 
@@ -75,7 +88,7 @@ $app->delete('/users/{id}', function ($request, $response, $args) {
 $app->put('/users/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+//    print_r($data);
     try {
         $users = \App\Models\Users::find($id);
         $users->fname = $data['fname'] ?: $users->fname;
@@ -137,19 +150,6 @@ $app->get('/users/{id}/roles', function ($request, $response, $args) {
     return $response->getBody()->write($user->roles()->get()->toJson());
 });
 
-//$app->get('/users/{id}/requests', function ($request, $response, $args) {
-//    $id = $args['id'];
-//    try {
-//        $user = \App\Models\Users::find($id);
-//    } catch (PDOException $e) {
-//        $nr = $response->withStatus(404);
-//        $error = new ApiError();
-//        $error->setData($e->getCode(), $e->getMessage());
-//        return $nr->write($error->toJson());
-//    }
-//    return $response->getBody()->write($user->requests()->get()->toJson());
-//});
-
 $app->get('/roombook/{id}/users', function ($request, $response, $args) {
     $id = $args['id'];
     try {
@@ -201,4 +201,41 @@ $app->get('/users/{id}/tms', function ($request, $response, $args) {
         return $nr->write($error->toJson());
     }
     return $response->getBody()->write($user->tm()->get()->toJson());
+});
+$app->get('/users/{id}/rooms', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $user = \App\Models\Users::find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($user->rooms()->get()->toJson());
+});
+$app->post('/users/{id}/rooms/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $user = \App\Models\Users::find($id);
+    $user->rooms()->attach($rid, $data);
+    return $response->getBody()->write($user->rooms()->get()->toJson());
+});
+
+$app->put('/users/{id}/rooms/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $data = $request->getParsedBody();
+    $user = \App\Models\Users::find($id);
+    $user->rooms()->updateExistingPivot($rid, $data);
+    return $response->getBody()->write($user->rooms()->get()->toJson());
+});
+
+$app->delete('/users/{id}/rooms/{rid}', function ($request, $response, $args) {
+    $id = $args['id'];
+    $rid = $args['rid'];
+    $user = \App\Models\Users::find($id);
+    $user->rooms()->detach($rid);
+    return $response->getBody()->write($user->rooms()->get()->toJson());
 });

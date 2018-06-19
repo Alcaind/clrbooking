@@ -154,15 +154,20 @@ angular.module('clrBooking', [
                     template: '<ps-profile></ps-profile>'
                 })
                 .when('/ps/:id', {
-                    title: 'curroculum',
+                    title: 'curriculum',
                     template: '<ps-profile></ps-profile>'
+                })
+                .when('/ps/:id/teachers', {
+                    title: 'ps teachers',
+                    controller: 'TeachersController',
+                    templateUrl: 'modules/ps/teachers/TeachersPs.html'
                 })
                 .when('/requests', {
                     title: 'requests',
                     controller: 'RequestsController',
                     templateUrl: 'modules/requests/reqviews/requests.html'
                 })
-                .when('/requests/create', {
+                .when('/requests/config/1/create', {
                     title: 'request create',
                     template: '<requests-profile></requests-profile>'
                 })
@@ -299,6 +304,11 @@ angular.module('clrBooking', [
                     title: 'users categories',
                     template: '<users-categories-profile></users-categories-profile>'
                 })
+                .when('/userscategories/:id/users', {
+                    title: 'category per users',
+                    controller: 'UcategoriesUsersController',
+                    templateUrl: 'modules/users/uviews/users.html'
+                })
                 .when('/users', {
                     title: 'users',
                     controller: 'UsersController',
@@ -327,19 +337,24 @@ angular.module('clrBooking', [
                     controller: 'UsersTmsController',
                     templateUrl: 'modules/users/utms/userTms.html'
                 })
-                .when('/psstats', {
-                    title: 'statistics',
-                    controller: 'PsStatsController',
-                    templateUrl: 'modules/ps_stats/psstatsviews/psstats.html'
+                .when('/users/:id/rooms', {
+                    title: 'user rooms',
+                    controller: 'UsersRoomsController',
+                    templateUrl: 'modules/users/rooms/ItemRoom.html'
                 })
-                .when('/psstats/create', {
-                    title: 'statistics create',
-                    template: '<ps-stats-profile></ps-stats-profile>'
-                })
-                .when('/psstats/:id', {
-                    title: 'statistics',
-                    template: '<ps-stats-profile></ps-stats-profile>'
-                })
+                // .when('/psstats', {
+                //     title: 'statistics',
+                //     controller: 'PsStatsController',
+                //     templateUrl: 'modules/ps_stats/psstatsviews/psstats.html'
+                // })
+                // .when('/psstats/create', {
+                //     title: 'statistics create',
+                //     template: '<ps-stats-profile></ps-stats-profile>'
+                // })
+                // .when('/psstats/:id', {
+                //     title: 'statistics',
+                //     template: '<ps-stats-profile></ps-stats-profile>'
+                // })
                 .when('/roombook', {
                     title: 'roombook',
                     controller: 'BookController',
@@ -364,6 +379,11 @@ angular.module('clrBooking', [
                     title: 'user view requests',
                     controller: 'UserViewController',
                     templateUrl: 'modules/userView/userHome/uhome.html'
+                })
+                .when('/publicroombook', {
+                    title: 'publicuserroombook',
+                    controller: 'RoomPublicController',
+                    templateUrl: 'modules/bookview/bookView.html'
                 })
 
                 .otherwise({redirectTo: '/login'});

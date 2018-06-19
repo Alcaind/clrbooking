@@ -1,25 +1,38 @@
-<div style="width: 100%; height: 100%; padding: 10px;">
+<div style="width: 100%; height: 100%; padding: 10px; display: block;">
     <user-request-header></user-request-header>
 
-    <show-hide sh-title="Επιλογή Χρήσης, Περιόδου">
+    <day-select style="padding: 4px 4px 0px 4px; border: 1px solid #cecece; display: block;"></day-select>
+    <use-select style="padding: 4px 4px 0px 4px; border: 1px solid #cecece; display: block;"></use-select>
+
+    <!--<show-hide sh-title="Επιλογή Χρήσης">
         <use-select style="padding: 4px 4px 0px 4px;"></use-select>
-        <day-select style="padding: 4px 4px 0px 4px;"></day-select>
+    </show-hide>-->
+
+    <show-hide sh-title="Επιλογή Μαθήματος" ng-init="emIsVisible=false" sh="emIsVisible" ng-click="eaIsVisible = false">
+        <course-select style=""></course-select>
     </show-hide>
 
-    <show-hide sh-title="Επιλογή Μαθήματος">
-        <course-select style="padding: 4px 4px 0px 4px;"></course-select>
+    <show-hide sh-title="Επιλογή Αίθουσας" ng-init="eaIsVisible=false" sh="eaIsVisible" ng-click="emIsVisible = false">
+        <room-select style=""></room-select>
     </show-hide>
+    <div id="selectedRoomsHolder" style="width: 100%; overflow: auto;" ng-if="mode !== 'reporting'">
 
-    <show-hide sh-title="Επιλογή Αίθουσας">
-        <room-select style="padding: 4px 4px 0px 4px;"></room-select>
-    </show-hide>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
+                    list-style: none; overflow-y: auto; height: 350px; border: #cecece solid 1px">
+            <default-room-tile ng-sh></default-room-tile>
+            <div ng-repeat="room in selectedRooms track by $index">
+                <selected-room-tile></selected-room-tile>
+            </div>
+        </div>
+    </div>
 
     <show-hide sh-title="Παρευρισκόμενοι" ng-show="selectedUse.synt === 'ΤΗΛ'">
-        <select-guest style="padding: 4px 4px 0px 4px;"></select-guest>
+        <select-guest style=""></select-guest>
     </show-hide>
 
-    <show-hide sh-title="Ελεγχος Διαθεσιμότητας">
+    <book-check style=""></book-check>
+
+    <!--<show-hide sh-title="Ελεγχος Διαθεσιμότητας">
         <book-check style="padding: 4px 4px 0px 4px;"></book-check>
-    </show-hide>
-
+    </show-hide>-->
 </div>

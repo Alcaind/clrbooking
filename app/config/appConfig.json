@@ -166,6 +166,13 @@
       "visible": true,
       "sorted": false,
       "filter": ""
+    },
+    {
+      "column": "tm_id",
+      "title": "Τμήμα",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
     }
   ],
   "roomsTableConf": [
@@ -575,14 +582,14 @@
     },
     {
       "column": "conf_id",
-      "title": "Configuration -config_id",
+      "title": "Έτος",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
-      "column": "ps_id",
-      "title": "Πρόγραμμα σπουδων ID",
+      "column": "ps_code",
+      "title": "Πρόγ.σπουδων ID/ps_code",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -666,6 +673,55 @@
     },
     {
       "column": "sxoli",
+      "title": "Σχολή",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "ku_code",
+      "title": "Κωδικός KU",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "ku_per",
+      "title": "Περιγραφή KU",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "mp_code",
+      "title": "Κωδικός Μετ/ακου",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "mku_code",
+      "title": "Κωδικός MKU",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "mku_per",
+      "title": "Περιγραφή MKU",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "pro_met",
+      "title": "Προ/Μετ",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "mp_code",
       "title": "Σχολή",
       "visible": true,
       "sorted": false,
@@ -892,7 +948,7 @@
         },
         {
           "column": "roomuse",
-          "title": "Χρήση Αιθουσών."
+          "title": "Χρήση Αιθουσών"
         },
         {
           "column": "items",
@@ -927,32 +983,45 @@
     },
     {
       "column": "roombook",
-      "title": "Διαθ. Αιθουσών"
+      "title": "Διαθεσιμότητα"
     },
     {
       "column": "usercreaterequests",
-      "title": "UserView"
+      "title": "Αίτημα δέσμευσης"
     },
     {
       "column": "dashboard",
-      "title": "Dashboard"
+      "title": "Πίνακας ελέγχου"
     }
   ],
   "homeButtonUserTableConf": [
     {
+      "column": "rooms",
+      "title": "Αίθουσες"
+    },
+    {
+      "column": "roomcategory",
+      "title": "Κατηγορίες Αιθουσών"
+    },
+    {
       "column": "dashboard",
-      "title": "Dashboard"
+      "title": "Πίνακας ελέγχου"
     },
     {
       "column": "usercreaterequests",
-      "title": "UserView"
+      "title": "Αίτημα δέσμευσης"
     },
     {
       "column": "roombook",
-      "title": "Διαθ. Αιθουσών"
+      "title": "Διαθεσιμότητα"
     }
   ],
-
+  "publicUserTableConf": [
+    {
+      "column": "publicroombook",
+      "title": "Διαθεσιμότητα"
+    }
+  ],
   "roomsTableConfOps": [
     {
       "hr": "#/rooms/id",
@@ -1023,6 +1092,12 @@
       "content": "Τμήματα",
       "gicon": "glyphicon-map-marker",
       "place": "left"
+    },
+    {
+      "hr": "#/users/id/rooms",
+      "content": "Αίθουσες",
+      "gicon": "glyphicon-folder-open",
+      "place": "left"
     }
   ],
   "configTableConfOps": [
@@ -1075,6 +1150,12 @@
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
       "place": "left"
+    },
+    {
+      "hr": "#/ps/id/teachers",
+      "content": "Καθηγητές",
+      "gicon": "glyphicon-user",
+      "place": "left"
     }
   ],
   "roomcategoryTableConfOps": [
@@ -1106,6 +1187,12 @@
       "hr": "#/userscategories/id",
       "content": "Επεξεργασία",
       "gicon": "glyphicon-pencil",
+      "place": "left"
+    },
+    {
+      "hr": "#/userscategories/id/users",
+      "content": "Xρήστες",
+      "gicon": "glyphicon-transfer",
       "place": "left"
     }
   ],
@@ -1149,120 +1236,121 @@
   ],
   "userRoleStatus": [
     {
-      "text": "In Progress",
-      "value": 0
-    },
-    {
-      "text": "Done",
+      "text": "Ενεργός",
       "value": 1
     },
     {
-      "text": "Expired",
-      "value": 2
+      "text": "Ανενεργός",
+      "value": 0
     }
   ],
   "configStatus": [
     {
-      "text": "In Progress",
-      "value": 0
+      "text": "Ενεργό τώρα",
+      "value": 1
     },
     {
-      "text": "Expired",
-      "value": 1
+      "text": "Ληγμένο",
+      "value": 0
     }
   ],
   "itemStatus": [
     {
-      "text": "Broken",
+      "text": "Μη λειτουργικό",
       "value": 0
     },
     {
-      "text": "Functional",
+      "text": "Λειτουργικό",
       "value": 1
     },
     {
-      "text": "In Repair",
+      "text": "Προς επιδιόρθωση",
       "value": 2
     },
     {
-      "text": "Booked",
+      "text": "Σε κράτηση",
       "value": 3
     },
     {
-      "text": "Available",
+      "text": "Διαθέσιμο",
       "value": 4
     }
   ],
   "periodStatus": [
     {
-      "text": "In Progress",
-      "value": 0
+      "text": "Ενεργή τώρα",
+      "value": 1
     },
     {
-      "text": "Expired",
-      "value": 1
+      "text": "Ληγμένη",
+      "value": 0
     }
   ],
   "requestStatus": [
     {
-      "text": "In Progress/Pending",
+      "text": "Προς έγκριση",
       "value": 0
     },
     {
-      "text": "Done",
+      "text": "Ολοκληρωμένο",
       "value": 1
     },
     {
-      "text": "Expired",
+      "text": "Ληγμένο",
       "value": 2
     },
     {
-      "text": "Draft",
+      "text": "Πρόχειρο",
       "value": 3
     },
     {
-      "text": "Canceled",
+      "text": "Ακυρωμένο",
       "value": 4
+    },
+    {
+      "text": "Διαμόρφωση",
+      "value": 4
+    }
+  ],
+  "requestViewStatus": [
+    {
+      "text": "Προς έγκριση",
+      "value": 0
+    },
+    {
+      "text": "Πρόχειρο",
+      "value": 3
     }
   ],
   "roombookStatus": [
     {
-      "text": "In Progress/Pending",
+      "text": "Προς έγκριση",
       "value": 0
     },
     {
-      "text": "Done",
+      "text": "Ολοκληρωμένο",
       "value": 1
     },
     {
-      "text": "Expired",
+      "text": "Ληγμένο",
       "value": 2
     }
   ],
   "roomStatus": [
     {
-      "text": "In Repair",
+      "text": "Υπο κατασκευή/επιδιόρθωση",
       "value": 0
     },
     {
-      "text": "Booked",
+      "text": "Σε κράτηση",
       "value": 1
     },
     {
-      "text": "Available",
+      "text": "Διαθέσιμη",
       "value": 2
     }
   ],
-  "roleUserStatus": [
-    {
-      "text": "Active",
-      "value": 0
-    },
-    {
-      "text": "NonActive",
-      "value": 1
-    }
-  ],
+
   "weekdaysTableDateIndex": [
     {
       "text": "Κυριακή",
@@ -1295,15 +1383,15 @@
   ],
   "userRequestStatus": [
     {
-      "text": "In Progress/Pending",
+      "text": "Προς έγκριση",
       "value": 0
     },
     {
-      "text": "Done",
+      "text": "Ολοκληρωμένο",
       "value": 1
     },
     {
-      "text": "Canceled",
+      "text": "Ακύρωμένο",
       "value": -1
     }
   ]

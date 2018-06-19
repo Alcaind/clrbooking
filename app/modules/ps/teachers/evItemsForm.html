@@ -1,0 +1,24 @@
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageTitle">Επεξεργασία</div>
+    </div>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="form-group">
+                <label for="stat_comm" class=" formItemLabel">Σχόλια:</label>
+                <div class="longInput">
+                        <textarea id="stat_comm" name="stat_comm" class="form-control" type="text"
+                                  ng-model="ctrl.pivotData.comment"></textarea>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.insertPivotItem(ctrl.pivotData)"
+                    style="padding: 5px; float: right">ok
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.cancelPivotData()"
+                    style="padding: 5px; float: right">
+                cancel
+            </button>
+        </form>
+    </div>
+</div>
+

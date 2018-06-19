@@ -13,8 +13,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/userscategories', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $ucategories = \App\Models\Ucategories::all();
-//    return $response->getBody()->write($ucategories->toJson());
+    $ucategories = \App\Models\Ucategories::with(['users'])->get();
     return $response->getBody()->write($ucategories->toJson());
 
 });
@@ -23,11 +22,12 @@ $app->get('/userscategories/{id}', function (Request $request, Response $respons
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $ucategories = \App\Models\Ucategories::find($id);
-//                                                with(['users:username,fname,sname'])->
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+        $ucategories = \App\Models\Ucategories::with(['users'])->find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($ucategories->toJson());
 });
@@ -37,7 +37,6 @@ $app->post('/userscategories', function (Request $request, Response $response) {
     $data = $request->getParsedBody();
     try {
         $ucategories = new \App\Models\Ucategories();
-
         $ucategories->descr = $data['descr'];
         $ucategories->comment = $data['comment'];
         $ucategories->save();
@@ -56,8 +55,11 @@ $app->delete('/userscategories/{id}', function ($request, $response, $args) {
     try {
         $ucategories = \App\Models\Ucategories::find($id);
         $ucategories->delete();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($ucategories->toJson());
 });
@@ -72,11 +74,29 @@ $app->put('/userscategories/{id}', function ($request, $response, $args) {
         $ucategories->descr = $data['descr'] ?: $ucategories->descr;
         $ucategories->comment = $data['comment'] ?: $ucategories->comment;
         $ucategories->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($ucategories->toJson());
 });
 
 //-------------------------
 
+$app->get('/users/userscategories/{id}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $users = \App\Models\Users::with(['ucategories'])
+            ->where('cat_id', '=', $id)
+            ->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($users->toJson());
+});
