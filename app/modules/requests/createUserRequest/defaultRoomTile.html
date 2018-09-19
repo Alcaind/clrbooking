@@ -1,11 +1,12 @@
 <div>
     <div style="background-color: #5bc0de66; display: block">
         <div class="btn btn-primary" ng-click="copyDefaultRoom()">
-            Αντιγραφή στις επιλεγμένες αίθουσες
+            {{"Αντιγραφή στις επιλεγμένες αίθουσες"| translate}}
         </div>
         <from-to-time-picker fromt="defaultRoomSelection.fromt" tot="defaultRoomSelection.tot"></from-to-time-picker>
         <div style="display: flex; width: 100%">
-            <input type="text" ng-model="defaultRoomSelection.comment" class="form-control" placeholder="Σχόλια"
+            <input type="text" ng-model="defaultRoomSelection.comment" class="form-control"
+                   placeholder='{{"Σχόλια"| translate}}'
                    style="width: 100%">
         </div>
     </div>

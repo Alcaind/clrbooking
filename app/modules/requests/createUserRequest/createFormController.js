@@ -10,19 +10,24 @@ angular.module('Requests')
         $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
         $scope.user = globalVarsSrv.getGlobalVar('auth');
         $scope.teachers = [];
+        $scope.itemtype = [];
         $scope.allTeachers = [];
         $scope.psTeachers = [];
         $scope.bookingErrors = [];
         $scope.selectedPeriod = {};
         $scope.selectedRooms = [];
+        $scope.personalTms = [];
         $scope.tms = [];
+        $scope.filtertms = [];
         $scope.courses = [];
         $scope.selectedCourse = {};
         $scope.coursesDp = [];
+        $scope.roomDP = [];
         $scope.selectedUse = {selected: false};
         $scope.calendarSelectedDay = null;
         $scope.fromAnotherPage = false;
         $scope.createFormControllerNotV = true;
+        $scope.roomscategory = [];
         $scope.selectedDays = [
             {
                 "d": "Κυριακή",
@@ -64,59 +69,23 @@ angular.module('Requests')
         $scope.maxLoaders = 4;
         $scope.finishedLoaders = 0;
         $scope.screenState = 'normal';
-
+        $scope.toRefresh = {};
+        $scope.coursesDp = [];
         AuthenticationService.CheckCredentials();
+        $scope.config = [];
+        $scope.periodActive = true;
 
-        $scope.copyDayRequest = function (day) {
-            var fd = day;
-            var td = new Date(day);
-            td = new Date(td.setDate(td.getDate() + 1));
+        api.apiCall('GET', 'api/public/config', function (result) {
+            $scope.config = result.data;
+        });
 
-            api.apiCall('POST', 'api/public/roombook/copyday', function (result) {
-                // var book = result.data;
-                // var toCopyRequests = [];
-                // book.map(function (request) {
-                //     $scope.selectedRooms =[];
-                //     request.rooms.map(function (room) {
-                //         if (room.pivot.date_index !== fd.getDay()) return;
-                //
-                //         var roomObj = Object.assign({}, room);
-                //
-                //         room.pivot.fromt = new Date('1970-01-01 ' + room.pivot.fromt + ' ');
-                //         room.pivot.tot = new Date('1970-01-01 ' + room.pivot.tot);
-                //         delete room.pivot.id;
-                //         delete room.pivot.req_id;
-                //
-                //         room.pivot.date_index = $scope.item.date_index * 1;
-                //         roomObj = Object.assign(roomObj, room.pivot);
-                //         // roomObj.ps = request.ps;
-                //         $scope.selectedRooms.push(roomObj);
-                //         for (var r = 0; r < $scope.rooms.length; r++) {
-                //             if (room.id === $scope.rooms[r].id) {
-                //                 $scope.rooms[r].checked = true;
-                //                 //$scope.roomChecked($scope.rooms[r])
-                //             }
-                //         }
-                //         room = Object.assign(room, room.pivot);
-                //     });
-                //
-                //     var tmpRequest =  Object.assign({},request);
-                //     delete tmpRequest.id;
-                //     delete tmpRequest.req_dt;
-                //     delete tmpRequest.created_at;
-                //     delete tmpRequest.updated_at;
-                //     tmpRequest.status = 3;
-                //     tmpRequest.conf_id = $scope.item.conf_id;
-                //     tmpRequest.period = $scope.item.period;
-                //     tmpRequest.rooms = $scope.selectedRooms;
-                //
-                //     $scope.selectedCourse = {};
-                //     $scope.postUserRequest(tmpRequest);
-                //     //toCopyRequests.push(tmpRequest);
-                // });
-                $scope.item.rooms = $scope.selectedRooms;
-            }, undefined, {fromd: fd, tod: $scope.item.fromd});
-        };
+
+        $scope.simpleManager = true;
+        for (var i = 0; i < $scope.user.authdata.roles[0].roles.length; i++) {
+            if ($scope.user.authdata.roles[0].roles[i].id === 19) {
+                $scope.simpleManager = false;
+            }
+        }
 
         $scope.reload = function () {
             globalVarsSrv.setGlobalVar('cur', true);
@@ -132,6 +101,7 @@ angular.module('Requests')
                 $scope.selectedCourse = {};
                 $scope.selectedUse = {};
                 $scope.currentPage = 0;
+                //$scope.teachers = $scope.allTeachers;
                 $scope.item = {
                     status: 0,
                     rooms: [],
@@ -150,6 +120,8 @@ angular.module('Requests')
                     $scope.selectedPeriod = $scope.item.periods;
                     $scope.item.fromd = new Date($scope.item.fromd + ' 00:00:00');
                     $scope.item.tod = new Date($scope.item.tod + ' 00:00:00');
+                    $scope.item.status = '14'.indexOf($scope.item.status) >= 0 ? 0 : $scope.item.status;
+                    if (!$scope.item.guests) $scope.item.guests = [];
 
                     for (var sr = 0; sr < $scope.item.rooms.length; sr++) {
                         //$scope.roomChecked($scope.item.rooms[sr].pivot);
@@ -181,8 +153,14 @@ angular.module('Requests')
                         for (var c = 0; c < $scope.courses.length; c++) {
                             if ($scope.courses[c].id === $scope.item.ps.id) {
                                 $scope.selectCourse($scope.courses[c]);
+                                break;
                             }
                         }
+                    if ($scope.item.guests) {
+                        api.apiCall('GET', 'api/public/requests/' + $routeParams.id + '/guests', function (results) {
+                            $scope.item.guests = results.data;
+                        });
+                    }
 
                     //$scope.gotoPage(4, $scope.item);
 
@@ -226,10 +204,10 @@ angular.module('Requests')
                     MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε χρήση αίθουσας.', 1);
                     return false;
                 }
-                if ($scope.coursesDp.length === 0 && '4912'.indexOf($scope.selectedUse.id) >= 0) {
-                    MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε μάθημα.', 1);
-                    return false;
-                }
+                // if (!$scope.selectedCourse.selected && '49'.indexOf($scope.selectedUse.id) >= 0) {
+                //     MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε μάθημα.', 1);
+                //     return false;
+                // }
                 if ($scope.selectedRooms.length === 0) {
                     MakeModal.generalInfoModal('sm', 'info', '', 'Παρακαλώ επιλέξτε αίθουσες.', 1);
                     return false;
@@ -248,20 +226,80 @@ angular.module('Requests')
             return true;
         }
 
-        var auth = globalVarsSrv.getGlobalVar('auth');
-        $scope.personalRooms = auth.authdata.roles[0].rooms;
-        $scope.personalTms = auth.authdata.roles[0].tm;
+        //$scope.personalRooms = $scope.user.authdata.roles[0].rooms;
 
-        api.apiCall('GET', 'api/public/rooms', function (result) {
-            $scope.rooms = ($scope.personalRooms && $scope.personalRooms.length > 0) ? $scope.personalRooms : result.data;
-            for (var i = 0; i < $scope.rooms.length; i++) {
-                $scope.rooms[i].checked = false;
-            }
-            $scope.tileRooms = $scope.rooms;
-            $scope.finishedLoaders++;
-            checkState();
-
+        api.apiCall('GET', 'api/public/personal/' + $scope.user.authdata.roles[0].id + '/rooms', function (result) {
+            $scope.personalRooms = result.data;
         });
+
+        $scope.personalTms = $scope.user.authdata.roles[0].tm;
+        if (globalVarsSrv.getGlobalVar('menuRole') === 'admin') {
+            api.apiCall('GET', 'api/public/tms', function (results) {
+                $scope.personalTms = results.data;
+            });
+        }
+
+        $scope.filterRooms = function (filteredArray, inputArray, roomsFilter) {
+            while ($scope.roomDP.length > 0) $scope.roomDP.pop();
+            var typeChecked = 0;
+            for (var j = 0; j < $scope.itemtype.length; j++) {
+                if ($scope.itemtype[j].visible) typeChecked++
+            }
+
+            inputArray.map(function (room) {
+                var exists = false;
+                var typeCheckedCnt = 0;
+                for (var i = 0; i < room.items.length; i++) {
+                    for (var j = 0; j < $scope.itemtype.length; j++) {
+                        if (room.items[i].id === $scope.itemtype[j].id && $scope.itemtype[j].visible) typeCheckedCnt++
+                    }
+                    if (typeCheckedCnt === typeChecked) exists = true;
+                }
+                if (exists || !typeChecked) $scope.roomDP.push(room);
+                // $scope.roomTile=$scope.roomDP
+            });
+        };
+
+        api.apiCall('GET', 'api/public/roomcategory', function (result) {
+            $scope.roomscategory = result.data;
+            //$scope.filteringRooms($scope.roomDP, $scope.tileRooms, $scope.roomsFilter);
+        });
+
+
+        $scope.filteringRooms = function (filteredArray, inputArray, roomsFilter) {
+            $scope.roomDP = [];
+            while ($scope.roomDP.length > 0) $scope.roomDP.pop();
+            inputArray.map(function (room) {
+                var exists = true;
+                exists = ((!roomsFilter.room || room.name.indexOf((roomsFilter.room).toUpperCase()) >= 0 || room.address.indexOf((roomsFilter.room).toUpperCase()) >= 0) && exists) ? true : false; //input
+                exists = ((!roomsFilter.roomcat || room.capasity_categ === roomsFilter.roomcat) && exists) ? true : false; //select
+                if (exists) $scope.roomDP.push(room);
+            });
+        };
+
+        api.apiCall('GET', 'api/public/itemtype', function (result) {
+            $scope.itemsrooms = result.data;
+            $scope.itemtype = result.data;
+            $scope.itemtype.map(function (value) {
+                value.title = value.descr;
+            });
+            api.apiCall('GET', 'api/public/rooms', function (result) {
+                $scope.rooms = ($scope.personalRooms && $scope.personalRooms.length > 0) ? $scope.personalRooms : result.data;
+                for (var i = 0; i < $scope.rooms.length; i++) {
+                    $scope.rooms[i].checked = false;
+                }
+
+                $scope.tileRooms = $scope.rooms;
+                $scope.filterRooms($scope.roomDP, $scope.tileRooms, $scope.roomsFilter);
+                $scope.finishedLoaders++;
+                checkState();
+            });
+        });
+
+        // $scope.itemsrooms = [];
+        // api.apiCall('GET', 'api/public/items', function (result) {
+        //     $scope.itemsrooms=result.data;
+        // });
 
         api.apiCall('GET', 'api/public/roomuse', function (result) {
             $scope.roomUse = result.data;
@@ -270,20 +308,60 @@ angular.module('Requests')
 
             $scope.roomUse.map(function (use) {
                 var cnt = 0;
-                for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
-                    if (auth.authdata.roles[0].roles[i].id !== 4 && use.synt === "Αργ") {
-                        use.useVisibility = true;
-                        cnt++;
+                use.useVisibility = true;
+                for (var i = 0; i < $scope.user.authdata.roles[0].roles.length; i++) {
+                    if ($scope.user.authdata.roles[0].roles[i].id !== 4 && use.synt === "Αργ") {
+                        use.useVisibility = false;
                     }
-                }
-                if (cnt === 1) {
-                    use.useVisibility = false;
+                    if ($scope.user.authdata.roles[0].roles[i].id === 19 && '4912'.indexOf(use.id) >= 0) {
+                        use.useVisibility = false;
+                    }
                 }
             })
         });
 
-        api.apiCall('POST', 'api/public/user/tms/ps', function (result) {
 
+        $scope.$watch('selectedConfig', function (newVal, oldvalue) {
+            if (!newVal) return;
+            $scope.getCourses(newVal);
+        });
+
+        $scope.getCourses = function (selectedConfig) {
+            $scope.courses = [];
+            $scope.tms = [];
+            if (globalVarsSrv.getGlobalVar('menuRole') === 'admin') {
+
+                api.apiCall('GET', 'api/public/ps/conf/' + $scope.selectedConfig, function (result) {
+                    $scope.courses = result.data;
+                });
+                api.apiCall('GET', 'api/public/tms', function (result) {
+                    var tmpTms = [];
+                    result.data.map(function (tm) {
+                        if (tmpTms.indexOf(tm.descr) < 0) {
+                            tmpTms.push(tm.descr)
+                        }
+                    });
+                    $scope.tms = tmpTms;
+                })
+            } else {
+                api.apiCall('POST', 'api/public/user/tms', function (res) {
+                    $scope.tms = res.data;
+                    $scope.tms.map(function (tm) {
+                        api.apiCall('GET', 'api/public/ps/conf/' + $scope.selectedConfig, function (result) {
+                            for (var i = 0; i < result.data.length; i++) {
+                                if (result.data[i].tm_code === tm.id) {
+                                    $scope.courses.push(result.data[i])
+                                }
+                            }
+                        });
+                    })
+                }, undefined, $scope.user.authdata.roles[0].tm);
+            }
+            $scope.finishedLoaders++;
+            checkState();
+        };
+
+        /*function psCallback(result) {
             result.data.map(function (tm) {
                 if (!$scope.tms.includes({
                         id: tm.tm_code,
@@ -301,45 +379,58 @@ angular.module('Requests')
                     if (ps.conf_id === 1) $scope.courses.push(Object.assign(tmpPs))
                 });
             });
-            $scope.finishedLoaders++;
-            checkState();
-        }, undefined, $scope.user.authdata.roles[0].tm);
+        }*/
 
+
+        $scope.teachersPushed = [];
         api.apiCall('GET', 'api/public/users', function (results) {
             for (var i = 0; i < results.data.length; i++) {
-                if (results.data[i].cat_id === 7) $scope.allTeachers.push(results.data[i]);
+                if (results.data[i].cat_id === 7) {
+                    $scope.allTeachers[results.data[i].id] = results.data[i];
+                    $scope.teachersPushed.push(results.data[i]);
+                }
             }
             $scope.finishedLoaders++;
+            $scope.teachers = $scope.teachersPushed;
             checkState();
         });
 
 
         $scope.newUserRequest = function () {
-            globalVarsSrv.setGlobalVar('cur', true);
-            $scope.selectedRooms = [];
-            $scope.selectedCourse.selected = false;
-            $scope.selectedCourse = {};
-            $scope.book = [];
-            for (var i = 0; i < $scope.rooms.length; i++) {
-                $scope.rooms[i].checked = false;
+            if (!$routeParams.id) {
+                globalVarsSrv.setGlobalVar('cur', true);
+                $scope.selectedRooms = [];
+                $scope.selectedCourse.selected = false;
+                $scope.selectedCourse = {};
+                $scope.book = [];
+                for (var i = 0; i < $scope.rooms.length; i++) {
+                    $scope.rooms[i].checked = false;
+                }
+            } else {
+                $location.path('/usercreaterequests');
             }
         };
 
         $scope.postUserRequest = function (item) {
-            item.conf_id = 1;
+            //item.conf_id = 1;
+            item.conf_id = $scope.selectedConfig;
             item.status = !item.status ? 0 : item.status;
             item.user_id = $scope.user.authdata.roles[0].id;
             item.req_dt = new Date();
             item.pivot = [];
-            item.ps_id = $scope.selectedCourse.id ? $scope.selectedCourse.id : null;
+            item.ps_id = $scope.selectedCourse.id && $scope.selectedCourse.selected ? $scope.selectedCourse.id : null;
             item.class_use = $scope.selectedUse.id;
+            item.priority = $scope.selectedUse.priority;
             item.descr = item.descr ? item.descr : '';
             if (item.tm_id === null) {
-                $scope.personalTms.map(function (value) {
-                    if (value.pivot.defaultTm) {
-                        item.tm_id = value.id;
-                    }
-                });
+                if (globalVarsSrv.getGlobalVar('menuRole') === 'admin') {
+                    item.tm_id = $scope.user.authdata.roles[0].tm[0].id;
+                } else
+                    $scope.personalTms.map(function (value) {
+                        if (value.pivot.defaultTm) {
+                            item.tm_id = value.id;
+                        }
+                    });
             }
             item.period = item.period ? item.period : -1;
             item.rooms.map(function (value) {
@@ -355,8 +446,14 @@ angular.module('Requests')
                 item.pivot.push(newPivot);
             });
 
+            var method = $routeParams.id ? 'PUT' : 'POST';
 
-            api.apiCall($routeParams.id ? 'PUT' : 'POST', 'api/public/requests/userrequest', function (result) {
+            if (item.fromd.toLocaleTimeString('en-GB') === '00:00:00') {
+                item.fromd = new Date(item.fromd.getTime() - item.fromd.getTimezoneOffset() * 1000 * 60);
+                item.tod = new Date(item.tod.getTime() - item.tod.getTimezoneOffset() * 1000 * 60);
+            }
+
+            api.apiCall(method, 'api/public/requests/userrequest', function (result) {
                 // alert('Το αίτημά σας καταχωρήθηκε με επιτυχία.');
                 MakeModal.generalInfoModal('sm', 'info', '', 'Το αίτημά σας καταχωρήθηκε με επιτυχία.', 1);
                 //$scope.reload()
@@ -376,26 +473,32 @@ angular.module('Requests')
                 $scope.selectedCourse = course;
                 api.apiCall('GET', 'api/public/ps/' + $scope.selectedCourse.id + '/teacher', function (results) {
                     $scope.teachers = results.data.users;
+                    for (var i = 0; i < $scope.selectedRooms.length; i++) {
+                        $scope.selectedRooms[i].teacher = $scope.teachers[0].id;
+                    }
                 });
-                $scope.item.tm_id = course.tm_code;
 
+                $scope.item.tm_id = course.tm_code;
+                $scope.item.ps_id = course.ps_id;
+                $scope.item.ps = course;
             } else {
                 $scope.item.tm_id = null;
+                $scope.item.ps_id = null;
+                $scope.item.ps = null;
                 $scope.selectedCourse.selected = false;
-                $scope.teachers = $scope.allTeachers;
+                $scope.teachers = $scope.teachersPushed;
             }
 
         };
 
-
         $scope.selectUse = function (use) {
-            use.useVisibility = false;
+            use.useVisibility = true;
             $scope.selectedUse.selected = false;
             use.selected = true;
             $scope.selectedUse = use;
+            $scope.item.class_use = use.id;
             $scope.steps[3].active = false;
             if ($scope.selectedUse.synt === 'ΤΗΛ') $scope.steps[3].active = true;
-
             //TODO : uncomment to filter rooms
             /*$scope.tileRooms = [];
             $scope.rooms.map(function (tile) {
@@ -407,6 +510,7 @@ angular.module('Requests')
 
         $scope.newGuest = function () {
             var newGuest = {
+                req_id: "",
                 name: "",
                 uni: "",
                 email: "",
@@ -417,7 +521,16 @@ angular.module('Requests')
         };
 
         $scope.deleteGuest = function (guest) {
-            $scope.item.guests.splice($scope.item.guests.indexOf(guest), 1);
+            api.apiCall('DELETE', 'api/public/requests/guests/' + guest.id, function (results) {
+                $scope.item.guests.splice($scope.item.guests.indexOf(guest), 1);
+            })
+        };
+
+        $scope.postGuest = function (item) {
+            item.req_id = $scope.item.id;
+            api.apiCall('POST', 'api/public/request/guest', function (result) {
+                $scope.item.guests = result.data;
+            }, undefined, item);
         };
 
         $scope.roomChecked = function (room) {
@@ -437,6 +550,15 @@ angular.module('Requests')
                 //$scope.item.rooms = [];
             }
         };
+
+        $scope.mustRefresh = false;
+
+        $scope.$watch('mustRefresh', function (newVal) {
+            if (newVal) {
+                $scope.mustRefresh = false;
+                $scope.getBook($scope.item);
+            }
+        });
 
         $scope.dayChecked = function (day) {
             day.s = !day.s;
@@ -474,11 +596,11 @@ angular.module('Requests')
             $scope.book = [];
             $scope.getBook($scope.item);
         };
-        var user = globalVarsSrv.getGlobalVar('auth');
+
         var cnt = 0;
         $scope.adminConfiguration = function () {
-            for (var i = 0; i < user.authdata.roles[0].roles.length; i++) {
-                if (user.authdata.roles[0].roles[i].id === 4) {
+            for (var i = 0; i < $scope.user.authdata.roles[0].roles.length; i++) {
+                if ($scope.user.authdata.roles[0].roles[i].id === 4) {
                     cnt++;
                     return false;
                 }
@@ -548,7 +670,6 @@ angular.module('Requests')
             }
         });*/
 
-        $scope.coursesDp = [];
 
         $scope.defaultCourseSelection = null;
         $scope.courseFilterObj = {tm: null, km: null, ex: null, pm: null, gen: null};
@@ -562,19 +683,30 @@ angular.module('Requests')
                 exists = ((!courseFilterObj.pskm || courseFilterObj.pskm.indexOf(course.ps_km) >= 0) && exists) ? true : false;
                 exists = ((!courseFilterObj.pm || courseFilterObj.pm.indexOf(course.pm) >= 0) && exists) ? true : false;
                 exists = ((!courseFilterObj.tma || course.tma_code.indexOf(courseFilterObj.tma) >= 0) && exists) ? true : false;
-
                 if (exists) $scope.coursesDp.push(course);
             });
         };
 //$scope.init();
-    }])
-    .controller('RoomSelectController', ['$scope', function ($scope) {
+    }
+    ])
+    .controller('RoomSelectController', ['$scope', 'api', 'MakeModal', function ($scope, api, MakeModal) {
         $scope.defaultRoomSelection = {fromt: null, tot: null, comment: null, teacher: null};
         $scope.filterObj = {tm: null, km: null, ex: null, pm: null, gen: null};
+        $scope.itemsrooms = [];
+        $scope.roomsFilter = {room: null, item: null, roomcat: null};
+
 
         $scope.removeSelectedRoom = function (room) {
             $scope.item.rooms.splice($scope.item.rooms.indexOf(room), 1);
             $scope.selectedRooms.splice($scope.selectedRooms.indexOf(room), 1);
+        };
+
+        $scope.roomItemsModal = function () {
+            MakeModal.generalModal('modules/mainComponents/views/generalModal.html', 'sm', 'info', 'Επιλογή εξοπλισμού', $scope.itemtype, 2,
+                function (results) {
+                    $scope.itemtype = results;
+                    $scope.filterRooms($scope.roomDP, $scope.rooms, results);
+                });
         };
 
         $scope.copyDefaultRoom = function () {
@@ -595,12 +727,16 @@ angular.module('Requests')
                 $scope.defaultRoomSelection = Object.assign({}, room);
                 $scope.defaultRoomSelection.date_index = day.i;
             }
+
             var roomObj = Object.assign({}, room);
             roomObj.date_index = day.i;
+
+            // if ($scope.teachers.length > 0 && $scope.selectedCourse.selected) {
+            //     roomObj.teacher = $scope.teachers[0].id;
+            // }
             $scope.selectedRooms.push(roomObj);
             $scope.item.rooms.push(roomObj);
         };
-
     }])
     .directive('userRequestHeader', function () {
         return {
@@ -636,14 +772,14 @@ angular.module('Requests')
     .directive('selectedRoomTile', function () {
         return {
             restrict: 'EA',
-            controller: 'RoomSelectController',
+            // controller: 'RoomSelectController',
             templateUrl: 'modules/requests/createUserRequest/selectedRoomTile.html'
         }
     })
     .directive('defaultRoomTile', function () {
         return {
             restrict: 'EA',
-            controller: 'RoomSelectController',
+            // controller: 'RoomSelectController',
             templateUrl: 'modules/requests/createUserRequest/defaultRoomTile.html'
         }
     })

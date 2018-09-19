@@ -88,7 +88,6 @@ $app->delete('/users/{id}', function ($request, $response, $args) {
 $app->put('/users/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-//    print_r($data);
     try {
         $users = \App\Models\Users::find($id);
         $users->fname = $data['fname'] ?: $users->fname;
@@ -100,7 +99,9 @@ $app->put('/users/{id}', function ($request, $response, $args) {
         $users->cat_id = $data['cat_id'] ?: $users->cat_id;
         $users->comments = $data['comments'] ?: $users->comments;
         $users->user = $data['user'] ?: $users->user;
-        $users->hash = password_hash($data['hash'], PASSWORD_DEFAULT) ?: $users->hash;
+        if ($data['hash'] && $data['hash'] != '') {
+            $users->hash = password_hash($data['hash'], PASSWORD_DEFAULT) ?: $users->hash;
+        }
         $users->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -214,6 +215,23 @@ $app->get('/users/{id}/rooms', function ($request, $response, $args) {
     }
     return $response->getBody()->write($user->rooms()->get()->toJson());
 });
+
+$app->get('/personal/{id}/rooms', function ($request, $response, $args) {
+    $id = $args['id'];
+    try {
+        $rooms = \App\Models\Rooms::with('items', 'users')
+            ->whereHas('users', function ($query) use ($id) {
+                $query->where('id', $id);
+            })->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($rooms->toJson());
+});
+
 $app->post('/users/{id}/rooms/{rid}', function ($request, $response, $args) {
     $id = $args['id'];
     $rid = $args['rid'];

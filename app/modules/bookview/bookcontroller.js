@@ -16,6 +16,7 @@ angular.module('RoomBook', [
         $scope.rooms = [];
         $scope.weekOptions = ClrStatusSrv.getStatus('weekdaysTableDateIndex');
         $scope.user = globalVarsSrv.getGlobalVar('auth');
+        $scope.allTeachers = [];
         $scope.courses = [];
         $scope.teachers = [];
         $scope.bookingErrors = [];
@@ -24,10 +25,11 @@ angular.module('RoomBook', [
         $scope.selectedCourse = {};
         $scope.selectedUse = {};
         $scope.calendarSelectedDay = null;
+        $scope.periodActive = false;
         $scope.steps = [
             {text: "Επιλογή Μαθήματος", active: true},
             {text: "Επιλογή Αίθουσας", active: true},
-            {text: "Ελεγχος", active: true}
+            {text: "Έλεγχος", active: true}
         ];
         $scope.selectedDays = [
             {
@@ -68,9 +70,44 @@ angular.module('RoomBook', [
         ];
         $scope.mode = 'reporting';
         $scope.coursesDp = [];
-        $scope.roomsFilter = '';
-        AuthenticationService.CheckCredentials();
+        $scope.roomDP = [];
+        $scope.roomscategory = [];
         $scope.dayState = false;
+        $scope.config = [];
+
+        api.apiCall('GET', 'api/public/config', function (result) {
+            $scope.config = result.data;
+        });
+
+        var cnt = 0;
+        $scope.adminConfiguration = function () {
+            for (var i = 0; i < $scope.user.authdata.roles[0].roles.length; i++) {
+                if ($scope.user.authdata.roles[0].roles[i].id === 4) {
+                    cnt++;
+                    return false;
+                }
+            }
+            if (cnt === 0) {
+                return true;
+            }
+        };
+
+
+        if ($scope.user) {
+            AuthenticationService.CheckCredentials();
+
+            for (var i = 0; i < $scope.user.authdata.roles[0].roles.length; i++) {
+                if ($scope.user.authdata.roles[0].roles[i].id === 4) {
+                    ClrStatusSrv.getStatus('homeButtonAdminTableConf');
+                    break;
+                } else {
+                    ClrStatusSrv.getStatus('homeButtonUserTableConf');
+                }
+            }
+        } else if (!$scope.user) {
+            ClrStatusSrv.getStatus('publicUserTableConf');
+        }
+
 
         $scope.selectAllDays = function () {
             $scope.item.date_index = '';
@@ -92,6 +129,7 @@ angular.module('RoomBook', [
         };
 
         $scope.openRoomCalendar = function () {
+            $scope.toRefresh = $scope.openRoomCalendar;
             $scope.book = [];
             $scope.rooms.map(function (room) {
                 $scope.selectedDays.map(function (day) {
@@ -103,11 +141,13 @@ angular.module('RoomBook', [
                 });
             });
             $scope.selectedRooms.map(function (value) {
-                if (!$scope.item.rooms.includes(value.id)) $scope.item.rooms.push(value.id)
+                if (value.checked) {
+                    if (!$scope.item.rooms.includes(value.id)) $scope.item.rooms.push(value.id)
+                }
             });
 
             if (!checkInput('r')) return;
-
+            $scope.deselectAllCourse();
             api.apiCall('POST', 'api/public/roombook/view/by/room', function (result) {
                 $scope.book = result.data;
                 $scope.item.active = true;
@@ -140,8 +180,17 @@ angular.module('RoomBook', [
             return true
         }
 
-        $scope.openCourseCalendar = function () {
+        $scope.mustRefresh = false;
+        $scope.toRefresh = {};
+        $scope.$watch('mustRefresh', function (newVal) {
+            if (newVal) {
+                $scope.mustRefresh = false;
+                $scope.toRefresh();
+            }
+        });
 
+        $scope.openCourseCalendar = function () {
+            $scope.toRefresh = $scope.openCourseCalendar;
             $scope.courses.map(function (course) {
                 if (course.selected) {
                     if (!$scope.item.ps.includes(course.id)) $scope.item.ps.push(course.id)
@@ -149,7 +198,6 @@ angular.module('RoomBook', [
             });
 
             $scope.item.date_index = '';
-
             var daySelected = false;
             $scope.selectedDays.map(function (day) {
                 if (day.s) {
@@ -165,7 +213,7 @@ angular.module('RoomBook', [
                 });
 
             if (!checkInput('c')) return;
-
+            $scope.deselectAllRoom();
             api.apiCall('POST', 'api/public/roombook/view/by/course', function (result) {
                 $scope.book = result.data;
                 $scope.item.active = true;
@@ -178,6 +226,7 @@ angular.module('RoomBook', [
             location.reload();
             //$location.path('/roombook');
         };
+
         $scope.init = function () {
             $scope.book = [];
             if (!$routeParams.id) {
@@ -189,15 +238,12 @@ angular.module('RoomBook', [
                 $scope.item = {rooms: [], date_index: "", guests: [], ps: []};
             } else {
                 api.apiCall('GET', 'api/public/requests/' + $routeParams.id, function (result) {
-
                     $scope.item = result.data;
                     $scope.selectedPeriod = $scope.item.periods;
 
                     for (var sr = 0; sr < $scope.item.rooms.length; sr++) {
                         //$scope.roomChecked($scope.item.rooms[sr].pivot);
-
                         var roomObj = Object.assign({}, $scope.item.rooms[sr]);
-
                         $scope.item.rooms[sr].pivot.fromt = new Date('1970-01-01T' + $scope.item.rooms[sr].pivot.fromt);
                         $scope.item.rooms[sr].pivot.tot = new Date('1970-01-01T' + $scope.item.rooms[sr].pivot.tot);
                         roomObj = Object.assign(roomObj, $scope.item.rooms[sr].pivot);
@@ -209,7 +255,6 @@ angular.module('RoomBook', [
                         }
                         $scope.item.rooms[sr] = Object.assign($scope.item.rooms[sr], $scope.item.rooms[sr].pivot);
                     }
-
                     for (var c = 0; c < $scope.courses.ps.length; c++) {
                         if ($scope.courses.ps[c].id === $scope.item.ps.id) {
                             $scope.selectCourse($scope.courses.ps[c]);
@@ -219,10 +264,11 @@ angular.module('RoomBook', [
             }
         };
 
+
         $scope.roomChecked = function (room) {
             room.checked = !room.checked;
             if (room.checked) {
-                //$scope.selectedRooms.push(room);
+                $scope.selectedRooms.push(room);
                 if (!room.fromt) {
                     room.fromt = new Date('1970-01-01T07:58:00');
                     room.tot = new Date('1970-01-01T07:59:00');
@@ -236,11 +282,13 @@ angular.module('RoomBook', [
                 $scope.item.rooms = [];
             }
         };
+
         $scope.selectCourse = function (course) {
             //$scope.selectedCourse.selected = false;
             course.selected = !course.selected;
             //$scope.selectedCourse = course;
         };
+
         $scope.fromAnotherPage = true;
         $scope.createFormControllerNotV = false;
 
@@ -259,13 +307,12 @@ angular.module('RoomBook', [
         };
 
         $scope.selectAllRoom = function () {
-
-            $scope.rooms.map(function (room) {
-                if (!$scope.courseFilterObj.room || $scope.courseFilterObj.room == '') {
+            $scope.roomDP.map(function (room) {
+                if (!$scope.room || $scope.room === '') {
                     room.checked = true;
-                    return
+                    return;
                 }
-                if (JSON.stringify(room).toLowerCase().indexOf($scope.courseFilterObj.room.toLowerCase()) >= 0)
+                if (JSON.stringify(room).toLowerCase().indexOf($scope.room.toLowerCase()) >= 0)
                     room.checked = true;
             });
         };
@@ -274,6 +321,8 @@ angular.module('RoomBook', [
             $scope.rooms.map(function (room) {
                 room.checked = false;
             });
+            $scope.selectedRooms = [];
+            $scope.item.rooms = [];
         };
 
         $scope.nextPage = function () {
@@ -307,18 +356,6 @@ angular.module('RoomBook', [
             }, undefined, item);
         };
 
-        $scope.copyDefaultRoom = function () {
-            if (!$scope.defaultRoomSelection) return;
-            $scope.defaultRoomSelection.fromt = $scope.defaultRoomSelection.fromt !== 0 ? $scope.defaultRoomSelection.fromt : new Date('1970-01-01T07:58:00');
-            $scope.defaultRoomSelection.tot = $scope.defaultRoomSelection.tot !== 0 ? $scope.defaultRoomSelection.tot : new Date('1970-01-01T07:59:00');
-
-            $scope.selectedRooms.map(function (selectedRoom) {
-                selectedRoom.fromt = selectedRoom.fromt === 0 ? $scope.defaultRoomSelection.fromt : selectedRoom.fromt;
-                selectedRoom.tot = selectedRoom.tot === 0 ? $scope.defaultRoomSelection.tot : selectedRoom.tot;
-                selectedRoom.comment = !selectedRoom.comment ? $scope.defaultRoomSelection.comment : selectedRoom.comment;
-                selectedRoom.teacher = !selectedRoom.teacher ? $scope.defaultRoomSelection.teacher : selectedRoom.teacher;
-            })
-        };
 
         $scope.$watch('item.fromd', function (newVal, oldvalue, scope) {
             if (!scope.item) return;
@@ -330,7 +367,6 @@ angular.module('RoomBook', [
 
         $scope.$watch('selectedPeriod', function (newVal, oldVal, scope) {
             if (!newVal || !newVal.fromd) return;
-
             scope.item.fromd = new Date(newVal.fromd);
             scope.item.tod = new Date(newVal.tod);
             scope.item.tod = new Date(scope.item.tod.getTime() + 86400000);
@@ -346,8 +382,6 @@ angular.module('RoomBook', [
             if (scope.item.tod && scope.item.fromd >= scope.item.tod) {
                 scope.item.tod = new Date(scope.item.fromd.getTime() + 86400000);
             }
-
-
         });
 
         $scope.$watch('item.tod', function (newVal, oldvalue, scope) {
@@ -357,50 +391,63 @@ angular.module('RoomBook', [
             if (scope.item.fromd && scope.item.fromd >= scope.item.tod) {
                 scope.item.tod = new Date(scope.item.fromd.getTime() + 86400000);
             }
-
         });
 
-        api.apiCall('GET', 'api/public/rooms', function (result) {
+        api.apiCall('GET', 'api/public/active/rooms', function (result) {
             $scope.rooms = result.data;
             $scope.tileRooms = $scope.rooms;
+            $scope.filterRooms($scope.roomDP, $scope.tileRooms, $scope.roomsFilter);
         });
+
         api.apiCall('GET', 'api/public/periods', function (result) {
             $scope.periods = result.data;
         });
+
         api.apiCall('GET', 'api/public/users', function (result) {
-            $scope.users = result.data;
-        });
-        $scope.tms = [];
-        api.apiCall('POST', 'api/public/tms/ps', function (result) {
-            result.data.map(function (tm) {
-                var ifExists = false;
-                for (var i = 0; i < $scope.tms.length; i++) {
-                    if ($scope.tms[i].id === tm.tm_code) {
-                        ifExists = true;
-                        break
-                    }
-                }
-
-                if (!ifExists)
-                    $scope.tms.push({
-                        id: tm.tm_code,
-                        per: tm.descr
-                    });
-                tm.ps.map(function (ps) {
-                    var tmpPs = Object.assign({}, tm);
-                    tmpPs.tmID = tmpPs.id;
-                    tmpPs = Object.assign(tmpPs, ps);
-                    delete tmpPs.ps;
-                    if (ps.conf_id === 1) $scope.courses.push(tmpPs);
-
-                });
+            result.data.map(function (value) {
+                $scope.allTeachers[value.id] = value;
             });
+        });
+
+        $scope.$watch('selectedConfig', function (newVal, oldvalue) {
+            if (!newVal) return;
+            $scope.getCourses(newVal);
+        });
+
+
+        $scope.getCourses = function (selectedConfig) {
+            $scope.courses = [];
+            $scope.tms = [];
+
+            api.apiCall('GET', 'api/public/ps/conf/' + $scope.selectedConfig, function (result) {
+                $scope.courses = result.data;
+            });
+            api.apiCall('GET', 'api/public/tms', function (result) {
+                var tmpTms = [];
+                result.data.map(function (tm) {
+                    if (tmpTms.indexOf(tm.descr) < 0) {
+                        tmpTms.push(tm.descr)
+                    }
+                });
+                $scope.tms = tmpTms;
+            })
+        };
+
+
+        $scope.itemsrooms = [];
+        $scope.itemtype = [];
+        api.apiCall('GET', 'api/public/itemtype', function (result) {
+            $scope.itemsrooms = result.data;
+            $scope.itemtype = result.data;
+            $scope.itemtype.map(function (value) {
+                value.title = value.descr;
+            })
         });
 
         $scope.init();
 
         $scope.defaultCourseSelection = null;
-        $scope.courseFilterObj = {tm: null, km: null, ex: null, pm: null, gen: null, tma: null, room: null};
+        $scope.courseFilterObj = {tm: null, km: null, ex: null, pm: null, gen: null, tma: null};
 
         $scope.filterCourses = function (filteredArray, inputArray, courseFilterObj) {
             $scope.coursesDp = [];
@@ -415,9 +462,113 @@ angular.module('RoomBook', [
                 if (exists) $scope.coursesDp.push(course);
             });
         };
-        //$scope.rootFilter ='';
+
+        $scope.roomsFilter = {room: null, item: null, roomcat: null};
+        $scope.filterRooms = function (filteredArray, inputArray, roomsFilter) {
+            while ($scope.roomDP.length > 0) $scope.roomDP.pop();
+            var typeChecked = 0;
+            for (var j = 0; j < $scope.itemtype.length; j++) {
+                if ($scope.itemtype[j].visible) typeChecked++
+            }
+            inputArray.map(function (room) {
+                var exists = false;
+                var typeCheckedCnt = 0;
+                for (var i = 0; i < room.items.length; i++) {
+                    for (var j = 0; j < $scope.itemtype.length; j++) {
+                        if (room.items[i].id === $scope.itemtype[j].id && $scope.itemtype[j].visible) typeCheckedCnt++
+                    }
+                    if (typeCheckedCnt === typeChecked) exists = true;
+                }
+                if (exists || !typeChecked) $scope.roomDP.push(room);
+                // $scope.roomTile=$scope.roomDP
+            });
+        };
+
+        api.apiCall('GET', 'api/public/roomcategory', function (result) {
+            $scope.roomscategory = result.data;
+            //$scope.filteringRooms($scope.roomDP, $scope.tileRooms, $scope.roomsFilter);
+        });
+
+        $scope.filteringRooms = function (filteredArray, inputArray, roomsFilter) {
+            $scope.roomDP = [];
+            while ($scope.roomDP.length > 0) $scope.roomDP.pop();
+            inputArray.map(function (room) {
+                var exists = true;
+                exists = ((!roomsFilter.room || room.name.indexOf((roomsFilter.room).toUpperCase()) >= 0 || room.address.indexOf((roomsFilter.room).toUpperCase()) >= 0) && exists) ? true : false; //input
+                exists = ((!roomsFilter.roomcat || room.capasity_categ === roomsFilter.roomcat) && exists) ? true : false; //select
+                if (exists) $scope.roomDP.push(room);
+            });
+        };
+
+        $scope.$watch('calendarSelectedDay', function (newVal) {
+            if (newVal)
+                $scope.copyDayRequest(newVal)
+        });
+
+
+        // $scope.postCopyDay=function () {
+        //     api.apiCall('POST', 'api/public/requests/copyday', function (results) {
+        //     }, undefined, $scope.reqToPush);
+        // };
+
+        //
+        // $scope.reqToPush = [];
+        // $scope.copyDayRequest = function (day) {
+        //     var fd = day;
+        //     var td = new Date(day);
+        //     td = new Date(td.setDate(td.getDate() + 1));
+        //     td = new Date(td.setDate(td.getDate() + 1));
+        //
+        //
+        //     api.apiCall('POST', 'api/public/roombook/copyday', function (result) {
+        //         $scope.reqToPush = [];
+        //         var book = result.data;
+        //         var toCopyRequests = [];
+        //         book.map(function (request) {
+        //             $scope.selectedRooms = [];
+        //             request.rooms.map(function (room) {
+        //                 if (room.pivot.date_index !== fd.getDay()) return;
+        //
+        //                 var roomObj = Object.assign({}, room);
+        //
+        //                 room.pivot.fromt = new Date('1970-01-01 ' + room.pivot.fromt + ' ');
+        //                 room.pivot.tot = new Date('1970-01-01 ' + room.pivot.tot);
+        //                 delete room.pivot.id;
+        //                 delete room.pivot.req_id;
+        //
+        //                 room.pivot.date_index = $scope.item.date_index * 1;
+        //                 roomObj = Object.assign(roomObj, room.pivot);
+        //                 // roomObj.ps = request.ps;
+        //                 $scope.selectedRooms.push(roomObj);
+        //                 for (var r = 0; r < $scope.rooms.length; r++) {
+        //                     if (room.id === $scope.rooms[r].id) {
+        //                         $scope.rooms[r].checked = true;
+        //                         //$scope.roomChecked($scope.rooms[r])
+        //                     }
+        //                 }
+        //                 room = Object.assign(room, room.pivot);
+        //             });
+        //
+        //             var tmpRequest = Object.assign({}, request);
+        //             delete tmpRequest.id;
+        //             delete tmpRequest.req_dt;
+        //             delete tmpRequest.created_at;
+        //             delete tmpRequest.updated_at;
+        //             tmpRequest.status = 3;
+        //             tmpRequest.conf_id = $scope.item.conf_id;
+        //             tmpRequest.period = $scope.item.period;
+        //             tmpRequest.rooms = $scope.selectedRooms;
+        //
+        //             $scope.reqToPush.push(tmpRequest);
+        //         });
+        //
+        //         $scope.item.rooms = $scope.selectedRooms;
+        //     }, undefined, {fromd: fd, tod: $scope.item.fromd});
+        // };
+
 
     }])
+
     .directive('bookView', function () {
         return {
             restrict: 'EA',

@@ -6,17 +6,19 @@ angular.module('Config', [
     'ApiModules',
     'Authentication',
     'GlobalVarsSrvs'
-]).controller('ConfigController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv) {
+])
+    .controller('ConfigController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv) {
 
-    $scope.ctrl = makeController.mainController('/config', 'configTableConf', 'Configuration');
-    $scope.ctrl.init();
-
-    $scope.statusOptions = ClrStatusSrv.getStatus('configStatus');
-
-}])
-    .controller('ConfigProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
-        $scope.ctrl = makeController.profileController('/config', 'configTableConf');
+        $scope.ctrl = makeController.mainController('/config', 'configTableConf', 'Configuration');
+        $scope.statusOptions = globalVarsSrv.getGlobalVar('configStatus');
         $scope.ctrl.init();
+
+    }])
+    .controller('ConfigProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api, ClrStatusSrv) {
+        $scope.ctrl = makeController.profileController('/config', 'configTableConf');
+        $scope.statusOptions = globalVarsSrv.getGlobalVar('configStatus');
+        $scope.ctrl.init();
+
 
         $scope.open1 = function () {
             $scope.popup1.opened = true;

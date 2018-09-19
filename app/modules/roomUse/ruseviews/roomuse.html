@@ -4,7 +4,8 @@
             <div class="operations">
                 <operations ng-repeat="op in ctrl.operations"
                             hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
-                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
+                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"
+                            ng-hide="userview"></operations>
                 <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
             </div>
             <table-tools class="pageTools"></table-tools>
@@ -31,10 +32,10 @@
             <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
                 style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
                 ng-click="ctrl.selectRow(item)">
-                    <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.synt }}</td>
+                <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
+                <td ng-if="ctrl.tableColumns[1].visible">{{ item.synt }}</td>
                 <td ng-if="ctrl.tableColumns[2].visible">{{ item.descr }}</td>
-                    <td ng-if="ctrl.tableColumns[3].visible">{{ item.priority }}</td>
+                <td ng-if="ctrl.tableColumns[3].visible">{{ item.priority }}</td>
                 <td style="width:30px;"></td>
             </tr>
             </tbody>

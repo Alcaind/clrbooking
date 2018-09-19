@@ -3,12 +3,12 @@
         <thead class="header-fixed" style="background-color: #cecece;">
         <tr>
             <th>ID</th>
-            <th>Αίθουσα</th>
-            <th>Από ώρα</th>
-            <th>Μέχρι ώρα</th>
-            <th>Ημέρα</th>
-            <th>Καθηγητής</th>
-            <th>Σχόλια</th>
+            <th>{{"Αίθουσα"| translate}}</th>
+            <th>{{"Από Ώρα"| translate}}</th>
+            <th>{{"Μέχρι Ώρα"| translate}}</th>
+            <th>{{"Ημέρα"| translate}}</th>
+            <th>{{"Καθηγητής"| translate}}</th>
+            <th>{{"Σχόλια"| translate}}</th>
             <th>...</th>
         </tr>
         </thead>
@@ -19,7 +19,7 @@
             <td>{{ item.name }}</td>
             <th>{{ item.pivot.fromt}}</th>
             <th>{{ item.pivot.tot}}</th>
-            <th>{{ statusOptions[item.pivot.date_index].text}}</th>
+            <th>{{ weekOptions[item.pivot.date_index].text}}</th>
             <th>{{ getTeacher(item.pivot.teacher) }}</th>
             <th>{{ item.pivot.comment }}</th>
             <td>

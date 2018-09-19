@@ -3,11 +3,11 @@
         <div class="pageButtons">
             <a href back-button type="button" class="btn btn-warning">
 				<span class="glyphicon glyphicon-chevron-left">
-					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
 				</span>
             </a>
         </div>
-        <div class="pageTitle">Διαχείριση Ακαδημαϊκών Ετών</div>
+        <div class="pageTitle">{{"Διαχείριση Ακαδημαϊκών Ετών"| translate}}</div>
     </div>
     <div class="contentHolder">
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
@@ -15,16 +15,16 @@
                 <div class="inlineItems">
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.year.$invalid && !itemForm.year.$pristine }">
-                        <label class=" formItemLabel" for="year">Έτος<span
+                        <label class=" formItemLabel" for="year">{{"Έτος"| translate}}<span
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="year" name="year" class="form-control" type="number" ng-model="ctrl.item.year">
                         </div>
-                        <p ng-show="itemForm.year.$invalid && !itemForm.year.$pristine" class="help-block">Εισάγετε
-                            έτος.</p>
+                        <p ng-show="itemForm.year.$invalid && !itemForm.year.$pristine" class="help-block">{{"Εισάγετε
+                            έτος."| translate}}</p>
                     </div>
                     <div class="form-group">
-                        <label class="formItemLabel" for="synt">Συντομογραφία:</label>
+                        <label class="formItemLabel" for="synt">{{"Συντομογραφία"| translate}}:</label>
                         <div class="midInput">
                             <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt">
                         </div>
@@ -33,7 +33,7 @@
                 <div class="inlineItems">
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.fromd.$invalid && !itemForm.fromd.$pristine }">
-                        <label class=" formItemLabel" for="fromd">Από ημέρα<span
+                        <label class=" formItemLabel" for="fromd">{{"Από ημέρα"| translate}}<span
                                 class="form-required">*</span>:</label>
                         <div class="input-group">
                             <input id="fromd" name="fromd" type="text" class="form-control"
@@ -44,12 +44,12 @@
                                 <button type="button" class="btn btn-default" ng-click="open1()">
                                     <i class="glyphicon glyphicon-calendar"></i></button></span>
                         </div>
-                        <p ng-show="itemForm.fromd.$invalid && !itemForm.fromd.$pristine" class="help-block">Εισάγετε
-                            ημερομηνιά έναρξης.</p>
+                        <p ng-show="itemForm.fromd.$invalid && !itemForm.fromd.$pristine" class="help-block">{{"Εισάγετε
+                            ημερομηνιά έναρξης."| translate}}</p>
                     </div>
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.tod.$invalid && !itemForm.tod.$pristine }">
-                        <label class=" formItemLabel" for="tod">Μέχρι ημέρα<span
+                        <label class=" formItemLabel" for="tod">{{"Μέχρι ημέρα"| translate}}<span
                                 class="form-required">*</span>:</label>
                         <div class="input-group">
                             <input id="tod" name="tod" type="text" class="form-control"
@@ -60,14 +60,13 @@
                                 <button type="button" class="btn btn-default" ng-click="open2()">
                                     <i class="glyphicon glyphicon-calendar"></i></button></span>
                         </div>
-                        <p ng-show="itemForm.tod.$invalid && !itemForm.tod.$pristine" class="help-block">Εισάγετε
-                            ημερομηνιά
-                            λήξης.</p>
+                        <p ng-show="itemForm.tod.$invalid && !itemForm.tod.$pristine" class="help-block">{{"Εισάγετε
+                            ημερομηνιά λήξης."| translate}}</p>
                     </div>
                 </div>
                 <div class="inlineItems">
                     <div class="form-group">
-                        <label class=" formItemLabel" for="req_exp_dates">Ημερες προθεσμίας:</label>
+                        <label class=" formItemLabel" for="req_exp_dates">{{"Ημερες προθεσμίας"| translate}}:</label>
                         <div class="midInput">
                             <input id="req_exp_dates" name="req_exp_dates" class="form-control" type="text"
                                    ng-model="ctrl.item.req_exp_dates">
@@ -75,16 +74,16 @@
 
                     </div>
                     <div class="directiveFormItemA">
-                        <status-selector status-title="Status" options="configStatus"
+                        <status-selector status-title='{{"Κατάσταση"| translate}}' options="configStatus"
                                          output-value="ctrl.item.status"></status-selector>
                     </div>
                 </div>
             </div>
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.id>0">Ανανέωση
+                    ng-if="ctrl.item.id>0">{{"Ανανέωση"| translate}}
             </button>
             <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.year && !ctrl.item.id">Αποθήκευση
+                    ng-if="ctrl.item.year && !ctrl.item.id">{{"Αποθήκευση"| translate}}
             </button>
         </form>
     </div>

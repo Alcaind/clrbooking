@@ -26,6 +26,7 @@ angular.module('Roles', [
             method: '='
         },
         controller: 'RoleProfileController'
+
     })
     .component('rolesUsers', {
         restrict: 'EA',
@@ -34,22 +35,22 @@ angular.module('Roles', [
             method: '='
         },
         controller: 'RolesUserController'
+
     })
     .controller('RolesUserController', ['$scope', 'AuthenticationService', 'makeController', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, ClrStatusSrv) {
 
         $scope.ctrl = makeController.n2nController('/roles', 'users', {comment: '', exp_dt: '', status: '0'});
         $scope.ctrl.init();
-
         $scope.statusOptions = ClrStatusSrv.getStatus('userRoleStatus');
-
-
     }])
+
     .directive('urUserTable', function () {
         return {
             restrict: 'EA',
             templateUrl: 'modules/roles/views/urTable.html'
         }
     })
+
     .directive('evrUserTable', function () {
         return {
             restrict: 'EA',

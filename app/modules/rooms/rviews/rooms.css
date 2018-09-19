@@ -187,3 +187,7 @@
 .directiveFormItemA status-selector div {
     display: flex;
 }
+
+.checkbutton {
+    padding: 10px;
+}

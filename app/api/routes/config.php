@@ -68,9 +68,10 @@ $app->delete('/config/{id}', function ($request, $response, $args) {
 $app->put('/config/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    //print_r($data);
     try {
         $config = \App\Models\Config::find($id);
+        //print_r($data);
         $config->year = $data['year'] ?: $config->year;
         $config->status = $data['status'] ?: $config->status;
         $config->fromd = $data['fromd'] ?: $config->fromd;

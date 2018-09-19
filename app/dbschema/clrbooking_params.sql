@@ -183,7 +183,7 @@
     },
     {
       "column": "address",
-      "title": "Διευθυνση",
+      "title": "Διεύθυνση",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -344,14 +344,14 @@
     },
     {
       "column": "fromd",
-      "title": "Από ημ/νια",
+      "title": "Από ημ/νία",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "tod",
-      "title": "Έως ημ/νια",
+      "title": "Έως ημ/νία",
       "visible": true,
       "sorted": false,
       "filter": ""

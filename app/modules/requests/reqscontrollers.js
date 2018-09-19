@@ -6,12 +6,10 @@ angular.module('Requests', [
     'ApiModules',
     'Authentication',
     'GlobalVarsSrvs'
-]).controller('RequestsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv, api) {
+]).controller('RequestsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', 'api', 'MakeModal', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv, api, MakeModal) {
     $scope.configs = {};
-
     //$scope.url = null;
-
-    $scope.config_id = 1;
+    $scope.config_id = 8;
     //$scope.url = 'api/public/requests/config/1';
 
     $scope.$watch('config_id', function (newVal) {
@@ -36,9 +34,13 @@ angular.module('Requests', [
                 $scope.ctrl.operations[2].ifVisible = false;
             }
         };
+        $scope.deleteRequest = function (request) {
+            api.apiCall('DELETE', "api/public/requests/" + request.id, function (results) {
+                $scope.ctrl.dp.splice($scope.ctrl.dp.indexOf(request), 1);
+                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Eπιτυχής διαγραφή', 1)
+            });
+        };
     });
-
-
     $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
     $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
 
@@ -46,11 +48,23 @@ angular.module('Requests', [
 }])
     .controller('RequestProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', '$filter', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api, $filter) {
         $scope.ctrl = makeController.profileController('/requests', 'requestsTableConf');
-        $scope.ctrl.init();
-
-
+        $scope.users = [];
+        $scope.currentLodersCnt = 0;
+        $scope.maxLoders = 4;
+        $scope.room_use = [];
+        $scope.tms = [];
+        $scope.ps = [];
+        $scope.configs = null;
+        $scope.periods = [];
+        $scope.selectedPeriod = {};
+        // $scope.ctrl.init();
         $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
         $scope.weekOptions = globalVarsSrv.getGlobalVar('weekdaysTableDateIndex');
+        $scope.$watch('selectedPeriod', periodWatch);
+        var auth = globalVarsSrv.getGlobalVar('auth');
+        $scope.ctrl.item.admin = auth.authdata.roles[0].id;
+        $scope.personalTms = auth.authdata.roles[0].tm;
+
 
         // function afterInit(res) {
         //     res.fromd = new Date($filter('date')(res.fromd, "yyyy-MM-dd")); // $filter('date')(res.fromd, "yyyy-MM-dd");
@@ -73,31 +87,32 @@ angular.module('Requests', [
             opened: false
         };
 
-        var auth = globalVarsSrv.getGlobalVar('auth');
-        $scope.ctrl.item.admin = auth.authdata.roles[0].id;
-        $scope.personalTms = auth.authdata.roles[0].tm;
-
-        $scope.users = {};
+        function checkForInit() {
+            $scope.currentLodersCnt++;
+            if ($scope.maxLoders === $scope.currentLodersCnt) $scope.ctrl.init();
+        }
 
         api.apiCall('GET', 'api/public/users', function (results) {
             $scope.users = results.data;
+            checkForInit();
         });
-
-        $scope.room_use = {};
 
         api.apiCall('GET', 'api/public/roomuse', function (results) {
             $scope.room_use = results.data;
+            checkForInit();
         });
 
-        $scope.tms = {};
+        $scope.$watch('ctrl.item.class_use', function (newVal) {
+            $scope.room_use.map(function (value) {
+                if (value.id === newVal)
+                    $scope.ctrl.item.priority = value.priority;
+            });
+        });
 
         api.apiCall('GET', 'api/public/tms', function (results) {
             $scope.personalTms = results.data;
+            checkForInit();
         });
-
-        $scope.ps = {};
-        $scope.configs = null;
-        $scope.periods = [];
 
         $scope.$watch('ctrl.item.conf_id', function (newVal) {
             if (newVal && $scope.configs) {
@@ -107,7 +122,6 @@ angular.module('Requests', [
                     }
                 });
                 api.apiCall('GET', 'api/public/ps/config/' + newVal, function (results) {
-
                     var tmp = [{
                         "id": null,
                         "tm_code": null,
@@ -120,12 +134,16 @@ angular.module('Requests', [
                     results.data.map(function (value) {
                         tmp.push(value);
                     });
-
                     $scope.ps = tmp;
-
                 });
             }
         });
+
+        function periodWatch(nv, ov) {
+            $scope.ctrl.item.fromd = nv.fromd;
+            $scope.ctrl.item.tod = nv.tod;
+            $scope.ctrl.item.period = nv.id;
+        }
 
         api.apiCall('GET', 'api/public/config', function (results) {
             $scope.configs = results.data;
@@ -136,24 +154,9 @@ angular.module('Requests', [
                     $scope.periods = value.periods;
                 }
             });
+            checkForInit();
         });
-
-        $scope.admin = [];
-
-        api.apiCall('GET', 'api/public/users', function (results) {
-            for (var i = 0; i < results.data.length; i++) {
-                if (results.data[i].cat_id === 9) $scope.admin.push(results.data[i]);
-            }
-        });
-
-        $scope.getAdmin = function (adminId) {
-            for (var i = 0; i < $scope.admin.length; i++) {
-                if ($scope.admin[i].id === adminId) return $scope.admin[i].user;
-            }
-        };
-
-    }
-    ])
+    }])
 
     .component('requestsProfile', {
         restrict: 'EA',

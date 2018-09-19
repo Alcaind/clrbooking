@@ -21,8 +21,11 @@ $app->get('/roomuse/{id}', function (Request $request, Response $response, $args
     $id = $args['id'];
     try {
         $roomuse = \App\Models\RoomUse::find($id);
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($roomuse->toJson());
 });
@@ -34,6 +37,7 @@ $app->post('/roomuse', function (Request $request, Response $response) {
         $roomuse = new \App\Models\RoomUse();
         $roomuse->synt = $data['synt'];
         $roomuse->descr = $data['descr'];
+        $roomuse->priority = $data['priority'];
         $roomuse->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -49,8 +53,11 @@ $app->delete('/roomuse/{id}', function ($request, $response, $args) {
     try {
         $roomuse = \App\Models\RoomUse::find($id);
         $roomuse->delete();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($roomuse->toJson());
 });
@@ -58,14 +65,18 @@ $app->delete('/roomuse/{id}', function ($request, $response, $args) {
 $app->put('/roomuse/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    // print_r($data);
     try {
         $roomuse = \App\Models\RoomUse::find($id);
         $roomuse->synt = $data['synt'] ?: $roomuse->synt;
         $roomuse->descr = $data['descr'] ?: $roomuse->descr;
+        $roomuse->priority = $data['priority'] ?: $roomuse->priority;
         $roomuse->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($roomuse->toJson());
 });

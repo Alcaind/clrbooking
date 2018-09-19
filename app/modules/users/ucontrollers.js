@@ -9,16 +9,17 @@ angular.module('Users', [
 ])
     .controller('UsersController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
 
-        $scope.ctrl = makeController.mainController('/users', 'usersTableConf', 'Καταλογος Χρηστών');
+        $scope.ctrl = makeController.mainController('/users', 'usersTableConf', 'Κατάλογος Χρηστών');
         $scope.ctrl.init();
 
     }])
 
     .controller('ProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, $routeParams, api, MakeModal, AuthenticationService, makeController, globalVarsSrv) {
-
+        var user = globalVarsSrv.getGlobalVar('auth');
+        $scope.curUser = user.authdata.roles[0].id;
+        if ($scope.curUser != $routeParams.id && globalVarsSrv.getGlobalVar('menuRole') !== 'admin') return;
         $scope.ctrl = makeController.profileController('/users', 'usersTableConf');
         $scope.ctrl.init();
-
         $scope.tms = {};
         $scope.ucategories = {};
 
@@ -29,7 +30,6 @@ angular.module('Users', [
         api.apiCall('GET', 'api/public/userscategories', function (results) {
             $scope.ucategories = results.data;
         });
-
     }])
 
     .component('usersProfile', {

@@ -21,9 +21,24 @@ $app->get('/usersrequests', function (Request $request, Response $response) {
 $app->get('/usersrequests/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
+
+    $tms = array();
+    $usr = \App\Models\Users::with(['tm'])->find($id);
+
+    foreach ($usr->tm as $tm) {
+        //if ($tm['config_id'] == $data['config_id'])
+        array_push($tms, $tm['id']);
+    }
+
+    $users = \App\Models\TmUsers::whereIn('tm_id', $tms)->get()->toArray();
+    $ju = array();
+    foreach ($users as $u) {
+        //if ($tm['config_id'] == $data['config_id'])
+        array_push($ju, $u['user_id']);
+    }
     try {
         $usreq = \App\Models\usersRequests::with(['roombook', 'fromuser', 'tousers'])
-            ->where('to_users', '=', $id)
+            ->whereIn('to_users', $ju)
             ->where('status', '=', 0)
             ->get();
     } catch (PDOException $e) {
@@ -74,7 +89,18 @@ $app->delete('/usersrequests/{id}', function ($request, $response, $args) {
 $app->put('/usersrequests/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    //print_r($data);
+    $req = \App\Models\Requests::find($data['rr_id']);
+
+    $roombook = \App\Models\Requests::with('rooms')
+        ->WhereBetween('fromd', [$req['fromd'], $req['tod']])
+        ->orWhereBetween('tod', [$req['fromd'], $req['tod']])
+        ->where('conf_id', '=', 1)
+        ->where('status', '=', 1)
+        //->max('priority as maxpriority')
+        ->get();
+    //print_r($roombook);
+
+
     try {
         $usreq = \App\Models\usersRequests::find($id);
         $usreq->from_user = $data['from_user'] ?: $usreq->from_user;
@@ -83,7 +109,7 @@ $app->put('/usersrequests/{id}', function ($request, $response, $args) {
         $usreq->rr_id = $data['rr_id'] ?: $usreq->rr_id;
         $usreq->to_comment = $data['to_comment'] ?: $usreq->to_comment;
         $usreq->confirm = $data['confirm'] ?: $usreq->confirm;
-        $usreq->status = $data['status'] ?: $usreq->status;
+        $usreq->status = $data['status'];
         $usreq->rb_id = $data['rb_id'] ?: '';
         $usreq->save();
 
@@ -95,23 +121,37 @@ $app->put('/usersrequests/{id}', function ($request, $response, $args) {
             if ($totalPending[$i]->status == -1) $canceled++;
         }
         if ($totalPending->count() == $confirmed) {
-            $req = \App\Models\Requests::find($data['rr_id']);
             $req->status = 1;
+            //$req->priority = $roombook->maxpriority+1;
             $req->save();
+
+            $reqIds = [];
             foreach ($totalPending as $ur) {
-                print_r($ur->rb_id);
-                $tmp = \App\Models\usersRequests::find($ur->rb_id);
-                print_r($tmp);
+                $tmp = \App\Models\usersRequests::find($ur->id);
                 $tmp->delete();
+                $rb = \App\Models\RoomBook::find($ur->rb_id);
+                $rb->status = -1;
+                $rb->save();
+                /*if ($req[0]['rooms_count'] == 0) {
+                    $tt = \App\Models\Requests::with('rooms')->find($rb->req_id);
+                    $tt->priority= -1;
+                    $tt->save();
+                }*/
+                array_push($reqIds, $rb->req_id);
             }
-        }
-        if ($totalPending->count() == ($confirmed + $canceled)) {
+            $mp = \App\Models\Requests::whereIn('id', $reqIds)->max('priority');
+            echo "\n " . $req->priority . " <= " . $mp . "\n";
+
+            if ($req->priority <= $mp) {
+                echo "\n in if \n";
+                $req->priority = $mp + 1;
+                $req->save();
+            }
+        } elseif ($totalPending->count() == ($confirmed + $canceled)) {
             $req = \App\Models\Requests::find($data['rr_id']);
             $req->status = 4;
             $req->save();
         }
-
-
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();

@@ -22,18 +22,20 @@ angular.module('MainComponents', [
             $rootScope.inAuthentication = true;
         }
     ])
-    .directive('navmenu', function () {
-        return {
-            restrict: "EA",
-            controller: 'NavmenuController',
-            templateUrl: 'modules/mainComponents/views/navmenu.html'
-        }
-    })
-    .controller('NavmenuController', ['$scope', '$interval', 'AuthenticationService', 'globalVarsSrv', '$location', function ($scope, $interval, AuthenticationService, globalVarsSrv, $location) {
-        function roleMenuListener(nv, ov) {
-            $scope.adminColums = globalVarsSrv.getGlobalVar(nv === 'admin' ? 'homeButtonAdminTableConf' : nv === null ? '' : 'homeButtonUserTableConf');
+
+    .controller('NavmenuController', ['$scope', '$interval', 'AuthenticationService', 'globalVarsSrv', '$location', 'api', '$routeParams', '$translate', function ($scope, $interval, AuthenticationService, globalVarsSrv, $location, api, $routeParams, $translate) {
+        function roleMenuListener(nval, oval) {
+            if (!nval) {
+                $scope.adminColums = [];
+                return;
+            }
+            var nv = globalVarsSrv.getGlobalVar('menuRole');
+            $scope.adminColums = globalVarsSrv.getGlobalVar('menuRole') ? globalVarsSrv.getGlobalVar(nv === 'admin' ? 'homeButtonAdminTableConf' : nv === null ? '' : 'homeButtonUserTableConf') : [];
         }
 
+        if (globalVarsSrv.getGlobalVar('appStarted') && globalVarsSrv.getGlobalVar('menuRole')) roleMenuListener();
+        globalVarsSrv.addListener('appStarted', roleMenuListener);
+        globalVarsSrv.addListener('appLoggedIn', roleMenuListener);
         globalVarsSrv.addListener('menuRole', roleMenuListener);
         $scope.toggleDropdown = function ($event) {
             $event.preventDefault();
@@ -45,6 +47,7 @@ angular.module('MainComponents', [
             var user = globalVarsSrv.getGlobalVar('auth');
             $scope.curUser = user.authdata.roles[0].id;
             $location.path('/users/' + $scope.curUser);
+
         };
 
         $scope.logout = function () {
@@ -55,13 +58,15 @@ angular.module('MainComponents', [
             globalVarsSrv.cookieSave();
         };
 
-    }])
-    .directive('footer', function () {
-        return {
-            restrict: "EA",
-            templateUrl: 'modules/mainComponents/views/footer.html'
+        $scope.updateLanguage = function (lang) {
+            $translate.use(lang);
+            globalVarsSrv.setGlobalVar('lang', lang);
+            globalVarsSrv.cookieSave();
+            //globalVarsSrv.initFromFile(globalVarsSrv.cookieGet(globalVarsSrv.getGlobalVar('auth')));
         }
-    })
+
+    }])
+
     .factory("MakeModal", ['$uibModal', function ($uibModal) {
         var factory = {};
 
@@ -77,6 +82,22 @@ angular.module('MainComponents', [
             return $myModalInstance
         };
 
+        factory.guestModal = function (url, size, type, title, data, buttons, okCallback, cancelCallback) {
+            var $myModalInstance = $uibModal.open({
+                templateUrl: url,
+                controller: 'guestModalController',
+                size: size ? size : 'sm',
+                resolve: {
+                    config: function () {
+                        return {title: title, data: data, type: type, buttons: buttons, size: size}
+                    }
+                }
+            });
+            $myModalInstance.result.then(okCallback, cancelCallback);
+            return $myModalInstance
+        };
+
+
         factory.generalInfoModal = function (size, type, title, message, buttons, okCallback, cancelCallback) {
             var $myModalInstance = $uibModal.open({
                 templateUrl: 'modules/mainComponents/views/genpopup.html',
@@ -85,6 +106,21 @@ angular.module('MainComponents', [
                 resolve: {
                     config: function () {
                         return {title: title, message: message, type: type, buttons: buttons, size: size}
+                    }
+                }
+            });
+            $myModalInstance.result.then(okCallback, cancelCallback);
+            return $myModalInstance
+        };
+
+        factory.generalModal = function (url, size, type, title, data, buttons, okCallback, cancelCallback) {
+            var $myModalInstance = $uibModal.open({
+                templateUrl: url,
+                controller: 'generalModalController',
+                size: size ? size : 'sm',
+                resolve: {
+                    config: function () {
+                        return {title: title, data: data, type: type, buttons: buttons, size: size}
                     }
                 }
             });
@@ -108,7 +144,8 @@ angular.module('MainComponents', [
         };
 
         return factory;
-    }])
+    }
+    ])
     .controller("PopupController", ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
         $scope.ok = function () {
             $uibModalInstance.close('ok');
@@ -131,6 +168,20 @@ angular.module('MainComponents', [
             $uibModalInstance.dismiss('cancel');
         };
     }])
+    .controller("generalModalController", ['$scope', '$uibModalInstance', 'config', function ($scope, $uibModalInstance, config) {
+        $scope.title = config.title ? config.title : "Info";
+        $scope.data = config.data;
+        $scope.buttons = config.buttons ? config.buttons : 1;
+
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.data);
+
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    }])
     .directive('backButton', function () {
         return {
             restrict: 'A',
@@ -144,19 +195,7 @@ angular.module('MainComponents', [
             }
         }
     })
-    .directive('pagination', function () {
-        return {
-            restrict: "EA",
-            scope: {
-                currentPage: "=",
-                totalItems: "=",
-                itemsPerPage: "=",
-                numPages: "="
-            },
-            templateUrl: 'modules/mainComponents/views/pagination.html',
-            controller: "PaginationController"
-        }
-    })
+
     .controller('PaginationController', ['$scope', function ($scope) {
         $scope.pageThresholds = [{th: 1}, {th: 3}, {th: 5}, {th: 10}, {th: 20}, {th: 50}, {th: 'all'}];
         $scope.currentPage = 1;
@@ -186,16 +225,7 @@ angular.module('MainComponents', [
         };
 
     }])
-    .directive('showHideColumns', function () {
-        return {
-            restrict: "EA",
-            scope: {
-                columsVisibility: "="
-            },
-            templateUrl: 'modules/mainComponents/views/showHideColumns.html',
-            controller: "showHideOptionsController"
-        }
-    })
+
     .controller('showHideOptionsController', ['$scope', function ($scope) {
         $scope.optionsVisible = false;
 
@@ -206,7 +236,6 @@ angular.module('MainComponents', [
             column.visible = state ? state : !column.visible;
         };
     }])
-
 
     .directive('showHide', function ($http) {
         function link(scope, element, attrs) {
@@ -230,93 +259,64 @@ angular.module('MainComponents', [
             templateUrl: 'modules/mainComponents/views/showHide.html',
             link: link
         }
-
     })
 
-    .directive('dmTh', function () {
-        return {
-            restrict: "EA",
-            templateUrl: 'modules/mainComponents/views/dmth.html'
-        }
-    })
-    //little pop-up mouse-over
-    .directive('toggle', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, element, attrs) {
-                if (attrs.toggle == "tooltip") {
-                    $(element).tooltip();
-                }
-                if (attrs.toggle == "popover") {
-                    $(element).popover();
-                }
-            }
-        };
-    })
-    .directive('operations', function () {
-        return {
-            restrict: "EA",
-            scope: {
-                hr: "@",
-                content: "@",
-                gicon: "@",
-                place: "@",
-                item: "<"
-            },
-            templateUrl: 'modules/mainComponents/views/buttonPopUp.html'
-        }
-    })
-    .directive('deleteRowButton', function () {
-        return {
-            restrict: "EA",
-            templateUrl: 'modules/mainComponents/views/deleteRowButton.html'
-        }
-    })
-    .directive('dmTitle', function () {
-        return {
-            restrict: "EA",
-            templateUrl: 'modules/mainComponents/views/dmTitle.html'
-        }
-    })
-    .directive('tableTools', function () {
-        return {
-            restrict: "EA",
-            templateUrl: 'modules/mainComponents/views/tableTools.html'
-        }
-    })
-    .controller('configController', ['$scope', 'api', function ($scope, api) {
+    .controller('configController', ['$scope', 'api', '$location', function ($scope, api, $location) {
         $scope.configuration = {};
-        api.apiCall('GET', 'api/public/config/1', function (result) {
-            $scope.configuration = result.data;
-            $scope.configuration.s = false;
-            $scope.configuration.totalDays = calcDaysDiff($scope.configuration.tod, $scope.configuration.fromd);
+        if (!$scope.year) $scope.year = "1";
 
-            for (var i = 0; i < $scope.configuration.periods.length; i++) {
-                $scope.configuration.periods[i].totalDays = calcDaysDiff($scope.configuration.periods[i].tod, $scope.configuration.periods[i].fromd);
-                $scope.configuration.periods[i].fdIndex = calcDaysDiff($scope.configuration.fromd, $scope.configuration.periods[i].fromd);
-                $scope.configuration.periods[i].tdIndex = $scope.configuration.periods[i].fdIndex + $scope.configuration.periods[i].totalDays;
-                $scope.configuration.periods[i].s = false;
-            }
-        });
+        $scope.init = function () {
+            api.apiCall('GET', 'api/public/config/' + $scope.year, function (result) {
+                $scope.configuration = result.data;
+                $scope.configuration.s = false;
+                $scope.configuration.totalDays = calcDaysDiff($scope.configuration.tod, $scope.configuration.fromd);
+
+                for (var i = 0; i < $scope.configuration.periods.length; i++) {
+                    $scope.configuration.periods[i].totalDays = calcDaysDiff($scope.configuration.periods[i].tod, $scope.configuration.periods[i].fromd);
+                    $scope.configuration.periods[i].fdIndex = calcDaysDiff($scope.configuration.fromd, $scope.configuration.periods[i].fromd);
+                    $scope.configuration.periods[i].tdIndex = $scope.configuration.periods[i].fdIndex + $scope.configuration.periods[i].totalDays;
+                    $scope.configuration.periods[i].s = false;
+                }
+            })
+        };
 
         function calcDaysDiff(from, to) {
             return Math.ceil(Math.abs(new Date(from) - new Date(to)) / (1000 * 3600 * 24));
         }
 
         $scope.setPeriod = function (period) {
-            $scope.selectedPeriod.s = false;
-            period.s = true;
-            $scope.selectedPeriod = period;
-        }
+            if ($scope.periodsActive === true) {
+                if (period.status !== 0) {
+                    $scope.selectedPeriod.s = false;
+                    period.s = true;
+                    $scope.selectedPeriod = period;
+                }
+            } else {
+                $scope.selectedPeriod.s = false;
+                period.s = true;
+                $scope.selectedPeriod = period;
+            }
+
+        };
+
+        $scope.$watch('year', function (newVal) {
+            $scope.init();
+        });
+
     }])
     .directive('configBookGraph', function () {
         return {
             restrict: "EA",
-            scope: {selectedPeriod: "="},
+            scope: {
+                selectedPeriod: "=",
+                year: "=",
+                periodsActive: "="
+            },
             controller: "configController",
             templateUrl: 'modules/mainComponents/config/configGraph.html'
         }
     })
+
     .directive('fromToDatePicker', function () {
         return {
             restrict: "EA",
@@ -360,4 +360,92 @@ angular.module('MainComponents', [
             transclude: true,
             templateUrl: 'modules/mainComponents/views/showHide.html'
         }
-    });
+    })
+    .directive('navmenu', function () {
+        return {
+            restrict: "EA",
+            controller: 'NavmenuController',
+            templateUrl: 'modules/mainComponents/views/navmenu.html'
+        }
+    })
+    .directive('deleteRowButton', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/deleteRowButton.html'
+        }
+    })
+    .directive('dmTitle', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/dmTitle.html'
+        }
+    })
+    .directive('tableTools', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/tableTools.html'
+        }
+    })
+    .directive('operations', function () {
+        return {
+            restrict: "EA",
+            scope: {
+                hr: "@",
+                content: "@",
+                gicon: "@",
+                place: "@",
+                item: "<"
+            },
+            templateUrl: 'modules/mainComponents/views/buttonPopUp.html'
+        }
+    })
+    .directive('dmTh', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/dmth.html'
+        }
+    })
+    //little pop-up mouse-over
+    .directive('toggle', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                if (attrs.toggle == "tooltip") {
+                    $(element).tooltip();
+                }
+                if (attrs.toggle == "popover") {
+                    $(element).popover();
+                }
+            }
+        };
+    })
+    .directive('footer', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/footer.html'
+        }
+    })
+    .directive('pagination', function () {
+        return {
+            restrict: "EA",
+            scope: {
+                currentPage: "=",
+                totalItems: "=",
+                itemsPerPage: "=",
+                numPages: "="
+            },
+            templateUrl: 'modules/mainComponents/views/pagination.html',
+            controller: "PaginationController"
+        }
+    })
+    .directive('showHideColumns', function () {
+        return {
+            restrict: "EA",
+            scope: {
+                columsVisibility: "="
+            },
+            templateUrl: 'modules/mainComponents/views/showHideColumns.html',
+            controller: "showHideOptionsController"
+        }
+    })
+;

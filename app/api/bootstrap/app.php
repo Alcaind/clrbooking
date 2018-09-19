@@ -18,6 +18,7 @@ require __DIR__ . '/../src/models/periods.php';
 require __DIR__ . '/../src/models/tm.php';
 require __DIR__ . '/../src/models/kat.php';
 require __DIR__ . '/../src/models/item.php';
+require __DIR__ . '/../src/models/itemtype.php';
 require __DIR__ . '/../src/models/rooms.php';
 
 require __DIR__ . '/../src/models/ps.php';
@@ -30,6 +31,7 @@ require __DIR__ . '/../src/models/room_category.php';
 require __DIR__ . '/../src/models/room_book.php';
 require __DIR__ . '/../src/models/params.php';
 require __DIR__ . '/../src/models/users_requests.php';
+require __DIR__ . '/../src/models/tm_users.php';
 
 //require __DIR__ . '../src/models/dp.php';
 //$dotenv = new Dotenv\Dotenv(__DIR__);
@@ -48,8 +50,10 @@ $app = new \Slim\App([
             'database' => 'clrbooking',
             'username' => 'lpadmin',
             'password' => 'OKEcmRv1UAa0Fqrb',
+
 //            'username' => 'root',
 //            'password' => '',
+
             'charset' => 'utf8',
             'collation' => 'utf8_general_ci',
             'prefix'    => ''
@@ -86,6 +90,7 @@ require __DIR__ . '/../routes/config.php';
 require __DIR__ . '/../routes/periods.php';
 require __DIR__ . '/../routes/tm.php';
 require __DIR__ . '/../routes/item.php';
+require __DIR__ . '/../routes/itemtype.php';
 require __DIR__ . '/../routes/rooms.php';
 require __DIR__ . '/../routes/kat.php';
 require __DIR__ . '/../routes/ps.php';

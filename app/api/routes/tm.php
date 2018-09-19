@@ -13,7 +13,10 @@ use \App\Models\ApiError as ApiError;
 $app->get('/tms', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $tm = \App\Models\Tm::with('supervisor', 'ps', 'users')->get();
-
+//        ->whereHas('ps', function ($query) {
+//            /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
+//            $query->where('conf_id', '=', 1);
+    //       })
     return $response->getBody()->write($tm->toJson());
 });
 
@@ -36,22 +39,30 @@ $app->get('/tms/{id}', function (Request $request, Response $response, $args) {
 
 $app->post('/tms/ps', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    //print_r($data['id']);
+    $tt = $data['id'];
+    //return $response->getBody()->write(json_encode($data));
+
     try {
-        $tm = \App\Models\Tm::with('supervisor', 'ps')
-            ->whereHas('ps', function ($query) {
-                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
-                $query->where('conf_id', '=', 1);
-            })->get();
+
+        $ps = \App\Models\Ps::with('tm')->where('conf_id', '=', $tt)->get();
+//        $tm = \App\Models\Tm::with('supervisor', 'ps')
+//            ->whereHas('ps', function ($query)  use ($data) {
+//                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
+//                $query->where('conf_id', '=', $data['id']);
+//            });
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage());
+        $error->setData($e->getCode(), $e->getMessage(), $data);
         return $nr->write($error->toJson());
     }
-    return $response->getBody()->write($tm->toJson());
+    return $response->getBody()->write($ps->toJson());
 });
 
-$app->post('/user/tms/ps', function (Request $request, Response $response, $args) {
+
+$app->post('/user/tms', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     //$id = $args['id'];
     $data = $request->getParsedBody();
@@ -60,13 +71,11 @@ $app->post('/user/tms/ps', function (Request $request, Response $response, $args
         //if ($tm['config_id'] == $data['config_id'])
         array_push($tms, $tm['id']);
     }
+    // print_r($tms);
     try {
-        $tm = \App\Models\Tm::with('supervisor', 'ps')
-            ->whereIn('id', $tms)
-            ->whereHas('ps', function ($query) use ($data) {
-                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
-                $query->where('conf_id', '=', 1);
-            })->get();
+        $tm = \App\Models\Tm::with('supervisor')
+            ->whereIn('id', $tms)->get();
+
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();

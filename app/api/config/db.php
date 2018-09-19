@@ -15,7 +15,7 @@ class db
     private $dbpass = 'OKEcmRv1UAa0Fqrb';
     private $dbname = 'clrbooking';
 
-    //TODO : Ayto einai to config gia ton local server.
+//    //TODO : Ayto einai to config gia ton local server.
 //    private $dbhost = 'localhost';
 //    private $dbuser = 'root';
 //    private $dbpass = '';

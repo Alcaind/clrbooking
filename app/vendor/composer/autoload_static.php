@@ -40,6 +40,7 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'N' => 
         array (
@@ -136,6 +137,10 @@ class ComposerStaticInitad56d39bfcea1ec182d3e264cf4c6564
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Neomerx\\Cors\\' => 
         array (

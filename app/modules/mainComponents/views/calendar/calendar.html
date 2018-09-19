@@ -1,9 +1,15 @@
+<div>
+    <select class="form-control smallInput" id="tmRoomBook" ng-options="tm as tm for tm in tms"
+            ng-if="comingFromBookController"
+            ng-model="calendarFilterObj.tm" style="min-width: 100px; padding: 6px 33px;">
+        <option value="">{{"Όλα"| translate}}</option>
+    </select></div>
 <div style="display: flex">
     <div>
         <table class="sorttable table table-hover table-striped table-responsive table-condensed table-bordered header-fixed">
             <thead>
             <tr>
-                <th>Ωρα</th>
+                <th style="padding:6px;">{{"Ώρα"| translate}}</th>
             <tbody>
             <tr style="cursor: pointer">
                 <td>
@@ -19,11 +25,13 @@
         <table class="sorttable table table-hover table-striped table-responsive table-condensed table-bordered header-fixed">
             <thead>
             <tr>
-                <th ng-repeat="day in headerDays track by $index" ng-init="headerDaysIndex = $index"
-                    style="min-width: 160px" ng-click="selectDay(day)">
-                    {{day.toLocaleDateString('el-GR',{ weekday: 'short',
-                    year:'numeric', month: 'short', day: 'numeric' })}}
-                </th>
+                <td ng-repeat="day in headerDays track by $index" ng-init="headerDaysIndex = $index"
+                    style="min-width: 160px;">
+                    <!--{{day.toLocaleDateString('el-GR',{ weekday: 'short', year:'numeric', month: 'short', day: 'numeric' })}}-->
+                    {{'-'}}
+                    <button class="btn" style="padding: 10px 46px;" ng-click="selectDay(day)">{{' '}}</button>
+                </td>
+            </tr>
             <tbody>
             <tr style="cursor: pointer">
                 <td ng-repeat="day in headerDays track by $index" ng-init="tdDaysIndex = $index"
@@ -35,7 +43,6 @@
                             background-color: #cacacaaa"
                              tooltip-placement="left"
                              uib-tooltip="{{day.toLocaleDateString({weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})}} - {{hour.ht}}">
-                            &nbsp;{{}}
                         </div>
                     </div>
                     <!--<ul ng-repeat="(key, value) in calendar[$index] | groupBy: 'name'">
@@ -49,16 +56,23 @@
                         <!--<div>{{newCalendar[]}}</div>-->
                         <!--{{calendar[$index]}}-->
                         <div ng-repeat="(key, room) in newCalendar[tdDaysIndex] track by $index"
-                             ng-init="newCalendarIndex = $index" class="info"
+                             ng-init="newCalendarIndex = $index;" class="info"
                              style="display: flex;position: relative; height:340px;width: 107px ; padding-left:5px;padding-right:5px; border: 1px solid #ababab;">
-                            <div ng-repeat="book in room track by $index" ng-init="roomIndex = $index" class="info"
+                            <div type="button" style="position: relative;  top: -25px;  font-size: 11px;">
+                                {{day.toLocaleDateString('el-GR',{ weekday:'short', year:'numeric', month:
+                                'short', day: 'numeric'})}}
+                            </div>
+                            <div ng-repeat="book in room |filter:filterBookByTm track by $index "
+                                 ng-init="roomIndex = $index;" class="info"
                                  id="{{book.did}}"
                                  style="top: {{book.dist}}px; height: {{book.h}}px; min-width:80px; width: 90px;
                              position: absolute; font-size: smaller;
                              background-color: {{book.color}}{{book.new?'66':'33'}}; text-align: left; border: 1px solid #ababab;"
-                                 uib-tooltip="{{book.book.ps.tma_per}} {{book.book.ps.teacher}} {{book.pivot.fromt}}-{{book.pivot.tot}}-{{book.book.ps.ps_ex}}o Εξ.-{{book.book.ps.ps_km}}"
-                                 ng-click="popup(book.pivot.id)">
-                                <div>{{book.book.ps.tma_code}}</div>
+                                 popover-trigger="'mouseenter'"
+                                 popover-placement="{{tdDaysIndex===0?book.dist>190?'top-left':'bottom-left':'bottom-right'}}"
+                                 uib-popover="{{book.book.ps.tma_per}}{{'('}}{{teachers[book.pivot.teacher].sname}}{{' '}}{{teachers[book.pivot.teacher].fname}}{{')'}}{{book.new?book.pivot.fromt.toLocaleTimeString('en-GB'):book.pivot.fromt}}-{{book.new?book.pivot.tot.toLocaleTimeString('en-GB'):book.pivot.tot}}{{' '}}[{{book.book.ps.ps_ex}}o Εξ.-{{book.book.ps.ps_km}} / {{classUses[book.book.class_use].synt}}]{{' '}} {{'Σχόλια'|translate}}: {{book.book.descr}}"
+                                 ng-click="popup(book)">
+                                <div>{{book.book.ps.tma_code}} - {{classUses[book.book.class_use].synt}}</div>
                                 <div>{{book.book.tm.descr}}</div>
                             </div>
                             <div style="top: 340px; height: 40px;
@@ -74,9 +88,12 @@
     </div>
 </div>
 
-<show-hide sh-title="Σφάλματα" style="padding: 5px" ng-if="showErrors && bookingErrors.length>0">
+<show-hide sh-title='{{"Σφάλματα"| translate}}' style="padding: 5px" ng-if="showErrors && bookingErrors.length>0">
     <report-errors></report-errors>
 </show-hide>
-<show-hide sh-title="Εβδομαδιαίο πρόγραμμα" style="padding: 5px">
+<show-hide sh-title='{{"Εβδομαδιαίο πρόγραμμα"| translate}}' style="padding: 5px">
     <report-calendar></report-calendar>
+</show-hide>
+<show-hide sh-title='{{"Ακυρωμένα"| translate}}' style="padding: 5px">
+    <report-canceled></report-canceled>
 </show-hide>

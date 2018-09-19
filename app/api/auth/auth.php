@@ -146,20 +146,45 @@ $app->post("/refresh-token", function (Request $request, Response $response) {
     for ($i = 0; $i < 16; $i++) $a .= mt_rand(0, 9);
 
     $jti = (new Base62)->encode($a);
+    $secret = getenv("JWT_SECRET"); //TODO : na valoume to secret sto ENV kai na to pairnoume apo ekei ...
+    $secret = "supersecretkeyyoushouldnotcommittogithub";
 
+    $future = new DateTime("now +10 hours");
+    $payload = [
+        "iat" => $now->getTimeStamp(),
+        "exp" => $future->getTimeStamp(),
+        "jti" => $jti
+    ];
+
+    $refreshToken = [];
+    $refreshToken["token"] = JWT::encode($payload, $secret, "HS256");
+    $refreshToken["expires"] = $future->getTimeStamp();
+
+    $future = new DateTime("now +1 hour");
+
+    $roles = \App\Models\Users::with('roles', 'tm', 'rooms')->where('user', '=', $server['PHP_AUTH_USER'])->get();
+    //print_r($roles);
     $payload = [
         "iat" => $now->getTimeStamp(),
         "exp" => $future->getTimeStamp(),
         "jti" => $jti,
-        "sub" => $server["PHP_AUTH_USER"],
-        "scope" => ["put", "get", "post"]
+        //"sub" => $server["PHP_AUTH_USER"],
+        "scope" => ["put", "get", "post"],
+        "roles" => $roles,
+        "refresh-token" => $refreshToken
     ];
 
-    $secret = getenv("JWT_SECRET");
-    $secret = "supersecretkeyyoushouldnotcommittogithub";
+    for ($i = 0; $i < sizeof($roles[0]->roles); $i++) {
+        if ($roles[0]->roles[$i]->role == 'admin') {
+            array_push($payload['scope'], 'delete');
+        }
+    }
+
+
     $token = JWT::encode($payload, $secret, "HS256");
     $data["token"] = $token;
     $data["expires"] = $future->getTimeStamp();
+    //$data["user"] = $future->getTimeStamp();
     return $response->withStatus(201)
         ->withHeader("Content-Type", "application/json")
         ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));

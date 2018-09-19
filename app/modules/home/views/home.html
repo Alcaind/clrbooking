@@ -2,9 +2,9 @@
 
     <div class="col-sm-6" role="menuitem" ng-repeat="option in adminColums">
         <a href="#{{option.column}}" ng-if="option.column" class="homebtn"
-           type="button">{{option.title}}</a>
+           type="button">{{option.title| translate}}</a>
         <div ng-repeat="smenu in option.smenu">
-            <a href="#{{smenu.column}}" type="button" class="homebtn2">{{smenu.title}}</a>
+            <a href="#{{smenu.column}}" type="button" class="homebtn2">{{smenu.title| translate}}</a>
         </div>
     </div>
 </div>

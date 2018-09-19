@@ -1,12 +1,12 @@
 <div style="display: flex;float: right;">
     <!--<input type="text" ng-model="filter" class="form-control" placeholder="search"
            style="padding: 5px; width: 100%">-->
-    <button tooltip-placement="left" uib-tooltip="GetData" type="button" class="btn btn-primary hippo "
+    <button tooltip-placement="left" uib-tooltip='{{"GetData"| translate}}' type="button" class="btn btn-primary hippo "
             ng-click="ctrl.getAll(url)" style="min-width: 50px; border-radius: 0px;">
         <span class="glyphicon glyphicon-download"></span>
     </button>
     <a href="#{{ctrl.url}}/create" class="btn btn-success hippo " type="button" tooltip-placement="left"
-       uib-tooltip="Δημιουργία νέας εγγραφής"
+       uib-tooltip='{{"Δημιουργία νέας εγγραφής"| translate}}'
        style="min-width: 50px;border-radius: 0px;">
         <span class="glyphicon glyphicon-plus"></span>
     </a>

@@ -5,7 +5,7 @@
                 style="width: 100%; margin: 0px 4px;"
                 ng-click="gotoPage($index, s)" class="btn btn-{{$index === currentPage?'success':'primary'}}"
                 ng-disabled="!s.active">
-            <div>Βήμα {{$index+1}}ο {{s.text}}</div>
+            <div>{{"Βήμα"| translate}} {{$index+1}}ο {{s.text}}</div>
         </div>
     </div>
     <!--<div style="display: flex">

@@ -33,7 +33,8 @@
                 ng-click="ctrl.selectRow(item)">
                 <td ng-if="ctrl.tableColumns[0].visible" style="max-width: 20px;text-align: center;">{{ item.id }}</td>
                 <td ng-if="ctrl.tableColumns[1].visible">{{ item.year }}</td>
-                <td ng-if="ctrl.tableColumns[2].visible">{{ statusOptions[item.status].text}}</td>
+                <!--<td ng-if="ctrl.tableColumns[2].visible">{{ item.status}}</td>-->
+                <td ng-if="ctrl.tableColumns[2].visible">{{ statusOptions[item.status===-1?1:0].text }}</td>
                 <td ng-if="ctrl.tableColumns[3].visible">{{ item.fromd |date:'dd-MM-yyyy' }}</td>
                 <td ng-if="ctrl.tableColumns[4].visible">{{ item.tod |date:'dd-MM-yyyy' }}</td>
                 <td ng-if="ctrl.tableColumns[5].visible">{{ item.synt }}</td>

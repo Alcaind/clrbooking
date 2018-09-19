@@ -1,0 +1,25 @@
+<div id="reportCanceled" style="display: flex ; overflow: auto;" ng-show="holidayView">
+    <ul ng-repeat="(name, room) in reqPerRoom" style="display: block">
+        {{name}}
+        <div ng-repeat="req in room | orderBy:['room.pivot.date_index', 'room.pivot.fromt'] track by $index">
+            <li ng-repeat="r in req.rooms " ng-if="r.name === name"
+                style="min-width: 200px; padding: 18px; width: max-content;">
+                <div>{{req.tm.title}}</div>
+                <div>{{"Εξάμημο"| translate}}: {{req.ps.ps_ex}}</div>
+                <div>{{req.ps.pm}}-{{req.ps.ps_km}}-{{req.ps.tma_code}}-{{req.ps.tma_per}}</div>
+                <div>{{teachers[r.pivot.teacher].sname}}{{' '}} {{teachers[r.pivot.teacher].fname}}</div>
+                <div>{{classUses[req.class_use].descr}}</div>
+                <div>{{ periods[req.period].descr }}
+                </div>
+                <div> {{errorWeekdays[r.pivot.date_index-1]}}{{' '}} {{r.showTod? 'από':'στις'}}{{' '}} {{req.fromd |
+                    date : 'd-M-y'}}{{r.showTod?' '+'έως'+' '+( req.tod |date:'dd-MM-yyyy'):''}}{{' , '}}{{r.pivot.fromt
+                    | date : 'shortTime' }} {{r.pivot.tot |
+                    date : 'shortTime'}}
+                </div>
+                <div ng-if="commentsVisible">{{"Σχόλια Αιτήματος"| translate}} : {{req.descr}}
+                    <div>{{"Σχόλια Αιτήματος Αίθουσας"| translate}} : {{r.pivot.comment}}</div>
+                </div>
+            </li>
+        </div>
+    </ul>
+</div>

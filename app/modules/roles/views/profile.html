@@ -3,25 +3,25 @@
         <div class="pageButtons">
             <a href back-button type="button" class="btn btn-warning">
 				<span class="glyphicon glyphicon-chevron-left">
-					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
 				</span>
             </a>
         </div>
-        <div class="pageTitle">Διαχείριση Ρόλου</div>
+        <div class="pageTitle">{{"Διαχείριση Ρόλου"| translate}}</div>
     </div>
     <div class="contentHolder">
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <div class="formGroupItems">
                 <div class="form-group" ng-class="{ 'has-error' : itemForm.role.$invalid && !itemForm.role.$pristine }">
-                    <label class=" formItemLabel" for="role">Ρόλος<span class="form-required">*</span>:</label>
+                    <label class=" formItemLabel" for="role">{{"Ρόλος"| translate}}<span class="form-required">*</span>:</label>
                     <div class="longInput">
                         <input id="role" name="role" class="form-control" type="text" ng-model="ctrl.item.role">
                     </div>
-                    <p ng-show="itemForm.role.$invalid && !itemForm.role.$pristine" class="help-block">Εισάγετε
-                        ρόλο.</p>
+                    <p ng-show="itemForm.role.$invalid && !itemForm.role.$pristine" class="help-block">{{"Εισάγετε
+                        ρόλο."| translate}}</p>
                 </div>
                 <div class="form-group">
-                    <label for="descr" class=" formItemLabel">Περιγραφή ρόλου:</label>
+                    <label for="descr" class=" formItemLabel">{{"Περιγραφή"| translate}}:</label>
                     <div class="longInput">
                         <textarea id="descr" name="descr" class="form-control" type="text"
                                   ng-model="ctrl.item.descr"></textarea>
@@ -29,10 +29,10 @@
                 </div>
             </div>
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.id > 0">Ανανέωση
+                    ng-if="ctrl.item.id > 0">{{"Ανανέωση"| translate}}
             </button>
             <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.role && !ctrl.item.id ">Αποθήκευση
+                    ng-if="ctrl.item.role && !ctrl.item.id ">{{"Αποθήκευση"| translate}}
             </button>
 
         </form>

@@ -1,28 +1,57 @@
 <div style="display: flex; width: 100%;">
     <div id="roomsToSelect" style="width: 100%; display: block">
-
         <div style="overflow-y: auto; padding: 5px; width: 100%;">
             <div style="padding: 5px; display: flex">
-                <input type="text" ng-model="courseFilterObj.room" class="form-control" placeholder="search"
+                <select id="categoryRoomFilter"
+                        ng-options="roomcat.synt as roomcat.synt for roomcat in roomscategory"
+                        ng-model="roomsFilter.roomcat" style="width: 150px;" class="form-control">
+                    <option value="">{{"Κατηγορία"| translate}}</option>
+                </select>
+
+                <input type="text" ng-model="roomsFilter.room" class="form-control"
+                       placeholder='{{"Search"| translate}}'
                        style="padding: 5px; width: 100%; padding: 5px">
-                <button tooltip-placement="left" uib-tooltip="Επιλογή όλων" class="btn btn-primary"
-                        ng-click="selectAllRoom()" ng-if="fromAnotherPage">
-                    <span class="glyphicon glyphicon-asterisk"></span>
-                </button>
-                <button tooltip-placement="left" uib-tooltip="Καθαρισμό όλων" class="btn btn-danger"
-                        ng-click="deselectAllRoom()" ng-if="fromAnotherPage">
-                    <span class="glyphicon glyphicon-asterisk"></span>
-                </button>
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <button tooltip-placement="left" uib-tooltip='{{"Φίλτρο"| translate}}' class="btn btn-primary"
+                            ng-click="filteringRooms(roomDP,tileRooms, roomsFilter)" style="margin-right: 100px;">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+
+                    <button ng-click="roomItemsModal()" class="btn btn-primary" tooltip-placement="left"
+                            uib-tooltip='{{"Φίλτρο"| translate}}'>{{"Εξοπλισμός"| translate}}
+                    </button>
+                    <button tooltip-placement="left" uib-tooltip='{{"Επιλογή όλων"| translate}}' class="btn btn-primary"
+                            ng-click="selectAllRoom()" ng-if="fromAnotherPage">
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </button>
+                    <button tooltip-placement="left" uib-tooltip='{{"Καθαρισμός όλων"| translate}}'
+                            class="btn btn-danger"
+                            ng-click="deselectAllRoom()" ng-if="fromAnotherPage">
+                        <span class="glyphicon glyphicon-asterisk"></span>
+                    </button>
+                </div>
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
                     list-style: none;padding: 0;overflow-y: auto; height: 350px; border: #cecece solid 1px">
-                <div ng-repeat="room in tileRooms|filter:courseFilterObj.room"
+                <!--|filter:roomsFilter.room |filter:filterRooms.roomcat-->
+                <div ng-repeat="room in roomDP"
                      class="{{room.checked?'success':'primary'}}"
                      style="cursor: pointer; padding: 4px; font-size: 12px; border: 1px solid #ababab; ">
                     <room-tile></room-tile>
                 </div>
             </div>
         </div>
-
+    </div>
+</div>
+<div id="selectedRoomsHolder" style="width: 100%; overflow: auto;" ng-if="mode !== 'reporting'">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
+                    list-style: none; overflow-y: auto; height: 350px; border: #cecece solid 1px">
+        <default-room-tile ng-sh></default-room-tile>
+        <div ng-repeat="room in selectedRooms track by $index">
+            <selected-room-tile></selected-room-tile>
+        </div>
     </div>
 </div>

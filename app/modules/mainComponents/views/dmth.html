@@ -1,5 +1,5 @@
 <div style="display:flex;width:100%;cursor: pointer;" ng-click="ctrl.sortBy(th)">
-    <button class="btn btn-link tableColoumns" style="text-align: left;">{{th.title}}
+    <button class="btn btn-link tableColoumns" style="text-align: left;">{{th.title| translate}}
         <span class="sortorder" ng-show="th.sorted" ng-class="{reverse: th.reverse}"></span>
     </button>
 </div>

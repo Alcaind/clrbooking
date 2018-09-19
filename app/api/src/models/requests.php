@@ -15,6 +15,20 @@ class Requests extends Model
 
     protected $table = 'requests';
 
+    protected $appends = ['if_expired'];
+
+    public function getIfExpiredAttribute()
+    {
+        $rdt = new \DateTime($this->req_dt);
+
+        $rdt->add(new \DateInterval('P' . intval($this->config->req_exp_dates) . 'D'));
+
+        $ndt = new \DateTime('now');
+
+        return $rdt->diff($ndt)->format('%R');
+        //return $ndt->format('Y-m-d') . ' - ' . $rdt->format('Y-m-d');
+    }
+
     public function users()
     {
         return $this->belongsTo('\\App\\Models\\Users', 'user_id');

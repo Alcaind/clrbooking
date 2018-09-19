@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h3 class="modal-title">Πληροφορίες</h3>
+    <h3 class="modal-title">{{"Πληροφορίες"| translate}}</h3>
 </div>
 <div class="modal-body">
     <h5 class="text-center">{{mainData.rooms.name}}</h5>
@@ -7,13 +7,13 @@
         <thead id="tblHead">
         <tr>
             <th>id</th>
-            <th>Ονομα αίθουσας</th>
-            <th>Τμήμα</th>
-            <th>Ημέρα/ες διεξαγωγής</th>
-            <th>Ώρες</th>
-            <th>Διοργανωτής/Καθηγητης</th>
-            <th>Μάθημα</th>
-            <th>Περίοδος</th>
+            <th>{{"Όνομα Αιθουσας"| translate}}</th>
+            <th>{{"Τμήμα"| translate}}</th>
+            <th>{{"Ημέρα Διεξαγωγής"| translate}}</th>
+            <th>{{"Ώρες"| translate}}</th>
+            <th>{{"Διοργανωτής/Καθηγητης"| translate}}</th>
+            <th>{{"Μάθημα"| translate}}</th>
+            <th>{{"Περίοδος"| translate}}</th>
         </tr>
         </thead>
         <tbody>
@@ -21,28 +21,32 @@
             <td>{{mainData.requests.id}}</td>
             <td>{{mainData.rooms.name}}</td>
             <td>
-                <button tooltip-placement="left" uib-tooltip="E-mail τμήματος" ng-click="mailTm(requests)"
+                <button tooltip-placement="left" uib-tooltip='{{"E-mail τμήματος"| translate}}'
+                        ng-click="mailTm(requests)"
                         style="cursor: pointer">{{requests.tm.descr}}
                 </button>
             </td>
-            <td>{{requests.fromd |date:'dd-MM-yyyy'}}- {{requests.tod |date:'dd-MM-yyyy'}}</td>
-            <td>{{ mainData.fromt}} - {{ mainData.tot | date:'shortTime'}}</td>
+            <td>{{requests.fromd |date:'dd-MM-yyyy'}} {{requests.showTod ? "-"+(requests.tod |date:'dd-MM-yyyy') :
+                null}}
+            </td>
+            <td>{{ mainData.fromt}} - {{mainData.tot | date:'shortTime' }}</td>
             <td>
-                <button ng-show="showddps" tooltip-placement="left" uib-tooltip="E-mail καθηγητή"
+                <button ng-show="showddps" tooltip-placement="left" uib-tooltip='{{"E-mail καθηγητή"| translate}}'
                         ng-click="mailTo(mainData.users.em_main)"
-                        style="cursor: pointer">{{mainData.users.fname}}{{mainData.users.sname}}
+                        style="cursor: pointer">{{mainData.users.fname}}{{" "}}{{mainData.users.sname}}
                 </button>
                 <div ng-show="!showddps">
                     <select id="teacher" name="teacher" class="form-control" ng-model="mainData.teacher"
-                            ng-options="user.id as (user.sname+' ' + user.fname) for user in teachers"></select>
+                            ng-options="user.id as (user.sname+' ' +user.fname) for user in teachers"></select>
                 </div>
             </td>
             <td>
                 <a ng-show="showddps">{{requests.ps.tma_per }}</a>
                 <div ng-show="!showddps">
+                    <input type="text" placeholder="serch ps" ng-model="searchPs">
                     <select id="ps_id" name="ps_id" class="form-control" ng-model="currentPs"
-                            ng-options="p as p.tma_per for p in ps">
-                        <option value="{{requests.ps_id}}">{{requests.ps.tma_per}}</option>
+                            ng-options="p as (p.tma_code)+' '+(p.tma_per) for p in ps|filter:searchPs">
+                        <option value="{{requests.ps_id}}">{{requests.ps.tma_code}}{{requests.ps.tma_per}}</option>
                     </select>
                 </div>
             </td>
@@ -50,12 +54,32 @@
         </tr>
         </tbody>
     </table>
+
+    <div class="inlineItems">{{"Γενικά Σχόλια Αιτήματος"| translate}} :
+        <div> {{requests.descr}}</div>
+    </div>
+
+    <div class="inlineItems" ng-if="mainData.comment">{{"Σχόλια Αιτήματος Αίθουσας"| translate}} :
+        <div ng-if="mainData.comment"> {{mainData.comment}}</div>
+    </div>
+
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-primary" type="button" ng-click="adminReq(requests.id)" ng-show="!uAdmin()">Admin Edit
+    <button class="btn btn-primary" type="button" ng-click="ok()">{{"ok"| translate}}</button>
+
+    <button class="btn btn-danger" type="button" ng-click="delete(requests)" ng-show="tmExists">{{"Διαγραφή"|
+        translate}}
     </button>
-    <a href="{{'#/usercreaterequests/'+requests.id }}" class="btn btn-info" role="button" style="padding: 5px"
-       ng-show="!uAdmin()">Admin Edit Graph</a>
+
+    <a href="{{'#/usercreaterequests/'+requests.id }}" class="btn btn-primary" role="button" style="padding: 5px"
+       ng-click="cancel()" ng-show="tmExists">{{"Επεξεργασία"| translate}}</a>
+
+    <div ng-if="uAdmin">
+        <button class="btn btn-primary" type="button" ng-click="adminReq(requests.id)">{{"Admin Edit"| translate}}
+        </button>
+
+        <a href="{{'#/usercreaterequests/'+requests.id }}" class="btn btn-primary" role="button" style="padding: 5px"
+           ng-click="cancel()">{{"Admin Edit Graph"| translate}}</a>
+    </div>
 
 </div>

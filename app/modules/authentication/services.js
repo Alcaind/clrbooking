@@ -69,27 +69,26 @@ angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
                         auth.authdata = jwtHelper.decodeToken(idToken);
                         globalVarsSrv.setGlobalVar('auth', auth);
                         globalVarsSrv.setGlobalVar('token', auth.authdata);
-                        for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
-                            if (auth.authdata.roles[0].roles[i].role === 'admin') {
-                                globalVarsSrv.setGlobalVar('menuRole', 'admin');
-                                break;
-                            } else {
-                                globalVarsSrv.setGlobalVar('menuRole', 'user');
-                                var url = $location.url();
-                                var routes = globalVarsSrv.getGlobalVar('homeButtonUserTableConf');
-                                var exist = false;
-                                if (routes) {
-                                    for (i = 0; i < routes.length; i++) {
-                                        if (url.indexOf(routes[i].column) >= 0) {
-                                            exist = true;
+                        if (auth.authdata.roles)
+                            for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
+                                if (auth.authdata.roles[0].roles[i].role === 'admin') {
+                                    globalVarsSrv.setGlobalVar('menuRole', 'admin');
+                                    break;
+                                } else {
+                                    globalVarsSrv.setGlobalVar('menuRole', 'user');
+                                    var url = $location.url();
+                                    var routes = globalVarsSrv.getGlobalVar('homeButtonUserTableConf');
+                                    var exist = false;
+                                    if (routes) {
+                                        for (i = 0; i < routes.length; i++) {
+                                            if (url.indexOf(routes[i].column) >= 0) {
+                                                exist = true;
+                                            }
                                         }
+                                        if (!exist) $location.path('/home');
                                     }
-                                    if (!exist) $location.path('/home');
                                 }
-
-
                             }
-                        }
 
                         return jwtHelper.decodeToken(idToken).sub;
                     }

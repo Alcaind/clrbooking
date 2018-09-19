@@ -1,5 +1,6 @@
 {
   "appUrl": "api/public",
+  "lang": "gr",
   "usersTableConf": [
     {
       "column": "id",
@@ -161,13 +162,6 @@
       "filter": ""
     },
     {
-      "column": "admin",
-      "title": "Επιβλέπων Αιτήματος",
-      "visible": true,
-      "sorted": false,
-      "filter": ""
-    },
-    {
       "column": "tm_id",
       "title": "Τμήμα",
       "visible": true,
@@ -190,7 +184,7 @@
     },
     {
       "column": "address",
-      "title": "Διευθυνση",
+      "title": "Διεύθυνση",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -260,7 +254,7 @@
     },
     {
       "column": "xoros",
-      "title": "Τυπος",
+      "title": "Τύπος",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -296,6 +290,13 @@
     {
       "column": "category",
       "title": "Χρήση",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "items",
+      "title": "Εξοπλισμός",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -351,14 +352,14 @@
     },
     {
       "column": "fromd",
-      "title": "Από ημ/νια",
+      "title": "Από ημ/νία",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "tod",
-      "title": "Έως ημ/νια",
+      "title": "Έως ημ/νία",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -373,6 +374,20 @@
     {
       "column": "req_exp_dates",
       "title": "Ημερες Ισχύος Αιτήματος",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    }
+  ],
+  "itemtypeTableConf": [
+    {
+      "column": "id",
+      "title": "ID",
+      "visible": true
+    },
+    {
+      "column": "descr",
+      "title": "Περιγραφή",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -401,6 +416,13 @@
     {
       "column": "code",
       "title": "Κωδικός εξοπλισμού",
+      "visible": true,
+      "sorted": false,
+      "filter": ""
+    },
+    {
+      "column": "type_id",
+      "title": "Τύπος",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -505,7 +527,7 @@
     },
     {
       "column": "status",
-      "title": "status",
+      "title": "Κατάσταση",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -561,7 +583,7 @@
     },
     {
       "column": "ps_dm",
-      "title": "Έτος-ps_dm",
+      "title": "Διδακτικές Μονάδες",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -638,7 +660,7 @@
     },
     {
       "column": "priority",
-      "title": "level",
+      "title": "Προτεραιότητα",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -694,7 +716,7 @@
     },
     {
       "column": "mp_code",
-      "title": "Κωδικός Μετ/ακου",
+      "title": "Κωδικός MP",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -785,7 +807,7 @@
     },
     {
       "column": "email",
-      "title": "mail",
+      "title": "E-mail",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -841,77 +863,77 @@
     },
     {
       "column": "date_index",
-      "title": "date_index",
+      "title": "Ημέρα",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "fromt",
-      "title": "fromt",
+      "title": "Από Ώρα",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "tot",
-      "title": "tot",
+      "title": "Μέχρι Ώρα",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "type",
-      "title": "type",
+      "title": "Τύπος",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "period",
-      "title": "period",
+      "title": "Ακαδημαϊκή Περίοδος",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "room_id",
-      "title": "room_id",
+      "title": "Αίθουσα",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "fromd",
-      "title": "fromd",
+      "title": "Από ημ/νία",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "tod",
-      "title": "tod",
+      "title": "Έως ημ/νία",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "request_id",
-      "title": "request_id",
+      "title": "Αίτημα",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "status",
-      "title": "status",
+      "title": "Κατάσταση",
       "visible": true,
       "sorted": false,
       "filter": ""
     },
     {
       "column": "comment",
-      "title": "comment",
+      "title": "Σχόλια",
       "visible": true,
       "sorted": false,
       "filter": ""
@@ -953,11 +975,15 @@
         {
           "column": "items",
           "title": "Εξοπλισμός"
+        },
+        {
+          "column": "itemtype",
+          "title": "Κατηγορίες Εξοπλισμού"
         }
       ]
     },
     {
-      "title": "Ακαδημαικοί Περίοδοι",
+      "title": "Ακαδημαϊκοί Περίοδοι",
       "smenu": [
         {
           "column": "periods",
@@ -970,12 +996,12 @@
         {
           "column": "tms",
           "title": "Τμήματα"
+        },
+        {
+          "column": "config",
+          "title": "Config"
         }
       ]
-    },
-    {
-      "column": "config",
-      "title": "Config"
     },
     {
       "column": "requests",
@@ -992,6 +1018,23 @@
     {
       "column": "dashboard",
       "title": "Πίνακας ελέγχου"
+    },
+    {
+      "title": "Βοηθητικά Προγράμματα",
+      "smenu": [
+        {
+          "column": "utilities",
+          "title": "Αντιγραφή Περιόδου"
+        },
+        {
+          "column": "checkpending",
+          "title": "Διαγραφή Ληγμένων"
+        },
+        {
+          "column": "holidayhold",
+          "title": "Ορισμός Αργιών"
+        }
+      ]
     }
   ],
   "homeButtonUserTableConf": [
@@ -1004,21 +1047,21 @@
       "title": "Κατηγορίες Αιθουσών"
     },
     {
-      "column": "dashboard",
-      "title": "Πίνακας ελέγχου"
+      "column": "roombook",
+      "title": "Διαθεσιμότητα"
     },
     {
       "column": "usercreaterequests",
       "title": "Αίτημα δέσμευσης"
     },
     {
-      "column": "roombook",
-      "title": "Διαθεσιμότητα"
+      "column": "dashboard",
+      "title": "Πίνακας ελέγχου"
     }
   ],
   "publicUserTableConf": [
     {
-      "column": "publicroombook",
+      "column": "roombook",
       "title": "Διαθεσιμότητα"
     }
   ],
@@ -1077,7 +1120,7 @@
     },
     {
       "hr": "#/users/id/roles",
-      "content": "Ρόλοι χρηστών",
+      "content": "Ρόλοι χρηστή",
       "gicon": "glyphicon-import",
       "place": "left"
     },
@@ -1109,7 +1152,7 @@
     },
     {
       "hr": "#/config/id/ps",
-      "content": "Μαθηματα Ακαδημαϊκου ετους",
+      "content": "Μαθηματα Ακαδημαϊκου έτους",
       "gicon": "glyphicon-folder-open",
       "place": "left"
     }
@@ -1125,6 +1168,14 @@
       "hr": "#/items/id/rooms",
       "content": "Εξοπλισμός Αιθουσών",
       "gicon": "glyphicon-folder-open",
+      "place": "left"
+    }
+  ],
+  "itemtypeTableConfOps": [
+    {
+      "hr": "#/itemtype/id",
+      "content": "Επεξεργασία",
+      "gicon": "glyphicon-pencil",
       "place": "left"
     }
   ],
@@ -1192,7 +1243,7 @@
     {
       "hr": "#/userscategories/id/users",
       "content": "Xρήστες",
-      "gicon": "glyphicon-transfer",
+      "gicon": "glyphicon-user",
       "place": "left"
     }
   ],
@@ -1222,7 +1273,7 @@
     {
       "hr": "#/roles/id/users",
       "content": "Χρήστες ρόλου",
-      "gicon": "glyphicon-import",
+      "gicon": "glyphicon-user",
       "place": "left"
     }
   ],
@@ -1236,22 +1287,22 @@
   ],
   "userRoleStatus": [
     {
-      "text": "Ενεργός",
-      "value": 1
-    },
-    {
       "text": "Ανενεργός",
       "value": 0
+    },
+    {
+      "text": "Ενεργός",
+      "value": 1
     }
   ],
   "configStatus": [
     {
-      "text": "Ενεργό τώρα",
+      "text": "Ενεργό",
       "value": 1
     },
     {
       "text": "Ληγμένο",
-      "value": 0
+      "value": -1
     }
   ],
   "itemStatus": [
@@ -1278,12 +1329,12 @@
   ],
   "periodStatus": [
     {
-      "text": "Ενεργή τώρα",
-      "value": 1
-    },
-    {
       "text": "Ληγμένη",
       "value": 0
+    },
+    {
+      "text": "Ενεργή",
+      "value": 1
     }
   ],
   "requestStatus": [
@@ -1309,7 +1360,7 @@
     },
     {
       "text": "Διαμόρφωση",
-      "value": 4
+      "value": 5
     }
   ],
   "requestViewStatus": [
@@ -1338,19 +1389,14 @@
   ],
   "roomStatus": [
     {
-      "text": "Υπο κατασκευή/επιδιόρθωση",
+      "text": "Ανενεργή",
       "value": 0
     },
     {
-      "text": "Σε κράτηση",
-      "value": 1
-    },
-    {
       "text": "Διαθέσιμη",
-      "value": 2
+      "value": 1
     }
   ],
-
   "weekdaysTableDateIndex": [
     {
       "text": "Κυριακή",

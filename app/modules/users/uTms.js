@@ -3,9 +3,7 @@ angular.module('Users')
 
         $scope.ctrl = makeController.n2nController('/users', 'tms', {comments: '', defaultTm: ''});
         $scope.ctrl.init();
-
         $scope.tms = {};
-
         api.apiCall('GET', 'api/public/tms', function (results) {
             $scope.tms = results.data;
         });

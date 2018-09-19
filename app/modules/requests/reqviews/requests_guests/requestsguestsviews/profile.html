@@ -3,24 +3,24 @@
         <div class="pageButtons">
             <a href back-button type="button" class="btn btn-warning">
 				<span class="glyphicon glyphicon-chevron-left">
-					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
 				</span>
             </a>
         </div>
-        <div class="pageTitle">Διαχείριση μελών τηλεδιάσκεψης</div>
+        <div class="pageTitle">{{"Διαχείριση μελών τηλεδιάσκεψης"| translate}}</div>
     </div>
     <div class="contentHolder">
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <div class="formGroupItems">
                 <div class="inlineItems">
                     <div class="form-group">
-                        <label class=" formItemLabel" for="name">Όνοματεπώνυμο:</label>
+                        <label class=" formItemLabel" for="name">{{"Όνοματεπώνυμο"| translate}}>:</label>
                         <div class="smallInput">
                             <input id="name" name="name" class="form-control" type="text" ng-model="ctrl.item.name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class=" formItemLabel" for="uni">Πανεπιστήμιο:</label>
+                        <label class=" formItemLabel" for="uni">{{"Πανεπιστήμιο"| translate}}:</label>
                         <div class="smallInput">
                             <input id="uni" name="uni" class="form-control" type="text" ng-model="ctrl.item.uni"></div>
 
@@ -28,14 +28,14 @@
                 </div>
                 <div class="inlineItems">
                     <div class="form-group">
-                        <label class=" formItemLabel" for="email">E-mail:</label>
+                        <label class=" formItemLabel" for="email">{{"E-Mail"| translate}}:</label>
                         <div class="smallInput">
                             <input id="email" name="email" class="form-control" type="email" ng-model="ctrl.item.email">
                         </div>
 
                     </div>
                     <div class="form-group">
-                        <label class=" formItemLabel" for="phone">Τηλέφωνο:</label>
+                        <label class=" formItemLabel" for="phone">{{"Τηλέφωνο"| translate}}:</label>
                         <div class="smallInput">
                             <input id="phone" name="phone" class="form-control" type="number"
                                    ng-model="ctrl.item.phone">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class=" formItemLabel" for="comment">Σχόλια:</label>
+                    <label class=" formItemLabel" for="comment">{{"Σχόλια"| translate}}:</label>
                     <div class="longInput">
                         <textarea id="comment" name="comment" class="form-control" type="text"
                                   ng-model="ctrl.item.comment"></textarea>
@@ -52,10 +52,10 @@
                 </div>
             </div>
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.id>0">Ανανέωση
+                    ng-if="ctrl.item.id>0">{{"Ανανέωση"| translate}}
             </button>
             <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.name && !ctrl.item.id">Αποθήκευση
+                    ng-if="ctrl.item.name && !ctrl.item.id">{{"Αποθήκευση"| translate}}
             </button>
         </form>
     </div>

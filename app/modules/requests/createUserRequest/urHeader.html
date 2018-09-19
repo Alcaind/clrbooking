@@ -13,31 +13,26 @@
             <div ng-repeat="room in selectedRooms">- {{room.name}}</div>
         </div>-->
         <button ng-click="reload()" class="btn btn-warning"
-                style="margin: 4px; border: 1px solid #ababab; ">Αρχηκοποίηση
+                style="margin: 4px; border: 1px solid #ababab; ">{{"Αρχικοποίηση"| translate}}
         </button>
         <div style=" width: 100%; padding-top: 6px;   padding-right: 6px;">
             <input type="text" ng-model="item.descr"
                    class="form-control ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched"
-                   placeholder="Αιτιολογία αιτήματος"></div>
-        <div style="position: center ">
-            <status-selector options="requestViewStatus" status-title="Request status"
+                   placeholder='{{"Αιτιολογία αιτήματος"| translate}}'></div>
+        <div id="sra" style="min-width: 313px;">
+
+            <status-selector options="requestViewStatus" status-title='{{"Request status"| translate}}'
                              output-value="item.status"></status-selector>
         </div>
-
-        <div>
-            <a tooltip-placement="left" uib-tooltip="NEW" type="button" class="btn btn-primary hippo"
-               ng-click="newUserRequest()" style="min-width: 50px; border-radius: 0px;">
-                <span class="glyphicon glyphicon-plus"></span></a>
-        </div>
-        <div>
-            <button ng-hide="adminConfiguration()" tooltip-placement="left" uib-tooltip="COPY DAY" type="button"
-                    class="btn btn-primary hippo"
-                    ng-click="copyDayRequest(calendarSelectedDay)" style="min-width: 50px; border-radius: 0px;">
-                <span class="glyphicon glyphicon-copy"></span></button>
-        </div>
+        <!--<div>-->
+        <!--<a tooltip-placement="left" uib-tooltip='{{"ΝΕΟ Αίτημα"| translate}}' type="button" class="btn btn-primary hippo"-->
+        <!--ng-click="newUserRequest()" style="min-width: 50px; border-radius: 0px;">-->
+        <!--<span class="glyphicon glyphicon-plus"></span></a>-->
+        <!--</div>-->
         <div>
             <!--ng-hide="enablePost()"-->
-            <button ng-show="checkBookIsClicked" tooltip-placement="left" uib-tooltip="POST" type="button"
+            <button ng-show="checkBookIsClicked" tooltip-placement="left"
+                    uib-tooltip='{{"Καταχώρηση Αιτήματος"| translate}}' type="button"
                     class="btn btn-primary hippo"
                     ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;">
                 <span class="glyphicon glyphicon-saved"></span></button>
@@ -46,3 +41,7 @@
     <!--<req-navigation></req-navigation>-->
 
 </div>
+<form-item-selector selector-title='{{"Έτος"|translate}}' return-column="id" view-column="year"
+                    dp="config" searchable="false" output-value="selectedConfig" ng-init="selectedConfig=8"
+                    style="width: 100%">
+</form-item-selector>

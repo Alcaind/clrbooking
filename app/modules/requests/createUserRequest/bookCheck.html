@@ -1,10 +1,11 @@
 <div style="padding: 6px 0px 0px 0px;">
     <button ng-click="showMyBook()" class="btn btn-warning" style="width: 100%;border: 1px solid #ababab; ">
-        Έλεγχος Διαθεσιμότητας ...
+        {{"Έλεγχος Διαθεσιμότητας ..."| translate}}
     </button>
     <calendar-book rooms="selectedRooms" fromd="item.fromd" tod="item.tod" dates-index="item.date_index" item="item"
                    book="book" booking-errors="bookingErrors" selected-day="calendarSelectedDay"
-                   show-errors="true"></calendar-book>
+                   show-errors="true" must-refresh="mustRefresh" tms="tms" teachers="allTeachers" periods=""
+                   coming-from-book-controller="false"></calendar-book>
     <!--<div ng-repeat="e in bookingErrors track by $index">-->
     <!--&lt;!&ndash;{{e}}&ndash;&gt;-->
     <!--</div>-->

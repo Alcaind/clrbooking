@@ -60,7 +60,7 @@ $app->delete('/kats/{id}', function ($request, $response, $args) {
 $app->put('/kats/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    // print_r($data);
     try {
         $kat = \App\Models\Kat::find($id);
         $kat->tm_id = $data['tm_id'] ?: $kat->tm_id;
@@ -73,3 +73,5 @@ $app->put('/kats/{id}', function ($request, $response, $args) {
     }
     return $response->getBody()->write($kat->toJson());
 });
+
+

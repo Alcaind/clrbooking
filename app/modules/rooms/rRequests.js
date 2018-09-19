@@ -8,15 +8,24 @@ angular.module('Rooms')
 
         api.apiCall('GET', globalVarsSrv.getGlobalVar('appUrl') + "/rooms/" + $routeParams.id, function (results) {
             room = results.data;
-            //$scope.calendar = [];
+            $scope.calendar = [];
 
-            $scope.ctrl = makeController.mainController('/requests/rooms/' + $routeParams.id, 'requestsTableConf', "Κατοχυρωμένα αιτήματα στην αίθουσα " + room.name);
+            $scope.ctrl = makeController.mainController('/requests/rooms/' + $routeParams.id, 'requestsTableConf', $translate.instant("Κατοχυρωμένα αιτήματα στην αίθουσα") + ' ' + room.name);
             $scope.ctrl.init();
+
+            $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
+
+            $scope.THLbutton = function (item) {
+                $scope.ctrl.operations[2].ifVisible = true;
+                if (item.class_use != 7) {
+                    $scope.ctrl.operations[2].ifVisible = false;
+                }
+            };
 
             $scope.$watch('ctrl.dp', function () {
                 for (var i = 0; i < $scope.ctrl.dp.length; i++) {
-                    var mdt = new Date($scope.ctrl.dp[i].fromd + 'T' + $scope.ctrl.dp[i].fromt);
-                    $scope.calendar[$scope.ctrl.dp[i].date_index][mdt.getHours()] = 1;
+                    var mdt = new Date($scope.ctrl.dp[i].fromd + 'T' + $scope.ctrl.dp[i].pivot.fromt);
+                    // $scope.calendar[$scope.ctrl.dp[i].pivot.date_index][mdt.getHours()] = 1;
                 }
             });
         })
@@ -25,20 +34,7 @@ angular.module('Rooms')
         $scope.ctrl = makeController.profileController('/rooms/requests', 'reqguestsTableConf');
         $scope.ctrl.init();
         $scope.ctrl.item['room_id'] = $routeParams.rid;
-
-
-        $scope.users = {};
-
-        api.apiCall('GET', 'api/public/users', function (results) {
-            $scope.users = results.data;
-        });
-
-        $scope.periods = {};
-
-        api.apiCall('GET', 'api/public/periods', function (results) {
-            $scope.periods = results.data;
-        });
-
+        $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
         $scope.admin = [];
 
         api.apiCall('GET', 'api/public/users', function (results) {

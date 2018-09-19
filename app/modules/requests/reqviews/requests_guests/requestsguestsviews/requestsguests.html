@@ -3,7 +3,7 @@
         <div class="pageButtons">
             <a href back-button type="button" class="btn btn-warning">
             <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span></span></a>
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span></span></a>
             <div class="operations">
                 <operations ng-repeat="op in ctrl.operations"
                             hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"

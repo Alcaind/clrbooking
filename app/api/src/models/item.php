@@ -22,4 +22,9 @@ class Items extends Model
         return $this->belongsToMany("\\App\\Models\\Rooms", 'room_items', 'item_id', 'room_id')->withPivot('comments', 'stat', 'from', 'to');
     }
 
+    public function itemtype()
+    {
+        return $this->belongsTo('\\App\\Models\\ItemType', 'type_id');
+    }
+
 }

@@ -1,9 +1,9 @@
 'use strict';
 
-var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies', 'MainComponents']);
+var globalVars = angular.module('GlobalVarsSrvs', ['ApiModules', 'ngCookies', 'MainComponents', 'pascalprecht.translate']);
 
-globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', 'api', function ($http, $cookies, $window, api) {
-    var globalVariables = {};
+globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', 'api', '$translate', function ($http, $cookies, $window, api, $translate) {
+    var globalVariables = {appStarted: false};
     var listeners = [];
 
     function addListener(varListen, listener) {
@@ -41,7 +41,7 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', 'api', func
         globalVariables = {};
     }
 
-    function initFromFile(fName) {
+    function initFromFile(fName, callback) {
         /*api.apiCall('GET', '/panteion/app/api/public/appconfig/' + fName, function (res) {
             setGlobal(JSON.parse(res.data[0].value));
         }, function (res) {
@@ -50,25 +50,33 @@ globalVars.factory('globalVarsSrv', ['$http', '$cookies', '$window', 'api', func
         $http.get('config/appConfig.json')
             .then(function (res) {
                 setGlobal(res.data);
+                $translate.use(res.data.lang);
+                if (callback) callback();
+                globalVariables.appStarted = true;
             }, function (res) {
                 console.log(res | JSON);
             });
     }
 
     function cookieSave() {
-        $window.localStorage['appConf' + getGlobalVar('auth')['username']] = JSON.stringify(globalVariables);
+        if (getGlobalVar('auth'))
+            $window.localStorage['appConf' + getGlobalVar('auth')['username']] = JSON.stringify(globalVariables);
 
     }
 
-    function cookieGet(usr) {
+    function cookieGet(usr, callback) {
         var appConf = $window.localStorage['appConf' + usr];
         if (usr !== getGlobalVar('auth')['username']) return;
         globalVariables = appConf ? Object.assign(globalVariables, JSON.parse(appConf)) : globalVariables;
+        $translate.use(globalVariables.lang);
+        console.log($translate.instant('Αρχική'));
+        if (callback) callback();
+        globalVariables.appStarted = true;
         return globalVariables;
     }
 
-    function appInit(fName, usr) {
-        if (!cookieGet(usr) || !globalVariables['appUrl']) initFromFile(fName);
+    function appInit(fName, usr, callback) {
+        if (!cookieGet(usr, callback) || !globalVariables['appUrl']) initFromFile(fName, callback);
     }
 
     var glbSrv = {
@@ -105,6 +113,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         /**
          * @type {{dp: Array, baseURL: *, totalRows: number, tableColumns: *, title: *, operations: *, url: *}}
          */
+        AuthenticationService.CheckCredentials();
 
         var ctrl = {
             dp: [],
@@ -157,8 +166,8 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             });
         };
 
+
         ctrl.init = function () {
-            AuthenticationService.CheckCredentials();
             ctrl.cth = ctrl.tableColumns[0];
             ctrl.cth.sorted = true;
             ctrl.getAll();
@@ -182,6 +191,7 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         ctrl.setFilter = function (th) {
             ctrl.filter[th.column] = th.filter;
         };
+
 
         return ctrl;
     }
@@ -319,7 +329,6 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
             } else {
                 api.apiCall('GET', ctrl.baseURL + "/" + $routeParams.id, function (results) {
                     ctrl.item = results.data;
-
                 });
             }
         };
@@ -334,8 +343,15 @@ globalVars.factory('makeController', ['globalVarsSrv', 'api', 'orderByFilter', '
         };
 
         function makeDates(item) {
-            if (item['fromd']) {
+            if (!item['fromd']) return;
+            if (typeof item['fromd'] === 'string') {
+                item['fromd'] = new Date(item['fromd']);
+            } else {
                 item['fromd'] = new Date(item['fromd'].getTime() - item['fromd'].getTimezoneOffset() * 60000);
+            }
+            if (typeof item['tod'] === 'string') {
+                item['tod'] = new Date(item['tod']);
+            } else {
                 item['tod'] = new Date(item['tod'].getTime() - item['tod'].getTimezoneOffset() * 60000);
             }
         }

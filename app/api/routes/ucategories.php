@@ -67,7 +67,7 @@ $app->delete('/userscategories/{id}', function ($request, $response, $args) {
 $app->put('/userscategories/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    //print_r($data);
     try {
         $ucategories = \App\Models\Ucategories::find($id);
 
@@ -89,7 +89,7 @@ $app->get('/users/userscategories/{id}', function (Request $request, Response $r
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $users = \App\Models\Users::with(['ucategories'])
+        $users = \App\Models\Users::with(['ucategories', 'tm'])
             ->where('cat_id', '=', $id)
             ->get();
     } catch (PDOException $e) {

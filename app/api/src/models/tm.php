@@ -23,7 +23,7 @@ class Tm extends Model
 
     public function Users()
     {
-        return $this->belongsToMany('\\App\\Models\\Users', 'tm_users', 'user_id', 'tm_id')->withPivot('comments', 'defaultTm');
+        return $this->belongsToMany('\\App\\Models\\Users', 'tm_users', 'tm_id', 'user_id')->withPivot('comments', 'defaultTm');
     }
 
     public function supervisor()

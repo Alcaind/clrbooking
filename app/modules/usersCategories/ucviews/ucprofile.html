@@ -3,23 +3,23 @@
         <div class="pageButtons">
             <a href back-button type="button" class="btn btn-warning">
 				<span class="glyphicon glyphicon-chevron-left">
-					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
 				</span>
             </a>
         </div>
-        <div class="pageTitle">Διαχείριση Κατηγορίας Χρήστη</div>
+        <div class="pageTitle">{{"Διαχείριση Κατηγορίας Χρήστη"| translate}}</div>
     </div>
     <div class="contentHolder">
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <div class="formGroupItems">
                 <div class="form-group">
-                    <label for="descr" class=" formItemLabel">Τίτλος Κατ.:</label>
+                    <label for="descr" class=" formItemLabel">{{"Τίτλος Κατ."| translate}}:</label>
                     <div class="longInput">
                         <input id="descr" name="descr" class="form-control" ng-model="ctrl.item.descr">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="comment" class=" formItemLabel">Σχόλια:</label>
+                    <label for="comment" class=" formItemLabel">{{"Σχόλια"| translate}}:</label>
                     <div class="longInput">
                         <textarea id="comment" name="comment" class="form-control" type="text"
                                   ng-model="ctrl.item.comment"></textarea>
@@ -27,10 +27,10 @@
                 </div>
             </div>
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.id>0">Ανανέωση
+                    ng-if="ctrl.item.id>0">{{"Ανανέωση"| translate}}
             </button>
             <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.descr && !ctrl.item.id">Αποθήκευση
+                    ng-if="ctrl.item.descr && !ctrl.item.id">{{"Αποθήκευση"| translate}}
             </button>
         </form>
     </div>

@@ -60,7 +60,7 @@ $app->delete('/psstats/{id}', function ($request, $response, $args) {
 $app->put('/psstats/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    //print_r($data);
     try {
         $psstat = \App\Models\Stats::find($id);
         $psstat->id = $data['id'] ?: $psstat->id;

@@ -3,34 +3,34 @@
         <div class="pageButtons">
             <a href back-button type="button" class="btn btn-warning">
 				<span class="glyphicon glyphicon-chevron-left">
-					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
 				</span>
             </a>
         </div>
-        <div class="pageTitle">Διαχείριση Χρήστη</div>
+        <div class="pageTitle">{{"Διαχείριση Χρήσης Αίθουσας"| translate}}</div>
     </div>
     <div class="contentHolder">
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <div class="formGroupItems">
                 <div class="form-group" ng-class="{ 'has-error' : itemForm.synt.$invalid && !itemForm.synt.$pristine }">
-                    <label class=" formItemLabel" for="synt">Συντομογραφία<span
+                    <label class=" formItemLabel" for="synt">{{"Συντομογραφία"| translate}}<span
                             class="form-required">*</span>:</label>
                     <div class="longInput">
                         <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt"
                                ng-minlength="1" ng-maxlength="4">
                     </div>
-                    <p ng-show="itemForm.synt.$invalid && !itemForm.synt.$pristine" class="help-block">Εισάγετε
-                        συντομογραφία.Μέχρι 4 γράμματα.</p>
+                    <p ng-show="itemForm.synt.$invalid && !itemForm.synt.$pristine" class="help-block">{{"Εισάγετε
+                        συντομογραφία.Μέχρι 4 γράμματα."| translate}}</p>
                 </div>
                 <div class="form-group">
-                    <label class=" formItemLabel" for="priority">Προτεραιότητα:</label>
+                    <label class=" formItemLabel" for="priority">{{"Προτεραιότητα"| translate}}:</label>
                     <div class="longInput">
-                        <input id="priority" name="priority" class="form-control" type="text"
+                        <input id="priority" name="priority" class="form-control" type="number"
                                ng-model="ctrl.item.priority">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="descr" class=" formItemLabel">Σχόλια:</label>
+                    <label for="descr" class=" formItemLabel">{{"Σχόλια"| translate}}:</label>
                     <div class="longInput">
                         <textarea id="descr" name="descr" class="form-control" type="text"
                                   ng-model="ctrl.item.descr"></textarea>
@@ -38,10 +38,10 @@
                 </div>
             </div>
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.id>0">Ανανέωση
+                    ng-if="ctrl.item.id>0">{{"Ανανέωση"| translate}}
             </button>
             <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.synt && !ctrl.item.id">Αποθήκευση
+                    ng-if="ctrl.item.synt && !ctrl.item.id">{{"Αποθήκευση"| translate}}
             </button>
         </form>
     </div>

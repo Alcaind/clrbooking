@@ -10,7 +10,6 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \App\Models\ApiError as ApiError;
 
-
 $app->get('/requests/guests/{id}', function (Request $request, Response $response, $args) {
     header("Content-Type: application/json");
     $id = $args['id'];
@@ -46,6 +45,30 @@ $app->post('/requests/guests', function (Request $request, Response $response) {
     return $response->withStatus(201)->getBody()->write($guests->toJson());
 });
 
+$app->post('/request/guest', function (Request $request, Response $response) {
+    header("Content-Type: application/json");
+    $data = $request->getParsedBody();
+    try {
+        $guests = new \App\Models\Guests();
+        $guests->req_id = $data['req_id'];
+        $guests->name = $data['name'];
+        $guests->uni = $data['uni'];
+        $guests->email = $data['email'];
+        $guests->phone = $data['phone'];
+        $guests->comment = $data['comment'];
+        $guests->save();
+
+        $req = \App\Models\Requests::find($data['req_id']);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->withStatus(201)->getBody()->write($req->guests()->get()->toJson());
+});
+
+
 $app->delete('/requests/guests/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     try {
@@ -63,7 +86,7 @@ $app->delete('/requests/guests/{id}', function ($request, $response, $args) {
 $app->put('/requests/guests/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    //print_r($data);
     try {
         $guests = \App\Models\Guests::find($id);
 

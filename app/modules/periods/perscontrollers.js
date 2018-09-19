@@ -14,10 +14,10 @@ angular.module('Periods', [
 
 
 }])
-    .controller('PeriodProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
+    .controller('PeriodProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api, ClrStatusSrv) {
         $scope.ctrl = makeController.profileController('/periods', 'periodTableConf');
         $scope.ctrl.init();
-
+        $scope.statusOptions = ClrStatusSrv.getStatus('periodStatus');
         $scope.configs = {};
 
         api.apiCall('GET', 'api/public/config', function (results) {

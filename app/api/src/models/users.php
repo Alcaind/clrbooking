@@ -63,7 +63,7 @@ class Users extends Model {
 
     public function rooms()
     {
-        return $this->belongsToMany('\\App\\Models\\Rooms', 'users_rooms', 'room_id', 'users_id')->withPivot('comment');
+        return $this->belongsToMany('\\App\\Models\\Rooms', 'users_rooms', 'users_id', 'room_id')->withPivot('comment');
     }
 
 }

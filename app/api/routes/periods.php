@@ -86,7 +86,7 @@ $app->put('/periods/{id}', function ($request, $response, $args) {
         $periods->comments = $data['comments'] ?: $periods->comments;
         $periods->conf_id = $data['conf_id'] ?: $periods->conf_id;
         $periods->porder = $data['porder'] ?: $periods->porder;
-        $periods->status = $data['status'] ?: $periods->status;
+        $periods->status = $data['status'];
         $periods->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);

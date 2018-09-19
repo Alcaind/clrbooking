@@ -3,18 +3,18 @@
         <div class="pageButtons">
             <a href back-button type="button" class="btn btn-warning">
 				<span class="glyphicon glyphicon-chevron-left">
-					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
 				</span>
             </a>
         </div>
-        <div class="pageTitle">Διαχείριση Αίθουσας</div>
+        <div class="pageTitle">{{"Διαχείριση Αίθουσας"| translate}}</div>
     </div>
     <div class="contentHolder">
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
             <!-- NAME -->
             <div class="formGroupItems">
                 <div class="form-group">
-                    <label class=" formItemLabel" for="name">Όνομα:</label>
+                    <label class=" formItemLabel" for="name">{{"Όνομα Αιθουσας"| translate}}:</label>
                     <div class="longInput">
                         <input id="name" name="name" class="form-control" type="text" ng-model="ctrl.item.name">
                     </div>
@@ -31,19 +31,18 @@
                 <div class="inlineItems">
                     <!--type-->
                     <div class="form-group">
-                        <label for="type" class=" formItemLabel">Κατηγορια:</label>
+                        <label for="type" class=" formItemLabel">{{"Κατηγορία"| translate}}:</label>
                         <div class="extraSmallInput">
                             <select id="type" class="form-control" ng-model="ctrl.item.category"
                                     ng-options="category.id as category.descr for category in categories"> </select>
                         </div>
                     </div>
                     <div class="directiveFormItem">
-                        <!--status-->
-                        <status-selector status-title="Κατάσταση" options="roomStatus"
+                        <status-selector status-title='{{"Κατάσταση"| translate}}' options="roomStatus"
                                          output-value="ctrl.item.status"></status-selector>
                     </div>
                     <div class="form-group">
-                        <label class=" formItemLabel smallInputLabel" for="conf_id">Έτος:</label>
+                        <label class=" formItemLabel smallInputLabel" for="conf_id">{{"Έτος"| translate}}:</label>
                         <div class="extraSmallInput">
                             <select id="conf_id" name="conf_id" class="form-control" ng-model="ctrl.item.conf_id"
                                     ng-options="config.id as config.year for config in configs"></select>
@@ -51,10 +50,10 @@
                     </div>
                 </div>
                 <hr class="myHr"/>
-                <span class="hrSeperator">Διεύθυνση</span>
+                <span class="hrSeperator">{{"Διεύθυνση"| translate}}</span>
                 <!-- ADDRESS -->
                 <div class="form-group">
-                    <label for="address" class=" formItemLabel">Διευθυνση:</label>
+                    <label for="address" class=" formItemLabel">{{"Διεύθυνση"| translate}}:</label>
                     <div class="longInput">
                         <input id="address" name="address" class="form-control" type="text"
                                ng-model="ctrl.item.address">
@@ -64,17 +63,17 @@
                     <!-- building -->
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.building.$invalid && !itemForm.building.$pristine }">
-                        <label for="building" class=" formItemLabel">Κτίριο<span class="form-required">*</span>:</label>
+                        <label for="building" class=" formItemLabel">{{"Κτίριο"| translate}}<span class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="building" name="building" class="form-control" type="text"
                                    ng-model="ctrl.item.building">
                         </div>
                         <p ng-show="itemForm.building.$invalid && !itemForm.building.$pristine" class="help-block">
-                            Εισάγετε κτίριο.</p>
+                            {{"Εισάγετε κτίριο."| translate}}</p>
                     </div>
                     <!--floor-->
                     <div class="form-group">
-                        <label for="floor" class=" formItemLabel smallInputLabel">Όροφος:</label>
+                        <label for="floor" class=" formItemLabel smallInputLabel">{{"Όροφος"| translate}}:</label>
                         <div class="smallInput">
                             <input id="floor" name="floor" class="form-control" type="text" ng-model="ctrl.item.floor">
                         </div>
@@ -83,38 +82,31 @@
             </div>
             <div class="formGroupItems">
                 <hr class="myHr"/>
-                <span class="hrSeperator">Έδρανα</span>
+                <span class="hrSeperator">{{"Έδρανα"| translate}}</span>
                 <div class="inlineItems">
                     <!--active-->
-                    <div class="form-group"
-                         ng-class="{ 'has-error' : itemForm.active.$invalid && !itemForm.active.$pristine }">
-                        <label for="active" class=" formItemLabel smallInputLabel">Ενεργά<span
-                                class="form-required">*</span>:</label>
+                    <div class="form-group">
+                        <label for="active" class=" formItemLabel smallInputLabel">{{"Ενεργά"| translate}}:</label>
                         <div class="extraSmallInput">
                             <input id="active" name="active" class="form-control" type="number"
                                    ng-model="ctrl.item.active">
-                            <p ng-show="itemForm.active.$invalid && !itemForm.active.$pristine" class="help-block">
-                                Εισάγετε ενεργά καθίσματα.</p>
                         </div>
                     </div>
                     <!--destroyed-->
                     <div class="form-group">
-                        <label for="destroyed" class=" formItemLabel midInputLabel">Καταστροφές:</label>
+                        <label for="destroyed" class=" formItemLabel midInputLabel">{{"Καταστροφές"|
+                            translate}}:</label>
                         <div class="extraSmallInput">
                             <input id="destroyed" name="destroyed" class="form-control" type="text"
                                    ng-model="ctrl.item.destroyed">
                         </div>
                     </div>
                     <!--nonexist-->
-                    <div class="form-group"
-                         ng-class="{ 'has-error' : itemForm.nonexist.$invalid && !itemForm.nonexist.$pristine }">
-                        <label for="nonexist" class=" formItemLabel midInputLabel">Ανενεργά<span
-                                class="form-required">*</span>:</label>
+                    <div class="form-group">
+                        <label for="nonexist" class=" formItemLabel midInputLabel">{{"Ανενεργά"| translate}}:</label>
                         <div class="extraSmallInput">
                             <input id="nonexist" name="nonexist" class="form-control" type="text"
                                    ng-model="ctrl.item.nonexist">
-                            <p ng-show="itemForm.nonexist.$invalid && !itemForm.nonexist.$pristine" class="help-block">
-                                Εισάγετε ανενεργά καθίσματα.</p>
                         </div>
                     </div>
                 </div>
@@ -123,12 +115,12 @@
             <div class="formGroupItems">
 
                 <hr class="myHr"/>
-                <span class="hrSeperator">Χωρητικότητα</span>
+                <span class="hrSeperator">{{"Χωρητικότητα"| translate}}</span>
 
                 <div class="inlineItems">
                     <!--capasity-->
                     <div class="form-group">
-                        <label for="capasity" class=" formItemLabel">Εδρανα Διδασκαλίας:</label>
+                        <label for="capasity" class=" formItemLabel">{{"Εδρανα Διδασκαλίας"| translate}}:</label>
                         <div class="extraSmallInput">
                             <input id="capasity" name="capasity" class="form-control" type="number"
                                    ng-model="ctrl.item.capasity">
@@ -137,7 +129,7 @@
 
                     <!--exams_capasity-->
                     <div class="form-group">
-                        <label for="exams_capasity" class=" formItemLabel">Εδρανα Εξετάσεων:</label>
+                        <label for="exams_capasity" class=" formItemLabel">{{"Εδρανα Εξετάσεων"| translate}}:</label>
                         <div class="extraSmallInput">
                             <input id="exams_capasity" name="exams_capasity" class="form-control" type="number"
                                    ng-model="ctrl.item.exams_capasity">
@@ -148,7 +140,7 @@
                 <div class="inlineItems">
                     <!--height-->
                     <div class="form-group">
-                        <label for="height" class=" formItemLabel">Υψος/Βαθος:</label>
+                        <label for="height" class=" formItemLabel">{{"Υψος/Βαθος"| translate}}:</label>
                         <div class="extraSmallInput">
                             <input id="height" name="height" class="form-control" type="number"
                                    ng-model="ctrl.item.height">
@@ -157,7 +149,7 @@
 
                     <!--width-->
                     <div class="form-group">
-                        <label for="width" class=" formItemLabel smallInputLabel">Πλάτος:</label>
+                        <label for="width" class=" formItemLabel smallInputLabel">{{"Πλάτος"| translate}}:</label>
                         <div class="extraSmallInput">
                             <input id="width" name="width" class="form-control" type="number"
                                    ng-model="ctrl.item.width">
@@ -165,7 +157,8 @@
                     </div>
                     <!--capasity_categ-->
                     <div class="form-group">
-                        <label for="capasity_categ" class=" formItemLabel midInputLabel">Κατηγ. Χωρητ.:</label>
+                        <label for="capasity_categ" class=" formItemLabel midInputLabel">{{"Κατηγ. Χωρητ."|
+                            translate}}:</label>
                         <div class="extraSmallInput">
                             <input id="capasity_categ" name="capasity_categ" class="form-control" type="text"
                                    ng-model="ctrl.item.capasity_categ">
@@ -174,7 +167,7 @@
                 </div>
                 <!--xoros-->
                 <div class="form-group">
-                    <label for="xoros" class=" formItemLabel">Χώρος:</label>
+                    <label for="xoros" class=" formItemLabel">{{"Χώρος"| translate}}:</label>
                     <div class="longInput">
                         <input id="xoros" name="xoros" class="form-control" type="text" ng-model="ctrl.item.xoros">
                     </div>
@@ -183,7 +176,7 @@
             <div class="formGroupItems">
                 <!--stat_comm-->
                 <div class="form-group">
-                    <label for="stat_comm" class=" formItemLabel">Σχόλια:</label>
+                    <label for="stat_comm" class=" formItemLabel">{{"Σχόλια"| translate}}:</label>
                     <div class="longInput">
                         <textarea id="stat_comm" name="stat_comm" class="form-control" type="text"
                                   ng-model="ctrl.item.stat_comm"></textarea>
@@ -191,10 +184,10 @@
                 </div>
             </div>
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.id>0">Ανανέωση
+                    ng-if="ctrl.item.id>0">{{"Ανανέωση"| translate}}
             </button>
             <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
-                    ng-if="ctrl.item.name && !ctrl.item.id">Αποθήκευση
+                    ng-if="ctrl.item.name && !ctrl.item.id">{{"Αποθήκευση"| translate}}
             </button>
         </form>
     </div>

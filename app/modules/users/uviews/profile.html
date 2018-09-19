@@ -3,11 +3,11 @@
         <div class="pageButtons">
             <a href back-button type="button" class="btn btn-warning">
 				<span class="glyphicon glyphicon-chevron-left">
-					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
 				</span>
             </a>
         </div>
-        <div class="pageTitle">Διαχείριση Χρήστη</div>
+        <div class="pageTitle">{{"Διαχείριση Χρήστη"| translate}}</div>
     </div>
     <div class="contentHolder">
         <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
@@ -21,7 +21,7 @@
                 <!--PASSWORD-->
                 <div class="inlineItems">
                     <div class="form-group">
-                        <label class=" formItemLabel " for="pw1">Κωδικός<span
+                        <label class=" formItemLabel " for="pw1">{{"Κωδικός"| translate}}<span
                                 class="form-required">*</span>:</label>
                         <input id="pw1" name="pw1" type="{{passwordString1}}" class="form-control"
                                ng-model="ctrl.item.hash" ng-init="passwordString1='password'" ng-required=""/>
@@ -31,7 +31,7 @@
                         </a>
                     </div>
                     <div class="form-group">
-                        <label class=" formItemLabel smallInputLabel" for="pw2">Επιβεβαίωση<span
+                        <label class=" formItemLabel smallInputLabel" for="pw2">{{"Επιβεβαίωση"| translate}}<span
                                 class="form-required">*</span>:</label>
                         <input id="pw2" name="pw2" type="{{passwordString2}}" ng-model="pw2"
                                ng-init="passwordString2='password'" pw-check="pw1" ng-required=""/>
@@ -41,53 +41,53 @@
                         </a>
                         <div class="msg-block" ng-show="itemForm.$error">
                             <span class="msg-error"
-                                  ng-show="itemForm.pw2.$error.pwmatch">Ο κωδικός δεν ταιριάζει.</span>
+                                  ng-show="itemForm.pw2.$error.pwmatch">{{"Ο κωδικός δεν ταιριάζει."| translate}}</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="formGroupItems">
                 <hr class="myHr"/>
-                <span class="hrSeperator">Στοιχεία</span>
+                <span class="hrSeperator">{{"Στοιχεία"| translate}}</span>
                 <div class="inlineItems">
                     <!-- FIRSTNAME -->
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.fname.$invalid && !itemForm.fname.$pristine }">
-                        <label for="fname" class=" formItemLabel">Όνομα<span
+                        <label for="fname" class=" formItemLabel">{{"Όνομα"| translate}}<span
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="fname" name="fname" class="form-control" type="text" ng-model="ctrl.item.fname">
                         </div>
-                        <p ng-show="itemForm.fname.$invalid && !itemForm.fname.$pristine" class="help-block">Εισάγετε
-                            όνομα χρήστη.</p>
+                        <p ng-show="itemForm.fname.$invalid && !itemForm.fname.$pristine" class="help-block">{{"Εισάγετε
+                            όνομα χρήστη."| translate}}</p>
                     </div>
                     <!-- LASTNAME -->
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.sname.$invalid && !itemForm.sname.$pristine }">
-                        <label for="sname" class="">Επώνυμο<span
+                        <label for="sname" class="">{{"Επώνυμο"| translate}}<span
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="sname" name="sname" class="form-control" type="text" ng-model="ctrl.item.sname">
                         </div>
-                        <p ng-show="itemForm.sname.$invalid && !itemForm.sname.$pristine" class="help-block">Εισάγετε
-                            επώνυμο χρήστη.</p>
+                        <p ng-show="itemForm.sname.$invalid && !itemForm.sname.$pristine" class="help-block">{{"Εισάγετε
+                            επώνυμο χρήστη."| translate}}</p>
                     </div>
                 </div>
                 <div class="inlineItems">
                     <div class="form-group"
                          ng-class="{ 'has-error' : itemForm.phone.$invalid && !itemForm.phone.$pristine }">
-                        <label for="phone" class=" formItemLabel">Τηλέφωνο<span
+                        <label for="phone" class=" formItemLabel">{{"Τηλέφωνο"| translate}}<span
                                 class="form-required">*</span>:</label>
                         <div class="midInput">
                             <input id="phone" name="phone" class="form-control" type="text"
                                    ng-model="ctrl.item.phone"
                                    ng-minlength="5" ng-maxlength="10">
                         </div>
-                        <p ng-show="itemForm.phone.$invalid && !itemForm.phone.$pristine" class="help-block">Εισάγετε
-                            τηλέφωνο.</p>
+                        <p ng-show="itemForm.phone.$invalid && !itemForm.phone.$pristine" class="help-block">{{"Εισάγετε
+                            τηλέφωνο."| translate}}</p>
                     </div>
                     <div class="form-group">
-                        <label for="catid" class="">Κατηγορία:</label>
+                        <label for="catid" class="">{{"Κατηγορία"| translate}}:</label>
                         <select id="catid" ng-model="ctrl.item.cat_id" class="form-control"
                                 ng-options="ucategorie.id as ucategorie.descr for ucategorie in ucategories"> </select>
                     </div>
@@ -98,36 +98,38 @@
                 <span class="hrSeperator">E-mail</span>
                 <div class="form-group"
                      ng-class="{ 'has-error' : itemForm.email1.$invalid && !itemForm.email1.$pristine }">
-                    <label class=" formItemLabel" for="email1">Email<span
+                    <label class=" formItemLabel" for="email1">E-mail<span
                             class="form-required">*</span>:</label>
                     <div class="longInput">
                         <input id="email1" name="email1" class="form-control" type="email"
                                ng-model="ctrl.item.em_main">
                     </div>
-                    <p ng-show="itemForm.email1.$invalid && !itemForm.email1.$pristine" class="help-block">Το e-mail
-                        δεν είναι σωστό.</p>
+                    <p ng-show="itemForm.email1.$invalid && !itemForm.email1.$pristine" class="help-block">{{"Το e-mail
+                        δεν είναι σωστό."| translate}}</p>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : itemForm.email2.$invalid  }">
-                    <label for="email2" class=" formItemLabel">Email 2ο:</label>
+                    <label for="email2" class=" formItemLabel">{{"Email 2ο"| translate}}:</label>
                     <div class="longInput">
                         <input id="email2" name="email2" class="form-control" type="email"
                                ng-model="ctrl.item.em_sec">
                     </div>
-                    <p ng-show="itemForm.email2.$invalid" class="help-block">Το e-mail δεν είναι σωστό.</p>
+                    <p ng-show="itemForm.email2.$invalid" class="help-block">{{"Το e-mail δεν είναι σωστό."|
+                        translate}}</p>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error' : itemForm.emailp.$invalid}">
-                    <label for="emailp" class=" formItemLabel">Email Παντείου:</label>
+                    <label for="emailp" class=" formItemLabel">{{"Email Παντείου"| translate}}:</label>
                     <div class="longInput">
                         <input id="emailp" name="emailp" class="form-control" type="email"
                                ng-model="ctrl.item.em_pant">
                     </div>
-                    <p ng-show="itemForm.emailp.$invalid" class="help-block">Το e-mail δεν είναι σωστό.</p>
+                    <p ng-show="itemForm.emailp.$invalid" class="help-block">{{"Το e-mail δεν είναι σωστό."|
+                        translate}}</p>
                 </div>
             </div>
             <div class="formGroupItems">
                 <!--stat_comm-->
                 <div class="form-group">
-                    <label for="comments" class=" formItemLabel">Σχόλια:</label>
+                    <label for="comments" class=" formItemLabel">{{"Σχόλια"| translate}}:</label>
                     <div class="longInput">
                         <textarea id="comments" name="comments" class="form-control" type="text"
                                   ng-model="ctrl.item.comments"></textarea>
@@ -136,11 +138,11 @@
             </div>
             <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)"
                     style="padding: 5px"
-                    ng-if="ctrl.item.id>0">Ανανέωση
+                    ng-if="ctrl.item.id>0">{{"Ανανέωση"| translate}}
             </button>
             <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)"
                     style="padding: 5px"
-                    ng-if="ctrl.item.fname && ctrl.item.sname && !ctrl.item.id">Αποθήκευση
+                    ng-if="ctrl.item.fname && ctrl.item.sname && !ctrl.item.id">{{"Αποθήκευση"| translate}}
             </button>
         </form>
     </div>

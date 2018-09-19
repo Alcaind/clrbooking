@@ -7,7 +7,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Αιθουσιολόγιο - Διαχείριση</title>
+    <title>{{"Αιθουσολόγιο - Διαχείριση"}}</title>
+
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +22,7 @@
     <link rel="stylesheet" href="modules/home/views/home.css"/>
     <link rel="stylesheet" href="modules/login/logincss/login_style.css"/>
     <link rel="stylesheet" href="modules/rooms/rviews/rooms.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
 
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -31,17 +32,17 @@
 </head>
 <body>
 <!--[if class 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
+<!--<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade-->
+<!--your browser</a> to improve your experience.</p>-->
 <![endif]-->
-<navmenu menu="{{menu}}"></navmenu>
+<navmenu menu="{{menu |translate}}"></navmenu>
 <div ng-controller="Controller" class="maincontainer" ng-view>
 </div>
 <p class="text-center text-muted" if-loading
-   style="position: absolute; top:0px; left: 0; width: 100%; height: 100%; background-color: #57575788">
+   style="position: absolute; top:0px; left: 0; width: 100%; height: 100%; background-color: #57575788; padding: 248px; font-size: 20px">
     <span class="fa fa-spinner fa-spin fa-4x"></span>
     <br/><br/>
-    Loading, please wait...
+    {{"Loading, please wait..."| translate}}
 </p>
 <footer></footer>
 
@@ -62,6 +63,9 @@
 <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
 <script src="bower_components/a0-angular-storage/dist/angular-storage.js"></script>
 <script src="bower_components/angularjs-dropdown-multiselect/src/angularjs-dropdown-multiselect.js"></script>
+<script src="bower_components/angular-translate/angular-translate.min.js"></script>
+<script src="bower_components/angular-translate-handler-log/angular-translate-handler-log.min.js"></script>
+<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
 
 
 <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.1.3.js"></script>
@@ -101,6 +105,7 @@
 <script src="modules/periods/perscontrollers.js"></script>
 <script src="modules/items/itemcontrollers.js"></script>
 <script src="modules/items/iRooms.js"></script>
+<script src="modules/item_type/itemtypecontrollers.js"></script>
 <script src="modules/roomCategory/roomcategoriescontrollers.js"></script>
 <script src="modules/roomUse/roomusecontrollers.js"></script>
 <script src="modules/rooms/rUsages.js"></script>
@@ -113,6 +118,8 @@
 <script src="modules/requests/ctrls/roomsn2nController.js"></script>
 <script src="modules/userView/userhomecontroller.js"></script>
 <!--<script src="modules/users/uTms.js"></script>-->
+<script src="modules/adminUtilities/adminUtilities.js"></script>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

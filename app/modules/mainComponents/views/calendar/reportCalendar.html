@@ -1,23 +1,69 @@
-<div id="report" style="display: flex">
+<div class="inlineItems">
+    <div class="form-group">
+        <select name="ckm" id="ckm" ng-model="programView" class="midInput">
+            <option ng-value="true">{{"Ανά Αίθουσα"| translate}}</option>
+            <option ng-value="false">{{"Ανά Μάθημα"| translate}}</option>
+        </select>
+    </div>
+    <div>
+        <button class="btn btn-warning" id="visibility" ng-click="commentsVisibillity()">{{commentsVisible ? 'Αποκρυψη
+            ':'Εμφάνιση '| translate}} {{' '}}{{" Σχολίων"| translate}}
+        </button>
+    </div>
+    <div class="form-group">
+        <a class="btn btn-link" id="downloadlink" type="button" ng-click="expFile(programView)">{{"Προς Εκτύπωση"|
+            translate}}</a>
+    </div>
+</div>
+<!--ANA AI8OYSA-->
+<div id="report" style="display: flex ; overflow: auto;" ng-show="programView">
     <ul ng-repeat="(name, room) in reqPerRoom" style="display: block">
         {{name}}
         <!--<div ng-repeat="req in room track by $index| orderBy:['rooms.pivot.date_index', 'rooms.pivot.fromt']">-->
-        <div ng-repeat="req in room track by $index">
-            <div ng-if="$index === 0">
-                <div>
-                    {{req.fromd | date : 'd-M-y'}} {{req.tod | date : 'd-M-y'}}
+        <!--TODO : na parei hmera apo ton global lookup table-->
+        <div ng-repeat="req in room |filter:filterReportTm | orderBy:['room.pivot.date_index', 'room.pivot.fromt'] track by $index">
+            <li ng-repeat="r in req.rooms " ng-if="r.name === name"
+                style="min-width: 200px; padding: 18px; width: max-content;">
+                <div>{{req.tm.title}}</div>
+                <div>{{"Εξάμημο"| translate}}: {{req.ps.ps_ex}}</div>
+                <div>{{req.ps.pm}}-{{req.ps.ps_km}}-{{req.ps.tma_code}}-{{req.ps.tma_per}}</div>
+                <div>{{teachers[r.pivot.teacher].sname}}{{' '}} {{teachers[r.pivot.teacher].fname}}</div>
+                <div>{{classUses[req.class_use].descr}}</div>
+                <div>{{ periods[req.period].descr }}
                 </div>
-            </div>
-            <li ng-repeat="r in req.rooms " ng-if="r.name === name" style="min-width: 200px;">
-                <!--TODO : na parei hmera apo ton global lookup table-->
-                <div>
-                    {{weekdays[r.pivot.date_index-1]}} {{r.pivot.fromt | date : 'shortTime' }} {{r.pivot.tot | date :
-                    'shortTime'}}
+                <div> {{errorWeekdays[r.pivot.date_index-1]}}{{' '}} {{r.showTod? 'από':'στις'}}{{' '}} {{req.fromd |
+                    date : 'd-M-y'}}{{r.showTod?' '+'έως'+' '+( req.tod |date:'dd-MM-yyyy'):''}}{{' , '}}{{r.pivot.fromt
+                    | date : 'shortTime' }} {{r.pivot.tot |
+                    date : 'shortTime'}}
                 </div>
-                <div>
-                    {{req.ps.tma_per}}
+                <div ng-if="commentsVisible">{{"Σχόλια Αιτήματος"| translate}} : {{req.descr}}
+                    <div>{{"Σχόλια Αιτήματος Αίθουσας"| translate}} : {{r.pivot.comment}}</div>
                 </div>
             </li>
+        </div>
+    </ul>
+</div>
+<!--ANA MA8HMA-->
+<div id="report2" style="display: flex ; overflow: auto;" ng-show="!programView">
+    <ul ng-repeat="pr in book | filter:filterReportTm | orderBy:['room.ps.ps_ex'] track by $index ">
+        <div id="valueps" style="display: block; width: max-content; padding: 18px;">
+            <div ng-repeat="r in pr.rooms">
+                <div>{{pr.tm.title}}</div>
+                <div>{{"Εξάμημο"| translate}}: {{pr.ps.ps_ex}}</div>
+                <div>{{pr.ps.pm}}-{{pr.ps.ps_km}}-{{pr.ps.tma_code}}-{{pr.ps.tma_per}}</div>
+                <div>{{teachers[r.pivot.teacher].sname}}{{' '}} {{teachers[r.pivot.teacher].fname}}</div>
+                <div>{{classUses[pr.class_use].descr}}</div>
+                <div>{{ periods[pr.period].descr }} {{errorWeekdays[r.pivot.date_index-1]}}{{' '}}{{pr.showTod?
+                    'από':'στις'|translate}}{{' '}} {{pr.fromd | date :
+                    'd-M-y'}}{{pr.showTod? +' '+'έως'+' '+( pr.tod |date:'dd-MM-yyyy'):''}}
+                </div>
+                {{r.name}}{{' '}}{{"στις"| translate}} {{r.pivot.fromt | date : 'shortTime' }} {{r.pivot.tot| date :
+                'shortTime'}}
+                <div ng-if="commentsVisible">{{"Σχόλια Αιτήματος"| translate}} : {{pr.descr}}
+                    <div>{{"Σχόλια Αιτήματος Αίθουσας"| translate}} : {{r.pivot.comment}}</div>
+                </div>
+                <div> ------------------------------------</div>
+            </div>
         </div>
     </ul>
 </div>

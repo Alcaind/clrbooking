@@ -8,13 +8,14 @@ angular.module('RoomUse', [
     'GlobalVarsSrvs'
 ]).controller('RoomUseController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
 
-    $scope.ctrl = makeController.mainController('/roomuse', 'roomuseTableConf', 'Κατηγορίες Αιθουσών');
+    $scope.ctrl = makeController.mainController('/roomuse', 'roomuseTableConf', 'Χρήσεις Αιθουσών');
     $scope.ctrl.init();
 
 }])
     .controller('RoomUseProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
         $scope.ctrl = makeController.profileController('/roomuse', 'roomuseTableConf');
         $scope.ctrl.init();
+
     }])
     .component('roomUseProfile', {
         restrict: 'EA',

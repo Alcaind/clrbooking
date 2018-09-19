@@ -2,18 +2,44 @@
 
 angular.module('MainComponents')
 
-    .controller('CalendarContol', ['$scope', 'MakeModal', '$compile', 'orderByFilter', '$filter', function ($scope, MakeModal, $compile, orderBy, $filter) {
+    .controller('CalendarContol', ['$scope', 'MakeModal', '$compile', 'orderByFilter', '$filter', 'api', '$location', function ($scope, MakeModal, $compile, orderBy, $filter, api, $location) {
         $scope.calendar = [];
         $scope.weekdays = ['Δ', 'Τρ', 'Τετ', 'Πεμ', 'Παρ', 'Σ', 'Κ'];
+        $scope.errorWeekdays = ['Δευτέρα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκευή', 'Σάββατο', 'Κυριακή'];
         $scope.headerDays = [];
         $scope.hours = [];
         $scope.options = {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'};
         $scope.showErrors = $scope.showErrors ? $scope.showErrors : false;
-
+        $scope.programView = false;
+        $scope.newCalendar = [];
+        $scope.reqPerRoom = {};
+        $scope.classUses = [];
+        $scope.commentsVisible = false;
         $scope.$watch('book', plotBook);
-        $scope.popup = function (reqID) {
-            MakeModal.infoBookRoom(reqID)
+
+
+        $scope.commentsVisibillity = function () {
+            $scope.commentsVisible = !$scope.commentsVisible;
         };
+
+        $scope.popup = function (item) {
+            if (!item.new)
+                var tt = MakeModal.infoBookRoom(item.pivot.id, function (res) {
+                    res = JSON.parse(res);
+                    if (res.type === 1) {
+                        item.book.ps = res.data;
+                        item.book.ps_id = res.data.id;
+                    }
+                    if (res.type === 3) $scope.mustRefresh = true;
+                    if (res.type === 0) {
+                        item.book.status = 1;
+                        item.color = '#287ed2';
+                        item.book.ps_id = res.data.id;
+                        item.book.ps = res.data;
+                    }
+                });
+        };
+
 
         $scope.selectDay = function (day) {
             $scope.selectedDay = day;
@@ -31,6 +57,9 @@ angular.module('MainComponents')
                 book.tDay = new Date(book.tod + 'T' + book.pivot.fromt);
                 book.h = (new Date(book.fromd + 'T' + book.pivot.tot) - book.fDay) / (1000 * 60) / 3;
                 book.dist = (Math.abs(book.fDay - new Date(book.fromd + 'T00:00:00')) / (1000 * 60) - 420) / 3;
+
+                book.showTod = (new Date(book.tDay) - new Date(book.fDay) > 86400000);
+
                 return {
                     fDay: new Date(book.fromd + 'T' + book.pivot.fromt), /* get book from day */
                     tDay: new Date(book.tod + 'T' + book.pivot.fromt) /* get book to day */
@@ -48,6 +77,7 @@ angular.module('MainComponents')
                 book.tot = new Date(book.tot - tmpDay);
                 book.tot.setHours(book.tot.getHours() + book.tot.getTimezoneOffset() / 60);
 
+                book.showTod = (new Date(book.tDay) - new Date(book.fDay) > 86400000);
                 //book.dist = ((book.fromt.getTime()) / (1000 * 60) - 420 + Math.abs(book.fromt.getTimezoneOffset())) / 3;
                 return {
                     fDay: new Date(book.fromd), /* get book from day */
@@ -65,16 +95,19 @@ angular.module('MainComponents')
                 var target = document.getElementById('calendarPlot');
                 angular.element(target).append(el);
             })
-
         }
 
-        $scope.newCalendar = [];
-        $scope.reqPerRoom = {};
+        api.apiCall('GET', 'api/public/roomuse', function (results) {
+            results.data.map(function (value) {
+                $scope.classUses[value.id] = value;
+            });
+        });
 
         function dictionary(book, room) {
             if (!$scope.reqPerRoom[room.name]) $scope.reqPerRoom[room.name] = [];
             if (!$scope.reqPerRoom[room.name].includes(book)) $scope.reqPerRoom[room.name].push(book);
         }
+
 
         /**
          * Plotting requests (new & old)
@@ -111,7 +144,7 @@ angular.module('MainComponents')
                 if ($scope.datesIndex && $scope.datesIndex.indexOf(dateIndex.getDay()) >= 0) {
 
                     $scope.headerDays.push(new Date(dateIndex)); // push the current date in the headerDays array to show
-                    calendarIndex = $scope.calendar.push([]); // create the holder for the requests for this day ang keep the last pushed index into calendarIndex
+                    calendarIndex = $scope.calendar.push([]); // create the holder for the requests for this day and keep the last pushed index into calendarIndex
                     $scope.item.new = true; // declare the input request as new (flag)
                     calObjects = []; // init table to hold new data for this day
 
@@ -126,7 +159,6 @@ angular.module('MainComponents')
                         newObject.fromd = $scope.item.fromd;
                         newObject.tod = $scope.item.tod;
                         newObject.did = "r" + i + '' + k; // the div id for view binding
-
                         var bDays = findBookDates(newObject); // create the newObject data. calc height, distance and real dates from room input
 
                         if (bDays && bDays.fDay <= dateIndex && bDays.tDay >= dateIndex) { // check if the parsing date (dateIndsex) is between room dates (fDay, tDay)
@@ -148,8 +180,8 @@ angular.module('MainComponents')
 
                     for (var j = 0; j < book.length; j++) {
                         //var bDays = findBookDates(book[j]);
+                        book[j].showTod = (new Date(book[j].tod + ' 00:00:00') - new Date(book[j].fromd + ' 00:00:00') > 86400000);
                         if (($scope.item.id && book[j].id === $scope.item.id) || ([2, 4, 3].includes(book[j].status))) continue;
-
                         if (new Date(book[j].fromd + ' 00:00:00') <= dateIndex && new Date(book[j].tod + ' 00:00:00') >= dateIndex) { // check if the parsing date (dateIndsex) is between request dates (fDay, tDay)
                             //if ($scope.item.id && book[j].id === $scope.item.id) return;
                             for (var r = 0; r < book[j].rooms.length; r++) { // parse request rooms
@@ -169,22 +201,24 @@ angular.module('MainComponents')
 
                     if (!$scope.newCalendar[calendarIndex - 1]) $scope.newCalendar[calendarIndex - 1] = {};
                     $scope.calendar[calendarIndex - 1].map(function (book) {
-                        if ($scope.newCalendar[calendarIndex - 1][book.name])
-                            $scope.newCalendar[calendarIndex - 1][book.name].push(book);
-                        else {
+                        if (!$scope.newCalendar[calendarIndex - 1][book.name]) {
                             $scope.newCalendar[calendarIndex - 1][book.name] = [];
-                            $scope.newCalendar[calendarIndex - 1][book.name].push(book);
                         }
+                        $scope.newCalendar[calendarIndex - 1][book.name].push(book);
+                        //$scope.newCalendar[calendarIndex - 1][book.name].ln = $scope.newCalendar[calendarIndex - 1][book.name].length;
                     });
                     //  $scope.calendar[calendarIndex - 1] = $scope.newCalendar[calendarIndex - 1];
                 }
                 dateIndex.setDate(dateIndex.getDate() + 1); // go to the next day
             }
             //  console.log($scope.newCalendar);
-
         }
 
         function plotTile(tile, book, cal, calObjects) {
+            /*if($scope.calendarFilterObj.tm) {
+                if (!(book.tm  && book.tm.descr === $scope.calendarFilterObj.tm)) return;
+            }*/
+
             dictionary(book, tile);
             tile.fromd = book.fromd;  //dirty room takes dates -> transfer requests data to the room data
             tile.tod = book.tod;   //dirty room takes dates -> transfer requests data to the room data
@@ -207,8 +241,6 @@ angular.module('MainComponents')
                         || ((totCheck < calObjects[m].tot && fromCheck > calObjects[m].tot)
                             || (fromCheck < calObjects[m].fromt && totCheck > calObjects[m].fromt))) && calObjects[m].id === tile.id)) {
 
-
-
                     // check if we have date conflict and is the same room with existing room
                     ok = true; // raise the conflict flag
                     //bookObj.color = '#dd3030'; // flag the objects with color
@@ -222,17 +254,82 @@ angular.module('MainComponents')
                     if (ok) { // if conflict, flag with color
                         //TODO: wanna be check room uses levels old requests not new one(yellow)
                         //bookObj.color = '#dd3030'
-                        bookObj.color = '#287ed2'
+                        bookObj.color = '#287ed2';
                     } else {
-                        bookObj.color = '#287ed2'
+                        bookObj.color = book.status === 5 ? '#d29a46' : book.status === 0 ? '#DC4600' : '#287ed2';
                     }
                 }
             }
-            cal.push(bookObj); // push it for view in the calendar array
+            $scope.canceledRequestsFromHoliday = {};
+            for (var n = 0; n < cal.length; n++) {
+                cal[n].book.priorityFlag = false;
+                if (cal[n].pivot)
+                    if ((((totCheck > new Date("1970-01-01T" + cal[n].pivot.fromt) && totCheck < new Date("1970-01-01T" + cal[n].pivot.tot))
+                            || (fromCheck > new Date("1970-01-01T" + cal[n].pivot.fromt) && fromCheck < new Date("1970-01-01T" + cal[n].pivot.tot))
+                            || ((totCheck < new Date("1970-01-01T" + cal[n].pivot.tot) && fromCheck > new Date("1970-01-01T" + cal[n].pivot.tot))
+                                || (fromCheck < new Date("1970-01-01T" + cal[n].pivot.fromt) && totCheck > new Date("1970-01-01T" + cal[n].pivot.fromt)))) && cal[n].id === bookObj.id)) {
+                        if (cal[n].book.priority) {
+                            if (bookObj.book.priority > cal[n].book.priority) {
+                                cal[n].color = '#2bff05';
+
+                                cal[n].pivot.push($scope.canceledRequestsFromHoliday);
+
+
+                                //cal.splice(cal.indexOf(cal[n]), 1);
+                                cal[n].book.priorityFlag = true;
+                            }
+                        }
+                    }
+            }
+            cal.push(bookObj);
+        }
+
+        // function checkPriority() {
+        //     if ($scope.calObjectsPriorities.book.priority > $scope.calPriorities.book.priority) {
+        //
+        //     }
+        // }
+
+        /* $scope.$watch('calendarFilterObj.tm', function (newVal) {
+             plotBook($scope.book, $scope.calendar)
+         });*/
+
+        $scope.calendarFilterObj = {tm: null};
+        $scope.filterBookByTm = function (item) {
+            return (!$scope.calendarFilterObj.tm) || (item.book.tm && item.book.tm.descr === $scope.calendarFilterObj.tm) || item.new;
+        };
+
+        $scope.filterReportTm = function (item) {
+            return (!$scope.calendarFilterObj.tm) || (item.tm && item.tm.descr === $scope.calendarFilterObj.tm);
+        };
+
+        if (!$scope.periods || $scope.periods.length === 0) api.apiCall('GET', 'api/public/periods', function (results) {
+            $scope.periods = [];
+            results.data.map(function (value) {
+                $scope.periods[value.id] = value;
+            })
+        });
+
+        $scope.expFile = function (psVSclass) {
+            if (psVSclass === false) {
+                makeTextFile(document.getElementById('report2').innerHTML);
+            } else {
+                makeTextFile(document.getElementById('report').innerHTML);
+            }
+        };
+
+        function makeTextFile(text) {
+
+            var textFile = window.open('', '_blank', 'location=yes,height=570,width=800,scrollbars=yes,status=1');
+            textFile.document.write(text);
+            textFile.document.close();
+
+            return textFile;
         }
 
         init();
-    }])
+    }
+    ])
     .directive('calendarBook', function () {
         return {
             restrict: "EA",
@@ -245,7 +342,12 @@ angular.module('MainComponents')
                 rooms: "<",
                 bookingErrors: "=",
                 selectedDay: '=',
-                showErrors: '<'
+                showErrors: '<',
+                mustRefresh: '=',
+                tms: '=',
+                comingFromBookController: '<',
+                teachers: '=',
+                periods: '='
             },
             controller: "CalendarContol",
             templateUrl: 'modules/mainComponents/views/calendar/calendar.html'
@@ -299,6 +401,12 @@ angular.module('MainComponents')
         return {
             restrict: "EA",
             templateUrl: 'modules/mainComponents/views/calendar/reportCalendar.html'
+        }
+    })
+    .directive('reportCanceled', function () {
+        return {
+            restrict: "EA",
+            templateUrl: 'modules/mainComponents/views/calendar/reportCanceled.html'
         }
     })
 ;

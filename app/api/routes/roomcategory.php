@@ -58,7 +58,7 @@ $app->delete('/roomcategory/{id}', function ($request, $response, $args) {
 $app->put('/roomcategory/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    // print_r($data);
     try {
         $roomcategory = \App\Models\RoomCategory::find($id);
         $roomcategory->synt = $data['synt'] ?: $roomcategory->synt;

@@ -8,6 +8,6 @@ angular.module('Home', [
 ])
     .controller('HomeController', ['$scope', 'globalVarsSrv', 'AuthenticationService', function ($scope, globalVarsSrv, AuthenticationService) {
         AuthenticationService.CheckCredentials();
-        $scope.adminColums = globalVarsSrv.getGlobalVar(globalVarsSrv.getGlobalVar('menuRole') === 'admin' ? 'homeButtonAdminTableConf' : 'homeButtonUserTableConf');
+        //$scope.adminColums = globalVarsSrv.getGlobalVar(globalVarsSrv.getGlobalVar('menuRole') === 'admin' ? 'homeButtonAdminTableConf' : 'homeButtonUserTableConf');
     }])
 ;

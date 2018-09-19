@@ -2,7 +2,7 @@
     <button type="button" class="btn btn-info btn-medium" ng-click="toggle($event)"
             style="text-align: center; width: 100%">
         <span class="glyphicon glyphicon-chevron-{{collapsed?'up':'down'}}"></span>
-        <span>{{title}}</span>
+        <span>{{title| translate}}</span>
     </button>
     <div ng-transclude ng-show="!collapsed">
     </div>

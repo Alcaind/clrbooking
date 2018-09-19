@@ -4,7 +4,7 @@
 
             <a ng-if="fromAnotherPage" href back-button type="button" class="btn btn-warning">
             <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span></span></a>
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span></span></a>
 
             <div class="operations">
                 <operations ng-repeat="op in ctrl.operations"
@@ -13,6 +13,11 @@
                 <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"></delete-row-button>
             </div>
             <table-tools class="pageTools"></table-tools>
+            <!--<div class="form-group" style="width: 315px; float: right;">-->
+            <!--<form-item-selector selector-title="Config" return-column="id" view-column="year"-->
+            <!--dp="configs" searchable="false" output-value="config_id" class="midInput"-->
+            <!--style="min-width: 314px; "></form-item-selector>-->
+            <!--</div>-->
         </div>
         <dm-title class="pageTitle"></dm-title>
         </div>
@@ -33,11 +38,11 @@
                 </tr>
             </thead>
             <tbody class="contentScroll">
-                <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                    style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
-                    ng-click="ctrl.selectRow(item)">
+            <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))"
+                style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
+                ng-click="ctrl.selectRow(item)">
                     <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ item.tm_code }}</td>
+                <td ng-if="ctrl.tableColumns[1].visible">{{item.tm_code}}</td>
                     <td ng-if="ctrl.tableColumns[2].visible">{{ item.tm_per }}</td>
                     <td ng-if="ctrl.tableColumns[3].visible">{{ item.pm }}</td>
                     <td ng-if="ctrl.tableColumns[4].visible">{{ item.tma_code }}</td>
@@ -46,12 +51,14 @@
                     <td ng-if="ctrl.tableColumns[7].visible">{{ item.ps_dm }}</td>
                     <td ng-if="ctrl.tableColumns[8].visible">{{ item.ps_km }}</td>
                     <td ng-if="ctrl.tableColumns[9].visible">
-                        <li ng-repeat="user in item.users"></li>
-                        {{ user.sname }}{{ user.fname }}
+                        <li ng-repeat="user in item.users">
+                            {{ user.sname }}{{' '}}{{ user.fname }}
+                        </li>
                     </td>
                     <td ng-if="ctrl.tableColumns[10].visible">{{ item.config.year }}</td>
                     <td ng-if="ctrl.tableColumns[11].visible">{{ item.ps_code }}</td>
-                    <td style="width:30px;"></td>
+
+                <td style="width:30px;"></td>
                 </tr>
                 </tbody>
             </table>

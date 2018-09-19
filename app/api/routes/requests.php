@@ -10,6 +10,11 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \App\Models\ApiError as ApiError;
 
+//use Illuminate\Database\Capsule\Manager as DB;
+//use db;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 
 $app->get('/requests', function (Request $request, Response $response) {
     header("Content-Type: application/json");
@@ -23,7 +28,7 @@ $app->get('/requests/{id}', function (Request $request, Response $response, $arg
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms', 'tm'])->find($id);
+        $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms', 'tm', 'guests'])->find($id);
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -37,7 +42,7 @@ $app->get('/requests/config/{id}', function (Request $request, Response $respons
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user', 'config', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
+        $requests = \App\Models\Requests::with(['users', 'config', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
             ->where('conf_id', '=', $id)
             ->orderBy('id', 'desc')
             ->get();
@@ -54,7 +59,7 @@ $app->get('/requests/users/{id}', function (Request $request, Response $response
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
+        $requests = \App\Models\Requests::with(['users', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
             ->where('user_id', '=', $id)
             ->where('conf_id', '=', 1)
             ->orderBy('id', 'desc')
@@ -72,11 +77,22 @@ $app->get('/requests/users/{id}/config/{cid}', function (Request $request, Respo
     header("Content-Type: application/json");
     $id = $args['id'];
     $cid = $args['cid'];
+    $tms = array();
+    $usr = \App\Models\Users::with(['tm'])->find($id);
+    //print_r($usr->toJson());
+
+    foreach ($usr->tm as $tm) {
+        //if ($tm['config_id'] == $data['config_id'])
+        array_push($tms, $tm['id']);
+    }
+
     try {
         $requests = \App\Models\Requests::with(['users:id,user', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
-            ->where('user_id', '=', $id)
             ->where('conf_id', '=', $cid)
-            ->orderBy('id', 'desc')
+            ->whereHas('tm', function ($query) use ($tms) {
+                $query->whereIn('id', $tms);
+            })
+            ->orderBy('fromd', 'desc')
             ->get();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -92,7 +108,7 @@ $app->get('/requests/rooms/{id}', function (Request $request, Response $response
     $id = $args['id'];
     try {
         $room = \App\Models\Rooms::find($id);
-        $requests = $room->requests()->join('users AS admin', 'requests.admin', '=', 'admin.id')
+        $requests = $room->requests()->join('users AS admin', 'requests.admin', '=', 'admin.id')->with(['users', 'periods', 'admin', 'room_use', 'ps', 'config', 'rooms', 'tm'])
             ->get();
         /*$requests = $this->container->db->table('requests')
             ->join('request_rooms', 'requests.id', '=', 'request_rooms.req_id')
@@ -149,6 +165,7 @@ $app->post('/requests', function (Request $request, Response $response) {
         $requests->admin = $data['admin'];
         $requests->conf_id = $data['conf_id'];
         $requests->tm_id = $data['tm_id'];
+        $requests->priority = $data['priority'];
         $requests->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -166,12 +183,11 @@ $checkUserRequestRules = function ($request, $response, $next) {
     //$data = $request->getAttributes()['routeInfo'][2];
     //$data = $request->getParsedBody();
     $data = $response->getBody();
-    print_r($data);
+    // print_r($data);
 
     $roombook = \App\Models\Requests::with('rooms')
         ->where('fromd', '<=', $data['fromd'])
         ->where('fromd', '>=', $data['fromd'])
-
 //        ->where('room_id', '=', $args['rid'])
         ->get();
 
@@ -208,11 +224,12 @@ $checkUserRequestRules = function ($request, $response, $next) {
                                 $uMessage->rr_id = $data['id'] ?: '';
                                 $uMessage->status = 0;
                                 $uMessage->save();
+
                             } else {
                                 $nr = $response->withStatus(417);
                                 $error = new ApiError();
                                 $req = \App\Models\Rooms::find($reqRoom['id'])->get();
-                                $error->setData(816, 'Class ' . $req->name . ' is already assigned to book.', $room);
+                                $error->setData(816, 'Η αίθουσα ' . $req->name . ' είναι ήδη καταχωρημένη σε άλλη δέσμευση.', $room);
                                 return $nr->write($error->toJson());
                             }
                         }
@@ -234,7 +251,6 @@ $checkUserRequestRules = function ($request, $response, $next) {
 
 $app->post('/requests/userrequest', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    //header("Content-Type: html/text");
     $data = $request->getParsedBody();
     $myData = $request->getParsedBody();
     $errors = array();
@@ -252,36 +268,28 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         $requests->tod = $data['tod'];
         $requests->conf_id = $data['conf_id'];
         $requests->tm_id = $data['tm_id'];
+        $requests->priority = $data['priority'];
         $requests->save();
-
         $data['id'] = $requests['id'];
+        $mydb = new db();
+        $pdo = $mydb->connect();
+        $errors = array();
+        $query = $pdo->prepare('SELECT * from requests WHERE conf_id = 8  AND status in (1,5)  AND ((fromd BETWEEN ? AND ?) OR (tod BETWEEN ? AND ?)) OR (? BETWEEN fromd and tod)');
+        $query->execute([explode('T', $data['fromd'])[0], explode('T', $data['tod'])[0], explode('T', $data['fromd'])[0], explode('T', $data['tod'])[0], explode('T', $data['fromd'])[0]]);
 
-        $roombook = \App\Models\Requests::with('rooms')
-//            /*->whereHas('rooms', function ($query)  use ($data) {
-//                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
-//                $rm = array();
-//               // $di = array();
-//                foreach ($data['rooms'] as $reqRoom) {
-//                    array_push($rm, $reqRoom['id']);
-//                    //array_push($di, $reqRoom['date_index']);
-//                    }
-//                $query->where('id', 'in', $rm);
-//            })
-            ->WhereBetween('fromd', [$data['fromd'], $data['tod']])
-            ->orWhereBetween('tod', [$data['fromd'], $data['tod']])
-            //->where('date_index','=',$data[])
-            ->where('conf_id', '=', 1)
-            ->where('status', '=', 1)
-            ->get();
+        while ($book = $query->fetch(PDO::FETCH_ASSOC)) {
 
-        foreach ($roombook as $book) {
-            foreach ($book->rooms()->get() as $room) {
+            $rooms = \App\Models\RoomBook::where('req_id', '=', $book['id'])->get();
+            $tm = \App\Models\Tm::find($book['tm_id']);
 
+            foreach ($rooms as $room) {
+
+                $roomname = \App\Models\Rooms::find($room['room_id']);
                 $cntRoom = 0;
                 foreach ($data['rooms'] as $reqRoom) {
                     $fromt = new DateTime($myData['pivot'][$cntRoom]['fromt']);
                     $tot = new DateTime($myData['pivot'][$cntRoom++]['tot']);
-                    if ($data['status'] == 3) continue;
+                    if ($data['status'] == 3 || $book['status'] == 4) continue;
                     if ($fromt->diff($tot)->invert == 1) {
                         $nr = $response->withStatus(418);
                         $error = new ApiError();
@@ -292,56 +300,70 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
 
                     $tmpStrFD = explode('T', $data['fromd'])[0];
                     $tmpStrTD = explode('T', $data['tod'])[0];
-//                    $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
-//                    $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
-
 
                     if (($tmpStrFD >= $book['fromd'] || $tmpStrTD > $book['fromd']) && $tmpStrFD < $book['tod']) {
-                        if ((new DateTime($room->pivot->tot) > $fromt && new DateTime($room->pivot->tot) < $tot) ||
-                            (new DateTime($room->pivot->fromt) > $fromt && new DateTime($room->pivot->fromt) < $tot) ||
-                            (new DateTime($room->pivot->fromt) == $fromt) ||
-                            (new DateTime($room->pivot->tot) > $tot && new DateTime($room->pivot->fromt) < $tot) ||
-                            (new DateTime($room->pivot->fromt) < $fromt && new DateTime($room->pivot->tot) > $tot)) {
-                            if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
+                        if ((new DateTime($room->tot) > $fromt && new DateTime($room->tot) < $tot) ||
+                            (new DateTime($room->fromt) > $fromt && new DateTime($room->fromt) < $tot) ||
+                            (new DateTime($room->fromt) == $fromt) || (new DateTime($room->tot) == $tot) ||
+                            (new DateTime($room->tot) > $tot && new DateTime($room->fromt) < $tot) ||
+                            (new DateTime($room->fromt) < $fromt && new DateTime($room->tot) > $tot)) {
+
+                            if ($room->room_id == $reqRoom['id'] && $room->date_index == $reqRoom['date_index']) {
+//                                && ($data['priority'] < $book['priority'] || $data['priority'] == $book['priority'])
                                 if ($data['status'] == 0) {
                                     $uMessage = new \App\Models\usersRequests();
                                     $uMessage->from_user = $data['user_id'];
-                                    $uMessage->to_users = $book['user_id'];
-                                    $uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . $room->pivot->date_index . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ. ' . $room->pivot->id;
+                                    $uMessage->to_users = $tm->supervisor;
+                                    $formatedMessage = "Υπάρχει σύγκρουση αιτημάτων μεταξύ της αίτησης σας (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $room->fromt . "-" . $room->tot . " " . "για τις ημν/νιες από" . " " . $tmpStrFD . " " . "εως" . $tmpStrTD;
+                                    $formatedMessage .= ") και της αίτησης (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $fromt->format('H:i') . " - " . $tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $book["fromd"] . " " . "εως" . " " . $book["tod"];
+                                    $formatedMessage .= ") link: http://app.livepraktoreio.gr/panteion/app/#/usercreaterequests/" . $book["id"];
+                                    $formatedMessage .= " " . "Σχόλια αιτήματος:" . " " . $data['descr'];
+                                    //$uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . getDateString($room->date_index) . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
+                                    $uMessage->comments = $formatedMessage;
                                     $uMessage->rr_id = $data['id'] ?: '';
-
-                                    $uMessage->rb_id = $room->pivot->id ?: '';
+                                    $uMessage->rb_id = $room->id ?: '';
                                     $uMessage->status = 0;
                                     $uMessage->save();
+                                    // $this->mailer('df', 'df', $uMessage->comments, $room);
+                                    $tt = new stdClass();
+                                    $tt->fromRoom = $reqRoom;
+                                    $tt->toRoom = $room;
+                                    $u = \App\Models\Users::find($tm->supervisor);
+                                    //  sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+                                    array_push($errors, $tt);
                                 }
 
-                                $tt = new stdClass();
-                                $tt->fromRoom = $reqRoom;
-                                $tt->toRoom = $room;
-
-                                array_push($errors, $tt);
-
+                            } elseif ($data['priority'] > $book['priority']) {
+                                $requests->priority++;
                             }
-                            if (property_exists($room->pivot, 'teacher'))
-                                if ($room->pivot->teacher == $reqRoom['teacher']) {
-
-                                    array_push($errors, \App\Models\Users::find($room->pivot->teacher)->user);
-                                    /*$nr = $response->withStatus(417);
-                                    $error = new ApiError();
-                                    $error->setData(815, 'Teacher ' . \App\Models\Users::find($room->pivot->teacher)->user . ' is already assigned to another room.', $room);
-                                    return $nr->write($error->toJson());*/
+                            if ($room->room_id != $reqRoom['id'] && $room->date_index == $reqRoom['date_index']) {
+                                foreach ($data['pivot'] as $dataTeacher) {
+                                    if ($room->teacher && $dataTeacher['teacher'] && $dataTeacher['teacher'] != '' && ($room->teacher == $dataTeacher['teacher'])) {
+                                        array_push($errors, \App\Models\Users::find($room->teacher)->user);
+                                        $nr = $response->withStatus(417);
+                                        $error = new ApiError();
+                                        //$requests->delete();
+//                                       $requests->status = 5;
+//                                        $requests->save();
+                                        $ps = \App\Models\Ps::find($book['ps_id']);
+                                        $error->setData(815, 'Ο καθηγητής' . ' ' . \App\Models\Users::find($room->teacher)->sname . ' ' . \App\Models\Users::find($room->teacher)->fname . ' ' . 'υπάρχει ήδη καταχωρημένος στην αίθουσας' . ' ' . $roomname->name . ', μάθημα ' . $ps->tma_code . ' ' . $ps->tma_per . ' και ώρες ' . $room->fromt . '-' . $room->tot, $dataTeacher);
+                                        return $nr->write($error->toJson());
+                                    }
                                 }
+                            }
+
                         }
                     }
                 }
             }
         }
 
-        if (sizeof($errors) == 0 && $data['status'] != 3) {
-            $requests->status = 1;
+        if (sizeof($errors) == 0) {
+            if ($data['status'] != 3 && $data['class_use'] != 12) $requests->status = 1;
+            if ($data['class_use'] === 12 && $data['status'] != 3 && !$data['ps_id']) $requests->status = 5;
+            if ($data['class_use'] === 12 && $data['status'] != 3 && $data['ps_id']) $requests->status = 1;
             $requests->save();
         }
-
         //$attachArray = array();
         //$deletedRows = \App\Models\RoomBook::where('req_id', '=', $requests['id'])->delete();
         for ($i = 0; $i < sizeof($data['pivot']); $i++) {
@@ -357,6 +379,46 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
             $rb->save();
         }
         //$requests->rooms()->delete() attach($attachArray);
+        //   print_r($data['guests']);
+        foreach ($data['guests'] as $guest) {
+            $guest = (array)$guest;
+        }
+        //  print_r($data['guests']);
+
+        if ($requests->class_use == 7 && sizeof($errors) == 0) {
+            $requests['status'] = 0;
+            $requests->save();
+            //  $requests['priority'] = $data->class_use['priority'];
+            $uMessage = new \App\Models\usersRequests();
+            //$uMessage->to_users = [];
+            $uMessage->from_user = $data['user_id'];
+
+            $uMessage->to_users = $room->users[0]->id;
+            $emCnt = 0;
+            if ($room->users) for ($i = 1; $i < sizeof($room->users); $i++) {
+                if ($room->users[$i]->em_main) $uMessage->to_users[$emCnt++] = $room->users[$i]->em_main;
+                if ($room->users[$i]->em_sec) $uMessage->to_users[$emCnt++] = $room->users[$i]->em_sec;
+                if ($room->users[$i]->em_pant) $uMessage->to_users[$emCnt++] = $room->users[$i]->em_pant;
+            }
+            //$uMessage->to_users = $room->users[0]->id;
+
+            $u = \App\Models\Users::find($data['user_id']);
+            $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . "ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($room->date_index) . ' και ώρα  ' . $room->fromt . '-' . $room->tot . ' για τις ημν/νιες από ' . $tmpStrFD . ' εως ' . $tmpStrTD;
+            $formatedMessage .= ') link: http://app.livepraktoreio.gr/panteion/app/#/usercreaterequests/' . $book["id"];
+            $formatedMessage .= ' Σχόλια αιτήματος: ' . $data['descr'];
+            $uMessage->comments = $formatedMessage;
+            $uMessage->rr_id = $data['id'] ?: '';
+            $uMessage->rb_id = $room->id ?: '';
+            $uMessage->status = 0;
+            $uMessage->save();
+
+            $tt = new stdClass();
+            $tt->fromRoom = $reqRoom;
+            $tt->toRoom = $room;
+            // print_r($uMessage);
+
+            //sendEmail(array('to' => $uMessage->to_users, 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+        }
 
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -368,60 +430,95 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         $nr = $response->withStatus(417);
         $error = new ApiError();
         //$req = \App\Models\Rooms::find($reqRoom['id'])->get();
-        $error->setData(816, 'Σφάλματα αίτησης ', $errors);
+        $error->setData(816, 'Σφάλματα αίτησης. Απεστάλει μήνυμα έγκρισης!', $errors);
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($requests->toJson());
 });//->add($checkUserRequestRules);
 
-$app->put('/requests/userrequest', function (Request $request, Response $response) {
+function sendEmail($data)
+{
+    //print_r($data);
+    $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+    try {
+        //Server settings
+        $mail->CharSet = 'UTF-8';
+        $mail->SMTPDebug = 0;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.office365.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'pant-rooms@panteion.gr';                 // SMTP username
+        $mail->Password = 'Rooms_pant1!';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        //$mail->Port = 443;                                    // TCP port to connect to
+        $mail->Port = 587;                                    // TCP port to connect to
 
+        //Recipients
+        $mail->setFrom('pant-rooms@panteion.gr', 'Mailer');
+
+        $mail->addAddress($data['to'][0], '');     // Add a recipient
+//        for ($i=1; $i<sizeof($data['to']); $i++) {
+//            $mail->addCC($data['to'][i]);
+//        }
+
+        if ($data['to'][1]) $mail->addCC($data['to'][1]);
+        if ($data['to'][2]) $mail->addCC($data['to'][2]);
+
+        /*$mail->addReplyTo('info@example.com', 'Information');
+        $mail->addCC('cc@example.com');
+        $mail->addBCC('bcc@example.com');*/
+
+        //Attachments
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+        //Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = $data['subj'];
+        $mail->Body = $data['body'];
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        return 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+    }
+
+}
+
+function getDateString($day)
+{
+    $days = ['Κυριακή', 'Δευτέρα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκευή', 'Σάββατο'];
+    return $days[$day];
+}
+
+$app->put('/requests/userrequest', function (Request $request, Response $response) {
     header("Content-Type: application/json");
     $data = $request->getParsedBody();
     $myData = $request->getParsedBody();
+    $mydb = new db();
+    $pdo = $mydb->connect();
     $errors = array();
-    $roombook = \App\Models\Requests::with('rooms', 'tm')
-//            /*->whereHas('rooms', function ($query)  use ($data) {
-//                /*$query->where('conf_id', '=', property_exists('$data', 'conf_id') ? $data['conf_id'] : json_decode(\App\Models\Config::where('status', '=', 1)*/
-//                $rm = array();
-//               // $di = array();
-//                foreach ($data['rooms'] as $reqRoom) {
-//                    array_push($rm, $reqRoom['id']);
-//                    //array_push($di, $reqRoom['date_index']);
-//                    }
-//                $query->where('id', 'in', $rm);
-//            })
-        ->WhereBetween('fromd', [$data['fromd'], $data['tod']])
-        ->orWhereBetween('tod', [$data['fromd'], $data['tod']])
-        //->where('date_index','=',$data[])
-        ->where('conf_id', '=', 1)
-        ->where('status', '=', 1)
-        ->where('id', '!=', $data['id'])
-        ->get();
-    try {
-        //$requests = new \App\Models\Requests();
+    $query = $pdo->prepare('SELECT * from requests WHERE conf_id = 8 AND status in (1,5) and id != ? AND ((fromd BETWEEN ? AND ?) OR (tod BETWEEN ? AND ?)) OR (? BETWEEN fromd and tod)');
+    $query->execute([$data['id'], explode('T', $data['fromd'])[0], explode('T', $data['tod'])[0], explode('T', $data['fromd'])[0], explode('T', $data['tod'])[0], explode('T', $data['fromd'])[0]]);
 
+    try {
 
         $requests = \App\Models\Requests::find($data['id']);
+        $urs = \App\Models\usersRequests::where('rr_id', $data['id'])->get();
+        foreach ($urs as $ur) {
+            $ur->delete();
+        }
 
-//        if ($data['status'] == 3) {
-//            if ($requests->status == 0) {
-                $urs = \App\Models\usersRequests::where('rr_id', $data['id'])->get();
-                foreach ($urs as $ur) {
-                    $ur->delete();
-                }
-//            }
-//        }
+        while ($book = $query->fetch(PDO::FETCH_ASSOC)) {
+            $rooms = \App\Models\RoomBook::where('req_id', '=', $book['id'])->get();
+            $tm = \App\Models\Tm::find($book['tm_id']);
 
-        foreach ($roombook as $book) {
-            foreach ($book->rooms()->get() as $room) {
-
+            foreach ($rooms as $room) {
+                $roomname = \App\Models\Rooms::find($room['room_id']);
                 $cntRoom = 0;
                 foreach ($data['rooms'] as $reqRoom) {
                     $fromt = new DateTime($myData['pivot'][$cntRoom]['fromt']);
                     $tot = new DateTime($myData['pivot'][$cntRoom++]['tot']);
-
-                    if ($data['status'] == 3) continue;
+                    if ($data['status'] == 3 || $book['status'] == 4) continue;
                     if ($fromt->diff($tot)->invert == 1) {
                         $nr = $response->withStatus(418);
                         $error = new ApiError();
@@ -432,26 +529,41 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
 
                     $tmpStrFD = explode('T', $data['fromd'])[0];
                     $tmpStrTD = explode('T', $data['tod'])[0];
-//                    $tmpStrFT = explode(".", explode('T', $reqRoom['fromt'])[1])[0];
-//                    $tmpStrTT = explode(".", explode('T', $reqRoom['tot'])[1])[0];
-
 
                     if (($tmpStrFD >= $book['fromd'] || $tmpStrTD > $book['fromd']) && $tmpStrFD < $book['tod']) {
-                        if ((new DateTime($room->pivot->tot) > $fromt && new DateTime($room->pivot->tot) < $tot) ||
-                            (new DateTime($room->pivot->tot) > $tot && new DateTime($room->pivot->fromt) < $tot) ||
-                            (new DateTime($room->pivot->fromt) > $fromt && new DateTime($room->pivot->fromt) < $tot) ||
-                            (new DateTime($room->pivot->fromt) == $fromt) ||
-                            (new DateTime($room->pivot->fromt) < $fromt && new DateTime($room->pivot->tot) > $tot)) {
-                            //print_r($reqRoom);
-                            //print_r($room->pivot);
-                            if ($room->pivot->room_id == $reqRoom['id'] && $room->pivot->date_index == $reqRoom['date_index']) {
-                                if ($data['status'] == 0 && $book['id'] !== $data['id']) {
+                        if ((new DateTime($room->tot) > $fromt && new DateTime($room->tot) < $tot) ||
+                            (new DateTime($room->tot) > $tot && new DateTime($room->fromt) < $tot) ||
+                            (new DateTime($room->fromt) > $fromt && new DateTime($room->fromt) < $tot) ||
+                            (new DateTime($room->fromt) == $fromt) || (new DateTime($room->tot) == $tot) ||
+                            (new DateTime($room->fromt) < $fromt && new DateTime($room->tot) > $tot)) {
+
+//                            echo "\n";
+//                            print_r($fromt);
+//                            echo '-';
+//                            print_r($tot);
+//                            echo '/';
+//                            print_r((new DateTime($room->fromt)));
+//                            echo '-';
+//                            print_r((new DateTime($room->tot)));
+//                            echo ' == ';
+//                            print_r((new DateTime($room->tot)) == $tot);
+//                            echo "\n";
+//                            print_r($data['status']);
+
+                            if ($room->room_id == $reqRoom['id'] && $room->date_index == $reqRoom['date_index']) {
+//                                && ($data['priority'] < $book['priority'] || $data['priority'] == $book['priority'])
+                                if ($data['status'] == 0 && $book['id'] != $data['id']) {
                                     $uMessage = new \App\Models\usersRequests();
                                     $uMessage->from_user = $data['user_id'];
-                                    $uMessage->to_users = $book['user_id'];
-                                    $uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . $room->pivot->date_index . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
+                                    $uMessage->to_users = $tm->supervisor;
+                                    $formatedMessage = "Υπάρχει σύγκρουση αιτημάτων μεταξύ της αίτησης σας (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $room->fromt . "-" . $room->tot . " " . "για τις ημν/νιες από" . " " . $tmpStrFD . " " . "εως" . $tmpStrTD;
+                                    $formatedMessage .= ") και της αίτησης (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $fromt->format('H:i') . " - " . $tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $book["fromd"] . " " . "εως" . " " . $book["tod"];
+                                    $formatedMessage .= ") link: http://app.livepraktoreio.gr/panteion/app/#/usercreaterequests/" . $book["id"];
+                                    $formatedMessage .= " " . "Σχόλια αιτήματος:" . " " . $data['descr'];
+                                    //$uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . getDateString($room->pivot->date_index) . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
+                                    $uMessage->comments = $formatedMessage;
                                     $uMessage->rr_id = $data['id'] ?: '';
-                                    $uMessage->rb_id = $room['pivot']['id'] ?: '';
+                                    $uMessage->rb_id = $room['id'] ?: '';
                                     $uMessage->status = 0;
                                     $uMessage->save();
 
@@ -459,18 +571,29 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
                                     $tt->fromRoom = $reqRoom;
                                     $tt->toRoom = $room;
 
+                                    $u = \App\Models\Users::find($tm->supervisor);
+                                    // sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
                                     array_push($errors, $tt);
+
+                                }
+                            } elseif ($data['priority'] > $book['priority']) {
+                                $requests->priority++;
+                            }
+                            if ($room->room_id != $reqRoom['id'] && $room->date_index == $reqRoom['date_index']) {
+                                foreach ($data['pivot'] as $dataTeacher) {
+                                    if ($room->teacher && $dataTeacher['teacher'] && $dataTeacher['teacher'] != '' && ($room->teacher == $dataTeacher['teacher'])) {
+                                        array_push($errors, \App\Models\Users::find($room->teacher)->user);
+                                        $nr = $response->withStatus(417);
+                                        $error = new ApiError();
+                                        //$requests->delete();
+//                                        $requests->status = 5;
+//                                        $requests->save();
+                                        $ps = \App\Models\Ps::find($book['ps_id']);
+                                        $error->setData(815, 'Ο καθηγητής' . ' ' . \App\Models\Users::find($room->teacher)->sname . ' ' . \App\Models\Users::find($room->teacher)->fname . ' ' . 'υπάρχει ήδη καταχωρημένος στην αίθουσας' . ' ' . $roomname->name . ', μάθημα ' . $ps->tma_code . ' ' . $ps->tma_per . ' και ώρες ' . $room->fromt . '-' . $room->tot, $dataTeacher);
+                                        return $nr->write($error->toJson());
+                                    }
                                 }
                             }
-                            if (property_exists($room->pivot, 'teacher'))
-                                if ($room->pivot->teacher == $reqRoom['teacher']) {
-
-                                    array_push($errors, \App\Models\Users::find($room->pivot->teacher)->user);
-                                    /*$nr = $response->withStatus(417);
-                                    $error = new ApiError();
-                                    $error->setData(815, 'Teacher ' . \App\Models\Users::find($room->pivot->teacher)->user . ' is already assigned to another room.', $room);
-                                    return $nr->write($error->toJson());*/
-                                }
                         }
                     }
                 }
@@ -504,11 +627,13 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
         $requests->fromd = $data['fromd'];
         $requests->tod = $data['tod'];
         $requests->conf_id = $data['conf_id'];
-        $data['id'] = $requests['id'];
+        $data['id'] = $requests->id;
         $requests->status = $data['status'];
-        if (sizeof($errors) == 0 && $data['status'] != 3) {
-            $requests->status = 1;
-            //$requests->save();
+
+        if (sizeof($errors) == 0) {
+            if ($data['status'] != 3 && $data['class_use'] != 12) $requests->status = 1;
+            if ($data['class_use'] == 12 && $data['status'] != 3 && $data['ps_id'] == null) $requests->status = 5;
+            if ($data['class_use'] == 12 && $data['status'] != 3 && $data['ps_id'] != null) $requests->status = 1;
         }
         $requests->tm_id = $data['tm_id'];
         $requests->save();
@@ -518,44 +643,18 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
         $error = new ApiError();
         $error->setData($e->getCode(), $e->getMessage(), $data);
         return $nr->write($error->toJson());
+        //return $nr->write('error');
     }
     if (sizeof($errors) != 0) {
         $nr = $response->withStatus(417);
         $error = new ApiError();
-        $error->setData(816, 'Σφάλματα αίτησης ', $errors);
+        $error->setData(816, 'Σφάλματα αίτησης. Απεστάλει μήνυμα έγκρισης!', $errors);
         return $nr->write($error->toJson());
+        //return $nr->write('error');
     }
 
     return $response->withStatus(201)->getBody()->write($requests->toJson());
-
-    /*header("Content-Type: application/json");
-    $data = $request->getParsedBody();
-    try {
-        $requests = \App\Models\Requests::find($data['id']);
-        $requests->req_dt = $data['req_dt'] ?: $requests->req_dt;
-        $requests->user_id = $data['user_id'] ?: $requests->user_id;
-        $requests->descr = $data['descr'] ?: $requests->descr;
-        $requests->period = $data['period'] ?: $requests->period;
-        $requests->ps_id = $data['ps_id'] ?: $requests->ps_id;
-        $requests->class_use = $data['class_use'] ?: $requests->class_use;
-        $requests->status = $data['status'] ?: $requests->status;
-        $requests->fromd = $data['fromd'] ?: $requests->fromd;
-        $requests->tod = $data['tod'] ?: $requests->tod;
-        $requests->conf_id = $data['conf_id'] ?: $requests->conf_id;
-        $requests->save();
-
-        $attachArray = array();
-        for ($i = 0; $i < sizeof($data['rooms']); $i++) {
-            $attachArray[$data['rooms'][$i]['room_id']] = $data['pivot'][$i];
-        }
-        $requests->rooms()->sync($attachArray);
-    } catch (PDOException $e) {
-        $nr = $response->withStatus(404);
-        $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage());
-        return $nr->write($error->toJson());
-    }
-    return $response->withStatus(201)->getBody()->write($requests->toJson());*/
+    //return $response->withStatus(201)->getBody()->write('ok');
 });//->add($checkUserRequestRules);
 
 $app->delete('/requests/{id}', function ($request, $response, $args) {
@@ -585,12 +684,13 @@ $app->put('/requests/{id}', function ($request, $response, $args) {
         $requests->class_use = $data['class_use'] ?: $requests->class_use;
         $requests->links = $data['links'] ?: $requests->links;
         $requests->protocol_id = $data['protocol_id'] ?: $requests->protocol_id;
-        $requests->status = $data['status'] ?: $requests->status;
+        $requests->status = $data['status'];
         $requests->fromd = $data['fromd'] ?: $requests->fromd;
         $requests->tod = $data['tod'] ?: $requests->tod;
         $requests->admin = $data['admin'] ?: '1';
         $requests->conf_id = $data['conf_id'] ?: $requests->conf_id;
         $requests->tm_id = $data['tm_id'] ?: $requests->tm_id;
+        $requests->priority = $data['priority'] ?: $requests->priority;
         $requests->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -622,7 +722,7 @@ $checkReqRooms = function ($request, $response, $next) {
             if ($fromt->diff($tot)->invert == 1) {
                 $nr = $response->withStatus(418);
                 $error = new ApiError();
-                $error->setData(818, 'To time must be greater than from time.');
+                $error->setData(818, 'Η ώρα λήξης πρέπει να είνα μεγαλύτερη από την ώρα έναρξης.');
                 return $nr->write($error->toJson());
             }
 
@@ -632,13 +732,13 @@ $checkReqRooms = function ($request, $response, $next) {
                     if ($room->pivot->room_id == $args['rid'] && $room->pivot->date_index == $data['date_index']) {
                         $nr = $response->withStatus(417);
                         $error = new ApiError();
-                        $error->setData(816, 'Class ' . \App\Models\Rooms::find($args['rid'])->name . ' is already assigned to book.');
+                        $error->setData(816, 'Η αίθουσα' . ' ' . \App\Models\Rooms::find($args['rid'])->name . ' ' . 'είναι ήδη καταχωρημένη σε άλλη δέσμευση.');
                         return $nr->write($error->toJson());
                     }
                     if ($room->pivot->teacher == $data['teacher']) {
                         $nr = $response->withStatus(417);
                         $error = new ApiError();
-                        $error->setData(815, 'Teacher ' . \App\Models\Users::find($room->pivot->teacher)->user . ' is already assigned to another room.');
+                        $error->setData(815, 'Ο καθηγητής' . ' ' . \App\Models\Users::find($room->pivot->teacher)->user . 'υπάρχει ήδη καταχωρημένος σε άλλη δέσμευση αίθουσας.');
                         return $nr->write($error->toJson());
                     }
                 }
@@ -674,6 +774,7 @@ $app->put('/requests/rooms/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
 
+    // print_r($data);
     try {
         $rb = \App\Models\RoomBook::find($id);
         $rb->room_id = $data['room_id'];
@@ -683,6 +784,8 @@ $app->put('/requests/rooms/{id}', function ($request, $response, $args) {
         $rb->tot = $data['tot'];
         $rb->date_index = $data['date_index'];
         $rb->save();
+        // echo "\n".$rb->fromt." - ". $rb->tot."\n";
+
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
@@ -695,6 +798,34 @@ $app->put('/requests/rooms/{id}', function ($request, $response, $args) {
     return $response->getBody()->write($requests->rooms()->get()->toJson());
 });
 //->add($checkReqRooms)
+
+//$app->put('/tstrequests/rooms/{id}', function ($request, $response, $args) {
+//    $id = $args['id'];
+//    $data = $request->getParsedBody();
+//
+//    // print_r($data);
+//    try {
+//        $rb = \App\Models\RoomBook::find($id);
+//        $rb->room_id = $data['room_id'];
+//        $rb->comment = $data['comment'];
+//        $rb->teacher = $data['teacher'];
+//        $rb->fromt = $data['fromt'];
+//        $rb->tot = $data['tot'];
+//        $rb->date_index = $data['date_index'];
+//        $rb->save();
+//        // echo "\n".$rb->fromt." - ". $rb->tot."\n";
+//
+//    } catch (PDOException $e) {
+//        $nr = $response->withStatus(404);
+//        $error = new ApiError();
+//        $error->setData($e->getCode(), $e->getMessage());
+//        return $nr->write($error->toJson());
+//    }
+//
+//    $requests = \App\Models\Requests::find($rb->req_id);
+//
+//    return $response->getBody()->write($requests->rooms()->get()->toJson());
+//});
 
 $app->put('/requests/{id}/{ps}', function ($request, $response, $args) {
     $id = $args['id'];
@@ -740,3 +871,198 @@ $app->get('/requests/{id}/guests', function ($request, $response, $args) {
     }
     return $response->getBody()->write($requests->guests()->get()->toJson());
 });
+
+
+$app->post('/requests/copyday', function (Request $request, Response $response) {
+    header("Content-Type: application/json");
+    $reqArray = $request->getParsedBody();
+    print_r($reqArray);
+
+    $errors = array();
+    try {
+
+        foreach ($reqArray as $data) {
+            $myData = $data;
+
+            $requests = new \App\Models\Requests();
+            $requests->req_dt = null;
+            $requests->user_id = $data['user_id'];
+            $requests->descr = $data['descr'] ?: '';
+            $requests->period = $data['period'] ?: '';
+            $requests->ps_id = $data['ps_id'] ?: null;
+            $requests->class_use = $data['class_use'] ?: '';
+            //$requests->links = $data['links']?:'';
+            $requests->status = $data['status'];
+            $requests->fromd = $data['fromd'];
+            $requests->tod = $data['tod'];
+            $requests->conf_id = $data['config']['id'];
+            $requests->tm_id = $data['tm_id'];
+            $requests->priority = $data['priority'];
+            $requests->save();
+
+            $data['id'] = $requests['id'];
+
+            $mydb = new db();
+            $pdo = $mydb->connect();
+            $errors = array();
+            $query = $pdo->prepare('SELECT * from requests WHERE conf_id = 1 AND status in (1,5)  AND ((fromd BETWEEN ? AND ?) OR (tod BETWEEN ? AND ?)) OR (? BETWEEN fromd and tod)');
+            $query->execute([explode('T', $data['fromd'])[0], explode('T', $data['tod'])[0], explode('T', $data['fromd'])[0], explode('T', $data['tod'])[0], explode('T', $data['fromd'])[0]]);
+
+            while ($book = $query->fetch(PDO::FETCH_ASSOC)) {
+
+                $rooms = \App\Models\RoomBook::where('req_id', '=', $book['id'])->get();
+                $tm = \App\Models\Tm::find($book['tm_id']);
+
+                foreach ($rooms as $room) {
+
+                    $roomname = \App\Models\Rooms::find($room['room_id']);
+                    $cntRoom = 0;
+                    foreach ($data['rooms'] as $reqRoom) {
+                        $fromt = new DateTime($myData['pivot'][$cntRoom]['fromt']);
+                        $tot = new DateTime($myData['pivot'][$cntRoom++]['tot']);
+                        if ($data['status'] == 3 || $book['status'] == 4) continue;
+                        if ($fromt->diff($tot)->invert == 1) {
+                            $nr = $response->withStatus(418);
+                            $error = new ApiError();
+                            $requests->delete();
+                            $error->setData(818, 'Η ώρα λήξης πρέπει να είναι μεγαλύτερη από την ώρα έναρξης.', $requests);
+                            return $nr->write($error->toJson());
+                        }
+
+                        $tmpStrFD = explode('T', $data['fromd'])[0];
+                        $tmpStrTD = explode('T', $data['tod'])[0];
+
+                        if (($tmpStrFD >= $book['fromd'] || $tmpStrTD > $book['fromd']) && $tmpStrFD < $book['tod']) {
+                            if ((new DateTime($room->tot) > $fromt && new DateTime($room->tot) < $tot) ||
+                                (new DateTime($room->fromt) > $fromt && new DateTime($room->fromt) < $tot) ||
+                                (new DateTime($room->fromt) == $fromt) ||
+                                (new DateTime($room->tot) > $tot && new DateTime($room->fromt) < $tot) ||
+                                (new DateTime($room->fromt) < $fromt && new DateTime($room->tot) > $tot)) {
+
+                                if ($room->room_id == $reqRoom['id'] && $room->date_index == $reqRoom['date_index'] && ($data['priority'] < $book['priority'] || $data['priority'] == $book['priority'])) {
+
+                                    if ($data['status'] == 0) {
+                                        $uMessage = new \App\Models\usersRequests();
+                                        $uMessage->from_user = $data['user_id'];
+                                        $uMessage->to_users = $tm->supervisor;
+                                        $formatedMessage = "Υπάρχει σύγκρουση αιτημάτων μεταξύ της αίτησης σας (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $room->fromt . "-" . $room->tot . " " . "για τις ημν/νιες από" . " " . $tmpStrFD . " " . "εως" . $tmpStrTD;
+                                        $formatedMessage .= ") και της αίτησης (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $fromt->format('H:i') . " - " . $tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $book["fromd"] . " " . "εως" . " " . $book["tod"];
+                                        $formatedMessage .= ") link: http://app.livepraktoreio.gr/panteion/app/#/usercreaterequests/" . $book["id"];
+                                        $formatedMessage .= " " . "Σχόλια αιτήματος:" . " " . $data['descr'];
+                                        //$uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . getDateString($room->date_index) . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
+                                        $uMessage->comments = $formatedMessage;
+                                        $uMessage->rr_id = $data['id'] ?: '';
+                                        $uMessage->rb_id = $room->id ?: '';
+                                        $uMessage->status = 0;
+                                        $uMessage->save();
+                                        // $this->mailer('df', 'df', $uMessage->comments, $room);
+                                        $tt = new stdClass();
+                                        $tt->fromRoom = $reqRoom;
+                                        $tt->toRoom = $room;
+                                        $u = \App\Models\Users::find($tm->supervisor);
+                                        //  sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+                                        array_push($errors, $tt);
+                                    }
+
+                                } elseif ($data['priority'] > $book['priority']) {
+                                    $requests->priority++;
+                                }
+                                foreach ($data['pivot'] as $dataTeacher) {
+                                    if ($room->teacher && $dataTeacher['teacher'] && $dataTeacher['teacher'] != '' && ($room->teacher == $dataTeacher['teacher'])) {
+                                        array_push($errors, \App\Models\Users::find($room->teacher)->user);
+                                        $nr = $response->withStatus(417);
+                                        $error = new ApiError();
+                                        $requests->delete();
+                                        $error->setData(815, 'Ο καθηγητής' . ' ' . \App\Models\Users::find($room->teacher)->sname . ' ' . \App\Models\Users::find($room->teacher)->fname . ' ' . 'υπάρχει ήδη καταχωρημένος σε άλλη δέσμευση αίθουσας.', $room);
+                                        return $nr->write($error->toJson());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (sizeof($errors) == 0) {
+                if ($data['status'] != 3 && $data['class_use'] != 12) $requests->status = 1;
+                if ($data['class_use'] === 12 && $data['status'] != 3 && !$data['ps_id']) $requests->status = 5;
+                if ($data['class_use'] === 12 && $data['status'] != 3 && $data['ps_id']) $requests->status = 1;
+                $requests->save();
+            }
+            //$attachArray = array();
+            //$deletedRows = \App\Models\RoomBook::where('req_id', '=', $requests['id'])->delete();
+            for ($i = 0; $i < sizeof($data['pivot']); $i++) {
+                //$attachArray["'" + $data['rooms'][$i]['id'] + "'"] = $data['pivot'][$i];
+                $rb = new \App\Models\RoomBook();
+                $rb->req_id = $requests['id'];
+                $rb->room_id = $data['rooms'][$i]['id'];
+                $rb->comment = $data['pivot'][$i]['comment'];
+                $rb->teacher = $data['pivot'][$i]['teacher'];
+                $rb->fromt = $data['pivot'][$i]['fromt'];
+                $rb->tot = $data['pivot'][$i]['tot'];
+                $rb->date_index = $data['pivot'][$i]['date_index'];
+                $rb->save();
+            }
+            //$requests->rooms()->delete() attach($attachArray);
+            //   print_r($data['guests']);
+            foreach ($data['guests'] as $guest) {
+                $guest = (array)$guest;
+            }
+            //  print_r($data['guests']);
+
+            if ($requests->class_use == 7 && sizeof($errors) == 0) {
+                $requests['status'] = 0;
+                $requests->save();
+                //  $requests['priority'] = $data->class_use['priority'];
+                $uMessage = new \App\Models\usersRequests();
+                //$uMessage->to_users = [];
+                $uMessage->from_user = $data['user_id'];
+
+                $uMessage->to_users = $room->users[0]->id;
+                $emCnt = 0;
+                if ($room->users) for ($i = 1; $i < sizeof($room->users); $i++) {
+                    if ($room->users[$i]->em_main) $uMessage->to_users[$emCnt++] = $room->users[$i]->em_main;
+                    if ($room->users[$i]->em_sec) $uMessage->to_users[$emCnt++] = $room->users[$i]->em_sec;
+                    if ($room->users[$i]->em_pant) $uMessage->to_users[$emCnt++] = $room->users[$i]->em_pant;
+                }
+                //$uMessage->to_users = $room->users[0]->id;
+
+                $u = \App\Models\Users::find($data['user_id']);
+                $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . "ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($room->date_index) . ' και ώρα  ' . $room->fromt . '-' . $room->tot . ' για τις ημν/νιες από ' . $tmpStrFD . ' εως ' . $tmpStrTD;
+                $formatedMessage .= ') link: http://app.livepraktoreio.gr/panteion/app/#/usercreaterequests/' . $book["id"];
+                $formatedMessage .= ' Σχόλια αιτήματος: ' . $data['descr'];
+                $uMessage->comments = $formatedMessage;
+                $uMessage->rr_id = $data['id'] ?: '';
+                $uMessage->rb_id = $room->id ?: '';
+                $uMessage->status = 0;
+                $uMessage->save();
+
+                $tt = new stdClass();
+                $tt->fromRoom = $reqRoom;
+                $tt->toRoom = $room;
+                // print_r($uMessage);
+
+                //sendEmail(array('to' => $uMessage->to_users, 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+            }
+        }
+
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage(), $data);
+        return $nr->write($error->toJson());
+    }
+    if (sizeof($errors) != 0) {
+        $nr = $response->withStatus(417);
+        $error = new ApiError();
+        //$req = \App\Models\Rooms::find($reqRoom['id'])->get();
+        $error->setData(816, 'Σφάλματα αίτησης', $errors);
+        return $nr->write($error->toJson());
+    }
+//    return $response->withStatus(201)->getBody()->write($requests->toJson());
+    return $response->withStatus(201)->getBody()->write('wtf');
+
+});
+
+
+

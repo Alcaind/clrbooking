@@ -25,6 +25,11 @@ class usersRequests extends Model
         return $this->belongsTo('\\App\\Models\\Users', 'to_users');
     }
 
+//    public function tms()
+//    {
+//        return $this->belongsTo('\\App\\Models\\Tm', 'tm_users', 'user_id', 'to_users')->withPivot( 'tm_id');
+//    }
+
     public function roombook()
     {
         return $this->belongsTo('\\App\\Models\\RoomBook', 'rr_id');
