@@ -16,6 +16,7 @@ body {
     margin-right: auto;
     margin-left: auto;*/
     background-color: #f3f3f3 !important;
+    overflow-y: hidden;
 }
 
 #main {
@@ -29,24 +30,13 @@ body {
 }
 
 .header {
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*width: 100%;*/
-    /*height: 50px;*/
-    /*overflow: hidden; !* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" *!*/
-    /*background: #800000;*/
-    /*margin-right: auto;*/
-    /*margin-left: auto;*/
     background-color: #F1F1F1;
     text-align: center;
     padding: 20px;
 }
 
-/*ok*/
 nav.navbarpan {
     background-color: #800000;
-    /*background-color: #5d0303;*/
 }
 
 nav.navbarpan > div > a.navbar-brand {
@@ -73,7 +63,6 @@ nav.navbarpan > div > a.navbar-brand {
 nav.navbarpan > div > ul.nav.navbar-nav > li > a:hover {
     background-color: #e6e6e6;
     color: #800000;
-
 }
 
 nav.navbarpan > div > ul.nav.navbar-nav > li > a:active {
@@ -102,7 +91,6 @@ nav.navbarpan > div > ul.nav.navbar-nav > li > a:active {
 }
 
 .div.navbar-collapse.collapse {
-
     display: block;
     overflow: hidden;
     max-height: 0px;
@@ -117,15 +105,14 @@ nav.navbarpan > div > ul.nav.navbar-nav > li > a:active {
 }
 
 .maincontainer {
-
     padding: 0px;
     margin-left: auto;
     background-color: #e6e6e6;
-    width: 80%;
+    width: 100%;
     height: calc(100vh - 102px);
     margin-right: auto;
     overflow-y: auto;
-
+    position: relative;
 }
 
 footer {
@@ -138,4 +125,137 @@ footer {
     color: #b2b3a8 !important;
     margin-top: 50px;
     text-align: center;
+}
+
+dm-title {
+    width: 100%;
+}
+
+.pageTools {
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    float: right;
+}
+
+.dropdown-menu {
+    left: -160px ! important;
+}
+
+.center {
+    left: 0px ! important;
+}
+
+.boxContent {
+    position: relative;
+    overflow-y: auto;
+    height: calc(100% - 106px);
+}
+
+.table-header-fixed {
+    position: relative;
+    /*display: grid;*/
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+.header-fixed {
+    /*position: fixed;*/
+}
+
+/*.contentScroll {*/
+/*height: calc(100% - 86px);*/
+/*width: 100%;*/
+/*}*/
+
+.sortorder {
+    width: 20px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.tableColoumns {
+    padding: 2px !important;
+    height: 25px;
+}
+
+.pagination {
+    margin: 0px !important;
+}
+
+.columnSettings li {
+    background: none !important;
+    cursor: pointer;
+    list-style: none;
+}
+
+td li {
+    list-style: none;
+}
+
+.navbar {
+    margin-bottom: 0px !important;
+}
+
+table {
+    margin-bottom: 0px !important;
+}
+
+.operations {
+    display: flex;
+    float: right;
+}
+
+.not-active {
+    pointer-events: none;
+    opacity: .5;
+}
+
+span.msg-error {
+    color: #F00;
+}
+
+span.form-required {
+    margin-left: 5px;
+    color: red;
+}
+
+.rightColumn {
+    height: calc(100vh - 122px);
+    overflow-y: auto;
+    width: 100%;
+}
+
+.leftColumn {
+    height: calc(100vh - 122px);
+    overflow-y: auto;
+    width: 100%;
+}
+
+.uib-time input {
+    width: 24px;
+    padding: 0;
+    height: 21px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.uib-time > .btn-default {
+    padding: 0;
+    height: 21px;
+    width: 23px;
+    margin-left: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    position: relative;
+    bottom: 1px;
+}
+
+.uib-separator {
+    font-weight: 600;
+}
+
+.uib-increment > .btn-link, .uib-decrement > .btn-link {
+    padding: 0;
 }

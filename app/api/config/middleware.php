@@ -76,7 +76,7 @@ $container["HttpBasicAuthentication"] = function ($container) {
             "user" => "user",
             "hash" => "hash"
         ]),
-        "users" => ["tt" => "tt"],
+        "users" => '',
         "environment" => "REDIRECT_HTTP_AUTHORIZATION"
     ]);
 };
@@ -100,7 +100,7 @@ $container["JwtAuthentication"] = function ($container) {
         "rules" => [
             new Slim\Middleware\JwtAuthentication\RequestPathRule([
                 "path" => "/",
-                "passthrough" => ["/token", "/trackDev", "/login"]
+                "passthrough" => ["/token", "/trackDev", "/login", "/sendEmail"]
             ]),
             new \Slim\Middleware\JwtAuthentication\RequestMethodRule([
                 "passthrough" => ["OPTIONS"]

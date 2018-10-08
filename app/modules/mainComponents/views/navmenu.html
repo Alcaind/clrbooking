@@ -3,50 +3,53 @@
 
         <button type="button" class="navbar-toggle" ng-init="navCollapsed = true"
                 ng-click="navCollapsed = !navCollapsed">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only">{{"Panteio navigation"| translate}}</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand panteiosbrand " href="#home">
             <div style="background: url('http://www.panteion.gr/images/Venda-img/logo.png') no-repeat 50% 0% #fff;background-size: auto auto;background-size: contain;height: 50px;position: absolute;left: 0px;z-index: 10;width: 50px;top: 0px;"></div>
-            <div style="border-bottom: 1px solid;height: 22px;margin-bottom: 5px;">Αιθουσιολόγιο</div>
-            <div style="font-size:10px;line-height: 10px;">ΠΑΝΤΕΙΟΝ ΠΑΝΕΠΙΣΤΗΜΙΟ <br> Κοινωνικών και Πολιτικών Επιστημών
+            <div style="border-bottom: 1px solid;height: 22px;margin-bottom: 5px;">{{"Αιθουσολόγιο"| translate}}</div>
+            <div style="font-size:10px;line-height: 10px;">{{"ΠΑΝΤΕΙΟΝ ΠΑΝΕΠΙΣΤΗΜΙΟ"| translate}} <br> {{"Κοινωνικών και
+                Πολιτικών Επιστημών"| translate}}
             </div>
         </a>
     </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbarpan " ng-class="!navCollapsed && 'in'"
-         ng-if="globals.item.username && globals.item.username !== '' && globals.item.authdata">
-        <ul class="nav navbar-nav">
-            <li><a href="#roles">Ρόλοι</a></li>
-            <li><a href="#users">Χρήστες</a></li>
-            <li><a href="#rooms">Αίθουσες</a></li>
-            <li><a href="#tms">Τμήματα</a></li>
-            <li><a href="#kats">Κατευθύνσεις</a></li>
-            <li><a href="#requests">Αιτήματα</a></li>
-            <li><a href="#config">Configuration</a></li>
-            <li><a href="#items">Εξοπλισμός</a></li>
-            <li><a href="#periods">Ακαδημαικοι Περίοδοι</a></li>
-            <li><a href="#ps">Προγραμμα σπουδών</a></li>
-            <li><a href="#booking">Κλείσιμο Αιθουσας</a></li>
-            <li><a href="#userscategories">Κατηγορίες Χρηστών</a></li>
-            <li><a href="#roomcategory">Κατηγορίες Αιθουσών</a></li>
-            <li><a href="#roomuse">Χρήση Αιθουσών</a></li>
-            <li><a href="#psstats">Στατιστικά</a></li>
 
+    <div class="collapse navbar-collapse navbarpan" ng-class="!navCollapsed && 'in'">
+        <!--ng-if="globals.item.username && globals.item.username !== '' && globals.item.authdata"-->
+        <ul class="nav navbar-nav">
+            <li class="dropdown" ng-repeat="option in adminColums" style="padding: 2px">
+                <a ng-if="!option.column" data-toggle="dropdown">{{option.title| translate}}</a>
+                <a href="#{{option.column}}" ng-if="option.column" style="line-height: 15px;">{{option.title|
+                    translate}}</a>
+
+                <ul class="dropdown-menu center" role="menu" aria-labelledby="simple-dropdown" data-placement="bottom">
+                    <li role="menuitem" ng-repeat="smenu in option.smenu" style="padding: 2px">
+                        <a href="#{{smenu.column}}" style="line-height: 15px;">{{smenu.title| translate}}</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown" style="background: #5d0303;">
-                <a class="dropdown-toggle" data-toggle="dropdown">Ρυθμίσεις<b class="caret"></b></a>
-                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
-                    <li role="menuitem"><a href="#roles">Προφίλ</a></li>
-                    <li role="menuitem" ng-click="logout()"><a href="#login">Έξοδος</a></li>
+            <li class="dropdown" style="background: #5d0303;cursor: pointer;">
+                <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"
+                                                                        aria-hidden="true"></span><b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="btn-append-to-single-button">
+                    <li role="menuitem" ng-click="getProfile()" type="button"><a>{{"Προφίλ"| translate}}</a></li>
+                    <li role="menuitem" ng-click="logout()"><a href="#login">{{"Έξοδος"| translate}}</a></li>
+                    <li role="menuitem" ng-click="closeWithCookie()" type="button"><a>{{"Αποθήκευσε τις επιλογές σου"|
+                        translate}}</a>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm" ng-click="updateLanguage('gr')">gr</button>
+                        <button class="btn btn-sm" ng-click="updateLanguage('en')">en</button>
+                    </li>
+                </ul>
                 </ul>
             </li>
         </ul>
     </div>
 </nav>
-
-

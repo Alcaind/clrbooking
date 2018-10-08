@@ -39,7 +39,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  * @property-read int $dayOfYear 0 through 365
  * @property-read int $weekOfMonth 1 through 5
  * @property-read int $weekOfYear ISO-8601 week number of year, weeks starting on Monday
- * @property-read int $daysInMonth number of days in the given month
+ * @property-read int $daysInMonth number of headerDays in the given month
  * @property-read int $age does a diffInYears() with default parameters
  * @property-read int $quarter the quarter of this instance, 1 - 4
  * @property-read int $offset the timezone offset in seconds from UTC
@@ -64,7 +64,7 @@ class Carbon extends DateTime
     const SATURDAY = 6;
 
     /**
-     * Names of days of the week.
+     * Names of headerDays of the week.
      *
      * @var array
      */
@@ -991,7 +991,7 @@ class Carbon extends DateTime
     }
 
     /**
-     * Get weekend days
+     * Get weekend headerDays
      *
      * @return array
      */
@@ -1001,7 +1001,7 @@ class Carbon extends DateTime
     }
 
     /**
-     * Set weekend days
+     * Set weekend headerDays
      *
      * @param array
      */
@@ -2250,7 +2250,7 @@ class Carbon extends DateTime
     }
 
     /**
-     * Add days to the instance. Positive $value travels forward while
+     * Add headerDays to the instance. Positive $value travels forward while
      * negative $value travels into the past.
      *
      * @param int $value
@@ -2287,7 +2287,7 @@ class Carbon extends DateTime
     }
 
     /**
-     * Remove days from the instance
+     * Remove headerDays from the instance
      *
      * @param int $value
      *
@@ -2595,7 +2595,7 @@ class Carbon extends DateTime
     }
 
     /**
-     * Get the difference in days
+     * Get the difference in headerDays
      *
      * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference
@@ -2610,7 +2610,7 @@ class Carbon extends DateTime
     }
 
     /**
-     * Get the difference in days using a filter closure
+     * Get the difference in headerDays using a filter closure
      *
      * @param Closure             $callback
      * @param \Carbon\Carbon|null $dt
@@ -2685,7 +2685,7 @@ class Carbon extends DateTime
     }
 
     /**
-     * Get the difference in weekend days using a filter
+     * Get the difference in weekend headerDays using a filter
      *
      * @param \Carbon\Carbon|null $dt
      * @param bool                $abs Get the absolute of the difference

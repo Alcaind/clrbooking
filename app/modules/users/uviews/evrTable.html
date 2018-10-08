@@ -1,22 +1,32 @@
-<div>
-    <table class="table table-striped">
+<div id="data_tbl" class="boxContent">
+    <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+        <thead class="header-fixed" style="background-color: #cecece;">
         <tr>
             <th>ID</th>
-            <th>Ρόλος</th>
-            <th>Περιγραφή</th>
+            <th>{{"Ρόλος"| translate}}</th>
+            <th>{{"Περιγραφή"| translate}}</th>
             <th>...</th>
         </tr>
-        <tr ng-repeat="role in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
-            style="cursor: pointer" ng-class="{selected: role.id === item.id}">
-            <td>{{ role.id }}</td>
-            <td>{{ role.role }}</td>
-            <td>{{ role.descr }}</td>
+        </thead>
+        <tbody class="contentScroll">
+        <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
+            style="cursor: pointer">
+            <td>{{ item.id }}</td>
+            <td>{{ item.role }}</td>
+            <td>{{ item.descr }}</td>
             <td>
-                <button ng-click="role.disabled?null:ctrl.showPivotData(role)" type="button"
-                        class="btn {{role.disabled?'btn-regular disabled':'btn-success '}}">
+                <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
+                        class="btn{{item.disabled?' btn-regular disabled':' btn-success'}}">
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
             </td>
         </tr>
+        </tbody>
     </table>
+</div>
+<div class="pagePagination">
+    <div>
+        <pagination current-page="currentPageR" total-items="ctrl.rdp.length" items-per-page="itemsPerPageR"
+                    num-pages="numPagesR"></pagination>
+    </div>
 </div>

@@ -1,44 +1,90 @@
-<div>
-    <div style="text-align: left;padding-left: 5px;">
-        <a href back-button type="button" class="btn btn-warning">
-            <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
-            </span>
-        </a>
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-chevron-left">
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
+				</span>
+            </a>
+        </div>
+        <div class="pageTitle">{{"Διαχείριση Ακαδημαϊκών Ετών"| translate}}</div>
     </div>
-    <form class="configForm" name="configForm" novalidate>
-        <div class="form-group"
-             ng-class="{ 'has-error' : configForm.year.$invalid && !configForm.year.$pristine }">
-            <label class="required" for="year">Έτος<span class="form-required">*</span>:</label>
-            <input id="year" name="year" class="form-control" type="number" ng-model="item.year">
-            <p ng-show="configForm.year.$invalid && !configForm.year.$pristine" class="help-block">Εισάγετε έτος.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : configForm.status.$invalid && !configForm.status.$pristine }">
-            <label class="required" for="status">Κατάσταση<span class="form-required">*</span>:</label>
-            <input id="status" name="status" class="form-control" type="number" ng-model="item.status">
-            <p ng-show="configForm.status.$invalid && !configForm.status.$pristine" class="help-block">Εισάγετε
-                κατάσταση.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : configForm.fromd.$invalid && !configForm.fromd.$pristine }">
-            <label class="required" for="fromd">Από ημ/νια<span class="form-required">*</span>:</label>
-            <input id="fromd" name="fromd" class="form-control" type="number" ng-model="item.fromd">
-            <p ng-show="configForm.fromd.$invalid && !configForm.fromd.$pristine" class="help-block">Εισάγετε ημερομηνία
-                έναρξης.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : configForm.tod.$invalid && !configForm.tod.$pristine }">
-            <label class="required" for="tod">Έως ημ/νια<span class="form-required">*</span>:</label>
-            <input id="tod" name="tod" class="form-control" type="number" ng-model="item.tod">
-            <p ng-show="configForm.tod.$invalid && !configForm.tod.$pristine" class="help-block">Εισάγετε ημερομηνία
-                λήξης.</p>
-        </div>
-        <button type="button" class="btn btn-primary" ng-click="updateConfig(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="saveConfig(item)" style="padding: 5px"
-                ng-if="item.year && !item.id">Αποθήκευση
-        </button>
-    </form>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="formGroupItems">
+                <div class="inlineItems">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.year.$invalid && !itemForm.year.$pristine }">
+                        <label class=" formItemLabel" for="year">{{"Έτος"| translate}}<span
+                                class="form-required">*</span>:</label>
+                        <div class="midInput">
+                            <input id="year" name="year" class="form-control" type="number" ng-model="ctrl.item.year">
+                        </div>
+                        <p ng-show="itemForm.year.$invalid && !itemForm.year.$pristine" class="help-block">{{"Εισάγετε
+                            έτος."| translate}}</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="formItemLabel" for="synt">{{"Συντομογραφία"| translate}}:</label>
+                        <div class="midInput">
+                            <input id="synt" name="synt" class="form-control" type="text" ng-model="ctrl.item.synt">
+                        </div>
+                    </div>
+                </div>
+                <div class="inlineItems">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.fromd.$invalid && !itemForm.fromd.$pristine }">
+                        <label class=" formItemLabel" for="fromd">{{"Από ημέρα"| translate}}<span
+                                class="form-required">*</span>:</label>
+                        <div class="input-group">
+                            <input id="fromd" name="fromd" type="text" class="form-control"
+                                   uib-datepicker-popup="{{'dd-MM-yyyy'}}"
+                                   ng-model="ctrl.item.fromd" ng-value="ctrl.item.fromd|date:'dd-MM-yyyy'"
+                                   is-open="popup1.opened" ng-required="true" close-text="Close"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()">
+                                    <i class="glyphicon glyphicon-calendar"></i></button></span>
+                        </div>
+                        <p ng-show="itemForm.fromd.$invalid && !itemForm.fromd.$pristine" class="help-block">{{"Εισάγετε
+                            ημερομηνιά έναρξης."| translate}}</p>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.tod.$invalid && !itemForm.tod.$pristine }">
+                        <label class=" formItemLabel" for="tod">{{"Μέχρι ημέρα"| translate}}<span
+                                class="form-required">*</span>:</label>
+                        <div class="input-group">
+                            <input id="tod" name="tod" type="text" class="form-control"
+                                   uib-datepicker-popup="{{'dd-MM-yyyy'}}"
+                                   ng-model="ctrl.item.tod" ng-value="ctrl.item.tod|date:'dd-MM-yyyy'"
+                                   is-open="popup2.opened" ng-required="true" close-text="Close"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open2()">
+                                    <i class="glyphicon glyphicon-calendar"></i></button></span>
+                        </div>
+                        <p ng-show="itemForm.tod.$invalid && !itemForm.tod.$pristine" class="help-block">{{"Εισάγετε
+                            ημερομηνιά λήξης."| translate}}</p>
+                    </div>
+                </div>
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="req_exp_dates">{{"Ημερες προθεσμίας"| translate}}:</label>
+                        <div class="midInput">
+                            <input id="req_exp_dates" name="req_exp_dates" class="form-control" type="text"
+                                   ng-model="ctrl.item.req_exp_dates">
+                        </div>
+
+                    </div>
+                    <div class="directiveFormItemA">
+                        <status-selector status-title='{{"Κατάσταση"| translate}}' options="configStatus"
+                                         output-value="ctrl.item.status"></status-selector>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.id>0">{{"Ανανέωση"| translate}}
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.year && !ctrl.item.id">{{"Αποθήκευση"| translate}}
+            </button>
+        </form>
+    </div>
 </div>

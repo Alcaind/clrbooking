@@ -1,38 +1,62 @@
-<div>
-    <div style="text-align: left;padding-left: 5px;">
-        <a href back-button type="button" class="btn btn-warning">
-            <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
-            </span>
-        </a>
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-chevron-left">
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
+				</span>
+            </a>
+        </div>
+        <div class="pageTitle">{{"Διαχείριση Εξοπλισμού"| translate}}</div>
     </div>
-    <form class="itemForm" name="itemForm" novalidate>
-        <div class="form-group">
-            <label for="description">Περιγραφή:</label>
-            <textarea id="description" name="comments" class="form-control" ng-model="item.descr"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="comments">Σχόλια:</label>
-            <textarea id="comments" name="comments" class="form-control" ng-model="item.comments"></textarea>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : itemForm.code.$invalid && !itemForm.code.$pristine }">
-            <label class="required" for="code">Κωδικός εξοπλισμού:<span class="form-required">*</span>:</label>
-            <input id="code" name="code" class="form-control" type="text" ng-model="item.code">
-            <p ng-show="itemForm.code.$invalid && !itemForm.code.$pristine" class="help-block">Εισάγετε ημερομηνία
-                κωδικό.</p>
-        </div>
-        <div class="form-group"
-             ng-class="{ 'has-error' : itemForm.status.$invalid && !itemForm.status.$pristine }">
-            <label class="required" for="status">Κατάσταση:<span class="form-required">*</span>:</label>
-            <input id="status" name="status" class="form-control" type="text" ng-model="item.status">
-            <p ng-show="itemForm.status.$invalid && !itemForm.status.$pristine" class="help-block">Εισάγετε
-                κατάσταση.</p>
-        </div>
-        <button type="button" class="btn btn-primary" ng-click="updateItem(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="saveItem(item)" style="padding: 5px"
-                ng-if="item.code && !item.id">Αποθήκευση
-        </button>
-    </form>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="formGroupItems">
+                <div class="form-group">
+                    <label for="description" class="formItemLabel">{{"Ονομασία"| translate}}:</label>
+                    <div class="longInput">
+                        <input id="description" name="comments" class="form-control" ng-model="ctrl.item.descr">
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : itemForm.code.$invalid && !itemForm.code.$pristine }">
+                    <label class=" formItemLabel" for="code">{{"Κωδικός εξοπλισμού"| translate}}:<span
+                            class="form-required">*</span>:</label>
+                    <div class="longInput">
+                        <input id="code" name="code" class="form-control" type="text" ng-model="ctrl.item.code">
+                    </div>
+                    <p ng-show="itemForm.code.$invalid && !itemForm.code.$pristine" class="help-block">{{"Εισάγετε
+                        κωδικό."| translate}}</p>
+                </div>
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class=" formItemLabel">{{"Τύπος Εξοπλισμού"| translate}}:</label>
+                        <div class="smallInput">
+                            <select id="itemtype" class="form-control"
+                                    ng-options="itemtype.id as itemtype.descr for itemtype in itemtypes"
+                                    ng-model="ctrl.item.type_id">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="directiveFormItemA">
+                        <status-selector status-title='{{"Κατάσταση"| translate}}' options="itemStatus"
+                                         output-value="ctrl.item.status"></status-selector>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments" class=" formItemLabel">{{"Σχόλια"| translate}}:</label>
+                    <div class="longInput">
+                        <textarea id="comments" name="comments" class="form-control" type="text"
+                                  ng-model="ctrl.item.comments"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.id>0">{{"Ανανέωση"| translate}}
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.code && !ctrl.item.id">{{"Αποθήκευση"| translate}}
+            </button>
+        </form>
+    </div>
 </div>

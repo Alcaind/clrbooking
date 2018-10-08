@@ -13,4 +13,10 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 class Stats extends Model
 {
     protected $table = 'ps_stats';
+
+
+    public function ps()
+    {
+        return $this->hasOne('\\App\\Models\\Ps', 'ps_id');
+    }
 }

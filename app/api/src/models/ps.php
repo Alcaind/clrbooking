@@ -30,4 +30,19 @@ class Ps extends Model
         }
         return $ret;
     }
+
+    public function stats()
+    {
+        return $this->hasOne('\\App\\Models\\Stats', 'ps_id');
+    }
+
+    public function tm()
+    {
+        return $this->belongsTo("\\App\\Models\\Tm", 'tm_code');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany("\\App\\Models\\Users", 'ps_teachers', 'ps_id', 'user_id')->withPivot('comment');
+    }
 }

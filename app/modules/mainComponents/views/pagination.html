@@ -1,8 +1,18 @@
-<div>
-    View <select ng-model="itemsPerPage" ng-change="setItemsPerPage(itemsPerPage)"
-                 ng-options="pg.th as pg.th for pg in pageThresholds"></select> records at a time.
-    <ul uib-pagination boundary-links="true" items-per-page="itemsPerPage" total-items="totalItems"
-        ng-model="currentPage" num-pages="numPages"
-        class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
-        last-text="&raquo;"></ul>
+<div style="display: flex;padding-top:  10px;padding-bottom:  10px;border-radius: 4px;background-color: #f5f5f5;border: 1px solid #ccc;">
+    <div style="height: 30px;line-height: 30px;padding-left: 20px;padding-right: 20px;width: 500px;">
+        {{"Βλέπετε"| translate}} <select ng-model="itemsPerPage" ng-change="setItemsPerPage(itemsPerPage)"
+                                         ng-options="pg.th as pg.th for pg in pageThresholds "></select> {{"Αποτελέσματα
+        / Σελίδα, σε Σύνολο"| translate}}
+        {{totalItems}} {{"Εγγραφών"| translate}}.
+    </div>
+    <div style="width:50%;text-align: center">
+        <ul uib-pagination boundary-links="true" items-per-page="itemsPerPage" total-items="totalItems"
+            max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="true" ng-model="currentPage"
+            num-pages="numPages"
+            class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+            last-text="&raquo;"></ul>
+    </div>
+    <div style="height: 30px;line-height: 30px;padding-left: 20px;padding-right: 20px;width:500px;text-align: right">
+        {{"Σελίδα"| translate}} {{currentPage}} {{"από"| translate}} {{numPages}}
+    </div>
 </div>

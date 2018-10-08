@@ -12,7 +12,7 @@ use \App\Models\ApiError as ApiError;
 
 $app->get('/config', function (Request $request, Response $response) {
     header("Content-Type: application/json");
-    $config = \App\Models\Config::all();
+    $config = \App\Models\Config::with('periods')->get();
     return $response->getBody()->write($config->toJson());
 });
 
@@ -20,10 +20,12 @@ $app->get('/config/{id}', function (Request $request, Response $response, $args)
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $config = \App\Models\Config::find($id);
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+        $config = \App\Models\Config::with('periods')->find($id);
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($config->toJson());
 });
@@ -37,6 +39,8 @@ $app->post('/config', function (Request $request, Response $response) {
         $config->status = $data['status'];
         $config->fromd = $data['fromd'];
         $config->tod = $data['tod'];
+        $config->synt = $data['synt'];
+        $config->req_exp_dates = $data['req_exp_dates'];
         $config->save();
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
@@ -52,9 +56,11 @@ $app->delete('/config/{id}', function ($request, $response, $args) {
     try {
         $config = \App\Models\Config::find($id);
         $config->delete();
-    } catch (\Exception $e) {
-        // do task when error
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->withStatus(200)->getBody()->write($config->toJson());
 });
@@ -62,16 +68,64 @@ $app->delete('/config/{id}', function ($request, $response, $args) {
 $app->put('/config/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    //print_r($data);
     try {
         $config = \App\Models\Config::find($id);
+        //print_r($data);
         $config->year = $data['year'] ?: $config->year;
         $config->status = $data['status'] ?: $config->status;
         $config->fromd = $data['fromd'] ?: $config->fromd;
         $config->tod = $data['tod'] ?: $config->tod;
+        $config->synt = $data['synt'] ?: $config->synt;
+        $config->req_exp_dates = $data['req_exp_dates'] ?: $config->req_exp_dates;
         $config->save();
-    } catch (\Exception $e) {
-        return $response->withStatus(404)->getBody()->write($e->getMessage());
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
     }
     return $response->getBody()->write($config->toJson());
+});
+
+
+//$app->get('/config/{id}/ps ', function ($request, $response, $args) {
+//    $id = $args['id'];
+//    try {
+//        $config = \App\Models\Config::find($id);
+//    } catch (PDOException $e) {
+//        $nr = $response->withStatus(404);
+//        $error = new ApiError();
+//        $error->setData($e->getCode(), $e->getMessage());
+//        return $nr->write($error->toJson());
+//    }
+//    return $response->getBody()->write($config->ps()->get()->toJson());
+//});
+
+$app->get('/ps/config/{id}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $id = $args['id'];
+    try {
+        $ps = \App\Models\Ps::with(['config', 'users'])->where('conf_id', '=', $id)->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($ps->toJson());
+});
+
+$app->get('/appconfig/{param}', function (Request $request, Response $response, $args) {
+    header("Content-Type: application/json");
+    $param = $args['param'];
+    try {
+        $result = \App\Models\Params::where('name', '=', $param)->get();
+    } catch (PDOException $e) {
+        $nr = $response->withStatus(404);
+        $error = new ApiError();
+        $error->setData($e->getCode(), $e->getMessage());
+        return $nr->write($error->toJson());
+    }
+    return $response->getBody()->write($result->toJson());
 });

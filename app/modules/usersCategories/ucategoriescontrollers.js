@@ -4,71 +4,21 @@ angular.module('UsersCategories', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication'
+    'Authentication',
+    'GlobalVarsSrvs'
+
 ])
-    .controller('UsersCategoriesController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
-        $scope.dp = [];
-        $scope.item = {};
-        $scope.method = '';
-        $scope.baseURL = 'api/public/userscategories';
+    .controller('UsersCategoriesController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
 
-        $scope.getUsersCategories = function () {
-            api.apiCall('GET', $scope.baseURL, function (results) {
-                $scope.dp = results.data;
-                $scope.totalItems = $scope.dp.length;
-            });
-        };
-
-        $scope.deleteUsersCategories = function (item) {
-            api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
-                $scope.dp.splice($scope.dp.indexOf(item), 1);
-                $scope.item = {};
-                MakeModal.generalInfoModal('sm', 'Info', 'info', 'Η κατηγορία χρήστη διαγράφηκε.', 1)
-            });
-        };
-
-        $scope.propertyName = 'descr';
-        $scope.reverse = true;
-        $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
-
-        $scope.sortBy = function (propertyName) {
-            $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-                ? !$scope.reverse : false;
-            $scope.propertyName = propertyName;
-        };
-
-        $scope.getUsersCategories();
+        $scope.ctrl = makeController.mainController('/userscategories', 'userscategoriesTableConf', 'Κατηγορίες Χρηστών');
+        $scope.ctrl.init();
 
     }])
-    .controller('UsersCategoriesProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
-        $scope.baseURL = 'api/public/userscategories';
+    .controller('UsersCategoriesProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api) {
 
-        if (!$routeParams.userscategoryId) {
-            $scope.item = {
-                descr: "",
-                comment: ""
-            };
-        } else {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userscategoryId, function (results) {
-                $scope.item = results.data;
-            });
-        }
-        $scope.updateUsersCategories = function (item) {
-            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η κατηγορία χρήστη ανανεώθηκε.', 1);
-                history.back();
-            }, undefined, item)
+        $scope.ctrl = makeController.profileController('/userscategories', 'userscategoriesTableConf');
+        $scope.ctrl.init();
 
-        };
-
-        $scope.saveUsersCategories = function (item) {
-            api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεα κατηγορία χρήστη δημιουργήθηκε.', 1);
-                history.back();
-            }, undefined, item)
-        }
     }])
     .component('usersCategoriesProfile', {
         restrict: 'EA',

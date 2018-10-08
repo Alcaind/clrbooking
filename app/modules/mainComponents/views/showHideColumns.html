@@ -1,12 +1,17 @@
 <div>
-    <button ng-click="hideShowOptions()">Press to show columns</button>
-    <div ng-if="optionsVisible" style="display: flex">
-        <div ng-repeat="option in columsVisibility" style="padding: 2px">
-            <label style="padding: 2px">
-                <input type="checkbox" ng-model="option.visible">
-                {{option.title}}
-            </label>
-        </div>
-        <!--<button ng-click="changeColumnVisibility(option)">{{option.visible ? 'hide' : 'show' }}</button>-->
-    </div>
+    <li class="dropdown" style="background: #5d0303;cursor: pointer;">
+        <button class="dropdown-toggle" data-toggle="dropdown" ng-click="hideShowOptions()">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-left" uib-dropdown-menu role="menu"
+            aria-labelledby="btn-append-to-single-button"
+            ng-show="optionsVisible">
+            <li role="menuitem" ng-repeat="option in columsVisibility">
+                <label style="padding: 2px" ng-model="option.visible">
+                    <input type="checkbox" ng-model="option.visible">
+                    {{option.title| translate}}
+                </label>
+            </li>
+        </ul>
+    </li>
 </div>

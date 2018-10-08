@@ -66,3 +66,16 @@
     color: rgba(145, 0, 0, 0.55) !important;
     font-size: 12px;
 }
+
+#roomtile {
+    background-color: #5bc0de66;
+    cursor: pointer;
+    padding: 4px;
+    font-size: medium;
+    border: 1px solid #ababab;
+
+}
+
+.modal-xlg {
+    width: 1024px;
+}

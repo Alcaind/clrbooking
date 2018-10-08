@@ -4,71 +4,37 @@ angular.module('Config', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication'
-]).controller('ConfigController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
-    AuthenticationService.CheckCredentials();
-    $scope.dp = [];
-    $scope.item = {};
-    $scope.method = '';
-    $scope.baseURL = 'api/public/config';
+    'Authentication',
+    'GlobalVarsSrvs'
+])
+    .controller('ConfigController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv) {
 
-    $scope.getConfigs = function () {
-        api.apiCall('GET', $scope.baseURL, function (results) {
-            $scope.dp = results.data;
-            $scope.totalItems = $scope.dp.length;
-        });
-    };
+        $scope.ctrl = makeController.mainController('/config', 'configTableConf', 'Configuration');
+        $scope.statusOptions = globalVarsSrv.getGlobalVar('configStatus');
+        $scope.ctrl.init();
 
-    $scope.deleteConfig = function (item) {
-        api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
-            $scope.dp.splice($scope.dp.indexOf(item), 1);
-            $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Configuration διαγράφηκε.', 1)
-        });
-    };
+    }])
+    .controller('ConfigProfileController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', '$routeParams', 'api', 'ClrStatusSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv, $routeParams, api, ClrStatusSrv) {
+        $scope.ctrl = makeController.profileController('/config', 'configTableConf');
+        $scope.statusOptions = globalVarsSrv.getGlobalVar('configStatus');
+        $scope.ctrl.init();
 
-    $scope.propertyName = 'year';
-    $scope.reverse = true;
-    $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
 
-    $scope.sortBy = function (propertyName) {
-        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-            ? !$scope.reverse : false;
-        $scope.propertyName = propertyName;
-    };
-
-    $scope.getConfigs();
-
-}])
-    .controller('ConfigProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
-        $scope.baseURL = 'api/public/config';
-
-        if (!$routeParams.configId) {
-            $scope.item = {
-                year: "",
-                dt: "",
-                status: ""
-            };
-        } else {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.configId, function (results) {
-                $scope.item = results.data;
-            });
-        }
-        $scope.updateConfig = function (item) {
-            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Configuration ανανεώθηκε.', 1);
-                history.back();
-            }, undefined, item)
-
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
         };
 
-        $scope.saveConfig = function (item) {
-            api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο Configuration δημιουργήθηκε.', 1);
-                history.back();
-            }, undefined, item)
-        }
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
+
 
     }])
     .component('configProfile', {
@@ -79,5 +45,4 @@ angular.module('Config', [
         },
         controller: 'ConfigProfileController'
     })
-
 ;

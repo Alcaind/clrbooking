@@ -1,30 +1,37 @@
-<div>
-    <table class="table table-striped">
-        <thead>
+<div id="data_tbl" class="boxContent">
+    <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+        <thead class="header-fixed" style="background-color: #cecece;">
         <tr>
             <th>id</th>
-            <th>Περιγραφή</th>
-            <th>Σχόλια</th>
-            <th>Κωδικός</th>
-            <th>Κατάσταση</th>
+            <th>{{"Περιγραφή"| translate}}</th>
+            <th>{{"Σχόλια"| translate}}</th>
+            <th>{{"Κωδικός εξοπλισμού"| translate}}</th>
+            <th>{{"Κατάσταση"| translate}}</th>
             <th>...</th>
         </tr>
         </thead>
-        <tbody>
-        <tr ng-repeat="items in rData.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:filter"
-            style="cursor: pointer" ng-class="{selected: items.id === item.id}">
-            <td>{{items.id }}</td>
-            <td>{{items.descr}}</td>
-            <td>{{items.comments }}</td>
-            <td>{{items.code }}</td>
-            <td>{{items.status }}</td>
+        <tbody class="contentScroll">
+        <tr ng-repeat="item in ctrl.rdp.slice(((currentPageR-1)*itemsPerPageR),((currentPageR)*itemsPerPageR))|filter:ctrl.filterR"
+            style="cursor: pointer">
+            <td>{{item.id }}</td>
+            <td>{{item.descr}}</td>
+            <td>{{item.comments }}</td>
+            <td>{{item.code }}</td>
+            <td>{{statusOptions[item.status].text}}</td>
 
             <td>
-                <button ng-click="items.disabled?null:showPivotData(items)" type="button"
-                        class="btn {{items.disabled?'btn-regular disabled':'btn-success '}}">
+                <button ng-click="item.disabled?null:ctrl.showPivotData(item)" type="button"
+                        class="btn{{item.disabled?' btn-regular disabled':' btn-success'}}">
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>
             </td>
         </tr>
+        </tbody>
     </table>
+</div>
+<div class="pagePagination">
+    <div>
+        <pagination current-page="currentPageR" total-items="ctrl.rdp.length"
+                    items-per-page="itemsPerPageR" num-pages="numPagesR"></pagination>
+    </div>
 </div>

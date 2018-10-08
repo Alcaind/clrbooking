@@ -15,4 +15,19 @@ class RoomUse extends Model
 {
 
     protected $table = 'room_use';
+
+    public function rooms()
+    {
+        $this->belongsToMany('\\App\\Models\\Rooms', 'rooms_room_use', 'room_use_id', 'rooms_id')->withPivot('comment');
+    }
+
+    public function requests()
+    {
+        try {
+            $ret = $this->hasMany('\\App\\Models\\Requests', 'class_use');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return $ret;
+    }
 }

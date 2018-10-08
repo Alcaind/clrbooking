@@ -1,18 +1,13 @@
 'use strict';
 
-angular.module('Home',[
+angular.module('Home', [
     'Authentication',
     'Admin',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'GlobalVarsSrvs'
 ])
-    .controller('HomeController', ['$scope', '$interval', '$rootScope', '$location', 'AuthenticationService', function ($scope, $interval, $rootScope, $location, AuthenticationService) {
-        if ((!$rootScope.globals || !$rootScope.globals.item || ($rootScope.globals.item && !$rootScope.globals.item.user)) && !$rootScope.inAuthentication) {
-            $location.path('/login');
-        }
+    .controller('HomeController', ['$scope', 'globalVarsSrv', 'AuthenticationService', function ($scope, globalVarsSrv, AuthenticationService) {
         AuthenticationService.CheckCredentials();
+        //$scope.adminColums = globalVarsSrv.getGlobalVar(globalVarsSrv.getGlobalVar('menuRole') === 'admin' ? 'homeButtonAdminTableConf' : 'homeButtonUserTableConf');
     }])
-    .run(['$rootScope', '$location', '$cookies', '$http','AuthenticationService',
-        function ($rootScope, $location, $cookies, $http, AuthenticationService) {
-
-        }
-    ]);
+;

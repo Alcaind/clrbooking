@@ -38,7 +38,7 @@ $app->post('/roomcategory', function (Request $request, Response $response) {
     } catch (PDOException $e) {
         $nr = $response->withStatus(404);
         $error = new ApiError();
-        $error->setData($e->getCode(), $e->getMessage('Error from POST'));
+        $error->setData($e->getCode(), $e->getMessage());
         return $nr->write($error->toJson());
     }
     return $response->withStatus(201)->getBody()->write($roomcategory->toJson());
@@ -58,7 +58,7 @@ $app->delete('/roomcategory/{id}', function ($request, $response, $args) {
 $app->put('/roomcategory/{id}', function ($request, $response, $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r($data);
+    // print_r($data);
     try {
         $roomcategory = \App\Models\RoomCategory::find($id);
         $roomcategory->synt = $data['synt'] ?: $roomcategory->synt;

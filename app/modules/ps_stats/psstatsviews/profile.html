@@ -2,38 +2,38 @@
     <div style="text-align: left;padding-left: 5px;">
         <a href back-button type="button" class="btn btn-warning">
             <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
             </span>
         </a>
     </div>
     <form class="psStatsForm" name="psStatsForm" novalidate>
         <div class="form-group"
              ng-class="{ 'has-error' : psStatsForm.ps_id.$invalid && !psStatsForm.ps_id.$pristine }">
-            <label class="required" for="ps_id">Πρόγραμμα Σπουδών<span class="form-required">*</span>:</label>
-            <select id="ps_id" name="ps_id" ng-model="item.ps_id"
-                    ng-options="ps.id as ps.ps_per for ps in ps"></select>
+            <label class="" for="ps_id">Πρόγραμμα Σπουδών<span class="form-required">*</span>:</label>
+            <select id="ps_id" name="ps_id" class="form-control" ng-model="ctrl.item.ps_id"
+                    ng-options="p.ps_id as p.tma_per for p in ps"></select>
             <p ng-show="psStatsForm.ps_id.$invalid && !psStatsForm.ps_id.$pristine" class="help-block">Εισάγετε
                 πρόγραμμα σπουδών.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : psStatsForm.diloseis.$invalid && !psStatsForm.diloseis.$pristine }">
-            <label class="required" for="diloseis">Αριθμός δηλώσεων<span class="form-required">*</span>:</label>
-            <input id="diloseis" name="diloseis" class="form-control" type="number" ng-model="item.diloseis">
+            <label class="" for="diloseis">Αριθμός δηλώσεων<span class="form-required">*</span>:</label>
+            <input id="diloseis" name="diloseis" class="form-control" type="number" ng-model="ctrl.item.diloseis">
             <p ng-show="psStatsForm.diloseis.$invalid && !psStatsForm.diloseis.$pristine" class="help-block">Εισάγετε
                 αριθμό δηλώσεων.</p>
         </div>
         <div class="form-group"
              ng-class="{ 'has-error' : psStatsForm.exetaseis.$invalid && !psStatsForm.exetaseis.$pristine }">
-            <label class="required" for="exetaseis">Εξετάσεις<span class="form-required">*</span>:</label>
-            <input id="exetaseis" name="exetaseis" class="form-control" type="number" ng-model="item.exetaseis">
+            <label class="" for="exetaseis">Εξετάσεις<span class="form-required">*</span>:</label>
+            <input id="exetaseis" name="exetaseis" class="form-control" type="number" ng-model="ctrl.item.exetaseis">
             <p ng-show="psStatsForm.exetaseis.$invalid && !psStatsForm.exetaseis.$pristine" class="help-block">Εισάγετε
                 αριθμό εξετάσεων.</p>
         </div>
-        <button type="button" class="btn btn-primary" ng-click="updatePsStats(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.id>0">Ανανέωση
         </button>
-        <button type="button" class="btn btn-primary" ng-click="savePsStats(item)" style="padding: 5px"
-                ng-if="item.ps_id && !item.id">Αποθήκευση
+        <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                ng-if="ctrl.item.ps_id && !ctrl.item.id">Αποθήκευση
         </button>
     </form>
 </div>

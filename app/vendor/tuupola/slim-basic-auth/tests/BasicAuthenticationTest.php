@@ -310,7 +310,7 @@ class HttpBasicAuthenticationTest extends \PHPUnit_Framework_TestCase
         $response = $auth($request, $response, $next);
 
         $this->assertEquals(401, $response->getStatusCode());
-        $this->assertEquals("", $response->getBody());
+        $this->assertEquals("401", $response->getBody());
     }
 
     public function testShouldCallErrorHandlerWith401()
@@ -495,7 +495,7 @@ class HttpBasicAuthenticationTest extends \PHPUnit_Framework_TestCase
         $response = $auth($request, $response, $next);
 
         $this->assertEquals(401, $response->getStatusCode());
-        $this->assertEquals("", $response->getBody());
+        $this->assertEquals("401", $response->getBody());
     }
 
     public function testShouldReturn200WithAnonymousFunction()
@@ -552,7 +552,7 @@ class HttpBasicAuthenticationTest extends \PHPUnit_Framework_TestCase
         $response = $auth($request, $response, $next);
 
         $this->assertEquals(401, $response->getStatusCode());
-        $this->assertEquals("", $response->getBody());
+        $this->assertEquals("401", $response->getBody());
     }
 
     public function testShouldNotAllowInsecure()
@@ -723,7 +723,7 @@ class HttpBasicAuthenticationTest extends \PHPUnit_Framework_TestCase
         $response = $auth($request, $response, $next);
 
         $this->assertEquals(401, $response->getStatusCode());
-        $this->assertEquals("", $response->getBody());
+        $this->assertEquals("401", $response->getBody());
     }
 
     public function testBug3ShouldReturn401WithTrailingSlash()

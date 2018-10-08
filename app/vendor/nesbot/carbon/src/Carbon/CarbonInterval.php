@@ -19,17 +19,17 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * A simple API extension for DateInterval.
- * The implementation provides helpers to handle weeks but only days are saved.
- * Weeks are calculated based on the total days of the current instance.
+ * The implementation provides helpers to handle weeks but only headerDays are saved.
+ * Weeks are calculated based on the total headerDays of the current instance.
  *
  * @property int $years Total years of the current interval.
  * @property int $months Total months of the current interval.
- * @property int $weeks Total weeks of the current interval calculated from the days.
- * @property int $dayz Total days of the current interval (weeks * 7 + days).
+ * @property int $weeks Total weeks of the current interval calculated from the headerDays.
+ * @property int $dayz Total headerDays of the current interval (weeks * 7 + headerDays).
  * @property int $hours Total hours of the current interval.
  * @property int $minutes Total minutes of the current interval.
  * @property int $seconds Total seconds of the current interval.
- * @property-read int $dayzExcludeWeeks Total days remaining in the final week of the current instance (days % 7).
+ * @property-read int $dayzExcludeWeeks Total headerDays remaining in the final week of the current instance (headerDays % 7).
  * @property-read int $daysExcludeWeeks alias of dayzExcludeWeeks
  *
  * @method static CarbonInterval years($years = 1) Create instance specifying a number of years.
@@ -38,9 +38,9 @@ use Symfony\Component\Translation\TranslatorInterface;
  * @method static CarbonInterval month($months = 1) Alias for months()
  * @method static CarbonInterval weeks($weeks = 1) Create instance specifying a number of weeks.
  * @method static CarbonInterval week($weeks = 1) Alias for weeks()
- * @method static CarbonInterval days($days = 1) Create instance specifying a number of days.
- * @method static CarbonInterval dayz($days = 1) Alias for days()
- * @method static CarbonInterval day($days = 1) Alias for days()
+ * @method static CarbonInterval headerDays($headerDays = 1) Create instance specifying a number of headerDays.
+ * @method static CarbonInterval dayz($headerDays = 1) Alias for headerDays()
+ * @method static CarbonInterval day($headerDays = 1) Alias for headerDays()
  * @method static CarbonInterval hours($hours = 1) Create instance specifying a number of hours.
  * @method static CarbonInterval hour($hours = 1) Alias for hours()
  * @method static CarbonInterval minutes($minutes = 1) Create instance specifying a number of minutes.
@@ -53,9 +53,9 @@ use Symfony\Component\Translation\TranslatorInterface;
  * @method CarbonInterval month() month($months = 1) Alias for months().
  * @method CarbonInterval weeks() weeks($weeks = 1) Set the weeks portion of the current interval.  Will overwrite dayz value.
  * @method CarbonInterval week() week($weeks = 1) Alias for weeks().
- * @method CarbonInterval days() days($days = 1) Set the days portion of the current interval.
- * @method CarbonInterval dayz() dayz($days = 1) Alias for days().
- * @method CarbonInterval day() day($days = 1) Alias for days().
+ * @method CarbonInterval headerDays() headerDays($headerDays = 1) Set the headerDays portion of the current interval.
+ * @method CarbonInterval dayz() dayz($headerDays = 1) Alias for headerDays().
+ * @method CarbonInterval day() day($headerDays = 1) Alias for headerDays().
  * @method CarbonInterval hours() hours($hours = 1) Set the hours portion of the current interval.
  * @method CarbonInterval hour() hour($hours = 1) Alias for hours().
  * @method CarbonInterval minutes() minutes($minutes = 1) Set the minutes portion of the current interval.
@@ -85,7 +85,7 @@ class CarbonInterval extends DateInterval
     protected static $translator;
 
     /**
-     * Before PHP 5.4.20/5.5.4 instead of FALSE days will be set to -99999 when the interval instance
+     * Before PHP 5.4.20/5.5.4 instead of FALSE headerDays will be set to -99999 when the interval instance
      * was created by DateTime:diff().
      */
     const PHP_DAYS_FALSE = -99999;
@@ -194,7 +194,7 @@ class CarbonInterval extends DateInterval
             case 'week':
                 return new static(null, null, $arg);
 
-            case 'days':
+            case 'headerDays':
             case 'dayz':
             case 'day':
                 return new static(null, null, null, $arg);
@@ -216,7 +216,7 @@ class CarbonInterval extends DateInterval
     /**
      * Create a CarbonInterval instance from a DateInterval one.  Can not instance
      * DateInterval objects created from DateTime::diff() as you can't externally
-     * set the $days field.
+     * set the $headerDays field.
      *
      * @param DateInterval $di
      *
@@ -388,10 +388,10 @@ class CarbonInterval extends DateInterval
     }
 
     /**
-     * Allow setting of weeks and days to be cumulative.
+     * Allow setting of weeks and headerDays to be cumulative.
      *
      * @param int $weeks Number of weeks to set
-     * @param int $days  Number of days to set
+     * @param int $days Number of headerDays to set
      *
      * @return static
      */
@@ -433,7 +433,7 @@ class CarbonInterval extends DateInterval
                 $this->dayz = $arg * Carbon::DAYS_PER_WEEK;
                 break;
 
-            case 'days':
+            case 'headerDays':
             case 'dayz':
             case 'day':
                 $this->dayz = $arg;

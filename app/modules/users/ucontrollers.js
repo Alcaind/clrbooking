@@ -7,19 +7,21 @@ angular.module('Users', [
     'Authentication',
     'GlobalVarsSrvs'
 ])
-    .controller('UsersController', ['$scope', 'MakeModal', '$http', 'api', 'orderByFilter', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, MakeModal, $http, api, orderBy, AuthenticationService, makeController, globalVarsSrv) {
-        AuthenticationService.CheckCredentials();
+    .controller('UsersController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, AuthenticationService, makeController, globalVarsSrv) {
 
-        $scope.ctrl = makeController.mainController('/users', 'usersTableConf');
+        $scope.ctrl = makeController.mainController('/users', 'usersTableConf', 'Κατάλογος Χρηστών');
         $scope.ctrl.init();
 
     }])
 
-    .controller('ProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
+    .controller('ProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, $routeParams, api, MakeModal, AuthenticationService, makeController, globalVarsSrv) {
+        var user = globalVarsSrv.getGlobalVar('auth');
+        $scope.curUser = user.authdata.roles[0].id;
+        if ($scope.curUser != $routeParams.id && globalVarsSrv.getGlobalVar('menuRole') !== 'admin') return;
+        $scope.ctrl = makeController.profileController('/users', 'usersTableConf');
+        $scope.ctrl.init();
         $scope.tms = {};
         $scope.ucategories = {};
-        $scope.baseURL = 'api/public/users';
 
         api.apiCall('GET', 'api/public/tms', function (results) {
             $scope.tms = results.data;
@@ -28,48 +30,12 @@ angular.module('Users', [
         api.apiCall('GET', 'api/public/userscategories', function (results) {
             $scope.ucategories = results.data;
         });
-
-        if (!$routeParams.userId) {
-            $scope.item = {
-                tm_id: "",
-                fname: "",
-                sname: "",
-                phone: "",
-                em_main: "",
-                em_sec: "",
-                em_pant: "",
-                cat_id: "",
-                comments: "",
-                user: "",
-                hash: ""
-            };
-        } else {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.userId, function (results) {
-                $scope.item = results.data;
-            });
-        }
-
-        $scope.updateUser = function (item) {
-            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Η εγγραφή του χρήστη ανανεώθηκε.', 1);
-                history.back();
-            }, undefined, item)
-
-        };
-
-        $scope.saveUser = function (item) {
-            api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νέα εγγραφή χρήστη δημιουργήθηκε.', 1);
-                history.back();
-            }, undefined, item)
-        };
     }])
 
     .component('usersProfile', {
         restrict: 'EA',
         templateUrl: 'modules/users/uviews/profile.html',
         scope: {
-            //itemId: '=itemId',
             method: '=method'
         },
         controller: 'ProfileController'

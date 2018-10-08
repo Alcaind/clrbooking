@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('Authentication', ['angular-storage'])
+angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
 
     .factory('AuthenticationService',
-        ['Base64', '$http', '$cookieStore', '$rootScope', 'store', 'jwtHelper', '$location',
-            function (Base64, $http, $cookieStore, $rootScope, store, jwtHelper, $location) {
+        ['Base64', '$http', '$cookieStore', '$rootScope', 'store', 'jwtHelper', '$location', 'globalVarsSrv',
+            function (Base64, $http, $cookieStore, $rootScope, store, jwtHelper, $location, globalVarsSrv) {
                 var service = {};
 
                 service.Login = function (username, password, callback) {
@@ -19,12 +19,12 @@ angular.module('Authentication', ['angular-storage'])
                     $http(req).then(function (response) {
                         store.set('jwt', response.data);
                         store.set('rwt', jwtHelper.decodeToken(response.data.token)["refresh-token"]);
-                        $rootScope.globals = {
-                            item: {
-                                username: username,
-                                authdata: jwtHelper.decodeToken(response.data.token)
-                            }
-                        };
+
+                        var auth = {};
+                        auth.username = jwtHelper.decodeToken(store.get('jwt').token).sub;
+                        auth.authdata = jwtHelper.decodeToken(store.get('jwt').token);
+                        globalVarsSrv.setGlobalVar('auth', auth);
+
                         callback(response);
                     }, function (response) {
                         callback(response);
@@ -41,8 +41,15 @@ angular.module('Authentication', ['angular-storage'])
                 };
 
                 service.ClearCredentials = function () {
-                    $rootScope.globals = {};
-                    $cookieStore.remove('globals');
+                    // $rootScope.globals = {};
+                    // $cookieStore.remove('globals');
+                    var auth = {};
+                    auth.username = jwtHelper.decodeToken(store.get('jwt').token).sub;
+                    auth.authdata = '';
+                    globalVarsSrv.setGlobalVar('auth', auth);
+                    //globalVarsSrv.setGlobalVar('', null)
+                    globalVarsSrv.setGlobalVar('menuRole', null);
+
                     store.set('jwt', null);
                     store.set('rwt', null);
                     $http.defaults.headers.common.Authorization = 'Basic ';
@@ -57,16 +64,35 @@ angular.module('Authentication', ['angular-storage'])
                         $location.path('/login');
                         return false;
                     } else {
-                        $rootScope.globals = {
-                            item: {
-                                username: jwtHelper.decodeToken(idToken).sub,
-                                authdata: jwtHelper.decodeToken(idToken)
+                        var auth = {};
+                        auth.username = jwtHelper.decodeToken(idToken).sub;
+                        auth.authdata = jwtHelper.decodeToken(idToken);
+                        globalVarsSrv.setGlobalVar('auth', auth);
+                        globalVarsSrv.setGlobalVar('token', auth.authdata);
+                        if (auth.authdata.roles)
+                            for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
+                                if (auth.authdata.roles[0].roles[i].role === 'admin') {
+                                    globalVarsSrv.setGlobalVar('menuRole', 'admin');
+                                    break;
+                                } else {
+                                    globalVarsSrv.setGlobalVar('menuRole', 'user');
+                                    var url = $location.url();
+                                    var routes = globalVarsSrv.getGlobalVar('homeButtonUserTableConf');
+                                    var exist = false;
+                                    if (routes) {
+                                        for (i = 0; i < routes.length; i++) {
+                                            if (url.indexOf(routes[i].column) >= 0) {
+                                                exist = true;
+                                            }
+                                        }
+                                        if (!exist) $location.path('/home');
+                                    }
+                                }
                             }
-                        };
-                        return jwtHelper.decodeToken(idToken).sub
+
+                        return jwtHelper.decodeToken(idToken).sub;
                     }
                 };
-
                 return service;
             }])
 

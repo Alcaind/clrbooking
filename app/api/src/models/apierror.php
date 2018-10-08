@@ -13,24 +13,27 @@ class ApiError
 {
     public $errorCode = '';
     public $errorMessage = '';
+    public $data = '';
 
-    public function SetData($code, $msg)
+    public function SetData($code, $msg, $data)
     {
         $this->errorCode = $code;
         $this->errorMessage = $msg;
+        $this->data = $data;
     }
 
     public function toJson()
     {
         $returnMessage = $this->libraryErrorMsg();
-        return json_encode(['errorType' => '', 'errorCode' => $this->errorCode, 'errorText' => $returnMessage]);
+        return json_encode(['errorType' => '', 'errorCode' => $this->errorCode, 'errorText' => $returnMessage, 'data' => $this->data]);
     }
 
     protected function libraryErrorMsg()
     {
-        $errormessage = explode(':', $this->errorMessage)[2];
-        $errormessage = explode('(', $errormessage)[0];
-        return $this->dictionary($errormessage);
+        //$errormessage = explode(':', $this->errorMessage)[2];
+        //$errormessage = explode('(', $errormessage)[0];
+        //return $this->dictionary($errormessage);
+        return $this->errorMessage;
     }
 
     protected function dictionary($errorstring)
