@@ -1,0 +1,23 @@
+<div id="report4" style="display: flex ; overflow: auto;">
+    <ul ng-repeat="pr in requestsBookedFromHoliday track by $index ">
+        <div id="holLess" style="display: block; width: max-content; padding: 18px;">
+            <div ng-repeat="r in pr.book.rooms">
+                <div>{{pr.book.tm.title}}</div>
+                <div>{{"Εξάμημο"| translate}}: {{pr.book.ps.ps_ex}}</div>
+                <div>{{pr.book.ps.pm}}-{{pr.book.ps.ps_km}}-{{pr.book.ps.tma_code}}-{{pr.book.ps.tma_per}}</div>
+                <div>{{teachers[r.pivot.teacher].sname}}{{' '}} {{teachers[r.pivot.teacher].fname}}</div>
+                <div>{{classUses[pr.book.class_use].descr}}</div>
+                <div>{{ periods[pr.book.period].descr }} {{errorWeekdays[r.pivot.date_index-1]}}{{'
+                    '}}{{pr.book.showTod?'από':'στις'|translate}}{{' '}} {{pr.book.fromd | date :
+                    'd-M-y'}}{{' '}}{{pr.book.showTod?'έως'+' '+( pr.book.tod |date:'dd-MM-yyyy'):''}}
+                </div>
+                {{r.name}}{{' '}}{{"στις"| translate}} {{r.pivot.fromt | date : 'shortTime' }} {{r.pivot.tot| date :
+                'shortTime'}}
+                <div ng-if="commentsVisible">{{"Σχόλια Αιτήματος"| translate}} : {{pr.book.descr}}
+                    <div>{{"Σχόλια Αιτήματος Αίθουσας"| translate}} : {{r.pivot.comment}}</div>
+                </div>
+                <div> ------------------------------------</div>
+            </div>
+        </div>
+    </ul>
+</div>
