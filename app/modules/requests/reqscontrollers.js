@@ -6,11 +6,15 @@ angular.module('Requests', [
     'ApiModules',
     'Authentication',
     'GlobalVarsSrvs'
-]).controller('RequestsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', 'api', 'MakeModal', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv, api, MakeModal) {
+]).controller('RequestsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', 'api', 'MakeModal', '$timeout', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv, api, MakeModal, $timeout) {
     $scope.configs = {};
     //$scope.url = null;
     $scope.config_id = 8;
     //$scope.url = 'api/public/requests/config/1';
+    $scope.acceptShow = true;
+
+
+
 
     $scope.$watch('config_id', function (newVal) {
         if (!newVal) return;
@@ -24,6 +28,13 @@ angular.module('Requests', [
             if (cfg.status === 1) $scope.config_id = cfg.id;
         });
         $scope.urlr = '/requests/config/' + $scope.config_id;
+
+        // $timeout( function(){
+        //     $scope.ctrl = makeController.mainController('', 'requestsTableConf', 'Κατάλογος Αιτημάτων');
+        //     $scope.ctrl.setUrl($scope.urlr);
+        //     $scope.ctrl.init();
+        // }, 5000 );
+
         $scope.ctrl = makeController.mainController('', 'requestsTableConf', 'Κατάλογος Αιτημάτων');
         $scope.ctrl.setUrl($scope.urlr);
         $scope.ctrl.init();

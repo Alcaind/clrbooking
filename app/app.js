@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Home', []);
-angular.module('Login', []);
+//angular.module('Login');
 angular.module('Admin', []);
 angular.module('Authentication', []);
 angular.module('DB', []);
@@ -18,15 +18,15 @@ angular.module('Config', []);
 angular.module('Ps', []);
 angular.module('Periods', []);
 angular.module('Items', []);
+angular.module('ItemType', []);
 angular.module('RoomCategory', []);
 angular.module('RoomUse', []);
 angular.module('RoomBook', []);
 angular.module('PsStats', []);
 
-
 // Declare app level module which depends on views, and components
 angular.module('clrBooking', [
-    'Authentication',
+    'pascalprecht.translate',
     'Admin',
     'Home',
     'ngRoute',
@@ -48,291 +48,402 @@ angular.module('clrBooking', [
     'Ps',
     'Periods',
     'Items',
+    'ItemType',
     'RoomCategory',
     'RoomUse',
-    'RoomBook',
     'PsStats',
-    'GlobalVarsSrvs'
+    'GlobalVarsSrvs',
+    'Authentication',
+    'RoomBook'
 ])
+    .config(function ($locationProvider) {
+        $locationProvider.html5Mode(false);
+        $locationProvider.hashPrefix('');
+    })
 
-    .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider',
-        function ($locationProvider, $routeProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider) {
+    .config(['$locationProvider', '$routeProvider', '$httpProvider', 'jwtOptionsProvider', 'jwtInterceptorProvider', '$translateProvider',
+        function ($locationProvider, $routeProvider, $httpProvider, jwtOptionsProvider, jwtInterceptorProvider, $translateProvider) {
+
+            $translateProvider
+                .useStaticFilesLoader({
+                    //prefix: '/panteion/config/', //localhost
+                    prefix: '/panteion/app/config/', //GERMANY server
+                    //prefix: '/config/', //PANTEIO's server
+                    suffix: '.json'
+                })
+                .useSanitizeValueStrategy(null)
+                .useMissingTranslationHandler();
+
 
             $routeProvider
                 .when('/', {
+                    title: 'Αιθουσολόγιο - Διαχείριση',
                     controller: 'HomeController',
                     templateUrl: 'modules/home/views/home.html'
                 })
                 .when('/admin', {
+                    title: "Αρχική",
                     controller: 'HomeController',
                     templateUrl: 'modules/home/views/home.html'
                 })
                 .when('/login', {
-                    title: "LogIn",
+                    title: "Είσοδος",
                     controller: 'LoginController',
                     templateUrl: 'modules/login/views/login.html'
                 })
                 .when('/home', {
+                    title: "Αρχική",
                     controller: 'HomeController',
                     templateUrl: 'modules/home/views/home.html'
                 })
-                .when('/roles', {
-                    title: 'roles',
-                    controller: 'RolesController',
-                    templateUrl: 'modules/roles/views/roles.html'
-                })
-                .when('/roles/create', {
-                    title: 'role create',
-                    template: '<roles-profile></roles-profile>'
-                })
-                .when('/roles/:roleId', {
-                    title: 'role',
-                    template: '<roles-profile></roles-profile>'
-                })
-                .when('/roles/:roleId/users', {
-                    title: 'role',
-                    template: '<roles-users></roles-users>'
-                })
-                .when('/users', {
-                    title: 'users',
-                    controller: 'UsersController',
-                    templateUrl: 'modules/users/uviews/users.html'
-                })
-                .when('/users/create', {
-                    title: 'user create',
-                    template: '<users-profile></users-profile>'
-                })
-                .when('/users/:id', {
-                    title: 'user',
-                    template: '<users-profile></users-profile>'
-                })
-                .when('/users/:id/requests', {
-                    title: 'user request',
-                    controller: 'URequestsController',
-                    templateUrl: 'modules/users/uviews/urequest.html'
-                })
-                .when('/users/:id/roles', {
-                    title: 'user role',
-                    controller: 'URolesController',
-                    templateUrl: 'modules/users/uviews/urole.html'
-                })
-                .when('/rooms', {
-                    title: 'rooms',
-                    controller: 'RoomsController',
-                    templateUrl: 'modules/rooms/rviews/rooms.html'
-                })
-                .when('/rooms/create', {
-                    title: 'room create',
-                    template: '<room-profile></room-profile>'
-                })
-                .when('/rooms/:roomId', {
-                    title: 'rooms',
-                    template: '<room-profile></room-profile>'
-                })
-
-                .when('/rooms/:roomId/usages', {
-                    title: 'user request',
-                    controller: 'RoomsUsagesController',
-                    templateUrl: 'modules/rooms/rviews/UCroom.html'
-                })
-                .when('/rooms/:roomId/items', {
-                    title: 'room items',
-                    controller: 'RoomsItemsController',
-                    templateUrl: 'modules/rooms/rviews/items/ItemRoom.html'
-                })
-
-
-                .when('/rooms/:roomId/tms', {
-                    title: 'room tms',
-                    controller: 'RoomsTmsController',
-                    templateUrl: 'modules/rooms/rviews/tms/TmsRoom.html'
-                })
-                .when('/rooms/:roomId/requests', {
-                    title: 'room requests',
-                    controller: 'RoomRequestsController',
-                    templateUrl: 'modules/rooms/rviews/request/urequest.html'
-                })
-                .when('/tms', {
-                    title: 'tm',
-                    controller: 'TmsController',
-                    templateUrl: 'modules/tm/tmviews/tms.html'
-                })
-                .when('/tms/create', {
-                    title: 'tm create',
-                    template: '<tm-profile></tm-profile>'
-                })
-                .when('/tms/:tmId', {
-                    title: 'tm',
-                    template: '<tm-profile></tm-profile>'
-                })
-                .when('/kats', {
-                    title: 'kat',
-                    controller: 'KatController',
-                    templateUrl: 'modules/kat/katsviews/kats.html'
-                })
-                .when('/kats/create', {
-                    title: 'kat create',
-                    template: '<kat-profile></kat-profile>'
-                })
-                .when('/kats/:katId', {
-                    title: 'kat',
-                    template: '<kat-profile></kat-profile>'
-                })
-                .when('/requests', {
-                    title: 'requests',
-                    controller: 'RequestsController',
-                    templateUrl: 'modules/requests/reqviews/requests.html'
-                })
-                .when('/requests/create', {
-                    title: 'request create',
-                    template: '<requests-profile></requests-profile>'
-                })
-                .when('/requests/:requestId', {
-                    title: 'requests',
-                    template: '<requests-profile></requests-profile>'
-                })
-                .when('/userscategories', {
-                    title: 'users categories',
-                    controller: 'UsersCategoriesController',
-                    templateUrl: 'modules/usersCategories/ucviews/ucategories.html'
-                })
-                .when('/userscategories/create', {
-                    title: 'users categories create',
-                    template: '<users-categories-profile></users-categories-profile>'
-                })
-                .when('/userscategories/:userscategoryId', {
-                    title: 'users categories',
-                    template: '<users-categories-profile></users-categories-profile>'
-                })
                 .when('/config', {
-                    title: 'configuration',
+                    title: 'Config',
                     controller: 'ConfigController',
                     templateUrl: 'modules/config/confviews/configs.html'
                 })
                 .when('/config/create', {
-                    title: 'configuration create',
+                    title: 'Δημιουργία configuration',
                     template: '<config-profile></config-profile>'
                 })
-                .when('/config/:configId', {
-                    title: 'configuration',
+                .when('/config/:id', {
+                    title: 'Επεξεργασία configuration',
                     template: '<config-profile></config-profile>'
                 })
-                .when('/ps', {
-                    title: 'curriculum',
-                    controller: 'PsController',
+                .when('/config/:id/ps', {
+                    title: 'Πρόγραμμα σπουδών ',
+                    controller: 'ConfigPsController',
                     templateUrl: 'modules/ps/psviews/ps.html'
                 })
-                .when('/ps/create', {
-                    title: 'curriculum create',
-                    template: '<ps-profile></ps-profile>'
-                })
-                .when('/ps/:psId', {
-                    title: 'curroculum',
-                    template: '<ps-profile></ps-profile>'
-                })
-                .when('/periods', {
-                    title: 'academic periods',
-                    controller: 'PeriodsController',
-                    templateUrl: 'modules/periods/periodviews/periods.html'
-                })
-                .when('/periods/create', {
-                    title: 'academic period create',
-                    template: '<period-profile></period-profile>'
-                })
-                .when('/periods/:periodId', {
-                    title: 'academic period',
-                    template: '<period-profile></period-profile>'
-                })
                 .when('/items', {
-                    title: 'items',
+                    title: 'Εξοπλισμός',
                     controller: 'ItemsController',
                     templateUrl: 'modules/items/itemviews/items.html'
                 })
                 .when('/items/create', {
-                    title: 'items create',
+                    title: 'Δημιουργία Εξοπλισμου',
                     template: '<items-profile></items-profile>'
                 })
-                .when('/items/:itemId', {
-                    title: 'items',
+                .when('/items/:id', {
+                    title: 'Επεξεργασία Εξοπλισμού',
                     template: '<items-profile></items-profile>'
+                })
+                .when('/items/:id/rooms', {
+                    title: 'Εξοπλισμός - Αίθουσες',
+                    controller: 'ItemsRoomsController',
+                    templateUrl: 'modules/items/itemviews/rooms/ItemRoom.html'
+                })
+                .when('/itemtype', {
+                    title: 'Τύπος-είδος εξοπλισμού',
+                    controller: 'ItemTypeController',
+                    templateUrl: 'modules/items/itemviews/items.html'
+                })
+                .when('/itemtype/create', {
+                    title: 'Δημιουργία τύπου-είδους εξοπλισμού',
+                    template: '<itemtype-profile></itemtype-profile>'
+                })
+                .when('/itemtype/:id', {
+                    title: 'Επεξεργασία τύπου-είδους εξοπλισμού',
+                    template: '<itemtype-profile></itemtype-profile>'
+                })
+                // .when('/kats', {
+                //     title: 'Κατευθύνσεις',
+                //     controller: 'KatController',
+                //     templateUrl: 'modules/kat/katsviews/kats.html'
+                // })
+                // .when('/kats/create', {
+                //     title: 'Δημιουργία κατευθύνσης',
+                //     template: '<kat-profile></kat-profile>'
+                // })
+                // .when('/kats/:id', {
+                //     title: 'Επεξεργασία κατευθύνσης',
+                //     template: '<kat-profile></kat-profile>'
+                // })
+                .when('/periods', {
+                    title: 'Ακαδημαϊκή Περίοδος',
+                    controller: 'PeriodsController',
+                    templateUrl: 'modules/periods/periodviews/periods.html'
+                })
+                .when('/periods/create', {
+                    title: 'Δημιουργία ακαδημαϊκής περιόδου',
+                    template: '<period-profile></period-profile>'
+                })
+                .when('/periods/:id', {
+                    title: 'Επεξεργασία ακαδημαϊκής περιόδου',
+                    template: '<period-profile></period-profile>'
+                })
+                .when('/ps', {
+                    title: 'Πρόγραμμα Σπουδών',
+                    controller: 'PsController',
+                    templateUrl: 'modules/ps/psviews/ps.html'
+                })
+                .when('/ps/conf/:cid/create', {
+                    title: 'Δημιουργία προγράμματος σπουδών',
+                    template: '<ps-profile></ps-profile>'
+                })
+                .when('/ps/:id', {
+                    title: 'Επεξεργασία προγράμματος σπουδών',
+                    template: '<ps-profile></ps-profile>'
+                })
+                .when('/ps/:id/teachers', {
+                    title: 'Πρόγραμμα Σπουδών - Καθηγητές',
+                    controller: 'TeachersController',
+                    templateUrl: 'modules/ps/teachers/TeachersPs.html'
+                })
+                .when('/requests', {
+                    title: 'Αιτήματα',
+                    controller: 'RequestsController',
+                    templateUrl: 'modules/requests/reqviews/requests.html'
+                })
+                .when('/requests/config/:cid/create', {
+                    title: 'Δημιουργία αιτήματος',
+                    template: '<requests-profile></requests-profile>'
+                })
+                .when('/requests/:id', {
+                    title: 'Επεξεργασία αιτήματος',
+                    template: '<requests-profile></requests-profile>'
+                })
+                .when('/requests/:id/rooms', {
+                    title: 'Αίτημα - Αίθουσα',
+                    controller: 'RequestsRoomsController',
+                    templateUrl: 'modules/requests/reqviews/rooms/mainn2n.html'
+                })
+                .when('/requests/:id/guests', {
+                    title: 'Αίτημα - Συμμετέχων Τηλεδιάσκεψης',
+                    controller: 'ReqGuestsController',
+                    templateUrl: 'modules/requests/reqviews/requests_guests/requestsguestsviews/requestsguests.html'
+                })
+                .when('/requests/:rid/guests/create', {
+                    title: 'Αίτημα - Δημιουργία Συμμετέχων Τηλεδιάσκεψης',
+                    template: '<req-guests-profile></req-guests-profile>'
+                })
+                .when('/requests/:rid/guests/:id', {
+                    title: 'Αίτημα - Επεξεργασία Συμμετέχων Τηλεδιάσκεψης',
+                    template: '<req-guests-profile></req-guests-profile>'
+                })
+                .when('/roles', {
+                    title: 'Ρόλοι',
+                    controller: 'RolesController',
+                    templateUrl: 'modules/roles/views/roles.html'
+                })
+                .when('/roles/create', {
+                    title: 'Δημιουργία ρόλου',
+                    template: '<roles-profile></roles-profile>'
+                })
+                .when('/roles/:id', {
+                    title: 'Επεξεργασία ρόλου',
+                    template: '<roles-profile></roles-profile>'
+                })
+                .when('/roles/:id/users', {
+                    title: 'Ρόλος - Χρήστης',
+                    controller: 'RolesUserController',
+                    templateUrl: 'modules/roles/views/rolesusers.html'
                 })
                 .when('/roomcategory', {
-                    title: 'room category',
+                    title: 'Κατηγορίες Αίθουσών',
                     controller: 'RoomCategoryController',
                     templateUrl: 'modules/roomCategory/rcviews/rcategories.html'
                 })
                 .when('/roomcategory/create', {
-                    title: 'room category create',
+                    title: 'Δημιουργία κατηγορίας αίθουσας',
                     template: '<room-category-profile></room-category-profile>'
                 })
-                .when('/roomcategory/:roomcategoryId', {
-                    title: 'room category',
+                .when('/roomcategory/:id', {
+                    title: 'Επεξεργασία κατηγορίας αίθουσας',
                     template: '<room-category-profile></room-category-profile>'
                 })
                 .when('/roomuse', {
-                    title: 'room use',
+                    title: 'Χρήσεις Αιθουσών',
                     controller: 'RoomUseController',
                     templateUrl: 'modules/roomUse/ruseviews/roomuse.html'
                 })
                 .when('/roomuse/create', {
-                    title: 'room use create',
+                    title: 'Δημιουργία χρήσης αίθουσας',
                     template: '<room-use-profile></room-use-profile>'
                 })
-                .when('/roomuse/:roomuseId', {
-                    title: 'room use',
+                .when('/roomuse/:id', {
+                    title: 'Επεξεργασία χρήσης αίθουσας',
                     template: '<room-use-profile></room-use-profile>'
                 })
-
-                .when('/booking', {
-                    title: 'booking',
-                    controller: 'roomBookController',
-                    templateUrl: 'modules/booking/roombookviews/roombook.html'
+                .when('/rooms', {
+                    title: 'Αίθουσες',
+                    controller: 'RoomsController',
+                    templateUrl: 'modules/rooms/rviews/rooms.html'
                 })
-                .when('/booking/create', {
-                    title: 'booking create',
-                    template: '<room-book-profile></room-book-profile>'
+                .when('/rooms/create', {
+                    title: 'Δημιουργία αίθουσας',
+                    template: '<room-profile></room-profile>'
                 })
-                .when('/booking/:roombookId', {
-                    title: 'booking',
-                    template: '<room-book-profile></room-book-profile>'
+                .when('/rooms/:id', {
+                    title: 'Επεξεργασία αίθουσας',
+                    template: '<room-profile></room-profile>'
                 })
-                .when('/psstats', {
-                    title: 'statistics',
-                    controller: 'PsStatsController',
-                    templateUrl: 'modules/ps_stats/psstatsviews/psstats.html'
+                .when('/rooms/:id/roomuse', {
+                    title: 'Αίθουσα - Χρήσεις Αίθουσας',
+                    controller: 'RoomsUsagesController',
+                    templateUrl: 'modules/rooms/rviews/UCroom.html'
                 })
-                .when('/psstats/create', {
-                    title: 'statistics create',
-                    template: '<ps-stats-profile></ps-stats-profile>'
+                .when('/rooms/:id/items', {
+                    title: 'Αίθουσα - Εξοπλισμός',
+                    controller: 'RoomsItemsController',
+                    templateUrl: 'modules/rooms/rviews/items/ItemRoom.html'
                 })
-                .when('/psstats/:psstatId', {
-                    title: 'statistics',
-                    template: '<ps-stats-profile></ps-stats-profile>'
+                .when('/rooms/:id/tms', {
+                    title: 'Αίθουσα - Τμήμα',
+                    controller: 'RoomsTmsController',
+                    templateUrl: 'modules/rooms/rviews/tms/TmsRoom.html'
                 })
-
-
-
-                /*.when('/', {
-                    controller: 'HomeController',
-                    templateUrl: 'modules/home/views/home.html'
+                .when('/rooms/:id/requests', {
+                    title: 'Αίθουσα - Αίτήματα',
+                    controller: 'RoomRequestsController',
+                    templateUrl: 'modules/requests/reqviews/requests.html'
                 })
-                .when('/', {
-                    controller: 'HomeController',
-                    templateUrl: 'modules/home/views/home.html'
-                })*/
+                .when('/rooms/:rid/requests/create', {
+                    title: 'Αίθουσα - Δημιουργία Αίτήματος',
+                    template: '<req-rooms-profile></req-rooms-profile>'
+                })
+                .when('/rooms/:rid/requests/:id', {
+                    title: 'Αίθουσα - Επεξεργασία Αίτήματος',
+                    template: '<req-rooms-profile></req-rooms-profile>'
+                })
+                .when('/tms', {
+                    title: 'Τμήματα',
+                    controller: 'TmsController',
+                    templateUrl: 'modules/tm/tmviews/tms.html'
+                })
+                .when('/tm/create', {
+                    title: 'Δημιουργία τμήματος',
+                    template: '<tm-profile></tm-profile>'
+                })
+                .when('/tms/:id', {
+                    title: 'Επεξεργασία τμήματος',
+                    template: '<tm-profile></tm-profile>'
+                })
+                .when('/userscategories', {
+                    title: 'Κατηγοριές Χρηστών',
+                    controller: 'UsersCategoriesController',
+                    templateUrl: 'modules/usersCategories/ucviews/ucategories.html'
+                })
+                .when('/userscategories/create', {
+                    title: 'Δημιουργία κατηγορίας χρήστη',
+                    template: '<users-categories-profile></users-categories-profile>'
+                })
+                .when('/userscategories/:id', {
+                    title: 'Επεξεργασία κατηγορίας χρήστη',
+                    template: '<users-categories-profile></users-categories-profile>'
+                })
+                .when('/userscategories/:id/users', {
+                    title: 'Κατηγορία χρήστη - Χρήστης',
+                    controller: 'UcategoriesUsersController',
+                    templateUrl: 'modules/users/uviews/users.html'
+                })
+                .when('/users', {
+                    title: 'Χρήστες',
+                    controller: 'UsersController',
+                    templateUrl: 'modules/users/uviews/users.html'
+                })
+                .when('/users/create', {
+                    title: 'Δημιουργία χρήστη',
+                    template: '<users-profile></users-profile>'
+                })
+                .when('/users/:id', {
+                    title: 'Επεξεργασία χρήστη',
+                    template: '<users-profile></users-profile>'
+                })
+                .when('/users/:id/requests', {
+                    title: 'Χρήστης - Αιτήματα',
+                    controller: 'URequestsController',
+                    templateUrl: 'modules/requests/reqviews/requests.html'
+                })
+                .when('/users/:id/roles', {
+                    title: 'Χρήστης - Ρόλοι',
+                    controller: 'URolesController',
+                    templateUrl: 'modules/users/uviews/urole.html'
+                })
+                .when('/users/:id/tms', {
+                    title: 'Χρήστης - Τμήματα',
+                    controller: 'UsersTmsController',
+                    templateUrl: 'modules/users/utms/userTms.html'
+                })
+                .when('/users/:id/rooms', {
+                    title: 'Χρήστης - Αίθουσα',
+                    controller: 'UsersRoomsController',
+                    templateUrl: 'modules/users/rooms/ItemRoom.html'
+                })
+                // .when('/psstats', {
+                //     title: 'Στατιστικά',
+                //     controller: 'PsStatsController',
+                //     templateUrl: 'modules/ps_stats/psstatsviews/psstats.html'
+                // })
+                // .when('/psstats/create', {
+                //     title: 'Δημιουργία στατιστικών',
+                //     template: '<ps-stats-profile></ps-stats-profile>'
+                // })
+                // .when('/psstats/:id', {
+                //     title: 'Επεξεργασία στατιστικών',
+                //     template: '<ps-stats-profile></ps-stats-profile>'
+                // })
+                .when('/roombook', {
+                    title: 'Διαθεσιμότητα',
+                    controller: 'BookController',
+                    templateUrl: 'modules/bookview/bookView.html'
+                })
+                .when('/roombook/dates', {
+                    title: 'Διαθεσιμότητα',
+                    controller: 'BookController',
+                    templateUrl: 'modules/bookview/bookView.html'
+                })
+                .when('/usercreaterequests', {
+                    title: 'Αίτημα Δέσμευσης',
+                    controller: 'CreateFormController',
+                    templateUrl: 'modules/requests/createUserRequest/createForm.html'
+                })
+                .when('/usercreaterequests/:id', {
+                    title: 'Επεξεργασία Αιτήματος Δέσμευσης',
+                    controller: 'CreateFormController',
+                    templateUrl: 'modules/requests/createUserRequest/createForm.html'
+                })
+                .when('/dashboard', {
+                    title: 'Πίνακας Ελέγχου',
+                    controller: 'UserViewController',
+                    templateUrl: 'modules/userView/userHome/uhome.html'
+                })
+                // .when('/publicroombook', {
+                //     title: 'publicuserroombook',
+                //     controller: 'BookController',
+                //     templateUrl: 'modules/bookview/bookView.html'
+                // })
+                .when('/utilities', {
+                    title: 'Αντιγραφή Περιόδου',
+                    controller: 'UtilitiesController',
+                    templateUrl: 'modules/adminUtilities/copyPeriod.html'
+                })
+                // .when('/copyday', {
+                //     title: 'Αντιγραφή Ημέρας',
+                //     controller: 'CopyDayController',
+                //     templateUrl: 'modules/adminUtilities/copyDay.html'
+                // })
+                .when('/checkpending', {
+                    title: 'Διαγραφή Ληγμένων',
+                    controller: 'UtilitiesController',
+                    templateUrl: 'modules/adminUtilities/copyPeriod.html'
+                })
+                .when('/holidayhold', {
+                    title: 'Ορισμός Αργιών',
+                    controller: 'UtilitiesController',
+                    templateUrl: 'modules/adminUtilities/setHoliday.html'
+                })
                 .otherwise({redirectTo: '/login'});
+
             /*$locationProvider.html5Mode({
                 enabled: true,
                 requireBase: false
             });*/
-
 
             var getUrlParameter = function getUrlParameter(sParam) {
                 var sPageURL = decodeURIComponent(window.location.search.substring(1)),
                     sURLVariables = sPageURL.split('&'),
                     sParameterName,
                     i;
-
                 for (i = 0; i < sURLVariables.length; i++) {
                     sParameterName = sURLVariables[i].split('=');
 
@@ -346,10 +457,12 @@ angular.module('clrBooking', [
                 return store.get('jwt');
             }*/
 
+
             jwtOptionsProvider.config({
                 tokenGetter: ['options', 'store', 'jwtHelper', '$http', '$rootScope', '$location',
                     function (options, store, jwtHelper, $http, $rootScope, $location) {
                         // Skip authentication for any requests ending in .html
+                        if (!refreshPromise) var refreshPromise = null;
                         if (options.url.substr(options.url.length - 5) == '.html') {
                             return null;
                         }
@@ -381,10 +494,10 @@ angular.module('clrBooking', [
                                 $location.path('/login');
                                 return null;
                             }
-                            var refreshToken = store.get('rwt');
+                            //var refreshToken = store.get('rwt');
                             // This is a promise of a JWT id_token
-                            var refreshPromise = $http({
-                                url: 'http://app.livepraktoreio.gr/api/public/refresh-token',
+                            refreshPromise = $http({
+                                url: 'http://localhost/panteion/api/public/refresh-token',
                                 // This makes it so that this request doesn't send the JWT
                                 //skipAuthorization: true,
                                 headers: {
@@ -399,6 +512,9 @@ angular.module('clrBooking', [
                                 store.set('jwt', newToken);
                                 refreshPromise = null;
                                 return newToken.token;
+                            }, function (reason) {
+                                // alert(reason.toString());
+                                $location.path('/login');
                             });
                             return refreshPromise;
                         } else {
@@ -411,12 +527,25 @@ angular.module('clrBooking', [
             $httpProvider.interceptors.push('jwtInterceptor');
             //$rootScope.app =  getUrlParameter('app');
         }])
-    .controller('Controller', ['jwtHelper', 'store', function Controller(jwtHelper, store) {
-
+    .controller('Controller', ['$scope', 'jwtHelper', 'store', 'globalVarsSrv', '$window', 'AuthenticationService', '$translate', function Controller($scope, jwtHelper, store, globalVarsSrv, $window, AuthenticationService, $translate) {
+        $scope.close = function () {
+            globalVarsSrv.cookieSave();
+        };
+        console.log('in App ctrl');
+        //$window.onclose =  $scope.close();
     }])
-    .run(['$rootScope', '$location', '$cookieStore', '$http', 'globalVarsSrv',
-        function ($rootScope, $location, $cookieStore, $http, globalVarsSrv) {
-            globalVarsSrv.initFromFile('config/appConfig.json');
+    .run(['$rootScope', '$location', '$http', 'globalVarsSrv', 'AuthenticationService', '$route', 'ClrStatusSrv', '$translate',
+        function ($rootScope, $location, $http, globalVarsSrv, AuthenticationService, $route, ClrStatusSrv, $translate) {
+            var usr = null;
+            if (usr = AuthenticationService.CheckCredentials()) {
+                // globalVarsSrv.appInit('config/appConfig.json', usr);
+                globalVarsSrv.appInit('appConfig', usr);
+            }
+            $rootScope.$on('$routeChangeSuccess', function () {
+                //document.title = $route.current.title;
+                document.title = $translate.instant($route.current.title);
+            });
+            console.log('in App Run');
+            ClrStatusSrv.getStatus('roomStatus');
+        }]);
 
-        }])
-;

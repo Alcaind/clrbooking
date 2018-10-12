@@ -1,40 +1,143 @@
-<div>
-    <div style="text-align: left;padding-left: 5px;">
-        <a href back-button type="button" class="btn btn-warning">
-            <span class="glyphicon glyphicon-chevron-left">
-                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Επιστροφή</span>
-            </span>
-        </a>
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-chevron-left">
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
+				</span>
+            </a>
+        </div>
+        <div class="pageTitle">{{"Διαχείριση Τμήματος"| translate}}</div>
     </div>
-    <form class="tmForm" name="tmForm" novalidate>
-        <div class="form-group" ng-class="{ 'has-error' : tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine }">
-            <label class="required" for="tm_code">Κωδικός τμήματος <span class="form-required">*</span>:</label>
-            <input id="tm_code" name="tm_code" class="form-control" type="text" ng-model="item.tm_code">
-            <p ng-show="tmForm.tm_code.$invalid && !tmForm.tm_code.$pristine" class="help-block">Εισάγετε κωδικό
-                τμήματος.</p>
-        </div>
-        <div class="form-group">
-            <label for="descr" class="required">Περιγραφή <span class="form-required">*</span>:</label>
-            <input id="descr" name="descr" class="form-control" type="text" ng-model="item.descr">
-            <p ng-show="tmForm.descr.$invalid && !tmForm.descr.$pristine" class="help-block">Εισάγετε περιγραφή.</p>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : tmForm.title.$invalid && !tmForm.title.$pristine }">
-            <label for="title" class="required">Τίτλος<span class="form-required">*</span>:</label>
-            <input id="title" name="title" class="form-control" type="text" ng-model="item.title">
-            <p ng-show="tmForm.title.$invalid && !tmForm.title.$pristine" class="help-block">Εισάγετε τίτλο
-                τμήματος.</p>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine }">
-            <label for="sxoli" class="required">Σχολή<span class="form-required">*</span>:</label>
-            <input id="sxoli" name="sxoli" class="form-control" type="text" ng-model="item.sxoli">
-            <p ng-show="tmForm.sxoli.$invalid && !tmForm.sxoli.$pristine" class="help-block">Εισάγετε το όνομα της
-                σχολής.</p>
-        </div>
-        <button type="button" class="btn btn-primary" ng-click="updateTm(item)" style="padding: 5px"
-                ng-if="item.id>0">Ανανέωση
-        </button>
-        <button type="button" class="btn btn-primary" ng-click="saveTm(item)" style="padding: 5px"
-                ng-if="item.tm_code && !item.id">Αποθήκευση
-        </button>
-    </form>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="formGroupItems">
+                <div class="inlineItems">
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : itemForm.tm_code.$invalid && !itemForm.tm_code.$pristine }">
+                        <label class=" formItemLabel" for="tm_code">{{"Κωδικός τμήματος"| translate}}<span
+                                class="form-required">*</span>:</label>
+                        <div class="smallInput">
+                            <input id="tm_code" name="tm_code" class="form-control" type="text"
+                                   ng-model="ctrl.item.tm_code">
+                        </div>
+                        <p ng-show="itemForm.tm_code.$invalid && !itemForm.tm_code.$pristine" class="help-block">
+                            {{"Εισάγετε κωδικό τμήματος."| translate}}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="descr" class=" formItemLabel">{{"Συντομογραφία"| translate}}<span
+                                class="form-required">*</span>:</label>
+                        <div class="smallInput">
+                            <input id="descr" name="descr" class="form-control" type="text" ng-model="ctrl.item.descr">
+                        </div>
+                        <p ng-show="itemForm.descr.$invalid && !itemForm.descr.$pristine" class="help-block">{{"Εισάγετε
+                            περιγραφή."| translate}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group"
+                     ng-class="{ 'has-error' : itemForm.title.$invalid && !itemForm.title.$pristine }">
+                    <label for="title" class=" formItemLabel">{{"Τίτλος"| translate}}<span
+                            class="form-required">*</span>:</label>
+                    <div class="longInput">
+                        <input id="title" name="title" class="form-control" type="text" ng-model="ctrl.item.title">
+                    </div>
+                    <p ng-show="itemForm.title.$invalid && !itemForm.title.$pristine" class="help-block">{{"Εισάγετε
+                        τίτλο τμήματος."| translate}}</p>
+                </div>
+
+
+                <div class="form-group"
+                     ng-class="{ 'has-error' : itemForm.sxoli.$invalid && !itemForm.sxoli.$pristine }">
+                    <label for="sxoli" class=" formItemLabel">{{"Σχολή"| translate}}<span
+                            class="form-required">*</span>:</label>
+                    <div class="midInput">
+                        <input id="sxoli" name="sxoli" class="form-control" type="text" ng-model="ctrl.item.sxoli">
+                    </div>
+                    <p ng-show="itemForm.sxoli.$invalid && !itemForm.sxoli.$pristine" class="help-block">{{"Εισάγετε το
+                        όνομα της σχολής."| translate}}</p>
+                </div>
+
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label for="supervisor" class=" formItemLabel">{{"Υπεύθυνος Τμήματος"| translate}}:</label>
+                        <select id="supervisor" class="midInput form-control"
+                                ng-options="user.id as (user.sname+' '+user.fname) for user in supervisor | orderBy:'sname' track by user.id"
+                                ng-model="ctrl.item.supervisor">
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="pro_met">{{"Προπτ/Μεταπτ"| translate}} :</label>
+                        <div class="smallInput">
+                            <select name="pro_met" id="pro_met" ng-model="ctrl.item.pro_met" class="form-control">
+                                <option value="ΠΡΟ">{{"Προπτυχιακό"| translate}}</option>
+                                <option value="ΜΕΤ">{{"Μεταπτυχιακό"| translate}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="ku_code">{{"Κωδικός KU"| translate}} :</label>
+                        <div class="smallInput">
+                            <input id="ku_code" name="ku_code" class="form-control" type="text"
+                                   ng-model="ctrl.item.ku_code">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descr" class=" formItemLabel">{{"Περιγραφή KU"| translate}} :</label>
+                        <div class="smallInput">
+                            <input id="ku_per" name="ku_per" class="form-control" type="text"
+                                   ng-model="ctrl.item.ku_per">
+                        </div>
+                    </div>
+                </div>
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="mku_code">{{"Κωδικός MKU"| translate}} :</label>
+                        <div class="smallInput">
+                            <input id="mku_code" name="mku_code" class="form-control" type="text"
+                                   ng-model="ctrl.item.mku_code">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descr" class=" formItemLabel">{{"Περιγραφή MKU"| translate}} :</label>
+                        <div class="smallInput">
+                            <input id="mku_per" name="mku_per" class="form-control" type="text"
+                                   ng-model="ctrl.item.mku_per">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="inlineItems">
+                    <div class="form-group">
+                        <label class=" formItemLabel" for="mp_code">{{"Κωδικός MP"| translate}} :</label>
+                        <div class="smallInput">
+                            <input id="mp_code" name="mp_code" class="form-control" type="text"
+                                   ng-model="ctrl.item.mp_code">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descr" class=" formItemLabel">{{"Περιγραφή MP"| translate}} :</label>
+                        <div class="smallInput">
+                            <input id="mp_per" name="mp_per" class="form-control" type="text"
+                                   ng-model="ctrl.item.mp_per">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.id>0">{{"Ανανέωση"| translate}}
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.tm_code && !ctrl.item.id">{{"Αποθήκευση"| translate}}
+            </button>
+        </form>
+    </div>
 </div>

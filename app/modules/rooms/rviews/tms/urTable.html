@@ -1,34 +1,40 @@
-<div>
-    <table class="table table-striped">
-        <thead>
+<div id="data_tbl" class="boxContent">
+    <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+        <thead class="header-fixed" style="background-color: #cecece;">
         <tr>
             <th>id</th>
-            <th>Κωδικός τμήματος</th>
-            <th>Περιγραφη</th>
-            <th>Τίτλος</th>
-            <th>Σχολή</th>
-            <th>Σχολια</th>
+            <th>{{"Κωδικός τμήματος"| translate}}</th>
+            <th>{{"Περιγραφή"| translate}}</th>
+            <th>{{"Τίτλος"| translate}}</th>
+            <th>{{"Σχολή"| translate}}</th>
+            <th>{{"Σχόλια"| translate}}</th>
             <th>...</th>
         </tr>
         </thead>
-        <tbody>
-        <tr ng-repeat="tms in lData.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:filter"
-            style="cursor: pointer" ng-class="{selected: tms.id === item.id}">
-            <td>{{ tms.id }}</td>
-            <td>{{ tms.tm_code }}</td>
-            <td>{{ tms.descr}}</td>
-            <td>{{ tms.title}}</td>
-            <td>{{ tms.sxoli}}</td>
-            <td>{{tms.pivot.comments }}</td>
+        <tbody class="contentScroll">
+        <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filterJson"
+            style="cursor: pointer">
+            <td>{{ item.id }}</td>
+            <td>{{ item.tm_code }}</td>
+            <td>{{ item.descr}}</td>
+            <td>{{ item.title}}</td>
+            <td>{{ item.sxoli}}</td>
+            <td>{{ item.pivot.comments }}</td>
             <td>
-                <button ng-click="editPivotData(tms)" type="button" class="btn btn-info">
+                <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button ng-click="deleteTmsRoom(tms.id)" type="button" class="btn btn-danger">
+                <button ng-click="ctrl.deleteData(item.id)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>
         </tr>
         </tbody>
     </table>
+</div>
+<div class="pagePagination">
+    <div>
+        <pagination current-page="currentPageL" total-items="ctrl.ldp.length"
+                    items-per-page="itemsPerPageL" num-pages="numPagesL"></pagination>
+    </div>
 </div>

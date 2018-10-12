@@ -1,106 +1,73 @@
-<div id="ps_main">
-    <div><h2 style="text-align: center;"> Πρόγραμμα Σπουδων </h2></div>
-    <div style="display: flex">
-        <input type="text" ng-model="filter" class="form-control" placeholder="search"
-               style="padding: 5px; width: 100%">
-        <button type="button" class="btn btn-primary" ng-click="getPs()"
-                style="min-width: 50px; border-radius: 0px;">
-            <span class="glyphicon glyphicon-refresh"></span>
-        </button>
-        <a href="#/ps/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-            <span class="glyphicon glyphicon-plus"></span>
-        </a>
+<div id="ps_main" class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+
+            <a ng-if="fromAnotherPage" href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span></span></a>
+
+            <div class="operations">
+                <operations ng-repeat="op in ctrl.operations"
+                            hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
+                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
+                <delete-row-button ng-click="deletePs(ctrl.selectedRow)"></delete-row-button>
+            </div>
+            <table-tools class="pageTools"></table-tools>
+            <div class="form-group" style="width: 315px; float: right;">
+                <form-item-selector selector-title='{{"Έτος"|translate}}' return-column="id" view-column="year"
+                                    dp="configs" searchable="false" output-value="conf_id" class="midInput"
+                                    style="min-width: 314px; "></form-item-selector>
+            </div>
+        </div>
+        <dm-title class="pageTitle"></dm-title>
     </div>
-    <div>
-        <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
-                    num-pages="numPages"></pagination>
-    </div>
-    <div id="data_tbl" class="table-responsive boxContent">
-        <table class="sorttable table table-hover table-striped table-responsive header-fixed">
-            <thead>
+
+    <!--<div class="pageTools">
+        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
+    </div>-->
+
+    <div id="data_tbl" class="boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+            <thead class="header-fixed" style="background-color: #cecece;">
             <tr>
-                <th>ID</th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('tm_code')">Κωδικός τμήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'tm_code'"
-                          ng-class="{reverse: reverse}"></span>
+                <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"
+                    style="{{th.title.lastIndexOf('.')===th.title.length-1?'width:50px;':'width:'+(th.title.length*10+20)+'px;'}}min-width: 20px;max-width: 200px;padding: 0px 5px 2px 5px;font-size: 12px;font-weight: normal;{{$index === 0?'width:44px':''}}"></th>
+                <th class="columnSettings">
+                    <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
                 </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('tm_per')">Περιγραφή τμήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'tm_per'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('pm')">Είδος</button>
-                    <span class="sortorder" ng-show="propertyName === 'pm'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('tma_code')">Κωδικός μαθήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'tma_code'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('tma_per')">Περιγραφή μαθήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'tma_per'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('ps_ex')">Εξάμημο</button>
-                    <span class="sortorder" ng-show="propertyName === 'ps_ex'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('ps_dm')">Έτος</button>
-                    <span class="sortorder" ng-show="propertyName === 'ps_dm'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('ps_km')">ps_km</button>
-                    <span class="sortorder" ng-show="propertyName === 'ps_km'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('teacher')">Διδάσκων</button>
-                    <span class="sortorder" ng-show="propertyName === 'teacher'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('conf_id')">Configuration</button>
-                    <span class="sortorder" ng-show="propertyName === 'conf_id'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>...</th>
-            <tbody>
-            <tr ng-repeat="ps in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
-                style="cursor: pointer" ng-class="{selected: ps.id === item.id}">>
-                <td>{{ ps.id }}</td>
-                <td>{{ ps.tm_code }}</td>
-                <td>{{ ps.tm_per }}</td>
-                <td>{{ ps.pm }}</td>
-                <td>{{ ps.tma_code }}</td>
-                <td>{{ ps.tma_per }}</td>
-                <td>{{ ps.ps_ex }}</td>
-                <td>{{ ps.ps_dm }}</td>
-                <td>{{ ps.ps_km }}</td>
-                <td>{{ ps.teacher }}</td>
-                <td>{{ ps.conf_id }}</td>
-                <td>
-                    <a href="#/ps/{{ps.id}}" type="button" class="btn btn-info thumb"><span
-                            class="glyphicon glyphicon-pencil"></span></a>
-                    <button ng-click="deletePs(ps)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
+            </tr>
+            </thead>
+            <tbody class="contentScroll">
+            <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filterJson"
+                style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
+                ng-click="ctrl.selectRow(item)">
+                <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
+                <td ng-if="ctrl.tableColumns[1].visible">{{item.tm_code}}</td>
+                <td ng-if="ctrl.tableColumns[2].visible">{{ item.tm_per }}</td>
+                <td ng-if="ctrl.tableColumns[3].visible">{{ item.pm }}</td>
+                <td ng-if="ctrl.tableColumns[4].visible">{{ item.tma_code }}</td>
+                <td ng-if="ctrl.tableColumns[5].visible">{{ item.tma_per }}</td>
+                <td ng-if="ctrl.tableColumns[6].visible">{{ item.ps_ex }}</td>
+                <td ng-if="ctrl.tableColumns[7].visible">{{ item.ps_dm }}</td>
+                <td ng-if="ctrl.tableColumns[8].visible">{{ item.ps_km }}</td>
+                <td ng-if="ctrl.tableColumns[9].visible">
+                    <li ng-repeat="user in item.users">
+                        {{ user.sname }}{{' '}}{{ user.fname }}
+                    </li>
                 </td>
+                <td ng-if="ctrl.tableColumns[10].visible">{{ item.config.year }}</td>
+                <td ng-if="ctrl.tableColumns[11].visible">{{ item.ps_code }}</td>
+
+                <td style="width:30px;"></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <pre>total curriculum list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+    <div class="pagePagination">
+        <div>
+            <pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"
+                        num-pages="numPages"></pagination>
+        </div>
+        <!--<pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>-->
+    </div>
 </div>
-
-
-
-
-
-

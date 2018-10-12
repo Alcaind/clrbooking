@@ -1,30 +1,36 @@
-<div>
-    <table class="table table-striped">
-        <thead>
+<div id="data_tbl" class="boxContent">
+    <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+        <thead class="header-fixed" style="background-color: #cecece;">
         <tr>
             <th>id</th>
-            <th>Συντομογραφία</th>
-            <th>Περιγραφή</th>
-            <th>Σχόλια</th>
+            <th>{{"Συντομογραφία"| translate}}</th>
+            <th>{{"Περιγραφή"| translate}}</th>
+            <th>{{"Σχόλια"| translate}}</th>
             <th>...</th>
         </tr>
         </thead>
-        <tbody>
-        <tr ng-repeat="room in lData.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:filter"
-            style="cursor: pointer" ng-class="{selected: room.id === item.id}">
-            <td>{{room.id }}</td>
-            <td>{{room.synt}}</td>
-            <td>{{room.descr }}</td>
-            <th>{{room.pivot.comment }}</th>
+        <tbody class="contentScroll">
+        <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filterJson"
+            style="cursor: pointer">
+            <td>{{item.id }}</td>
+            <td>{{item.synt}}</td>
+            <td>{{item.descr }}</td>
+            <th>{{item.pivot.comment }}</th>
             <td>
-                <button ng-click="editUrData(room)" type="button" class="btn btn-info">
+                <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button ng-click="deleteUsageRoom(room.id)" type="button" class="btn btn-danger">
+                <button ng-click="ctrl.deleteData(item.id)" type="button" class="btn btn-danger">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </td>
         </tr>
         </tbody>
     </table>
+</div>
+<div class="pagePagination">
+    <div>
+        <pagination current-page="currentPageL" total-items="ctrl.ldp.length"
+                    items-per-page="itemsPerPageL" num-pages="numPagesL"></pagination>
+    </div>
 </div>

@@ -1,61 +1,63 @@
-<div id="users_main">
-    <div>
-        <h2 style="text-align: center;"> Κατάλογος Χρηστών </h2>
-    </div>
-    <div style="padding: 15px">
-        <div style="display: flex">
-            <input type="text" ng-model="filter" class="form-control" placeholder="search"
-                   style="padding: 5px; width: 100%">
-            <button type="button" class="btn btn-primary" ng-click="ctrl.getAll()"
-                    style="min-width: 50px; border-radius: 0px;">
-                <span class="glyphicon glyphicon-refresh"></span>
-            </button>
-            <a href="#/users/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-                <span class="glyphicon glyphicon-plus"></span>
-            </a>
+<div id="users_main" class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+
+            <a ng-if="fromAnotherPage" href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span></span></a>
+
+            <div class="operations">
+                <operations ng-repeat="op in ctrl.operations"
+                            hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
+                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}"></operations>
+                <delete-row-button ng-click="ctrl.delete(ctrl.selectedRow)"
+                                   ng-if="!fromAnotherPage"></delete-row-button>
+            </div>
+            <table-tools class="pageTools"></table-tools>
         </div>
+        <dm-title class="pageTitle"></dm-title>
+    </div>
+    <!--<div class="pageTools">
+        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
+    </div>-->
+    <div id="data_tbl" class="boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+            <thead class="header-fixed" style="background-color: #cecece;">
+            <tr>
+                <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"
+                    style="{{th.title.lastIndexOf('.')===th.title.length-1?'width:50px;':'width:'+(th.title.length*10+20)+'px;'}}min-width: 20px;max-width: 200px;padding: 0px 5px 2px 5px;font-size: 12px;font-weight: normal;{{$index === 0?'width:44px':''}}"></th>
+                <th class="columnSettings">
+                    <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
+                </th>
+            </tr>
+            </thead>
+            <tbody class="contentScroll">
+            <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filterJson"
+                style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
+                ng-click="ctrl.selectRow(item)">
+                <td ng-if="ctrl.tableColumns[0].visible">{{ item.id }}</td>
+                <td ng-if="ctrl.tableColumns[1].visible">{{ item.user}}</td>
+                <td ng-if="ctrl.tableColumns[2].visible">{{ item.fname }}</td>
+                <td ng-if="ctrl.tableColumns[3].visible">{{ item.sname}}</td>
+                <td ng-if="ctrl.tableColumns[4].visible">{{ item.phone}}</td>
+                <td ng-if="ctrl.tableColumns[5].visible">{{ item.em_main}}</td>
+                <td ng-if="ctrl.tableColumns[6].visible">{{ item.em_sec}}</td>
+                <td ng-if="ctrl.tableColumns[7].visible">{{ item.em_pant}}</td>
+                <td ng-if="ctrl.tableColumns[8].visible">{{ item.ucategories.descr}}</td>
+                <td ng-if="ctrl.tableColumns[9].visible">
+                    <li ng-repeat="tm in item.tm">{{ tm.descr }}</li>
+                </td>
+                <td ng-if="ctrl.tableColumns[10].visible">{{ item.comments}}</td>
+                <td style="width:30px;"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pagePagination">
         <div>
-            <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
+            <pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"
                         num-pages="numPages"></pagination>
         </div>
-        <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
-        <div id="data_tbl" class="table-responsive boxContent">
-            <table class="sorttable table table-hover table-striped table-responsive header-fixed">
-                <thead>
-                <tr>
-                    <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"></th>
-                    <th>...</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="user in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filter"
-                    style="cursor: pointer" ng-class="{selected: user.id === item.id}">
-                    <td ng-if="ctrl.tableColumns[0].visible">{{ user.id }}</td>
-                    <td ng-if="ctrl.tableColumns[1].visible">{{ user.user}}</td>
-                    <td ng-if="ctrl.tableColumns[2].visible">{{ user.fname }}</td>
-                    <td ng-if="ctrl.tableColumns[3].visible">{{ user.sname}}</td>
-                    <td ng-if="ctrl.tableColumns[4].visible">{{ user.phone}}</td>
-                    <td ng-if="ctrl.tableColumns[5].visible">{{ user.em_main}}</td>
-                    <td ng-if="ctrl.tableColumns[6].visible">{{ user.em_sec}}</td>
-                    <td ng-if="ctrl.tableColumns[7].visible">{{ user.em_pant}}</td>
-                    <td ng-if="ctrl.tableColumns[8].visible">{{ user.ucategories.descr}}</td>
-                    <td ng-if="ctrl.tableColumns[9].visible">{{ user.tm.title }}</td>
-                    <td ng-if="ctrl.tableColumns[10].visible"><textarea disabled>{{ user.comments}}</textarea></td>
-                    <td>
-                        <a href="#/users/{{user.id}}" type="button" class="btn btn-info thumb"><span
-                                class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="#/users/{{user.id}}/roles" type="button" class="btn btn-primary thumb"><span
-                                class="glyphicon glyphicon-import"></span></a>
-                        <a href="#/users/{{user.id}}/requests" type="button" class="btn btn-success thumb"><span
-                                class="glyphicon glyphicon-transfer"></span></a>
-                        <button ng-click="ctrl.delete(user)" type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <pre>total users : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+        <!--<pre>total requests list : {{ctrl.dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>-->
     </div>
 </div>

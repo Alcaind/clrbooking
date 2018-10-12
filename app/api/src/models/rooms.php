@@ -18,7 +18,7 @@ class Rooms extends Model
 
     public function items()
     {
-        return $this->belongsToMany("\\App\\Models\\Items", 'room_items', 'room_id', 'item_id')->withPivot('comments', 'stat', 'from', 'to');
+        return $this->belongsToMany("\\App\\Models\\ItemType", 'room_items', 'room_id', 'item_id')->withPivot('comments', 'stat', 'from', 'to');
     }
 
     public function room_use()
@@ -51,14 +51,23 @@ class Rooms extends Model
         return $this->belongsToMany("\\App\\Models\\Tm", 'rooms_tms', 'room_id', 'tm_id')->withPivot('comments');
     }
 
-//    public function requests()
-//    {
-//        try {
-//            $ret = $this->hasMany('\\App\\Models\\Requests', 'user_id');
-//        } catch (\Exception $e) {
-//            return $e->getMessage();
-//        }
-//        return $ret;
-//    }
+    public function tm()
+    {
+        return $this->belongsTo('\\App\\Models\\Tm', 'tm_owner');
+    }
 
+    public function requests()
+    {
+        return $this->belongsToMany('\\App\\Models\\Requests', 'request_rooms', 'room_id', 'req_id')->withPivot('id', 'comment', 'teacher', 'fromt', 'tot', 'date_index');
+    }
+
+    public function books()
+    {
+        return $this->hasMany('\\App\\Models\\RoomBook', 'room_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('\\App\\Models\\Users', 'users_rooms', 'room_id', 'users_id')->withPivot('comment');
+    }
 }

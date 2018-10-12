@@ -24,7 +24,6 @@
                 <a ng-if="!option.column" data-toggle="dropdown">{{option.title| translate}}</a>
                 <a href="#{{option.column}}" ng-if="option.column" style="line-height: 15px;">{{option.title|
                     translate}}</a>
-
                 <ul class="dropdown-menu center" role="menu" aria-labelledby="simple-dropdown" data-placement="bottom">
                     <li role="menuitem" ng-repeat="smenu in option.smenu" style="padding: 2px">
                         <a href="#{{smenu.column}}" style="line-height: 15px;">{{smenu.title| translate}}</a>
@@ -32,24 +31,28 @@
                 </ul>
             </li>
         </ul>
+        <div class="inlineItems navbar-right" style="margin-right:0px!important;">
 
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown" style="background: #5d0303;cursor: pointer;">
-                <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"
-                                                                        aria-hidden="true"></span><b class="caret"></b></a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="btn-append-to-single-button">
-                    <li role="menuitem" ng-click="getProfile()" type="button"><a>{{"Προφίλ"| translate}}</a></li>
-                    <li role="menuitem" ng-click="logout()"><a href="#login">{{"Έξοδος"| translate}}</a></li>
-                    <li role="menuitem" ng-click="closeWithCookie()" type="button"><a>{{"Αποθήκευσε τις επιλογές σου"|
-                        translate}}</a>
-                    </li>
-                    <li>
-                        <button class="btn btn-sm" ng-click="updateLanguage('gr')">gr</button>
-                        <button class="btn btn-sm" ng-click="updateLanguage('en')">en</button>
-                    </li>
-                </ul>
-                </ul>
-            </li>
-        </ul>
+            <ul class="nav navbar-nav">
+                <li class="dropdown" style="background: #5d0303;cursor: pointer;">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"
+                                                                            aria-hidden="true"
+                                                                            style="color: #fff;"></span><b class="caret"
+                                                                                                           style="color: #fff;"></b></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="btn-append-to-single-button">
+                        <li role="menuitem" ng-click="getProfile()" type="button"><a>{{"Προφίλ"| translate}}</a></li>
+                        <li role="menuitem" ng-click="logout()"><a href="#login">{{"Έξοδος"| translate}}</a></li>
+                        <li role="menuitem" ng-click="closeWithCookie()" type="button"><a>{{"Αποθήκευσε τις επιλογές
+                            σου"|translate}}</a>
+                        </li>
+                        <li>
+                            <button class="btn btn-sm" ng-click="updateLanguage('gr')">gr</button>
+                            <button class="btn btn-sm" ng-click="updateLanguage('en')">en</button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!--<button class="btn glyphicon glyphicon-refresh navbar-right" style="margin-bottom: 16px;" ng-click="refreshClear()"></button>-->
+        </div>
     </div>
 </nav>

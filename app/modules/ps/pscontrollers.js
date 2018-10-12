@@ -4,81 +4,95 @@ angular.module('Ps', [
     'MainComponents',
     'ui.bootstrap',
     'ApiModules',
-    'Authentication'
-]).controller('PsController', ['$scope', 'MakeModal', 'api', 'orderByFilter', 'AuthenticationService', function ($scope, MakeModal, api, orderBy, AuthenticationService) {
-    AuthenticationService.CheckCredentials();
-    $scope.dp = [];
-    $scope.item = {};
-    $scope.method = '';
-    $scope.baseURL = 'api/public/ps';
+    'Authentication',
+    'GlobalVarsSrvs'
+]).controller('PsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'api', 'MakeModal', function ($scope, AuthenticationService, makeController, globalVarsSrv, api, MakeModal) {
+    $scope.configs = {};
+    $scope.conf_id = 8;
+    $scope.tms = [];
 
-    $scope.getPs = function () {
-        api.apiCall('GET', $scope.baseURL, function (results) {
-            $scope.dp = results.data;
-            $scope.totalItems = $scope.dp.length;
+    $scope.$watch('conf_id', function (newVal) {
+        if (!newVal) return;
+        $scope.urlr = '/ps/conf/' + newVal;
+        if ($scope.ctrl) $scope.ctrl.setUrl($scope.urlr);
+    });
+
+    api.apiCall('GET', 'api/public/config', function (results) {
+        $scope.configs = results.data;
+        $scope.configs.map(function (cfg) {
+            if (cfg.status === 1) $scope.conf_id = cfg.id;
+        });
+        $scope.urlr = '/ps/conf/' + $scope.conf_id;
+        $scope.ctrl = makeController.mainController('', 'psTableConf', 'Πρόγραμμα Σπουδών');
+        $scope.ctrl.setUrl($scope.urlr);
+        $scope.ctrl.init();
+
+
+        api.apiCall('GET', 'api/public/tms', function (results) {
+            $scope.tms = results.data;
+        });
+
+        $scope.$watch('ctrl.dp', function (n, o) {
+            if (n.length) {
+                for (var column in $scope.ctrl.filter) {
+                    if (n[column] === $scope.ctrl.filter[column]) {
+                        // return true
+                        ctrl.getAll();
+
+                        // api.apiCall('GET', 'api/public/ps', function (result) {
+                        //     ctrl.dp = result.data;
+                        // })
+                    }
+                }
+
+            }
+        });
+    });
+    $scope.deletePs = function (ps) {
+        api.apiCall('DELETE', "api/public/ps/" + ps.id, function (results) {
+            $scope.ctrl.dp.splice($scope.ctrl.dp.indexOf(ps), 1);
+            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Eπιτυχής διαγραφή', 1)
         });
     };
 
-    $scope.deletePs = function (item) {
-        api.apiCall('DELETE', $scope.baseURL + "/" + item.id, function (results) {
-            $scope.dp.splice($scope.dp.indexOf(item), 1);
-            $scope.item = {};
-            MakeModal.generalInfoModal('sm', 'Info', 'info', 'Το πρόγραμμα σπουδών διαγράφηκε.', 1)
-        });
-    };
 
-    $scope.propertyName = 'tm_code';
-    $scope.reverse = true;
-    $scope.sorttable = orderBy($scope.dp, $scope.propertyName, $scope.reverse);
-
-    $scope.sortBy = function (propertyName) {
-        $scope.reverse = (propertyName !== null && $scope.propertyName === propertyName)
-            ? !$scope.reverse : false;
-        $scope.propertyName = propertyName;
-    };
-
-    $scope.getPs();
 
 }])
-    .controller('PsProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', function ($scope, $routeParams, api, MakeModal, AuthenticationService) {
-        AuthenticationService.CheckCredentials();
-        $scope.baseURL = 'api/public/ps';
+    .controller('PsProfileController', ['$scope', '$routeParams', 'api', 'MakeModal', 'AuthenticationService', 'makeController', 'globalVarsSrv', function ($scope, $routeParams, api, MakeModal, AuthenticationService, makeController, globalVarsSrv) {
+        $scope.ctrl = makeController.profileController('/ps', 'psTableConf');
+        $scope.tms = [];
+        $scope.configs = [];
+//        $scope.teachers = [];
+        // $scope.users = [];
+        //
+        // api.apiCall('GET', 'api/public/users', function (results) {
+        //     $scope.users = results.data;
+        // });
 
-        if (!$routeParams.psId) {
-            $scope.item = {
-                tm_code: "",
-                tm_per: "",
-                pm: "",
-                tma_code: "",
-                tma_per: "",
-                ps_ex: "",
-                ps_dm: "",
-                ps_km: "",
-                teacher: "",
-                conf_id: ""
-            };
-        } else {
-            api.apiCall('GET', $scope.baseURL + "/" + $routeParams.psId, function (results) {
-                $scope.item = results.data;
+        $scope.$watch('ctrl.item.tm', function (newVal) {
+            if (!newVal) return;
+            $scope.ctrl.item.tm_code = newVal.id;
+            $scope.ctrl.item.tm_per = newVal.descr;
+
+        });
+
+
+        api.apiCall('GET', 'api/public/config', function (results) {
+            $scope.configs = results.data;
+            api.apiCall('GET', 'api/public/tms', function (results) {
+                $scope.tms = results.data;
+                // api.apiCall('GET', 'api/public/users', function (results) {
+                //     for (var i = 0; i < results.data.length; i++) {
+                //         if (results.data[i].cat_id === 7) $scope.teachers.push(results.data[i]);
+                //     }
+
+                $scope.ctrl.init();
+                //  $scope.ctrl.item.tm = [];
+                // });
             });
-        }
-        $scope.updatePs = function (item) {
-            api.apiCall('PUT', $scope.baseURL + "/" + item.id, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Το πρόγραμμα σπουδών ανανεώθηκε.', 1);
-                history.back();
-            }, undefined, item)
-
-        };
-
-        $scope.savePs = function (item) {
-            api.apiCall('POST', $scope.baseURL, function (results) {
-                MakeModal.generalInfoModal('sm', 'Info', 'Info', 'Νεο πρόγραμμα σπουδών δημιουργήθηκε.', 1);
-                history.back();
-            }, undefined, item)
-        }
-
-
+        });
     }])
+
     .component('psProfile', {
         restrict: 'EA',
         templateUrl: 'modules/ps/psviews/psprofile.html',
@@ -87,5 +101,4 @@ angular.module('Ps', [
         },
         controller: 'PsProfileController'
     })
-
 ;

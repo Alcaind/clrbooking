@@ -1,137 +1,66 @@
-<div id="requests_main">
-    <div><h2 style="text-align: center;"> Κατάλογος Αιτημάτων </h2></div>
-    <div style="display: flex">
-        <input type="text" ng-model="filter" class="form-control" placeholder="search"
-               style="padding: 5px; width: 100%">
-        <button type="button" class="btn btn-primary" ng-click="getRequests()"
-                style="min-width: 50px; border-radius: 0px;">
-            <span class="glyphicon glyphicon-refresh"></span>
-        </button>
-        <a href="#/requests/create" class="btn btn-success thumb" style="min-width: 50px;border-radius: 0px;">
-            <span class="glyphicon glyphicon-plus"></span>
-        </a>
+<div id="requests_main" class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a ng-if="fromAnotherPage" href back-button type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-chevron-left">
+                <span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span></span></a>
+            <div class="operations">
+                <operations ng-repeat="op in ctrl.operations"
+                            hr="{{ctrl.selectedRow?op.hr.replace('id',ctrl.selectedRow.id):null}}"
+                            content="{{op.content}}" gicon="{{op.gicon}}" place="{{op.place}}" ng-if="op.ifVisible">
+                </operations>
+                <delete-row-button ng-if="!fromAnotherPage"
+                                   ng-click="deleteRequest(ctrl.selectedRow)"></delete-row-button>
+            </div>
+            <table-tools ng-if="!fromAnotherPage" class="pageTools"></table-tools>
+
+
+            <div class="form-group" style="width: 315px; float: right;">
+                <form-item-selector selector-title='{{"Έτος"|translate}}' return-column="id" view-column="year"
+                                    dp="configs" searchable="false" output-value="config_id" class="midInput"
+                                    style="min-width: 314px; " ng-if="acceptShow"></form-item-selector>
+            </div>
+        </div>
+        <dm-title class="pageTitle"></dm-title>
     </div>
-    <div>
-        <pagination current-page="currentPage" total-items="totalItems" items-per-page="itemsPerPage"
-                    num-pages="numPages"></pagination>
-    </div>
-    <div id="data_tbl" class="table-responsive boxContent">
-        <table class="sorttable table table-hover table-striped table-responsive header-fixed">
-            <thead>
+    <div id="data_tbl" class="boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+            <thead class="header-fixed" style="background-color: #cecece;">
             <tr>
-                <th>ID</th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('req_dt')">Ημ/νία Αιτήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'req_dt'"
-                          ng-class="{reverse: reverse}"></span>
+                <th dm-th ng-repeat="th in ctrl.tableColumns" ng-if="th.visible"
+                    style="{{th.title.lastIndexOf('.')===th.title.length-1?'width:50px;':'width:'+(th.title.length*10+20)+'px;'}}min-width: 20px;max-width: 200px;padding: 0px 5px 2px 5px;font-size: 12px;font-weight: normal;{{$index === 0?'width:44px':''}}"></th>
+                <th class="columnSettings">
+                    <show-hide-columns colums-visibility="ctrl.tableColumns"></show-hide-columns>
                 </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('users.user')">Username</button>
-                    <span class="sortorder" ng-show="propertyName === 'user.user'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('descr')">Περιγραφή</button>
-                    <span class="sortorder" ng-show="propertyName === 'descr'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('period')">Ακαδημαϊκή Περίοδος</button>
-                    <span class="sortorder" ng-show="propertyName === 'period'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('ps_id')">Πρόγραμμα Σπουδών</button>
-                    <span class="sortorder" ng-show="propertyName === 'ps_id'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('class_use')">Χρήση Αίθουσας</button>
-                    <span class="sortorder" ng-show="propertyName === 'class_use'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('links')">Παραποµπές</button>
-                    <span class="sortorder" ng-show="propertyName === 'links'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('fromdt')">Από ώρα</button>
-                    <span class="sortorder" ng-show="propertyName === 'fromdt'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('todt')">Μέχρι ώρα</button>
-                    <span class="sortorder" ng-show="propertyName === 'todt'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('protocol_id')">Αρ.πρωτοκόλλου</button>
-                    <span class="sortorder" ng-show="propertyName === 'protocol_id'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('req_status')">Κατάσταση Αιτήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'req_status'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('fromd')">Από ημέρα</button>
-                    <span class="sortorder" ng-show="propertyName === 'fromd'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('tod')">Μέχρι ημέρα</button>
-                    <span class="sortorder" ng-show="propertyName === 'tod'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('date_index')">Kαταχώρηση αιτήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'date_index'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>
-                    <button class="btn btn-link" ng-click="sortBy('admin')">Επιβλέπων Αιτήματος</button>
-                    <span class="sortorder" ng-show="propertyName === 'admin'"
-                          ng-class="{reverse: reverse}"></span>
-                </th>
-                <th>...</th>
-            <tbody>
-            <tr ng-repeat="request in dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:filter|orderBy:propertyName:reverse"
-                style="cursor: pointer" ng-class="{selected: request.id === item.id}">
-                <td>{{ request.id }}</td>
-                <td>{{ request.req_dt }}</td>
-                <td>{{ request.users.user }}</td>
-                <td><textarea disabled>{{ request.descr }}</textarea></td>
-                <td>{{ request.period }}</td>
-                <td>{{ request.ps_id }}</td>
-                <td>{{ request.class_use }}</td>
-                <td>{{ request.links }}</td>
-                <td>{{ request.fromdt }}</td>
-                <td>{{ request.todt }}</td>
-                <td>{{ request.protocol_id }}</td>
-                <td>{{ request.req_status }}</td>
-                <td>{{ request.fromd }}</td>
-                <td>{{ request.tod }}</td>
-                <td>{{ request.date_index }}</td>
-                <td>{{ request.admin }}</td>
-                <td>
-                    <a href="#/requests/{{request.id}}" type="button" class="btn btn-info thumb"><span
-                            class="glyphicon glyphicon-pencil"></span></a>
-                    <button ng-click="deleteRequest(request)" type="button" class="btn btn-danger">
-                        <span class="glyphicon glyphicon-remove
-"></span>
-                    </button>
-                </td>
+            </tr>
+            </thead>
+            <tbody class="contentScroll">
+            <tr ng-repeat="item in ctrl.dp.slice(((currentPage-1)*itemsPerPage),((currentPage)*itemsPerPage))|filter:ctrl.filterJson"
+                style="cursor: pointer;display: table-row; background-color: {{item.selected?'#b2b2b2':''}}"
+                ng-click="ctrl.selectRow(item); THLbutton(item)">
+                <td ng-if="ctrl.tableColumns[0].visible">{{ item.id}}</td>
+                <td ng-if="ctrl.tableColumns[1].visible">{{ item.req_dt }}</td>
+                <td ng-if="ctrl.tableColumns[2].visible">{{ item.users.sname}}{{' '}}{{item.users.fname}}</td>
+                <td ng-if="ctrl.tableColumns[3].visible">{{ item.descr }}</td>
+                <td ng-if="ctrl.tableColumns[4].visible">{{ item.periods.descr }}</td>
+                <td ng-if="ctrl.tableColumns[5].visible">{{ item.ps.tma_per }}</td>
+                <td ng-if="ctrl.tableColumns[6].visible">{{ item.room_use.synt }}</td>
+                <td ng-if="ctrl.tableColumns[7].visible">{{ item.links }}</td>
+                <td ng-if="ctrl.tableColumns[8].visible">{{ item.protocol_id }}</td>
+                <td ng-if="ctrl.tableColumns[9].visible">{{ statusOptions[item.status].text }}</td>
+                <td ng-if="ctrl.tableColumns[10].visible">{{ item.fromd |date:'dd-MM-yyyy' }}</td>
+                <td ng-if="ctrl.tableColumns[11].visible">{{ item.tod |date:'dd-MM-yyyy' }}</td>
+                <!--<td ng-if="ctrl.tableColumns[12].visible">{{ item.admin.user }}</td>-->
+                <td ng-if="ctrl.tableColumns[12].visible">{{ item.tm.descr }}</td>
+                <td style="width:30px;"></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <pre>total requests list : {{dp.length}}  Page: {{currentPage}} / {{numPages}}</pre>
+    <div class="pagePagination">
+        <div>
+            <pagination current-page="currentPage" total-items="ctrl.totalRows" items-per-page="itemsPerPage"
+                        num-pages="numPages"></pagination>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-

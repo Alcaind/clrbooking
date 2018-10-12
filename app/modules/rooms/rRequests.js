@@ -10,14 +10,14 @@ angular.module('Rooms')
             room = results.data;
             $scope.calendar = [];
 
-            $scope.ctrl = makeController.mainController('/requests/rooms/' + $routeParams.id, 'requestsTableConf', $translate.instant("Κατοχυρωμένα αιτήματα στην αίθουσα") + ' ' + room.name);
+            $scope.ctrl = makeController.mainController('/requests/rooms/' + $routeParams.id, 'requestsTableConf', "Κατοχυρωμένα αιτήματα στην αίθουσα" + ' ' + room.name);
             $scope.ctrl.init();
 
             $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
 
             $scope.THLbutton = function (item) {
                 $scope.ctrl.operations[2].ifVisible = true;
-                if (item.class_use != 7) {
+                if (item.class_use !== 7) {
                     $scope.ctrl.operations[2].ifVisible = false;
                 }
             };

@@ -14,6 +14,7 @@ use  \Illuminate\Database\Eloquent\Model as Model;
 class Users extends Model {
 
     protected $table = 'users';
+    protected $hidden = ['hash'];
 
     public function roles()
     {
@@ -22,7 +23,17 @@ class Users extends Model {
 
     public function tm()
     {
-        return $this->belongsTo('\\App\\Models\\Tm', 'tm_id');
+        return $this->belongsToMany('\\App\\Models\\Tm', 'tm_users', 'user_id', 'tm_id')->withPivot('comments');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsToMany('\\App\\Models\\Ps', 'ps_teachers', 'tm_id', 'user_id')->withPivot('comment');
+    }
+
+    public function supervisor()
+    {
+        return $this->hasMany('\\App\\Models\\Tm', 'supervisor');
     }
 
     public function ucategories()
@@ -43,11 +54,16 @@ class Users extends Model {
     public function roombook()
     {
         try {
-            $ret = $this->hasMany('\\App\\Models\\RoomBook', 'users_id');
+            $ret = $this->hasMany('\\App\\Models\\RoomBook', 'teacher');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
         return $ret;
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany('\\App\\Models\\Rooms', 'users_rooms', 'users_id', 'room_id')->withPivot('comment');
     }
 
 }

@@ -4,6 +4,8 @@ angular.module('Users')
             var user = {};
             $scope.configs = {};
             $scope.fromAnotherPage = true;
+            $scope.acceptShow = false;
+
 
 
             api.apiCall('GET', globalVarsSrv.getGlobalVar('appUrl') + '/users/' + $routeParams.id, function (results) {
