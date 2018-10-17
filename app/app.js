@@ -68,7 +68,7 @@ angular.module('clrBooking', [
                 .useStaticFilesLoader({
                     //prefix: '/panteion/config/', //localhost
                     prefix: '/panteion/app/config/', //GERMANY server
-                    //prefix: '/config/', //PANTEIO's server
+                    //  prefix: '/config/', //PANTEIO's server
                     suffix: '.json'
                 })
                 .useSanitizeValueStrategy(null)

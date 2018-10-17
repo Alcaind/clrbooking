@@ -1,0 +1,33 @@
+<div id="roomtile" style="padding: 3px">
+    <div class="btn btn-primary" ng-click="removeSelectedRoom(room)">
+        <span class="glyphicon glyphicon-{{room.checked?'ok':'remove'}}"></span>
+    </div>
+    <div>
+        <label>{{room.name}}</label>
+        <label>{{room.capasity_categ}}</label>
+        <label>{{room.address}}</label>
+    </div>
+
+    <div>
+        <label style="width: 100%; text-align: center; border: #cecece 1px solid; background-color: beige">{{selectedDays[room.date_index].d|
+            translate}}</label>
+        <from-to-time-picker fromt="room.fromt" tot="room.tot"></from-to-time-picker>
+        <div class="inlineItems">
+            <label for="teacher">{{"Καθηγητής"| translate}}:</label>
+            <select id="teacher" name="teacher" class="form-control" ng-model="room.teacher"
+                    ng-options="user.id as (user.sname+' ' + user.fname) for user in teachers  | orderBy:'sname' track by user.id">
+            </select>
+
+        </div>
+
+        <div class="inlineItems" style="padding: 6px">
+            <input type="text" ng-model="room.comment" class="form-control" placeholder='{{"Σχόλια" | translate}}'>
+        </div>
+        <!--<span class="glyphicon glyphicon-{{sday.s?'ok':'remove'}}"></span>-->
+        <!--class="btn btn-{{sday.s?'success':'primary'}}"-->
+        <!--style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;-->
+        <!--border: 1px solid #ababab; box-shadow: 1px 1px 3px #ababab"-->
+    </div>
+</div>
+
+

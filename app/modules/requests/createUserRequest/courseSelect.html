@@ -1,0 +1,94 @@
+<div ng-show="mode!=='inserting'">
+
+</div>
+
+<div style=" border: 1px solid #ababab;">
+    <div style="padding: 5px; display: flex" class="inlineItems">
+
+        <select name="ckm" id="ckm" ng-model="courseFilterObj.pskm" class="smallInput form-control">
+            <option value="">{{"Ολες Κατ. Μαθ."| translate}}</option> <!-- not selected / blank option -->
+            <option value="ΥΠ">{{"ΥΠ"| translate}}</option> <!-- interpolation -->
+            <option value="ΕΥ">{{"ΕΥ"| translate}}</option>
+            <option value="ΕΕ">{{"ΕΕ"| translate}}</option>
+            <option value="ΣΕ">{{"ΣΕ"| translate}}</option>
+            <option value="ΕΡΓ">{{"ΕΡΓ"| translate}}</option>
+            <option value="ΥΑ">{{"ΥΑ"| translate}}</option>
+        </select>
+
+        <select name="cpm" id="xepm" ng-model="courseFilterObj.psex" class="smallInput form-control">
+            <option value="">{{"Χ/Ε"| translate}}</option> <!-- not selected / blank option -->
+            <option value="1357">{{"Χ"| translate}}</option>
+            <option value="2468">{{"Ε"| translate}}</option>
+        </select>
+
+        <select name="cpm" id="cpm" ng-model="courseFilterObj.psex" class="smallInput form-control">
+            <option value="">{{"Όλα τα εξάμηνα"| translate}}</option> <!-- not selected / blank option -->
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+        </select>
+        <select name="cpm" id="cpm2" ng-model="courseFilterObj.pm" class="midInput form-control">
+            <option value="">{{"Προπτυχιακό & Μεταπτυχιακό"| translate}}</option> <!-- not selected / blank option -->
+            <option value="ΠΡΟ">{{"Προπτυχιακό"| translate}}</option> <!-- interpolation -->
+            <option value="ΜΕΤ">{{"Μεταπτυχιακό"| translate}}</option>
+        </select>
+
+        <select id="tmRoomBook" ng-options="tm as tm for tm in tms"
+                ng-model="courseFilterObj.tm" ng-show="fromAnotherPage" style="min-width: 0px;"
+                class="form-control midInput">
+            <option value="">{{"Τμήμα"| translate}}</option>
+        </select>
+
+        <select id="myTm" class="midInput form-control"
+                ng-options="tm.id as (tm.descr)+(tm.ku_code?' / '+tm.ku_code:' / - ')+(tm.mku_code?' / '+tm.mku_code:' / - ')+(tm.mp_code?' / '+tm.mp_code:'') for tm in personalTms"
+                ng-model="courseFilterObj.tm" style="min-width: 0px;" ng-show="createFormControllerNotV">
+            <option value="">{{"Τμήμα"| translate}}</option>
+        </select>
+
+        <input type="text" ng-model="courseFilterObj.tma"
+               class="form-control ng-valid ng-dirty ng-valid-parse ng-empty ng-touched"
+               placeholder='{{"Search"| translate}}'
+               style="padding: 5px; padding: 5px">
+
+        <button tooltip-placement="left" uib-tooltip='{{"Φίλτρο"| translate}}' class="btn btn-primary"
+                ng-click="filterCourses(coursesDp, courses, courseFilterObj)">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+        <button tooltip-placement="left" uib-tooltip='{{"Επιλογή όλων"| translate}}' class="btn btn-primary"
+                ng-click="selectAllCourse()"
+                ng-if="fromAnotherPage">
+            <span class="glyphicon glyphicon-asterisk"></span>
+        </button>
+        <button tooltip-placement="left" uib-tooltip='{{"Καθαρισμός όλων"| translate}}' class="btn btn-danger"
+                ng-click="deselectAllCourse()" ng-if="fromAnotherPage">
+            <span class="glyphicon glyphicon-asterisk"></span>
+        </button>
+    </div>
+    <div style="overflow-y: auto; height: 350px; padding: 5px;  border: 1px solid #ababab;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;
+                    list-style: none; margin: 1em auto; padding: 0;">
+            <div ng-repeat="course in coursesDp track by $index" ng-click="selectCourse(course)"
+                 class="btn btn-{{course.selected?'success':'primary'}}"
+                 uib-tooltip="{{course.tma_per}} {{course.teacher}} {{course.pivot.fromt}}-{{course.pivot.tot}}-{{course.ps_ex}}o Εξ.-{{course.ps_km}} - {{course.ku_per}} - {{course.mku_per}} - {{course.mp_per}}"
+                 style="cursor: pointer; padding: 4px; font-size: 12px;
+                 border: 1px solid #ababab; overflow: hidden ">
+                <div>
+                    <div>{{course.tma_code}}</div>
+                    <div>{{course.ps_code}}</div>
+                    <div>{{course.tma_per}}</div>
+                    <div>{{course.tm.ku_code}} - {{course.tm.ku_per}}</div>
+                    <div>{{course.tm.mku_code}} - {{course.tm.mku_per}}</div>
+                    <div>{{course.tm.mp_code}} - {{course.tm.mp_per}}</div>
+                    <div>{{"Δήλωσαν"| translate}}:{{course.registers}} - {{"Εξετάστηκαν"| translate}}:{{course.exams}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,40 @@
+<div style="width: 100%; height: 100%; padding: 10px; display: block;">
+    <user-request-header></user-request-header>
+
+    <day-select style="padding: 4px 4px 0px 4px; border: 1px solid #cecece; display: block;"></day-select>
+    <use-select style="padding: 4px 4px 0px 4px; border: 1px solid #cecece; display: block;"></use-select>
+
+    <!--<show-hide sh-title="Επιλογή Χρήσης">
+        <use-select style="padding: 4px 4px 0px 4px;"></use-select>
+    </show-hide>-->
+
+    <show-hide sh-title='{{"Επιλογή Μαθήματος"| translate}}' ng-init="emIsVisible=false" sh="emIsVisible"
+               ng-click="eaIsVisible = false" ng-if="simpleManager">
+        <course-select style=""></course-select>
+    </show-hide>
+
+    <show-hide sh-title='{{"Επιλογή Αίθουσας"| translate}}' ng-init="eaIsVisible=false" sh="eaIsVisible"
+               ng-click="emIsVisible = false">
+        <room-select style=""></room-select>
+    </show-hide>
+    <!--<div id="selectedRoomsHolder" style="width: 100%; overflow: auto;" ng-if="mode !== 'reporting'">-->
+
+    <!--<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); grid-gap: 10px; grid-auto-flow: dense;-->
+    <!--list-style: none; overflow-y: auto; height: 350px; border: #cecece solid 1px">-->
+    <!--<default-room-tile ng-sh></default-room-tile>-->
+    <!--<div ng-repeat="room in selectedRooms track by $index">-->
+    <!--<selected-room-tile></selected-room-tile>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <show-hide sh-title='{{"Παρευρισκόμενοι"| translate}}' ng-show="selectedUse.id === 7 && item.id">
+        <select-guest style=""></select-guest>
+    </show-hide>
+
+    <book-check style=""></book-check>
+
+    <!--<show-hide sh-title="Ελεγχος Διαθεσιμότητας">
+        <book-check style="padding: 4px 4px 0px 4px;"></book-check>
+    </show-hide>-->
+</div>

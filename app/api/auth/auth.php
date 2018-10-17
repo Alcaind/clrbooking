@@ -108,7 +108,7 @@ $app->post("/login", function (Request $request, Response $response) {
 
     $future = new DateTime("now +1 hour");
 
-    $roles = \App\Models\Users::with('roles', 'tm', 'rooms')->where('user', '=', $server['PHP_AUTH_USER'])->get();
+    $roles = \App\Models\Users::with('roles', 'tm')->where('user', '=', $server['PHP_AUTH_USER'])->get();
     //print_r($roles);
     $payload = [
         "iat" => $now->getTimeStamp(),

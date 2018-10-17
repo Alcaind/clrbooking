@@ -16,9 +16,18 @@
 
 
             <div class="form-group" style="width: 315px; float: right;">
-                <form-item-selector selector-title='{{"Έτος"|translate}}' return-column="id" view-column="year"
-                                    dp="configs" searchable="false" output-value="config_id" class="midInput"
-                                    style="min-width: 314px; " ng-if="acceptShow"></form-item-selector>
+                <!--<form-item-selector selector-title='{{"Έτος"|translate}}' return-column="id" view-column="year"-->
+                <!--dp="configs" searchable="false" output-value="config_id" class="midInput"-->
+                <!--style="min-width: 314px; " ng-if="acceptShow"></form-item-selector>-->
+
+                <div class="inlineItems">
+                    <label class=" formItemLabel" for="status">{{"Έτος"|translate}}:</label>
+                    <select id="status" class="form-control"
+                            ng-options="config.id as config.year for config in configs"
+                            ng-model="config_id">
+                    </select>
+
+                </div>
             </div>
         </div>
         <dm-title class="pageTitle"></dm-title>

@@ -1,0 +1,1 @@
+"use strict";angular.module("Authentication").controller("AuthenticationController",["$scope","$rootScope","$location","AuthenticationService",function(t,o,n,e){}]);

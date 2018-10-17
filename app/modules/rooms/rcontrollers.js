@@ -40,6 +40,7 @@ angular.module('Rooms', [
             $scope.itemtypes = results.data;
         });
 
+
         $scope.roomItemsModal = function () {
             MakeModal.generalModal('modules/mainComponents/views/generalModal.html', 'sm', 'info', 'Επιλογή εξοπλισμού', $scope.itemtypes, 2,
                 function (results) {

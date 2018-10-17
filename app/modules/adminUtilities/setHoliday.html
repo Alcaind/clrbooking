@@ -1,0 +1,28 @@
+<div style="margin-left: auto;
+    margin-right: auto;">
+    <form-item-selector selector-title='{{"Έτος"|translate}}' return-column="id" view-column="year"
+                        dp="config" searchable="false" output-value="selectedConfig" ng-init="selectedConfig=8"
+                        style="width: 50%;
+                    display: block;
+                    padding-top: 44px;
+                    padding-right: 96px;
+                    margin-right: 50px;
+                    margin-left: 231px;
+                    padding-bottom: 10px;">
+    </form-item-selector>
+    <div class="inlineItems">
+        <div style="width: 26%;display: flex;
+    padding-top: 44px;
+    padding-right: 96px;
+    margin-right: 50px;
+    margin-left: 231px;
+    padding-bottom: 10px;">
+            <from-to-date-picker fromd="item.fromd" tod="item.tod"></from-to-date-picker>
+        </div>
+
+        <button tooltip-placement="left" type="button"
+                class="btn btn-primary hippo" ng-click="setHoliday(item)"
+                style="margin: 3%;">{{'Οριστικοποίηση'| translate}}
+        </button>
+    </div>
+</div>

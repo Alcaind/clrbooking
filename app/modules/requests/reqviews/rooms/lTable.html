@@ -1,0 +1,50 @@
+<div id="data_tbl" class="boxContent">
+    <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+        <thead class="header-fixed" style="background-color: #cecece;">
+        <tr>
+            <th>ID</th>
+            <th>{{"Αίθουσα"| translate}}</th>
+            <th>{{"Από Ώρα"| translate}}</th>
+            <th>{{"Μέχρι Ώρα"| translate}}</th>
+            <th>{{"Ημέρα"| translate}}</th>
+            <th>{{"Καθηγητής"| translate}}</th>
+            <th>{{"Σχόλια"| translate}}</th>
+            <th>...</th>
+        </tr>
+        </thead>
+        <tbody class="contentScroll">
+        <tr ng-repeat="item in ctrl.ldp.slice(((currentPageL-1)*itemsPerPageL),((currentPageL)*itemsPerPageL))|filter:ctrl.filterJson"
+            style="cursor: pointer">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <th>
+                <div id="fromt" name="fromt" uib-timepicker ng-model="item.pivot.fromt" ng-change="changed()"
+                     show-meridian="false" show-spinners="false" ng-disabled="true">
+                </div>
+            </th>
+            <th>
+                <div id="tot" name="tot" uib-timepicker ng-model="item.pivot.tot" ng-change="changed()"
+                     show-meridian="false" show-spinners="false" ng-disabled="true">
+                </div>
+            </th>
+            <th>{{ weekOptions[item.pivot.date_index].text}}</th>
+            <th>{{ getTeacher(item.pivot.teacher) }}</th>
+            <th>{{ item.pivot.comment }}</th>
+            <td>
+                <button ng-click="ctrl.editPivotData(item)" type="button" class="btn btn-info">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button ng-click="ctrl.deleteData(item.pivot.id)" type="button" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="pagePagination">
+    <div>
+        <pagination current-page="currentPageL" total-items="ctrl.ldp.length"
+                    items-per-page="itemsPerPageL" num-pages="numPagesL"></pagination>
+    </div>
+</div>

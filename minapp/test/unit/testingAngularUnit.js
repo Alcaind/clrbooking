@@ -1,0 +1,1 @@
+describe("justTesting",function(){describe("TestingController",function(){it("login",function(){angular.module("Login");var e,n={};inject(function(i){e=i("LoginController",{$scope:n})}),expect(n.login).toBeDefined(),expect(n.login).toBe("ifigeneia","test")})})});

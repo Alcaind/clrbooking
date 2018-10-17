@@ -1,0 +1,65 @@
+<div style="width: 100%; height: 100%; padding: 10px;">
+    <!--<user-header></user-header>-->
+    <form-item-selector selector-title='{{"Έτος"|translate}}' return-column="id" view-column="year"
+                        dp="config" searchable="false" output-value="selectedConfig" ng-init="selectedConfig=8"
+                        style="width: 100%">
+    </form-item-selector>
+    <div class="inlineItems">
+        <div style="display: flex; width: 100%;border: 1px solid #ababab; padding: 2px">
+            <!--<req-user-navigation></req-user-navigation>-->
+            <day-select style="padding: 4px 0px 0px 4px; width: 100%"></day-select>
+            <button ng-click="reload()" class="btn btn-warning" style="margin: 4px; border: 1px solid #ababab; ">
+                {{"Αρχικοποίηση"| translate}}
+            </button>
+        </div>
+        <div>
+            <!--ng-hide="adminConfiguration()"-->
+            <!--<button  tooltip-placement="left"-->
+            <!--uib-tooltip='{{"Αντιγραφή Ημέρας"| translate}}' type="button"-->
+            <!--class="btn btn-primary hippo"-->
+            <!--ng-click="postCopyDay()" style="min-width: 50px; border-radius: 0px;">-->
+            <!--<span class="glyphicon glyphicon-copy"></span></button>-->
+        </div>
+    </div>
+    <show-hide sh-title='{{"Επιλογή Μαθήματος"| translate}}' style="padding: 2px">
+        <course-select style=""></course-select>
+    </show-hide>
+
+    <show-hide sh-title='{{"Επιλογή Αίθουσας"| translate}}' style="padding: 2px">
+        <room-select style=""></room-select>
+    </show-hide>
+
+    <!--<show-hide sh-title="Ελεγχος Διαθεσιμότητας" style="border: 1px solid #ababab; padding: 2px">-->
+    <div style="padding: 4px 4px 0px 4px;">
+        <div style="width: 100%; display: flex">
+            <button class="btn btn-warning" ng-click="openCourseCalendar(item)"
+                    style="margin: 4px;width: 100%;border: 1px solid #ababab;">{{"Έλεγχος για τα επιλεγμένα ΜΑΘΗΜΑΤΑ"|
+                translate}}
+            </button>
+            <button class="btn btn-warning" ng-click="openRoomCalendar(item)"
+                    style="margin: 4px;width: 100%;border: 1px solid #ababab;">{{"Έλεγχος για τις επιλεγμένες ΑΙΘΟΥΣΕΣ"|
+                translate}}
+            </button>
+        </div>
+
+        <!--<div>-->
+        <!--<select id="tmRoomBook" ng-options="tm.per as tm.per for tm in tms"-->
+        <!--ng-model="calendarFilterObj.tm" style="min-width: 100px; padding: 6px 33px;">-->
+        <!--</select>-->
+        <!--<button tooltip-placement="left" uib-tooltip="Φίλτρο" class="btn btn-primary"-->
+        <!--ng-click="calendarFilter(room,book,calendarFilterObj)">-->
+        <!--<span class="glyphicon glyphicon-search"></span>-->
+        <!--</button>-->
+        <!--</div>-->
+
+        <calendar-book rooms="selectedRooms" fromd="item.fromd" tod="item.tod"
+                       dates-index="item.date_index" item="item"
+                       book="book" booking-errors="bookingErrors"
+                       selected-day="calendarSelectedDay" must-refresh="mustRefresh" tms="tms" teachers="allTeachers"
+                       periods="periods" coming-from-book-controller="true"></calendar-book>
+        <!--<div ng-repeat="e in bookingErrors track by $index">-->
+        <!--&lt;!&ndash;{{e}}&ndash;&gt;-->
+        <!--</div>-->
+    </div>
+    <!--</show-hide>-->
+</div>

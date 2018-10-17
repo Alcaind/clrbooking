@@ -1,0 +1,17 @@
+<div class="btn btn-primary" ng-click="roomChecked(room)">
+    <span class="glyphicon glyphicon-{{room.checked?'ok':'remove'}}"></span>
+</div>
+<div>
+    <div>{{room.tm.descr}}</div>
+    <div>{{room.name}}</div>
+    <div>{{room.capasity_categ}}{{' / '}}{{room.capasity}}{{' άτομα'}}</div>
+    <div>{{room.address}}</div>
+
+    <div ng-repeat="sday in selectedDays" ng-click="roomDaySelect(room, sday)"
+         ng-if="(room.checked && mode==='inserting')">
+        <div class="btn btn-default" ng-if="sday.s"
+             style="background-color: {{(room.date_index.indexOf(sday.i)>=0)?'#5bc0de66':''}}; width: 100%">
+            {{sday.d | translate}}
+        </div>
+    </div>
+</div>

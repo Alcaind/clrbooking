@@ -1,0 +1,151 @@
+<div ng-if="utilities" style="margin-left: auto;
+    margin-right: auto;">
+    <div class="inlineItems">
+        <div style="width: 26%;display: flex;
+    padding-top: 44px;
+    padding-right: 96px;
+    margin-right: 50px;
+    margin-left: 231px;
+    padding-bottom: 10px;">
+            <label style="width: inherit; text-align: start;" for="selectedPeriod">{{"Από έτος"| translate }}:</label>
+            <select id="selectedPeriod" class="form-control"
+                    ng-options="pastConf.id as pastConf.year for pastConf in pastConfigs"
+                    ng-model="selections.from">
+            </select>
+        </div>
+        <div style="width: 26%;display: flex;
+    padding-top: 44px;
+    padding-right: 96px;
+    margin-right: 50px;
+    margin-left: 231px;
+    padding-bottom: 10px;">
+            <label style="width: inherit; text-align: start;" for="selectedPeriod">{{"Στο έτος"| translate }}:</label>
+            <select id="futureConf" class="form-control"
+                    ng-options="futureConf.id as futureConf.year for futureConf in futureConfigs"
+                    ng-model="selections.to">
+            </select>
+        </div>
+    </div>
+
+    <div class="inlineItems">
+        <div style="display: flex;
+    padding-top: 44px;
+    padding-right: 96px;
+    margin-right: 50px;
+    margin-left: 231px;
+    padding-bottom: 10px;">
+            <div>
+                <config-book-graph selected-period="periodSelections.from" year="selections.from" style=""
+                                   periods-active="periodActive"></config-book-graph>
+                <div ng-show="!periodSelections.from.s && !periodSelections.to.s">
+                    <span class="msg-error">{{"Επιλέξτε έτος και περίοδο προς αντιγραφή."| translate}}</span>
+                </div>
+            </div>
+        </div>
+        <div ng-show="periodSelections.from.s && periodSelections.to.s && periodSelections">
+            <button tooltip-placement="left"
+                    uib-tooltip='{{"Αντιγραφή Περιόδου"| translate}}' type="button"
+                    class="btn btn-primary hippo"
+                    ng-click="copyAllPeriod(periodSelections.from,periodSelections.to)"
+                    style="min-width: 83px;margin-top: 50px; border-radius: 0px;">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            </button>
+        </div>
+        <div style="display: flex;
+    padding-top: 44px;
+    padding-right: 96px;
+    margin-right: 50px;
+    margin-left: 231px;
+    padding-bottom: 10px;">
+            <div>
+                <config-book-graph selected-period="periodSelections.to" year="selections.to" style=""
+                                   periods-active="periodActive"></config-book-graph>
+                <div ng-show="periodSelections.from.s && !periodSelections.to.s">
+                    <span class="msg-error">{{"Επιλέξτε περίοδο στην οποία θα αντιγραφεί."| translate}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="!utilities" class="pageHolder" style="margin-left: auto;
+    margin-right: auto;">
+
+    <div class="pageHeader">
+        <button tooltip-placement="right"
+                uib-tooltip='{{"Φέρε τα ληγμένα αιτήματα"| translate}}' type="button"
+                class="btn btn-primary hippo"
+                ng-click="getExpiredRequests()">
+            <span class="glyphicon glyphicon-arrow-down"></span>
+        </button>
+
+        <button tooltip-placement="right"
+                uib-tooltip='{{"Διαγραφή όλων των ληγμένων αιτημάτων"| translate}}' type="button"
+                class="btn btn-danger hippo"
+                ng-click="deleteAllExpiredRequests()">
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <div class="checkbutton">{{"Εμφάνιση"| translate}}{{' '}}{{showExpired ?'όλων':' ληγμένων' |translate}}
+            <input type="checkbox" ng-model="showExpired" value="true">
+        </div>
+    </div>
+
+    <div id="data_tbl" class="boxContent">
+        <table class="sorttable table table-hover table-striped table-responsive table-header-fixed table-condensed">
+            <thead class="header-fixed" style="background-color: #cecece;">
+            <tr>
+                <th>ID</th>
+                <th>{{"Ημ/νία Αιτήματος"| translate}}</th>
+                <th>{{"Username"| translate}}</th>
+                <th>{{"Περιγραφή"| translate}}</th>
+                <th>{{"Ακαδημαϊκή Περίοδος"| translate}}</th>
+                <th>{{"Πρόγραμμα Σπουδών"| translate}}</th>
+                <th>{{"Χρήση Αίθουσας"| translate}}</th>
+                <th>{{"Αρ.πρωτοκόλλου"| translate}}</th>
+                <th>{{"Κατάσταση"| translate}}</th>
+                <th>{{"Από"| translate}}</th>
+                <th>{{"Εως"| translate}}</th>
+                <th>{{"Τμήμα"| translate}}</th>
+                <th>...</th>
+            </tr>
+            </thead>
+            <tbody class="contentScroll">
+            <tr ng-repeat="item in pendings" style="background-color: {{item.if_expired==='+'?'#c56a6a':''}}">
+                <td>{{ item.id}}</td>
+                <td>{{ item.req_dt }}</td>
+                <td>{{ item.users.sname}}{{' '}}{{item.users.fname}}</td>
+                <td>{{ item.descr }}</td>
+                <td>{{ item.periods.descr }}</td>
+                <td>{{ item.ps.tma_per }}</td>
+                <td>{{ item.room_use.synt }}</td>
+                <td>{{ item.protocol_id }}</td>
+                <td>{{ statusOptions[item.status].text }}</td>
+                <td>{{ item.fromd |date:'dd-MM-yyyy' }}</td>
+                <td>{{ item.tod |date:'dd-MM-yyyy' }}</td>
+                <td>{{ item.tm.descr }}</td>
+                <td>
+                    <button tooltip-placement="left"
+                            uib-tooltip='{{"Διαγραφή μεμονωμένου ληγμένου αιτήματος"| translate}}' type="button"
+                            class="btn btn-danger hippo"
+                            ng-click="deleteExpiredRequest(item)">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

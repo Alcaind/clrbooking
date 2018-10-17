@@ -56,14 +56,14 @@ $app = new \Slim\App([
 //            'password' => 'OKEcmRv1UAa0Fqrb',
 
 //Panteion
-            'database' => 'rbookings',
-            'username' => 'rbookings',
-            'password' => '7nwqp0gtbutEAi1',
+//            'database' => 'rbookings',
+//            'username' => 'rbookings',
+//            'password' => '7nwqp0gtbutEAi1',
 
 //localhost
-//            'database' => 'clrbooking',
-//            'username' => 'root',
-//            'password' => '',
+            'database' => 'clrbooking',
+            'username' => 'root',
+            'password' => '',
 
             'charset' => 'utf8',
             'collation' => 'utf8_general_ci',

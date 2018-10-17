@@ -1,0 +1,35 @@
+<div>
+    <button ng-click="newGuest()">{{"Συμμετέχων Τηλεδιάσκεψης"| translate}}</button>
+    <table class="sorttable table table-hover table-striped table-responsive header-fixed">
+        <thead>
+        <tr>
+            <th>{{"Όνοματεπώνυμο"| translate}}</th>
+            <th>{{"Πανεπιστήμιο"| translate}}</th>
+            <th>{{"E-Mail"| translate}}</th>
+            <th>{{"Τηλέφωνο"| translate}}</th>
+            <th>{{"Σχόλια"| translate}}</th>
+            <th>...</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in item.guests"
+            style="cursor: pointer">
+            <td><input class="smallInput" ng-model="item.name" type="text"></td>
+            <td><input class="smallInput" ng-model="item.uni" type="text"></td>
+            <td><input class="smallInput" ng-model="item.email" type="text"></td>
+            <td><input class="smallInput" ng-model="item.phone" type="text"></td>
+            <td><input class="smallInput" ng-model="item.comment" type="text"></td>
+            <td>
+                <button ng-click="postGuest(item)" class="btn btn-success hippo " type="button" tooltip-placement="left"
+                        uib-tooltip='{{"Αποθήκευση"| translate}}'>
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                <button ng-click="deleteGuest(item)" type="button" class="btn btn-danger hippo" tooltip-placement="left"
+                        uib-tooltip='{{"Διαγραφή"| translate}}'>
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

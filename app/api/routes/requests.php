@@ -331,7 +331,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
                                     $tt->fromRoom = $reqRoom;
                                     $tt->toRoom = $room;
                                     $u = \App\Models\Users::find($tm->supervisor);
-                                    // sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+                                    sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
                                     array_push($errors, $tt);
                                 }
 
@@ -418,7 +418,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
             $tt->toRoom = $room;
             // print_r($uMessage);
 
-            //sendEmail(array('to' => $uMessage->to_users, 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+            sendEmail(array('to' => $uMessage->to_users, 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
         }
 
 
@@ -451,7 +451,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
                 $tt->fromRoom = $room;
                 $tt->toRoom = $room;
                 $u = \App\Models\Users::find($tm->supervisor);
-                // sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+                sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
                 array_push($errors, $tt);
             }
         }
@@ -608,7 +608,7 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
                                     $tt->toRoom = $room;
 
                                     $u = \App\Models\Users::find($tm->supervisor);
-                                    // sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+                                    sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
                                     array_push($errors, $tt);
 
                                 }
@@ -704,7 +704,7 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
                 $tt->fromRoom = $room;
                 $tt->toRoom = $room;
                 $u = \App\Models\Users::find($tm->supervisor);
-                // sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+                sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
                 array_push($errors, $tt);
             }
         }

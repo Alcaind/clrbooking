@@ -1,0 +1,7 @@
+<div style="display: flex; height: 40px; text-align: center;">
+    <div ng-repeat="rUse in roomUse" ng-click="selectUse(rUse)" ng-init="rUse.s=false"
+         class="btn btn-{{rUse.selected?'success':'primary'}}" ng-show="rUse.useVisibility"
+         style="cursor: pointer; padding: 4px; font-size: 10px; width: 100%; margin: 0px 4px 4px;">
+        <div> {{rUse.descr| translate}}</div>
+    </div>
+</div>
