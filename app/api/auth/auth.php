@@ -107,9 +107,13 @@ $app->post("/login", function (Request $request, Response $response) {
     $refreshToken["expires"] = $future->getTimeStamp();
 
     $future = new DateTime("now +1 hour");
-
-    $roles = \App\Models\Users::with('roles', 'tm')->where('user', '=', $server['PHP_AUTH_USER'])->get();
+    $roles = \App\Models\Users::with(['roles' => function ($query) {
+        $query->select('roles.id', 'roles.role', 'roles.descr');
+    }, 'tm' => function ($query) {
+        $query->select('tm.id');
+    }])->where('user', '=', $server['PHP_AUTH_USER'])->get();
     //print_r($roles);
+
     $payload = [
         "iat" => $now->getTimeStamp(),
         "exp" => $future->getTimeStamp(),
