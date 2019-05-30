@@ -1,0 +1,21 @@
+<div style="padding: 4px">
+    <div style="width: {{configuration.totalDays}}px;text-align: center; border: 1px solid #ababab; font-size: 10px;"
+         class="btn btn-{{configuration.s?'success':'primary'}}"
+         data-toggle="popover"
+         data-content="{{configuration.fromd| date:'dd/MM/yyyy'}} - {{configuration.tod| date:'dd/MM/yyyy'}}"
+         data-trigger="hover"
+         ng-click="setPeriod(configuration)">
+        {{configuration.year}}
+    </div>
+
+    <div style="display: flex;height: 25px; ">
+        <div ng-repeat="p in configuration.periods | orderBy: 'porder'" class="btn btn-{{p.s?'success':'primary'}}"
+             style="width: {{p.totalDays}}px; position: sticky; cursor: pointer; color: #F1F1F1; text-align: center; margin: 2px; left: {{p.fdIndex}}px; width: {{p.totalDays}}px; font-size: small; border: 1px solid #ababab;font-size: 10px;"
+             data-toggle="popover"
+             data-content="{{p.fromd| date:'dd/MM/yyyy'}} - {{p.tod| date:'dd/MM/yyyy'}} ({{p.comments}})"
+             data-trigger="hover"
+             ng-click="setPeriod(p)" ng-disabled="periodsActive && p.status===0">
+            {{p.synt}}
+        </div>
+    </div>
+</div>

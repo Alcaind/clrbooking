@@ -7,7 +7,7 @@ angular.module('Requests', [
     'Authentication',
     'GlobalVarsSrvs'
 ]).controller('RequestsController', ['$scope', 'AuthenticationService', 'makeController', 'globalVarsSrv', 'ClrStatusSrv', 'api', 'MakeModal', '$timeout', function ($scope, AuthenticationService, makeController, globalVarsSrv, ClrStatusSrv, api, MakeModal, $timeout) {
-    $scope.configs = {};
+    $scope.configs = [];
     //$scope.url = null;
     $scope.config_id = 8;
     //$scope.url = 'api/public/requests/config/1';
@@ -65,7 +65,7 @@ angular.module('Requests', [
         $scope.room_use = [];
         $scope.tms = [];
         $scope.ps = [];
-        $scope.configs = null;
+        $scope.configs = [];
         $scope.periods = [];
         $scope.selectedPeriod = {};
         // $scope.ctrl.init();

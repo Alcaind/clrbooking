@@ -1,0 +1,33 @@
+<div class="pageHolder">
+    <div class="pageHeader">
+        <div class="pageButtons">
+            <a href back-button type="button" class="btn btn-warning">
+				<span class="glyphicon glyphicon-chevron-left">
+					<span style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">{{"Επιστροφή"| translate}}</span>
+				</span>
+            </a>
+        </div>
+        <div class="pageTitle">{{"Διαχείριση Τύπου Εξοπλισμού"| translate}}</div>
+    </div>
+    <div class="contentHolder">
+        <form class="itemForm" name="itemForm" novalidate style="padding: 20px;border:1px solid #cdcdcd">
+            <div class="formGroupItems">
+                <div class="form-group">
+                    <label class=" formItemLabel" for="descr">{{"Περιγραφή"| translate}}:</label>
+                    <div class="longInput">
+                        <input id="descr" name="descr" class="form-control" type="text" ng-model="ctrl.item.descr">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.update(ctrl.item)" style="padding: 5px"
+                    ng-if="ctrl.item.descr != '' && ctrl.item.id">
+                {{"Ανανέωση"| translate}}
+            </button>
+            <button type="button" class="btn btn-primary" ng-click="ctrl.save(ctrl.item)" style="padding: 5px"
+                    ng-if="!ctrl.item.id">{{"Αποθήκευση"| translate}}
+            </button>
+        </form>
+    </div>
+</div>
+
+

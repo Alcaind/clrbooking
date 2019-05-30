@@ -1,0 +1,47 @@
+<div style=" border: 1px solid #ababab; padding: 2px">
+
+    <!--<h1>{{tmpDate+''}}</h1>-->
+    <div id="selectedParams" style="display: flex">
+        <!--<div>Τρέχουσες επιλογές</div>-->
+        <!-- <div id="selectedUse" style="width: 100%">
+             <div>Χρήση : {{selectedUse.synt}}</div>
+         </div>
+         <div id="selectedCourse" style="width: 100%">
+             <div>Μάθημα : {{selectedCourse.tma_code}} - {{selectedCourse.tma_per}}</div>
+         </div>-->
+        <!--<div id="selectedRoom" style="width: 100%; display: flex; overflow-x: auto;">
+            <div ng-repeat="room in selectedRooms">- {{room.name}}</div>
+        </div>-->
+        <button ng-click="reload()" class="btn btn-warning"
+                style="margin: 4px; border: 1px solid #ababab; ">{{"Αρχικοποίηση"| translate}}
+        </button>
+        <div style=" width: 100%; padding-top: 6px;   padding-right: 6px;">
+            <input type="text" ng-model="item.descr"
+                   class="form-control ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched"
+                   placeholder='{{"Αιτιολογία αιτήματος"| translate}}'></div>
+        <div id="sra" style="min-width: 313px;">
+
+            <status-selector options="requestViewStatus" status-title='{{"Request status"| translate}}'
+                             output-value="item.status"></status-selector>
+        </div>
+        <!--<div>-->
+        <!--<a tooltip-placement="left" uib-tooltip='{{"ΝΕΟ Αίτημα"| translate}}' type="button" class="btn btn-primary hippo"-->
+        <!--ng-click="newUserRequest()" style="min-width: 50px; border-radius: 0px;">-->
+        <!--<span class="glyphicon glyphicon-plus"></span></a>-->
+        <!--</div>-->
+        <div>
+            <!--ng-hide="enablePost()"-->
+            <button ng-show="checkBookIsClicked" tooltip-placement="left"
+                    uib-tooltip='{{"Καταχώρηση Αιτήματος"| translate}}' type="button"
+                    class="btn btn-primary hippo"
+                    ng-click="postUserRequest(item)" style="min-width: 50px; border-radius: 0px;">
+                <span class="glyphicon glyphicon-saved"></span></button>
+        </div>
+    </div>
+    <!--<req-navigation></req-navigation>-->
+
+</div>
+<form-item-selector selector-title='{{"Έτος"|translate}}' return-column="id" view-column="year"
+                    dp="config" searchable="false" output-value="selectedConfig" ng-init="selectedConfig=8"
+                    style="width: 100%">
+</form-item-selector>

@@ -1,0 +1,19 @@
+<div id="report3" style="display: flex ; overflow: auto;">
+    <ul ng-repeat="pr in holidayBook track by $index ">
+        <div>{{pr.tm.title}}</div>
+        <div>{{classUses[pr.class_use].descr}}</div>
+        <div id="canceled" style="display: block; width: max-content; padding: 18px;">
+            <div ng-repeat="r in pr.rooms">
+                <div>{{r.date_index}}</div>
+                <div>{{periods[pr.period].descr }} {{errorWeekdays[r.pivot.date_index-1]}}{{'
+                    '}}{{pr.showTod?'από':'στις'|translate}}
+                    {{' '}}{{pr.fromd | date :
+                    'd-M-y'}}{{' '}}{{pr.showTod?'έως'+' '+( pr.tod |date:'dd-MM-yyyy'):''}}
+                </div>
+                {{r.name}}{{' '}}{{"στις"| translate}} {{r.pivot.fromt | date : 'shortTime' }} {{r.pivot.tot| date :
+                'shortTime'}}
+                <div> ------------------------------------</div>
+            </div>
+        </div>
+    </ul>
+</div>

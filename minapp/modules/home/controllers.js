@@ -1,0 +1,1 @@
+"use strict";angular.module("Home",["Authentication","Admin","ui.bootstrap","GlobalVarsSrvs"]).controller("HomeController",["$scope","globalVarsSrv","AuthenticationService",function(o,e,t){t.CheckCredentials()}]);

@@ -1,0 +1,6 @@
+<div class="form-group">
+    <label class=" formItemLabel" for="status">{{ statusTitle | translate }}:</label>
+    <select id="status" ng-options="option.value as option.text for option in optStatus"
+            ng-model="outputValue" class="form-control">
+    </select>
+</div>

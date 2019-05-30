@@ -67,8 +67,8 @@ angular.module('clrBooking', [
             $translateProvider
                 .useStaticFilesLoader({
                     //prefix: '/panteion/config/', //localhost
-                    prefix: '/panteion/app/config/', //GERMANY server
-                    //prefix: '/config/', //PANTEIO's server
+                    //prefix: '/panteionold/app/config/', //GERMANY server
+                    prefix: '/config/', //PANTEIO's server
                     suffix: '.json'
                 })
                 .useSanitizeValueStrategy(null)
@@ -497,6 +497,7 @@ angular.module('clrBooking', [
                             //var refreshToken = store.get('rwt');
                             // This is a promise of a JWT id_token
                             refreshPromise = $http({
+                                //TODO : sto url allazoyme panteionOLD
                                 url: 'http://localhost/panteion/api/public/refresh-token',
                                 // This makes it so that this request doesn't send the JWT
                                 //skipAuthorization: true,

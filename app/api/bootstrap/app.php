@@ -55,7 +55,7 @@ $app = new \Slim\App([
 //            'username' => 'lpadmin',
 //            'password' => 'OKEcmRv1UAa0Fqrb',
 
-//Panteion
+////Panteion
             'database' => 'rbookings',
             'username' => 'rbookings',
             'password' => '7nwqp0gtbutEAi1',

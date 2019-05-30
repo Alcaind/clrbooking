@@ -1,0 +1,21 @@
+{
+  "name": "app",
+  "main": "app.js",
+  "homepage": "https://github.com/Alcaind/clrbooking",
+  "authors": [
+    "IfigeneiaKontogianni <34159162+IfigeneiaKontogianni@users.noreply.github.com>"
+  ],
+  "description": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-mocks": "^1.7.4"
+  }
+}

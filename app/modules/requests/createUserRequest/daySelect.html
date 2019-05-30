@@ -1,0 +1,28 @@
+<div>
+    <div style="display: flex">
+        <config-book-graph selected-period="selectedPeriod" year="selectedConfig" periods-active="periodActive"
+                           style=""></config-book-graph>
+        <from-to-date-picker fromd="item.fromd" tod="item.tod"></from-to-date-picker>
+        <div style="width: 100% ">
+            <div style="display: flex; width: 100% ">
+                <div ng-repeat="sday in selectedDays" ng-click="dayChecked(sday)"
+                     class="btn btn-{{sday.s?'success':'primary'}}"
+                     style="cursor: pointer; padding: 4px; width: 100%; margin: 0px 4px 4px;
+                        border: 1px solid #ababab; ">
+                    <div>
+                        <!--<span class="glyphicon glyphicon-{{sday.s?'ok':'remove'}}"></span>-->
+                        {{sday.d | translate}}
+                    </div>
+                </div>
+            </div>
+            <div style=" padding-right : 5px ">
+                <button ng-click="selectAllDays()" class="btn btn-{{sday.s?'success':'warning'}}"
+                        style="cursor: pointer; padding: 4px; width: 100%; margin: 0px 4px 4px;
+                        border: 1px solid #ababab;" ng-show="fromAnotherPage">
+                    {{dayState?"Απεπιλ.":"'Επιλ." | translate}}{{" όλων"| translate}}
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

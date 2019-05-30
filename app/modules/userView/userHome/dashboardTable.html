@@ -1,0 +1,100 @@
+<div id="data_tbl" class="boxContent" style="height: 100%; padding: 5px">
+    <div style="width: 100%; text-align: center; font-size: 18px; font-weight: 500; background-color: moccasin">
+        {{title}}
+    </div>
+    <table class="table table-hover table-striped table-responsive table-condensed">
+
+        <thead style="background-color: #cecece;">
+
+        <tr>
+            <th>
+                <button class="btn btn-link tableColoumns" style="text-align: left;" ng-click="sortBy('req_dt',dp)">
+                    {{"Ημ/νία Αιτήματος"| translate}}
+                </button>
+                <span class="sortorder" ng-show="propertyName === 'req_dt'" ng-class="{reverse: reverse}"></span></th>
+
+            <th>{{"Περιγραφή"| translate}}<br><input ng-model="filterDp['descr']"></th>
+            <th>{{"Ακαδημαϊκή Περίοδος"| translate}}</th>
+            <th style="max-width: 350px">{{"Πρόγραμμα Σπουδών"| translate}}<br><input
+                    ng-model="filterDp['ps']['tma_per']"></th>
+            <th>{{"Χρήση Αίθουσας"| translate}}</th>
+            <th>{{"Αρ.πρωτοκόλλου"| translate}}</th>
+            <th>
+                <button class="btn btn-link tableColoumns" style="text-align: left;" ng-click="sortBy('fromd',dp)">
+                    {{"Από ημέρα"| translate}}
+                </button>
+                <span class="sortorder" ng-show="propertyName === 'fromd'" ng-class="{reverse: reverse}"></span></th>
+            <!--<th>{{"Ημέρα"| translate}} </th>-->
+            <th>
+                <button class="btn btn-link tableColoumns" style="text-align: left;" ng-click="sortBy('tod',dp)">{{"Έως
+                    ημ/νία"| translate}}
+                </button>
+                <span class="sortorder" ng-show="propertyName === 'tod'" ng-class="{reverse: reverse}"></span></th>
+            <th>{{"Info"| translate}}</th>
+            <th ng-hide="item.status!='3' ">...</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in dp |filter:filterDp"
+            style="cursor: pointer; background-color: {{item.selected?'#b2b2b2':item.status===4?'#f7c7be':item.status===1?'#c8e6d2':''}}">
+            <td>{{ item.req_dt }}</td>
+            <td>{{ item.descr }}</td>
+            <td>{{ item.periods.descr }}</td>
+            <td>{{ item.ps.tma_per }}</td>
+            <td>{{ item.room_use.synt }}</td>
+            <td>{{ item.protocol_id }}</td>
+            <td>{{ item.fromd |date:'dd-MM-yyyy'}}</td>
+            <td>{{ item.showTod?(item.tod |date:'dd-MM-yyyy'):'-'}}</td>
+            <!--ng-if="new Date(room.pivot.tod) - new Date(room.pivot.fromd"-->
+            <td>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>{{"Αίθουσα"| translate}}</th>
+                        <th>{{"Ημέρα"| translate}}</th>
+                        <th>{{"Από"| translate}}</th>
+                        <th>{{"Εως"| translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="room in item.rooms">
+                        <td>{{room.name}}</td>
+                        <td>{{weekdays[room.pivot.date_index-1]}}</td>
+                        <td>{{room.pivot.fromt}}</td>
+                        <td>{{room.pivot.tot}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <button type="button" class="btn btn-info hippo"
+                        tooltip-placement="left"
+                        uib-tooltip='{{"Επεξεργασία"| translate}}' value='Επεξεργασία'
+                        ng-click="editDashReq(item, $event)">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="btn btn-danger hippo" tooltip-placement="left"
+                        uib-tooltip='{{"Διαγραφή"| translate}}' value='Διαγραφή'
+                        ng-click="deleteDashReq(item, $event)">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+                <button ng-hide="item.status===3 || item.status=== 5" type="button" class="btn btn-info hippo"
+                        tooltip-placement="left"
+                        uib-tooltip='{{"Προεπισκόπηση"| translate}}' value='Προεπισκόπηση'
+                        ng-click="selectRow(item)">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                </button>
+
+                <button type="button" class="btn btn-info hippo"
+                        tooltip-placement="left"
+                        uib-tooltip='{{"Συμμετέχων Τηλεδιάσκεψης"| translate}}' value='Συμμετέχων Τηλεδιάσκεψης'
+                        ng-click="editGuestThl(item)" ng-if="item.room_use.id===7 && item.status=== 1 ">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                </button>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

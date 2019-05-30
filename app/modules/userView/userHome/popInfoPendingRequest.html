@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{"Πληροφορίες για την κατασταση του αιτηματός σας"| translate}}</h3>
+</div>
+<div class="modal-body">
+    <!--<h5 class="text-center">{{item.rr_id}}</h5>-->
+    <table class="table table-striped" id="tblGrid">
+        <thead id="tblHead">
+        <tr>
+            <th>ID</th>
+            <th>{{"Προς χρηστη"| translate}}</th>
+            <th>{{"Τα σχόλια σας"| translate}}</th>
+            <th>{{"Απαντητικά Σχολία"| translate}}</th>
+            <th>{{"Κατάσταση"| translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in dataRRID">
+            <td>{{item.id}}//{{item.rr_id}}</td>
+            <td>{{item.tousers.fname}}</td>
+            <td>{{item.comments| translate}}</td>
+            <td>{{item.to_comment}}</td>
+            <td>{{getstatus(item)}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-enter="ok()" ng-click="ok()">{{"ok"| translate}}</button>
+</div>
