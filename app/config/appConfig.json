@@ -1034,10 +1034,6 @@
           "title": "Αντιγραφή Περιόδου"
         },
         {
-          "column": "copyday",
-          "title": "Αντιγραφή Ημέρας"
-        },
-        {
           "column": "checkpending",
           "title": "Διαγραφή Ληγμένων"
         },

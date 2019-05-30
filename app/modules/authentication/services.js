@@ -75,6 +75,8 @@ angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
                         var auth = {};
                         auth.username = jwtHelper.decodeToken(idToken).sub;
                         auth.authdata = jwtHelper.decodeToken(idToken);
+                        globalVarsSrv.setGlobalVar('auth', auth);
+                        globalVarsSrv.setGlobalVar('token', auth.authdata);
 
                         $http({
                             method: 'GET',
@@ -82,8 +84,7 @@ angular.module('Authentication', ['angular-storage', 'GlobalVarsSrvs'])
 
                         }).then(function successCallback(responseTm) {
                             auth.authdata.roles[0].tm = responseTm.data;
-                            globalVarsSrv.setGlobalVar('auth', auth);
-                            globalVarsSrv.setGlobalVar('token', auth.authdata);
+
                             if (auth.authdata.roles)
                                 for (var i = 0; i < auth.authdata.roles[0].roles.length; i++) {
                                     if (auth.authdata.roles[0].roles[i].role === 'admin') {

@@ -23,6 +23,7 @@ angular.module('Requests')
         $scope.periodActive = false;
         $scope.copyperiod = [];
         $scope.pendings = [];
+        $scope.finalPendings = [];
         $scope.statusOptions = globalVarsSrv.getGlobalVar('requestStatus');
         $scope.showExpired = true;
         $scope.pastConfigs = [];
@@ -70,25 +71,58 @@ angular.module('Requests')
             return $scope.showExpired ? item.if_expired === "+" ? true : false : true;
         };
 
+
         // var today = new Date();
-        $scope.getExpiredRequests = function () {
-
-            api.apiCall('GET', 'api/public/config/1', function (result) {
+        $scope.getExpiredRequests = function (item) {
+            $scope.pendings = [];
+            $scope.finalPendings = [];
+            api.apiCall('GET', 'api/public/config/' + item, function (result) {
                 $scope.selectconfig = result.data;
-
                 api.apiCall('POST', 'api/public/checkpending', function (results) {
                     $scope.pendings = results.data;
-                }, undefined, {config: $scope.selectconfig})
+                    $scope.finalPendings = results.data;
+                    // for (var i = 0; i < $scope.pendings.length; i++) {
+                    //     var value = $scope.pendings[i];
+                    //     api.apiCall('GET', 'api/public/users/' + value.user_id, function (result) {
+                    //         value.users = result.data;
+                    //         // value.users.sname=result.data.fname;
+                    //     });
+                    //     api.apiCall('GET', 'api/public/periods/' + value.period, function (result) {
+                    //         value.period = result.data;
+                    //     });
+                    //     if (value.ps_id !== null) {
+                    //         api.apiCall('GET', 'api/public/ps/' + value.ps_id, function (result) {
+                    //             value.ps = result.data;
+                    //         });
+                    //     }
+                    //     api.apiCall('GET', 'api/public/roomuse/' + value.class_use, function (result) {
+                    //         value.class_use = result.data;
+                    //     });
+                    //     api.apiCall('GET', 'api/public/tms/' + value.tm_id, function (result) {
+                    //         value.tm = result.data;
+                    //     });
+                    //     $scope.finalPendings.push(value);
+                    // }
+                }, undefined, {config: $scope.selectconfig});
+                // if($scope.pendings.length>0){
+                //     $scope.pendings.map(function (value2) {
+                //         $scope.finalPendings.push(value2);
+                //     });
+                // }
             });
+
+
         };
+
 
         $scope.deleteExpiredRequest = function (item) {
             api.apiCall('DELETE', 'api/public/requests/' + item.id, function (res) {
-                $scope.pendings.splice($scope.pendings.indexOf(item), 1);
+                $scope.finalPendings.splice($scope.pendings.indexOf(item), 1);
             })
         };
 
         $scope.deleteAllExpiredRequests = function () {
+            $scope.finalPendings = [];
             api.apiCall('PUT', 'api/public/checkpending/expired', function (res) {
                 // alert('all done');
             }, undefined, {config: $scope.selectconfig})
@@ -245,9 +279,7 @@ angular.module('Requests')
 
 
         $scope.ckeckit = function (item) {
-
             $scope.justchecking = globalVarsSrv.checkDates(item.fromd, item.tod);
-
             console.log($scope.justchecking);
         }
 

@@ -57,7 +57,7 @@
                 <td ng-if="ctrl.tableColumns[13].visible">{{item.exams_capasity}}</td>
                 <td ng-if="ctrl.tableColumns[14].visible">{{item.capasity_categ}}</td>
                 <td ng-if="ctrl.tableColumns[15].visible">{{item.stat_comm}}</td>
-                <td ng-if="ctrl.tableColumns[16].visible">{{ item.config.year }}</td>
+                <td ng-if="ctrl.tableColumns[16].visible">{{item.config.year }}</td>
                 <td ng-if="ctrl.tableColumns[17].visible">
                     <li ng-repeat="use in item.room_use">
                         <button ng-hide="userview" ng-click="deleteUsage(item, use)"

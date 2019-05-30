@@ -16,15 +16,21 @@ class db
 //    private $dbname = 'clrbooking';
 
 //    //TODO : Ayto einai to config gia ton local server.
-    private $dbhost = 'localhost';
-    private $dbuser = 'root';
-    private $dbpass = '';
-    private $dbname = 'clrbooking';
+//    private $dbhost = 'localhost';
+//    private $dbuser = 'root';
+//    private $dbpass = '';
+//    private $dbname = 'clrbooking';
 
     //TODO : Ayto einai to config gia ton PANTEIOS server.
+    private $dbhost = 'localhost';
+    private $dbuser = 'rbookings';
+    private $dbpass = '7nwqp0gtbutEAi1';
+    private $dbname = 'rbookings';
+
+    //TODO : Ayto einai to config gia ton local PANTEIOS.
 //    private $dbhost = 'localhost';
-//    private $dbuser = 'rbookings';
-//    private $dbpass = '7nwqp0gtbutEAi1';
+//    private $dbuser = 'root';
+//    private $dbpass = '';
 //    private $dbname = 'rbookings';
 
 

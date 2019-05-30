@@ -252,9 +252,11 @@ angular.module('Requests')
                 var typeCheckedCnt = 0;
                 for (var i = 0; i < room.items.length; i++) {
                     for (var j = 0; j < $scope.itemtype.length; j++) {
-                        if (room.items[i].id === $scope.itemtype[j].id && $scope.itemtype[j].visible) typeCheckedCnt++
+                        if (room.items[i].type_id === $scope.itemtype[j].id && $scope.itemtype[j].visible) typeCheckedCnt++
                     }
-                    if (typeCheckedCnt === typeChecked) exists = true;
+                    if (typeCheckedCnt === typeChecked) {
+                        exists = true;
+                    }
                 }
                 if (exists || !typeChecked) $scope.roomDP.push(room);
                 // $scope.roomTile=$scope.roomDP

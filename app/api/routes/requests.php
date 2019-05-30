@@ -42,7 +42,7 @@ $app->get('/requests/config/{id}', function (Request $request, Response $respons
     header("Content-Type: application/json");
     $id = $args['id'];
     try {
-        $requests = \App\Models\Requests::with(['users', 'config', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
+        $requests = \App\Models\Requests::with(['user', 'config', 'periods', 'admin', 'ps', 'room_use', 'rooms', 'tm'])
             ->where('conf_id', '=', $id)
             ->orderBy('id', 'desc')->get();
 //        ->limit(30)->offset(30)
@@ -316,8 +316,9 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
                                     $uMessage->from_user = $data['user_id'];
                                     $uMessage->to_users = $tm->supervisor;
 //                                    ".$ps->tms_code."
-                                    $formatedMessage = "Υπάρχει σύγκρουση αιτημάτων μεταξύ της αίτησης σας (Μάθημα:  - Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $room->fromt . "-" . $room->tot . " " . "για τις ημν/νιες από" . " " . $tmpStrFD . " " . "εως" . $tmpStrTD;
-                                    $formatedMessage .= ") και της αίτησης (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $fromt->format('H:i') . " - " . $tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $book["fromd"] . " " . "εως" . " " . $book["tod"];
+                                    //date("d-m-Y H:i:s").
+                                    $formatedMessage = "Υπάρχει σύγκρουση αιτημάτων μεταξύ της αίτησης σας (Μάθημα:  - Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $room->fromt . "-" . $room->tot . " " . "για τις ημν/νιες από" . " " . $tmpStrFD . " " . "έως" . " " . $tmpStrTD;
+                                    $formatedMessage .= ") και της αίτησης (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $fromt->format('H:i') . " - " . $tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $book["fromd"] . " " . "έως" . " " . $book["tod"];
                                     $formatedMessage .= ") link: http://roombookings.panteion.gr/#/usercreaterequests/" . $book["id"];
                                     $formatedMessage .= " " . "Σχόλια αιτήματος:" . " " . $data['descr'];
                                     //$uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . getDateString($room->date_index) . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
@@ -405,7 +406,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
             }
             //$uMessage->to_users = $room->users[0]->id;
 
-            $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . "ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($room->date_index) . ' και ώρα  ' . $room->fromt . '-' . $room->tot . ' για τις ημν/νιες από ' . $tmpStrFD . ' εως ' . $tmpStrTD;
+            $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . "ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($room->date_index) . ' και ώρα  ' . $room->fromt . '-' . $room->tot . ' για τις ημν/νιες από ' . $tmpStrFD . ' έως ' . $tmpStrTD;
             $formatedMessage .= ') link: http://roombookings.panteion.gr/#/usercreaterequests/' . $book["id"];
             $formatedMessage .= ' Σχόλια αιτήματος: ' . $data['descr'];
             $uMessage->comments = $formatedMessage;
@@ -425,11 +426,11 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
         foreach ($data['rooms'] as $room) {
             $ifexists = false;
             foreach ($u['tm'] as $utm) {
-                if ($utm['default_tm_sel'] == $room['tm']['default_tm_sel']) {
+                if ($room['tm_owner'] != ' ' && $utm['default_tm_sel'] == $room['tm_owner']) {
                     $ifexists = true;
                 }
             }
-            if ($ifexists == false && $room['tm']['id'] && $room['tm']['id'] != '') {
+            if ($ifexists == false && $room['tm_owner'] && $room['tm_owner'] != '') {
                 $requests->status = 0;
                 $requests->save();
 
@@ -439,7 +440,7 @@ $app->post('/requests/userrequest', function (Request $request, Response $respon
                 $uMessage->from_user = $data['user_id'];
                 $uMessage->to_users = $room['tm']['supervisor'];
 
-                $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . "ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($data['pivot'][0]['date_index']) . ' και ώρα  ' . $data['pivot'][0]['fromt'] . '-' . $data['pivot'][0]['tot'] . ' για τις ημν/νιες από ' . $tmpStrFD . ' εως ' . $tmpStrTD;
+                $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . "ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($data['pivot'][0]['date_index']) . ' και ώρα  ' . $data['pivot'][0]['fromt'] . '-' . $data['pivot'][0]['tot'] . ' για τις ημν/νιες από ' . $tmpStrFD . ' έως ' . $tmpStrTD;
                 $formatedMessage .= ') link: http://roombookings.panteion.gr/#/usercreaterequests/' . $data["id"];
                 $formatedMessage .= ' Σχόλια αιτήματος: ' . $data['descr'];
                 $uMessage->comments = $formatedMessage;
@@ -573,27 +574,14 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
                             (new DateTime($room->fromt) == $fromt) || (new DateTime($room->tot) == $tot) ||
                             (new DateTime($room->fromt) < $fromt && new DateTime($room->tot) > $tot)) {
 
-//                            echo "\n";
-//                            print_r($fromt);
-//                            echo '-';
-//                            print_r($tot);
-//                            echo '/';
-//                            print_r((new DateTime($room->fromt)));
-//                            echo '-';
-//                            print_r((new DateTime($room->tot)));
-//                            echo ' == ';
-//                            print_r((new DateTime($room->tot)) == $tot);
-//                            echo "\n";
-//                            print_r($data['status']);
-
                             if ($room->room_id == $reqRoom['id'] && $room->date_index == $reqRoom['date_index']) {
 //                                && ($data['priority'] < $book['priority'] || $data['priority'] == $book['priority'])
                                 if ($data['status'] == 0 && $book['id'] != $data['id']) {
                                     $uMessage = new \App\Models\usersRequests();
                                     $uMessage->from_user = $data['user_id'];
                                     $uMessage->to_users = $tm->supervisor;
-                                    $formatedMessage = "Υπάρχει σύγκρουση αιτημάτων μεταξύ της αίτησης σας (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $room->fromt . "-" . $room->tot . " " . "για τις ημν/νιες από" . " " . $tmpStrFD . " " . "εως" . $tmpStrTD;
-                                    $formatedMessage .= ") και της αίτησης (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $fromt->format('H:i') . " - " . $tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $book["fromd"] . " " . "εως" . " " . $book["tod"];
+                                    $formatedMessage = "Υπάρχει σύγκρουση αιτημάτων μεταξύ της αίτησης σας (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $room->fromt . "-" . $room->tot . " " . "για τις ημν/νιες από" . " " . $tmpStrFD . " " . "έως" . " " . $tmpStrTD;
+                                    $formatedMessage .= ") και της αίτησης (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $fromt->format('H:i') . " - " . $tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $book["fromd"] . " " . "έως" . " " . $book["tod"];
                                     $formatedMessage .= ") link: http://roombookings.panteion.gr/#/usercreaterequests/" . $book["id"];
                                     $formatedMessage .= " " . "Σχόλια αιτήματος:" . " " . $data['descr'];
                                     //$uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . getDateString($room->pivot->date_index) . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
@@ -678,11 +666,11 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
         foreach ($data['rooms'] as $room) {
             $ifexists = false;
             foreach ($u['tm'] as $utm) {
-                if ($utm['default_tm_sel'] == $room['tm']['default_tm_sel']) {
+                if ($room['tm_owner'] != ' ' && $utm['default_tm_sel'] == $room['tm_owner']) {
                     $ifexists = true;
                 }
             }
-            if ($ifexists == false && $room['tm']['id'] && $room['tm']['id'] != '') {
+            if ($ifexists == false && $room['tm_owner'] && $room['tm_owner'] != '') {
                 $requests->status = 0;
                 $requests->save();
 
@@ -690,9 +678,9 @@ $app->put('/requests/userrequest', function (Request $request, Response $respons
                 $tmpStrFD = explode('T', $data['fromd'])[0];
                 $tmpStrTD = explode('T', $data['tod'])[0];
                 $uMessage->from_user = $data['user_id'];
-                $uMessage->to_users = $room['tm']['supervisor'];
+                $uMessage->to_users = $room['tm_owner'];
 
-                $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . "ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($data['pivot'][0]['date_index']) . ' και ώρα  ' . $data['pivot'][0]['fromt'] . '-' . $data['pivot'][0]['tot'] . ' για τις ημν/νιες από ' . $tmpStrFD . ' εως ' . $tmpStrTD;
+                $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . " ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($data['pivot'][0]['date_index']) . ' και ώρα  ' . $data['pivot'][0]['fromt'] . '-' . $data['pivot'][0]['tot'] . ' για τις ημν/νιες από ' . $tmpStrFD . ' έως ' . $tmpStrTD;
                 $formatedMessage .= ') link: http://roombookings.panteion.gr/#/usercreaterequests/' . $data["id"];
                 $formatedMessage .= ' Σχόλια αιτήματος: ' . $data['descr'];
                 $uMessage->comments = $formatedMessage;
@@ -1017,8 +1005,8 @@ $app->post('/requests/copyday', function (Request $request, Response $response) 
                                         $uMessage = new \App\Models\usersRequests();
                                         $uMessage->from_user = $data['user_id'];
                                         $uMessage->to_users = $tm->supervisor;
-                                        $formatedMessage = "Υπάρχει σύγκρουση αιτημάτων μεταξύ της αίτησης σας (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $room->fromt . "-" . $room->tot . " " . "για τις ημν/νιες από" . " " . $tmpStrFD . " " . "εως" . $tmpStrTD;
-                                        $formatedMessage .= ") και της αίτησης (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $fromt->format('H:i') . " - " . $tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $book["fromd"] . " " . "εως" . " " . $book["tod"];
+                                        $formatedMessage = "Υπάρχει σύγκρουση αιτημάτων μεταξύ της αίτησης σας (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $room->fromt->format('H:i') . "-" . $room->tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $tmpStrFD . " " . "έως" . " " . $tmpStrTD;
+                                        $formatedMessage .= ") και της αίτησης (Αίθουσα :" . " " . $roomname->name . ", ημέρα" . " " . getDateString($room->date_index) . " " . "και ώρα" . " " . $fromt->format('H:i') . " - " . $tot->format('H:i') . " " . "για τις ημν/νιες από" . " " . $book["fromd"] . " " . "έως" . " " . $book["tod"];
                                         $formatedMessage .= ") link: http://roombookings.panteion.gr/#/usercreaterequests/" . $book["id"];
                                         $formatedMessage .= " " . "Σχόλια αιτήματος:" . " " . $data['descr'];
                                         //$uMessage->comments = 'Αίτημα δεύσμευσης για την αίθουσα ' . $room['name'] . ', ημέρα ' . getDateString($room->date_index) . ' και ώρα ' . $room->pivot->fromt . '-' . $room->pivot->tot . '. Ευχαριστώ.';
@@ -1032,7 +1020,7 @@ $app->post('/requests/copyday', function (Request $request, Response $response) 
                                         $tt->fromRoom = $reqRoom;
                                         $tt->toRoom = $room;
                                         $u = \App\Models\Users::find($tm->supervisor);
-                                        //  sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+                                        sendEmail(array('to' => [$u->em_main, $u->em_sec, $u->em_pant], 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
                                         array_push($errors, $tt);
                                     }
 
@@ -1100,7 +1088,7 @@ $app->post('/requests/copyday', function (Request $request, Response $response) 
                 //$uMessage->to_users = $room->users[0]->id;
 
                 $u = \App\Models\Users::find($data['user_id']);
-                $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . "ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($room->date_index) . ' και ώρα  ' . $room->fromt . '-' . $room->tot . ' για τις ημν/νιες από ' . $tmpStrFD . ' εως ' . $tmpStrTD;
+                $formatedMessage = "Ο χρήστης " . $u->sname . ' ' . $u->fname . "ζητάει την αίθουσα : " . $room['name'] . ", ημέρα " . getDateString($room->date_index) . ' και ώρα  ' . $room->fromt . '-' . $room->tot . ' για τις ημν/νιες από ' . $tmpStrFD . ' έως ' . $tmpStrTD;
                 $formatedMessage .= ') link: http://roombookings.panteion.gr/#/usercreaterequests/' . $book["id"];
                 $formatedMessage .= ' Σχόλια αιτήματος: ' . $data['descr'];
                 $uMessage->comments = $formatedMessage;
@@ -1114,7 +1102,7 @@ $app->post('/requests/copyday', function (Request $request, Response $response) 
                 $tt->toRoom = $room;
                 // print_r($uMessage);
 
-                //sendEmail(array('to' => $uMessage->to_users, 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
+                sendEmail(array('to' => $uMessage->to_users, 'subj' => 'Αίτημα Δέσμευσης Αίθουσας', 'body' => $uMessage->comments,));
             }
         }
 

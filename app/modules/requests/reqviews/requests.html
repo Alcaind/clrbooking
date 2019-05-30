@@ -21,12 +21,11 @@
                 <!--style="min-width: 314px; " ng-if="acceptShow"></form-item-selector>-->
 
                 <div class="inlineItems">
-                    <label class=" formItemLabel" for="status">{{"Έτος"|translate}}:</label>
+                    <label class="formItemLabel" for="status">{{"Έτος"|translate}}:</label>
                     <select id="status" class="form-control"
                             ng-options="config.id as config.year for config in configs"
                             ng-model="config_id">
                     </select>
-
                 </div>
             </div>
         </div>
@@ -49,7 +48,7 @@
                 ng-click="ctrl.selectRow(item); THLbutton(item)">
                 <td ng-if="ctrl.tableColumns[0].visible">{{ item.id}}</td>
                 <td ng-if="ctrl.tableColumns[1].visible">{{ item.req_dt }}</td>
-                <td ng-if="ctrl.tableColumns[2].visible">{{ item.users.sname}}{{' '}}{{item.users.fname}}</td>
+                <td ng-if="ctrl.tableColumns[2].visible">{{ item.user.sname}}{{' '}}{{item.user.fname}}</td>
                 <td ng-if="ctrl.tableColumns[3].visible">{{ item.descr }}</td>
                 <td ng-if="ctrl.tableColumns[4].visible">{{ item.periods.descr }}</td>
                 <td ng-if="ctrl.tableColumns[5].visible">{{ item.ps.tma_per }}</td>
