@@ -11,7 +11,7 @@
   "devDependencies": {
     "bower": "^1.7.7",
     "del": "^3.0.0",
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-csso": "^2.0.0",
     "gulp-htmlmin": "^3.0.0",
